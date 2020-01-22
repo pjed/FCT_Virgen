@@ -17,6 +17,8 @@ class CrearTablaUsuariosRoles extends Migration
             $table->string('usuarios_dni',45);
             $table->string('roles_id',11);
             $table->timestamps();
+            $table->foreign('usuarios_dni')->references('dni')->on('usuarios');
+            $table->foreign('roles_id')->references('id')->on('roles');
         });
     }
 

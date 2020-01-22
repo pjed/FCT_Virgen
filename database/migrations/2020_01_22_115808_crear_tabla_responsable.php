@@ -19,6 +19,8 @@ class CrearTablaResponsable extends Migration {
             $table->string('email', 100);
             $table->string('telefono', 9);
             $table->timestamps();
+            $table->string('practicas_id',255);
+            $table->foreign('practicas_id')->references('id')->on('practicas');
         });
     }
 
