@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrearTablaComida extends Migration
+class CrearTablaColectivo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CrearTablaComida extends Migration
      */
     public function up()
     {
-        Schema::create('comida', function (Blueprint $table) {
+        Schema::create('colectivo', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string('importe', 8, 2);
-            $table->date('fecha');
             $table->binary('foto');
+            $table->string('n_dias');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CrearTablaComida extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comida');
+        Schema::dropIfExists('colectivo');
     }
 }

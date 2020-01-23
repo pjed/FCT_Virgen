@@ -14,9 +14,10 @@ class CrearTablaUsuarios extends Migration {
     public function up() {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->string('dni', 45)->primary();
-            $table->string('email', 100);
             $table->string('nombre', 100);
             $table->string('apellidos', 100);
+            $table->string('email', 100);
+            $table->string('telefono', 9);
             $table->string('cursos_centro_cod', 255);
             $table->string('cursos_id', 100);
             $table->string('practicas_id', 255);
