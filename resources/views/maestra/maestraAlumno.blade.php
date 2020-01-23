@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>@yield('titulo')</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -80,6 +80,31 @@
                 </div>
             </div>
             @yield('contenido')
+            <div class="row">
+                <div class="col">
+                    <footer class="nav">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
+                                    <img src="" alt="logotipo instituto">
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    2 DAW 2019 - 2020
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Marina Estefania Flores Fernandez
+                                    Pedro Javier Espinosa
+                                    Manuel Ruis Gonzalez
+                                </a>
+                            </li>
+                        </ul>
+                    </footer>
+                </div>
+            </div>
         </div>
     </body>
 </html>

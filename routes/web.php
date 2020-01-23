@@ -18,9 +18,11 @@ Route::get('/', function () {
 //comunes
 Route::post('inicioSesion', 'controladorGeneral@inicioSesion');
 Route::post('cerrarSesion', 'controladorGeneral@cerrarSesion');
+Route::post('olvidarPwd', 'controladorGeneral@olvidarPwd');
 //Route::group(['middleware' => ['general']], function() {
     Route::get('inicioSesion', 'controladorGeneral@inicioSesion');
-    Route::get('cerrarSesion', 'controladorGeneral@cerrarSesion');
+    Route::get('cerrarSesion', 'controladorGeneral@cerrarSesion');    
+    Route::get('olvidarPwd', 'controladorGeneral@olvidarPwd');
 //});
 
 //tutor
