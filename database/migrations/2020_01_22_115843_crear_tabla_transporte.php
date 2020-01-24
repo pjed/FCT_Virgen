@@ -14,9 +14,15 @@ class CrearTablaTransporte extends Migration
     public function up()
     {
         Schema::create('transporte', function (Blueprint $table) {
-            $table->string('id',255)->primary();
+            $table->integer('id')->autoIncrement();
+            $table->integer('tipo');
+            $table->integer('donde');//Desde el instituto (1) o desde el domicilio (0)
+            $table->integer('colectivo_id');
+            $table->integer('propio_id');
             $table->timestamps();
-        });
+            
+            $table->foreign('colectivo_id')->references('id')->on('colectivo');
+            $table->foreign('propio_id')->references('id')->on('propio'); });
     }
 
     /**

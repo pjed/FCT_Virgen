@@ -34,61 +34,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="">Logo</a>
-                            </li>
-                            <!--                            <li class="nav-item">
-                                                            <a class="nav-link active" href="">Cambiar de rol</a>
-                                                        </li>-->
-                            <li class="nav-item justify-content-end">
-                                <form name="perfil" action="perfil"  method="post">
-                                    {{ csrf_field() }}  
-                                    <div class="form-group">
-                                        <button type="submit" id="perfil" name="perfil" value=""></button>
-                                    </div>
-                                </form>
-                            </li>
-                            <li class="nav-item justify-content-end">
-                                <form name="cerrarSesion" action="cerrarSesion"  method="post">
-                                    {{ csrf_field() }}  
-                                    <div class="form-group">
-                                        <button type="submit" id="cerrarSesion" name="cerrarSesion" value=""></button>
-                                    </div>
-                                </form>
+                                <a class="nav-link active" href="">Nombre de la aplicacion</a>
                             </li>
                         </ul>
                     </header>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <nav  class="nav">
-                        <ul class="nav">
-
-                            <li class="nav-item">
-                                <a class="nav-link active" href="">Home</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="">Exportar Documentos</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="">Gestionar Usuarios</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="">Gestionar Tutores</a>
-                                    <a class="dropdown-item" href="">Gestionar Alumnos</a>
-                                    <a class="dropdown-item" href="">Gestionar Usuarios</a>
-                                </div>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="">Importar Tutores</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            @yield('contenido')
+                @yield('contenido')
             <div class="row">
                 <div class="col">
                     <footer class="nav">
