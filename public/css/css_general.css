@@ -1,0 +1,27 @@
+/* 
+    Created on : 24-ene-2020, 10:43:20
+    Author     : daw207
+*/
+
+.cerrarSesion{
+    background-color: url('../images/logout.png');
+    background-repeat: no-repeat;
+    background-size: 64px;
+}
+.perfil{
+    background-color: url('../images/user.png');
+    background-repeat: no-repeat;
+    background-size: 64px;
+}
+.logoInstituto{
+    width: 64px;
+    height: 64px;
+}
+
+.logo{
+    width: 64px;
+    height: 64px;
+}
+a{
+    color:black;
+}

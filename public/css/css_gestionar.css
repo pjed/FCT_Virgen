@@ -1,0 +1,25 @@
+/* 
+    Created on : 23-ene-2020, 10:58:07
+    Author     : daw209
+*/
+
+.eliminar{
+    background-color: url('../images/delete.png');
+    background-repeat: no-repeat;
+    background-size: 64px;
+}
+.editar{
+    background-color: url('../images/edit.png');
+    background-repeat: no-repeat;
+    background-size: 64px;
+}
+.buscar{
+    background-color: url('../images/search.png');
+    background-repeat: no-repeat;
+    background-size: 64px;
+}
+.confirmar{
+    background-color: url('../images/confirm.png');
+    background-repeat: no-repeat;
+    background-size: 64px;
+}
