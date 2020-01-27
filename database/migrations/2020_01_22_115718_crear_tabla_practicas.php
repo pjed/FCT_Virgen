@@ -14,16 +14,18 @@ class CrearTablaPracticas extends Migration
     public function up()
     {
         Schema::create('practicas', function (Blueprint $table) {
-            $table->string('id',255)->primary();
-            $table->string('dni_representante',9);
-            $table->string('dni_alumno',45);
-            $table->string('cod_proyecto',50);
+            $table->increments('id');
+            $table->string('dni_responsable',9);
+            $table->string('cod_proyecto',50)->nullable();
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
-            $table->string('empresa_cif',255);
+            $table->string('empresa_cif',9);
+            $table->string('alumno_dni',9);
             $table->timestamps();
             
+            $table->foreign('alumno_dni')->references('dni')->on('usuarios');
             $table->foreign('empresa_cif')->references('cif')->on('empresa');
+            $table->foreign('dni_responsable')->references('dni')->on('responsable');
         });
     }
 

@@ -17,15 +17,15 @@ class CrearTablaGastos extends Migration
             $table->string('id',255)->primary();
             $table->integer('desplazamiento');
             $table->integer('tipo');
-            $table->string('usuarios_dni', 45);
+            $table->string('usuarios_dni', 9);
             $table->integer('transporte_id');
             $table->integer('comida_id');
             $table->float('total_gasto_alumno', 8, 2);
             $table->float('total_gasto_ciclo', 8, 2);
             $table->timestamps();
+            $table->foreign('usuarios_dni')->references('dni')->on('usuarios');
             $table->foreign('transporte_id')->references('id')->on('transporte');
             $table->foreign('comida_id')->references('id')->on('comida');
-            $table->foreign('usuarios_dni')->references('dni')->on('usuarios');
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrearTablaResponsable extends Migration {
+class CrearTablaUsuarios extends Migration {
 
     /**
      * Run the migrations.
@@ -12,15 +12,18 @@ class CrearTablaResponsable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('responsable', function (Blueprint $table) {
-            $table->string('dni', 45)->primary();
+        Schema::create('usuarios', function (Blueprint $table) {
+            $table->string('dni', 9)->primary();
             $table->string('nombre', 100);
             $table->string('apellidos', 100);
             $table->string('email', 100);
             $table->string('telefono', 9);
+            $table->string('movil', 9);
+            $table->string('iban', 24);
+            $table->string('cursos_id', 50);
             $table->timestamps();
-            $table->string('practicas_id',255);
-            $table->foreign('practicas_id')->references('id')->on('practicas');
+            
+            $table->foreign('cursos_id')->references('id')->on('cursos');
         });
     }
 
@@ -30,7 +33,7 @@ class CrearTablaResponsable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('responsable');
+        Schema::dropIfExists('usuarios');
     }
 
 }

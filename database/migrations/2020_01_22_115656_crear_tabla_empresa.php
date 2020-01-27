@@ -13,16 +13,16 @@ class CrearTablaEmpresa extends Migration {
      */
     public function up() {
         Schema::create('empresa', function (Blueprint $table) {
-            $table->string('cif', 255)->primary();
+            $table->string('cif', 9)->primary();
             $table->string('nombre', 100);
             $table->string('dni_responsable', 9);
             $table->string('nombre_responsable', 100);
             $table->string('direccion', 200);
             $table->string('localidad', 200);
             $table->string('horario', 100);
-            $table->integer('nueva');
-            $table->integer('gastos');
-            $table->integer('apto');
+            $table->integer('nueva')->nullable();
+            $table->integer('gastos')->nullable();
+            $table->integer('apto')->nullable();
             
             $table->timestamps();
         });
