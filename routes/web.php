@@ -16,14 +16,20 @@ Route::get('/', function () {
 });
 
 //comunes
+//Route::group(['middleware' => ['general']], function() {
 Route::post('inicioSesion', 'controladorGeneral@inicioSesion');
 Route::post('cerrarSesion', 'controladorGeneral@cerrarSesion');
 Route::post('olvidarPwd', 'controladorGeneral@olvidarPwd');
+Route::get('inicioSesion', function () {
+    return view('inicioSesion');
+});
+Route::get('cerrarSesion', function () {
+    return view('518'); //Error 404 NOT FOUND
+});
+Route::get('olvidarPwd', function () {
+    return view('olvidarPwd');
+});
 
-//Route::group(['middleware' => ['general']], function() {
-Route::get('inicioSesion', 'controladorGeneral@inicioSesion');
-Route::get('cerrarSesion', 'controladorGeneral@cerrarSesion');
-Route::get('olvidarPwd', 'controladorGeneral@olvidarPwd');
 //});
 
 //tutor
