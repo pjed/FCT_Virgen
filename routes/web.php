@@ -86,6 +86,10 @@ Route::get('gestionarGastos', function () {
     return view('gestionarGastos');
 });
 
+Route:post('crearGasto', 'controladorAlumno@crearGasto');
+
+Route:post('gestionarGastos', 'controladorAlumno@gestionarGasto');
+
 //});
 
 

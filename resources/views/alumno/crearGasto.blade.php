@@ -12,7 +12,7 @@ Crear gasto
         <nav class="col">
             <div class="breadcrumb">
                 <div class="breadcrumb-item"><a href="bienvenidaAl">Home</a></div>
-                <div class="breadcrumb-item active" href="crearGasto"><a>Crear gasto</a></div>
+                <div class="breadcrumb-item active"><a href="crearGasto">Crear gasto</a></div>
             </div>
         </nav>
     </nav>
@@ -23,7 +23,7 @@ Crear gasto
         </div>
     </div>
 
-    <form name="form" action="" method="POST">
+    <form name="form" action="crearGasto" method="POST">
 
         <div class="row justify-content-center"> 
 
@@ -39,16 +39,15 @@ Crear gasto
             <div class="col-md-2">
 
                 <p>Nombre del alumno</p>
-                <input type="text" id="nombre" name="nombreReg" placeholder="Nombre" value="" readonly/><br><br>
-                <p>Gasto</p>
-                <input type="number" id="gasto" name="edadReg" min="0" step="0.01" value="0"/><br><br>
+                <input type="text" id="nombre" name="nomAlum" placeholder="Nombre" value="" readonly/><br><br>
+                <p>Importe total</p>
+                <input type="number" id="importeT" name="importeT" min="0" max="9" step="0.01" value="0"/><br><br>
 
                 <fieldset>
                     <legend>Tipo</legend>
 
                     <div>
-                        <input type="radio" id="comida" name="tipo" value="comida"
-                               checked>
+                        <input type="radio" id="comida" name="tipo" value="comida">
                         <label for="comida">Comida</label>
                     </div>
 
