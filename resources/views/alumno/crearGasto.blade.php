@@ -11,6 +11,7 @@
     <div class="row">
         <div class="col-sm col-md col-lg">
             <h2 class="text-center">Izquierda</h2>
+            <img src="imagenes/miLogo.svg" class="imgNoticias">
         </div>
         
         <div class="col-sm col-md col-lg">

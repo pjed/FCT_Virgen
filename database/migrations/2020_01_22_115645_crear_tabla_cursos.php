@@ -20,6 +20,7 @@ class CrearTablaCursos extends Migration
             $table->string('ano_academico');
             $table->string('familia');
             $table->integer('horas');
+            $table->string('tutor');
             $table->timestamps();
             $table->foreign('centro_cod')->references('cod')->on('centro');
         });
