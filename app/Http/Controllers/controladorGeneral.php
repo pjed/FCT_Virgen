@@ -11,6 +11,12 @@ class controladorGeneral extends Controller
         session()->regenerate();
         return view('inicioSesion');
     }
+//    public function comprobarExisteBD(Request $req) {
+//        
+//        return view('errorBD');//si no existe BD
+//        
+//        return view('inicioSesion'); //si existe BD
+//    }
 
     public function inicioSesion(Request $req) {
         $correo = $req->get('usuario');

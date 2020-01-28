@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('inicioSesion');
 });
+//Route::get('/', 'controladorGeneral@comprobarExisteBD');
 
 //comunes
 //Route::group(['middleware' => ['general']], function() {
