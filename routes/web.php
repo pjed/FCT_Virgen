@@ -110,4 +110,5 @@ Route::post('gestionarGastos', 'controladorAlumno@gestionarGasto');
 Route::get('cambiarRol', function () {
     return view('cambiarRol');
 });
+Route::post('cambiarRol', 'controladorGeneral@cambiarRol');
 //});

@@ -49,7 +49,7 @@ class controladorGeneral extends Controller {
                 foreach ($n as $u) {
                     $usu = $u['rol'];
                 }
-                
+
                 if ($rol == 1) {//admin
                     echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como administrador
@@ -86,6 +86,27 @@ class controladorGeneral extends Controller {
                     </button>
                   </div>';
             return view('inicioSesion');
+        }
+    }
+
+    public function cambiarRol(Request $req) {
+        if (isset($_REQUEST['tutor'])) {
+            echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    Has inicado sesion como tutor
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            return view('bienvenidaT');
+        }
+        if (isset($_REQUEST['administrador'])) {
+            echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    Has inicado sesion como administrador
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            return view('bienvenidaAd');
         }
     }
 
