@@ -1,4 +1,9 @@
 @extends('maestra.maestraAlumno')
+
+@section('titulo') 
+Gestionar gastos
+@endsection
+
 @section('contenido') 
 <div class="container-fluid">  
 
@@ -12,13 +17,14 @@
         </nav>
     </nav>
 
+    <!-- Título página -->
     <div class="row">
         <div class="col-sm col-md col-lg">
             <h2 class="text-center">Gestionar gasto comida/transporte</h2>
         </div>
     </div>
 
-    <!-- tabla -->
+    <!-- Tabla de gastos del usuario -->
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">

@@ -78,6 +78,8 @@ Route::get('importarTutores', function () {
     return view('importarTutores');
 });
 
+Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');
+
 //});
 
 //alumno

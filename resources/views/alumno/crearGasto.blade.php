@@ -17,12 +17,14 @@ Crear gasto
         </nav>
     </nav>
 
+    <!-- Título página -->
     <div class="row">
         <div class="col-sm col-md col-lg">
             <h2 class="text-center">Crear gasto comida/transporte</h2>
         </div>
     </div>
 
+    <!-- Formulario para crear un gasto -->
     <form name="form" action="crearGasto" method="POST">
 
         <div class="row justify-content-center"> 
