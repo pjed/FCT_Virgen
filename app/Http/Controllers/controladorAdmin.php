@@ -13,4 +13,8 @@ class controladorAdmin extends Controller
     public function gestionarAlumnos(Request $req) {
         
     }
+    
+    public function gestionarTutores(Request $req) {
+        
+    }
 }
