@@ -20,8 +20,12 @@ Route::get('/', function () {
 Route::post('inicioSesion', 'controladorGeneral@inicioSesion');
 Route::post('cerrarSesion', 'controladorGeneral@cerrarSesion');
 Route::post('olvidarPwd', 'controladorGeneral@olvidarPwd');
+Route::post('perfil', 'controladorGeneral@perfil');
 Route::get('inicioSesion', function () {
     return view('inicioSesion');
+});
+Route::get('perfil', function () {
+    return view('perfil');
 });
 Route::get('cerrarSesion', function () {
     return view('518'); //Error 404 NOT FOUND

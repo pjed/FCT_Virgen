@@ -88,6 +88,14 @@ class controladorGeneral extends Controller {
         }
     }
 
+    public function olvidarPwd(Request $req) {
+        $email=$req->get('email');
+    }
+
+    public function perfil(Request $req) {
+        
+    }
+
     public function cambiarRol(Request $req) {
         if (isset($_REQUEST['tutor'])) {
             echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
