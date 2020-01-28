@@ -57,7 +57,7 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                    return view('bienvenidaAd');
+                    return view('admin.bienvenidaAd');
                 } else if ($rol == 2) { //tutor
                     echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como tutor
@@ -65,7 +65,7 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                    return view('bienvenidaT');
+                    return view('tutor.bienvenidaT');
                 } else if ($rol == 3) {//alumno
                     echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como alumno
@@ -73,7 +73,7 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                    return view('bienvenidaAl');
+                    return view('alumno.bienvenidaAl');
                 }
             } else if ($cont != 1) { //si tiene un rol
                 return view('cambiarRol');
@@ -97,7 +97,7 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-            return view('bienvenidaT');
+            return view('tutor.bienvenidaT');
         }
         if (isset($_REQUEST['administrador'])) {
             echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -106,7 +106,7 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-            return view('bienvenidaAd');
+            return view('admin.bienvenidaAd');
         }
     }
 
