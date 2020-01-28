@@ -32,6 +32,8 @@ class Conexion {
         
         $ur = usuarios_rol::all();
         $v = [];
+        $w = [];
+        $cont = 0;
         foreach ($ur as $a) {
             $p = usuario::where('email', $correo)->where('password', $pwd)->where('dni', $a->usuarios_dni)->first(); //aqui se cruzan
             if ($p) {
@@ -45,9 +47,13 @@ class Conexion {
                     'rol' => $a->roles_id,
                     'curso' => $a->cursos_id,
                     ];
+                $cont++;
             }
         }
-        return $v;
+        $w [] = ['usuario'=> $v,
+                'cont'=>$cont
+                ];
+        return $w;
     }
 
     /**
