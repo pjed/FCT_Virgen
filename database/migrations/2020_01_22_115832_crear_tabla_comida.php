@@ -13,7 +13,7 @@ class CrearTablaComida extends Migration
      */
     public function up()
     {
-        Schema::create('comida', function (Blueprint $table) {
+        Schema::create('comidas', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->string('importe', 8, 2);
             $table->date('fecha');

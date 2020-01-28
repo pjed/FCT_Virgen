@@ -13,7 +13,7 @@ class CrearTablaColectivo extends Migration
      */
     public function up()
     {
-        Schema::create('colectivo', function (Blueprint $table) {
+        Schema::create('colectivos', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->binary('foto');
             $table->string('n_dias');

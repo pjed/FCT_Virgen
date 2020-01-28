@@ -7,7 +7,7 @@ Inicio de sesion
 @section('contenido') 
 <div class="row justify-content-center">
     <div class="col-sm col-md-2 col-lg">
-        <main class="mt-5 mb-5 "> 
+        <main class="col-lg-12 mt-5 mb-5 "> 
             <div class="row justify-content-center">
                 <div class="col-sm col-md-2 col-lg">
                     <h1>Iniciar Sesión</h1>

@@ -12,7 +12,7 @@ class CrearTablaEmpresa extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('empresa', function (Blueprint $table) {
+        Schema::create('empresas', function (Blueprint $table) {
             $table->string('cif', 9)->primary();
             $table->string('nombre', 100);
             $table->string('dni_responsable', 9);

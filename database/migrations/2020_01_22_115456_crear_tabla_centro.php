@@ -13,7 +13,7 @@ class CrearTablaCentro extends Migration
      */
     public function up()
     {
-        Schema::create('centro', function (Blueprint $table) {
+        Schema::create('centros', function (Blueprint $table) {
             $table->string('cod')->primary();
             $table->string('nombre');
             $table->string('localidad');

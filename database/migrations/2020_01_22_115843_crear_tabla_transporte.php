@@ -13,7 +13,7 @@ class CrearTablaTransporte extends Migration
      */
     public function up()
     {
-        Schema::create('transporte', function (Blueprint $table) {
+        Schema::create('transportes', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('tipo');
             $table->integer('donde');//Desde el instituto (1) o desde el domicilio (0)

@@ -17,6 +17,7 @@ class CrearTablaUsuarios extends Migration {
             $table->string('nombre', 100);
             $table->string('apellidos', 100);
             $table->string('email', 100);
+            $table->string('password', 100);
             $table->string('telefono', 9);
             $table->string('movil', 9);
             $table->string('iban', 24);
