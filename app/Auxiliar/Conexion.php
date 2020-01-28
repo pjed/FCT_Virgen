@@ -30,6 +30,24 @@ class Conexion {
      */
     static function existeUsuario($correo, $pwd) {
         
+        $ur = usuarios_rol::all();
+        $v = [];
+        foreach ($ur as $a) {
+            $p = usuario::where('email', $correo)->where('password', $pwd)->where('dni', $a->usuarios_dni)->first(); //aqui se cruzan
+            if ($p) {
+                $v[] = ['dni' => $p->dni,
+                    'nombre' => $p->nombre,
+                    'apellidos' => $p->apellidos,
+                    'email' => $p->email,
+                    'tel' => $p->telefono,
+                    'movil' => $p->movil,
+                    'iban' => $p->iban,
+                    'rol' => $a->roles_id,
+                    'curso' => $a->cursos_id,
+                    ];
+            }
+        }
+        return $v;
     }
 
     /**
