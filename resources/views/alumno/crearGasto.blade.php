@@ -26,7 +26,7 @@ Crear gasto
 
     <!-- Formulario para crear un gasto -->
     <form name="form" action="crearGasto" method="POST">
-
+        {{ csrf_field() }}
         <div class="row justify-content-center"> 
 
             <div class="col-md-2">

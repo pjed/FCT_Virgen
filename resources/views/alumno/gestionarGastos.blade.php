@@ -51,6 +51,7 @@ Gestionar gastos
                             ?>
 
                         <form name="form" action="gestionarGastos" method="POST">
+                            {{ csrf_field() }}
                             <tr>
                                 <td><input type="text" name ="idGasto" value='' readonly></td>
                                 <td><input type="text" name ="tipoGasto" value=''></td>
