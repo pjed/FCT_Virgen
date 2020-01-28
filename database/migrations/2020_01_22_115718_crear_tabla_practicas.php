@@ -24,8 +24,8 @@ class CrearTablaPracticas extends Migration
             $table->timestamps();
             
             $table->foreign('alumno_dni')->references('dni')->on('usuarios');
-            $table->foreign('empresa_cif')->references('cif')->on('empresa');
-            $table->foreign('dni_responsable')->references('dni')->on('responsable');
+            $table->foreign('empresa_cif')->references('cif')->on('empresas');
+            $table->foreign('dni_responsable')->references('dni')->on('responsables');
         });
     }
 

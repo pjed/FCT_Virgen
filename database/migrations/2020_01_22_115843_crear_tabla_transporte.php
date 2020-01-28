@@ -20,8 +20,8 @@ class CrearTablaTransporte extends Migration
             $table->integer('colectivo_id');
             $table->integer('propio_id');
             $table->timestamps();
-            $table->foreign('colectivo_id')->references('id')->on('colectivo');
-            $table->foreign('propio_id')->references('id')->on('propio');
+            $table->foreign('colectivo_id')->references('id')->on('colectivos');
+            $table->foreign('propio_id')->references('id')->on('propios');
             });
     }
 

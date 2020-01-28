@@ -24,8 +24,8 @@ class CrearTablaGastos extends Migration
             $table->float('total_gasto_ciclo', 8, 2);
             $table->timestamps();
             $table->foreign('usuarios_dni')->references('dni')->on('usuarios');
-            $table->foreign('transporte_id')->references('id')->on('transporte');
-            $table->foreign('comida_id')->references('id')->on('comida');
+            $table->foreign('transporte_id')->references('id')->on('transportes');
+            $table->foreign('comida_id')->references('id')->on('comidas');
         });
     }
 

@@ -47,7 +47,7 @@ class controladorGeneral extends Controller {
             session()->put('usu', $n);
             if ($cont == 1) { //si tiene un rol
                 foreach ($n as $u) {
-                    $usu = $u['rol'];
+                    $rol = $u['rol'];
                 }
 
                 if ($rol == 1) {//admin
