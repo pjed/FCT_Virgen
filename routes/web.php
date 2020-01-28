@@ -81,6 +81,7 @@ Route::get('importarTutores', function () {
 
 Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');
 
+Route::post('gestionarTablaAlumnos', 'controladorAdmin@gestionarAlumnos');
 //});
 
 //alumno

@@ -1,4 +1,4 @@
-@extends('maestra.maestraAlumno')
+@extends('maestra.maestraAdmin')
 
 @section('titulo') 
 Gestionar usuarios
