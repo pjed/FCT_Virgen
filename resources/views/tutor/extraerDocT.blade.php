@@ -1,40 +1,42 @@
 @extends('maestra.maestraAdmin')
 
 @section('titulo') 
-Consultar Gastos por curso
+Extraer Documentos
 @endsection
 
 @section('contenido') 
 <div class="row">
     <div class="col-sm col-md col-lg">
-        <h2 class="text-center">Consultar Gastos por curso</h2>
-        <div class="table-responsive ">
-            <table class="table table-striped  table-hover table-bordered">
-                <thead class="thead-dark">
-                    <tr>         
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach ($lu as $key) {
-                        ?>
-                    <form action="gestionarUsuarios" method="POST">
-                        {{ csrf_field() }}
-                        <tr>
-                            <td>
-                            </td>
-                            <td><button type="submit" id="editar" class="btn" name="editar" /></td>
-                            <td><button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
-                        </tr>
-                    </form>
-                    <?php
-                }
-                ?>
-                </tbody>
-            </table>
-        </div>
+        <h2 class="text-center">Extraer Documentos</h2>
+
+        <form action="extraerDocT" method="POST">
+            {{ csrf_field() }}
+            <div class="form-group">
+                <label>
+                    Grupo:      
+                    <input type="text" id="grupo" class="form-control form-control-sm form-control-md form-control-lg" name="grupo" value=""/>
+                </label>
+            </div>
+            <div class="form-group ">
+                <label>
+                    Tutor:      
+                    <input type="text" id="tutor" class="form-control form-control-sm form-control-md form-control-lg" name="tutor" value=""/>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    Recibí (PDF):      
+                    <input type="text" id="recibiFCT" class="btn btn-primary" name="recibiFCT" value="Anexo V Recibí FCT"/><a href="">FCT</a>
+                    <input type="text" id="recibiFPDUAL" class="btn btn-primary" name="recibiFPDUAL" value="Anexo XV Recibí FP DUAL"/><a href="">FP DUAL</a>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    Memoria alumnos (EXCEL):      
+                    <input type="submit" id="memoriaAlumnos" class="btn btn-primary" name="memoriaAlumnos" value="Memoria alumnos"/>
+                </label>
+            </div>
+        </form>
     </div>
 </div>  
 @endsection
