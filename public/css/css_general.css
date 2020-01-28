@@ -7,11 +7,17 @@
     background-color: url('../images/logout.png');
     background-repeat: no-repeat;
     background-size: 64px;
+    width: 64px;
+    height: 64px;
+
 }
 .perfil{
     background-color: url('../images/user.png');
     background-repeat: no-repeat;
     background-size: 64px;
+    width: 64px;
+    height: 64px;
+
 }
 .logoInstituto{
     width: 64px;
@@ -22,6 +28,18 @@
     width: 64px;
     height: 64px;
 }
-a{
-    color:black;
+footer,.footer{
+    background: black;    
+    margin: 0px;
+}
+main{
+    margin-top:  4rem; 
+}
+header{
+    margin-bottom: 3.5rem; 
+}
+@media (max-width:701px){
+    footer{
+        font-size: 10px;
+    }
 }

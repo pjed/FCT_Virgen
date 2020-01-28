@@ -23,49 +23,53 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <header class="fixed-top">  
+        <header class="fixed-top bg-dark">  
             <ul class="list-group  list-group-flush">
                 <div class="row">
-                    <div class="col-2">
-                        <li class="list-group-item">
+                    <div class="col-sm-2 col-md-2 col-lg-2">
+                        <li class="bg-dark list-group-item">
                             <a href="#">
                                 <img id="logotipo" src="{{asset ('imagenes/logo.png')}}" alt="logotipo">
                             </a>
                         </li>
                     </div>
-                    <div class="col-10">
-                        <li class="list-group-item">
+                    <div class="col-sm-10 col-md-10 col-lg-10">
+                        <li class="bg-dark list-group-item">
                             <a href="#">Nombre de la aplicacion</a>
                         </li>
                     </div>
                 </div>
             </ul>
         </header>
-        <div class="container">
+        <main>
             @yield('contenido')
-        </div>
-        <footer class="fixed-bottom">   
-            <ul class="list-group  list-group-flush">
+        </main>
+       <footer>   
+            <ul class="list-group list-group-flush">
                 <div class="row">
-                    <div class="col-4">
-                        <li class="list-group-item">
+                    <div class="col-sm-1 col-md-2 col-lg-2">
+                        <li class="footer list-group-item">
                             <a class="nav-link" href="http://www.cifpvirgendegracia.com/">
                                 <img id="logoInstituto" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
                             </a>
                         </li>
                     </div>
-                    <div class="col-5">
-                        <li class="list-group-item">
-                            2 DAW 2019 - 2020
+                    <div class="col-sm-1 col-md-7 col-lg-7">
+                        <li class="footer list-group-item">
+                            <p class="text-center">
+                                2 DAW 2019 - 2020
+                            </p>
                         </li>
                     </div>
-                    <div class="col-3">
-                        <li class="list-group-item">
-                            Marina Estefania Flores Fernandez
-                            <br>
-                            Pedro Javier Espinosa
-                            <br>
-                            Manuel Ruis Gonzalez
+                    <div class="col-sm-1 col-md-3 col-lg-3">
+                        <li class="footer list-group-item">
+                            <p class="text-center">
+                                Marina Estefania Flores Fernandez
+                                <br>
+                                Pedro Javier Espinosa
+                                <br>
+                                Manuel Ruis Gonzalez
+                            </p>
                         </li>
                     </div>
                 </div>

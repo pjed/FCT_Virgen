@@ -26,89 +26,78 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <header class="fixed-top">  
-           <div class="row">
-                <div class="col">
-                    <ul class="list-group  list-group-flush">
-                        <div class="row">
-                            <div class="col-3">
-                                <li class="list-group-item">
-                                    <a href="#">
-                                        <img id="logotipo" src="{{asset ('imagenes/logo.png')}}" alt="logotipo">
-                                    </a>
-                                </li>
-                            </div>
-                            <div class="col-3">
-                                <li class="list-group-item">
-                                    <a href="#">Nombre de la aplicacion</a>
-                                </li>
-                            </div>
-                            <div class="col-3">
-                                <li class="list-group-item">
-                                    <form name="perfil" action="perfil"  method="post">
-                                        {{ csrf_field() }}  
-                                        <div class="form-group">
-                                            <button type="submit" id="perfil" name="perfil" value=""></button>
-                                        </div>
-                                    </form>
-                                </li>
-                            </div>
-                            <div class="col-3">
-                                <li class="list-group-item">
-                                    <form name="cerrarSesion" action="cerrarSesion"  method="post">
-                                        {{ csrf_field() }}  
-                                        <div class="form-group">
-                                            <button type="submit" id="cerrarSesion" name="cerrarSesion" value=""></button>
-                                        </div>
-                                    </form>
-                                </li>
-                            </div>
-                        </div>
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">
+                    <img id="logotipo" src="{{asset ('images/logo.png')}}" alt="logotipo">
+                </a>
+                <a class="navbar-brand" href="#">Nombre de la aplicacion</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="bienvenidaAl">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="crearGasto">Crear Gasto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="gestionarGastos">Gestionar Gastos</a>
+                        </li>                
+                        <li class="nav-item">
+                            <a class="nav-link" href="importarTutores">Importar Tutores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="cambiarRol">Cambiar de rol</a>
+                        </li>
+                        <li class="nav-item">
+                            <form name="perfil" action="perfil"  method="post">
+                                {{ csrf_field() }}  
+                                <div class="form-group">
+                                    <button type="submit" id="perfil" name="perfil" value=""></button>
+                                </div>
+                            </form>
+                        </li>
                     </ul>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <nav  class="nav">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="bienvenidaAl">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="crearGasto">Crear Gasto</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="gestionarGastos">Gestionar Gastos</a>
-                            </li>                
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+                <form name="cerrarSesion" action="cerrarSesion"  method="post">
+                    {{ csrf_field() }}  
+                    <div class="form-group">
+                        <button type="submit" id="cerrarSesion" name="cerrarSesion" value=""></button>
+                    </div>
+                </form>
+            </nav>
         </header>
-        <div class="container">
+        <main>
             @yield('contenido')
-        </div>
+        </main>
         <footer class="fixed-bottom">   
             <ul class="list-group list-group-flush">
                 <div class="row">
-                    <div class="col-4">
-                        <li class="list-group-item">
+                    <div class="col-sm-1 col-md-2 col-lg-2">
+                        <li class="footer list-group-item">
                             <a class="nav-link" href="http://www.cifpvirgendegracia.com/">
                                 <img id="logoInstituto" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
                             </a>
                         </li>
                     </div>
-                    <div class="col-5">
-                        <li class="list-group-item">
-                            2 DAW 2019 - 2020
+                    <div class="col-sm-1 col-md-7 col-lg-7">
+                        <li class="footer list-group-item">
+                            <p class="text-center">
+                                2 DAW 2019 - 2020
+                            </p>
                         </li>
                     </div>
-                    <div class="col-3">
-                        <li class="list-group-item">
-                            Marina Estefania Flores Fernandez
-                            <br>
-                            Pedro Javier Espinosa
-                            <br>
-                            Manuel Ruis Gonzalez
+                    <div class="col-sm-1 col-md-3 col-lg-3">
+                        <li class="footer list-group-item">
+                            <p class="text-center">
+                                Marina Estefania Flores Fernandez
+                                <br>
+                                Pedro Javier Espinosa
+                                <br>
+                                Manuel Ruis Gonzalez
+                            </p>
                         </li>
                     </div>
                 </div>

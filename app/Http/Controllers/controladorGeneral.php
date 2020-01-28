@@ -49,7 +49,6 @@ class controladorGeneral extends Controller {
                 foreach ($n as $u) {
                     $rol = $u['rol'];
                 }
-
                 if ($rol == 1) {//admin
                     echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como administrador
