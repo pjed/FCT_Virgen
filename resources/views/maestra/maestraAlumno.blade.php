@@ -92,11 +92,11 @@
                     <div class="col-sm-1 col-md-3 col-lg-3">
                         <li class="footer list-group-item">
                             <p class="text-center">
-                                Marina Estefania Flores Fernandez
+                                Marina Estefanía Flores Fernández
                                 <br>
-                                Pedro Javier Espinosa
+                                Pedro Javier Espinosa Duque
                                 <br>
-                                Manuel Ruis Gonzalez
+                                Manuel Ruiz González
                             </p>
                         </li>
                     </div>

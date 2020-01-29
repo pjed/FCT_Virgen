@@ -38,46 +38,46 @@ Route::get('olvidarPwd', function () {
 //tutor
 //Route::group(['middleware' => ['tutor']], function() {
 Route::get('bienvenidaT', function () {
-    return view('bienvenidaT');
+    return view('tutor/bienvenidaT');
 });
 Route::get('consultarAlumno', function () {
-    return view('consultarGastosAlumno');
+    return view('tutor/consultarGastosAlumno');
 });
 Route::get('consultarCurso', function () {
-    return view('consultarGastosCurso');
+    return view('tutor/consultarGastosCurso');
 });
 Route::get('ModificarDoc', function () {
-    return view('modificarDoc');
+    return view('tutor/modificarDoc');
 });
 Route::get('ExtraerDocT', function () {
-    return view('extraerDocT');
+    return view('tutor/extraerDocT');
 });
 Route::get('importarAlumnos', function () {
-    return view('importarAlumnos');
+    return view('tutor/importarAlumnos');
 });
 //});
 //admin
 //Route::group(['middleware' => ['admin']], function() {
 Route::get('bienvenidaAd', function () {
-    return view('bienvenidaAd');
+    return view('admin/bienvenidaAd');
 });
 Route::get('extraerDocA', function () {
-    return view('extraerDocA');
+    return view('admin/extraerDocA');
 });
 Route::get('gestionarUsuarios', function () {
-    return view('gestionarUsuarios');
+    return view('admin/gestionarUsuarios');
 });
 Route::get('gestionarAlumnos', function () {
-    return view('gestionarAlumnos');
+    return view('admin/gestionarAlumnos');
 });
 Route::get('gestionarUsuarios', function () {
-    return view('gestionarUsuarios');
+    return view('admin/gestionarUsuarios');
 });
 Route::get('gestionarTutores', function () {
-    return view('gestionarTutores');
+    return view('admin/gestionarTutores');
 });
 Route::get('importarTutores', function () {
-    return view('importarTutores');
+    return view('admin/importarTutores');
 });
 
 Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');
@@ -85,17 +85,19 @@ Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');
 Route::post('gestionarTablaAlumnos', 'controladorAdmin@gestionarAlumnos');
 
 Route::post('gestionarTablaTutores', 'controladorAdmin@gestionarTutores');
+
+Route::post('exportarDocumentos', 'controladorAdmin@exportarDocumentos');
 //});
 //alumno
 //Route::group(['middleware' => ['alumno']], function() {
 Route::get('bienvenidaAl', function () {
-    return view('bienvenidaAl');
+    return view('alumno/bienvenidaAl');
 });
 Route::get('crearGasto', function () {
-    return view('crearGasto');
+    return view('alumno/crearGasto');
 });
 Route::get('gestionarGastos', function () {
-    return view('gestionarGastos');
+    return view('alumno/gestionarGastos');
 });
 
 Route::post('crearGasto', 'controladorAlumno@crearGasto');

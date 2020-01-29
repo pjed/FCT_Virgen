@@ -41,8 +41,8 @@
                          <li class="nav-item">
                             <a class="nav-link" href="extraerDocA">Exportar Documentos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Gestionar Usuarios</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar Usuarios</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="gestionarTutores">Tutores</a>
                                 <a class="dropdown-item" href="gestionarAlumnos">Alumnos</a>
@@ -96,11 +96,11 @@
                     <div class="col-sm-1 col-md-3 col-lg-3">
                         <li class="footer list-group-item">
                             <p class="text-center">
-                                Marina Estefania Flores Fernandez
+                                Marina Estefanía Flores Fernandez
                                 <br>
-                                Pedro Javier Espinosa
+                                Pedro Javier Espinosa Duque
                                 <br>
-                                Manuel Ruis Gonzalez
+                                Manuel Ruiz González
                             </p>
                         </li>
                     </div>

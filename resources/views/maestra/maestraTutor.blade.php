@@ -37,15 +37,15 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="bienvenidaT">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Documentos</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Documentos</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="ModificarDoc">Modificar</a>
                                 <a class="dropdown-item" href="ExtraerDocT">Extraer</a>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Consultar Gastos</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Consultar Gastos</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="consultarAlumno">Alumno</a>
                                 <a class="dropdown-item" href="consultarCurso">Curso</a>
@@ -101,11 +101,11 @@
                     <div class="col-sm-1 col-md-3 col-lg-3">
                         <li class="footer list-group-item">
                             <p class="text-center">
-                                Marina Estefania Flores Fernandez
+                                Marina Estefanía Flores Fernández
                                 <br>
-                                Pedro Javier Espinosa
+                                Pedro Javier Espinosa Duque
                                 <br>
-                                Manuel Ruis Gonzalez
+                                Manuel Ruiz González
                             </p>
                         </li>
                     </div>
