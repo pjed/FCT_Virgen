@@ -1,4 +1,4 @@
-@extends('maestra.maestraAdmin')
+@extends('maestra.maestraTutor')
 
 @section('titulo') 
 Extraer Documentos
@@ -34,6 +34,13 @@ Extraer Documentos
                 <label>
                     Memoria alumnos (EXCEL):      
                     <input type="submit" id="memoriaAlumnos" class="btn btn-primary" name="memoriaAlumnos" value="Memoria alumnos"/>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    Gastos de alumnos (EXCEL):      
+                    <input type="submit" id="gastosFCT" class="btn btn-primary" name="gastosFCT" value="Gastos alumnos FCT"/>
+                    <input type="submit" id="gastosFPDUAL" class="btn btn-primary" name="gastosFPDUAL" value="Gastos alumnos FP DUAL"/>
                 </label>
             </div>
         </form>

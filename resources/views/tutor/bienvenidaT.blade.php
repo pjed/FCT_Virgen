@@ -1,4 +1,4 @@
-@extends('maestra.maestraAdmin')
+@extends('maestra.maestraTutor')
 
 @section('titulo') 
 Consultar Gastos por curso
