@@ -1,4 +1,4 @@
-@extends('maestra.maestraGeneral')
+@extends('maestra.maestraAdmin')
 
 @section('titulo') 
 Perfil
