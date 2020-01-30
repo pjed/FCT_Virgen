@@ -13,4 +13,8 @@ class controladorAlumno extends Controller
     public function gestionarGasto(Request $req) {
         
     }
+    
+    public function perfil(Request $req) {
+        
+    }
 }

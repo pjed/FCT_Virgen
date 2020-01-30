@@ -52,7 +52,7 @@
                             <a class="nav-link"  href="cambiarRol">Cambiar de rol</a>
                         </li>
                         <li class="nav-item">
-                            <form name="perfil" action="perfil"  method="post">
+                            <form name="perfil" action="perfilAl"  method="post">
                                 {{ csrf_field() }}  
                                 <div class="form-group">
                                     <button type="submit" id="perfil" name="perfil" value=""></button>

@@ -20,12 +20,8 @@ Route::get('/', function () {
 Route::post('inicioSesion', 'controladorGeneral@inicioSesion');
 Route::post('cerrarSesion', 'controladorGeneral@cerrarSesion');
 Route::post('olvidarPwd', 'controladorGeneral@olvidarPwd');
-Route::post('perfil', 'controladorGeneral@perfil');
 Route::get('inicioSesion', function () {
     return view('inicioSesion');
-});
-Route::get('perfil', function () {
-    return view('perfil');
 });
 Route::get('cerrarSesion', function () {
     return view('518'); //Error 404 NOT FOUND
@@ -55,6 +51,10 @@ Route::get('ExtraerDocT', function () {
 Route::get('importarAlumnos', function () {
     return view('tutor/importarAlumnos');
 });
+Route::get('perfilTutor', function () {
+    return view('perfilTutor');
+});
+Route::post('perfilT', 'controladorTutor@perfil');
 //});
 //admin
 //Route::group(['middleware' => ['admin']], function() {
@@ -79,6 +79,10 @@ Route::get('gestionarTutores', function () {
 Route::get('importarTutores', function () {
     return view('admin/importarTutores');
 });
+Route::get('perfilAdmin', function () {
+    return view('perfilAdmin');
+});
+Route::post('perfilAd', 'controladorAdmin@perfil');
 
 Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');
 
@@ -99,6 +103,10 @@ Route::get('crearGasto', function () {
 Route::get('gestionarGastos', function () {
     return view('alumno/gestionarGastos');
 });
+Route::get('perfilAlumno', function () {
+    return view('perfilAlumno');
+});
+Route::post('perfilAl', 'controladorAlumno@perfil');
 
 Route::post('crearGasto', 'controladorAlumno@crearGasto');
 

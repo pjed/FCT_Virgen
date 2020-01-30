@@ -53,5 +53,9 @@ class controladorAdmin extends Controller {
             
         }
     }
+    
+    public function perfil(Request $req) {
+        
+    }
 
 }
