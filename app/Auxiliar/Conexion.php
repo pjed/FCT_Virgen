@@ -35,7 +35,7 @@ class Conexion {
         $w = [];
         $cont = 0;
         foreach ($ur as $a) {
-            $p = usuario::where('email', $correo)->where('password', $pwd)->where('dni', $a->usuarios_dni)->first(); //aqui se cruzan
+            $p = usuario::where('email', $correo)->where('pass', $pwd)->where('dni', $a->usuarios_dni)->first(); //aqui se cruzan
             if ($p) {
                 $v[] = ['dni' => $p->dni,
                     'nombre' => $p->nombre,
