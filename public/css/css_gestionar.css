@@ -3,23 +3,64 @@
     Author     : daw209
 */
 
-.eliminar{
-    background-color: url('../images/delete.png');
+#cerrarSesion{
+    background-image :url('../images/logout.png');
     background-repeat: no-repeat;
     background-size: 64px;
+    background-color: transparent;
+    width: 64px;
+    height: 64px;
+    border: none;
+
 }
-.editar{
-    background-color: url('../images/edit.png');
+#perfil{
+    background-image: url('../images/user.png');
     background-repeat: no-repeat;
     background-size: 64px;
+    background-color: transparent;
+    width: 64px;
+    height: 64px;
+    border: none;
+
 }
-.buscar{
-    background-color: url('../images/search.png');
+
+#eliminar{
+    background-image :url('../images/delete.png');
     background-repeat: no-repeat;
     background-size: 64px;
+    background-color: transparent;
+    width: 64px;
+    height: 64px;
+    border: none;
 }
-.confirmar{
-    background-color: url('../images/confirm.png');
+
+#editar{
+    background-image: url('../images/edit.png');
     background-repeat: no-repeat;
     background-size: 64px;
+    background-color: transparent;
+    width: 64px;
+    height: 64px;
+    border: none;
+}
+
+#buscar{
+    background-image: url('../images/search.png');
+    background-repeat: no-repeat;
+    background-size: 64px;
+    width: 64px;
+    height: 64px;
+}
+
+#confirmar{
+    background-image: url('../images/confirm.png');
+    background-repeat: no-repeat;
+    background-size: 64px;
+    width: 64px;
+    height: 64px;
+}
+
+
+main{
+    margin-top: 7rem; 
 }

@@ -118,6 +118,16 @@ Exportar documentos
 
                 </fieldset>
 
+                <fieldset>
+                    <legend>Gastos de alumnos (excel)</legend>
+
+                    <div>
+                        <input type="submit" name="gastosAlumnosFct" value="Gastos alumnos FCT"><br><br>
+                        <input type="submit" name="gastosAlumnosDual" value="Gastos alumnos FP DUAL">
+                    </div>
+
+                </fieldset>
+
             </div>
 
             <!-- Columna derecha -->

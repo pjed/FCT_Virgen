@@ -3,20 +3,24 @@
     Author     : daw207
 */
 
-.cerrarSesion{
-    background-color: url('../images/logout.png');
+#cerrarSesion{
+    background-image :url('../images/logout.png');
     background-repeat: no-repeat;
     background-size: 64px;
+    background-color: transparent;
     width: 64px;
     height: 64px;
+    border: none;
 
 }
-.perfil{
-    background-color: url('../images/user.png');
+#perfil{
+    background-image: url('../images/user.png');
     background-repeat: no-repeat;
     background-size: 64px;
+    background-color: transparent;
     width: 64px;
     height: 64px;
+    border: none;
 
 }
 .logoInstituto{

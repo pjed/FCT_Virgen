@@ -9,12 +9,12 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
+        <script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <!-- Course CSS -->
-        <link rel="stylesheet" type="text/css" href="{{asset ('css/css_general.css')}}" media="screen" />   
-        <script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>
+        <link rel="stylesheet" type="text/css" href="{{asset ('css/css_general.css')}}" media="screen" />
     </head>
 
     <body>
@@ -44,7 +44,7 @@
         <main>
             @yield('contenido')
         </main>
-       <footer>   
+        <footer>   
             <ul class="list-group list-group-flush">
                 <div class="row">
                     <div class="col-sm-1 col-md-2 col-lg-2">

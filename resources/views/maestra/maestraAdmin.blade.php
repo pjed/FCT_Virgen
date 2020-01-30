@@ -7,15 +7,15 @@
         <title>@yield('titulo')</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
         <!-- Styles -->
+        <script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <!-- Course CSS -->
-        <link rel="stylesheet" type="text/css" href="{!! asset('css/css_general.css') !!}" media="screen" />        
+        <link rel="stylesheet" type="text/css" href="{{asset ('css/css_general.css')}}" media="screen" />
         <link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
-        <script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>
+
     </head>
 
     <body>
@@ -38,7 +38,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="bienvenidaAd">Home</a>
                         </li>
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" href="extraerDocA">Exportar Documentos</a>
                         </li>
                         <li class="nav-item dropdown">
@@ -50,16 +50,13 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="importarTutores">Importar Tutores</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link"  href="cambiarRol">Cambiar de rol</a>
                         </li>
                         <li class="nav-item">
                             <form name="perfil" action="perfilAd"  method="post">
                                 {{ csrf_field() }}  
                                 <div class="form-group">
-                                    <button type="submit" id="perfil" name="perfil" value=""></button>
+                                    <button type="submit" class="btn" id="perfil" name="perfil" value=""></button>
                                 </div>
                             </form>
                         </li>
@@ -68,7 +65,7 @@
                 <form name="cerrarSesion" action="cerrarSesion"  method="post">
                     {{ csrf_field() }}  
                     <div class="form-group">
-                        <button type="submit" id="cerrarSesion" name="cerrarSesion" value=""></button>
+                        <button type="submit" class="btn" id="cerrarSesion" name="cerrarSesion" value=""></button>
                     </div>
                 </form>
             </nav>

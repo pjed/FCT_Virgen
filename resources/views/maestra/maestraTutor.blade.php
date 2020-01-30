@@ -52,12 +52,6 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="importarAlumnos">Importar Alumnos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="importarTutores">Importar Tutores</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link"  href="cambiarRol">Cambiar de rol</a>
                         </li>
                         <li class="nav-item">

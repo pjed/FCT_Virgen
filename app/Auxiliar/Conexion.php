@@ -29,13 +29,13 @@ class Conexion {
      * @return type
      */
     static function existeUsuario($correo, $pwd) {
-        
+
         $ur = usuarios_rol::all();
         $v = [];
         $w = [];
         $cont = 0;
         foreach ($ur as $a) {
-            $p = usuario::where('email', $correo)->where('password', $pwd)->where('dni', $a->usuarios_dni)->first(); //aqui se cruzan
+            $p = usuario::where('email', $correo)->where('pass', $pwd)->where('dni', $a->usuarios_dni)->first(); //aqui se cruzan
             if ($p) {
                 $v[] = ['dni' => $p->dni,
                     'nombre' => $p->nombre,
@@ -46,13 +46,13 @@ class Conexion {
                     'iban' => $p->iban,
                     'rol' => $a->roles_id,
                     'curso' => $a->cursos_id,
-                    ];
+                ];
                 $cont++;
             }
         }
-        $w [] = ['usuario'=> $v,
-                'cont'=>$cont
-                ];
+        $w [] = ['usuario' => $v,
+            'cont' => $cont
+        ];
         return $w;
     }
 
@@ -88,7 +88,7 @@ class Conexion {
      * @param type $edad
      * @return string
      */
-    static function insertarUsuarios($correo, $dni, $pwd, $nombre, $tf, $edad,$activo) {
+    static function insertarUsuarios($correo, $dni, $pwd, $nombre, $tf, $edad, $activo) {
         $pe = new Persona;
         $pe->correo = $correo;
         $pe->DNI = $dni;
@@ -126,11 +126,11 @@ class Conexion {
     static function ModificarUsuarios($dni, $correo, $nombre, $tf, $edad, $activo) {
         try {
             $p = Persona::where('correo', $correo)
-                ->where('DNI', $dni)
-                ->update(['Nombre' => $nombre,
-            'Tfno' => $tf,
-            'edad' => $edad,
-            'activo' => $activo]);
+                    ->where('DNI', $dni)
+                    ->update(['Nombre' => $nombre,
+                'Tfno' => $tf,
+                'edad' => $edad,
+                'activo' => $activo]);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito usuario.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -171,5 +171,24 @@ class Conexion {
         }
     }
 
+    static function listarAlumnos() {
+
+        $ur = usuarios_rol::where('roles_id', 3)->get();
+        $listaAlumnos = [];
+        
+        foreach ($ur as $a) {
+            $w = usuario::where('dni', $a->usuarios_dni)->get(); //aqui se cruzan
+            foreach ($w as $p) {
+                $listaAlumnos [] = ['dni' => $p->dni,
+                    'nombre' => $p->nombre,
+                    'apellidos' => $p->apellidos,
+                    'email' => $p->email,
+                    'telefono' => $p->telefono,
+                    'iban' => $p->iban];
+            }
+        }
+        
+        return $listaAlumnos;
+    }
 
 }
