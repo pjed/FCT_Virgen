@@ -97,20 +97,30 @@ Route::post('exportarDocumentos', 'controladorAdmin@exportarDocumentos');
 Route::get('bienvenidaAl', function () {
     return view('alumno/bienvenidaAl');
 });
-Route::get('crearGasto', function () {
-    return view('alumno/crearGasto');
+Route::get('crearGastoComida', function () {
+    return view('alumno/crearGastoComida');
 });
-Route::get('gestionarGastos', function () {
-    return view('alumno/gestionarGastos');
+Route::get('crearGastoTransporte', function () {
+    return view('alumno/crearGastoTransporte');
+});
+Route::get('gestionarGastosComida', function () {
+    return view('alumno/gestionarGastosComida');
+});
+Route::get('gestionarGastosTransporte', function () {
+    return view('alumno/gestionarGastosTransporte');
 });
 Route::get('perfilAlumno', function () {
     return view('perfilAlumno');
 });
 Route::post('perfilAl', 'controladorAlumno@perfil');
 
-Route::post('crearGasto', 'controladorAlumno@crearGasto');
+Route::post('crearGastoComida', 'controladorAlumno@crearGastoComida');
 
-Route::post('gestionarGastos', 'controladorAlumno@gestionarGasto');
+Route::post('crearGastoTransporte', 'controladorAlumno@crearGastoTransporte');
+
+Route::post('gestionarGastosComida', 'controladorAlumno@gestionarGastoComida');
+
+Route::post('gestionarGastosTransporte', 'controladorAlumno@gestionarGastoTransporte');
 
 //});
 //admin y tutor

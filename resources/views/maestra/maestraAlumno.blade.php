@@ -39,14 +39,19 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="bienvenidaAl">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="crearGasto">Crear Gasto</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#">Crear Gasto</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="crearGastoComida">Comida</a>
+                                <a class="dropdown-item" href="crearGastoTransporte">Transporte</a>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="gestionarGastos">Gestionar Gastos</a>
-                        </li>                
-                        <li class="nav-item">
-                            <a class="nav-link" href="importarTutores">Importar Tutores</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#">Gestionar Gastos</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="gestionarGastosComida">Comida</a>
+                                <a class="dropdown-item" href="gestionarGastosTransporte">Transporte</a>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"  href="cambiarRol">Cambiar de rol</a>

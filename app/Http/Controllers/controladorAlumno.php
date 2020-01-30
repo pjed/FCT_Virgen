@@ -6,11 +6,19 @@ use Illuminate\Http\Request;
 
 class controladorAlumno extends Controller
 {
-    public function crearGasto(Request $req) {
+    public function crearGastoComida(Request $req) {
         
     }
     
-    public function gestionarGasto(Request $req) {
+    public function crearGastoTransporte(Request $req) {
+        
+    }
+    
+    public function gestionarGastoComida(Request $req) {
+        
+    }
+    
+    public function gestionarGastoTransporte(Request $req) {
         
     }
     
