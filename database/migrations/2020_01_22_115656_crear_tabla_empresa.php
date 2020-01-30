@@ -15,8 +15,8 @@ class CrearTablaEmpresa extends Migration {
         Schema::create('empresas', function (Blueprint $table) {
             $table->string('cif', 9)->primary();
             $table->string('nombre', 100);
-            $table->string('dni_responsable', 9);
-            $table->string('nombre_responsable', 100);
+            $table->string('dni_representante', 9);
+            $table->string('nombre_representante', 100);
             $table->string('direccion', 200);
             $table->string('localidad', 200);
             $table->string('horario', 100);
