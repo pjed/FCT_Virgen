@@ -6,20 +6,20 @@
 #cerrarSesion{
     background-image :url('../images/logout.png');
     background-repeat: no-repeat;
-    background-size: 64px;
+    background-size: 44px;
     background-color: transparent;
-    width: 64px;
-    height: 64px;
+    width: 44px;
+    height:44px;
     border: none;
 
 }
 #perfil{
     background-image: url('../images/user.png');
     background-repeat: no-repeat;
-    background-size: 64px;
+    background-size: 44px;
     background-color: transparent;
-    width: 64px;
-    height: 64px;
+    width: 44px;
+    height: 44px;
     border: none;
 
 }
@@ -32,18 +32,55 @@
     width: 64px;
     height: 64px;
 }
-footer,.footer{
-    background: black;    
-    margin: 0px;
-}
-main{
-    margin-top:  4rem; 
-}
-header{
-    margin-bottom: 3.5rem; 
+
+
+@media (min-width:701px){
+    header{
+        margin-bottom: 3.5rem; 
+    }
+    main{
+        margin-top:  4rem; 
+        margin-bottom: 4rem; 
+        min-height: 700px;
+    }
+    footer,.footer{
+        background: black;    
+        margin: 0px;
+        padding: 0px;
+    }
+    .logoInstituto{
+        width: 64px;
+        height: 64px;
+        justify-content: center;
+    }
 }
 @media (max-width:701px){
-    footer{
+    header{
+        margin-bottom: 6rem; 
         font-size: 10px;
+        padding: 0px;
+    }
+    main{
+        margin-top:  6rem;         
+        margin-bottom: 6rem;
+        min-height: 40px;
+    }
+    footer,.footer{
+        align-self: center;
+        font-size: 8px;
+        background: black;    
+        margin: 0px;
+        padding: 0px;
+    }
+    h1{
+        font-size: 25px;
+    }
+    a,label{
+        font-size: 15px;
+    }
+    .logoInstituto{
+        width: 44px;
+        height: 44px;
+        align-items:  center;
     }
 }

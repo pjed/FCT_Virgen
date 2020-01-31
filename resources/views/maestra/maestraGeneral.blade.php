@@ -26,14 +26,14 @@
         <header class="fixed-top bg-dark">  
             <ul class="list-group  list-group-flush">
                 <div class="row">
-                    <div class="col-sm-2 col-md-2 col-lg-2">
+                    <div class="col-sm col-md-2 col-lg-2">
                         <li class="bg-dark list-group-item">
                             <a href="#">
                                 <img id="logotipo" src="{{asset ('imagenes/logo.png')}}" alt="logotipo">
                             </a>
                         </li>
                     </div>
-                    <div class="col-sm-10 col-md-10 col-lg-10">
+                    <div class="col-sm col-md-10 col-lg-10">
                         <li class="bg-dark list-group-item">
                             <a href="#">Nombre de la aplicacion</a>
                         </li>
@@ -44,7 +44,7 @@
         <main>
             @yield('contenido')
         </main>
-        <footer>   
+        <footer class="fixed-bottom">   
             <ul class="list-group list-group-flush">
                 <div class="row">
                     <div class="col-sm-1 col-md-2 col-lg-2">
