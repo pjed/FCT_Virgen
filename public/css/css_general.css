@@ -23,12 +23,8 @@
     border: none;
 
 }
-.logoInstituto{
-    width: 64px;
-    height: 64px;
-}
 
-.logo{
+#logo{
     width: 64px;
     height: 64px;
 }
@@ -48,7 +44,7 @@
         margin: 0px;
         padding: 0px;
     }
-    .logoInstituto{
+    #logoInstituto{
         width: 64px;
         height: 64px;
         justify-content: center;
@@ -78,9 +74,12 @@
     a,label{
         font-size: 15px;
     }
-    .logoInstituto{
-        width: 44px;
-        height: 44px;
-        align-items:  center;
+    #logoInstituto img{
+        width: 34px;
+        height: 34px;
+    }
+    
+    #logoInstituto a{
+        width: 100%;
     }
 }
