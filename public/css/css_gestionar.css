@@ -6,20 +6,14 @@
 #cerrarSesion{
     background-image :url('../images/logout.png');
     background-repeat: no-repeat;
-    background-size: 64px;
     background-color: transparent;
-    width: 64px;
-    height: 64px;
     border: none;
 
 }
 #perfil{
     background-image: url('../images/user.png');
     background-repeat: no-repeat;
-    background-size: 64px;
     background-color: transparent;
-    width: 64px;
-    height: 64px;
     border: none;
 
 }
@@ -27,40 +21,52 @@
 #eliminar{
     background-image :url('../images/delete.png');
     background-repeat: no-repeat;
-    background-size: 64px;
     background-color: transparent;
-    width: 64px;
-    height: 64px;
     border: none;
 }
 
 #editar{
     background-image: url('../images/edit.png');
     background-repeat: no-repeat;
-    background-size: 64px;
     background-color: transparent;
-    width: 64px;
-    height: 64px;
     border: none;
 }
 
 #buscar{
     background-image: url('../images/search.png');
     background-repeat: no-repeat;
-    background-size: 64px;
-    width: 64px;
-    height: 64px;
+    background-color: transparent;
+    border: none;
 }
 
 #confirmar{
     background-image: url('../images/confirm.png');
     background-repeat: no-repeat;
-    background-size: 64px;
-    width: 64px;
-    height: 64px;
+    background-color: transparent;
+    border: none;
 }
 
 
-main{
-    margin-top: 7rem; 
+
+@media (min-width:701px){  
+    main{
+        margin-top: 7rem;     
+    }
+    #confirmar,#buscar,#editar,#eliminar, #perfil,  #cerrarSesion{    
+        width: 64px;
+        background-size: 64px;
+        height: 64px
+
+    }
+}
+@media (max-width:701px){
+    main{
+        margin-top: 10rem;     
+    }
+    #confirmar,#buscar,#editar,#eliminar, #perfil,  #cerrarSesion{    
+        width: 24px;
+        background-size: 24px;
+        height: 24px
+
+    }
 }

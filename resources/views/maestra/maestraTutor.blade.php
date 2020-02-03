@@ -25,10 +25,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <header class="fixed-top">  
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-nav" href="#">
                     <img id="logotipo" src="{{asset ('images/logo.png')}}" alt="logotipo">
                 </a>
-                <a class="navbar-brand" href="#">Nombre de la aplicacion</a>
+                <a class="navbar-nav" href="#">Nombre de la aplicacion</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -75,36 +75,21 @@
         <main>
             @yield('contenido')
         </main>
-        <footer class="fixed-bottom">   
-            <ul class="list-group list-group-flush">
-                <div class="row">
-                    <div class="col-sm-1 col-md-2 col-lg-2">
-                        <li class="footer list-group-item">
-                            <a class="nav-link" href="http://www.cifpvirgendegracia.com/">
-                                <img id="logoInstituto" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
-                            </a>
-                        </li>
-                    </div>
-                    <div class="col-sm-1 col-md-7 col-lg-7">
-                        <li class="footer list-group-item">
-                            <p class="text-center">
-                                2 DAW 2019 - 2020
-                            </p>
-                        </li>
-                    </div>
-                    <div class="col-sm-1 col-md-3 col-lg-3">
-                        <li class="footer list-group-item">
-                            <p class="text-center">
-                                Marina Estefanía Flores Fernández
-                                <br>
-                                Pedro Javier Espinosa Duque
-                                <br>
-                                Manuel Ruiz González
-                            </p>
-                        </li>
-                    </div>
-                </div>
-            </ul>
+        <footer class="footer bg-dark container-fluid">  
+            <nav class="nav row">
+                <a class="col nav-link float-left text-center" id="logoInstituto" href="http://www.cifpvirgendegracia.com/">
+                    <img id="logoInstituto" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
+                </a>
+                <p class="col nav-link float-left text-center">
+                    2 DAW 2019 - 2020
+                    </br>
+                    Marina Estefanía Flores Fernández
+                    </br>
+                    Pedro Javier Espinosa Duque
+                    </br>
+                    Manuel Ruiz González
+                </p>
+            </nav>
         </footer>
     </body>
 </html>

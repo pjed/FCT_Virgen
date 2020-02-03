@@ -35,23 +35,21 @@
         <main>
             @yield('contenido')
         </main>
-        <footer>  
-            <div class="container">
-                <nav class="nav row">
-                    <a class=" col nav-link text-center" id="logoInstituto" href="http://www.cifpvirgendegracia.com/">
-                        <img id="logoInstituto" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
-                    </a>
-                    <p class="col nav-item  text-center">
-                        2 DAW 2019 - 2020
-                        </br>
-                        Marina Estefanía Flores Fernández
-                        </br>
-                        Pedro Javier Espinosa Duque
-                        </br>
-                        Manuel Ruiz González
-                    </p>
-                </nav>
-            </div>
+        <footer class="footer bg-dark container-fluid">  
+            <nav class="nav row">
+                <a class="col nav-link float-left text-center" id="logoInstituto" href="http://www.cifpvirgendegracia.com/">
+                    <img id="logoInstituto" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
+                </a>
+                <p class="col nav-link float-left text-center">
+                    2 DAW 2019 - 2020
+                    </br>
+                    Marina Estefanía Flores Fernández
+                    </br>
+                    Pedro Javier Espinosa Duque
+                    </br>
+                    Manuel Ruiz González
+                </p>
+            </nav>
         </footer>
     </body>
 </html>
