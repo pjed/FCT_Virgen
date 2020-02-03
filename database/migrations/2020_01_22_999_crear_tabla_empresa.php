@@ -12,6 +12,8 @@ class CrearTablaEmpresa extends Migration {
      * @return void
      */
     public function up() {
+        
+        Schema::defaultStringLength(191);
         Schema::create('empresas', function (Blueprint $table) {
             $table->string('cif', 9)->primary();
             $table->string('nombre', 100);
