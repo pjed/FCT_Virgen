@@ -15,8 +15,9 @@
         <!-- Course CSS -->
         <link rel="stylesheet" type="text/css" href="{{asset ('css/css_general.css')}}" media="screen" />        
         <link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
+        
         <script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>
-        <script src="{{asset ('js/crearGasto.js')}}"></script>
+        <script src="{{asset ('js/js_crearGasto.js')}}"></script>
     </head>
 
     <body>
