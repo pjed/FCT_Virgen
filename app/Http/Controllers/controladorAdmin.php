@@ -4,6 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Auxiliar\Conexion;
+use App\Modal\centro;
+use App\Modal\comida;
+use App\Modal\curso;
+use App\Modal\empresa;
+use App\Modal\gasto;
+use App\Modal\practica;
+use App\Modal\propio;
+use App\Modal\responsable;
+use App\Modal\transporte;
+use App\Modal\usuario;
+use App\Modal\usuarios_rol;
+use App\Modal\colectivo;
 
 class controladorAdmin extends Controller {
 
