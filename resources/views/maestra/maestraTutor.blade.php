@@ -41,8 +41,12 @@
                             <a class="nav-link" href="ExtraerDocT">Generar documentos</a>
 
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="consultarAlumno">Consultar Gastos</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Consultar Gastos</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="consultarGastoComida">Comida</a>
+                                <a class="dropdown-item" href="consultarGastoTrasnporte">Trasnporte</a>
+                            </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar</a>

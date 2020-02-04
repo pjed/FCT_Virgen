@@ -20,7 +20,7 @@ Consultar Gastos por curso
                     <?php
                     foreach ($lu as $key) {
                         ?>
-                    <form action="consultarAlumno" method="POST">
+                    <form action="consultarGastoTrasnporte" method="POST">
                         {{ csrf_field() }}
                         <tr>
                             <td>

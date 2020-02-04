@@ -36,8 +36,11 @@ Route::get('olvidarPwd', function () {
 Route::get('bienvenidaT', function () {
     return view('tutor/bienvenidaT');
 });
-Route::get('consultarAlumno', function () {
-    return view('tutor/consultarGastosAlumno');
+Route::get('consultarGastoTrasnporte', function () {
+    return view('tutor/consultarGastoTrasnporte');
+});
+Route::get('consultarGastoComida', function () {
+    return view('tutor/consultarGastoComida');
 });
 Route::get('gestionarEmpresa', function () {
     return view('tutor/gestionarEmpresa');
@@ -54,7 +57,9 @@ Route::get('ExtraerDocT', function () {
 Route::get('perfilTutor', function () {
     return view('perfilTutor');
 });
-Route::post('consultarAlumno', 'controladorTutor@gconsultarAlumno');
+
+Route::post('consultarGastoComida', 'controladorTutor@consultarGastoComida');
+Route::post('consultarGastoTrasnporte', 'controladorTutor@consultarGastoTrasnporte');
 Route::post('extraerDocT', 'controladorTutor@xtraerDocT');
 Route::post('gestionarEmpresa', 'controladorTutor@gestionarEmpresa');
 Route::post('gestionarResponsable', 'controladorTutor@gestionarResponsable');

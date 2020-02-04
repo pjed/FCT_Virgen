@@ -9,7 +9,11 @@ class controladorTutor extends Controller
     public function perfil(Request $req) {
         
     }
-    public function consultarAlumno(Request $req) {
+    
+    public function consultarGastoTrasnporte(Request $req) {
+        
+    }
+    public function consultarGastoComida(Request $req) {
         
     }
     public function extraerDocT(Request $req) {
