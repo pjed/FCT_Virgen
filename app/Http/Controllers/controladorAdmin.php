@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Auxiliar\Conexion;
 
 class controladorAdmin extends Controller {
 
@@ -20,11 +21,26 @@ class controladorAdmin extends Controller {
     public function gestionarAlumnos(Request $req) {
 
         if (isset($_REQUEST['editar'])) {
-            
+
+            $dni = $req->get('dni');
+            $nombre = $req->get('nombre');
+            $apellidos = $req->get('apellidos');
+            $email = $req->get('email');
+            $telefono = $req->get('telefono');
+            $iban = $req->get('iban');
+
+            Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban);
+
+            return view('admin/gestionarAlumnos');
         }
 
         if (isset($_REQUEST['eliminar'])) {
-            
+
+            $dni = $req->get('dni');
+
+            Conexion::borrarUsuario($dni);
+
+            return view('admin/gestionarAlumnos');
         }
     }
 
@@ -32,10 +48,26 @@ class controladorAdmin extends Controller {
 
         if (isset($_REQUEST['editar'])) {
             
+            $dni = $req->get('dni');
+            $nombre = $req->get('nombre');
+            $apellidos = $req->get('apellidos');
+            $email = $req->get('email');
+            $telefono = $req->get('telefono');
+            $ciclo = $req->get('selectCiclo');
+            
+            Conexion::actualizarDatosTutor($dni, $nombre, $apellidos, $email, $telefono, $ciclo);
+            
+            return view('admin/gestionarTutores');
+            
         }
 
         if (isset($_REQUEST['eliminar'])) {
-            
+         
+            $dni = $req->get('dni');
+
+            Conexion::borrarUsuario($dni);
+
+            return view('admin/gestionarTutores');
         }
     }
 
@@ -53,7 +85,7 @@ class controladorAdmin extends Controller {
             
         }
     }
-    
+
     public function perfil(Request $req) {
         
     }

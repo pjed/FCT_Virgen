@@ -154,7 +154,7 @@ class Conexion {
     static function borrarUsuario($dni) {
 //        dd($correo);    
         try {
-            Persona::where('correo', $dni)->delete();
+            usuario::where('dni', $dni)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -175,7 +175,7 @@ class Conexion {
 
         $ur = usuarios_rol::where('roles_id', 3)->get();
         $listaAlumnos = [];
-        
+
         foreach ($ur as $a) {
             $w = usuario::where('dni', $a->usuarios_dni)->get(); //aqui se cruzan
             foreach ($w as $p) {
@@ -187,8 +187,123 @@ class Conexion {
                     'iban' => $p->iban];
             }
         }
-        
+
         return $listaAlumnos;
+    }
+
+    static function listarTutores() {
+
+        $ur = usuarios_rol::where('roles_id', 2)->get();
+        $listaTutores = [];
+
+        foreach ($ur as $a) {
+            $w = usuario::where('dni', $a->usuarios_dni)->get(); //aqui se cruzan
+            foreach ($w as $p) {
+                $listaTutores [] = ['dni' => $p->dni,
+                    'nombre' => $p->nombre,
+                    'apellidos' => $p->apellidos,
+                    'email' => $p->email,
+                    'telefono' => $p->telefono,
+                    'cursos_id' => $p->cursos_id];
+            }
+        }
+
+        return $listaTutores;
+    }
+
+    static function listarCiclos() {
+
+        $ur = curso::all();
+        $listaCiclos = [];
+
+        foreach ($ur as $a) {
+            $listaCiclos [] = ['id' => $a->id,
+                'descripcion' => $a->descripcion,
+                'centro_cod' => $a->centro_cod,
+                'ano_academico' => $a->ano_academico,
+                'familia' => $a->familia,
+                'horas' => $a->horas,
+                'tutor' => $a->tutor];
+        }
+
+        return $listaCiclos;
+    }
+
+    static function listarUsuarios() {
+
+        $ur = usuario::all();
+        $listaUsuarios = [];
+
+        foreach ($ur as $a) {
+            $listaUsuarios [] = ['dni' => $a->dni,
+                'nombre' => $a->nombre,
+                'apellidos' => $a->apellidos,
+                'email' => $a->email,
+                'telefono' => $a->telefono,
+                'iban' => $a->iban,
+                'rol' => $a->rol];
+        }
+
+        return $listaUsuarios;
+    }
+
+    static function obtenerRolesUsuarios() {
+
+        $ur = usuarios_rol::all();
+        $listaRolesUsuarios = [];
+
+        foreach ($ur as $a) {
+            $listaRolesUsuarios [] = ['id' => $a->id,
+                'usuarios_dni' => $a->usuarios_dni,
+                'roles_id' => $a->roles_id];
+        }
+
+        return $listaRolesUsuarios;
+    }
+
+    static function actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban) {
+        try {
+            usuario::where('dni', $dni)
+                    ->update(['nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 'telefono' => $telefono, 'iban' => $iban]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito usuario.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar usuario.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function actualizarDatosTutor($dni, $nombre, $apellidos, $email, $telefono, $ciclo) {
+        try {
+            usuario::where('dni', $dni)
+                    ->update(['nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 'telefono' => $telefono, 'cursos_id' => $ciclo]);
+
+            curso::where('id', $ciclo)
+                    ->update(['tutor' => $dni]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito usuario.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar usuario.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
     }
 
 }
