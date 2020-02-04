@@ -39,21 +39,26 @@ Route::get('bienvenidaT', function () {
 Route::get('consultarAlumno', function () {
     return view('tutor/consultarGastosAlumno');
 });
-Route::get('consultarCurso', function () {
-    return view('tutor/consultarGastosCurso');
+Route::get('gestionarEmpresa', function () {
+    return view('tutor/gestionarEmpresa');
 });
-Route::get('ModificarDoc', function () {
-    return view('tutor/modificarDoc');
+Route::get('gestionarResponsable', function () {
+    return view('tutor/gestionarResponsable');
+});
+Route::get('gestionarPracticas', function () {
+    return view('tutor/gestionarPracticas');
 });
 Route::get('ExtraerDocT', function () {
     return view('tutor/extraerDocT');
 });
-Route::get('importarAlumnos', function () {
-    return view('tutor/importarAlumnos');
-});
 Route::get('perfilTutor', function () {
     return view('perfilTutor');
 });
+Route::post('consultarAlumno', 'controladorTutor@gconsultarAlumno');
+Route::post('extraerDocT', 'controladorTutor@xtraerDocT');
+Route::post('gestionarEmpresa', 'controladorTutor@gestionarEmpresa');
+Route::post('gestionarResponsable', 'controladorTutor@gestionarResponsable');
+Route::post('gestionarPracticas', 'controladorTutor@gestionarPracticas');
 Route::post('perfilT', 'controladorTutor@perfil');
 //});
 //admin
