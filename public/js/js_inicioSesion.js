@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("#aceptarInicioSesion").click(function () {
-        if ($("#usuario").val() === "" && $("#pwd").val() === "") {
+        if ($("#usuario").val() === "" || $("#pwd").val() === "") {
             location.replace("inicioSesion");
         }
     });
