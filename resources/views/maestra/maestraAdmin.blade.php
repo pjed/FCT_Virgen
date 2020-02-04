@@ -38,7 +38,7 @@
                             <a class="nav-link active" href="bienvenidaAd">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="extraerDocA">Exportar Documentos</a>
+                            <a class="nav-link" href="extraerDocA">Generar Documentos</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar Usuarios</a>

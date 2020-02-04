@@ -37,18 +37,19 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="bienvenidaT">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Documentos</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="ModificarDoc">Modificar</a>
-                                <a class="dropdown-item" href="ExtraerDocT">Extraer</a>
-                            </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ExtraerDocT">Generar documentos</a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="consultarAlumno">Consultar Gastos</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Consultar Gastos</a>
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="consultarAlumno">Alumno</a>
-                                <a class="dropdown-item" href="consultarCurso">Curso</a>
+                                <a class="dropdown-item" href="gestionarEmpresa">Empresa</a>
+                                <a class="dropdown-item" href="gestionarResponsable">Responsable</a>
+                                <a class="dropdown-item" href="gestionarPracticas">Practicas</a>
                             </div>
                         </li>
                         <li class="nav-item">
