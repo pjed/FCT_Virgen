@@ -5,6 +5,12 @@ Gestionar usuarios
 @endsection
 
 @section('contenido') 
+
+<?php
+$listaUsuarios = Conexion::listarUsuarios();
+$listaRoles = Conexion::obtenerRolesUsuarios();
+?>
+
 <div class="container-fluid">  
 
     <!-- Migas de pan -->
@@ -42,7 +48,6 @@ Gestionar usuarios
                             <th>Teléfono</th>
                             <th>Iban</th>
                             <th>Rol</th>
-                            <th>Tutor</th>
                             <th>Modificar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -54,15 +59,14 @@ Gestionar usuarios
                         <form action="gestionarTablaUsuarios" method="POST">
                             {{ csrf_field() }}
                             <tr>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="dni" value="" readonly/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value=""/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value=""/></td>
-                                <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value=""/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value=""/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="iban" value=""/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="dni" value="<?php echo $value['dni']; ?>" readonly/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value="<?php echo $value['nombre']; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value="<?php echo $value['apellidos']; ?>"/></td>
+                                <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $value['email']; ?>"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value['telefono']; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="iban" value="<?php echo $value['iban']; ?>"/></td>
                                 <td>
                                     <fieldset>
-                                        <legend></legend>
 
                                         <div>
                                             <input type="checkbox" id="admin" name="rol" value="administrador">
@@ -79,17 +83,6 @@ Gestionar usuarios
                                             <label for="alumno">Alumno</label>
                                         </div>
                                     </fieldset>
-                                </td>
-                                <td>
-                                    <select name="selectTutor">
-                                        <?php
-                                        foreach ($listaTutores as $value) {
-                                            ?>
-                                            <option value="<?php echo $value ?>"><?php echo $value ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
                                 </td>
 
                                 <td><button type="submit" id="editar" class="btn" name="editar" /></td>

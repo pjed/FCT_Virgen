@@ -9,7 +9,7 @@ Gestionar alumnos
 <main>
 
     <?php
-    $listaAlumnos = Conexion::listarAlumnos();
+    $listaTutores = Conexion::listarAlumnos();
     ?>
 
     <div class="container-fluid">  
@@ -54,7 +54,7 @@ Gestionar alumnos
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($listaAlumnos as $value) {
+                            foreach ($listaTutores as $value) {
                                 ?>
                             <form action="gestionarTablaAlumnos" method="POST">
                                 {{ csrf_field() }}

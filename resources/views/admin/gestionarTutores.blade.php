@@ -5,6 +5,12 @@ Gestionar tutores
 @endsection
 
 @section('contenido') 
+
+<?php
+$listaTutores = Conexion::listarTutores();
+$listaCiclos = Conexion::listarCiclos();
+?>
+
 <div class="container-fluid">  
 
     <!-- Migas de pan -->
@@ -47,22 +53,25 @@ Gestionar tutores
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($listaAlumnos as $value) {
+                        foreach ($listaTutores as $value) {
                             ?>
                         <form action="gestionarTablaTutores" method="POST">
                             {{ csrf_field() }}
                             <tr>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="dni" value="" readonly/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value=""/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value=""/></td>
-                                <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value=""/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value=""/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="dni" value="<?php echo $value['dni']; ?>" readonly/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value="<?php echo $value['nombre']; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value="<?php echo $value['apellidos']; ?>"/></td>
+                                <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $value['email']; ?>"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value['telefono']; ?>"/></td>
                                 <td>
                                     <select name="selectCiclo">
+                                        
                                         <?php
-                                        foreach ($listaCiclos as $value) {
+                                        foreach ($listaCiclos as $value1) {
                                             ?>
-                                            <option value="<?php echo $value ?>"><?php echo $value ?></option>
+                                        <option value="<?php echo $value1['id'] ?>"<?php if ($value1['id']==$value['cursos_id']){ ?>selected<?php } ?>>
+                                            <?php echo $value1['id'] ?>
+                                        </option>
                                             <?php
                                         }
                                         ?>
