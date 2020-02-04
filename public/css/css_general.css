@@ -21,33 +21,9 @@
 .footer{  
     color:white;
 }
-@media (min-width:701px){
-    header{
-        margin-bottom: 3.5rem; 
-    }
-    #logo{
-        width: 64px;
-        height: 64px;
-    }
-    main{
-        margin-top:  4rem; 
-        margin-bottom: 4rem; 
-        min-height: 100px;
-    }
 
-    #perfil,#cerrarSesion{
-        background-size: 64px;
-        width: 64px;
-        height: 64px;
-    }
-    #logoInstituto{        
-        align-self: center;
-        width: 64px;
-        height: 64px;
-        justify-content: center;
-    }
-}
-@media (max-width:701px){
+/*Movil site vertical */
+@media only screen and (max-width:480px){
     header{
         margin-bottom: 6rem; 
         font-size: 10px;
@@ -85,4 +61,58 @@
         align-self: center;
         width: 100%;
     }
+}
+/*Tablet Apps */
+@media only screen and (min-width:481px) and (max-width:1024px){
+   header{
+        margin-bottom: 3.5rem; 
+    }
+    #logo{
+        width: 64px;
+        height: 64px;
+    }
+    main{
+        margin-top:  4rem; 
+        margin-bottom: 4rem; 
+        min-height: 250px;
+    }
+
+    #perfil,#cerrarSesion{
+        background-size: 64px;
+        width: 64px;
+        height: 64px;
+    }
+    #logoInstituto{        
+        align-self: center;
+        width: 64px;
+        height: 64px;
+        justify-content: center;
+    }
+}
+/*Pantalla de escritorio WebSite */
+@media only screen and (min-width:1025px){
+    header{
+        margin-bottom: 3.5rem; 
+    }
+    #logo{
+        width: 64px;
+        height: 64px;
+    }
+    main{
+        margin-top:  4rem; 
+        margin-bottom: 4rem; 
+        min-height: 80px;
+    }
+
+    #perfil,#cerrarSesion{
+        background-size: 64px;
+        width: 64px;
+        height: 64px;
+    }
+    #logoInstituto{        
+        align-self: center;
+        width: 64px;
+        height: 64px;
+        justify-content: center;
+    }   
 }
