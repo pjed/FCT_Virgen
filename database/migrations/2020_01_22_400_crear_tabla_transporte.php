@@ -13,6 +13,8 @@ class CrearTablaTransporte extends Migration
      */
     public function up()
     {
+        
+        Schema::defaultStringLength(191);
         Schema::create('transportes', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('tipo');

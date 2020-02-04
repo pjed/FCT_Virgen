@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrearTablaColectivo extends Migration
+class CrearTablaCentro extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CrearTablaColectivo extends Migration
      */
     public function up()
     {
-        Schema::create('colectivos', function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
-            $table->binary('foto');
-            $table->string('n_dias');
+        
+        Schema::defaultStringLength(191);
+        Schema::create('centros', function (Blueprint $table) {
+            $table->string('cod')->primary();
+            $table->string('nombre');
+            $table->string('localidad');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CrearTablaColectivo extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('colectivo');
+        Schema::dropIfExists('centro');
     }
 }

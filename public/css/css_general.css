@@ -6,44 +6,83 @@
 #cerrarSesion{
     background-image :url('../images/logout.png');
     background-repeat: no-repeat;
-    background-size: 64px;
     background-color: transparent;
-    width: 64px;
-    height: 64px;
     border: none;
 
 }
 #perfil{
     background-image: url('../images/user.png');
-    background-repeat: no-repeat;
-    background-size: 64px;
-    background-color: transparent;
-    width: 64px;
-    height: 64px;
+    background-repeat: no-repeat;    
+    background-color: transparent;   
     border: none;
 
 }
-.logoInstituto{
-    width: 64px;
-    height: 64px;
-}
 
-.logo{
-    width: 64px;
-    height: 64px;
+.footer{  
+    color:white;
 }
-footer,.footer{
-    background: black;    
-    margin: 0px;
-}
-main{
-    margin-top:  4rem; 
-}
-header{
-    margin-bottom: 3.5rem; 
+@media (min-width:701px){
+    header{
+        margin-bottom: 3.5rem; 
+    }
+    #logo{
+        width: 64px;
+        height: 64px;
+    }
+    main{
+        margin-top:  4rem; 
+        margin-bottom: 4rem; 
+        min-height: 100px;
+    }
+
+    #perfil,#cerrarSesion{
+        background-size: 64px;
+        width: 64px;
+        height: 64px;
+    }
+    #logoInstituto{        
+        align-self: center;
+        width: 64px;
+        height: 64px;
+        justify-content: center;
+    }
 }
 @media (max-width:701px){
-    footer{
+    header{
+        margin-bottom: 6rem; 
         font-size: 10px;
+        padding: 0px;
+    }
+    main{
+        margin-top:  6rem;         
+        margin-bottom: 6rem;
+        min-height: 40px;
+    }
+    footer,.footer{
+        align-self: center;
+        font-size: 8px; 
+    }
+    h1{
+        font-size: 25px;
+    }
+    #perfil,#cerrarSesion{
+        background-size: 34px;
+        width: 34px;
+        height: 34px;
+    }
+    a,label{
+        font-size: 10px;
+    }
+    #logo{
+        width: 34px;
+        height: 34px;
+    }
+    #logoInstituto img{
+        width: 34px;
+        height: 34px;
+    }
+    #logoInstituto a{   
+        align-self: center;
+        width: 100%;
     }
 }

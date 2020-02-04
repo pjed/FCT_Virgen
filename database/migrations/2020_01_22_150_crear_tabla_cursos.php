@@ -13,14 +13,16 @@ class CrearTablaCursos extends Migration
      */
     public function up()
     {
+        
+        Schema::defaultStringLength(191);
         Schema::create('cursos', function (Blueprint $table) {
             $table->string('id', 50)->primary();
             $table->string('descripcion');
             $table->string('centro_cod');
             $table->string('ano_academico');
             $table->string('familia');
-            $table->integer('horas');
-            $table->string('tutor')->nullable();
+            $table->integer('horas')->nullable();
+            $table->string('profesor_dni')->nullable();
             $table->timestamps();
             $table->foreign('centro_cod')->references('cod')->on('centros');
         });

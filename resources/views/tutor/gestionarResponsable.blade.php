@@ -1,13 +1,13 @@
 @extends('maestra.maestraTutor')
 
 @section('titulo') 
-Consultar Gastos por curso
+Gestionar Responsable
 @endsection
 
 @section('contenido') 
 <div class="row">
     <div class="col-sm col-md col-lg">
-        <h2 class="text-center">Consultar Gastos por curso</h2>
+        <h2 class="text-center">Gestionar Responsable</h2>
         <div class="table-responsive ">
             <table class="table table-striped  table-hover table-bordered">
                 <thead class="thead-dark">
