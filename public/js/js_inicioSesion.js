@@ -10,8 +10,7 @@ $(document).ready(function () {
         }
     });
     $("#pwd").blur(function () {
-        if ($("#pwd").val() === "") {
-            location.replace("inicioSesion");
+        if ($("#pwd").val() === "") {            
             $("#pwd").css({'border-color': 'red'});
         }
     });
