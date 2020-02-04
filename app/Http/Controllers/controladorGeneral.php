@@ -38,43 +38,37 @@ class controladorGeneral extends Controller {
 //        $passHash = md5($pass);
         $w = [];
 //        $w = Conexion::existeUsuario($correo, $passHash);        
-        $w = Conexion::existeUsuario($correo, $pass);
-        foreach ($w as $q) {
-            $n = $q['usuario'];
-            $cont = $q['cont'];
-        }
-        if ($cont != 0) { //si existe usuario
+        $n = Conexion::existeUsuario($correo, $pass);
+        if ($n != 0) { //si existe usuario
             session()->put('usu', $n);
-            if ($cont == 1) { //si tiene un rol
-                foreach ($n as $u) {
-                    $rol = $u['rol'];
-                }
-                if ($rol == 1) {//admin
-                    echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+            if ($n['rol'] == 1) {//admin
+                session()->put('rol', 1);
+                echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como administrador
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                    return view('admin.bienvenidaAd');
-                } else if ($rol == 2) { //tutor
-                    echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                return view('admin.bienvenidaAd');
+            } else if ($n['rol'] == 2) { //tutor                
+                session()->put('rol', 2);
+                echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como tutor
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                    return view('tutor.bienvenidaT');
-                } else if ($rol == 3) {//alumno
-                    echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                return view('tutor.bienvenidaT');
+            } else if ($n['rol'] == 3) {//alumno                
+                session()->put('rol', 3);
+                echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como alumno
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                    return view('alumno.bienvenidaAl');
-                }
-            } else if ($cont != 1) { //si tiene un rol
+                return view('alumno.bienvenidaAl');
+            } else if ($n['rol'] == 4) {//tutor-admin
                 return view('cambiarRol');
             }
         } else {
@@ -89,11 +83,12 @@ class controladorGeneral extends Controller {
     }
 
     public function olvidarPwd(Request $req) {
-        $email=$req->get('email');
+        $email = $req->get('email');
     }
 
     public function cambiarRol(Request $req) {
         if (isset($_REQUEST['tutor'])) {
+            session()->put('rol', 2);
             echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como tutor
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -103,6 +98,7 @@ class controladorGeneral extends Controller {
             return view('tutor.bienvenidaT');
         }
         if (isset($_REQUEST['administrador'])) {
+            session()->put('rol', 1);
             echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como administrador
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

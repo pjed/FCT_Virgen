@@ -29,11 +29,8 @@ class Conexion {
      * @return type
      */
     static function existeUsuario($correo, $pwd) {
-
         $ur = usuarios_rol::all();
         $v = [];
-        $w = [];
-        $cont = 0;
         foreach ($ur as $a) {
             $p = usuario::where('email', $correo)->where('pass', $pwd)->where('dni', $a->usuarios_dni)->first(); //aqui se cruzan
             if ($p) {
@@ -47,13 +44,9 @@ class Conexion {
                     'rol' => $a->roles_id,
                     'curso' => $a->cursos_id,
                 ];
-                $cont++;
             }
         }
-        $w [] = ['usuario' => $v,
-            'cont' => $cont
-        ];
-        return $w;
+        return $v;
     }
 
     /**
