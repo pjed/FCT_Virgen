@@ -13,6 +13,8 @@ class CrearTablaPracticas extends Migration
      */
     public function up()
     {
+        
+        Schema::defaultStringLength(191);
         Schema::create('practicas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('dni_responsable',9);
@@ -23,7 +25,7 @@ class CrearTablaPracticas extends Migration
             $table->string('alumno_dni',9);
             $table->timestamps();
             
-            $table->foreign('alumno_dni')->references('dni')->on('usuarios');
+            $table->foreign('alumno_dni')->references('dni')->on('alumnos');
             $table->foreign('empresa_cif')->references('cif')->on('empresas');
             $table->foreign('dni_responsable')->references('dni')->on('responsables');
         });

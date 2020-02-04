@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrearTablaPropio extends Migration
+class CrearTablaComida extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CrearTablaPropio extends Migration
      */
     public function up()
     {
-        Schema::create('propios', function (Blueprint $table) {
+        
+        Schema::defaultStringLength(191);
+        Schema::create('comidas', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->integer('kms');
-            $table->string('n_dias');
-            $table->float('precio', 8, 2);
+            $table->string('importe', 8, 2);
+            $table->date('fecha');
+            $table->binary('foto');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CrearTablaPropio extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('propio');
+        Schema::dropIfExists('comida');
     }
 }

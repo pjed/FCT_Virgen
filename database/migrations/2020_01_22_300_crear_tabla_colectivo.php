@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrearTablaRoles extends Migration
+class CrearTablaColectivo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CrearTablaRoles extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->string('id',3)->primary();
-            $table->string('nombre');
+        
+        Schema::defaultStringLength(191);
+        Schema::create('colectivos', function (Blueprint $table) {
+            $table->integer('id')->autoIncrement();
+            $table->binary('foto');
+            $table->string('n_dias');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CrearTablaRoles extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('colectivo');
     }
 }

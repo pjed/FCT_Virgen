@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrearTablaCentro extends Migration
+class CrearTablaRoles extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CrearTablaCentro extends Migration
      */
     public function up()
     {
-        Schema::create('centros', function (Blueprint $table) {
-            $table->string('cod')->primary();
+        
+        Schema::defaultStringLength(191);
+        Schema::create('roles', function (Blueprint $table) {
+            $table->string('id',3)->primary();
             $table->string('nombre');
-            $table->string('localidad');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CrearTablaCentro extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('centro');
+        Schema::dropIfExists('roles');
     }
 }
