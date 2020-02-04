@@ -35,14 +35,14 @@ Crear gasto comida
                 <p>Ticket</p>
                 <img src="{{asset ('images/ticket.png')}}" class="logoInstituto"><br><br>
                 <p>Hacer foto</p>
-                <input type="file" id="fichero" name="fichero"/><br><br>
+                <input type="file" id="fotoTicket" name="fichero"/><br><br>
 
             </div>
 
             <div class="col-md-2">
 
                 <p>Nombre del alumno</p>
-                <input type="text" id="nombre" name="nomAlum" placeholder="Nombre" value="" readonly/><br><br>
+                <input type="text" id="nombreAl" name="nomAlum" placeholder="Nombre" value="" readonly/><br><br>
                 <p>Importe total</p>
                 <input type="number" id="importeT" name="importeT" min="0" max="9" step="0.01" value="0"/><br><br>
 
@@ -54,7 +54,7 @@ Crear gasto comida
 
             <div class="col-md-2">
 
-                <input type="submit" name="guardar" value="Guardar">
+                <input type="submit" id="guardar" name="guardar" value="Guardar">
 
             </div>
 
