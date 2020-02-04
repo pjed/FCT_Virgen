@@ -44,8 +44,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Consultar Gastos</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="consultarGastoComida">Comida</a>
-                                <a class="dropdown-item" href="consultarGastoTrasnporte">Trasnporte</a>
+                                <a class="dropdown-item" href="consultarGastoAlumno">Alumno</a>
+                                <a class="dropdown-item" href="consultarGastoCurso">Curso</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">

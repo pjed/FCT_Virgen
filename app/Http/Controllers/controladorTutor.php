@@ -10,10 +10,10 @@ class controladorTutor extends Controller
         
     }
     
-    public function consultarGastoTrasnporte(Request $req) {
+    public function consultarGastoAlumno(Request $req) {
         
     }
-    public function consultarGastoComida(Request $req) {
+    public function consultarGastoCurso(Request $req) {
         
     }
     public function extraerDocT(Request $req) {
