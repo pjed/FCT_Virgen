@@ -27,7 +27,7 @@ Inicio de sesion
                     <a href="olvidarPwd">He olvidado la contraseña</a>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary btn-sm" id="aceptarInicioSesion" name="aceptarInicioSesion" value="Aceptar">
+                    <input type="submit" class="btn btn-primary btn-sm" id="aceptar" name="aceptarIndex" value="Aceptar">
                 </div>
             </form>
         </div>
