@@ -2,7 +2,6 @@
 
 namespace App\Auxiliar;
 
-use App\Modal\tutor;
 use App\Modal\matricula;
 use App\Modal\centro;
 use App\Modal\comida;
