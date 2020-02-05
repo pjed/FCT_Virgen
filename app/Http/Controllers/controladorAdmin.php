@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Modal\tutor;
+use App\Modal\matricula;
 use App\Auxiliar\Conexion;
 use App\Modal\centro;
 use App\Modal\comida;
