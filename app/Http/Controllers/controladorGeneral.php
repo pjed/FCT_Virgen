@@ -39,9 +39,12 @@ class controladorGeneral extends Controller {
         $w = [];
 //        $w = Conexion::existeUsuario($correo, $passHash);        
         $n = Conexion::existeUsuario($correo, $pass);
-        if ($n != 0) { //si existe usuario
+        if ($n != null) { //si existe usuario
             session()->put('usu', $n);
-            if ($n['rol'] == 1) {//admin
+            foreach ($n as $u){
+                $rol = $u['rol'];
+            }
+            if ($rol == 1) {//admin
                 session()->put('rol', 1);
                 echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como administrador
@@ -50,7 +53,7 @@ class controladorGeneral extends Controller {
                     </button>
                   </div>';
                 return view('admin.bienvenidaAd');
-            } else if ($n['rol'] == 2) { //tutor                
+            } else if ($rol == 2) { //tutor                
                 session()->put('rol', 2);
                 echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como tutor
@@ -59,7 +62,7 @@ class controladorGeneral extends Controller {
                     </button>
                   </div>';
                 return view('tutor.bienvenidaT');
-            } else if ($n['rol'] == 3) {//alumno                
+            } else if ($rol == 3) {//alumno                
                 session()->put('rol', 3);
                 echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como alumno
@@ -68,7 +71,7 @@ class controladorGeneral extends Controller {
                     </button>
                   </div>';
                 return view('alumno.bienvenidaAl');
-            } else if ($n['rol'] == 4) {//tutor-admin
+            } else if ($rol == 4) {//tutor-admin
                 return view('cambiarRol');
             }
         } else {
