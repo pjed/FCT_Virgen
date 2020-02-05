@@ -2,6 +2,8 @@
 
 namespace App\Auxiliar;
 
+use App\Modal\tutor;
+use App\Modal\matricula;
 use App\Modal\centro;
 use App\Modal\comida;
 use App\Modal\curso;
@@ -297,6 +299,26 @@ class Conexion {
                     </button>
                   </div>';
         }
+    }
+
+    static function generarDocTutor() {
+        $v = [];
+        $tutor = session()->get('usu');
+        foreach ($tutor as $t){
+            $dni = $t['dni'];
+            $nombre = $t['nombre'];
+            $apellido = $t['apellidos'];
+        }
+        $q= tutor::where('usuarios_dni', $dni)->get();
+        
+        foreach ($q as $a) {
+            $v [] = ['id_tutores' => $a->idTutores,
+                'id_curso' => $a->cursos_id_curso,
+                'dni_tutor' => $dni,
+                'nombre_tutor' => $nombre,
+                'apellido_tutor' => $apellido];
+        }
+        return $v;
     }
 
 }

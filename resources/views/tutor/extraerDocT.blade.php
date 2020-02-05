@@ -1,3 +1,7 @@
+
+<?php
+
+use App\Auxiliar\Conexion; ?>
 @extends('maestra.maestraTutor')
 
 @section('titulo') 
@@ -5,45 +9,92 @@ Extraer Documentos
 @endsection
 
 @section('contenido') 
-<div class="row">
-    <div class="col-sm col-md col-lg">
-        <h2 class="text-center">Extraer Documentos</h2>
+<div class="container">
+    <!-- Migas de pan -->
+    <nav class="row  justify-content-center">
+        <nav class="col-sm col-md-2 col-lg">
+            <div class="breadcrumb">
+                <div class="breadcrumb-item"><a href="bienvenidaT">Home</a></div>
+                <div class="breadcrumb-item"><a href="#">Generar Documentos</a></div>
+            </div>
+        </nav>
+    </nav>
 
-        <form action="extraerDocT" method="POST">
-            {{ csrf_field() }}
-            <div class="form-group">
-                <label>
-                    Grupo:      
-                    <input type="text" id="grupo" class="form-control form-control-sm form-control-md form-control-lg" name="grupo" value=""/>
-                </label>
-            </div>
-            <div class="form-group ">
-                <label>
-                    Tutor:      
-                    <input type="text" id="tutor" class="form-control form-control-sm form-control-md form-control-lg" name="tutor" value=""/>
-                </label>
-            </div>
-            <div class="form-group">
-                <label>
-                    Recibí (PDF):      
-                    <input type="text" id="recibiFCT" class="btn btn-primary" name="recibiFCT" value="Anexo V Recibí FCT"/><a href="">FCT</a>
-                    <input type="text" id="recibiFPDUAL" class="btn btn-primary" name="recibiFPDUAL" value="Anexo XV Recibí FP DUAL"/><a href="">FP DUAL</a>
-                </label>
-            </div>
-            <div class="form-group">
-                <label>
-                    Memoria alumnos (EXCEL):      
-                    <input type="submit" id="memoriaAlumnos" class="btn btn-primary" name="memoriaAlumnos" value="Memoria alumnos"/>
-                </label>
-            </div>
-            <div class="form-group">
-                <label>
-                    Gastos de alumnos (EXCEL):      
-                    <input type="submit" id="gastosFCT" class="btn btn-primary" name="gastosFCT" value="Gastos alumnos FCT"/>
-                    <input type="submit" id="gastosFPDUAL" class="btn btn-primary" name="gastosFPDUAL" value="Gastos alumnos FP DUAL"/>
-                </label>
-            </div>
-        </form>
+    <!-- Título página -->
+    <div class="row  justify-content-center">
+        <div class="col-sm col-md-2 col-lg">
+            <h2 class="text-center">Generar Documentos</h2>
+        </div>
     </div>
-</div>  
+
+    <!-- Generar Documentos -->
+    <div class="row justify-content-center">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <?php
+            $lu = Conexion::generarDocTutor();
+            foreach ($lu as $key) {
+                ?>
+                <form action="extraerDocT" method="POST">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label>
+                            Grupo:      
+                            <input type="text" id="id_curso" class="form-control form-control-sm form-control-md form-control-lg" name="id_curso" value="<?php echo $key['id_curso']; ?>"/>
+                        </label>
+                        <label>
+                            Tutor:      
+                            <input type="text" id="nom_ape_tutor" class="form-control form-control-sm form-control-md form-control-lg" name="nom_ape_tutor" value="<?php echo $key['nombre_tutor'] . ', ' . $key['apellido_tutor']; ?>"/>
+                            <input type="hidden" id="dni_tutor" class="form-control form-control-sm form-control-md form-control-lg" name="dni_tutor" value="<?php echo $key['dni_tutor']; ?>"/>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Recibí (PDF):
+                            <div class="row">
+                                <div class="col-sm col-md col-lg">
+                                    <input type="submit" id="recibiFCT" class="btn btn-primary" name="recibiFCT" value="Anexo V Recibí FCT"/>
+                                </div>
+                                <div class="col-sm col-md col-lg">
+                                    <a href="http://www.educa.jccm.es/es/fpclm/centros-formacion-profesional/formacion-centros-trabajo-proyecto.ficheros/100158-anexo5_recibi.doc">FCT</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm col-md col-lg">
+                                    <input type="submit" id="recibiFPDUAL" class="btn btn-primary" name="recibiFPDUAL" value="Anexo XV Recibí FP DUAL"/>
+                                </div>
+                                <div class="col-sm col-md col-lg">
+                                    <a href="http://www.educa.jccm.es/es/fpclm/fp-dual/proyectos-formacion-profesional-dual-curso-2019-2020.ficheros/317740-Anexo%20XV%20Recib%C3%AD%20del%20alumnado.docx">FP DUAL</a>
+                                </div>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Memoria alumnos (EXCEL):   
+                            <div class="row">
+                                <div class="col-sm col-md col-lg">
+                                    <input type="submit" id="memoriaAlumnos" class="btn btn-primary" name="memoriaAlumnos" value="Memoria alumnos"/>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Gastos de alumnos (EXCEL):  
+                            <div class="row">
+                                <div class="col-sm col-md col-lg">
+                                    <input type="submit" id="gastosFCT" class="btn btn-primary" name="gastosFCT" value="Gastos alumnos FCT"/>
+                                </div>
+                                <div class="col-sm col-md col-lg">
+                                    <input type="submit" id="gastosFPDUAL" class="btn btn-primary" name="gastosFPDUAL" value="Gastos alumnos FP DUAL"/>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </form>
+                <?php
+            }
+            ?>
+        </div>
+    </div> 
+</div>
 @endsection

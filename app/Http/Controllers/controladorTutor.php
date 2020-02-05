@@ -32,7 +32,23 @@ class controladorTutor extends Controller
         
     }
     public function extraerDocT(Request $req) {
-        
+        $id_curso = $req->get('id_curso');        
+        $dni_tutor = $req->get('dni_tutor');
+        if (isset($_REQUEST['recibiFCT'])) {
+            
+        }
+        if (isset($_REQUEST['recibiFPDUAL'])) {
+            
+        }
+        if (isset($_REQUEST['memoriaAlumnos'])) {
+            
+        }
+        if (isset($_REQUEST['gastosFCT'])) {
+            
+        }
+        if (isset($_REQUEST['gastosFPDUAL'])) {
+            
+        }  
     }
     public function gestionarEmpresa(Request $req) {
         
