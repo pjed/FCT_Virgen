@@ -42,7 +42,7 @@
 /*Movil site vertical*/
 @media only screen and (max-width:480px){
     main{
-        margin-top: 7rem;     
+        /*margin-top: 7rem;*/     
     }
     #confirmar,#buscar,#editar,#eliminar, #perfil,  #cerrarSesion{    
         width: 64px;
@@ -53,7 +53,7 @@
 /*Tablet Apps */
 @media only screen and (min-width:481px) and (max-width:1024px){
     main{
-        margin-top: 7rem;     
+        /*margin-top: 7rem;*/     
     }
     #confirmar,#buscar,#editar,#eliminar, #perfil,  #cerrarSesion{    
         width: 64px;
@@ -64,7 +64,8 @@
 /*Pantalla de escritorio WebSite */
 @media only screen and (min-width:1025px){
     main{
-        margin-top: 10rem;     
+        /*margin-top: 10rem;*/  
+         min-height: 26rem;
     }
     #confirmar,#buscar,#editar,#eliminar, #perfil,  #cerrarSesion{    
         width: 24px;

@@ -41,12 +41,13 @@ class controladorGeneral extends Controller {
         $n = Conexion::existeUsuario($correo, $pass);
         if ($n != null) { //si existe usuario
             session()->put('usu', $n);
-            foreach ($n as $u){
+            foreach ($n as $u) {
                 $rol = $u['rol'];
             }
             if ($rol == 1) {//admin
                 session()->put('rol', 1);
-                echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                echo '
+                  <div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como administrador
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -55,12 +56,13 @@ class controladorGeneral extends Controller {
                 return view('admin.bienvenidaAd');
             } else if ($rol == 2) { //tutor                
                 session()->put('rol', 2);
-                echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                echo '
+                  <div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como tutor
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
-                  </div>';
+                  </div>  ';
                 return view('tutor.bienvenidaT');
             } else if ($rol == 3) {//alumno                
                 session()->put('rol', 3);

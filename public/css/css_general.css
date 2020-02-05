@@ -17,7 +17,6 @@
     border: none;
 
 }
-
 .footer{  
     color:white;
 }
@@ -25,13 +24,13 @@
 /*Movil site vertical */
 @media only screen and (max-width:480px){
     header{
-        margin-bottom: 6rem; 
+        /*margin-bottom: 6rem;*/ 
         font-size: 10px;
         padding: 0px;
     }
     main{
-        margin-top:  6rem;         
-        margin-bottom: 6rem;
+/*        margin-top:  6rem;         
+        margin-bottom: 6rem;*/
         min-height: 40px;
     }
     footer,.footer{
@@ -65,16 +64,16 @@
 /*Tablet Apps */
 @media only screen and (min-width:481px) and (max-width:1024px){
    header{
-        margin-bottom: 3.5rem; 
+        /*margin-bottom: 3.5rem;*/ 
     }
     #logo{
         width: 64px;
         height: 64px;
     }
     main{
-        margin-top:  4rem; 
-        margin-bottom: 4rem; 
-        min-height: 250px;
+/*        margin-top:  4rem; 
+        margin-bottom: 4rem; */
+        min-height: 25rem;
     }
 
     #perfil,#cerrarSesion{
@@ -92,16 +91,16 @@
 /*Pantalla de escritorio WebSite */
 @media only screen and (min-width:1025px){
     header{
-        margin-bottom: 3.5rem; 
+        /*margin-bottom: 3.5rem;*/ 
     }
     #logo{
         width: 64px;
         height: 64px;
     }
     main{
-        margin-top:  4rem; 
-        margin-bottom: 4rem; 
-        min-height: 80px;
+/*        margin-top:  4rem; 
+        margin-bottom: 4rem; */
+        min-height: 30rem;
     }
 
     #perfil,#cerrarSesion{
