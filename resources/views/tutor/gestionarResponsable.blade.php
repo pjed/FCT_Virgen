@@ -1,3 +1,10 @@
+
+<?php
+
+use App\Auxiliar\Conexion;
+
+$lu = Conexion::listarResponsables();
+?>
 @extends('maestra.maestraTutor')
 
 @section('titulo') 
