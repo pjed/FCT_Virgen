@@ -32,7 +32,7 @@ class Conexion {
         $ur = usuarios_rol::all();
         $v = [];
         foreach ($ur as $a) {
-            $p = usuario::where('email', $correo)->where('pass', $pwd)->where('dni', $a->usuarios_dni)->first(); //aqui se cruzan
+            $p = usuario::where('email', $correo)->where('pass', $pwd)->where('dni', $a->usuario_dni)->first(); //aqui se cruzan
             if ($p) {
                 $v[] = ['dni' => $p->dni,
                     'nombre' => $p->nombre,
@@ -41,8 +41,8 @@ class Conexion {
                     'tel' => $p->telefono,
                     'movil' => $p->movil,
                     'iban' => $p->iban,
-                    'rol' => $a->roles_id,
-                    'curso' => $a->cursos_id,
+                    'rol' => $a->rol_id,
+                    'curso' => $a->curso_id,
                 ];
             }
         }
