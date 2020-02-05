@@ -8,7 +8,6 @@ Gestionar usuarios
 
 <?php
 $listaUsuarios = Conexion::listarUsuarios();
-$listaRoles = Conexion::obtenerRolesUsuarios();
 ?>
 
 <div class="container-fluid">  
@@ -45,8 +44,9 @@ $listaRoles = Conexion::obtenerRolesUsuarios();
                             <th>Nombre</th>
                             <th>Apellidos</th>
                             <th>Email</th>
+                            <th>Domicilio</th>
                             <th>Teléfono</th>
-                            <th>Iban</th>
+                            <th>Móvil</th>
                             <th>Rol</th>
                             <th>Modificar</th>
                             <th>Eliminar</th>
@@ -63,28 +63,17 @@ $listaRoles = Conexion::obtenerRolesUsuarios();
                                 <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value="<?php echo $value['nombre']; ?>"/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value="<?php echo $value['apellidos']; ?>"/></td>
                                 <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $value['email']; ?>"/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value['telefono']; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="iban" value="<?php echo $value['iban']; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="domicilio" value="<?php echo $value['domicilio']; ?>"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value['tel']; ?>"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="movil" value="<?php echo $value['movil']; ?>"/></td>
                                 <td>
-                                    <fieldset>
-
-                                        <div>
-                                            <input type="checkbox" id="admin" name="rol" value="administrador">
-                                            <label for="admin">Administrador</label>
-                                        </div>
-
-                                        <div>
-                                            <input type="checkbox" id="tutor" name="rol" value="tutor">
-                                            <label for="tutor">Tutor</label>
-                                        </div>
-
-                                        <div>
-                                            <input type="checkbox" id="alumno" name="rol" value="alumno">
-                                            <label for="alumno">Alumno</label>
-                                        </div>
-                                    </fieldset>
+                                    <select name="selectRol">
+                                        <option value="<?php echo $value['rol_id'] ?>" <?php if ($value['rol_id'] == 1) { ?>selected<?php } ?>>Administrador</option>
+                                        <option value="<?php echo $value['rol_id'] ?>" <?php if ($value['rol_id'] == 2) { ?>selected<?php } ?>>Tutor</option>
+                                        <option value="<?php echo $value['rol_id'] ?>" <?php if ($value['rol_id'] == 3) { ?>selected<?php } ?>>Alumno</option>
+                                        <option value="<?php echo $value['rol_id'] ?>" <?php if ($value['rol_id'] == 4) { ?>selected<?php } ?>>Tutor-Administrador</option>
+                                    </select>
                                 </td>
-
                                 <td><button type="submit" id="editar" class="btn" name="editar" /></td>
                                 <td><button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
                             </tr>
