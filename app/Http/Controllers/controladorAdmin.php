@@ -25,11 +25,31 @@ class controladorAdmin extends Controller {
     public function gestionarUsuarios(Request $req) {
 
         if (isset($_REQUEST['editar'])) {
-            
+
+            $dni = $req->get('dni');
+            $nombre = $req->get('nombre');
+            $apellidos = $req->get('apellidos');
+            $email = $req->get('email');
+            $tel = $req->get('telefono');
+            $movil = $req->get('movil');
+            $domicilio = $req->get('domicilio');
+
+            $rol_id = $req->get('selectRol');
+
+            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil);
+            Conexion::ModificarRol($dni, $rol_id);
+
+            return view('admin/gestionarUsuarios');
         }
 
         if (isset($_REQUEST['eliminar'])) {
-            
+
+            $dni = $req->get('dni');
+
+            Conexion::borrarUsuario($dni);
+            Conexion::borrarUsuarioTablaRoles($dni);
+
+            return view('admin/gestionarAlumnos');
         }
     }
 
@@ -54,6 +74,7 @@ class controladorAdmin extends Controller {
             $dni = $req->get('dni');
 
             Conexion::borrarUsuario($dni);
+            Conexion::borrarUsuarioTablaRoles($dni);
 
             return view('admin/gestionarAlumnos');
         }
@@ -62,25 +83,26 @@ class controladorAdmin extends Controller {
     public function gestionarTutores(Request $req) {
 
         if (isset($_REQUEST['editar'])) {
-            
+
             $dni = $req->get('dni');
             $nombre = $req->get('nombre');
             $apellidos = $req->get('apellidos');
             $email = $req->get('email');
             $telefono = $req->get('telefono');
             $ciclo = $req->get('selectCiclo');
-            
+
             Conexion::actualizarDatosTutor($dni, $nombre, $apellidos, $email, $telefono, $ciclo);
-            
+
             return view('admin/gestionarTutores');
-            
         }
 
         if (isset($_REQUEST['eliminar'])) {
-         
+
             $dni = $req->get('dni');
 
             Conexion::borrarUsuario($dni);
+            Conexion::borrarTutor($dni);
+            Conexion::borrarUsuarioTablaRoles($dni);
 
             return view('admin/gestionarTutores');
         }

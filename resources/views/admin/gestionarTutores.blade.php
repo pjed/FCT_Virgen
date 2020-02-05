@@ -46,7 +46,7 @@ $listaCiclos = Conexion::listarCiclos();
                             <th>Apellidos</th>
                             <th>Email</th>
                             <th>Teléfono</th>
-                            <th>Tutor</th>
+                            <th>Ciclo</th>
                             <th>Modificar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -58,20 +58,20 @@ $listaCiclos = Conexion::listarCiclos();
                         <form action="gestionarTablaTutores" method="POST">
                             {{ csrf_field() }}
                             <tr>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="dni" value="<?php echo $value['dni']; ?>" readonly/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="dni" value="<?php echo $value['usuarios_dni']; ?>" readonly/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value="<?php echo $value['nombre']; ?>"/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value="<?php echo $value['apellidos']; ?>"/></td>
-                                <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $value['email']; ?>"/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value['telefono']; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $value['email']; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value['telefono']; ?>"/></td>
                                 <td>
                                     <select name="selectCiclo">
-                                        
+
                                         <?php
                                         foreach ($listaCiclos as $value1) {
                                             ?>
-                                        <option value="<?php echo $value1['id'] ?>"<?php if ($value1['id']==$value['cursos_id']){ ?>selected<?php } ?>>
-                                            <?php echo $value1['id'] ?>
-                                        </option>
+                                            <option value="<?php echo $value1['id_curso'] ?>"<?php if ($value1['id_curso'] == $value['cursos_id_curso']) { ?>selected<?php } ?>>
+                                                <?php echo $value1['id_curso'] ?>
+                                            </option>
                                             <?php
                                         }
                                         ?>
