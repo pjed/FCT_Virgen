@@ -128,5 +128,6 @@ Gestionar  Practicas
             </table>
         </div>
     </div>
-</div>  
+</div>
+
 @endsection

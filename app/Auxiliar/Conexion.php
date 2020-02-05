@@ -331,17 +331,21 @@ class Conexion {
         foreach ($tu as $t) {
             $w = matricula::where('cursos_id_curso', $t->cursos_id_curso)->get();
             foreach ($w as $m) {
-                $q = practica::where('usuarios_dni', $m->usuarios_dni)->get();
-                foreach ($q as $p) {
-                            $v [] = ['id' => $p->id,
-                                'idEmpresa' => $p->empresa_id,
-                                'dniAlumno' => $p->usuarios_dni,
-                                'codProyecto' => $p->cod_proyecto,
-                                'idResponsable' => $p->responsables_id,
-                                'gasto' => $p->gastos,
-                                'apto' => $p->apto,
-                                'fechaInicio' => $p->fecha_inicio,
-                                'fechaFin' => $p->fecha_fin];
+                $x = usuario::where('dni', $m->usuarios_dni)->get();
+                foreach ($x as $uu) {
+                    $q = practica::where('usuarios_dni', $uu->dni)->get();
+                    dd($q);
+                    foreach ($q as $p) {
+                        $v [] = ['id' => $p->id,
+                            'idEmpresa' => $p->empresa_id,
+                            'dniAlumno' => $p->usuarios_dni,
+                            'codProyecto' => $p->cod_proyecto,
+                            'idResponsable' => $p->responsables_id,
+                            'gasto' => $p->gastos,
+                            'apto' => $p->apto,
+                            'fechaInicio' => $p->fecha_inicio,
+                            'fechaFin' => $p->fecha_fin];
+                    }
                 }
             }
         }
