@@ -2,6 +2,8 @@
 
 namespace App\Auxiliar;
 
+use App\Modal\tutor;
+use App\Modal\matricula;
 use App\Modal\centro;
 use App\Modal\comida;
 use App\Modal\curso;
@@ -419,6 +421,204 @@ class Conexion {
         } catch (\Exception $e) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar usuario.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function generarDocTutor() {
+        $v = [];
+        $tutor = session()->get('usu');
+        foreach ($tutor as $t) {
+            $dni = $t['dni'];
+            $nombre = $t['nombre'];
+            $apellido = $t['apellidos'];
+        }
+        $q = tutor::where('usuarios_dni', $dni)->get();
+
+        foreach ($q as $a) {
+            $v [] = ['id_tutores' => $a->idTutores,
+                'id_curso' => $a->cursos_id_curso,
+                'dni_tutor' => $dni,
+                'nombre_tutor' => $nombre,
+                'apellido_tutor' => $apellido];
+        }
+        return $v;
+    }
+
+    static function listarPracticas() {
+        $v = [];
+        $tutor = session()->get('usu');
+        foreach ($tutor as $t) {
+            $dni = $t['dni'];
+        }
+        $tu = tutor::where('usuarios_dni', $dni)->get();
+        foreach ($tu as $t) {
+            $w = matricula::where('cursos_id_curso', $t->cursos_id_curso)->get();
+            foreach ($w as $m) {
+                $q = practica::where('usuarios_dni', $m->usuarios_dni)->get();
+                foreach ($q as $p) {
+                            $v [] = ['id' => $p->id,
+                                'idEmpresa' => $p->empresa_id,
+                                'dniAlumno' => $p->usuarios_dni,
+                                'codProyecto' => $p->cod_proyecto,
+                                'idResponsable' => $p->responsables_id,
+                                'gasto' => $p->gastos,
+                                'apto' => $p->apto,
+                                'fechaInicio' => $p->fecha_inicio,
+                                'fechaFin' => $p->fecha_fin];
+                }
+            }
+        }
+        return $v;
+    }
+
+    static function borrarPractica($id) {
+        try {
+            usuario::where('id', $id)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function ModificarPractica($ID, $CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $apto, $fechaInicio, $fechaFin) {
+        try {
+            $p = practica::where('id', $ID)
+                    ->update([
+                'empresa_id' => $CIF,
+                'usuarios_dni' => $dniAlumno,
+                'cod_proyecto' => $codProyecto,
+                'responsables_id' => $dniResponsable,
+                'gastos' => $gasto,
+                'apto' => $apto,
+                'fecha_inicio' => $fechaInicio,
+                'fecha_fin' => $fechaFin
+            ]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function listarResponsables() {
+        $r = responsable::all();
+        return $r;
+    }
+
+    static function ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel) {
+        try {
+            $p = responsable::where('id', $id)
+                    ->update([
+                'dni' => $dni,
+                'nombre' => $nombre,
+                'apellidos' => $apellidos,
+                'email' => $email,
+                'telefono' => $tel
+            ]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function borrarResponsable($id) {
+        try {
+            usuario::where('id', $id)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function listarEmpresas() {
+        $e = empresa::all();
+        return $e;
+    }
+
+    static function ModificarEmpresa($id, $dni, $nombre, $apellidos, $email, $tel) {
+        try {
+            $p = responsable::where('id', $id)
+                    ->update([
+                'dni' => $dni,
+                'nombre' => $nombre,
+                'apellidos' => $apellidos,
+                'email' => $email,
+                'telefono' => $tel
+            ]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function borrarEmpresa($id) {
+        try {
+            usuario::where('id', $id)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>

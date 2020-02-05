@@ -1,3 +1,10 @@
+
+<?php
+
+use App\Auxiliar\Conexion;
+
+$lu = Conexion::listarEmpresas();
+?>
 @extends('maestra.maestraTutor')
 
 @section('titulo') 

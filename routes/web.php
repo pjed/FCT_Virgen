@@ -60,7 +60,7 @@ Route::get('perfilTutor', function () {
 
 Route::post('consultarGastosAlumno', 'controladorTutor@consultarGastoAlumno');
 Route::post('consultarGastosCurso', 'controladorTutor@consultarGastoCurso');
-Route::post('extraerDocT', 'controladorTutor@xtraerDocT');
+Route::post('extraerDocT', 'controladorTutor@extraerDocT');
 Route::post('gestionarEmpresa', 'controladorTutor@gestionarEmpresa');
 Route::post('gestionarResponsable', 'controladorTutor@gestionarResponsable');
 Route::post('gestionarPracticas', 'controladorTutor@gestionarPracticas');
