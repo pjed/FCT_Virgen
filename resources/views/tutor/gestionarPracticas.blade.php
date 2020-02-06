@@ -94,7 +94,7 @@ Gestionar  Practicas
                                 <input type="hidden" class="form-control form-control-sm form-control-md form-control-lg" name="ID" value="<?php echo $key->id; ?>" readonly/>
                                 <input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="gasto" value="<?php echo $key->gasto; ?>"/>
                             </td>
-                            <td><input type="checkbox" class="form-control form-control-sm form-control-md form-control-lg" name="apto" <?php if ($key->apto == 1) { ?>checked<?php } ?>/>Apto</td>
+                            <td><input type="checkbox" class="form-control form-control-sm form-control-md form-control-lg" name="apto" <?php if ($key->apto == 1) { ?>checked<?php } ?>/></td>
                             <td><input type="date" class="form-control form-control-sm form-control-md form-control-lg" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>"/></td>
                             <td><input type="date" class="form-control form-control-sm form-control-md form-control-lg" name="fechaFin" value="<?php echo $key->fechaFin; ?>"/></td>
                             <td><button type="submit" id="editar" class="btn btn-sm" name="editar"/></td>

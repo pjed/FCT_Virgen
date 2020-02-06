@@ -734,6 +734,34 @@ class Conexion {
     }
 
     /**
+     * Método para comprobar que la empresa existe para no deje añadirla
+     * @param type $cif
+     * @return boolean
+     */
+    static function existeEmpresa($cif) {
+        $val = false;
+        $e = empresa::where('cif', $cif)->first();
+        if ($e) {
+            $val = true;
+        }
+        return $val;
+    }
+
+    /**
+     * Método para comprobar que la responsable existe para no deje añadirla
+     * @param type $dni
+     * @return boolean
+     */
+    static function existeResponsable($dni) {
+        $val = false;
+        $e = responsable::where('dni', $dni)->first();
+        if ($e) {
+            $val = true;
+        }
+        return $val;
+    }
+
+    /**
      * Método para insertar empresas
      * @param type $CIF
      * @param type $nombreEmpresa
@@ -744,7 +772,7 @@ class Conexion {
      * @param type $horario
      * @param type $nueva
      */
-    static function insertarEmpresa($CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario, $nueva) {
+    static function insertarEmpresa($CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario) {
         $p = new empresa;
         $p->cif = $CIF;
         $p->nombre = $nombreEmpresa;
@@ -753,7 +781,7 @@ class Conexion {
         $p->direccion = $direccion;
         $p->localidad = $localidad;
         $p->horario = $horario;
-        $p->nueva = $nueva;
+        $p->nueva = 1;
         try {
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
