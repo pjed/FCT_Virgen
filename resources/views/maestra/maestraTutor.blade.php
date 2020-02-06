@@ -26,7 +26,7 @@
         <header>  
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                 <a class="navbar-nav" href="#">
-                    <img id="logotipo" src="{{asset ('images/logo.png')}}" alt="logotipo">
+                    <img id="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                 </a>
                 <a class="navbar-nav" href="#">Nombre de la aplicacion</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
