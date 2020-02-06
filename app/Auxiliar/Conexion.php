@@ -458,6 +458,34 @@ class Conexion {
         return $v;
     }
 
+    static function insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $apto, $fechaInicio, $fechaFin) {
+        $p = new practica;
+        $p->dni = $dni;
+        $p->nombre = $nombre;
+        $p->apellidos = $apellidos;
+        $p->domicilio = $domicilio;
+        $p->email = $email;
+        $p->telefono = $tel;
+        $p->movil = $movil;
+        $p->iban = $iban;
+        try {
+            $p->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
     static function borrarPractica($id) {
         try {
             practica::where('id', $id)->delete();
@@ -515,17 +543,14 @@ class Conexion {
         $r = responsable::all();
         return $r;
     }
-static function insertarResponsable($dni, $nombre, $apellidos, $email, $tel) {
-        $p = new usuario;
+
+    static function insertarResponsable($dni, $nombre, $apellidos, $email, $tel) {
+        $p = new responsable;
         $p->dni = $dni;
         $p->nombre = $nombre;
         $p->apellidos = $apellidos;
-        $p->domicilio = $domicilio;
         $p->email = $email;
         $p->telefono = $tel;
-        $p->movil = $movil;
-        $p->iban = $iban;
-        $p->foto = null;
         try {
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -543,6 +568,7 @@ static function insertarResponsable($dni, $nombre, $apellidos, $email, $tel) {
                   </div>';
         }
     }
+
     static function ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel) {
         try {
             $p = responsable::where('id', $id)
@@ -598,8 +624,9 @@ static function insertarResponsable($dni, $nombre, $apellidos, $email, $tel) {
         $e = empresa::all();
         return $e;
     }
-static function insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $iban, $movil) {
-        $p = new usuario;
+
+    static function insertarEmpresa($CIF,$nombreEmpresa,$dniRepresentante,$nombreRepresentante,$direccion,$localidad,$horario,$nueva) {
+        $p = new empresa;
         $p->dni = $dni;
         $p->nombre = $nombre;
         $p->apellidos = $apellidos;
@@ -626,6 +653,7 @@ static function insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, 
                   </div>';
         }
     }
+
     static function ModificarEmpresa($id, $CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario, $nueva) {
         try {
             $p = empresa::where('id', $id)
