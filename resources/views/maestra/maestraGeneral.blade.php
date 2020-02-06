@@ -27,10 +27,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <header class="bg-dark">  
             <nav class="nav">
-                <a class="nav-link float-left" href="#">
-                    <img id="logotipo" src="{{asset ('imagenes/logo.png')}}" alt="logotipo">
+                <a class="nav-link float-left col-3" href="#">
+                    <img id="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                 </a>
-                <a class="nav-link float-left" href="#">Nombre de la aplicacion</a>
+                <a class="nav-link float-left col-9" href="#">CIFP - Virgen de Gracia - Gestión FCT</a>
             </nav>
         </header>
         <main>
