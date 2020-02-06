@@ -25,48 +25,50 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <header>  
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                <a class="navbar-nav" href="#">
-                    <img id="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
-                </a>
-                <a class="navbar-nav" href="#">Nombre de la aplicacion</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="menu">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="bienvenidaAd">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="extraerDocA">Generar Documentos</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar Usuarios</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="gestionarTutores">Tutores</a>
-                                <a class="dropdown-item" href="gestionarAlumnos">Alumnos</a>
-                                <a class="dropdown-item" href="gestionarUsuarios">Usuarios</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="cambiarRol">Cambiar de rol</a>
-                        </li>
-                        <li class="nav-item">
-                            <form name="perfil" action="perfilAd"  method="post">
-                                {{ csrf_field() }}  
-                                <div class="form-group">
-                                    <button type="submit" class="btn" id="perfil" name="perfil" value=""></button>
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
+                <div class="text-center col-2">
+                    <a class="navbar-nav" href="#">
+                        <img class="borde_logo" id="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                    </a>
                 </div>
-                <form name="cerrarSesion" action="cerrarSesion"  method="post">
-                    {{ csrf_field() }}  
-                    <div class="form-group">
-                        <button type="submit" class="btn" id="cerrarSesion" name="cerrarSesion" value=""></button>
+
+                <div class="col-8">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="menu">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="bienvenidaAd">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="extraerDocA">Generar Documentos</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar Usuarios</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="gestionarTutores">Tutores</a>
+                                    <a class="dropdown-item" href="gestionarAlumnos">Alumnos</a>
+                                    <a class="dropdown-item" href="gestionarUsuarios">Usuarios</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"  href="cambiarRol">Cambiar de rol</a>
+                            </li>
+                        </ul>
                     </div>
-                </form>
+                </div>
+                <div class="col-1 text-center">
+                    <form name="perfil" action="perfilAd"  method="post">
+                        {{ csrf_field() }}  
+                        <button type="submit" class="btn" id="perfil" name="perfil" value=""></button>
+                    </form>
+                </div>
+                <div class="col-1 text-center">
+                    <form name="cerrarSesion" action="cerrarSesion"  method="post">
+                        {{ csrf_field() }}  
+                        <button type="submit" class="btn" id="cerrarSesion" name="cerrarSesion" value=""></button>
+                    </form>
+                </div>
             </nav>
         </header>
         <main>
