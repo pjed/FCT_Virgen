@@ -51,6 +51,17 @@ class Conexion {
         return $v;
     }
 
+    /**
+     * Método para insertar usuarios
+     * @param type $dni
+     * @param type $nombre
+     * @param type $apellidos
+     * @param type $domicilio
+     * @param type $email
+     * @param type $tel
+     * @param type $iban
+     * @param type $movil
+     */
     static function insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $iban, $movil) {
         $p = new usuario;
         $p->dni = $dni;
@@ -80,6 +91,11 @@ class Conexion {
         }
     }
 
+    /**
+     * Método para insertar el rol de los usuario en la tabla usarios_rol
+     * @param type $dni
+     * @param type $rol
+     */
     static function insertarRol($dni, $rol) {
         $p = new usuarios_rol;
         $p->dni = $dni;
@@ -419,6 +435,10 @@ class Conexion {
         }
     }
 
+    /**
+     * Método para recoger los requisitos necesarios para la vista extraerDocT
+     * @return type 
+     */
     static function generarDocTutor() {
         $v = [];
         $tutor = session()->get('usu');
@@ -439,6 +459,32 @@ class Conexion {
         return $v;
     }
 
+    /**
+     * Método para obtener todas las practicas con paginacion
+     * @return type
+     */
+    static function listarPracticasPagination() {
+        $v = [];
+        $tutor = session()->get('usu');
+        foreach ($tutor as $t) {
+            $dni = $t['dni'];
+        }
+        $v = \DB::table('tutores')
+                ->where('tutores.usuarios_dni', $dni)
+                ->join('matriculados', 'matriculados.cursos_id_curso', '=', 'tutores.cursos_id_curso')
+                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
+                ->join('practicas', 'practicas.usuarios_dni', '=', 'usuarios.dni')
+                ->select(
+                        'practicas.id AS id', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto'
+                )
+                ->paginate(8);
+        return $v;
+    }
+
+    /**
+     * Método para obtener todas las practicas sin paginacion
+     * @return type
+     */
     static function listarPracticas() {
         $v = [];
         $tutor = session()->get('usu');
@@ -453,21 +499,30 @@ class Conexion {
                 ->select(
                         'practicas.id AS id', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto'
                 )
-//                ->get();
-                ->paginate(8);
+                ->get();
         return $v;
     }
 
-    static function insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $apto, $fechaInicio, $fechaFin) {
+    /**
+     * Método para insertar practicas
+     * @param type $CIF
+     * @param type $dniAlumno
+     * @param type $codProyecto
+     * @param type $dniResponsable
+     * @param type $gasto
+     * @param type $fechaInicio
+     * @param type $fechaFin
+     */
+    static function insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $fechaInicio, $fechaFin) {
         $p = new practica;
-        $p->dni = $dni;
-        $p->nombre = $nombre;
-        $p->apellidos = $apellidos;
-        $p->domicilio = $domicilio;
-        $p->email = $email;
-        $p->telefono = $tel;
-        $p->movil = $movil;
-        $p->iban = $iban;
+        $p->cod_proyecto = $codProyecto;
+        $p->fecha_inicio = $fechaInicio;
+        $p->fecha_fin = $fechaFin;
+        $p->gastos = $gasto;
+        $p->apto = 0;
+        $p->usuarios_dni = $dniAlumno;
+        $p->empresas_id = $CIF;
+        $p->responsables_id = $dniResponsable;
         try {
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -486,6 +541,10 @@ class Conexion {
         }
     }
 
+    /**
+     * Método para borrar practicas
+     * @param type $id
+     */
     static function borrarPractica($id) {
         try {
             practica::where('id', $id)->delete();
@@ -505,6 +564,18 @@ class Conexion {
         }
     }
 
+    /**
+     * Método para modificar practicas
+     * @param type $ID
+     * @param type $CIF
+     * @param type $dniAlumno
+     * @param type $codProyecto
+     * @param type $dniResponsable
+     * @param type $gasto
+     * @param type $apto
+     * @param type $fechaInicio
+     * @param type $fechaFin
+     */
     static function ModificarPractica($ID, $CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $apto, $fechaInicio, $fechaFin) {
         try {
             $p = practica::where('id', $ID)
@@ -534,16 +605,32 @@ class Conexion {
         }
     }
 
+    /**
+     * Método para obtener los responsables con paginacion
+     * @return type
+     */
     static function listarResponsablesPagination() {
         $r = responsable::paginate(8);
         return $r;
     }
 
+    /**
+     * Método para obtener los reponsables sin paginacion
+     * @return type
+     */
     static function listarResponsables() {
         $r = responsable::all();
         return $r;
     }
 
+    /**
+     * Método para insertar responsables
+     * @param type $dni
+     * @param type $nombre
+     * @param type $apellidos
+     * @param type $email
+     * @param type $tel
+     */
     static function insertarResponsable($dni, $nombre, $apellidos, $email, $tel) {
         $p = new responsable;
         $p->dni = $dni;
@@ -569,6 +656,15 @@ class Conexion {
         }
     }
 
+    /**
+     * Método para insertar responsables
+     * @param type $id
+     * @param type $dni
+     * @param type $nombre
+     * @param type $apellidos
+     * @param type $email
+     * @param type $tel
+     */
     static function ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel) {
         try {
             $p = responsable::where('id', $id)
@@ -596,6 +692,10 @@ class Conexion {
         }
     }
 
+    /**
+     * Método para borrar responsable
+     * @param type $id
+     */
     static function borrarResponsable($id) {
         try {
             usuario::where('id', $id)->delete();
@@ -615,27 +715,45 @@ class Conexion {
         }
     }
 
+    /**
+     * Método para obtener las empresas con paginacion
+     * @return type
+     */
     static function listarEmpresasPagination() {
         $e = empresa::paginate(8);
         return $e;
     }
 
+    /**
+     * Método para obtener las empresas sin paginacion
+     * @return type
+     */
     static function listarEmpresas() {
         $e = empresa::all();
         return $e;
     }
 
-    static function insertarEmpresa($CIF,$nombreEmpresa,$dniRepresentante,$nombreRepresentante,$direccion,$localidad,$horario,$nueva) {
+    /**
+     * Método para insertar empresas
+     * @param type $CIF
+     * @param type $nombreEmpresa
+     * @param type $dniRepresentante
+     * @param type $nombreRepresentante
+     * @param type $direccion
+     * @param type $localidad
+     * @param type $horario
+     * @param type $nueva
+     */
+    static function insertarEmpresa($CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario, $nueva) {
         $p = new empresa;
-        $p->dni = $dni;
-        $p->nombre = $nombre;
-        $p->apellidos = $apellidos;
-        $p->domicilio = $domicilio;
-        $p->email = $email;
-        $p->telefono = $tel;
-        $p->movil = $movil;
-        $p->iban = $iban;
-        $p->foto = null;
+        $p->cif = $CIF;
+        $p->nombre = $nombreEmpresa;
+        $p->dni_representante = $dniRepresentante;
+        $p->nombre_Representante = $nombreRepresentante;
+        $p->direccion = $direccion;
+        $p->localidad = $localidad;
+        $p->horario = $horario;
+        $p->nueva = $nueva;
         try {
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -654,6 +772,18 @@ class Conexion {
         }
     }
 
+    /**
+     * Método para modificar empresa
+     * @param type $id
+     * @param type $CIF
+     * @param type $nombreEmpresa
+     * @param type $dniRepresentante
+     * @param type $nombreRepresentante
+     * @param type $direccion
+     * @param type $localidad
+     * @param type $horario
+     * @param type $nueva
+     */
     static function ModificarEmpresa($id, $CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario, $nueva) {
         try {
             $p = empresa::where('id', $id)
@@ -684,6 +814,10 @@ class Conexion {
         }
     }
 
+    /**
+     * Método para borrar la empresa
+     * @param type $id
+     */
     static function borrarEmpresa($id) {
         try {
             empresa::where('id', $id)->delete();
