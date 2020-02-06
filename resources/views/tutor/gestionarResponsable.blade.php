@@ -33,15 +33,33 @@ Gestionar Responsable
     <div class="col-sm-4 col-md-4">
         <form action="gestionarResponsable" method="POST">
             {{ csrf_field() }}
-            
             <div class="form-group">
+                <label class="text-center" >
+                    Dni:
                     <input type="text" class="form-control form-control-sm" name="dni"/>
+                </label>
+                <label class="text-center">
+                    Nombre:
+                    <input type="text" class="form-control form-control-sm" name="nombre"/>
+                </label>
             </div>
-                <td><input type="text" class="form-control form-control-sm" name="nombre"/>
-                <td><input type="text" class="form-control form-control-sm" name="apellido" />
-                <td><input type="email" class="form-control form-control-sm" name="email" />
-                <td><input type="tel" class="form-control form-control-sm" pattern="[0-9]{9}"/>
-                <td><button type="submit" id="editar" class="btn" name="aniadir" value="añadir"/>
+            <div class="form-group">
+                <label class="text-center">
+                    Apellido:
+                    <input type="text" class="form-control form-control-sm" name="apellido" />
+                </label>
+                <label class="text-center">
+                    Email:
+                    <input type="email" class="form-control form-control-sm" name="email" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="text-center">
+                    Telefono:
+                    <input type="tel" class="form-control form-control-sm" name="tel" pattern="[0-9]{9}"/>
+                </label>
+                <input type="submit" id="añadir" class="btn btn-sm" name="aniadir" value="añadir" />
+            </div>
             </tr>
         </form>
     </div>
@@ -68,13 +86,13 @@ Gestionar Responsable
                         {{ csrf_field() }}
                         <tr>
                             <td>
-                                <input type="hidden" class="form-control form-control-sm form-control-md form-control-lg" name="id" value="<?php echo $key['id']; ?>" readonly/>
-                                <input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="dni" value="<?php echo $key['dni']; ?>" readonly/>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key['id']; ?>" readonly/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $key['dni']; ?>" readonly/>
                             </td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value="<?php echo $key['nombre']; ?>"></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellido" value="<?php echo $key['apellido']; ?>"/></td>
-                            <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $key['email']; ?>"/></td>
-                            <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="tel" value="<?php echo $key['tel']; ?>" pattern="[0-9]{9}"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $key['nombre']; ?>"></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="apellido" value="<?php echo $key['apellido']; ?>"/></td>
+                            <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $key['email']; ?>"/></td>
+                            <td><input type="tel" class="form-control form-control-sm form-control-md" name="tel" value="<?php echo $key['tel']; ?>" pattern="[0-9]{9}"/></td>
                             <td><button type="submit" id="editar" class="btn" name="editar" /></td>
                             <td><button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
                         </tr>

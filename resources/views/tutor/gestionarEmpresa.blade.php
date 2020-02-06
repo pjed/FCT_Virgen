@@ -34,37 +34,37 @@ Gestionar Empresa
         <form action="gestionaEmpresa" method="POST">
             {{ csrf_field() }}
             <div class="form-group">
-                <label class="text-center" for="email">
+                <label class="text-center" >
                     CIF de la empresa:
                     <input type="text" class="form-control form-control-sm" name="CIF"/>
                 </label>
             </div>
             <div class="form-group">
-                <label class="text-center" for="email">
+                <label class="text-center" >
                     Nombre de la empresa:
                     <input type="text" class="form-control form-control-sm" name="nombreEmpresa"/>
                 </label>
-                <label class="text-center" for="email">
+                <label class="text-center" >
                     Direccion de la empresa:
                     <input type="text" class="form-control form-control-sm" name="direccion" />
                 </label>                
             </div>
             <div class="form-group">
-                <label class="text-center" for="email">
+                <label class="text-center" >
                     Localidad:
                     <input type="text" class="form-control form-control-sm" name="localidad" />
                 </label>
-                <label class="text-center" for="email">
+                <label class="text-center" >
                     Horario:
                     <input type="text" class="form-control form-control-sm" name="horario"/>
                 </label>
             </div>
             <div class="form-group">
-                <label class="text-center" for="email">
+                <label class="text-center" >
                     Dni del representante:
                     <input type="text" class="form-control form-control-sm" name="dniRepresentante"/>
                 </label>
-                <label class="text-center" for="email">
+                <label class="text-center" >
                     Nombre del representante:
                     <input type="text" class="form-control form-control-sm" name="nombreRepresentante" />
                 </label>
@@ -98,16 +98,16 @@ Gestionar Empresa
                         {{ csrf_field() }}
                         <tr> 
                             <td>
-                                <input type="hidden" class="form-control form-control-sm form-control-md form-control-lg" name="id" value="<?php echo $key->id; ?>"/>
-                                <input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="CIF" value="<?php echo $key->cif; ?>"/>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key->id; ?>"/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="CIF" value="<?php echo $key->cif; ?>"/>
                             </td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombreEmpresa" value="<?php echo $key->nombre; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="dniRepresentante" value="<?php echo $key->dni_representante; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombreRepresentante" value="<?php echo $key->nombre_representante; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="direccion" value="<?php echo $key->direccion; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="localidad" value="<?php echo $key->localidad; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="horario" value="<?php echo $key->horario; ?>"/></td>
-                            <td><input type="checkbox" class="form-control form-control-sm form-control-md form-control-lg" name="nueva" <?php if ($key->nueva == 1) { ?>checked<?php } ?>/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $key->nombre; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="dniRepresentante" value="<?php echo $key->dni_representante; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreRepresentante" value="<?php echo $key->nombre_representante; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="direccion" value="<?php echo $key->direccion; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="localidad" value="<?php echo $key->localidad; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="horario" value="<?php echo $key->horario; ?>"/></td>
+                            <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="nueva" <?php if ($key->nueva == 1) { ?>checked<?php } ?>/></td>
                             <td><button type="submit" id="editar" class="btn btn-sm" name="editar" /></td>
                             <td><button type="submit" id="eliminar" class="btn btn-sm" name="eliminar" /></td>
                         </tr>
