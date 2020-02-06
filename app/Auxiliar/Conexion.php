@@ -43,57 +43,49 @@ class Conexion {
                     'tel' => $p->telefono,
                     'movil' => $p->movil,
                     'iban' => $p->iban,
+                    'foto' => $p->foto,
                     'rol' => $a->rol_id,
-                    'curso' => $a->curso_id,
                 ];
             }
         }
         return $v;
     }
 
-    /**
-     * 
-     * @return type
-     */
-    static function obtenerUsuarios() {
-        $ar = Asignarrol::all();
-        $v = [];
-        foreach ($ar as $a) {
-            $w = Persona::where('DNI', $a->dni)->get(); //aqui se cruzan
-            foreach ($w as $p) {
-                $v [] = ['DNI' => $p->DNI,
-                    'correo' => $p->correo,
-                    'Nombre' => $p->Nombre,
-                    'Tfno' => $p->Tfno,
-                    'idRol' => $a->idRol,
-                    'edad' => $p->edad,
-                    'activo' => $p->activo];
-            }
+    static function insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $iban, $movil) {
+        $p = new usuario;
+        $p->dni = $dni;
+        $p->nombre = $nombre;
+        $p->apellidos = $apellidos;
+        $p->domicilio = $domicilio;
+        $p->email = $email;
+        $p->telefono = $tel;
+        $p->movil = $movil;
+        $p->iban = $iban;
+        $p->foto = null;
+        try {
+            $p->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
         }
-        return $v;
     }
 
-    /**
-     * insertar usuario
-     * @param type $correo
-     * @param type $dni
-     * @param type $pwd
-     * @param type $nombre
-     * @param type $tf
-     * @param type $edad
-     * @return string
-     */
-    static function insertarUsuarios($correo, $dni, $pwd, $nombre, $tf, $edad, $activo) {
-        $pe = new Persona;
-        $pe->correo = $correo;
-        $pe->DNI = $dni;
-        $pe->pwd = $pwd;
-        $pe->Nombre = $nombre;
-        $pe->Tfno = $tf;
-        $pe->edad = $edad;
-        $pe->activo = $activo;
+    static function insertarRol($dni, $rol) {
+        $p = new usuarios_rol;
+        $p->dni = $dni;
+        $p->rol_id = $rol;
         try {
-            $pe->save(); //aqui se hace la insercion   
+            $pp->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -459,10 +451,7 @@ class Conexion {
                 ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
                 ->join('practicas', 'practicas.usuarios_dni', '=', 'usuarios.dni')
                 ->select(
-                        'practicas.id AS id', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno',
-                        'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable',
-                        'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio',
-                        'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto'
+                        'practicas.id AS id', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto'
                 )
 //                ->get();
                 ->paginate(8);
@@ -517,11 +506,43 @@ class Conexion {
         }
     }
 
+    static function listarResponsablesPagination() {
+        $r = responsable::paginate(8);
+        return $r;
+    }
+
     static function listarResponsables() {
         $r = responsable::all();
         return $r;
     }
-
+static function insertarResponsable($dni, $nombre, $apellidos, $email, $tel) {
+        $p = new usuario;
+        $p->dni = $dni;
+        $p->nombre = $nombre;
+        $p->apellidos = $apellidos;
+        $p->domicilio = $domicilio;
+        $p->email = $email;
+        $p->telefono = $tel;
+        $p->movil = $movil;
+        $p->iban = $iban;
+        $p->foto = null;
+        try {
+            $p->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
     static function ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel) {
         try {
             $p = responsable::where('id', $id)
@@ -568,20 +589,55 @@ class Conexion {
         }
     }
 
+    static function listarEmpresasPagination() {
+        $e = empresa::paginate(8);
+        return $e;
+    }
+
     static function listarEmpresas() {
         $e = empresa::all();
         return $e;
     }
-
-    static function ModificarEmpresa($id, $dni, $nombre, $apellidos, $email, $tel) {
+static function insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $iban, $movil) {
+        $p = new usuario;
+        $p->dni = $dni;
+        $p->nombre = $nombre;
+        $p->apellidos = $apellidos;
+        $p->domicilio = $domicilio;
+        $p->email = $email;
+        $p->telefono = $tel;
+        $p->movil = $movil;
+        $p->iban = $iban;
+        $p->foto = null;
         try {
-            $p = responsable::where('id', $id)
+            $p->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+    static function ModificarEmpresa($id, $CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario, $nueva) {
+        try {
+            $p = empresa::where('id', $id)
                     ->update([
-                'dni' => $dni,
-                'nombre' => $nombre,
-                'apellidos' => $apellidos,
-                'email' => $email,
-                'telefono' => $tel
+                'cif' => $CIF,
+                'nombre' => $nombreEmpresa,
+                'dni_representante' => $dniRepresentante,
+                'nombre_representante' => $nombreRepresentante,
+                'direccion' => $direccion,
+                'localidad' => $localidad,
+                'horario' => $horario,
+                'nueva' => $nueva
             ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -602,7 +658,7 @@ class Conexion {
 
     static function borrarEmpresa($id) {
         try {
-            usuario::where('id', $id)->delete();
+            empresa::where('id', $id)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
