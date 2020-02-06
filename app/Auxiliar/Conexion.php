@@ -241,7 +241,7 @@ class Conexion {
                   </div>';
         }
     }
-    
+
     /**
      * Método para borrar un tutor de la BD
      * @param type $dni dni del tutor a borrar
@@ -453,34 +453,25 @@ class Conexion {
         foreach ($tutor as $t) {
             $dni = $t['dni'];
         }
-        $tu = tutor::where('usuarios_dni', $dni)->get();
-        foreach ($tu as $t) {
-            $w = matricula::where('cursos_id_curso', $t->cursos_id_curso)->get();
-            foreach ($w as $m) {
-                $x = usuario::where('dni', $m->usuarios_dni)->get();
-                foreach ($x as $uu) {
-                    $q = practica::where('usuarios_dni', $uu->dni)->get();
-                    dd($q);
-                    foreach ($q as $p) {
-                        $v [] = ['id' => $p->id,
-                            'idEmpresa' => $p->empresa_id,
-                            'dniAlumno' => $p->usuarios_dni,
-                            'codProyecto' => $p->cod_proyecto,
-                            'idResponsable' => $p->responsables_id,
-                            'gasto' => $p->gastos,
-                            'apto' => $p->apto,
-                            'fechaInicio' => $p->fecha_inicio,
-                            'fechaFin' => $p->fecha_fin];
-                    }
-                }
-            }
-        }
+        $v = \DB::table('tutores')
+                ->where('tutores.usuarios_dni', $dni)
+                ->join('matriculados', 'matriculados.cursos_id_curso', '=', 'tutores.cursos_id_curso')
+                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
+                ->join('practicas', 'practicas.usuarios_dni', '=', 'usuarios.dni')
+                ->select(
+                        'practicas.id AS id', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno',
+                        'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable',
+                        'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio',
+                        'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto'
+                )
+//                ->get();
+                ->paginate(8);
         return $v;
     }
 
     static function borrarPractica($id) {
         try {
-            usuario::where('id', $id)->delete();
+            practica::where('id', $id)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -501,16 +492,15 @@ class Conexion {
         try {
             $p = practica::where('id', $ID)
                     ->update([
-                'empresa_id' => $CIF,
-                'usuarios_dni' => $dniAlumno,
                 'cod_proyecto' => $codProyecto,
-                'responsables_id' => $dniResponsable,
+                'fecha_inicio' => $fechaInicio,
+                'fecha_fin' => $fechaFin,
                 'gastos' => $gasto,
                 'apto' => $apto,
-                'fecha_inicio' => $fechaInicio,
-                'fecha_fin' => $fechaFin
+                'usuarios_dni' => $dniAlumno,
+                'empresas_id' => $CIF,
+                'responsables_id' => $dniResponsable
             ]);
-
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
