@@ -14,7 +14,16 @@ class tutor
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
-        return $next($request);
+    {        $n = session()->get('usu');
+        //comprobar si eres admin
+        foreach ($n as $u) {
+            $rol = $u['rol'];
+        }
+        if ($rol == 3) {
+            return $next($request);
+        } else {
+            abort(518);
+            //return view('errors/518');
+        }
     }
 }

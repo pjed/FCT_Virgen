@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class general {
+class tutorAdmin {
 
     /**
      * Handle an incoming request.
@@ -16,8 +16,10 @@ class general {
     public function handle($request, Closure $next) {
         $n = session()->get('usu');
         //comprobar si eres admin
-
-        if ($n == 2) {
+        foreach ($n as $u) {
+            $rol = $u['rol'];
+        }
+        if ($rol == 4) {
             return $next($request);
         } else {
             abort(518);
