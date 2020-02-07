@@ -31,12 +31,12 @@ Gestionar Empresa
 <!-- Añadir Empresa -->
 <div class="row justify-content-center">
     <div class="col-sm-4 col-md-4">
-        <form action="gestionaEmpresa" method="POST">
+        <form action="gestionarEmpresa" method="POST">
             {{ csrf_field() }}
             <div class="form-group">
                 <label class="text-center" >
                     CIF de la empresa:
-                    <input type="text" class="form-control form-control-sm" name="CIF"/>
+                    <input type="text" class="form-control form-control-sm" name="CIF" pattern="{9}"/>
                 </label>
             </div>
             <div class="form-group">

@@ -36,7 +36,7 @@ Gestionar Responsable
             <div class="form-group">
                 <label class="text-center" >
                     Dni:
-                    <input type="text" class="form-control form-control-sm" name="dni"/>
+                    <input type="text" class="form-control form-control-sm" name="dni" pattern="[0-9]{8}[A-Za-z]{1}"/>
                 </label>
                 <label class="text-center">
                     Nombre:
@@ -60,7 +60,6 @@ Gestionar Responsable
                 </label>
                 <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
             </div>
-            </tr>
         </form>
     </div>
 </div> 
@@ -90,9 +89,9 @@ Gestionar Responsable
                                 <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $key['dni']; ?>" readonly/>
                             </td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $key['nombre']; ?>"></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="apellido" value="<?php echo $key['apellido']; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="apellido" value="<?php echo $key['apellidos']; ?>"/></td>
                             <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $key['email']; ?>"/></td>
-                            <td><input type="tel" class="form-control form-control-sm form-control-md" name="tel" value="<?php echo $key['tel']; ?>" pattern="[0-9]{9}"/></td>
+                            <td><input type="tel" class="form-control form-control-sm form-control-md" name="tel" value="<?php echo $key['telefono']; ?>" pattern="[0-9]{9}"/></td>
                             <td><button type="submit" id="editar" class="btn" name="editar" /></td>
                             <td><button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
                         </tr>

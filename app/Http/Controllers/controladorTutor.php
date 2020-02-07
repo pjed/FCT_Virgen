@@ -93,6 +93,9 @@ class controladorTutor extends Controller {
         }
         if (isset($_REQUEST['editar'])) {
             Conexion::ModificarEmpresa($id, $CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario, $nueva);
+        
+            
+        return view('tutor/gestionarEmpresa');
         }
         if (isset($_REQUEST['eliminar'])) {
             Conexion::borrarEmpresa($id);

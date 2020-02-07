@@ -624,6 +624,20 @@ class Conexion {
     }
 
     /**
+     * Método para comprobar que la responsable existe para no deje añadirla
+     * @param type $dni
+     * @return boolean
+     */
+    static function existeResponsable($dni) {
+        $val = true;
+        $e = responsable::where('dni', $dni)->first();
+        if ($e) {
+            $val = false;
+        }
+        return $val;
+    }
+
+    /**
      * Método para insertar responsables
      * @param type $dni
      * @param type $nombre
@@ -632,13 +646,15 @@ class Conexion {
      * @param type $tel
      */
     static function insertarResponsable($dni, $nombre, $apellidos, $email, $tel) {
-        $p = new responsable;
-        $p->dni = $dni;
-        $p->nombre = $nombre;
-        $p->apellidos = $apellidos;
-        $p->email = $email;
-        $p->telefono = $tel;
         try {
+            $p = new responsable;
+            $p->id = null;
+            $p->dni = $dni;
+            $p->nombre = $nombre;
+            $p->apellidos = $apellidos;
+            $p->email = $email;
+            $p->telefono = $tel;
+
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
@@ -739,24 +755,10 @@ class Conexion {
      * @return boolean
      */
     static function existeEmpresa($cif) {
-        $val = false;
+        $val = true;
         $e = empresa::where('cif', $cif)->first();
         if ($e) {
-            $val = true;
-        }
-        return $val;
-    }
-
-    /**
-     * Método para comprobar que la responsable existe para no deje añadirla
-     * @param type $dni
-     * @return boolean
-     */
-    static function existeResponsable($dni) {
-        $val = false;
-        $e = responsable::where('dni', $dni)->first();
-        if ($e) {
-            $val = true;
+            $val = false;
         }
         return $val;
     }
