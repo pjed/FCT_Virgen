@@ -58,7 +58,7 @@ Gestionar Responsable
                     Telefono:
                     <input type="tel" class="form-control form-control-sm" name="tel" pattern="[0-9]{9}"/>
                 </label>
-                <input type="submit" id="añadir" class="btn btn-sm" name="aniadir" value="añadir" />
+                <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
             </div>
             </tr>
         </form>

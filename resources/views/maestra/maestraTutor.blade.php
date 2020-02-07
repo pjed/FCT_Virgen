@@ -6,7 +6,7 @@
 
         <title>@yield('titulo')</title>
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet"> 
 
         <!-- Styles -->
         <!-- Bootstrap CSS -->

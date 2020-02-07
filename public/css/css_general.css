@@ -2,7 +2,9 @@
     Created on : 24-ene-2020, 10:43:20
     Author     : daw207
 */
-
+body{
+    font-family: 'Playfair Display', serif;
+}
 #cerrarSesion{
     background-image :url('../images/logout.png');
     background-repeat: no-repeat;

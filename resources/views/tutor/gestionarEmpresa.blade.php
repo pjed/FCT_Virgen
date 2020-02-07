@@ -68,7 +68,7 @@ Gestionar Empresa
                     Nombre del representante:
                     <input type="text" class="form-control form-control-sm" name="nombreRepresentante" />
                 </label>
-                <input type="submit" id="añadir" class="btn btn-sm" name="aniadir" value="añadir" />
+                <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
             </div>
         </form>
     </div>

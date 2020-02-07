@@ -3,7 +3,7 @@
 
 use App\Auxiliar\Conexion;
 
-$lu = Conexion::listarPracticas();
+$lu = Conexion::listarPracticasPagination();
 $l1 = Conexion::listarEmpresas();
 $l2 = Conexion::listarAlumnos();
 $l3 = Conexion::listarResponsables();
@@ -66,7 +66,7 @@ Gestionar  Practicas
             <div class="form-group">
                 <label class="text-center">
                     Cod proyecto:
-                    <input type="text" class="codProyecto form-control form-control-sm" name="codProyecto"/>
+                    <input type="text" class="codProyecto form-control form-control-sm" name="codProyecto" pattern="[0-9]{6}"/>
                 </label>
                 <label class="text-center">
                     Responsable:
@@ -100,7 +100,7 @@ Gestionar  Practicas
                     Fecha fin:
                     <input type="date" class="form-control form-control-sm" name="fechaFin"/>
                 </label>
-                <input type="submit" id="añadir" class="btn btn-sm" name="aniadir" value="añadir" />
+                <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
             </div>
         </form>
     </div>
@@ -176,18 +176,18 @@ Gestionar  Practicas
                                 <label>
                                     Recibí (PDF):
                                     <div class="row">
-                                        <div class="col-sm col-md col-lg">
+                                        <div class="col-sm">
                                             <input type="submit" id="recibiFCT" class="btn btn-primary" name="recibiFCT" value="Anexo V Recibí FCT"/>
                                         </div>
-                                        <div class="col-sm col-md col-lg">
+                                        <div class="col-sm">
                                             <a href="http://www.educa.jccm.es/es/fpclm/centros-formacion-profesional/formacion-centros-trabajo-proyecto.ficheros/100158-anexo5_recibi.doc">FCT</a>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm col-md col-lg">
+                                        <div class="col-sm">
                                             <input type="submit" id="recibiFPDUAL" class="btn btn-primary" name="recibiFPDUAL" value="Anexo XV Recibí FP DUAL"/>
                                         </div>
-                                        <div class="col-sm col-md col-lg">
+                                        <div class="col-sm">
                                             <a href="http://www.educa.jccm.es/es/fpclm/fp-dual/proyectos-formacion-profesional-dual-curso-2019-2020.ficheros/317740-Anexo%20XV%20Recib%C3%AD%20del%20alumnado.docx">FP DUAL</a>
                                         </div>
                                 </label>
