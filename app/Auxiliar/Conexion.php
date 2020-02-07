@@ -436,6 +436,29 @@ class Conexion {
     }
 
     /**
+     * Método para listar alumnos de un tutor determinado
+     * @return type lista de alumnos
+     */
+    static function listarAlumnoPorTutor() {
+        $tutor = session()->get('usu');
+        foreach ($tutor as $t) {
+            $dni = $t['dni'];
+        }
+        $v = [];
+        $v = \DB::table('tutores')
+                ->where('tutores.usuarios_dni', $dni)
+                ->join('matriculados', 'matriculados.cursos_id_curso', '=', 'tutores.cursos_id_curso')
+                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')   
+                ->join('usuarios_roles','usuarios.dni', '=',  'usuarios_roles.usuario_dni')
+                ->where('usuarios_roles.rol_id', 3)                
+                ->select(
+                        'usuarios.dni AS dni','usuarios.nombre AS nombre', 'usuarios.apellidos AS apellido'
+                )
+                ->get();
+        return $v;
+    }
+
+    /**
      * Método para recoger los requisitos necesarios para la vista extraerDocT
      * @return type 
      */

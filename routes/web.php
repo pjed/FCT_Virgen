@@ -37,10 +37,10 @@ Route::get('bienvenidaT', function () {
     return view('tutor/bienvenidaT');
 });
 Route::get('consultarGastosAlumno', function () {
-    return view('tutor/consultarGastoAlumno');
+    return view('tutor/consultarGastosAlumno');
 });
 Route::get('consultarGastosCurso', function () {
-    return view('tutor/consultarGastoCurso');
+    return view('tutor/consultarGastosCurso');
 });
 Route::get('gestionarEmpresa', function () {
     return view('tutor/gestionarEmpresa');
@@ -55,7 +55,7 @@ Route::get('ExtraerDocT', function () {
     return view('tutor/extraerDocT');
 });
 Route::get('perfilTutor', function () {
-    return view('perfilTutor');
+    return view('tutor/perfilTutor');
 });
 
 Route::post('consultarGastosAlumno', 'controladorTutor@consultarGastoAlumno');
