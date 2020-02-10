@@ -1,3 +1,6 @@
+<?php
+$rol1 = session()->get('rol1');
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -43,12 +46,8 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="ExtraerDocT">Generar documentos</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Consultar Gastos</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="consultarGastosAlumno">Alumno</a>
-                                    <a class="dropdown-item" href="consultarGastosCurso">Curso</a>
-                                </div>
+                            <li class="nav-item">
+                                <a class="nav-link"  href="consultarGastosAlumno">Consultar Gastos Alumno</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar</a>
@@ -58,9 +57,11 @@
                                     <a class="dropdown-item" href="gestionarPracticas">Practicas</a>
                                 </div>
                             </li>
+                            @if ($rol1==4)
                             <li class="nav-item">
                                 <a class="nav-link"  href="cambiarRol">Cambiar de rol</a>
                             </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
