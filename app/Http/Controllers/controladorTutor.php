@@ -27,8 +27,35 @@ class controladorTutor extends Controller {
     }
 
     public function consultarGastoAlumno(Request $req) {
-
-        return view('tutor/consultarGastosAlumno');
+        if (isset($_REQUEST['buscar'])) {
+            $dniAlumno = $req->get('dniAlumno');
+            $gt = Conexion::listarGastosTransportes($dniAlumno);
+            
+            foreach ($gt as $key) {
+                $desplazamiento = $key->desplazamiento;
+                $tipo = $key->tipo;
+            }
+            
+            if ($desplazamiento == 1) {
+                if ($tipo == 1) {
+                    $gtp = null;
+                    $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+                } else {
+                    $gtc = null;
+                    $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+                }
+            } else {
+                $gtc = null;
+                $gtp = null;
+            }
+            $gc = Conexion::listarGastosComidasPagination($dniAlumno);
+            $datos = [
+                'gc' => $gc,
+                'gtp' => $gtp,
+                'gtc' => $gtc,
+            ];
+        }
+        return view('tutor/consultarGastosAlumno', $datos);
     }
 
     public function consultarGastoCurso(Request $req) {
@@ -93,9 +120,9 @@ class controladorTutor extends Controller {
         }
         if (isset($_REQUEST['editar'])) {
             Conexion::ModificarEmpresa($id, $CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario, $nueva);
-        
-            
-        return view('tutor/gestionarEmpresa');
+
+
+            return view('tutor/gestionarEmpresa');
         }
         if (isset($_REQUEST['eliminar'])) {
             Conexion::borrarEmpresa($id);
