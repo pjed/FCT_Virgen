@@ -56,7 +56,7 @@ Gestionar  Practicas
                         <?php
                         foreach ($l2 as $k2) {
                             ?>
-                            <option value="<?php echo $k2['dni']; ?>"> <?php echo $k2['nombre'] . ', ' . $k2['apellidos']; ?></option>
+                            <option value="<?php echo $k2->dni; ?>"> <?php echo $k2->nombre . ', ' . $k2->apellidos; ?></option>
                             <?php
                         }
                         ?>
@@ -144,8 +144,8 @@ Gestionar  Practicas
                                 <select name="dniAlumno">                                    
                                     <?php
                                     foreach ($l2 as $k2) {
-                                        ?>
-                                        <option value="<?php echo $k2['dni']; ?>" <?php if ($key->dniAlumno == $k2['dni']) { ?> selected <?php } ?> > <?php echo $k2['nombre'] . ', ' . $k2['apellidos']; ?></option>
+                                        ?>                                    
+                                        <option value="<?php echo $k2->dni; ?>" <?php if ($key->dniAlumno == $k2->dni) { ?> selected <?php } ?> > <?php echo $k2->nombre . ', ' . $k2->apellidos; ?></option>
                                         <?php
                                     }
                                     ?>
