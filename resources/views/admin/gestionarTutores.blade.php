@@ -58,18 +58,18 @@ $listaCiclos = Conexion::listarCiclos();
                         <form action="gestionarTablaTutores" method="POST">
                             {{ csrf_field() }}
                             <tr>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="dni" value="<?php echo $value['usuarios_dni']; ?>" readonly/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value="<?php echo $value['nombre']; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value="<?php echo $value['apellidos']; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $value['email']; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value['telefono']; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $value->usuarios_dni; ?>" readonly/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>"/></td>
                                 <td>
                                     <select name="selectCiclo">
 
                                         <?php
                                         foreach ($listaCiclos as $value1) {
                                             ?>
-                                            <option value="<?php echo $value1['id_curso'] ?>"<?php if ($value1['id_curso'] == $value['cursos_id_curso']) { ?>selected<?php } ?>>
+                                            <option value="<?php echo $value1['id_curso'] ?>"<?php if ($value1['id_curso'] == $value->cursos_id_curso) { ?>selected<?php } ?>>
                                                 <?php echo $value1['id_curso'] ?>
                                             </option>
                                             <?php
@@ -89,6 +89,12 @@ $listaCiclos = Conexion::listarCiclos();
                 </table>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm col-md col-lg">
+        {{ $listaTutores->links()}}
     </div>
 </div>
 @endsection

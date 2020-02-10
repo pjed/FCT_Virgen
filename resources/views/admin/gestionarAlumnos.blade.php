@@ -9,7 +9,7 @@ Gestionar alumnos
 <main>
 
     <?php
-    $listaTutores = Conexion::listarAlumnos();
+    $listaAlumnos = Conexion::listarAlumnos();
     ?>
 
     <div class="container-fluid">  
@@ -54,17 +54,17 @@ Gestionar alumnos
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($listaTutores as $value) {
+                            foreach ($listaAlumnos as $value) {
                                 ?>
                             <form action="gestionarTablaAlumnos" method="POST">
                                 {{ csrf_field() }}
                                 <tr>
-                                    <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="dni" value="<?php echo $value['dni']; ?>" readonly/></td>
-                                    <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value="<?php echo $value['nombre']; ?>"/></td>
-                                    <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value="<?php echo $value['apellidos']; ?>"/></td>
-                                    <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $value['email']; ?>"/></td>
-                                    <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value['telefono']; ?>"/></td>
-                                    <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="iban" value="<?php echo $value['iban']; ?>"/></td>
+                                    <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="dni" value="<?php echo $value->dni; ?>" readonly/></td>
+                                    <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value="<?php echo $value->nombre; ?>"/></td>
+                                    <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value="<?php echo $value->apellidos; ?>"/></td>
+                                    <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $value->email; ?>"/></td>
+                                    <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value->telefono; ?>"/></td>
+                                    <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="iban" value="<?php echo $value->iban; ?>"/></td>
 
                                     <td><button type="submit" id="editar" class="btn" name="editar" value=""/></td>
                                     <td><button type="submit" id="eliminar" class="btn" name="eliminar" value=""/></td>
@@ -77,6 +77,12 @@ Gestionar alumnos
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm col-md col-lg">
+            {{ $listaAlumnos->links()}}
         </div>
     </div>
 </main>

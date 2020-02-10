@@ -280,22 +280,14 @@ class Conexion {
      */
     static function listarAlumnos() {
 
-        $ur = usuarios_rol::where('rol_id', 3)->get();
-        $listaAlumnos = [];
-
-        foreach ($ur as $a) {
-            $w = usuario::where('dni', $a->usuario_dni)->get(); //aqui se cruzan
-            foreach ($w as $p) {
-                $listaAlumnos [] = ['dni' => $p->dni,
-                    'nombre' => $p->nombre,
-                    'apellidos' => $p->apellidos,
-                    'email' => $p->email,
-                    'telefono' => $p->telefono,
-                    'iban' => $p->iban];
-            }
-        }
-
-        return $listaAlumnos;
+        $v = \DB::table('usuarios_roles')
+                ->where('usuarios_roles.rol_id', 3)
+                ->join('usuarios', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
+                ->select(
+                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban'
+                )
+                ->paginate(4);
+        return $v;
     }
 
     /**
@@ -304,23 +296,13 @@ class Conexion {
      */
     static function listarTutores() {
 
-        $ur = tutor::all();
-        $listaTutores = [];
-
-        foreach ($ur as $a) {
-            $w = usuario::where('dni', $a->usuarios_dni)->get(); //aqui se cruzan
-            foreach ($w as $p) {
-                $listaTutores [] = ['idtutores' => $a->idtutores,
-                    'cursos_id_curso' => $a->cursos_id_curso,
-                    'usuarios_dni' => $a->usuarios_dni,
-                    'nombre' => $p->nombre,
-                    'apellidos' => $p->apellidos,
-                    'email' => $p->email,
-                    'telefono' => $p->telefono];
-            }
-        }
-
-        return $listaTutores;
+        $v = \DB::table('tutores')
+                ->join('usuarios', 'usuarios.dni', '=', 'tutores.usuarios_dni')
+                ->select(
+                        'tutores.idtutores AS idtutores', 'tutores.cursos_id_curso AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono'
+                )
+                ->paginate(4);
+        return $v;
     }
 
     /**
@@ -351,24 +333,32 @@ class Conexion {
      * @return type lista de usuarios
      */
     static function listarUsuarios() {
-        $ur = usuarios_rol::all();
-        $v = [];
-        foreach ($ur as $a) {
-            $ur = usuario::where('dni', $a->usuario_dni)->get(); //aqui se cruzan
-            foreach ($ur as $p) {
-                $v[] = ['dni' => $p->dni,
-                    'nombre' => $p->nombre,
-                    'apellidos' => $p->apellidos,
-                    'email' => $p->email,
-                    'tel' => $p->telefono,
-                    'movil' => $p->movil,
-                    'domicilio' => $p->domicilio,
-                    'iban' => $p->iban,
-                    'rol_id' => $a->rol_id,
-                    'curso' => $a->curso_id,
-                ];
-            }
-        }
+//        $ur = usuarios_rol::all();
+//        $v = [];
+//        foreach ($ur as $a) {
+//            $ur = usuario::where('dni', $a->usuario_dni)->get(); //aqui se cruzan
+//            foreach ($ur as $p) {
+//                $v[] = ['dni' => $p->dni,
+//                    'nombre' => $p->nombre,
+//                    'apellidos' => $p->apellidos,
+//                    'email' => $p->email,
+//                    'tel' => $p->telefono,
+//                    'movil' => $p->movil,
+//                    'domicilio' => $p->domicilio,
+//                    'iban' => $p->iban,
+//                    'rol_id' => $a->rol_id,
+//                    'curso' => $a->curso_id,
+//                ];
+//            }
+//        }
+//        return $v;
+        
+        $v = \DB::table('usuarios')
+                ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
+                ->select(
+                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios_roles.rol_id AS rol_id'
+                )
+                ->paginate(4);
         return $v;
     }
 
