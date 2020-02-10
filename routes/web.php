@@ -37,10 +37,12 @@ Route::get('bienvenidaT', function () {
     return view('tutor/bienvenidaT');
 });
 Route::get('consultarGastosAlumno', function () {
-    return view('tutor/consultarGastosAlumno');
-});
-Route::get('consultarGastosCurso', function () {
-    return view('tutor/consultarGastosCurso');
+    $datos = [
+        'gc' => null,
+        'gtp' => null,
+        'gtc' => null,
+    ];
+    return view('tutor/consultarGastosAlumno', $datos);
 });
 Route::get('gestionarEmpresa', function () {
     return view('tutor/gestionarEmpresa');
@@ -59,7 +61,6 @@ Route::get('perfilTutor', function () {
 });
 
 Route::post('consultarGastosAlumno', 'controladorTutor@consultarGastoAlumno');
-Route::post('consultarGastosCurso', 'controladorTutor@consultarGastoCurso');
 Route::post('extraerDocT', 'controladorTutor@extraerDocT');
 Route::post('gestionarEmpresa', 'controladorTutor@gestionarEmpresa');
 Route::post('gestionarResponsable', 'controladorTutor@gestionarResponsable');
