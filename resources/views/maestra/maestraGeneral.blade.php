@@ -32,10 +32,13 @@
                         <img class="borde_logo" id="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                     </a>
                 </div>
-                <div class="container col-9">
+                <div class="container col-6">
                     <div class="row h-100 justify-content-center align-items-center">
-                        <p class="titulo_app">CIFP - Virgen de Gracia - Gestión FCT</p>
+                        <p class="titulo_app">Gestión FCT</p>
                     </div>
+                </div>
+                <div class="container col-3">
+                    
                 </div>
             </nav>
         </header>
@@ -44,39 +47,38 @@
         </main>
         <footer class="footer bg-dark container-fluid">  
             <nav class="nav">
-                <div class="col-3 container text-center">
+                <div class="col-2 container text-center">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" id="logoInstituto" href="https://europa.eu/european-union/index_es">
                             <img class="borde_logo" id="logotipo_dual" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
                         </a>
                     </div>
                 </div>
-                <div class="col-3 container text-center">
+                <div class="col-2 container text-center">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" id="logoInstituto" href="http://http://www.educa.jccm.es/es/fpclm/fp-dual">
                             <img class="borde_logo" id="logotipo_dual" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
                         </a>
                     </div>
                 </div>
-                <div class="col-3 container text-center">
+                <div class="col-2 container text-center">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" id="logoInstituto" href="http://www.cifpvirgendegracia.com/">
                             <img id="logoInstituto" class="borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
                         </a>
                     </div>
                 </div>
-                <div class="col-2">
-                    <div class="row content">
-                        <div class="text-center">
-                            <p>Marina Estefanía Flores Fernández</p>
-                            <p>Pedro Javier Espinosa Duque</p>
-                            <p>Manuel Ruiz González</p>
-                        </div>
+                <div class="col-3 container text-center">
+                    <div class="row h-100 justify-content-center align-items-center">
+                        <p>Marina Estefanía Flores Fernández</p>
+                        <p>Pedro Javier Espinosa Duque</p>
+                        <p>Manuel Ruiz González</p>
                     </div>
                 </div>
-                <div class="col-1 container text-center">
+
+                <div class="col-3 container text-center">
                     <div class="row h-100 justify-content-center align-items-center">
-                            <p>2 - DAW <br>2019 - 2020</p>
+                        <p>2 - DAW <br>2019 - 2020</p>
                     </div>
                 </div>
                 </div>
