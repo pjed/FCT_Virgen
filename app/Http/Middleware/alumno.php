@@ -4,8 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class alumno
-{
+class alumno {
+
     /**
      * Handle an incoming request.
      *
@@ -13,8 +13,18 @@ class alumno
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
-    {
-        return $next($request);
+    public function handle($request, Closure $next) {
+        $n = session()->get('usu');
+        //comprobar si eres admin
+        foreach ($n as $u) {
+            $rol = $u['rol'];
+        }
+        if ($rol == 2) {
+            return $next($request);
+        } else {
+            abort(518);
+            //return view('errors/518');
+        }
     }
+
 }

@@ -5,7 +5,7 @@ use App\Auxiliar\Conexion;
 
 $lu = Conexion::listarPracticasPagination();
 $l1 = Conexion::listarEmpresas();
-$l2 = Conexion::listarAlumnos();
+$l2 = Conexion::listarAlumnoPorTutor();
 $l3 = Conexion::listarResponsables();
 ?>
 @extends('maestra.maestraTutor')
@@ -51,7 +51,7 @@ Gestionar  Practicas
                     </select>
                 </label>
                 <label class="text-center">
-                    Cod proyecto:
+                    Alumno:
                     <select name="dniAlumno">                                    
                         <?php
                         foreach ($l2 as $k2) {
@@ -202,7 +202,7 @@ Gestionar  Practicas
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-sm col-md col-lg">
         {{ $lu->links()}}
     </div>

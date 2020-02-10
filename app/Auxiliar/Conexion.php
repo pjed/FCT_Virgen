@@ -426,6 +426,29 @@ class Conexion {
     }
 
     /**
+     * Método para listar alumnos de un tutor determinado
+     * @return type lista de alumnos
+     */
+    static function listarAlumnoPorTutor() {
+        $tutor = session()->get('usu');
+        foreach ($tutor as $t) {
+            $dni = $t['dni'];
+        }
+        $v = [];
+        $v = \DB::table('tutores')
+                ->where('tutores.usuarios_dni', $dni)
+                ->join('matriculados', 'matriculados.cursos_id_curso', '=', 'tutores.cursos_id_curso')
+                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')   
+                ->join('usuarios_roles','usuarios.dni', '=',  'usuarios_roles.usuario_dni')
+                ->where('usuarios_roles.rol_id', 3)                
+                ->select(
+                        'usuarios.dni AS dni','usuarios.nombre AS nombre', 'usuarios.apellidos AS apellido'
+                )
+                ->get();
+        return $v;
+    }
+
+    /**
      * Método para recoger los requisitos necesarios para la vista extraerDocT
      * @return type 
      */
@@ -467,7 +490,7 @@ class Conexion {
                 ->select(
                         'practicas.id AS id', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto'
                 )
-                ->paginate(8);
+                ->paginate(4);
         return $v;
     }
 
@@ -600,7 +623,7 @@ class Conexion {
      * @return type
      */
     static function listarResponsablesPagination() {
-        $r = responsable::paginate(8);
+        $r = responsable::paginate(4);
         return $r;
     }
 
@@ -726,7 +749,7 @@ class Conexion {
      * @return type
      */
     static function listarEmpresasPagination() {
-        $e = empresa::paginate(8);
+        $e = empresa::paginate(4);
         return $e;
     }
 
