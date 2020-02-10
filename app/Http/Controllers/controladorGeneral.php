@@ -75,7 +75,8 @@ class controladorGeneral extends Controller {
                     </button>
                   </div>';
                 return view('alumno.bienvenidaAl');
-            } else if ($rol == 4) {//tutor-admin
+            } else if ($rol == 4) {//tutor-admin                              
+                session()->put('rol1', 4);
                 return view('cambiarRol');
             }
         } else {
