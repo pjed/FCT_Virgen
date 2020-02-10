@@ -438,11 +438,11 @@ class Conexion {
         $v = \DB::table('tutores')
                 ->where('tutores.usuarios_dni', $dni)
                 ->join('matriculados', 'matriculados.cursos_id_curso', '=', 'tutores.cursos_id_curso')
-                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')   
-                ->join('usuarios_roles','usuarios.dni', '=',  'usuarios_roles.usuario_dni')
-                ->where('usuarios_roles.rol_id', 3)                
+                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
+                ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
+                ->where('usuarios_roles.rol_id', 3)
                 ->select(
-                        'usuarios.dni AS dni','usuarios.nombre AS nombre', 'usuarios.apellidos AS apellido'
+                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellido'
                 )
                 ->get();
         return $v;
@@ -493,6 +493,8 @@ class Conexion {
                 ->paginate(4);
         return $v;
     }
+
+    
 
     /**
      * Método para obtener todas las practicas sin paginacion
@@ -878,6 +880,85 @@ class Conexion {
                     </button>
                   </div>';
         }
+    }
+    /**
+     * Método para obtener los gastos de comida de un alumno determinado con paginacion de 4
+     * @param type $dni
+     * @return type
+     */
+    static function listarGastosComidasPagination($dni) {
+        $v = [];
+        $v = \DB::table('usuarios')
+                ->where('usuarios.dni', $dni)
+                ->where('gastos.tipo', 0)
+                ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
+                ->join('comidas', 'comidas.id', '=', 'gastos.comidas_id')
+                ->select(
+                        'comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto'
+                )
+                ->paginate(4);
+        return $v;
+    }
+    /**
+     * Método para obtener los datos de transporte de un alumno determinado con paginacion de 4
+     * @param type $dni
+     * @return type
+     */
+    static function listarGastosTransportes($dni) {
+        $v = [];
+        $v = \DB::table('usuarios')
+                ->where('usuarios.dni', $dni)
+                ->where('gastos.tipo', 1)
+                ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
+                ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')     
+                ->select(
+                        'gastos.desplazamiento AS desplazamiento','transportes.tipo AS tipo','transportes.donde AS donde'
+                )
+                ->paginate(4);
+        return $v;
+    }
+    /**
+     * Método para obtener los gastos de transporte colectivo de un alumno determinado con paginacion de 4
+     * @param type $dni
+     * @return type
+     */
+    static function listarGastosTransportesColectivosPagination($dni) {
+        $v = [];
+        $v = \DB::table('usuarios')
+                ->where('usuarios.dni', $dni)
+                ->where('gastos.tipo', 1)
+                ->where('gastos.desplazamiento', 1)
+                ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
+                ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')                
+                ->join('colectivos', 'transportes.id', '=', 'colectivos.transportes_id')
+                ->select(
+                        'transportes.donde AS donde','colectivos.id AS idColectivos',
+                        'colectivos.n_dias AS n_diasC', 'colectivos.foto AS foto', 'colectivos.importe AS precio'
+                )
+                ->paginate(4);
+        return $v;
+    }
+    /**
+     * Método para obtener los gastos de transporte de un alumno determinado con paginacion de 4
+     * @param type $dni
+     * @return type
+     */
+    static function listarGastosTransportesPropiosPagination($dni) {
+        $v = [];
+        $sql = 'SELECT transportes.donde AS donde,propios.id AS idPropios, propios.n_dias AS n_diasP, propios.kms AS kms, propios.precio AS precio FROM `usuarios` join gastos on gastos.usuarios_dni=usuarios.dni join transportes on transportes.id=gastos.transportes_id join propios On transportes.id=propios.transportes_id WHERE usuarios.dni="05931616P" and gastos.tipo=1 and gastos.desplazamiento=1 ';
+        $v = \DB::table('usuarios')
+                ->where('usuarios.dni', $dni)
+                ->where('gastos.tipo', 1)
+                ->where('gastos.desplazamiento', 1)
+                ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
+                ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')  
+                ->join('propios', 'transportes.id', '=', 'propios.transportes_id')
+                ->select(
+                        'transportes.donde AS donde','propios.id AS idPropios',
+                        'propios.n_dias AS n_diasP', 'propios.kms AS kms', 'propios.precio AS precio'
+                )
+                ->paginate(4);
+        return $v;
     }
 
 }
