@@ -5,9 +5,6 @@ Gestionar alumnos
 @endsection
 
 @section('contenido') 
-
-<main>
-
     <?php
     $listaAlumnos = Conexion::listarAlumnos();
     ?>
@@ -19,7 +16,7 @@ Gestionar alumnos
             <nav class="col">
                 <div class="breadcrumb">
                     <div class="breadcrumb-item"><a href="bienvenidaAd">Home</a></div>
-                    <div class="breadcrumb-item"><a href="">Gestionar Usuarios</a></div>
+                    <div class="breadcrumb-item"><a href="#">Gestionar Usuarios</a></div>
                     <div class="breadcrumb-item active"><a href="gestionarAlumnos">Alumnos</a></div>
                 </div>
             </nav>
@@ -85,5 +82,4 @@ Gestionar alumnos
             {{ $listaAlumnos->links()}}
         </div>
     </div>
-</main>
 @endsection
