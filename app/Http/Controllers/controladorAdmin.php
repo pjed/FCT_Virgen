@@ -36,10 +36,10 @@ class controladorAdmin extends Controller {
             $familia = $req->get('familia');
             $horas = $req->get('horas'); 
 
-            Conexion::insertarCurso();
+            Conexion::ModificarCurso($id, $descripcion, $anioAcademico, $familia, $horas);
         }
         if (isset($_REQUEST['eliminar'])) {
-            Conexion::insertarCurso();
+            Conexion::borrarCurso($id);
         }
 
         $l = Conexion::listaCursosPagination();

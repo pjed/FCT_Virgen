@@ -884,7 +884,7 @@ class Conexion {
         try {
             $now = new \DateTime();
             $fechaHoy = $now->format('Y-m-d H:i:s');
-            
+
             $c = new comida;
             $c->importe = $importe;
             $c->fecha = $fecha;
@@ -961,7 +961,7 @@ class Conexion {
         //dd($totalGastosCiclo);
         return $totalGastosCiclo;
     }
-    
+
     /**
      * Método para obtener los gastos de comida de un alumno determinado con paginacion de 4
      * @param type $dni
@@ -975,7 +975,7 @@ class Conexion {
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
                 ->join('comidas', 'comidas.id', '=', 'gastos.comidas_id')
                 ->select(
-                         'gastos.id AS idGasto','comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto'
+                        'gastos.id AS idGasto', 'comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto'
                 )
                 ->paginate(4);
         return $v;
@@ -994,7 +994,7 @@ class Conexion {
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
                 ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')
                 ->select(
-                         'gastos.id AS idGasto','gastos.desplazamiento AS desplazamiento', 'transportes.id AS idTransporte', 'transportes.tipo AS tipo', 'transportes.donde AS donde'
+                        'gastos.id AS idGasto', 'gastos.desplazamiento AS desplazamiento', 'transportes.id AS idTransporte', 'transportes.tipo AS tipo', 'transportes.donde AS donde'
                 )
                 ->paginate(4);
         return $v;
@@ -1015,7 +1015,7 @@ class Conexion {
                 ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')
                 ->join('colectivos', 'transportes.id', '=', 'colectivos.transportes_id')
                 ->select(
-                         'transportes.id AS idTransporte','transportes.donde AS donde', 'colectivos.id AS idColectivos', 'colectivos.n_dias AS n_diasC', 'colectivos.foto AS foto', 'colectivos.importe AS precio'
+                        'transportes.id AS idTransporte', 'transportes.donde AS donde', 'colectivos.id AS idColectivos', 'colectivos.n_dias AS n_diasC', 'colectivos.foto AS foto', 'colectivos.importe AS precio'
                 )
                 ->paginate(4);
         return $v;
@@ -1037,7 +1037,7 @@ class Conexion {
                 ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')
                 ->join('propios', 'transportes.id', '=', 'propios.transportes_id')
                 ->select(
-                        'transportes.id AS idTransporte','transportes.donde AS donde', 'propios.id AS idPropios', 'propios.n_dias AS n_diasP', 'propios.kms AS kms', 'propios.precio AS precio'
+                        'transportes.id AS idTransporte', 'transportes.donde AS donde', 'propios.id AS idPropios', 'propios.n_dias AS n_diasP', 'propios.kms AS kms', 'propios.precio AS precio'
                 )
                 ->paginate(4);
         return $v;
@@ -1209,7 +1209,6 @@ class Conexion {
                   </div>';
         }
     }
- 
 
     /**
      * Método para obtener todos los cursos con paginacion de 4
@@ -1232,7 +1231,7 @@ class Conexion {
             $p->ano_academico = $anioAcademico;
             $p->familia = $familia;
             $p->horas = $horas;
-
+            $p->centros_cod = '13002691';
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
