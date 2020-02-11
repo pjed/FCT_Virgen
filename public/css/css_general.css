@@ -23,6 +23,21 @@ body{
     color:white;
 }
 
+
+
+.panel_informativo{
+    background-color: lightgray;  
+    border-left: 6px solid gray;
+    border-radius: 25px;
+    margin-left: 5px;
+}
+
+.panel_informativo_bd{
+    background-color: lightskyblue;  
+    border-left: 6px solid blue;
+    border-radius: 25px;
+}
+
 .titulo_app{
     color: white; font-size: 18pt
 }
