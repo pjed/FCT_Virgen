@@ -25,132 +25,87 @@ Exportar documentos
     </div>
 
     <!-- Formulario -->
-    <form name="form" action="exportarDocumentos" method="POST">
-        {{ csrf_field() }}
-        <div class="row justify-content-center"> 
-
-            <!-- Columna izquierda -->
-            <div class="col-md-2">
-
-                <fieldset>
-                    <legend>Familia profesional</legend>
-
-                    <?php
-                    foreach ($listaFamiliasProfesionales as $value) {
-                        ?>
-                        <div>
-                            <input type="radio" id='<?php $value ?>' name="familiaProfesional" value="">
-                            <label for='<?php $value ?>'><?php $value ?></label>
+    <div class="row justify-content-center"> 
+        <div class="col-sm-4 col-md-4">
+            <form name="form" action="exportarDocumentos" method="POST">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label class="text-center" for='familiaProfesional'>
+                        Familia profesional:
+                        <select name="familiaProfesional">  
+                            <?php
+                            foreach ($l1 as $value) {
+                                ?>
+                                <option value="<?php echo $value->familia; ?>"><?php echo $value->familia; ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </label>  
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="text-center" for='ciclo'>
+                        Ciclo:
+                        <select name="ciclo">  
+                            <?php
+                            foreach ($l1 as $value) {
+                                ?>
+                                <option value="<?php echo $value->id; ?>"><?php echo $value->id; ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </label> 
+                </div>
+                </br>
+                <div class="form-group">
+                    <label>
+                        Recibí (PDF):
+                        <div class="row">
+                            <div class="col-sm col-md col-lg">
+                                <input type="submit" id="recibiFCT" class="btn btn-primary" name="recibiFCT" value="Anexo V Recibí FCT"/>
+                            </div>
+                            <div class="col-sm col-md col-lg">
+                                <a href="http://www.educa.jccm.es/es/fpclm/centros-formacion-profesional/formacion-centros-trabajo-proyecto.ficheros/100158-anexo5_recibi.doc">FCT</a>
+                            </div>
                         </div>
-                        <?php
-                    }
-                    ?>
-                </fieldset>
-
-            </div>
-
-            <!-- Columna centro izquierda -->
-            <div class="col-md-2">
-
-                <fieldset>
-                    <legend>Ciclo</legend>
-
-                    <?php
-                    foreach ($listaCiclosFamilia as $value) {
-                        ?>
-                        <div>
-                            <input type="radio" id='<?php $value ?>' name="ciclo" value="">
-                            <label for='<?php $value ?>'><?php $value ?></label>
+                        <div class="row">
+                            <div class="col-sm col-md col-lg">
+                                <input type="submit" id="recibiFPDUAL" class="btn btn-primary" name="recibiFPDUAL" value="Anexo XV Recibí FP DUAL"/>
+                            </div>
+                            <div class="col-sm col-md col-lg">
+                                <a href="http://www.educa.jccm.es/es/fpclm/fp-dual/proyectos-formacion-profesional-dual-curso-2019-2020.ficheros/317740-Anexo%20XV%20Recib%C3%AD%20del%20alumnado.docx">FP DUAL</a>
+                            </div>
+                    </label>
+                </div>
+                </br>
+                <div class="form-group">
+                    <label>
+                        Memoria alumnos (EXCEL):   
+                        <div class="row">
+                            <div class="col-sm col-md col-lg">
+                                <input type="submit" id="memoriaAlumnos" class="btn btn-primary" name="memoriaAlumnos" value="Memoria alumnos"/>
+                            </div>
                         </div>
-                        <?php
-                    }
-                    ?>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Curso</legend>
-
-                    <div>
-                        <input type="radio" id="primero" name="curso" value="1">
-                        <label for="primero">1</label>
-                    </div>
-
-                    <div>
-                        <input type="radio" id="segundo" name="curso" value="2">
-                        <label for="segundo">2</label>
-                    </div>
-
-                </fieldset>
-
-                <fieldset>
-                    <legend>Tutor</legend>
-
-                    <div>
-                        <input type="text" name="tutor" value="" readonly>
-                    </div>
-
-                </fieldset>
-
-            </div>
-
-            <!-- Columna centro derecha -->
-            <div class="col-md-2">
-
-                <fieldset>
-                    <legend>Recibí (pdf)</legend>
-
-                    <div>
-                        <input type="submit" name="recibiFPdual" value="Anexo XV Recibí FP DUAL"><br><br>
-                    </div>
-
-                    <div>
-                        <input type="submit" name="recibiFCT" value="Anexo XV Recibí FCT">
-                    </div>
-
-                </fieldset>
-
-                <fieldset>
-                    <legend>Memoria alumnos (excel)</legend>
-
-                    <div>
-                        <input type="submit" name="memoriaAlumnos" value="Memoria de alumnos">
-                    </div>
-
-                </fieldset>
-
-                <fieldset>
-                    <legend>Gastos de alumnos (excel)</legend>
-
-                    <div>
-                        <input type="submit" name="gastosAlumnosFct" value="Gastos alumnos FCT"><br><br>
-                        <input type="submit" name="gastosAlumnosDual" value="Gastos alumnos FP DUAL">
-                    </div>
-
-                </fieldset>
-
-            </div>
-
-            <!-- Columna derecha -->
-            <div class="col-md-2">
-
-                <fieldset>
-                    <legend>Enlaces anexos</legend>
-
-                    <div>
-                        <a href="">FP Dual</a>
-                    </div>
-
-                    <div>
-                        <a href="">FCT</a>
-                    </div>
-
-                </fieldset>
-
-            </div>
-
+                    </label>
+                </div>
+                </br>
+                <div class="form-group">
+                    <label>
+                        Gastos de alumnos (EXCEL):  
+                        <div class="row">
+                            <div class="col-sm col-md col-lg">
+                                <input type="submit" id="gastosFCT" class="btn btn-primary" name="gastosFCT" value="Gastos alumnos FCT"/>
+                            </div>
+                            <div class="col-sm col-md col-lg">
+                                <input type="submit" id="gastosFPDUAL" class="btn btn-primary" name="gastosFPDUAL" value="Gastos alumnos FP DUAL"/>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </form>
         </div>
-
-    </form>
-
+    </div>
 </div>
 @endsection

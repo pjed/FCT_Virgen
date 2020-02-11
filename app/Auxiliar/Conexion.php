@@ -1211,6 +1211,26 @@ class Conexion {
     }
 
     /**
+     * Método para obtener todos los cursos
+     * @return type
+     */
+    static function listaCursos() {
+        $v = [];
+        $v = \DB::table('cursos')
+                ->join('tutores', 'cursos.id_curso', '=', 'tutores.cursos_id_curso')
+                ->join('usuarios', 'usuarios.dni', '=', 'tutores.usuarios_dni')
+                ->select(
+                        'tutores.idtutores AS idtutores', ' AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono'
+                )
+                ->select(
+                        'cursos.id_curso AS id', 'cursos.descripcion AS descripcion', 'cursos.ano_academico AS anioAcademico', 'cursos.familia AS familia', 'cursos.horas AS horas' ,
+                        'tutores.usuarios_dni AS tutorDni', 'usuarios.nombre AS tutorNombre', 'usuarios.apellidos AS tutorApellidos'
+                        )
+                ->get();
+        return $v;
+    }
+
+    /**
      * Método para obtener todos los cursos con paginacion de 4
      * @return type
      */

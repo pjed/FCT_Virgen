@@ -22,19 +22,19 @@ use App\Modal\colectivo;
 class controladorAdmin extends Controller {
 
     public function gestionarCursos(Request $req) {
-            $id = $req->get('id');
+        $id = $req->get('id');
         if (isset($_REQUEST['aniadir'])) {
             $descripcion = $req->get('descripcion');
             $anioAcademico = $req->get('anioAcademico');
             $familia = $req->get('familia');
             $horas = $req->get('horas');
-            Conexion::insertarCurso($id,$descripcion,$anioAcademico,$familia,$horas);            
+            Conexion::insertarCurso($id, $descripcion, $anioAcademico, $familia, $horas);
         }
         if (isset($_REQUEST['editar'])) {
             $descripcion = $req->get('descripcion');
             $anioAcademico = $req->get('anioAcademico');
             $familia = $req->get('familia');
-            $horas = $req->get('horas'); 
+            $horas = $req->get('horas');
 
             Conexion::ModificarCurso($id, $descripcion, $anioAcademico, $familia, $horas);
         }
@@ -133,7 +133,8 @@ class controladorAdmin extends Controller {
     }
 
     public function exportarDocumentos(Request $req) {
-
+        $familia = $req->get('familiaProfesional');
+        $idCurso = $req->get('ciclo');
         if (isset($_REQUEST['recibiFPdual'])) {
             
         }
@@ -145,10 +146,16 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['memoriaAlumnos'])) {
             
         }
+        if (isset($_REQUEST['gastosFCT'])) {
+            
+        }
+        if (isset($_REQUEST['gastosFPDUAL'])) {
+            
+        }
     }
 
     public function perfil(Request $req) {
-        
+
         return view('admin/perfilAdmin');
     }
 

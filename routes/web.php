@@ -73,7 +73,11 @@ Route::get('bienvenidaAd', function () {
     return view('admin/bienvenidaAd');
 });
 Route::get('extraerDocA', function () {
-    return view('admin/extraerDocA');
+    $l1 = Conexion::listaCursos();
+    $datos =[
+        'l1' =>$l1
+            ];
+    return view('admin/extraerDocA',$datos );
 });
 Route::get('gestionarCursos', function () {
     $l = Conexion::listaCursosPagination();
