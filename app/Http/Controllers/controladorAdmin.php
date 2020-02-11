@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Modal\tutor;
 use App\Modal\matricula;
 use App\Auxiliar\Conexion;
@@ -21,6 +20,12 @@ use App\Modal\usuarios_rol;
 use App\Modal\colectivo;
 
 class controladorAdmin extends Controller {
+
+    public function gestionarCursos(Request $req) {
+
+        $l = Conexion::listaCursosPagination();
+        return view('admin/gestionarCursos', ['l1' => $l]);
+    }
 
     public function gestionarUsuarios(Request $req) {
 
