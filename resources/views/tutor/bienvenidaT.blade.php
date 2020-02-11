@@ -8,7 +8,7 @@ Consultar Gastos por curso
 <h2 class="text-center">Bienvenido/a Tutor/a</h2>
 
 <div class="row container-fluid">
-    <div class="col-5 container panel_informativo ">
+    <div class="col-12 container panel_informativo ">
         <div class="row h-100 justify-content-center align-items-center">
             <p>Que puedo hacer:</p>
             <ol>

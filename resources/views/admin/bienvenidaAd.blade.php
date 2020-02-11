@@ -8,7 +8,7 @@ Consultar Gastos por curso
 <h2 class="text-center">Bienvenido/a Administrador/a</h2>
 <div class="row container-fluid">
 
-    <div class="col-5 container panel_informativo_bd">
+    <div class="col-lg-5 col-sm-12 container panel_informativo_bd">
         <div class="row justify-content-center align-items-center">
         <p>Administracion de Base de Datos</p>
             <ol>
@@ -27,7 +27,7 @@ Consultar Gastos por curso
             </ol>
         </div>
     </div>
-    <div class="col-6 container panel_informativo">
+    <div class="col-lg-6 col-sm-12 container panel_informativo">
         <div class="row justify-content-center align-items-center">
             <p>Que puedo hacer:</p>
             <ol>
