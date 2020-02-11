@@ -149,6 +149,7 @@ class controladorAdmin extends Controller {
 
     public function perfil(Request $req) {
         
+        return view('admin/perfilAdmin');
     }
 
 }

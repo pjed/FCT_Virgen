@@ -28,6 +28,9 @@ class controladorTutor extends Controller {
 
     public function consultarGastoAlumno(Request $req) {
         if (isset($_REQUEST['buscar'])) {
+            
+//            si ese usuario no tiene ningun gasto que salga algo
+            
             $dniAlumno = $req->get('dniAlumno');
             $gt = Conexion::listarGastosTransportes($dniAlumno);
 
