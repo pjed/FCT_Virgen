@@ -46,6 +46,9 @@ $rol1 = session()->get('rol1');
                             <li class="nav-item">
                                 <a class="nav-link" href="extraerDocA">Generar Documentos</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="gestionarCursos">Gestionar Cursos</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar Usuarios</a>
                                 <div class="dropdown-menu">
