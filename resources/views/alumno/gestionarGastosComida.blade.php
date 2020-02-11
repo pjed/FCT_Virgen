@@ -55,7 +55,7 @@ Gestionar gastos comida
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->id; ?>' readonly>
                                     <input type="text" class="form-control form-control-sm form-control-md" name ="importe" value='<?php echo $key->importe; ?>'>
                                 </td>
-                                <td><input type="number" class="form-control form-control-sm form-control-md"  name ="fecha" value="0" min="0" value="<?php echo $key->fecha; ?>"/></td>
+                                <td><input type="date" class="form-control form-control-sm form-control-md"  name ="fecha" value="<?php echo $key->fecha; ?>"/></td>
                                 <td>
                                     <?php
                                     echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>';

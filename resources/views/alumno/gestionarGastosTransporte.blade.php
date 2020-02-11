@@ -67,8 +67,8 @@ Gestionar gastos transporte
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'></td>
 
-                                <td><button type="submit" id="editar" class="btn" name="editar" /></td>
-                                <td><button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
+                                <td><button type="submit" id="editar" class="btn" name="editarC" /></td>
+                                <td><button type="submit" id="eliminar" class="btn" name="eliminarC" /></td>
                             </tr>
                         </form>
 
@@ -117,8 +117,8 @@ Gestionar gastos transporte
                             <td><input type="text" class="form-control form-control-sm form-control-md" name ="n_diasP" value="<?php echo $key->n_diasP; ?>"></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name ="kms" value="<?php echo $key->kms; ?>"></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'></td>
-                            <td><button type="submit" id="editar" class="btn" name="editar" /></td>
-                            <td><button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
+                            <td><button type="submit" id="editar" class="btn" name="editarP" /></td>
+                            <td><button type="submit" id="eliminar" class="btn" name="eliminarP" /></td>
                         </tr>
                     </form>
                     <?php
