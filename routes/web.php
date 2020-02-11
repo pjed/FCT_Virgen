@@ -1,5 +1,5 @@
 <?php
-
+use App\Auxiliar\Conexion;
 /*
   |--------------------------------------------------------------------------
   | Web Routes
@@ -76,7 +76,8 @@ Route::get('extraerDocA', function () {
     return view('admin/extraerDocA');
 });
 Route::get('gestionarCursos', function () {
-    return view('admin/gestionarCursos');
+    $l = Conexion::listaCursosPagination();
+    return view('admin/gestionarCursos',['l1' => $l]);
 });
 Route::get('gestionarUsuarios', function () {
     return view('admin/gestionarUsuarios');
