@@ -47,7 +47,7 @@ Gestionar gastos comida
                         foreach ($gastosAlumno as $key) {
                             ?>
 
-                        <form name="form" action="gestionarGastosComida" method="POST">
+                        <form name="form" action="gestionarGastosComida" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <tr>
                                 <td>

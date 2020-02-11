@@ -52,7 +52,7 @@ Gestionar gastos transporte
                         foreach ($gastosAlumno as $key) {
                             ?>
 
-                        <form name="form" action="gestionarGastosTransporte" method="POST">
+                        <form name="form" action="gestionarGastosTransporte" method="POST"  enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <tr>
                                 <td>
