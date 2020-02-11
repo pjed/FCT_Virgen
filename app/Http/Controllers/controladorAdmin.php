@@ -22,6 +22,25 @@ use App\Modal\colectivo;
 class controladorAdmin extends Controller {
 
     public function gestionarCursos(Request $req) {
+            $id = $req->get('id');
+        if (isset($_REQUEST['aniadir'])) {
+            $descripcion = $req->get('descripcion');
+            $anioAcademico = $req->get('anioAcademico');
+            $familia = $req->get('familia');
+            $horas = $req->get('horas');
+            Conexion::insertarCurso($id,$descripcion,$anioAcademico,$familia,$horas);            
+        }
+        if (isset($_REQUEST['editar'])) {
+            $descripcion = $req->get('descripcion');
+            $anioAcademico = $req->get('anioAcademico');
+            $familia = $req->get('familia');
+            $horas = $req->get('horas'); 
+
+            Conexion::insertarCurso();
+        }
+        if (isset($_REQUEST['eliminar'])) {
+            Conexion::insertarCurso();
+        }
 
         $l = Conexion::listaCursosPagination();
         return view('admin/gestionarCursos', ['l1' => $l]);

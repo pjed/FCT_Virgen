@@ -1209,5 +1209,90 @@ class Conexion {
                   </div>';
         }
     }
+ 
+
+    /**
+     * Método para obtener todos los cursos con paginacion de 4
+     * @return type
+     */
+    static function listaCursosPagination() {
+        $v = [];
+        $v = \DB::table('cursos')->select(
+                        'id_curso AS id', 'descripcion', 'ano_academico AS anioAcademico', 'familia', 'horas'
+                )
+                ->paginate(4);
+        return $v;
+    }
+
+    static function insertarCurso($id, $descripcion, $anioAcademico, $familia, $horas) {
+        try {
+            $p = new curso;
+            $p->id_curso = $id;
+            $p->descripcion = $descripcion;
+            $p->ano_academico = $anioAcademico;
+            $p->familia = $familia;
+            $p->horas = $horas;
+
+            $p->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function ModificarCurso($id, $descripcion, $anioAcademico, $familia, $horas) {
+        try {
+            $p = curso::where('id_curso', $id)
+                    ->update([
+                'descripcion' => $descripcion,
+                'ano_academico' => $anioAcademico,
+                'familia' => $familia,
+                'horas' => $horas
+            ]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function borrarCurso($id) {
+        try {
+            curso::where('id_curso', $id)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
 
 }
