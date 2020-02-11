@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $("#gastoPropio").hide();
+    $("#gastoColectivo").hide();
+
     $("#guardar").click(function () {
         if ($("#importeT").val() === "" || $("#fotoTicket").val() === "") {
             //location.replace("crearGastoTransporte");
@@ -21,3 +24,19 @@ $(document).ready(function () {
         }
     });
 });
+
+function handleClick(myRadio) {
+
+    if (myRadio.value === "Propio") {
+        $("#gastoColectivo").hide();
+        $("#gastoPropio").show();
+        //alert('Es propio');
+    }
+
+    if (myRadio.value === "Colectivo") {
+        $("#gastoPropio").hide();
+        $("#gastoColectivo").show();
+        //alert('Es colectivo');
+    }
+
+}

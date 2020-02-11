@@ -880,6 +880,88 @@ class Conexion {
         }
     }
 
+    static function insertarGastoComida($importe, $fecha, $foto) {
+        try {
+            $now = new \DateTime();
+            $fechaHoy = $now->format('Y-m-d H:i:s');
+            
+            $c = new comida;
+            $c->importe = $importe;
+            $c->fecha = $fecha;
+            $c->foto = $foto;
+            $c->created_at = $fecha;
+            $c->updated_at = $fechaHoy;
+
+            $c->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function obtenerIdComidaIngresada() {
+        $comida = comida::all()->last();
+        $id = $comida->id;
+
+        return $id;
+    }
+
+    static function obtenerTotalGastosAlumno($dni) {
+        $gastos = gasto::where('usuarios_dni', $dni)->sum('total_gasto_alumno');
+
+        return $gastos;
+    }
+
+    static function ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCiclo, $usuarios_dni, $comidas_id, $transporte_id) {
+
+        try {
+            $g = new gasto;
+            $g->desplazamiento = $desplazamiento;
+            $g->tipo = $tipo;
+            $g->total_gasto_alumno = $totalGastoAlumno;
+            $g->total_gasto_ciclo = $totalGastoCiclo;
+            $g->usuarios_dni = $usuarios_dni;
+            $g->comidas_id = $comidas_id;
+            $g->transportes_id = $transporte_id;
+
+            $g->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function obtenerGastosCicloAlumno($dni) {
+        //$totalGastosCiclo = 0;
+
+        $sql = "SELECT SUM(gastos.total_gasto_alumno) AS gasto from gastos where gastos.usuarios_dni In(select matriculados.usuarios_dni AS usuario from matriculados where cursos_id_curso = (select matriculados.cursos_id_curso AS cursos_id_curso from matriculados where usuarios_dni = '" . $dni . "') )";
+
+        $totalGastosCiclo = \DB::select($sql);
+
+        //dd($totalGastosCiclo);
+        return $totalGastosCiclo;
+    }
+    
     /**
      * Método para obtener los gastos de comida de un alumno determinado con paginacion de 4
      * @param type $dni

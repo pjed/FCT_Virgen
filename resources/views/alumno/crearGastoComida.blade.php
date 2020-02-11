@@ -1,11 +1,11 @@
 @extends('maestra.maestraAlumno')
 
-@section('titulo') 
+@section('titulo')
 Crear gasto comida
 @endsection
 
-@section('contenido') 
-<div class="container-fluid">  
+@section('contenido')
+<div class="container-fluid">
 
     <!-- Migas de pan -->
     <nav class="row">
@@ -28,21 +28,34 @@ Crear gasto comida
     <!-- Formulario para crear un gasto -->
     <form name="form" action="crearGastoComida" method="POST">
         {{ csrf_field() }}
-        <div class="row justify-content-center"> 
+        <div class="row justify-content-center">
 
             <div class="col-md-2">
 
                 <p>Ticket</p>
-                <img src="{{asset ('images/ticket.png')}}" class="logoInstituto"><br><br>
+                <img src="{{asset ('images/ticket.png')}}" class="fotoTicket"><br><br>
                 <p>Hacer foto</p>
-                <input type="file" id="fotoTicket" name="fichero"/><br><br>
+                <input type="file" id="fotoTicket" name="fotoTicket"/><br><br>
+
+                <fieldset>
+                    <!--                    <legend>Tipo transporte</legend>-->
+                    <p>¿Te has desplazado?</p>
+                    <div>
+                        <input type="radio" name="desplazado" id="si" value="1">
+                        <label for="si">Si</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="desplazado" id="no" value="0">
+                        <label for="no">No</label>
+                    </div>
+                </fieldset>
 
             </div>
 
             <div class="col-md-2">
 
-                <p>Nombre del alumno</p>
-                <input type="text" id="nombreAl" name="nomAlum" placeholder="Nombre" value="" readonly/><br><br>
+                <p>Fecha gasto</p>
+                <input type="date" id="fechaT" name="fechaT" value=""/><br><br>
                 <p>Importe total</p>
                 <input type="number" id="importeT" name="importeT" min="0" max="9" step="0.01" value="0"/><br><br>
 
@@ -50,7 +63,8 @@ Crear gasto comida
 
         </div>
 
-        <div class="row justify-content-center"> 
+
+        <div class="row justify-content-center">
 
             <div class="col-md-2">
 

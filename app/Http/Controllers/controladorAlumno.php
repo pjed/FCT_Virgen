@@ -22,11 +22,41 @@ use Illuminate\Http\Request;
 class controladorAlumno extends Controller {
 
     public function crearGastoComida(Request $req) {
-        
+        //ingresar el gasto de comida en la tabla comidas
+        $foto = $req->get('fotoTicket');
+        $fecha = $req->get('fechaT');
+        $importe = $req->get('importeT');
+
+        Conexion::insertarGastoComida($importe, $fecha, $foto);
+
+        //ingresar el gasto de comida en la tabla de gastos
+        $usuario = session()->get('usu');
+        foreach ($usuario as $u) {
+            $usuarios_dni = $u['dni'];
+        }
+
+        $comidas_id = Conexion::obtenerIdComidaIngresada();
+        $transporte_id = "";
+        $desplazamiento = $req->get('desplazado');
+        $tipo = 0;
+
+        $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($usuarios_dni);
+        $totalGastoAlumno = $gastosAntiguos + $importe;
+
+        $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($usuarios_dni);
+        foreach ($totalGastoCicloAntiguo as $a) {
+            $totalGastoCiclo = $a->gasto + $importe;
+        }
+        //dd($totalGastoCiclo);
+        //$totalGastoCiclo = $totalGastoCicloAntiguo + $importe;
+
+        Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCiclo, $usuarios_dni, $comidas_id, $transporte_id);
+
+        return view('alumno/crearGastoComida');
     }
 
     public function crearGastoTransporte(Request $req) {
-        
+
     }
 
     public function gestionarGastoComida(Request $req) {
@@ -85,7 +115,7 @@ class controladorAlumno extends Controller {
     }
 
     public function perfil(Request $req) {
-        
+
     }
 
 }
