@@ -30,12 +30,12 @@ class controladorTutor extends Controller {
         if (isset($_REQUEST['buscar'])) {
             $dniAlumno = $req->get('dniAlumno');
             $gt = Conexion::listarGastosTransportes($dniAlumno);
-            
+
             foreach ($gt as $key) {
                 $desplazamiento = $key->desplazamiento;
                 $tipo = $key->tipo;
             }
-            
+
             if ($desplazamiento == 1) {
                 if ($tipo == 1) {
                     $gtp = null;
@@ -54,13 +54,22 @@ class controladorTutor extends Controller {
                 'gtp' => $gtp,
                 'gtc' => $gtc,
             ];
+            return view('tutor/consultarGastosAlumno', $datos);
         }
-        return view('tutor/consultarGastosAlumno', $datos);
-    }
-
-    public function consultarGastoCurso(Request $req) {
-
-        return view('tutor/consultarGastosCurso');
+        if (isset($_REQUEST['revisar'])) {
+            $idGasto = $req->get('idGasto');
+            $id = $req->get('ID');
+            $donde = $req->get('donde');
+            $n_diasC = $req->get('n_diasC');
+            $precio = $req->get('precio');
+            $foto = $req->get('foto');
+            $datos = [
+                'gc' => null,
+                'gtp' => null,
+                'gtc' => null,
+            ];
+            return view('tutor/consultarGastosAlumno', $datos);
+        }
     }
 
     /**

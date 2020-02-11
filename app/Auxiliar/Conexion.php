@@ -352,7 +352,7 @@ class Conexion {
 //            }
 //        }
 //        return $v;
-        
+
         $v = \DB::table('usuarios')
                 ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
                 ->select(
@@ -442,7 +442,7 @@ class Conexion {
                 ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
                 ->where('usuarios_roles.rol_id', 3)
                 ->select(
-                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellido'
+                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos'
                 )
                 ->get();
         return $v;
@@ -493,8 +493,6 @@ class Conexion {
                 ->paginate(4);
         return $v;
     }
-
-    
 
     /**
      * Método para obtener todas las practicas sin paginacion
@@ -881,6 +879,7 @@ class Conexion {
                   </div>';
         }
     }
+
     /**
      * Método para obtener los gastos de comida de un alumno determinado con paginacion de 4
      * @param type $dni
@@ -894,11 +893,12 @@ class Conexion {
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
                 ->join('comidas', 'comidas.id', '=', 'gastos.comidas_id')
                 ->select(
-                        'comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto'
+                         'gastos.id AS idGasto','comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto'
                 )
                 ->paginate(4);
         return $v;
     }
+
     /**
      * Método para obtener los datos de transporte de un alumno determinado con paginacion de 4
      * @param type $dni
@@ -910,13 +910,14 @@ class Conexion {
                 ->where('usuarios.dni', $dni)
                 ->where('gastos.tipo', 1)
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
-                ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')     
+                ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')
                 ->select(
-                        'gastos.desplazamiento AS desplazamiento','transportes.tipo AS tipo','transportes.donde AS donde'
+                         'gastos.id AS idGasto','gastos.desplazamiento AS desplazamiento', 'transportes.id AS idTransporte', 'transportes.tipo AS tipo', 'transportes.donde AS donde'
                 )
                 ->paginate(4);
         return $v;
     }
+
     /**
      * Método para obtener los gastos de transporte colectivo de un alumno determinado con paginacion de 4
      * @param type $dni
@@ -929,15 +930,15 @@ class Conexion {
                 ->where('gastos.tipo', 1)
                 ->where('gastos.desplazamiento', 1)
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
-                ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')                
+                ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')
                 ->join('colectivos', 'transportes.id', '=', 'colectivos.transportes_id')
                 ->select(
-                        'transportes.donde AS donde','colectivos.id AS idColectivos',
-                        'colectivos.n_dias AS n_diasC', 'colectivos.foto AS foto', 'colectivos.importe AS precio'
+                         'transportes.id AS idTransporte','transportes.donde AS donde', 'colectivos.id AS idColectivos', 'colectivos.n_dias AS n_diasC', 'colectivos.foto AS foto', 'colectivos.importe AS precio'
                 )
                 ->paginate(4);
         return $v;
     }
+
     /**
      * Método para obtener los gastos de transporte de un alumno determinado con paginacion de 4
      * @param type $dni
@@ -951,14 +952,180 @@ class Conexion {
                 ->where('gastos.tipo', 1)
                 ->where('gastos.desplazamiento', 1)
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
-                ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')  
+                ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')
                 ->join('propios', 'transportes.id', '=', 'propios.transportes_id')
                 ->select(
-                        'transportes.donde AS donde','propios.id AS idPropios',
-                        'propios.n_dias AS n_diasP', 'propios.kms AS kms', 'propios.precio AS precio'
+                        'transportes.id AS idTransporte','transportes.donde AS donde', 'propios.id AS idPropios', 'propios.n_dias AS n_diasP', 'propios.kms AS kms', 'propios.precio AS precio'
                 )
                 ->paginate(4);
         return $v;
+    }
+
+    /**
+     * Método para los gastos de comida del alumnno
+     * @param type $id
+     * @param type $fecha
+     * @param type $importe
+     * @param type $foto
+     */
+    static function ModificarGastoComida($id, $fecha, $importe, $foto) {
+        try {
+            $p = comida::where('id', $id)
+                    ->update([
+                'fecha' => $fecha,
+                'importe' => $importe,
+                'foto' => $foto,
+            ]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
+     * Método para borrar los gastos de comida del alumno
+     * @param type $id
+     */
+    static function borrarGastoComida($id) {
+        try {
+            comida::where('id', $id)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
+     * Método para borrar los gastos de transporte colectivo del alumno
+     * @param type $id
+     */
+    static function borrarGastoTransporteColectivo($id) {
+        try {
+            colectivo::where('id', $id)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
+     * Método para modificar los gastos de transporte colectivo del alumno
+     * @param type $id
+     * @param type $donde
+     * @param type $n_diasP
+     * @param type $precio
+     * @param type $foto
+     */
+    static function ModificarGastoTransporteColectivo($id, $n_diasC, $precio, $foto) {
+        try {
+            $p = colectivo::where('id', $id)
+                    ->update([
+                'n_dias' => $n_diasC,
+                'foto' => $foto,
+                'importe' => $precio,
+            ]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
+     * Método para borrar los gastos de transporte propio del alumno
+     * @param type $id
+     */
+    static function borrarGastoTransportePropio($id) {
+        try {
+            propio::where('id', $id)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
+     * Método para modificar los gastos de transporte propio del alumno
+     * @param type $id
+     * @param type $donde
+     * @param type $n_diasP
+     * @param type $precio
+     * @param type $kms
+     */
+    static function ModificarGastoTransportePropio($id, $n_diasP, $precio, $kms) {
+        try {
+            $p = propio::where('id', $id)
+                    ->update([
+                'n_dias' => $n_diasP,
+                'kms' => $kms,
+                'precio' => $precio,
+            ]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
     }
 
 }

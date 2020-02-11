@@ -109,16 +109,33 @@ Route::get('bienvenidaAl', function () {
     return view('alumno/bienvenidaAl');
 });
 Route::get('crearGastoComida', function () {
+
     return view('alumno/crearGastoComida');
 });
 Route::get('crearGastoTransporte', function () {
     return view('alumno/crearGastoTransporte');
 });
 Route::get('gestionarGastosComida', function () {
-    return view('alumno/gestionarGastosComida');
+    $n = session()->get('usu');
+    foreach ($n as $u) {
+        $dniAlumno = $u['dni'];
+    }
+    $gastosAlumno = Conexion::listarGastosComidasPagination($dniAlumno);
+    return view('alumno/gestionarGastosComida', ['gastosAlumno' => $gastosAlumno]);
 });
 Route::get('gestionarGastosTransporte', function () {
-    return view('alumno/gestionarGastosTransporte');
+    $n = session()->get('usu');
+    foreach ($n as $u) {
+        $dniAlumno = $u['dni'];
+    }
+    $gt = Conexion::listarGastosTransportes($dniAlumno);
+
+    foreach ($gt as $key1) {
+        $tipo = $key1->tipo;
+    }
+    $datos = ['tipo' => $tipo,
+        'dniAlumno' => $dniAlumno];
+    return view('alumno/gestionarGastosTransporte', $datos);
 });
 Route::get('perfilAlumno', function () {
     return view('perfilAlumno');

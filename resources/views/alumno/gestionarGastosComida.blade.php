@@ -35,7 +35,6 @@ Gestionar gastos comida
                     </caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th>ID</th>
                             <th>Importe</th>
                             <th>Fecha</th>
                             <th>Foto</th>
@@ -43,26 +42,26 @@ Gestionar gastos comida
                             <th>Eliminar</th>
                         </tr>
                     </thead>
-
                     <tbody>
-
                         <?php
-                        foreach ($gastosAlumno as $value) {
+                        foreach ($gastosAlumno as $key) {
                             ?>
 
                         <form name="form" action="gestionarGastosComida" method="POST">
                             {{ csrf_field() }}
                             <tr>
-                                <td><input type="text" name ="idGasto" value='' readonly></td>
-                                <td><input type="text" name ="importeGasto" value=''></td>
-                                <td><input type="number" name ="fechaGasto" value="0" min="0"></td>
+                                <td>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value='<?php echo $key->idGasto; ?>' readonly>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->id; ?>' readonly>
+                                    <input type="text" class="form-control form-control-sm form-control-md" name ="importe" value='<?php echo $key->importe; ?>'>
+                                </td>
+                                <td><input type="number" class="form-control form-control-sm form-control-md"  name ="fecha" value="0" min="0" value="<?php echo $key->fecha; ?>"/></td>
                                 <td>
                                     <?php
-                                    echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($value->getFoto()) . '"/>';
+                                    echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>';
                                     ?>
-                                    <input type="file" class="form-control" id="image" name="image">
+                                    <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
-
                                 <td><button type="submit" id="editar" class="btn" name="editar" /></td>
                                 <td><button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
                             </tr>
