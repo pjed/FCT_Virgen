@@ -75,6 +75,9 @@ Route::get('bienvenidaAd', function () {
 Route::get('extraerDocA', function () {
     return view('admin/extraerDocA');
 });
+Route::get('gestionarCursos', function () {
+    return view('admin/gestionarCursos');
+});
 Route::get('gestionarUsuarios', function () {
     return view('admin/gestionarUsuarios');
 });
@@ -94,6 +97,8 @@ Route::get('perfilAdmin', function () {
     return view('perfilAdmin');
 });
 Route::post('perfilAd', 'controladorAdmin@perfil');
+
+Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');
 
 Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');
 
