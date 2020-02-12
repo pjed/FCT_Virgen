@@ -44,14 +44,15 @@
     background-color: transparent;
     border: none;
 }
-td{
-    min-width: 5px;
+.sel{
+    max-width: 150px;
 }
 /*Movil site vertical*/
 @media only screen and (max-width:480px){
     main{
         /*margin-top: 7rem;*/     
     }
+    /*iconos*/
     #confirmar,#buscar,#editar,#eliminar,#aniadir, #perfil,  #cerrarSesion{    
         width: 24px;
         background-size: 24px;
@@ -63,10 +64,11 @@ td{
     main{
         /*margin-top: 7rem;*/     
     }
+    /*iconos*/
     #confirmar,#buscar,#editar,#eliminar,#aniadir, #perfil,  #cerrarSesion{    
-        width: 64px;
-        background-size: 64px;
-        height: 64px;
+        width: 24px;
+        background-size: 24px;
+        height: 24px;
     }
 }
 /*Pantalla de escritorio WebSite */
@@ -75,9 +77,17 @@ td{
         /*margin-top: 10rem;*/  
          min-height: 26rem;
     }
+    /*tablas*/
+/*    #colectivo,#propio{
+        max-width: 750px;
+    }
+    #comida{
+        max-width: 700px;
+    }*/
+    /*iconos*/
     #confirmar,#buscar,#editar,#eliminar, #perfil,#aniadir,  #cerrarSesion{    
-        width: 64px;
-        background-size: 64px;
-        height: 64px;
+        width: 34px;
+        background-size: 34px;
+        height: 34px;
     }
 }

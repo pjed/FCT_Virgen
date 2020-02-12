@@ -128,7 +128,7 @@ Gestionar  Practicas
 <div class="row">
     <div class="col-sm col-md">
         <div class="table-responsive ">
-            <table class="table table-striped  table-hover table-bordered">
+            <table class="table  table-sm  table-striped  table-hover table-bordered">
                 <thead class="thead-dark">
                     <tr>       
                         <th>Nombre_Empresa</th>                      
@@ -139,6 +139,7 @@ Gestionar  Practicas
                         <th>Apto</th> 
                         <th>Fecha inicio</th>
                         <th>Fecha fin</th>
+                        <th>Recibí</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -149,7 +150,7 @@ Gestionar  Practicas
                         {{ csrf_field() }}
                         <tr>
                             <td>
-                                <select name="idEmpresa">
+                                <select class="sel" name="idEmpresa">
                                     <?php
                                     foreach ($l1 as $k1) {
                                         ?>
@@ -160,7 +161,7 @@ Gestionar  Practicas
                                 </select>
                             </td>
                             <td>
-                                <select name="dniAlumno">                                    
+                                <select class="sel" name="dniAlumno">                                    
                                     <?php
                                     foreach ($l2 as $k2) {
                                         ?>                                    
@@ -189,28 +190,12 @@ Gestionar  Practicas
                             <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" <?php if ($key->apto == 1) { ?>checked<?php } ?>/></td>
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>"/></td>
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaFin" value="<?php echo $key->fechaFin; ?>"/></td>
+                            <td>
+                                <input type="submit" id="recibiFCT" class="btn btn-primary btn-sm" name="recibiFCT" value="FCT"/>
+                                <input type="submit" id="recibiFPDUAL" class="btn btn-primary btn-sm" name="recibiFPDUAL" value="FP DUAL"/>
+                            </td>
                             <td><button type="submit" id="editar" class="btn btn-sm" name="editar"/></td>
                             <td><button type="submit" id="eliminar" class="btn btn-sm" name="eliminar"/></td>
-                            <td>
-                                <label>
-                                    Recibí (PDF):
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            <input type="submit" id="recibiFCT" class="btn btn-primary" name="recibiFCT" value="Anexo V Recibí FCT"/>
-                                        </div>
-                                        <div class="col-sm">
-                                            <a href="http://www.educa.jccm.es/es/fpclm/centros-formacion-profesional/formacion-centros-trabajo-proyecto.ficheros/100158-anexo5_recibi.doc">FCT</a>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            <input type="submit" id="recibiFPDUAL" class="btn btn-primary" name="recibiFPDUAL" value="Anexo XV Recibí FP DUAL"/>
-                                        </div>
-                                        <div class="col-sm">
-                                            <a href="http://www.educa.jccm.es/es/fpclm/fp-dual/proyectos-formacion-profesional-dual-curso-2019-2020.ficheros/317740-Anexo%20XV%20Recib%C3%AD%20del%20alumnado.docx">FP DUAL</a>
-                                        </div>
-                                </label>
-                            </td>
                         </tr>
                     </form>
                     <?php

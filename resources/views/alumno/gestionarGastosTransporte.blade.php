@@ -31,13 +31,10 @@ Gestionar gastos transporte
     @if ($tipo == 1)
 <?php $gastosAlumno = Conexion::listarGastosTransportesColectivosPagination($dniAlumno); ?>
     <!-- Tabla de gastos transporte colectivo del usuario -->
-    <div class="row">
-        <div class="col-md-12">
+    <div id="colectivo" class="row justify-content-center">
+        <div class="col-sm col-md-8">
             <div class="table-responsive">
-                <table class="table table-striped table-hover table-bordered illo">
-                    <caption class="text-center blanco">
-                        Tabla de gastos de transporte colectivo
-                    </caption>
+                <table class="table table-striped table-hover table-bordered">
                     <thead class="thead-dark">
                         <tr>
                             <th>Donde es</th>
@@ -61,7 +58,7 @@ Gestionar gastos transporte
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="n_diasC" value="<?php echo $key->n_diasC; ?>"></td>
                                 <td>
-    <?php echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>'; ?>
+                                    <?php echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>'; ?>
                                     <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'></td>
@@ -84,13 +81,10 @@ Gestionar gastos transporte
 @else
 <?php $gastosAlumno = Conexion::listarGastosTransportesPropiosPagination($dniAlumno); ?>
 <!-- Tabla de gastos transporte propio del usuario -->
-<div class="row">
+<div id="propio" class="row">
     <div class="col-md-12">
         <div class="table-responsive">
-            <table class="table table-striped table-hover table-bordered illo">
-                <caption class="text-center blanco">
-                    Tabla de gastos de transporte propio
-                </caption>
+            <table class="table table-striped table-hover table-bordered">
                 <thead class="thead-dark">
                     <tr>
                         <th>Donde es</th>
@@ -115,7 +109,7 @@ Gestionar gastos transporte
                             <td><input type="text" class="form-control form-control-sm form-control-md" name ="kms" value="<?php echo $key->kms; ?>"></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'></td>
                             <td><button type="submit" id="editar" class="btn" name="editarP" /></td>
-                            <td><button type="submit" id="eliminar" class="btn" name="eliminarP" /></td>
+                                <td><button type="submit" id="eliminar" class="btn" name="eliminarP" /></td>
                         </tr>
                     </form>
                     <?php

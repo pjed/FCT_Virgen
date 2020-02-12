@@ -46,15 +46,15 @@ Consultar Gastos Alumnos
                     ?>
                 </select>
             </label>
-            <button type="submit" id="buscar" class=" btn-sm btn-sm btn-primary" name="buscar"></button>
+            <button type="submit" id="buscar" class=" btn-sm-sm btn-sm-sm btn-sm-primary" name="buscar"></button>
         </form>
     </div>
 </div>
 @if ($gc !=null) 
 <!-- Gestionar Gastos Comida -->
-<h2 class="text-center">Consultar Gastos Comida</h2>
-<div class="row">
-    <div class="col-sm col-md">
+<div id="comida" class="row justify-content-center">
+    <div class="col-sm-8 col-md-8">
+        <h2 class="text-center">Consultar Gastos Comida</h2>
         <div class="table-responsive ">
             <table class="table table-striped  table-hover table-bordered">
                 <thead class="thead-dark">
@@ -74,16 +74,17 @@ Consultar Gastos Alumnos
                         <tr>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value='<?php echo $key->idGasto; ?>' readonly>
-                                <input type="text" class="form-control form-control-sm form-control-md" name="fecha" value="<?php echo $key->fecha; ?>" readonly/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="fecha" value="<?php echo $key->fecha; ?>"/>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->id; ?>" readonly/>
                             </td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="importe" value="<?php echo $key->importe; ?>" readonly/></td>
+                            <td><input type="text" class="form-control form-control-sm" name="importe" value="<?php echo $key->importe; ?>"/></td>
                             <td>
                                 <?php
                                 echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>';
                                 ?>
                             </td>
-                            <td><input type="submit" id="revisar" class=" btn-sm btn-primary" name="revisar" value="Revisar" /></td>
+                            <td><button type="submit" id="editar" class="btn-sm" name="editar"></button></td>
+                            <td><button type="submit" id="eliminar" class="btn-sm" name="eliminar"></button></td> 
                         </tr>
                     </form>
                     <?php
@@ -93,12 +94,17 @@ Consultar Gastos Alumnos
             </table>
         </div>
     </div>
-</div>  
+</div> 
+<div class="row justify-content-center">
+    <div class="col-sm col-md col-lg">
+        {{ $gc->links()}}
+    </div>
+</div>
 @endif
 
 @if ($gtc !=null) 
 <!-- Gestionar Gastos Transporte  Colectivo-->
-<div id="colectivo" class="row">
+<div id="colectivo" class="row justify-content-center">
     <div class="col-sm col-md">
         <h2 class="text-center">Consultar Gastos Transporte Colectivo</h2>
         <div class="table-responsive ">
@@ -121,17 +127,18 @@ Consultar Gastos Alumnos
                         <tr>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>' readonly>
-                                <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>" readonly/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>"/>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idColectivos; ?>" readonly/>
                             </td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="n_diasC" value="<?php echo $key->n_diasC; ?>" readonly/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="precio" value="<?php echo $key->precio; ?>" readonly/></td>
+                            <td><input type="number" class="form-control form-control-sm" name="n_diasC" value="<?php echo $key->n_diasC; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
                             <td>
                                 <?php
-                                    echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>';
+                                echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>';
                                 ?>
                             </td>
-                            <td><input type="submit" id="revisar" class=" btn-sm btn-primary" name="revisar" value="Revisar" /></td>
+                            <td><button type="submit" id="editar" class="btn-sm" name="editarC"></button></td>
+                            <td><button type="submit" id="eliminar" class="btn-sm" name="eliminarC"></button></td>
                         </tr>
                     </form>
                     <?php
@@ -142,15 +149,20 @@ Consultar Gastos Alumnos
         </div>
     </div>
 </div> 
+<div class="row justify-content-center">
+    <div class="col-sm col-md col-lg">
+        {{ $gtc->links()}}
+    </div>
+</div>
 @endif
 
 @if ($gtp !=null) 
 <!-- Gestionar Gastos Transporte  Propio-->
-<div id="propio" class="row">
+<div id="propio" class="row justify-content-center">
     <div class="col-sm col-md">
         <h2 class="text-center">Consultar Gastos Transporte Propio</h2>
         <div class="table-responsive ">
-            <table class="table table-striped  table-hover table-bordered">
+            <table class="table  table-sm  table-striped  table-hover table-bordered">
                 <thead class="thead-dark">
                     <tr>   
                         <th>Donde es</th>
@@ -168,13 +180,14 @@ Consultar Gastos Alumnos
                         <tr>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>' readonly>
-                                <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>" readonly/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>"/>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idPropios; ?>" readonly/>
                             </td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="n_diasP" value="<?php echo $key->n_diasP; ?>" readonly/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="kms" value="<?php echo $key->kms; ?>" readonly/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="precio" value="<?php echo $key->precio; ?>" readonly/></td>
-                            <td><input type="submit" id="revisar" class=" btn-sm btn-primary" name="revisar" value="Revisar" /></td>
+                            <td><input type="number" class="form-control form-control-sm" name="n_diasP" value="<?php echo $key->n_diasP; ?>"/></td>
+                            <td><input type="number" class="form-control form-control-sm" name="kms" value="<?php echo $key->kms; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
+                            <td><button type="submit" id="editar" class="btn-sm" name="editarP"></button></td>
+                            <td><button type="submit" id="eliminar" class="btn-sm" name="eliminarP"></button></td>
                         </tr>
                     </form>
                     <?php
@@ -185,5 +198,10 @@ Consultar Gastos Alumnos
         </div>
     </div>
 </div> 
+<div class="row justify-content-center">
+    <div class="col-sm col-md col-lg">
+        {{ $gtp->links()}}
+    </div>
+</div>
 @endif
 @endsection

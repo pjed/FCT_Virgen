@@ -26,13 +26,10 @@ Gestionar gastos comida
     </div>
 
     <!-- Tabla de gastos del usuario -->
-    <div class="row">
-        <div class="col-md-12">
+    <div id="comida" class="row justify-content-center">
+        <div class="col-sm-8 col-md-8">
             <div class="table-responsive">
                 <table class="table table-striped table-hover table-bordered illo">
-                    <caption class="text-center blanco">
-                        Tabla de gastos de comida
-                    </caption>
                     <thead class="thead-dark">
                         <tr>
                             <th>Importe</th>
