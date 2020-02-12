@@ -38,9 +38,6 @@ Gestionar gastos comida
                             <th>Importe</th>
                             <th>Fecha</th>
                             <th>Foto</th>
-                            <th>Archivo</th>
-                            <th>Modificar</th>
-                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,8 +58,8 @@ Gestionar gastos comida
                                     <?php
                                     echo '<img name="ticketGasto" class="foto_small" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>';
                                     ?>
+                                    <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
-                                <td><input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto"></td>
                                 <td><button type="submit" id="editar" class="btn" name="editar" /></td>
                                 <td><button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
                             </tr>

@@ -69,8 +69,6 @@ Gestionar Cursos
                             <th>AnioAcademico</th>
                             <th>Familia</th>
                             <th>Horas</th>
-                            <th>Modificar</th>
-                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>

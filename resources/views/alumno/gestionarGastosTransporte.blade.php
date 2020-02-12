@@ -1,4 +1,5 @@
 <?php
+
 use App\Auxiliar\Conexion;
 ?>
 @extends('maestra.maestraAlumno')
@@ -28,7 +29,7 @@ Gestionar gastos transporte
         </div>
     </div>
     @if ($tipo == 1)
-    <?php $gastosAlumno = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);?>
+<?php $gastosAlumno = Conexion::listarGastosTransportesColectivosPagination($dniAlumno); ?>
     <!-- Tabla de gastos transporte colectivo del usuario -->
     <div class="row">
         <div class="col-md-12">
@@ -43,8 +44,6 @@ Gestionar gastos transporte
                             <th>Nº dias</th>
                             <th>Foto</th>
                             <th>Importe</th>
-                            <th>Modificar</th>
-                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,7 +61,7 @@ Gestionar gastos transporte
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="n_diasC" value="<?php echo $key->n_diasC; ?>"></td>
                                 <td>
-                                    <?php echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>';?>
+    <?php echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>'; ?>
                                     <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'></td>
@@ -83,7 +82,7 @@ Gestionar gastos transporte
     </div>
 </div>
 @else
-<?php $gastosAlumno = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);?>
+<?php $gastosAlumno = Conexion::listarGastosTransportesPropiosPagination($dniAlumno); ?>
 <!-- Tabla de gastos transporte propio del usuario -->
 <div class="row">
     <div class="col-md-12">
@@ -98,8 +97,6 @@ Gestionar gastos transporte
                         <th>Nº dias</th>
                         <th>KMS</th>
                         <th>Importe</th>
-                        <th>Modificar</th>
-                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -111,7 +108,7 @@ Gestionar gastos transporte
                         <tr>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>' readonly>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->idPropios; ?>' readonly>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->idPropios; ?>' readonly>
                                 <input type="text" class="form-control form-control-sm form-control-md" name ="donde" value='<?php echo $key->donde; ?>' readonly>
                             </td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name ="n_diasP" value="<?php echo $key->n_diasP; ?>"></td>

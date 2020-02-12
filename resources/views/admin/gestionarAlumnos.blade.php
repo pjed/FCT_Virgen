@@ -45,8 +45,6 @@ Gestionar alumnos
                                 <th>Email</th>
                                 <th>Teléfono</th>
                                 <th>Iban</th>
-                                <th>Modificar</th>
-                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
