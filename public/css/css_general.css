@@ -11,7 +11,15 @@ body{
     background-color: transparent;
     border: none;
 }
-
+#info{
+    background-image :url('../images/information.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    background-size: 25px;
+    width: 25px;
+    height: 25px;
+}
 .fotoTicket{
     width: 100px;
     height: 100px;
@@ -21,7 +29,6 @@ body{
     width: 50px;
     height: 50px;
 }
-
 #perfil{
     background-image: url('../images/user.png');
     background-repeat: no-repeat;    
@@ -32,9 +39,6 @@ body{
 .footer{  
     color:white;
 }
-
-
-
 .panel_informativo{
     background-color: lightgray;  
     border-left: 6px solid gray;
@@ -72,9 +76,9 @@ body{
     .titulo_app{
         color: white; font-size: 14pt
     }
-    
+
     main{
-        height: 100vh;
+        min-height: 100vh;
     }
     footer,.footer{
         align-self: center;
@@ -84,9 +88,9 @@ body{
         font-size: 25px;
     }
     #perfil,#cerrarSesion{
-        background-size: 34px;
-        width: 34px;
-        height: 34px;
+        background-size: 15px;
+        width: 15px;
+        height: 15px;
     }
     a,label{
         font-size: 10px;
@@ -114,13 +118,13 @@ body{
         height: 64px;
     }
     main{
-        height: 67vh;
+        min-height: 67vh;
     }
 
     #perfil,#cerrarSesion{
-        background-size: 34px;
-        width: 34px;
-        height: 34px;
+        background-size: 234px;
+        width: 24px;
+        height: 24px;
     }
     #logoInstituto{        
         align-self: center;
