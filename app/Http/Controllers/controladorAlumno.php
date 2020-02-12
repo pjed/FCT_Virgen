@@ -36,7 +36,7 @@ class controladorAlumno extends Controller {
         }
 
         $comidas_id = Conexion::obtenerIdComidaIngresada();
-        $transporte_id = "";
+        $transporte_id = 0;
         $desplazamiento = $req->get('desplazado');
         $tipo = 0;
 
