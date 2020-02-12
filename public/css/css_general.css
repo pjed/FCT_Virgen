@@ -10,8 +10,18 @@ body{
     background-repeat: no-repeat;
     background-color: transparent;
     border: none;
-
 }
+
+.fotoTicket{
+    width: 100px;
+    height: 100px;
+}
+
+.foto_small{
+    width: 50px;
+    height: 50px;
+}
+
 #perfil{
     background-image: url('../images/user.png');
     background-repeat: no-repeat;    
