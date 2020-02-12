@@ -33,7 +33,7 @@ Crear gasto transporte
             <div class="col-md-2">
 
                 <p>Ticket</p>
-                <img src="{{asset ('images/ticket.png')}}" class="logoInstituto"><br><br>
+                <img src="{{asset ('images/ticket.png')}}" class="fotoTicket"><br><br>
                 <p>Hacer foto</p>
                 <input type="file" id="fotoTicket" name="fichero"/><br><br>
 

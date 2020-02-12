@@ -41,22 +41,28 @@ class controladorAlumno extends Controller {
         $tipo = 0;
 
         $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($usuarios_dni);
-        $totalGastoAlumno = $gastosAntiguos + $importe;
+        $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] + $importe;
+        //dd($totalGastoAlumno);
 
         $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($usuarios_dni);
+        $totalGastoCiclo = 0;
         foreach ($totalGastoCicloAntiguo as $a) {
-            $totalGastoCiclo = $a->gasto + $importe;
+            $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
         }
-        //dd($totalGastoCiclo);
-        //$totalGastoCiclo = $totalGastoCicloAntiguo + $importe;
 
-        Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCiclo, $usuarios_dni, $comidas_id, $transporte_id);
+        $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+
+        Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCicloNuevo, $usuarios_dni, $comidas_id, $transporte_id);
+
+        Conexion::actualizarTotalGastosAlumno($usuarios_dni, $totalGastoAlumno);
+
+        Conexion::actualizarTotalGastosCiclo($usuarios_dni, $totalGastoCicloNuevo);
 
         return view('alumno/crearGastoComida');
     }
 
     public function crearGastoTransporte(Request $req) {
-
+        
     }
 
     public function gestionarGastoComida(Request $req) {
@@ -76,7 +82,7 @@ class controladorAlumno extends Controller {
             $dniAlumno = $u['dni'];
         }
         $gastosAlumno = Conexion::listarGastosComidasPagination($dniAlumno);
-        return view('alumno/gestionarGastosComida', ['gastosAlumno'=> $gastosAlumno]);
+        return view('alumno/gestionarGastosComida', ['gastosAlumno' => $gastosAlumno]);
     }
 
     public function gestionarGastoTransporte(Request $req) {
@@ -109,8 +115,8 @@ class controladorAlumno extends Controller {
         foreach ($gt as $key1) {
             $tipo = $key1->tipo;
         }
-        $datos = ['tipo'=> $tipo,
-            'dniAlumno'=> $dniAlumno];
+        $datos = ['tipo' => $tipo,
+            'dniAlumno' => $dniAlumno];
         return view('alumno/gestionarGastosTransporte', $datos);
     }
 

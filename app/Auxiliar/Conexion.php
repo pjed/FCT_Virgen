@@ -917,8 +917,11 @@ class Conexion {
     }
 
     static function obtenerTotalGastosAlumno($dni) {
-        $gastos = gasto::where('usuarios_dni', $dni)->sum('total_gasto_alumno');
+        //$gastos = gasto::where('usuarios_dni', $dni)->get('total_gasto_alumno');
+        $gastos = gasto::where('usuarios_dni', $dni)->select('total_gasto_alumno')->first();
+        //$gastos2 = gasto::where('usuarios_dni', $dni)->sum('total_gasto_alumno');
 
+        //dd($gastos);
         return $gastos;
     }
 
@@ -954,12 +957,23 @@ class Conexion {
     static function obtenerGastosCicloAlumno($dni) {
         //$totalGastosCiclo = 0;
 
-        $sql = "SELECT SUM(gastos.total_gasto_alumno) AS gasto from gastos where gastos.usuarios_dni In(select matriculados.usuarios_dni AS usuario from matriculados where cursos_id_curso = (select matriculados.cursos_id_curso AS cursos_id_curso from matriculados where usuarios_dni = '" . $dni . "') )";
+        $sql = "SELECT gastos.usuarios_dni AS usuarios_dni, gastos.total_gasto_alumno AS total_gasto_alumno from gastos where gastos.usuarios_dni In( select matriculados.usuarios_dni AS usuario from matriculados where cursos_id_curso = ( select matriculados.cursos_id_curso AS cursos_id_curso from matriculados where usuarios_dni = '" . $dni . "') ) group by gastos.usuarios_dni, gastos.total_gasto_alumno ";
 
         $totalGastosCiclo = \DB::select($sql);
 
-        //dd($totalGastosCiclo);
         return $totalGastosCiclo;
+    }
+
+    static function actualizarTotalGastosAlumno($dni, $totalGastoAlumno) {
+        gasto::where('usuarios_dni', $dni)->update([
+            'total_gasto_alumno' => $totalGastoAlumno
+        ]);
+    }
+
+    static function actualizarTotalGastosCiclo($dni, $totalGastoCiclo) {
+
+        $sql = "UPDATE gastos SET total_gasto_ciclo = '" . $totalGastoCiclo . "' where gastos.usuarios_dni In(select matriculados.usuarios_dni AS usuario from matriculados where cursos_id_curso = (select 					matriculados.cursos_id_curso AS cursos_id_curso from matriculados where usuarios_dni = '" . $dni . "') )";
+        \DB::update($sql);
     }
 
     /**
@@ -1223,9 +1237,8 @@ class Conexion {
                         'tutores.idtutores AS idtutores', ' AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono'
                 )
                 ->select(
-                        'cursos.id_curso AS id', 'cursos.descripcion AS descripcion', 'cursos.ano_academico AS anioAcademico', 'cursos.familia AS familia', 'cursos.horas AS horas' ,
-                        'tutores.usuarios_dni AS tutorDni', 'usuarios.nombre AS tutorNombre', 'usuarios.apellidos AS tutorApellidos'
-                        )
+                        'cursos.id_curso AS id', 'cursos.descripcion AS descripcion', 'cursos.ano_academico AS anioAcademico', 'cursos.familia AS familia', 'cursos.horas AS horas', 'tutores.usuarios_dni AS tutorDni', 'usuarios.nombre AS tutorNombre', 'usuarios.apellidos AS tutorApellidos'
+                )
                 ->get();
         return $v;
     }
