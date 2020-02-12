@@ -46,6 +46,117 @@ class controladorAdmin extends Controller {
         return view('admin/gestionarCursos', ['l1' => $l]);
     }
 
+    /**
+     * metodo para recoger los datos que se necesitan mostrar en la vista consultar gastos
+     * @return type
+     */
+    public function enviarConsultarGastoAlumno() {
+        $dniAlumno = session()->get('dniAlumno');
+        $desplazamiento = session()->get('desplazamiento');
+        $tipo = session()->get('tipo');
+        if ($desplazamiento == 1) {
+            if ($tipo == 1) {
+                $gtp = null;
+                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+            } else {
+                $gtc = null;
+                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+            }
+        } else {
+            $gtc = null;
+            $gtp = null;
+        }
+        $gc = Conexion::listarGastosComidasPagination($dniAlumno);
+        $datos = [
+            'l1' => null,
+            'l2' => null,
+            'gc' => $gc,
+            'gtp' => $gtp,
+            'gtc' => $gtc,
+        ];
+        return $datos;
+    }
+
+    public function consultarGastoAlumno(Request $req) {
+        //saca los alumnos de un curso
+        if (isset($_REQUEST['buscar'])) {
+
+//            si ese usuario no tiene ningun gasto que salga algo
+
+            $ciclo = $req->get('ciclo');
+            $l2 = Conexion::listarAlumnosCurso($ciclo);
+            $datos = [
+                'l1' => null,
+                'l2' => $l2,
+                'gc' => null,
+                'gtp' => null,
+                'gtc' => null,
+            ];
+            return view('admin/consultarGastos', $datos);
+        }
+        //saca los gastos de un alumno
+        if (isset($_REQUEST['buscar1'])) {
+
+//            si ese usuario no tiene ningun gasto que salga algo
+
+            $dniAlumno = $req->get('dniAlumno');
+            $gt = Conexion::listarGastosTransportes($dniAlumno);
+
+            foreach ($gt as $key) {
+                $desplazamiento = $key->desplazamiento;
+                $tipo = $key->tipo;
+            }
+
+            session()->put('desplazamiento', $desplazamiento);
+            session()->put('tipo', $tipo);
+            session()->put('dniAlumno', $dniAlumno);
+        }
+//            editar y borrar comida
+        if (isset($_REQUEST['editar'])) {
+            $id = $req->get('ID');
+            $idGasto = $req->get('idGasto');
+            $fecha = $req->get('fecha');
+            $importe = $req->get('importe');
+            $foto = $req->get('foto');
+            Conexion::ModificarGastoComida($id, $fecha, $importe, $foto);
+        }
+        if (isset($_REQUEST['eliminar'])) {
+            $id = $req->get('ID');
+            $idGasto = $req->get('idGasto');
+            Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
+        }
+//            editar y borrar transporte propio
+        if (isset($_REQUEST['editarP'])) {
+            $id = $req->get('ID');
+            $idTransporte = $req->get('idTransporte');
+            $n_diasP = $req->get('n_diasP');
+            $kms = $req->get('kms');
+            $precio = $req->get('precio');
+            Conexion::ModificarGastoTransportePropio($id, $n_diasP, $precio, $kms);
+        }
+        if (isset($_REQUEST['eliminarP'])) {
+            $id = $req->get('ID');
+            $idTransporte = $req->get('idTransporte');
+            Conexion::borrarGastoTransportePropio($id, $idTransporte); //hay que mirarlo
+        }
+//            editar y borrar transporte colectivo
+        if (isset($_REQUEST['editarC'])) {
+            $id = $req->get('ID');
+            $idTransporte = $req->get('idTransporte');
+            $n_diasC = $req->get('n_diasC');
+            $precio = $req->get('precio');
+            $foto = $req->get('foto');
+            Conexion::ModificarGastoTransporteColectivo($id, $n_diasP, $precio, $foto);
+        }
+        if (isset($_REQUEST['eliminarC'])) {
+            $id = $req->get('ID');
+            $idTransporte = $req->get('idTransporte');
+            Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
+        }
+        $datos = $this->enviarConsultarGastoAlumno();
+        return view('admin/consultarGastos', $datos);
+    }
+
     public function gestionarUsuarios(Request $req) {
 
         if (isset($_REQUEST['editar'])) {

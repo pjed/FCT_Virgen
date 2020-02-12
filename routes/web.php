@@ -79,6 +79,17 @@ Route::get('extraerDocA', function () {
             ];
     return view('admin/extraerDocA',$datos );
 });
+Route::get('consultarGastos', function () {
+    $l1 = Conexion::listaCursos();
+    $datos = [
+        'l1' =>$l1,
+        'l2' => null,
+        'gc' => null,
+        'gtp' => null,
+        'gtc' => null,
+    ];
+    return view('admin/consultarGastos', $datos);
+});
 Route::get('gestionarCursos', function () {
     $l = Conexion::listaCursosPagination();
     return view('admin/gestionarCursos',['l1' => $l]);
@@ -102,6 +113,7 @@ Route::get('perfilAd', function () {
     return view('admin/perfilAdmin');
 });
 Route::post('perfilAd', 'controladorAdmin@perfil');
+Route::post('consultarGastos', 'controladorAdmin@consultarGastoAlumno');
 
 Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');
 

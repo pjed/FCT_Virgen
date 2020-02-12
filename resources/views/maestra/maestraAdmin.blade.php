@@ -49,6 +49,9 @@ $rol1 = session()->get('rol1');
                             <li class="nav-item">
                                 <a class="nav-link" href="gestionarCursos">Gestionar Cursos</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="consultarGastos">Consultar Gastos</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar Usuarios</a>
                                 <div class="dropdown-menu">
@@ -58,8 +61,17 @@ $rol1 = session()->get('rol1');
                                 </div>
                             </li>
                             @if ($rol1==4)
-                            <li class="nav-item">
-                                <a class="nav-link"  href="cambiarRol">Cambiar de rol</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Cambiar de rol</a>
+                                <div class="dropdown-menu">
+                                    <form name="cambiarRol" action="cambiarRol" method="POST">
+                                        {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <input type="submit" class="btn" name="tutor" value="Tutor">
+                                            <input type="submit" class="btn" name="administrador" value="Administrador">
+                                        </div>
+                                    </form>
+                                </div>
                             </li>
                             @endif
                         </ul>

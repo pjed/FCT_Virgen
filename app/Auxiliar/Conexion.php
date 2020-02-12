@@ -426,6 +426,22 @@ class Conexion {
     }
 
     /**
+     * Método para listar todos los alumnos de un curso
+     * @param type $ciclo
+     */
+    static function listarAlumnosCurso($ciclo) {
+        $v = \DB::table('matriculados')
+                ->where('matriculados.cursos_id_curso',$ciclo)
+                ->join('cursos', 'matriculados.cursos_id_curso', '=', 'cursos.id_curso')
+                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
+                ->select(
+                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban'
+                )
+                ->get();
+        return $v;
+    }
+
+    /**
      * Método para listar alumnos de un tutor determinado
      * @return type lista de alumnos
      */
@@ -920,7 +936,6 @@ class Conexion {
         //$gastos = gasto::where('usuarios_dni', $dni)->get('total_gasto_alumno');
         $gastos = gasto::where('usuarios_dni', $dni)->select('total_gasto_alumno')->first();
         //$gastos2 = gasto::where('usuarios_dni', $dni)->sum('total_gasto_alumno');
-
         //dd($gastos);
         return $gastos;
     }
