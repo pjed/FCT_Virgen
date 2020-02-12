@@ -57,7 +57,7 @@ $rol1 = session()->get('rol1');
                                     <a class="dropdown-item" href="gestionarUsuarios">Usuarios</a>
                                 </div>
                             </li>
-                             @if ($rol1==4)
+                            @if ($rol1==4)
                             <li class="nav-item">
                                 <a class="nav-link"  href="cambiarRol">Cambiar de rol</a>
                             </li>
@@ -113,12 +113,36 @@ $rol1 = session()->get('rol1');
                     </div>
                 </div>
 
-                <div class="col-3 container text-center">
+                <div class="col-2 container text-center">
                     <div class="row h-100 justify-content-center align-items-center">
                         <p>2 - DAW <br>2019 - 2020</p>
                     </div>
                 </div>
-                </div>
+                <div class="col-1 container">
+                    <div class="row h-100 justify-content-center align-items-center">
+                        <button type="button" class="btn" id="info"  data-toggle="modal" data-target="#exampleModal">
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <h2>Derechos de los iconos</h2>
+                                            <h3>Añadir:</h3><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3>User:</h3><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3>Delete: </h3><a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3>Confirm:</h3><a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3>Search:</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3>Edit:</h3><a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3>Logout: </h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                                            <h3>Ticket:</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3>Informacion</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>                                     
             </nav>
         </footer>
     </body>

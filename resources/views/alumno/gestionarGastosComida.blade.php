@@ -38,8 +38,6 @@ Gestionar gastos comida
                             <th>Importe</th>
                             <th>Fecha</th>
                             <th>Foto</th>
-                            <th>Modificar</th>
-                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,7 +56,7 @@ Gestionar gastos comida
                                 <td><input type="date" class="form-control form-control-sm form-control-md"  name ="fecha" value="<?php echo $key->fecha; ?>"/></td>
                                 <td>
                                     <?php
-                                    echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>';
+                                    echo '<img name="ticketGasto" class="foto_small" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>';
                                     ?>
                                     <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>

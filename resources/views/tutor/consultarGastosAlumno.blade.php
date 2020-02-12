@@ -74,14 +74,14 @@ Consultar Gastos Alumnos
                         <tr>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value='<?php echo $key->idGasto; ?>' readonly>
-                                    <input type="text" class="form-control form-control-sm form-control-md" name="fecha" value="<?php echo $key->fecha; ?>" readonly/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="fecha" value="<?php echo $key->fecha; ?>" readonly/>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->id; ?>" readonly/>
                             </td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="importe" value="<?php echo $key->importe; ?>" readonly/></td>
                             <td>
                                 <?php
-                                    echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($value->getFoto()) . '"/>';
-                                    ?>
+                                echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>';
+                                ?>
                             </td>
                             <td><input type="submit" id="revisar" class=" btn-sm btn-primary" name="revisar" value="Revisar" /></td>
                         </tr>
@@ -121,15 +121,15 @@ Consultar Gastos Alumnos
                         <tr>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>' readonly>
-                                    <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>" readonly/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>" readonly/>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idColectivos; ?>" readonly/>
                             </td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="n_diasC" value="<?php echo $key->n_diasC; ?>" readonly/></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="precio" value="<?php echo $key->precio; ?>" readonly/></td>
                             <td>
                                 <?php
-                                    echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($value->getFoto()) . '"/>';
-                                    ?>
+                                    echo '<img name="ticketGasto" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>';
+                                ?>
                             </td>
                             <td><input type="submit" id="revisar" class=" btn-sm btn-primary" name="revisar" value="Revisar" /></td>
                         </tr>
@@ -168,7 +168,7 @@ Consultar Gastos Alumnos
                         <tr>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>' readonly>
-                                    <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>" readonly/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>" readonly/>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idPropios; ?>" readonly/>
                             </td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="n_diasP" value="<?php echo $key->n_diasP; ?>" readonly/></td>

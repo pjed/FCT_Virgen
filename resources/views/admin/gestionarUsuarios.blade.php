@@ -48,8 +48,6 @@ $listaUsuarios = Conexion::listarUsuarios();
                             <th>Teléfono</th>
                             <th>Móvil</th>
                             <th>Rol</th>
-                            <th>Modificar</th>
-                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>

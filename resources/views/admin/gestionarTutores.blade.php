@@ -47,8 +47,6 @@ $listaCiclos = Conexion::listarCiclos();
                             <th>Email</th>
                             <th>Teléfono</th>
                             <th>Ciclo</th>
-                            <th>Modificar</th>
-                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
