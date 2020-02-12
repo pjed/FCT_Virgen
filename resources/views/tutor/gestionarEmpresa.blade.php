@@ -31,46 +31,66 @@ Gestionar Empresa
 <!-- Añadir Empresa -->
 <div class="row justify-content-center">
     <div class="col-sm-4 col-md-4">
-        <form action="gestionarEmpresa" method="POST">
-            {{ csrf_field() }}
-            <div class="form-group">
-                <label class="text-center" >
-                    CIF de la empresa:
-                    <input type="text" class="form-control form-control-sm" name="CIF" pattern="{9}"/>
-                </label>
+        <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">      
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">                            
+                            <h3>Añadir Empresas</h3>
+                            <form action="gestionarEmpresa" method="POST">
+                                {{ csrf_field() }}
+                                <div class="form-group">
+                                    <label class="text-center" >
+                                        CIF de la empresa:
+                                        <input type="text" class="form-control form-control-sm" name="CIF" pattern="{9}"/>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-center" >
+                                        Nombre de la empresa:
+                                        <input type="text" class="form-control form-control-sm" name="nombreEmpresa"/>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-center" >
+                                        Direccion de la empresa:
+                                        <input type="text" class="form-control form-control-sm" name="direccion" />
+                                    </label>                
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-center" >
+                                        Localidad:
+                                        <input type="text" class="form-control form-control-sm" name="localidad" />
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-center" >
+                                        Horario:
+                                        <input type="text" class="form-control form-control-sm" name="horario"/>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-center" >
+                                        Dni del representante:
+                                        <input type="text" class="form-control form-control-sm" name="dniRepresentante"/>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-center" >
+                                        Nombre del representante:
+                                        <input type="text" class="form-control form-control-sm" name="nombreRepresentante" />
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="text-center" >
-                    Nombre de la empresa:
-                    <input type="text" class="form-control form-control-sm" name="nombreEmpresa"/>
-                </label>
-                <label class="text-center" >
-                    Direccion de la empresa:
-                    <input type="text" class="form-control form-control-sm" name="direccion" />
-                </label>                
-            </div>
-            <div class="form-group">
-                <label class="text-center" >
-                    Localidad:
-                    <input type="text" class="form-control form-control-sm" name="localidad" />
-                </label>
-                <label class="text-center" >
-                    Horario:
-                    <input type="text" class="form-control form-control-sm" name="horario"/>
-                </label>
-            </div>
-            <div class="form-group">
-                <label class="text-center" >
-                    Dni del representante:
-                    <input type="text" class="form-control form-control-sm" name="dniRepresentante"/>
-                </label>
-                <label class="text-center" >
-                    Nombre del representante:
-                    <input type="text" class="form-control form-control-sm" name="nombreRepresentante" />
-                </label>
-                <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
-            </div>
-        </form>
+        </button> 
     </div>
 </div> 
 <!-- Gestionar Empresa -->
