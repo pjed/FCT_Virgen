@@ -56,7 +56,7 @@ Route::get('gestionarPracticas', function () {
 Route::get('ExtraerDocT', function () {
     return view('tutor/extraerDocT');
 });
-Route::get('perfilTutor', function () {
+Route::get('perfilT', function () {
     return view('tutor/perfilTutor');
 });
 
@@ -73,7 +73,11 @@ Route::get('bienvenidaAd', function () {
     return view('admin/bienvenidaAd');
 });
 Route::get('extraerDocA', function () {
-    return view('admin/extraerDocA');
+    $l1 = Conexion::listaCursos();
+    $datos =[
+        'l1' =>$l1
+            ];
+    return view('admin/extraerDocA',$datos );
 });
 Route::get('gestionarCursos', function () {
     $l = Conexion::listaCursosPagination();
@@ -94,8 +98,8 @@ Route::get('gestionarTutores', function () {
 Route::get('importarTutores', function () {
     return view('admin/importarTutores');
 });
-Route::get('perfilAdmin', function () {
-    return view('perfilAdmin');
+Route::get('perfilAd', function () {
+    return view('admin/perfilAdmin');
 });
 Route::post('perfilAd', 'controladorAdmin@perfil');
 
@@ -143,8 +147,8 @@ Route::get('gestionarGastosTransporte', function () {
         'dniAlumno' => $dniAlumno];
     return view('alumno/gestionarGastosTransporte', $datos);
 });
-Route::get('perfilAlumno', function () {
-    return view('perfilAlumno');
+Route::get('perfilAl', function () {
+    return view('alumno/perfilAlumno');
 });
 Route::post('perfilAl', 'controladorAlumno@perfil');
 

@@ -116,6 +116,7 @@ class controladorAlumno extends Controller {
 
     public function perfil(Request $req) {
 
+        return view('alumno/perfilAlumno');
     }
 
 }

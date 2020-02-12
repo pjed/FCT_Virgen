@@ -23,10 +23,10 @@ Gestionar Cursos
             <h2 class="text-center">Gestionar Cursos</h2>
         </div>
     </div>
-    <!-- Añadir Empresa -->
+    <!-- Añadir -curso -->
     <div class="row justify-content-center">
         <div class="col-sm-4 col-md-4">
-            <form action="gestionarEmpresa" method="POST">
+            <form action="gestionarCursos" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label class="text-center" >
@@ -49,7 +49,7 @@ Gestionar Cursos
                     </label>
                     <label class="text-center" >
                         Total de horas:
-                        <input type="text" class="form-control form-control-sm form-control-md" name="horas"/>
+                        <input type="number" class="form-control form-control-sm form-control-md" name="horas"/>
                     </label>
                     <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
                 </div>
