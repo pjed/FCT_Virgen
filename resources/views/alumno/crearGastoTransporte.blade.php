@@ -32,6 +32,50 @@ Crear gasto transporte
 
             <div class="col-md-2">
 
+                <fieldset>
+                    <!--                    <legend>Tipo transporte</legend>-->
+                    <p>Tipo transporte</p>
+                    <div>
+                        <input type="radio" name="tipoT" id="colectivo" value="Colectivo" onclick="handleClick(this);">
+                        <label for="colectivo">Colectivo</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="tipoT" id="propio" value="Propio" onclick="handleClick(this);">
+                        <label for="propio">Propio</label>
+                    </div>
+                </fieldset>
+
+            </div>
+
+        </div>
+
+        <!-- Campos para el gasto de transporte propio -->
+        <div class="row justify-content-center" id="gastoPropio">
+
+            <div class="col-md-2">
+
+                <p>Kilómetros</p>
+                <input type="number" id="kms" name="kms" value="" min="0">
+
+                <p>Número de días</p>
+                <input type="number" id="diasP" name="diasP" value="" min="0">
+
+            </div>  
+
+            <div class="col-md-2">
+
+                <p>Precio</p>
+                <input type="number" id="precioP" name="precioP" value="" min="0">
+
+                
+            </div>
+        </div>
+
+        <!-- Campos para el gasto de transporte colectivo -->
+        <div class="row justify-content-center" id="gastoColectivo"> 
+
+            <div class="col-md-2">
+
                 <p>Ticket</p>
                 <img src="{{asset ('images/ticket.png')}}" class="fotoTicket"><br><br>
                 <p>Hacer foto</p>
