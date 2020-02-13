@@ -67,7 +67,8 @@ Crear gasto transporte
                 <p>Precio</p>
                 <input type="number" id="precioP" name="precioP" value="" min="0">
 
-                
+                <p>Localidad</p>
+                <input type="text" id="locP" name="locP" value="" placeholder="Localidad">
             </div>
         </div>
 
@@ -79,16 +80,18 @@ Crear gasto transporte
                 <p>Ticket</p>
                 <img src="{{asset ('images/ticket.png')}}" class="fotoTicket"><br><br>
                 <p>Hacer foto</p>
-                <input type="file" id="fotoTicket" name="fichero"/><br><br>
+                <input type="file" id="fotoTicket" name="fotoTicket"/><br><br>
+                <p>Número de días</p>
+                <input type="number" id="diasC" name="diasC" value="" min="0">
 
             </div>
 
             <div class="col-md-2">
 
-                <p>Nombre del alumno</p>
-                <input type="text" id="nombreAl" name="nomAlum" placeholder="Nombre" value="" readonly/><br><br>
+                <p>Localidad</p>
+                <input type="text" id="locC" name="locC" value="" placeholder="Localidad"><br><br>
                 <p>Importe total</p>
-                <input type="number" id="importeT" name="importeT" min="0" max="9" step="0.01" value="0"/><br><br>
+                <input type="number" id="importeT" name="importeT" min="0" step="0.01" value="0"/><br><br>
 
             </div>
 

@@ -431,7 +431,7 @@ class Conexion {
      */
     static function listarAlumnosCurso($ciclo) {
         $v = \DB::table('matriculados')
-                ->where('matriculados.cursos_id_curso',$ciclo)
+                ->where('matriculados.cursos_id_curso', $ciclo)
                 ->join('cursos', 'matriculados.cursos_id_curso', '=', 'cursos.id_curso')
                 ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
                 ->select(
@@ -1341,16 +1341,27 @@ class Conexion {
                   </div>';
         }
     }
-    
-    static function insertarTransporteColectivo($foto, $n_dias, $importe, $transportes_id) {
-        
+
+    static function insertarTransporteColectivo($tipo, $donde, $foto, $n_dias, $importe) {
+
         try {
 
+            //insertar el gasto en la tabla transportes
+            $t = new transporte;
+            $t->tipo = $tipo;
+            $t->donde = $donde;
+
+            $t->save();
+
+            $transporte = transporte::all()->last();
+            $idTransporte = $transporte->id;
+
+            //insertar el gasto en la tabla colectivos
             $c = new colectivo;
             $c->foto = $foto;
             $c->n_dias = $n_dias;
             $c->importe = $importe;
-            $c->transportes_id = $transportes_id;
+            $c->transportes_id = $idTransporte;
 
             $c->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1367,11 +1378,51 @@ class Conexion {
                     </button>
                   </div>';
         }
-        
     }
-    
-    static function insertarTransportePropio() {
-        
+
+    static function insertarTransportePropio($tipo, $donde, $kms ,$n_dias, $precio) {
+
+        try {
+
+            //insertar el gasto en la tabla transportes
+            $t = new transporte;
+            $t->tipo = $tipo;
+            $t->donde = $donde;
+
+            $t->save();
+
+            $transporte = transporte::all()->last();
+            $idTransporte = $transporte->id;
+
+            //insertar el gasto en la tabla colectivos
+            $c = new propio;
+            $c->kms = $kms;
+            $c->n_dias = $n_dias;
+            $c->precio = $precio;
+            $c->transportes_id = $idTransporte;
+
+            $c->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function obtenerIdTransporteIngresado() {
+        $transporte = transporte::all()->last();
+        $idTransporte = $transporte->id;
+
+        return $idTransporte;
     }
 
 }
