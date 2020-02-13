@@ -18,7 +18,6 @@ use App\Modal\usuario;
 use App\Modal\usuarios_rol;
 use App\Modal\colectivo;
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
 use App\Mail\DemoEmail;
 use Illuminate\Support\Facades\Mail;
@@ -103,16 +102,44 @@ class controladorGeneral extends Controller {
 
     public function olvidarPwd(Request $req) {
         $email_usuario = $req->get('email');
-        
-        $objDemo = new \stdClass();
-        $objDemo->demo_one = 'Demo One Value';
-        $objDemo->demo_two = 'Demo Two Value';
-        $objDemo->sender = 'SenderUserName';
-        $objDemo->receiver = 'ReceiverUserName';
+        $n = Conexion::existeUsuario_Correo($email_usuario);
 
-        Mail::to($email_usuario)->send(new DemoEmail($objDemo));
-        
-        return view('inicioSesion');
+        $nombre = null;
+        $apellidos = null;
+        $dni = null;
+
+        foreach ($n as $value) {
+            $nombre = $value['nombre'];
+            $apellidos = $value['apellidos'];
+            $dni = $value['dni'];
+        }
+
+        if ($n != null) { //si existe usuario
+            //genera la contraseña
+            $pass = $this->generateRandomString(5);
+            //cifrar contraseña
+            Conexion::RecuperarConstrasenia($dni, $pass);
+
+
+            $objDemo = new \stdClass();
+            $objDemo->demo_one = $email_usuario;
+            $objDemo->demo_two = $pass;
+            $objDemo->sender = 'Servicio de recuperación de contraseñas';
+            $objDemo->receiver = $nombre . ', ' . $apellidos;
+
+            Mail::to($email_usuario)->send(new DemoEmail($objDemo));
+
+            return view('inicioSesion');
+        } else {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error el usuario no existe o es incorrecto.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+
+            return view('olvidarPwd');
+        }
     }
 
     public function cambiarRol(Request $req) {
@@ -136,6 +163,15 @@ class controladorGeneral extends Controller {
                   </div>';
             return view('admin.bienvenidaAd');
         }
+    }
+
+    /**
+     * Genera la contraseña
+     * @param type $length
+     * @return type
+     */
+    public static function generateRandomString($length) {
+        return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
     }
 
 }
