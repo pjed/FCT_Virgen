@@ -19,6 +19,10 @@ use App\Modal\usuarios_rol;
 use App\Modal\colectivo;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
+use App\Mail\DemoEmail;
+use Illuminate\Support\Facades\Mail;
+
 class controladorGeneral extends Controller {
 
     public function cerrarSesion(Request $req) {
@@ -98,7 +102,17 @@ class controladorGeneral extends Controller {
     }
 
     public function olvidarPwd(Request $req) {
-        $email = $req->get('email');
+        $email_usuario = $req->get('email');
+        
+        $objDemo = new \stdClass();
+        $objDemo->demo_one = 'Demo One Value';
+        $objDemo->demo_two = 'Demo Two Value';
+        $objDemo->sender = 'SenderUserName';
+        $objDemo->receiver = 'ReceiverUserName';
+
+        Mail::to($email_usuario)->send(new DemoEmail($objDemo));
+        
+        return view('inicioSesion');
     }
 
     public function cambiarRol(Request $req) {

@@ -76,7 +76,7 @@
                     </div>
                 </div>
 
-                <div class="col-2 container text-center">
+                <div class="col-1 container text-center">
                     <div class="row h-100 justify-content-center align-items-center">
                         <p>2 - DAW <br>2019 - 2020</p>
                     </div>
