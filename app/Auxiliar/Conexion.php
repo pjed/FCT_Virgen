@@ -199,6 +199,31 @@ class Conexion {
                   </div>';
         }
     }
+    
+    /**
+     * Método para modificar la contraseña de un usuario
+     * @param type $dni dni del usuario
+     * @param type $pass nueva contraseña
+     */
+    static function RecuperarConstrasenia($dni, $pass) {
+        try {
+            $p = usuario::where('dni', $dni)
+                    ->update(['pass' => $pass]);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Contraseña restablecida correctamente y enviada al correo.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al restablecer la contraseña.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
 
     /**
      * Método para modificar el rol de un usuario
