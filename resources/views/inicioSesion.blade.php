@@ -6,7 +6,7 @@ Inicio de sesion
 
 @section('contenido') 
 <p class="text-center">Iniciar Sesión</p>
-<div class="container" style="height: 70vh;">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-sm-3 col-md-3"> 
             <form name="inicioSesion" action="inicioSesion" method="POST">

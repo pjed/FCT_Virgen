@@ -78,7 +78,7 @@ body{
     }
 
     main{
-        min-height: 100vh;
+        min-height: 63vh;
     }
     footer,.footer{
         align-self: center;
@@ -118,7 +118,7 @@ body{
         height: 64px;
     }
     main{
-        min-height: 67vh;
+        min-height: 100vh;
     }
 
     #perfil,#cerrarSesion{
