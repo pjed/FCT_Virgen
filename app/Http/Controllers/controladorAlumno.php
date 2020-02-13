@@ -62,7 +62,22 @@ class controladorAlumno extends Controller {
     }
 
     public function crearGastoTransporte(Request $req) {
-        
+
+        $tipoTransporte = $req->get('tipoT');
+
+        //si el transporte es colectivo        
+        if ($tipoTransporte == "colectivo") {
+            $foto = $req->get('fotoTicket');
+            $fecha = $req->get('fechaT');
+            $importe = $req->get('importeT');
+        }
+
+        //si el transporte es propio
+        if ($tipoTransporte == "propio") {
+            $numKilometros = $req->get('kms');
+            $numDias = $req->get('diasP');
+            $precio = $req->get('precioP');
+        }
     }
 
     public function gestionarGastoComida(Request $req) {

@@ -1341,5 +1341,37 @@ class Conexion {
                   </div>';
         }
     }
+    
+    static function insertarTransporteColectivo($foto, $n_dias, $importe, $transportes_id) {
+        
+        try {
+
+            $c = new colectivo;
+            $c->foto = $foto;
+            $c->n_dias = $n_dias;
+            $c->importe = $importe;
+            $c->transportes_id = $transportes_id;
+
+            $c->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+        
+    }
+    
+    static function insertarTransportePropio() {
+        
+    }
 
 }
