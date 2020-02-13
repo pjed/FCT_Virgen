@@ -50,6 +50,29 @@ class Conexion {
         }
         return $v;
     }
+    
+    /**
+     * Método para comprobar si el correo del usuario que quiere recuperar la contraseña existe
+     * @param type $correo email del usuario
+     * @return type usuario
+     */
+    static function existeUsuario_Correo($correo) {
+        $v = [];
+            $p = usuario::where('email', $correo)->first(); //aqui se cruzan
+            if ($p) {
+                $v[] = ['dni' => $p->dni,
+                    'nombre' => $p->nombre,
+                    'apellidos' => $p->apellidos,
+                    'email' => $p->email,
+                    'tel' => $p->telefono,
+                    'movil' => $p->movil,
+                    'iban' => $p->iban,
+                    'foto' => $p->foto,
+                    'rol' => null,
+                ];
+            }
+        return $v;
+    }
 
     /**
      * Método para insertar usuarios
