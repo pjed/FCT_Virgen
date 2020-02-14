@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="col-1 text-center">
-                    <form name="perfil" action="perfilAl"  method="post">
+                    <form name="perfil" action="perfilAl1"  method="post">
                         {{ csrf_field() }}  
                         <div class="form-group">
                             <button type="submit" id="perfil" name="perfil" value=""></button>

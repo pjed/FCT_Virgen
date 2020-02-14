@@ -39,7 +39,9 @@ class Conexion {
                 $v[] = ['dni' => $p->dni,
                     'nombre' => $p->nombre,
                     'apellidos' => $p->apellidos,
+                    'domicilio' => $p->domicilio,
                     'email' => $p->email,
+                    'pass' => $p->pass,
                     'tel' => $p->telefono,
                     'movil' => $p->movil,
                     'iban' => $p->iban,
@@ -419,10 +421,59 @@ class Conexion {
      * @param type $telefono número de teléfono del alumno
      * @param type $iban número iban del alumno
      */
-    static function actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban) {
+    static function actualizarDatosAlumno($dni, $nombre, $apellidos, $domicilio, $email, $password, $telefono, $movil, $iban, $updated_at) {
         try {
             usuario::where('dni', $dni)
-                    ->update(['nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 'telefono' => $telefono, 'iban' => $iban]);
+                    ->update([
+                        'nombre' => $nombre, 
+                        'apellidos' => $apellidos, 
+                        'domicilio' => $domicilio, 
+                        'email' => $email, 
+                        'pass' => $password, 
+                        'telefono' => $telefono, 
+                        'movil' => $movil, 
+                        'iban' => $iban, 
+                        'updated_at' => $updated_at
+                            ]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito usuario.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar usuario.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+    
+    /**
+     * Método para actualiar los datos de un tutor
+     * @param type $dni dni del alumno
+     * @param type $nombre nombre del alumno
+     * @param type $apellidos apellidos del alumno
+     * @param type $email email del alumno
+     * @param type $telefono número de teléfono del alumno
+     * @param type $iban número iban del alumno
+     */
+    static function actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $password, $telefono, $movil, $updated_at) {
+        try {
+            usuario::where('dni', $dni)
+                    ->update([
+                        'nombre' => $nombre, 
+                        'apellidos' => $apellidos, 
+                        'domicilio' => $domicilio, 
+                        'email' => $email, 
+                        'pass' => $password, 
+                        'telefono' => $telefono, 
+                        'movil' => $movil, 
+                        'updated_at' => $updated_at
+                            ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito usuario.

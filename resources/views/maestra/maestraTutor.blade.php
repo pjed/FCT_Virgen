@@ -76,7 +76,7 @@ $rol1 = session()->get('rol1');
                 </div>
 
                 <div class="col-1 text-center">
-                    <form name="perfil" action="perfilT"  method="post">
+                    <form name="perfil" action="perfilT1"  method="post">
                         {{ csrf_field() }}  
                         <div class="form-group">
                             <button type="submit" id="perfil" name="perfil" value=""></button>

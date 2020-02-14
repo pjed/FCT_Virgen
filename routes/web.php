@@ -66,6 +66,7 @@ Route::post('gestionarEmpresa', 'controladorTutor@gestionarEmpresa');
 Route::post('gestionarResponsable', 'controladorTutor@gestionarResponsable');
 Route::post('gestionarPracticas', 'controladorTutor@gestionarPracticas');
 Route::post('perfilT', 'controladorTutor@perfil');
+Route::post('perfilT1', 'controladorGeneral@perfilT'); //redirige al perfil
 //});
 //admin
 //Route::group(['middleware' => ['admin','tutorAdmin']], function() {
@@ -113,6 +114,7 @@ Route::get('perfilAd', function () {
     return view('admin/perfilAdmin');
 });
 Route::post('perfilAd', 'controladorAdmin@perfil');
+Route::post('perfilAd1', 'controladorGeneral@perfilAd'); //redirige al perfil
 Route::post('consultarGastos', 'controladorAdmin@consultarGastoAlumno');
 
 Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');
@@ -162,6 +164,8 @@ Route::get('gestionarGastosTransporte', function () {
 Route::get('perfilAl', function () {
     return view('alumno/perfilAlumno');
 });
+Route::post('perfilAl1', 'controladorGeneral@perfilAl'); //redirige al perfil
+
 Route::post('perfilAl', 'controladorAlumno@perfil');
 
 Route::post('crearGastoComida', 'controladorAlumno@crearGastoComida');

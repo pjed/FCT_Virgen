@@ -266,8 +266,32 @@ class controladorAdmin extends Controller {
     }
 
     public function perfil(Request $req) {
+        $domicilio = $req->get('domicilio');
+        $pass = $req->get('pass');
+        $telefono = $req->get('telefono');
+        $movil = $req->get('movil');
+
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
+        $usuario = session()->get('usu');
+        $nombre = null;
+        $apellidos = null;
+        $email = null;
+        $dni = null;
+
+        foreach ($usuario as $value) {
+            $dni = $value['dni'];
+            $nombre = $value['nombre'];
+            $apellidos = $value['apellidos'];
+            $email = $value['email'];
+        }
+
+        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $pass, $telefono, $movil, $updated_at);
+
+        $usu = Conexion::existeUsuario($email, $pass);
+
+        session()->put('usu',$usu);
 
         return view('admin/perfilAdmin');
     }
-
 }

@@ -93,7 +93,7 @@ class controladorAlumno extends Controller {
             }
 
             $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
-            
+
             $desplazamiento = 1;
             $comidas_id = 0;
 
@@ -110,11 +110,11 @@ class controladorAlumno extends Controller {
             $n_dias = $req->get('diasP');
             $precio = $req->get('precioP');
             $localidadP = $req->get('locP');
-            
+
             $tipo = 0;
-            
+
             Conexion::insertarTransportePropio($tipo, $localidadP, $kms, $n_dias, $precio);
-            
+
             //ingresar el gasto de transporte propio en la tabla de gastos
             $usuario = session()->get('usu');
             foreach ($usuario as $u) {
@@ -133,7 +133,7 @@ class controladorAlumno extends Controller {
             }
 
             $totalGastoCicloNuevo = $totalGastoCiclo + $precio;
-            
+
             $desplazamiento = 1;
             $comidas_id = 0;
 
@@ -203,6 +203,32 @@ class controladorAlumno extends Controller {
     }
 
     public function perfil(Request $req) {
+        $domicilio = $req->get('domicilio');
+        $pass = $req->get('pass');
+        $telefono = $req->get('telefono');
+        $movil = $req->get('movil');
+        $iban = $req->get('iban');
+
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
+        $usuario = session()->get('usu');
+        $nombre = null;
+        $apellidos = null;
+        $email = null;
+        $dni = null;
+
+        foreach ($usuario as $value) {
+            $dni = $value['dni'];
+            $nombre = $value['nombre'];
+            $apellidos = $value['apellidos'];
+            $email = $value['email'];
+        }
+
+        Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $domicilio, $email, $pass, $telefono, $movil, $iban, $updated_at);
+
+        $usu = Conexion::existeUsuario($email, $pass);
+
+        session()->put('usu',$usu);
 
         return view('alumno/perfilAlumno');
     }

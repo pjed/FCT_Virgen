@@ -165,6 +165,18 @@ class controladorGeneral extends Controller {
         }
     }
 
+    public function perfilAl(Request $req) {
+        return view('alumno/perfilAlumno');
+    }
+
+    public function perfilT(Request $req) {
+        return view('tutor/perfilTutor');
+    }
+
+    public function perfilAd(Request $req) {
+        return view('admin/perfilAdmin');
+    }
+
     /**
      * Genera la contraseña
      * @param type $length
