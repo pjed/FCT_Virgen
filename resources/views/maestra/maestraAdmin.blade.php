@@ -67,8 +67,8 @@ $rol1 = session()->get('rol1');
                                     <form name="cambiarRol" action="cambiarRol" method="POST">
                                         {{ csrf_field() }}
                                         <div class="form-group">
-                                            <input type="submit" class="btn" name="tutor" value="Tutor">
-                                            <input type="submit" class="btn" name="administrador" value="Administrador">
+                                            <input type="submit" class="btn fondo_gris"  name="tutor" value="Tutor">
+                                            <input type="submit" class="btn fondo_gris" name="administrador" value="Administrador">
                                         </div>
                                     </form>
                                 </div>
@@ -80,7 +80,19 @@ $rol1 = session()->get('rol1');
                 <div class="col-1 text-center">
                     <form name="perfil" action="perfilAd1"  method="post">
                         {{ csrf_field() }}  
-                        <button type="submit" class="btn" id="perfil" name="perfil" value=""></button>
+                        <div class="form-group">
+                            <?php
+                            $usuario = session()->get('usu');
+
+                            foreach ($usuario as $value) {
+                                $foto = $value['foto'];
+                            }
+                            ?>
+                            
+                            <button type="submit" id="perfil" name="perfil" value="">
+                                <input type="image" name="submit" class="miniatura_perfil" src="<?php echo $foto?>"/>
+                            </button>
+                        </div>
                     </form>
                 </div>
                 <div class="col-1 text-center">

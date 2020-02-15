@@ -167,6 +167,7 @@ Route::get('perfilAl', function () {
 Route::post('perfilAl1', 'controladorGeneral@perfilAl'); //redirige al perfil
 
 Route::post('perfilAl', 'controladorAlumno@perfil');
+Route::post('actualizarFoto', 'controladorGeneral@actualizarFoto');
 
 Route::post('crearGastoComida', 'controladorAlumno@crearGastoComida');
 

@@ -453,6 +453,40 @@ class Conexion {
     }
     
     /**
+     * Método para actualiar la foto del alumno
+     * @param type $dni dni del alumno
+     * @param type $password la password del alumno
+     * @param type $foto foto del alumno
+     * @param type $updated_at la fecha en la que se actualizo el perfil
+     */
+    static function actualizarFotoAlumno($dni, $email, $password, $foto, $updated_at) {
+        
+        try {
+            usuario::where('dni', $dni)
+                    ->update([
+                        'email' => $email, 
+                        'pass' => $password, 
+                        'foto' => $foto, 
+                        'updated_at' => $updated_at
+                            ]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito usuario.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar usuario.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+    
+    /**
      * Método para actualiar los datos de un tutor
      * @param type $dni dni del alumno
      * @param type $nombre nombre del alumno

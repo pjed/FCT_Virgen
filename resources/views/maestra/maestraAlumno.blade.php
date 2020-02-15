@@ -70,7 +70,17 @@
                     <form name="perfil" action="perfilAl1"  method="post">
                         {{ csrf_field() }}  
                         <div class="form-group">
-                            <button type="submit" id="perfil" name="perfil" value=""></button>
+                            <?php
+                            $usuario = session()->get('usu');
+
+                            foreach ($usuario as $value) {
+                                $foto = $value['foto'];
+                            }
+                            ?>
+                            
+                            <button type="submit" id="perfil" name="perfil" value="">
+                                <input type="image" name="submit" class="miniatura_perfil" src="<?php echo $foto?>"/>
+                            </button>
                         </div>
                     </form>
                 </div>

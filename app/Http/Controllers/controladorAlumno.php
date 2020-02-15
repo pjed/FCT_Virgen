@@ -228,9 +228,8 @@ class controladorAlumno extends Controller {
 
         $usu = Conexion::existeUsuario($email, $pass);
 
-        session()->put('usu',$usu);
+        session()->put('usu', $usu);
 
         return view('alumno/perfilAlumno');
     }
-
 }

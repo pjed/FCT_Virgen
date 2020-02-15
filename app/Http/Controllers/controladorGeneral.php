@@ -185,5 +185,26 @@ class controladorGeneral extends Controller {
     public static function generateRandomString($length) {
         return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
     }
+    
+    public function actualizarFoto(Request $req) {
+        $usuario = session()->get('usu');
+
+        foreach ($usuario as $value) {
+            $dni = $value['dni'];
+            $email = $value['email'];
+            $pass = $value['pass'];
+            $now = new \DateTime();
+            $updated_at = $now->format('Y-m-d H:i:s');
+        }
+
+        $foto = $req->file('subir')->move('imagenes_perfil', $dni);
+        Conexion::actualizarFotoAlumno($dni, $email, $pass, $foto, $updated_at);
+
+        $usu = Conexion::existeUsuario($email, $pass);
+
+        session()->put('usu', $usu);
+
+        return view('alumno/perfilAlumno');
+    }
 
 }
