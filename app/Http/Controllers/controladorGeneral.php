@@ -178,10 +178,11 @@ class controladorGeneral extends Controller {
     public static function generateRandomString($length) {
         return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
     }
-    
-    public function actualizarFoto(Request $req) {
-        $usuario = session()->get('usu');
 
+    public function actualizarFoto(Request $req) {
+        $rolUsuario = $req->get('usuario');
+        $usuario = session()->get('usu');
+        
         foreach ($usuario as $value) {
             $dni = $value['dni'];
             $email = $value['email'];
@@ -196,8 +197,17 @@ class controladorGeneral extends Controller {
         $usu = Conexion::existeUsuario($email, $pass);
 
         session()->put('usu', $usu);
-
+        switch ($rolUsuario){
+            case 'tutor':
+        return view('tutor/perfilTutor');
+                break;
+            case 'admin':                
+        return view('admin/perfilAdmin');
+                break;
+            case 'alumno':                
         return view('alumno/perfilAlumno');
+                break;
+        }
     }
 
 }

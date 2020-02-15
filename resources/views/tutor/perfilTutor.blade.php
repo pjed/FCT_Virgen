@@ -31,7 +31,8 @@ foreach ($usuario as $value) {
                 <div class="col-sm-4 col-md-4 col-lg-4 float-left">
                     <form name="foto" action="actualizarFoto" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
-                        <img class="borde_logo imagen_perfil_tamano" id="foto" src="<?php echo $foto?>" alt="foto perfil">
+                        <input type="hidden" name="usuario" value="tutor"/>
+                        <img class="borde_logo imagen_perfil_tamano" id="foto" src="<?php echo $foto ?>" alt="foto perfil">
                         <input type="file" id="subir" name="subir"><br>
                         <input type="submit" class="btn btn-primary" name="perfil" value="Actualizar Foto">
                     </form>
@@ -53,4 +54,4 @@ foreach ($usuario as $value) {
             </div>
         </div>
     </div>
-@endsection
+    @endsection
