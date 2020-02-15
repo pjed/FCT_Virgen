@@ -43,7 +43,7 @@ foreach ($usuario as $value) {
                     <div class="form-group">
                         <div class="col-sm-4 col-md-4 col-lg-4 float-right">
                             <label>Domicilio</label><input type="text" id="domicilio" name="domicilio" value="<?php echo $domicilio ?>" placeholder="Domicilio"><br>
-                            <label>Contraseña</label><input type="text" id="password" name="pass" value="<?php echo $password ?>" placeholder="Contraseña"><br>
+                            <label>Contraseña</label><input type="password" id="password" name="pass" value="<?php echo $password ?>" placeholder="Contraseña"><br>
                             <label>Teléfono</label><input type="number" id="telefono" name="telefono" value="<?php echo $telefono ?>" placeholder="Telefono"><br>
                             <label>Móvil</label><input type="number" id="movil" name="movil" value="<?php echo $movil ?>" placeholder="Movil"><br>
                             <label>IBAN</label><input type="text" id="iban" name="iban" value="<?php echo $iban ?>" placeholder="IBAN"><br>
