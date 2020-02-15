@@ -14,7 +14,7 @@ use App\Auxiliar\Conexion;
 Route::get('/', function () {
     return view('inicioSesion');
 });
-//Route::get('/', 'controladorGeneral@comprobarExisteBD');
+
 //comunes
 //Route::group(['middleware' => ['general']], function() {
 Route::post('inicioSesion', 'controladorGeneral@inicioSesion');
@@ -31,6 +31,9 @@ Route::get('olvidarPwd', function () {
 });
 
 //});
+
+
+
 //tutor
 //Route::group(['middleware' => ['tutor', 'tutorAdmin']], function() {
 Route::get('bienvenidaT', function () {
@@ -68,6 +71,8 @@ Route::post('gestionarPracticas', 'controladorTutor@gestionarPracticas');
 Route::post('perfilT', 'controladorTutor@perfil');
 Route::post('perfilT1', 'controladorGeneral@perfilT'); //redirige al perfil
 //});
+
+
 //admin
 //Route::group(['middleware' => ['admin','tutorAdmin']], function() {
 Route::get('bienvenidaAd', function () {
@@ -116,17 +121,14 @@ Route::get('perfilAd', function () {
 Route::post('perfilAd', 'controladorAdmin@perfil');
 Route::post('perfilAd1', 'controladorGeneral@perfilAd'); //redirige al perfil
 Route::post('consultarGastos', 'controladorAdmin@consultarGastoAlumno');
-
 Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');
-
 Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');
-
 Route::post('gestionarTablaAlumnos', 'controladorAdmin@gestionarAlumnos');
-
 Route::post('gestionarTablaTutores', 'controladorAdmin@gestionarTutores');
-
 Route::post('exportarDocumentos', 'controladorAdmin@exportarDocumentos');
 //});
+
+
 //alumno
 //Route::group(['middleware' => ['alumno']], function() {
 Route::get('bienvenidaAl', function () {
@@ -165,23 +167,11 @@ Route::get('perfilAl', function () {
     return view('alumno/perfilAlumno');
 });
 Route::post('perfilAl1', 'controladorGeneral@perfilAl'); //redirige al perfil
-
 Route::post('perfilAl', 'controladorAlumno@perfil');
 Route::post('actualizarFoto', 'controladorGeneral@actualizarFoto');
-
 Route::post('crearGastoComida', 'controladorAlumno@crearGastoComida');
-
 Route::post('crearGastoTransporte', 'controladorAlumno@crearGastoTransporte');
-
 Route::post('gestionarGastosComida', 'controladorAlumno@gestionarGastoComida');
-
 Route::post('gestionarGastosTransporte', 'controladorAlumno@gestionarGastoTransporte');
 
-//});
-//admin y tutor
-//Route::group(['middleware' => ['tutorAdmin']], function() {
-Route::get('cambiarRol', function () {
-    return view('cambiarRol');
-});
-Route::post('cambiarRol', 'controladorGeneral@cambiarRol');
 //});

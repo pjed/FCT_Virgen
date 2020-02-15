@@ -30,13 +30,6 @@ class controladorGeneral extends Controller {
         return view('inicioSesion');
     }
 
-//    public function comprobarExisteBD(Request $req) {
-//        
-//        return view('errorBD');//si no existe BD
-//        
-//        return view('inicioSesion'); //si existe BD
-//    }
-
     public function inicioSesion(Request $req) {
         $correo = $req->get('usuario');
         $pass = $req->get('pwd');
