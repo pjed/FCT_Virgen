@@ -4,6 +4,29 @@
 use App\Auxiliar\Conexion;
 
 $l2 = Conexion::listarAlumnoPorTutor();
+if (isset($_GET['page'])) {
+    $dniAlumno = session()->get('dniAlumno');
+    $desplazamiento = session()->get('desplazamiento');
+    $tipo = session()->get('tipo');
+    if ($desplazamiento == 1) {
+        if ($tipo == 1) {
+            $gtp = null;
+            $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+        } else {
+            $gtc = null;
+            $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+        }
+    } else {
+        $gtc = null;
+        $gtp = null;
+    }
+    $gc = Conexion::listarGastosComidasPagination($dniAlumno);
+    $datos = [
+        'gc' => $gc,
+        'gtp' => $gtp,
+        'gtc' => $gtc,
+    ];
+} 
 ?>
 @extends('maestra.maestraTutor')
 
@@ -50,7 +73,7 @@ Consultar Gastos Alumnos
         </form>
     </div>
 </div>
-@if ($gc !=null) 
+@if ($gc!=null) 
 <!-- Gestionar Gastos Comida -->
 <div id="comida" class="row justify-content-center">
     <div class="col-sm-8 col-md-8">
