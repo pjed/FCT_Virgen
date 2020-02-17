@@ -26,7 +26,7 @@ Crear gasto comida
     </div>
 
     <!-- Formulario para crear un gasto -->
-    <form name="form" action="crearGastoComida" method="POST">
+    <form name="form" action="crearGastoComida" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row justify-content-center">
 
