@@ -1560,5 +1560,12 @@ class Conexion {
 
         return $idTransporte;
     }
+    
+    static function obtenerIdUltimaComidaIngresada() {
+        $comidas = comida::all()->last();
+        $idUltimaComida = $comidas->id;
+
+        return $idUltimaComida;
+    }
 
 }
