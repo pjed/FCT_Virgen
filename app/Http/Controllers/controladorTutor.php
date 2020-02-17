@@ -94,6 +94,7 @@ class controladorTutor extends Controller {
         if (isset($_REQUEST['eliminar'])) {
             $id = $req->get('ID');
             $idGasto = $req->get('idGasto');
+//            dd($id, $idGasto);
             Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
         }
 //            editar y borrar transporte propio
