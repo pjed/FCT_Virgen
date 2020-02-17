@@ -34,6 +34,9 @@ class controladorAdmin extends Controller {
      * @return type
      */
     public function enviarConsultarGastoAlumno() {
+        $l1 = Conexion::listaCursos();
+        $ciclo = session()->get('ciclo');
+        $l2 = Conexion::listarAlumnosCurso($ciclo);
         $dniAlumno = session()->get('dniAlumno');
         $desplazamiento = session()->get('desplazamiento');
         $tipo = session()->get('tipo');
@@ -51,8 +54,8 @@ class controladorAdmin extends Controller {
         }
         $gc = Conexion::listarGastosComidasPagination($dniAlumno);
         $datos = [
-            'l1' => null,
-            'l2' => null,
+            'l1' => $l1,
+            'l2' => $l2,
             'gc' => $gc,
             'gtp' => $gtp,
             'gtc' => $gtc,
@@ -66,10 +69,12 @@ class controladorAdmin extends Controller {
 
 //            si ese usuario no tiene ningun gasto que salga algo
 
+            $l1 = Conexion::listaCursos();
             $ciclo = $req->get('ciclo');
+            session()->put('ciclo', $ciclo);
             $l2 = Conexion::listarAlumnosCurso($ciclo);
             $datos = [
-                'l1' => null,
+                'l1' => $l1,
                 'l2' => $l2,
                 'gc' => null,
                 'gtp' => null,
@@ -81,7 +86,9 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['buscar1'])) {
 
 //            si ese usuario no tiene ningun gasto que salga algo
-
+            $desplazamiento = null;
+            $tipo = null;
+            
             $dniAlumno = $req->get('dniAlumno');
             $gt = Conexion::listarGastosTransportes($dniAlumno);
 
@@ -273,8 +280,9 @@ class controladorAdmin extends Controller {
 
         $usu = Conexion::existeUsuario($email, $pass);
 
-        session()->put('usu',$usu);
+        session()->put('usu', $usu);
 
         return view('admin/perfilAdmin');
     }
+
 }

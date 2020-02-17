@@ -107,7 +107,10 @@ Route::get('extraerDocA', function () {
     return view('admin/extraerDocA', $datos);
 });
 Route::get('consultarGastos', function () {
+    $l1 = Conexion::listaCursos();
     if (isset($_GET['page'])) {
+        session()->put('ciclo', $ciclo);
+        $l2 = Conexion::listarAlumnosCurso($ciclo);
         $dniAlumno = session()->get('dniAlumno');
         $desplazamiento = session()->get('desplazamiento');
         $tipo = session()->get('tipo');
@@ -125,14 +128,13 @@ Route::get('consultarGastos', function () {
         }
         $gc = Conexion::listarGastosComidasPagination($dniAlumno);
         $datos = [
-            'l1' => null,
-            'l2' => null,
+            'l1' => $l1,
+            'l2' => $l2,
             'gc' => $gc,
             'gtp' => $gtp,
             'gtc' => $gtc,
         ];
     } else {
-        $l1 = Conexion::listaCursos();
         $datos = [
             'l1' => $l1,
             'l2' => null,

@@ -10,7 +10,6 @@ Gestionar gastos transporte
 
 @section('contenido') 
 <div class="container-fluid">  
-
     <!-- Migas de pan -->
     <nav class="row">
         <nav class="col">

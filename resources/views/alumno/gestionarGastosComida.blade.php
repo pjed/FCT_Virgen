@@ -6,7 +6,6 @@ Gestionar gastos comida
 
 @section('contenido') 
 <div class="container-fluid">  
-
     <!-- Migas de pan -->
     <nav class="row">
         <nav class="col">

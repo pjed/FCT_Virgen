@@ -67,6 +67,8 @@ class controladorTutor extends Controller {
 
     public function consultarGastoAlumno(Request $req) {
         if (isset($_REQUEST['buscar'])) {
+            $desplazamiento = null;
+            $tipo = null;
 
 //            si ese usuario no tiene ningun gasto que salga algo
 
