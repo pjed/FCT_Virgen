@@ -52,7 +52,7 @@ class Conexion {
         }
         return $v;
     }
-    
+
     /**
      * Método para comprobar si el correo del usuario que quiere recuperar la contraseña existe
      * @param type $correo email del usuario
@@ -60,19 +60,19 @@ class Conexion {
      */
     static function existeUsuario_Correo($correo) {
         $v = [];
-            $p = usuario::where('email', $correo)->first(); //aqui se cruzan
-            if ($p) {
-                $v[] = ['dni' => $p->dni,
-                    'nombre' => $p->nombre,
-                    'apellidos' => $p->apellidos,
-                    'email' => $p->email,
-                    'tel' => $p->telefono,
-                    'movil' => $p->movil,
-                    'iban' => $p->iban,
-                    'foto' => $p->foto,
-                    'rol' => null,
-                ];
-            }
+        $p = usuario::where('email', $correo)->first(); //aqui se cruzan
+        if ($p) {
+            $v[] = ['dni' => $p->dni,
+                'nombre' => $p->nombre,
+                'apellidos' => $p->apellidos,
+                'email' => $p->email,
+                'tel' => $p->telefono,
+                'movil' => $p->movil,
+                'iban' => $p->iban,
+                'foto' => $p->foto,
+                'rol' => null,
+            ];
+        }
         return $v;
     }
 
@@ -201,7 +201,7 @@ class Conexion {
                   </div>';
         }
     }
-    
+
     /**
      * Método para modificar la contraseña de un usuario
      * @param type $dni dni del usuario
@@ -425,16 +425,16 @@ class Conexion {
         try {
             usuario::where('dni', $dni)
                     ->update([
-                        'nombre' => $nombre, 
-                        'apellidos' => $apellidos, 
-                        'domicilio' => $domicilio, 
-                        'email' => $email, 
-                        'pass' => $password, 
-                        'telefono' => $telefono, 
-                        'movil' => $movil, 
-                        'iban' => $iban, 
+                        'nombre' => $nombre,
+                        'apellidos' => $apellidos,
+                        'domicilio' => $domicilio,
+                        'email' => $email,
+                        'pass' => $password,
+                        'telefono' => $telefono,
+                        'movil' => $movil,
+                        'iban' => $iban,
                         'updated_at' => $updated_at
-                            ]);
+            ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito usuario.
@@ -451,7 +451,7 @@ class Conexion {
                   </div>';
         }
     }
-    
+
     /**
      * Método para actualiar la foto del alumno
      * @param type $dni dni del alumno
@@ -460,15 +460,15 @@ class Conexion {
      * @param type $updated_at la fecha en la que se actualizo el perfil
      */
     static function actualizarFotoAlumno($dni, $email, $password, $foto, $updated_at) {
-        
+
         try {
             usuario::where('dni', $dni)
                     ->update([
-                        'email' => $email, 
-                        'pass' => $password, 
-                        'foto' => $foto, 
+                        'email' => $email,
+                        'pass' => $password,
+                        'foto' => $foto,
                         'updated_at' => $updated_at
-                            ]);
+            ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito usuario.
@@ -485,7 +485,7 @@ class Conexion {
                   </div>';
         }
     }
-    
+
     /**
      * Método para actualiar los datos de un tutor
      * @param type $dni dni del alumno
@@ -499,15 +499,15 @@ class Conexion {
         try {
             usuario::where('dni', $dni)
                     ->update([
-                        'nombre' => $nombre, 
-                        'apellidos' => $apellidos, 
-                        'domicilio' => $domicilio, 
-                        'email' => $email, 
-                        'pass' => $password, 
-                        'telefono' => $telefono, 
-                        'movil' => $movil, 
+                        'nombre' => $nombre,
+                        'apellidos' => $apellidos,
+                        'domicilio' => $domicilio,
+                        'email' => $email,
+                        'pass' => $password,
+                        'telefono' => $telefono,
+                        'movil' => $movil,
                         'updated_at' => $updated_at
-                            ]);
+            ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito usuario.
@@ -1134,6 +1134,7 @@ class Conexion {
         $v = \DB::table('usuarios')
                 ->where('usuarios.dni', $dni)
                 ->where('gastos.tipo', 0)
+                ->whereNotIn('gastos.comidas_id', [0])
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
                 ->join('comidas', 'comidas.id', '=', 'gastos.comidas_id')
                 ->select(
@@ -1241,9 +1242,11 @@ class Conexion {
      * Método para borrar los gastos de comida del alumno
      * @param type $id
      */
-    static function borrarGastoComida($id) {
+    static function borrarGastoComida($id, $idGasto) {
         try {
-            comida::where('id', $id)->delete();
+            $c = \DB::update('update gastos set comidas_id = 0 where id = ? and comidas_id=?', [$idGasto,$id]);
+            $p = comida::where('id', $id)
+                    ->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1513,7 +1516,7 @@ class Conexion {
         }
     }
 
-    static function insertarTransportePropio($tipo, $donde, $kms ,$n_dias, $precio) {
+    static function insertarTransportePropio($tipo, $donde, $kms, $n_dias, $precio) {
 
         try {
 

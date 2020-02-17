@@ -175,3 +175,9 @@ Route::post('gestionarGastosComida', 'controladorAlumno@gestionarGastoComida');
 Route::post('gestionarGastosTransporte', 'controladorAlumno@gestionarGastoTransporte');
 
 //});
+
+//tutor-admin
+//Route::group(['middleware' => ['tutorAdmin']], function() {
+Route::post('cambiarRol', 'controladorGeneral@cambiarRol');
+//});
+
