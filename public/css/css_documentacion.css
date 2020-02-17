@@ -1,0 +1,46 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17-feb-2020, 13:26:55
+    Author     : daw201
+*/
+
+.logo_clm{
+    width: 114px;
+    height: 79px;
+}
+
+.logo_ue{
+    width: 87px;
+    height: 74px;
+}
+
+.titulo{
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 8pt;    
+}
+
+html, body{
+    width: 80%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.titulo_negrita{
+    font-weight: bold;
+    font-size: 11pt;    
+}
+table{
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 150px;
+}
+
+.borde{
+    border: 1px black solid;
+}

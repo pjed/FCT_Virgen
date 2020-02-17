@@ -287,10 +287,10 @@ class controladorTutor extends Controller {
             Conexion::insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $fechaInicio, $fechaFin);
         }
         if (isset($_REQUEST['recibiFCT'])) {
-            
+            return view('documentos/recibi/recibi_fct');
         }
         if (isset($_REQUEST['recibiFPDUAL'])) {
-            
+            return view('documentos/recibi/recibi_dual');
         }
 
         return view('tutor/gestionarPracticas');
