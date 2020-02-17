@@ -72,7 +72,7 @@ class controladorTutor extends Controller {
 
 //            si ese usuario no tiene ningun gasto que salga algo
 
-            $dniAlumno = $req->get('dniAlumno');            
+            $dniAlumno = $req->get('dniAlumno');
             session()->put('dniAlumno', $dniAlumno);
             $gt = Conexion::listarGastosTransportes($dniAlumno);
 
@@ -287,9 +287,23 @@ class controladorTutor extends Controller {
             Conexion::insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $fechaInicio, $fechaFin);
         }
         if (isset($_REQUEST['recibiFCT'])) {
+//            $datos = [
+//                'titulo' => 'Styde.net'
+//            ];
+//            $pdf = \PDF::loadView('documentos.recibi.recibi_fct', $datos)
+//                    ->setPaper('a4', 'landscape') 
+//                    ->save(storage_path('app/public/') . 'archivo.pdf');
+//            return $pdf->download('recibi_fct.pdf');
             return view('documentos/recibi/recibi_fct');
         }
         if (isset($_REQUEST['recibiFPDUAL'])) {
+//            $datos = [
+//                'titulo' => 'Styde.net'
+//            ];
+//            $pdf = \PDF::loadView('documentos.recibi.recibi_dual', $datos)
+//                    ->setPaper('a4', 'landscape')
+//                    ->save(storage_path('app/public/') . 'archivo.pdf');
+//            return $pdf->download('recibi_dual.pdf');
             return view('documentos/recibi/recibi_dual');
         }
 

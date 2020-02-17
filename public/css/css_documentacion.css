@@ -44,3 +44,31 @@ table{
 .borde{
     border: 1px black solid;
 }
+
+.cuerpo_recibi{
+    margin-top: 20px;
+    margin-left: 20px;
+    text-align: justify;
+    line-height : 30px;
+}
+
+.margen_arriba{
+    margin-top: 100px;
+}
+
+.anexo{
+    text-align: center;
+    font-weight: bold;
+}
+
+.campos_derecha{
+    float: right;
+}
+
+.tamano_campo{
+    width: 200px;
+}
+
+.campo_readonly{
+    background-color: lightgray; 
+}
