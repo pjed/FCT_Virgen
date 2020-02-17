@@ -72,6 +72,8 @@ class controladorAdmin extends Controller {
             $l1 = Conexion::listaCursos();
             $ciclo = $req->get('ciclo');
             session()->put('ciclo', $ciclo);
+            session()->remove('dniAlumno');
+            
             $l2 = Conexion::listarAlumnosCurso($ciclo);
             $datos = [
                 'l1' => $l1,
@@ -88,8 +90,9 @@ class controladorAdmin extends Controller {
 //            si ese usuario no tiene ningun gasto que salga algo
             $desplazamiento = null;
             $tipo = null;
-            
-            $dniAlumno = $req->get('dniAlumno');
+
+            $dniAlumno = $req->get('dniAlumno');            
+            session()->put('dniAlumno', $dniAlumno);
             $gt = Conexion::listarGastosTransportes($dniAlumno);
 
             foreach ($gt as $key) {
@@ -99,7 +102,6 @@ class controladorAdmin extends Controller {
 
             session()->put('desplazamiento', $desplazamiento);
             session()->put('tipo', $tipo);
-            session()->put('dniAlumno', $dniAlumno);
         }
 //            editar y borrar comida
         if (isset($_REQUEST['editar'])) {

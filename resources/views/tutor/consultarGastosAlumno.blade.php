@@ -4,8 +4,12 @@
 use App\Auxiliar\Conexion;
 
 $l2 = Conexion::listarAlumnoPorTutor();
-if (isset($_GET['page'])) {
+if (session()->get('dniAlumno')!=null) {
     $dniAlumno = session()->get('dniAlumno');
+} else {
+    $dniAlumno = null;
+}
+if (isset($_GET['page'])) {
     $desplazamiento = session()->get('desplazamiento');
     $tipo = session()->get('tipo');
     if ($desplazamiento == 1) {
@@ -21,12 +25,7 @@ if (isset($_GET['page'])) {
         $gtp = null;
     }
     $gc = Conexion::listarGastosComidasPagination($dniAlumno);
-    $datos = [
-        'gc' => $gc,
-        'gtp' => $gtp,
-        'gtc' => $gtc,
-    ];
-}
+    }
 ?>
 @extends('maestra.maestraTutor')
 
@@ -64,7 +63,7 @@ Consultar Gastos Alumnos
                         <?php
                         foreach ($l2 as $k2) {
                             ?>
-                            <option value="<?php echo $k2->dni; ?>"> <?php echo $k2->nombre . ', ' . $k2->apellidos; ?></option>
+                            <option value="<?php echo $k2->dni; ?>"<?php if ($k2->dni == $dniAlumno) { ?>selected<?php } ?>> <?php echo $k2->nombre . ', ' . $k2->apellidos; ?></option>
                             <?php
                         }
                         ?>
@@ -105,8 +104,8 @@ Consultar Gastos Alumnos
                                 <td>
                                     <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?>
                                 </td>
-                                <td><button type="submit" id="editar" class="btn-sm" name="editar"></button></td>
-                                <td><button type="submit" id="eliminar" class="btn-sm" name="eliminar"></button></td> 
+                                <td><button type="submit" id="editar" class="btn-sm" name="editar"></button>
+                                    <button type="submit" id="eliminar" class="btn-sm" name="eliminar"></button></td> 
                             </tr>
                         </form>
                         <?php

@@ -2,20 +2,19 @@
 
 use App\Auxiliar\Conexion;
 
-if (isset($_SESSION['ciclo'])) {
+if (session()->get('ciclo')!=null) {
     $ciclo = session()->get('ciclo');
 } else {
-    $ciclo = null;
+    $ciclo = null; 
+    $dniAlumno = null;
 }
-if (isset($_SESSION['dniAlumno'])) {
+if (session()->get('dniAlumno')!=null) {
     $dniAlumno = session()->get('dniAlumno');
     $l2 = Conexion::listarAlumnosCurso($ciclo);
 } else {
     $dniAlumno = null;
 }
 if (isset($_GET['page'])) {
-    $l1 = Conexion::listaCursos();
-    $dniAlumno = session()->get('dniAlumno');
     $desplazamiento = session()->get('desplazamiento');
     $tipo = session()->get('tipo');
     if ($desplazamiento == 1) {
@@ -31,14 +30,7 @@ if (isset($_GET['page'])) {
         $gtp = null;
     }
     $gc = Conexion::listarGastosComidasPagination($dniAlumno);
-    $datos = [
-        'l1' => $l1,
-        'l2' => null,
-        'gc' => $gc,
-        'gtp' => $gtp,
-        'gtc' => $gtc,
-    ];
-}
+    }
 ?>
 @extends('maestra.maestraAdmin')
 

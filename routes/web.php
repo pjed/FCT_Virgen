@@ -108,8 +108,8 @@ Route::get('extraerDocA', function () {
 });
 Route::get('consultarGastos', function () {
     $l1 = Conexion::listaCursos();
-    if (isset($_GET['page'])) {
-        session()->put('ciclo', $ciclo);
+    if (isset($_GET['page'])) { //si hay paginacion
+        $ciclo = session()->get('ciclo');
         $l2 = Conexion::listarAlumnosCurso($ciclo);
         $dniAlumno = session()->get('dniAlumno');
         $desplazamiento = session()->get('desplazamiento');
