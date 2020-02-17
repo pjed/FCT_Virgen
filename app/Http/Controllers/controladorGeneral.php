@@ -168,7 +168,7 @@ class controladorGeneral extends Controller {
     public function actualizarFoto(Request $req) {
         $rolUsuario = $req->get('usuario');
         $usuario = session()->get('usu');
-        
+
         foreach ($usuario as $value) {
             $dni = $value['dni'];
             $email = $value['email'];
@@ -183,15 +183,15 @@ class controladorGeneral extends Controller {
         $usu = Conexion::existeUsuario($email, $pass);
 
         session()->put('usu', $usu);
-        switch ($rolUsuario){
+        switch ($rolUsuario) {
             case 'tutor':
-        return view('tutor/perfilTutor');
+                return view('tutor/perfilTutor');
                 break;
-            case 'admin':                
-        return view('admin/perfilAdmin');
+            case 'admin':
+                return view('admin/perfilAdmin');
                 break;
-            case 'alumno':                
-        return view('alumno/perfilAlumno');
+            case 'alumno':
+                return view('alumno/perfilAlumno');
                 break;
         }
     }
