@@ -24,9 +24,6 @@ class controladorAdmin extends Controller {
 
             Conexion::ModificarCurso($id, $descripcion, $anioAcademico, $familia, $horas);
         }
-        if (isset($_REQUEST['eliminar'])) {
-            Conexion::borrarCurso($id);
-        }
 
         $l = Conexion::listaCursosPagination();
         return view('admin/gestionarCursos', ['l1' => $l]);
