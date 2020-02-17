@@ -53,7 +53,7 @@ Gestionar gastos comida
                                 <td><input type="date" class="form-control form-control-sm form-control-md"  name ="fecha" value="<?php echo $key->fecha; ?>"/></td>
                                 <td>
                                     <?php
-                                    echo '<img name="ticketGasto" class="foto_small" src="data:image/jpeg;base64,' . base64_encode($key->foto) . '"/>';
+                                    echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>';
                                     ?>
                                     <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
@@ -69,6 +69,11 @@ Gestionar gastos comida
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm col-md col-lg">
+            {{ $gastosAlumno->links()}}
         </div>
     </div>
 </div>
