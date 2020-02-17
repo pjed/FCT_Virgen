@@ -107,14 +107,40 @@ Route::get('extraerDocA', function () {
     return view('admin/extraerDocA', $datos);
 });
 Route::get('consultarGastos', function () {
-    $l1 = Conexion::listaCursos();
-    $datos = [
-        'l1' => $l1,
-        'l2' => null,
-        'gc' => null,
-        'gtp' => null,
-        'gtc' => null,
-    ];
+    if (isset($_GET['page'])) {
+        $dniAlumno = session()->get('dniAlumno');
+        $desplazamiento = session()->get('desplazamiento');
+        $tipo = session()->get('tipo');
+        if ($desplazamiento == 1) {
+            if ($tipo == 1) {
+                $gtp = null;
+                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+            } else {
+                $gtc = null;
+                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+            }
+        } else {
+            $gtc = null;
+            $gtp = null;
+        }
+        $gc = Conexion::listarGastosComidasPagination($dniAlumno);
+        $datos = [
+            'l1' => null,
+            'l2' => null,
+            'gc' => $gc,
+            'gtp' => $gtp,
+            'gtc' => $gtc,
+        ];
+    } else {
+        $l1 = Conexion::listaCursos();
+        $datos = [
+            'l1' => $l1,
+            'l2' => null,
+            'gc' => null,
+            'gtp' => null,
+            'gtc' => null,
+        ];
+    }
     return view('admin/consultarGastos', $datos);
 });
 Route::get('gestionarCursos', function () {

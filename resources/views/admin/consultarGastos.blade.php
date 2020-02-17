@@ -1,3 +1,33 @@
+<?php
+
+use App\Auxiliar\Conexion;
+
+if (isset($_GET['page'])) {
+    $dniAlumno = session()->get('dniAlumno');
+    $desplazamiento = session()->get('desplazamiento');
+    $tipo = session()->get('tipo');
+    if ($desplazamiento == 1) {
+        if ($tipo == 1) {
+            $gtp = null;
+            $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+        } else {
+            $gtc = null;
+            $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+        }
+    } else {
+        $gtc = null;
+        $gtp = null;
+    }
+    $gc = Conexion::listarGastosComidasPagination($dniAlumno);
+    $datos = [
+        'l1' => null,
+        'l2' => null,
+        'gc' => $gc,
+        'gtp' => $gtp,
+        'gtc' => $gtc,
+    ];
+}
+?>
 @extends('maestra.maestraAdmin')
 
 @section('titulo') 
