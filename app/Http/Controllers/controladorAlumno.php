@@ -23,7 +23,10 @@ class controladorAlumno extends Controller {
 
     public function crearGastoComida(Request $req) {
         //ingresar el gasto de comida en la tabla comidas
-        $foto = $req->get('fotoTicket');
+        //$foto = $req->get('fotoTicket');
+        $idComida = Conexion::obtenerIdUltimaComidaIngresada() + 1;
+        $req->file('fotoTicket')->move('imagenes_gastos/comida', $idComida);
+        $foto = 'imagenes_gastos/comida/'. $idComida;
         $fecha = $req->get('fechaT');
         $importe = $req->get('importeT');
 
