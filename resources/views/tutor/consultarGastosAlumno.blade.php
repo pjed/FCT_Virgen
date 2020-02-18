@@ -59,7 +59,7 @@ Consultar Gastos Alumnos
                 {{ csrf_field() }}
                 <label class="text-center">
                     Alumno:
-                    <select name="dniAlumno">                                    
+                    <select class="sel" name="dniAlumno">                                    
                         <?php
                         foreach ($l2 as $k2) {
                             ?>

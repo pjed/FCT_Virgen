@@ -65,7 +65,7 @@ $listaUsuarios = Conexion::listarUsuarios();
                                 <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value->telefono; ?>"/></td>
                                 <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="movil" value="<?php echo $value->movil; ?>"/></td>
                                 <td>
-                                    <select name="selectRol">
+                                    <select class="sel" name="selectRol">
                                         <option value="<?php echo $value->rol_id; ?>" <?php if ($value->rol_id == 1) { ?>selected<?php } ?>>Administrador</option>
                                         <option value="<?php echo $value->rol_id ?>" <?php if ($value->rol_id == 2) { ?>selected<?php } ?>>Tutor</option>
                                         <option value="<?php echo $value->rol_id ?>" <?php if ($value->rol_id == 3) { ?>selected<?php } ?>>Alumno</option>

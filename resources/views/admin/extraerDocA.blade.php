@@ -26,13 +26,13 @@ Exportar documentos
 
     <!-- Formulario -->
     <div class="row justify-content-center"> 
-        <div class="col-sm-4 col-md-4">
+        <div class="col-sm-3 col-md-3">
             <form name="form" action="exportarDocumentos" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label class="text-center" for='familiaProfesional'>
                         Familia profesional:
-                        <select name="familiaProfesional">  
+                        <select class="sel" name="familiaProfesional">  
                             <?php
                             foreach ($l1 as $value) {
                                 ?>
@@ -47,7 +47,7 @@ Exportar documentos
                 <div class="form-group">
                     <label class="text-center" for='ciclo'>
                         Ciclo:
-                        <select name="ciclo">  
+                        <select class="sel" name="ciclo">  
                             <?php
                             foreach ($l1 as $value) {
                                 ?>
@@ -90,7 +90,6 @@ Exportar documentos
                         </div>
                     </label>
                 </div>
-                </br>
                 <div class="form-group">
                     <label>
                         Gastos de alumnos (EXCEL):  

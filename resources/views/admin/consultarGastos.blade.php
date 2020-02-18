@@ -59,12 +59,12 @@ Consultar Gastos Alumnos
 
     <!-- Seleccionar curso -->
     <div class="row justify-content-center">
-        <div class="col-sm-4 col-md-4">
+        <div class="col-sm-3 col-md-3">
             <form action="consultarGastos" method="POST">
                 {{ csrf_field() }}
                 <label class="text-center" for='ciclo'>
                     Ciclo:
-                    <select name="ciclo">  
+                    <select class="sel" name="ciclo">  
                         <?php
                         foreach ($l1 as $value) {
                             ?>
@@ -81,12 +81,12 @@ Consultar Gastos Alumnos
     @if ($l2 !=null) 
     <!-- Seleccionar alumno -->
     <div class="row justify-content-center">
-        <div class="col-sm-5 col-md-5">
+        <div class="col-sm-3 col-md-3">
             <form action="consultarGastos" method="POST">
                 {{ csrf_field() }}
                 <label class="text-center">
                     Alumno:
-                    <select name="dniAlumno">                                    
+                    <select class="sel" name="dniAlumno">                                    
                         <?php
                         foreach ($l2 as $k2) {
                             ?>

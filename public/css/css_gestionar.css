@@ -44,7 +44,7 @@
     background-color: transparent;
     border: none;
 }
-.sel{
+.sel{ /*para darle un maximo a las select y no sean muy garandes*/
     max-width: 150px;
 }
 /*Movil site vertical*/

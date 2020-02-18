@@ -54,7 +54,7 @@ Gestionar Empresa
                                 </div>
                                 <div class="form-group">
                                     <label class="text-center" >
-                                        Direccion de la empresa:
+                                        Dirección de la empresa:
                                         <input type="text" class="form-control form-control-sm" name="direccion" />
                                     </label>                
                                 </div>
@@ -104,7 +104,7 @@ Gestionar Empresa
                         <th>Nombre_empresa</th>
                         <th>DNI_Representante</th>
                         <th>Nombre_Representante</th>
-                        <th>Direccion</th>
+                        <th>Dirección</th>
                         <th>Localidad</th>
                         <th>Horario</th>
                         <th>Nueva</th>

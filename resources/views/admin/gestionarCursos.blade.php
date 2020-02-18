@@ -43,13 +43,13 @@ Gestionar Cursos
                                     </div>
                                     <div class="form-group">
                                         <label class="text-center" >
-                                            Descripcion:
+                                            Descripción:
                                             <input type="text" class="form-control form-control-sm form-control-md" name="descripcion"/>
                                         </label>                    
                                     </div>
                                     <div class="form-group">
                                         <label class="text-center" >
-                                            Año Academico:
+                                            Año Académico:
                                             <input type="text" class="form-control form-control-sm form-control-md" name="anioAcademico"/>
                                         </label>
                                     </div>
@@ -85,8 +85,8 @@ Gestionar Cursos
                     <thead class="thead-dark">
                         <tr>                
                             <th>Curso</th>
-                            <th>Descripcion</th>
-                            <th>AnioAcademico</th>
+                            <th>Descripción</th>
+                            <th>Año Académico</th>
                             <th>Familia</th>
                             <th>Horas</th>
                         </tr>
@@ -102,7 +102,7 @@ Gestionar Cursos
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="descripcion" value="<?php echo $key->descripcion; ?>" /></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="anioAcademico" value="<?php echo $key->anioAcademico; ?>" /></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="familia" value="<?php echo $key->familia; ?>" /></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="horas" value="<?php echo $key->horas; ?>" /></td>
+                                <td><input type="number" class="form-control form-control-sm form-control-md" name="horas" value="<?php echo $key->horas; ?>" /></td>
 
                                 <td><button type="submit" id="editar" class="btn" name="editar" /></td>
                             </tr>

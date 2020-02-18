@@ -66,7 +66,7 @@ Gestionar Responsable
                                 </div>
                                 <div class="form-group">
                                     <label class="text-center">
-                                        Telefono:
+                                        Teléfono:
                                         <input type="tel" class="form-control form-control-sm" name="tel" pattern="[0-9]{9}"/>
                                     </label>
                                 </div>
@@ -92,7 +92,7 @@ Gestionar Responsable
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
-                        <th>Telefono</th>
+                        <th>Teléfono</th>
                     </tr>
                 </thead>
                 <tbody>
