@@ -191,7 +191,7 @@ Gestionar  Practicas
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>"/></td>
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaFin" value="<?php echo $key->fechaFin; ?>"/></td>
                             <td>
-                                <input type="submit" id="recibiFCT" class="btn btn-primary btn-sm" name="recibiFCT" value="FCT"/>
+                                <input type="submit" id="recibiFTC" class="btn btn-primary btn-sm" name="recibiFCT" value="FCT"/>
                                 <input type="submit" id="recibiFPDUAL" class="btn btn-primary btn-sm" name="recibiFPDUAL" value="FP DUAL"/>
                             </td>
                             <td><button type="submit" id="editar" class="btn btn-sm" name="editar"/></td>
