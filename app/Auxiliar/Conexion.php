@@ -336,7 +336,7 @@ class Conexion {
                 ->select(
                         'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban'
                 )
-                ->paginate(4);
+                ->paginate(8);
         return $v;
     }
 
@@ -351,7 +351,7 @@ class Conexion {
                 ->select(
                         'tutores.idtutores AS idtutores', 'tutores.cursos_id_curso AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono'
                 )
-                ->paginate(4);
+                ->paginate(8);
         return $v;
     }
 
@@ -383,32 +383,12 @@ class Conexion {
      * @return type lista de usuarios
      */
     static function listarUsuarios() {
-//        $ur = usuarios_rol::all();
-//        $v = [];
-//        foreach ($ur as $a) {
-//            $ur = usuario::where('dni', $a->usuario_dni)->get(); //aqui se cruzan
-//            foreach ($ur as $p) {
-//                $v[] = ['dni' => $p->dni,
-//                    'nombre' => $p->nombre,
-//                    'apellidos' => $p->apellidos,
-//                    'email' => $p->email,
-//                    'tel' => $p->telefono,
-//                    'movil' => $p->movil,
-//                    'domicilio' => $p->domicilio,
-//                    'iban' => $p->iban,
-//                    'rol_id' => $a->rol_id,
-//                    'curso' => $a->curso_id,
-//                ];
-//            }
-//        }
-//        return $v;
-
         $v = \DB::table('usuarios')
                 ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
                 ->select(
                         'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios_roles.rol_id AS rol_id'
                 )
-                ->paginate(4);
+                ->paginate(8);
         return $v;
     }
 
@@ -639,7 +619,7 @@ class Conexion {
                 ->select(
                         'practicas.id AS id', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto'
                 )
-                ->paginate(4);
+                ->paginate(8);
         return $v;
     }
 
@@ -772,7 +752,7 @@ class Conexion {
      * @return type
      */
     static function listarResponsablesPagination() {
-        $r = responsable::paginate(4);
+        $r = responsable::paginate(8);
         return $r;
     }
 
@@ -783,6 +763,33 @@ class Conexion {
     static function listarResponsables() {
         $r = responsable::all();
         return $r;
+    }
+/**
+     * Método para comprobar que el curso existe para no deje añadirla
+     * @param type $dni
+     * @return boolean
+     */
+    static function existeCurso($cilo) {
+        $val = true;
+        $e = practica::where('id_curso', $cilo)->first();
+        if ($e) {
+            $val = false;
+        }
+        return $val;
+    }
+
+    /**
+     * Método para comprobar que la practica existe para no deje añadirla
+     * @param type $dni
+     * @return boolean
+     */
+    static function existePractica($dni) {
+        $val = true;
+        $e = practica::where('usuarios_dni', $dni)->first();
+        if ($e) {
+            $val = false;
+        }
+        return $val;
     }
 
     /**
@@ -898,7 +905,7 @@ class Conexion {
      * @return type
      */
     static function listarEmpresasPagination() {
-        $e = empresa::paginate(4);
+        $e = empresa::paginate(8);
         return $e;
     }
 
@@ -1140,7 +1147,7 @@ class Conexion {
                 ->select(
                         'gastos.id AS idGasto', 'comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto'
                 )
-                ->paginate(4);
+                ->paginate(8);
         return $v;
     }
 
@@ -1159,7 +1166,7 @@ class Conexion {
                 ->select(
                         'gastos.id AS idGasto', 'gastos.desplazamiento AS desplazamiento', 'transportes.id AS idTransporte', 'transportes.tipo AS tipo', 'transportes.donde AS donde'
                 )
-                ->paginate(4);
+                ->paginate(8);
         return $v;
     }
 
@@ -1180,7 +1187,7 @@ class Conexion {
                 ->select(
                         'transportes.id AS idTransporte', 'transportes.donde AS donde', 'colectivos.id AS idColectivos', 'colectivos.n_dias AS n_diasC', 'colectivos.foto AS foto', 'colectivos.importe AS precio'
                 )
-                ->paginate(4);
+                ->paginate(8);
         return $v;
     }
 
@@ -1202,7 +1209,7 @@ class Conexion {
                 ->select(
                         'transportes.id AS idTransporte', 'transportes.donde AS donde', 'propios.id AS idPropios', 'propios.n_dias AS n_diasP', 'propios.kms AS kms', 'propios.precio AS precio'
                 )
-                ->paginate(4);
+                ->paginate(8);
         return $v;
     }
 
@@ -1244,7 +1251,7 @@ class Conexion {
      */
     static function borrarGastoComida($id, $idGasto) {
         try {
-            $c = \DB::update('update gastos set comidas_id = 0 where id = ? and comidas_id=?', [$idGasto,$id]);
+            $c = \DB::update('update gastos set comidas_id = 0 where id = ? and comidas_id=?', [$idGasto, $id]);
             $p = comida::where('id', $id)
                     ->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1403,7 +1410,7 @@ class Conexion {
         $v = \DB::table('cursos')->select(
                         'id_curso AS id', 'descripcion', 'ano_academico AS anioAcademico', 'familia', 'horas'
                 )
-                ->paginate(4);
+                ->paginate(8);
         return $v;
     }
 
@@ -1560,7 +1567,7 @@ class Conexion {
 
         return $idTransporte;
     }
-    
+
     static function obtenerIdUltimaComidaIngresada() {
         $comidas = comida::all()->last();
         $idUltimaComida = $comidas->id;

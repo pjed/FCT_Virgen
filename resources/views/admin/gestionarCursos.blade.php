@@ -23,55 +23,6 @@ Gestionar Cursos
             <h2 class="text-center">Gestionar Cursos</h2>
         </div>
     </div>
-    <!-- Añadir -curso -->
-    <div class="row justify-content-center">
-        <div class="col-sm-4 col-md-4">
-            <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">      
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">                          
-                            <h3 class="text-center">Añadir Cursos</h3>
-                            <form action="gestionarCursos" method="POST">
-                                {{ csrf_field() }}
-                                <div class="row justify-content-center form-group">
-                                    <label class="col-sm text-center">
-                                        Grupo:
-                                        <input type="text" class="form-control form-control-sm form-control-md" name="id"/>
-                                    </label>
-                                </div>
-                                <div class="row justify-content-center form-group">
-                                    <label class="col-sm text-center">
-                                        Descripción:
-                                        <input type="text" class="form-control form-control-sm form-control-md" name="descripcion"/>
-                                    </label>           
-                                    <label class="col-sm text-center" >
-                                        Año Académico:
-                                        <input type="text" class="form-control form-control-sm form-control-md" name="anioAcademico"/>
-                                    </label>
-                                </div>
-                                <div class="row justify-content-center form-group">
-                                    <label class="col-sm text-center">
-                                        Familia:
-                                        <input type="text" class="form-control form-control-sm form-control-md" name="familia"/>
-                                    </label>
-                                    <label class="col-sm text-center" >
-                                        Total de horas:
-                                        <input type="number" class="form-control form-control-sm form-control-md" name="horas"/>
-                                    </label>
-                                </div>
-                                <div class="row justify-content-center form-group">
-                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> 
 
     <!-- Tabla de Cursos -->
     <div class="row">
@@ -85,6 +36,53 @@ Gestionar Cursos
                             <th>Año Académico</th>
                             <th>Familia</th>
                             <th>Horas</th>
+                            <th>
+                                <!-- Añadir -curso -->
+                                <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">      
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">                          
+                                                <h3 class="text-center">Añadir Cursos</h3>
+                                                <form action="gestionarCursos" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <div class="row justify-content-center form-group">
+                                                        <label class="col-sm text-center">
+                                                            Grupo:
+                                                            <input type="text" class="form-control form-control-sm form-control-md" name="id"/>
+                                                        </label>
+                                                    </div>
+                                                    <div class="row justify-content-center form-group">
+                                                        <label class="col-sm text-center">
+                                                            Descripción:
+                                                            <input type="text" class="form-control form-control-sm form-control-md" name="descripcion"/>
+                                                        </label>           
+                                                        <label class="col-sm text-center" >
+                                                            Año Académico:
+                                                            <input type="text" class="form-control form-control-sm form-control-md" name="anioAcademico"/>
+                                                        </label>
+                                                    </div>
+                                                    <div class="row justify-content-center form-group">
+                                                        <label class="col-sm text-center">
+                                                            Familia:
+                                                            <input type="text" class="form-control form-control-sm form-control-md" name="familia"/>
+                                                        </label>
+                                                        <label class="col-sm text-center" >
+                                                            Total de horas:
+                                                            <input type="number" class="form-control form-control-sm form-control-md" name="horas"/>
+                                                        </label>
+                                                    </div>
+                                                    <div class="row justify-content-center form-group">
+                                                        <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>

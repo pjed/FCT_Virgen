@@ -17,7 +17,7 @@
 #aniadir{
     background-image :url('../images/add.png');
     background-repeat: no-repeat;
-    background-color: transparent;
+    background-color: white;
     /*border: none;*/
 }
 #eliminar{
