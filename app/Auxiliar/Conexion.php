@@ -1244,7 +1244,7 @@ class Conexion {
      */
     static function borrarGastoComida($id, $idGasto) {
         try {
-            $c = \DB::update('update gastos set comidas_id = 0 where id = ? and comidas_id=?', [$idGasto,$id]);
+            $c = \DB::update('update gastos set comidas_id = 0 where id = ? and comidas_id=?', [$idGasto, $id]);
             $p = comida::where('id', $id)
                     ->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1560,12 +1560,62 @@ class Conexion {
 
         return $idTransporte;
     }
-    
+
     static function obtenerIdUltimaComidaIngresada() {
         $comidas = comida::all()->last();
         $idUltimaComida = $comidas->id;
 
         return $idUltimaComida;
+    }
+
+    static function obtenerDatosAlumno($dni) {
+        $p = usuario::where('dni', $dni)->first();
+        if ($p) {
+            $alumno[] = ['dni' => $p->dni,
+                'nombre' => $p->nombre,
+                'apellidos' => $p->apellidos,
+                'domicilio' => $p->domicilio,
+                'email' => $p->email,
+                'pass' => $p->pass,
+                'tel' => $p->telefono,
+                'movil' => $p->movil,
+                'iban' => $p->iban,
+                'foto' => $p->foto,
+            ];
+        }
+        return $alumno;
+    }
+
+    static function listarAlumnoMatriculado($dni) {
+        $v = \DB::table('matriculados')
+                ->where('usuarios.dni', $dni)
+                ->join('cursos', 'matriculados.cursos_id_curso', '=', 'cursos.id_curso')
+                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
+                ->select(
+                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.domicilio AS domicilio', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban', 'matriculados.cursos_id_curso AS curso', 'cursos.descripcion AS descripcion', 'cursos.descripcion AS descripcion', 'cursos.familia AS familia', 'cursos.horas AS horas'
+                )
+                ->get();
+        return $v;
+    }
+
+    static function listarPracticasAlumno($dni) {
+        $v = \DB::table('practicas')
+                ->where('practicas.usuarios_dni', $dni)
+                ->join('empresas', 'practicas.empresas_id', '=', 'empresas.id')
+                ->select(
+                        'empresas.nombre AS nombre', 'empresas.localidad AS localidad'
+                )
+                ->get();
+        return $v;
+    }
+    
+    static function listarCentro() {
+        $v = \DB::table('centros')
+                ->select(
+                        'centros.cod AS cod', 'centros.nombre AS nombre', 'centros.localidad AS localidad'
+                )
+                ->get();
+        return $v;
     }
 
 }
