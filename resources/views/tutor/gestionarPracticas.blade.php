@@ -34,18 +34,19 @@ Gestionar  Practicas
 
 <!-- Añadir Practicas -->
 <div class="row justify-content-center">
-    <div class="col-sm-4 col-md-4">
+    <div class="col-sm col-md">
         <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
-            <!-- Modal -->
+        </button>
+        <!-- Modal -->
             <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <h3>Añadir Practicas</h3>
+                            <h3 class="text-center">Añadir Practicas</h3>
                             <form action="gestionarPracticas" method="POST">
                                 {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label class="text-center">
+                                <div class="row justify-content-center form-group">
+                                    <label class="col-sm text-center">
                                         Empresa:
                                         <select name="idEmpresa">
                                             <?php
@@ -58,8 +59,8 @@ Gestionar  Practicas
                                         </select>
                                     </label>
                                 </div>
-                                <div class="form-group">
-                                    <label class="text-center">
+                                <div class="row justify-content-center form-group">
+                                    <label class="col-sm text-center">
                                         Alumno:
                                         <select name="dniAlumno">                                    
                                             <?php
@@ -72,8 +73,8 @@ Gestionar  Practicas
                                         </select>
                                     </label>
                                 </div>
-                                <div class="form-group">
-                                    <label class="text-center">
+                                <div class="row justify-content-center form-group">
+                                    <label class="col-sm text-center">
                                         Responsable:
                                         <select name="idResponsable">
                                             <?php
@@ -86,33 +87,33 @@ Gestionar  Practicas
                                         </select>
                                     </label>
                                 </div>
-                                <div class="form-group">
-                                    <label class="text-center">
+                                <div class="row justify-content-center form-group">
+                                    <label class="col-sm text-center">
                                         Cod proyecto:
                                         <input type="text" class="codProyecto form-control form-control-sm" name="codProyecto" pattern="[0-9]{6}"/>
                                     </label>
-                                    <label class="text-center">
+                                    <label class="col-sm text-center">
                                         Gasto Total:
                                         <input type="text" class="form-control form-control-sm" name="gasto"/>
                                     </label>
                                 </div>
-                                <div class="form-group">
-                                    <label class="text-center">
+                                <div class="row justify-content-center form-group">
+                                    <label class="col-sm text-center">
                                         Apto:
                                         <input type="checkbox" class="form-control form-control-sm" name="apto"/>
                                     </label>
                                 </div>
-                                <div class="form-group">
-                                    <label class="text-center">
+                                <div class="row justify-content-center form-group">
+                                    <label class="col-sm text-center">
                                         Fecha inicio:
                                         <input type="date" class="form-control form-control-sm" name="fechaInicio"/>
                                     </label>
-                                    <label class="text-center">
+                                    <label class="col-sm text-center">
                                         Fecha fin:
                                         <input type="date" class="form-control form-control-sm" name="fechaFin"/>
                                     </label>
                                 </div>
-                                <div class="form-group">
+                                <div class="row justify-content-center form-group">
                                     <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
                                 </div>
                             </form>
@@ -120,7 +121,6 @@ Gestionar  Practicas
                     </div>
                 </div>
             </div>
-        </button>
     </div>
 
 </div> 
