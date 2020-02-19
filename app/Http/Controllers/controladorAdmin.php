@@ -9,19 +9,33 @@ class controladorAdmin extends Controller {
 
     public function gestionarCursos(Request $req) {
         $id = $req->get('id');
+        $descripcion = $req->get('descripcion');
+        $anioAcademico = $req->get('anioAcademico');
+        $familia = $req->get('familia');
+        $horas = $req->get('horas');
         if (isset($_REQUEST['aniadir'])) {
-            $descripcion = $req->get('descripcion');
-            $anioAcademico = $req->get('anioAcademico');
-            $familia = $req->get('familia');
-            $horas = $req->get('horas');
-            Conexion::insertarCurso($id, $descripcion, $anioAcademico, $familia, $horas);
+            if ($id != null && $descripcion != null && $anioAcademico != null && $familia != null && $horas != null) {
+                $val = Conexion::existePractica($id);
+                if ($val) {
+                    Conexion::insertarCurso($id, $descripcion, $anioAcademico, $familia, $horas);
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Ya existe.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Algún campo está vacio.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
         }
         if (isset($_REQUEST['editar'])) {
-            $descripcion = $req->get('descripcion');
-            $anioAcademico = $req->get('anioAcademico');
-            $familia = $req->get('familia');
-            $horas = $req->get('horas');
-
             Conexion::ModificarCurso($id, $descripcion, $anioAcademico, $familia, $horas);
         }
 
@@ -73,7 +87,7 @@ class controladorAdmin extends Controller {
             $ciclo = $req->get('ciclo');
             session()->put('ciclo', $ciclo);
             session()->remove('dniAlumno');
-            
+
             $l2 = Conexion::listarAlumnosCurso($ciclo);
             $datos = [
                 'l1' => $l1,
@@ -91,7 +105,7 @@ class controladorAdmin extends Controller {
             $desplazamiento = null;
             $tipo = null;
 
-            $dniAlumno = $req->get('dniAlumno');            
+            $dniAlumno = $req->get('dniAlumno');
             session()->put('dniAlumno', $dniAlumno);
             $gt = Conexion::listarGastosTransportes($dniAlumno);
 

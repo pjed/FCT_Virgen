@@ -28,59 +28,7 @@ Gestionar Responsable
         <h2 class="text-center">Gestionar Responsable</h2>
     </div>
 </div>
-<!-- Añadir Responsable -->
-<div class="row justify-content-center">
-    <div class="col-sm-4 col-md-4">
-        <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">      
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">                        
-                            <h3>Añadir Responsables</h3>
-                            <form action="gestionarResponsable" method="POST">
-                                {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label class="text-center" >
-                                        Dni:
-                                        <input type="text" class="form-control form-control-sm" name="dni" pattern="[0-9]{8}[A-Za-z]{1}"/>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-center">
-                                        Nombre:
-                                        <input type="text" class="form-control form-control-sm" name="nombre"/>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-center">
-                                        Apellido:
-                                        <input type="text" class="form-control form-control-sm" name="apellido" />
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-center">
-                                        Email:
-                                        <input type="email" class="form-control form-control-sm" name="email" />
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-center">
-                                        Teléfono:
-                                        <input type="tel" class="form-control form-control-sm" name="tel" pattern="[0-9]{9}"/>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </button>  
-    </div>
-</div> 
+
 <!-- Gestionar Responsable -->
 <div class="row">
     <div class="col-sm col-md col-lg">
@@ -93,6 +41,53 @@ Gestionar Responsable
                         <th>Apellido</th>
                         <th>Email</th>
                         <th>Teléfono</th>
+                        <th>
+                            <!-- Añadir Responsable -->
+                            <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">      
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">                        
+                                            <h3 class="text-center">Añadir Responsables</h3>
+                                            <form action="gestionarResponsable" method="POST">
+                                                {{ csrf_field() }}
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Dni:
+                                                        <input type="text" class="form-control form-control-sm" name="dni" pattern="[0-9]{8}[A-Za-z]{1}"/>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Nombre:
+                                                        <input type="text" class="form-control form-control-sm" name="nombre"/>
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Apellido:
+                                                        <input type="text" class="form-control form-control-sm" name="apellido" />
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Email:
+                                                        <input type="email" class="form-control form-control-sm" name="email" />
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Teléfono:
+                                                        <input type="tel" class="form-control form-control-sm" name="tel" pattern="[0-9]{9}"/>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

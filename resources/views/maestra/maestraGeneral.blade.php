@@ -17,6 +17,9 @@
 
         <!-- Course CSS -->
         <link rel="stylesheet" type="text/css" href="{{asset ('css/css_general.css')}}" media="screen" />
+        <!-- Javascript -->
+        @yield('javascript')        
+        <script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>
     </head>
 
     <body>

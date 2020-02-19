@@ -19,58 +19,67 @@ class controladorGeneral extends Controller {
     public function inicioSesion(Request $req) {
         $correo = $req->get('usuario');
         $pass = $req->get('pwd');
+        if ($correo != null && $pass != null) {
 //        $passHash = md5($pass);
-        $w = [];
+            $w = [];
 //        $w = Conexion::existeUsuario($correo, $passHash);        
-        $n = Conexion::existeUsuario($correo, $pass);
-        if ($n != null) { //si existe usuario
-            session()->put('usu', $n);
-            foreach ($n as $u) {
-                $rol = $u['rol'];
-            }
-            if ($rol == 1) {//admin
-                session()->put('rol', 1);
-                echo '
+            $n = Conexion::existeUsuario($correo, $pass);
+            if ($n != null) { //si existe usuario
+                session()->put('usu', $n);
+                foreach ($n as $u) {
+                    $rol = $u['rol'];
+                }
+                if ($rol == 1) {//admin
+                    session()->put('rol', 1);
+                    echo '
                   <div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como administrador
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                return view('admin.bienvenidaAd');
-            } else if ($rol == 2) { //tutor                
-                session()->put('rol', 2);
-                echo '
+                    return view('admin.bienvenidaAd');
+                } else if ($rol == 2) { //tutor                
+                    session()->put('rol', 2);
+                    echo '
                   <div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como tutor
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>  ';
-                return view('tutor.bienvenidaT');
-            } else if ($rol == 3) {//alumno                
-                session()->put('rol', 3);
-                echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    return view('tutor.bienvenidaT');
+                } else if ($rol == 3) {//alumno                
+                    session()->put('rol', 3);
+                    echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como alumno
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                return view('alumno.bienvenidaAl');
-            } else if ($rol == 4) {//tutor-admin                              
-                session()->put('rol1', 4);
-                echo '
+                    return view('alumno.bienvenidaAl');
+                } else if ($rol == 4) {//tutor-admin                              
+                    session()->put('rol1', 4);
+                    echo '
                   <div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como administrador
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                return view('admin.bienvenidaAd');
-            }
-        } else {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    return view('admin.bienvenidaAd');
+                }
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Error al introducir los datos vuelve a intentarlo.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                return view('inicioSesion');
+            }
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Algún campo está vacio.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>

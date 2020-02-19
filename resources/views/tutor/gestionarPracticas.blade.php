@@ -32,98 +32,7 @@ Gestionar  Practicas
     </div>
 </div>
 
-<!-- Añadir Practicas -->
-<div class="row justify-content-center">
-    <div class="col-sm-4 col-md-4">
-        <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <h3>Añadir Practicas</h3>
-                            <form action="gestionarPracticas" method="POST">
-                                {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label class="text-center">
-                                        Empresa:
-                                        <select name="idEmpresa">
-                                            <?php
-                                            foreach ($l1 as $k1) {
-                                                ?>
-                                                <option value="<?php echo $k1->id; ?>"><?php echo $k1->nombre; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-center">
-                                        Alumno:
-                                        <select name="dniAlumno">                                    
-                                            <?php
-                                            foreach ($l2 as $k2) {
-                                                ?>
-                                                <option value="<?php echo $k2->dni; ?>"> <?php echo $k2->nombre . ', ' . $k2->apellidos; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-center">
-                                        Responsable:
-                                        <select name="idResponsable">
-                                            <?php
-                                            foreach ($l3 as $k3) {
-                                                ?>
-                                                <option value="<?php echo $k3->id; ?>"><?php echo $k3->nombre . ', ' . $k3->apellidos; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-center">
-                                        Cod proyecto:
-                                        <input type="text" class="codProyecto form-control form-control-sm" name="codProyecto" pattern="[0-9]{6}"/>
-                                    </label>
-                                    <label class="text-center">
-                                        Gasto Total:
-                                        <input type="text" class="form-control form-control-sm" name="gasto"/>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-center">
-                                        Apto:
-                                        <input type="checkbox" class="form-control form-control-sm" name="apto"/>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-center">
-                                        Fecha inicio:
-                                        <input type="date" class="form-control form-control-sm" name="fechaInicio"/>
-                                    </label>
-                                    <label class="text-center">
-                                        Fecha fin:
-                                        <input type="date" class="form-control form-control-sm" name="fechaFin"/>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </button>
-    </div>
 
-</div> 
 <!-- Gestionar Practicas -->
 <div class="row">
     <div class="col-sm col-md">
@@ -140,6 +49,95 @@ Gestionar  Practicas
                         <th>Fecha inicio</th>
                         <th>Fecha fin</th>
                         <th>Recibí</th>
+                        <th>
+                            <!-- Añadir Practicas -->
+                            <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <h3 class="text-center">Añadir Practicas</h3>
+                                            <form action="gestionarPracticas" method="POST">
+                                                {{ csrf_field() }}
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Empresa:
+                                                        <select name="idEmpresa">
+                                                            <?php
+                                                            foreach ($l1 as $k1) {
+                                                                ?>
+                                                                <option value="<?php echo $k1->id; ?>"><?php echo $k1->nombre; ?></option>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Alumno:
+                                                        <select name="dniAlumno">                                    
+                                                            <?php
+                                                            foreach ($l2 as $k2) {
+                                                                ?>
+                                                                <option value="<?php echo $k2->dni; ?>"> <?php echo $k2->nombre . ', ' . $k2->apellidos; ?></option>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Responsable:
+                                                        <select name="idResponsable">
+                                                            <?php
+                                                            foreach ($l3 as $k3) {
+                                                                ?>
+                                                                <option value="<?php echo $k3->id; ?>"><?php echo $k3->nombre . ', ' . $k3->apellidos; ?></option>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Cod proyecto:
+                                                        <input type="text" class="codProyecto form-control form-control-sm" name="codProyecto" pattern="[0-9]{6}"/>
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Gasto Total:
+                                                        <input type="text" class="form-control form-control-sm" name="gasto"/>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Apto:
+                                                        <input type="checkbox" class="form-control form-control-sm" name="apto"/>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Fecha inicio:
+                                                        <input type="date" class="form-control form-control-sm" name="fechaInicio"/>
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Fecha fin:
+                                                        <input type="date" class="form-control form-control-sm" name="fechaFin"/>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

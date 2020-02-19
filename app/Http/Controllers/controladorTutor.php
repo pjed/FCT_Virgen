@@ -190,7 +190,6 @@ class controladorTutor extends Controller {
         if (isset($_REQUEST['editar'])) {
             Conexion::ModificarEmpresa($id, $CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario, $nueva);
 
-
             return view('tutor/gestionarEmpresa');
         }
         if (isset($_REQUEST['eliminar'])) {
@@ -198,12 +197,21 @@ class controladorTutor extends Controller {
         }
         if (isset($_REQUEST['aniadir'])) {
             $nueva = 1;
-            $val = Conexion::existeEmpresa($CIF);
-            if ($val) {
-                Conexion::insertarEmpresa($CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario);
+            if ($CIF != null && $nombreEmpresa != null && $dniRepresentante != null && $nombreRepresentante != null && $direccion != null && $localidad != null && $horario != null) {
+                $val = Conexion::existeEmpresa($CIF);
+                if ($val) {
+                    Conexion::insertarEmpresa($CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario);
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Ya existe.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
             } else {
                 echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Ya existe.
+                    Algún campo está vacio.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -237,12 +245,21 @@ class controladorTutor extends Controller {
             Conexion::borrarResponsable($id);
         }
         if (isset($_REQUEST['aniadir'])) {
-            $val = Conexion::existeResponsable($dni);
-            if ($val) {
-                Conexion::insertarResponsable($dni, $nombre, $apellidos, $email, $tel);
+            if ($dni != null && $nombre != null && $apellidos != null && $email != null && $tel != null) {
+                $val = Conexion::existeResponsable($dni);
+                if ($val) {
+                    Conexion::insertarResponsable($dni, $nombre, $apellidos, $email, $tel);
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Ya existe.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
             } else {
                 echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Ya existe.
+                    Algún campo está vacio.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -285,7 +302,27 @@ class controladorTutor extends Controller {
             Conexion::borrarPractica($ID);
         }
         if (isset($_REQUEST['aniadir'])) {
-            Conexion::insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $fechaInicio, $fechaFin);
+            if ($CIF != null && $dniAlumno != null && $codProyecto != null && $dniResponsable != null && $gasto != null) {
+                $val = Conexion::existePractica($dniAlumno);
+                if ($val) {
+                    Conexion::insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $fechaInicio, $fechaFin);
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Ya existe.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
+                Conexion::insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $fechaInicio, $fechaFin);
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Algún campo está vacio.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
         }
         if (isset($_REQUEST['recibiFCT'])) {
 

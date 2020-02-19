@@ -8,6 +8,9 @@
     background-color: transparent;
     border: none;
 }
+.modal{
+    color:black;
+}
 #perfil{
 /*    background-image: url('../images/user.png');*/
     background-repeat: no-repeat;
@@ -17,7 +20,7 @@
 #aniadir{
     background-image :url('../images/add.png');
     background-repeat: no-repeat;
-    background-color: transparent;
+    background-color: white;
     /*border: none;*/
 }
 #eliminar{
