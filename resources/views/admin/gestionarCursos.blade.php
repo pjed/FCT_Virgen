@@ -36,37 +36,33 @@ Gestionar Cursos
                             <h3 class="text-center">Añadir Cursos</h3>
                             <form action="gestionarCursos" method="POST">
                                 {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label class="text-center" >
+                                <div class="row justify-content-center form-group">
+                                    <label class="col-sm text-center">
                                         Grupo:
                                         <input type="text" class="form-control form-control-sm form-control-md" name="id"/>
                                     </label>
                                 </div>
-                                <div class="form-group">
-                                    <label class="text-center" >
+                                <div class="row justify-content-center form-group">
+                                    <label class="col-sm text-center">
                                         Descripción:
                                         <input type="text" class="form-control form-control-sm form-control-md" name="descripcion"/>
-                                    </label>                    
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-center" >
+                                    </label>           
+                                    <label class="col-sm text-center" >
                                         Año Académico:
                                         <input type="text" class="form-control form-control-sm form-control-md" name="anioAcademico"/>
                                     </label>
                                 </div>
-                                <div class="form-group">
-                                    <label class="text-center" >
+                                <div class="row justify-content-center form-group">
+                                    <label class="col-sm text-center">
                                         Familia:
                                         <input type="text" class="form-control form-control-sm form-control-md" name="familia"/>
                                     </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-center" >
+                                    <label class="col-sm text-center" >
                                         Total de horas:
                                         <input type="number" class="form-control form-control-sm form-control-md" name="horas"/>
                                     </label>
                                 </div>
-                                <div class="form-group">
+                                <div class="row justify-content-center form-group">
                                     <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
                                 </div>
                             </form>
