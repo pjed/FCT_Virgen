@@ -47,7 +47,7 @@ body{
     background-color: #FFFFFF;
 }
 #perfil{
-/*    background-image: url('../images/user.png');*/
+    /*    background-image: url('../images/user.png');*/
     background-repeat: no-repeat;
     background-color: transparent;
     border: none;
@@ -72,14 +72,9 @@ body{
     color: white; font-size: 18pt
 }
 
-#logotipo_dual{
-    width: 80px;
-    height: 80px;
-}
 
-.borde_logo{
-    border: black 2px solid; background-color: white;
-}
+
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -122,17 +117,23 @@ input[type=number] {
     a,label{
         font-size: 10px;
     }
-    #logotipo{
+    #imgPie{        
+        width: 34px;
+    }
+    .borde_logo{
+        width: 34px;
+        height: 34px;
+        border: black 2px solid; 
+        background-color: white;
+    }
+    #logotipo_dual{
         width: 34px;
         height: 34px;
     }
-    #logoInstituto img{
+    #logotipo,#logoInstituto img{
         width: 34px;
-        height: 34px;
-    }
-    #logoInstituto a{   
+        height: 34px;    
         align-self: center;
-        width: 100%;
     }
 }
 /*Tablet Apps */
@@ -144,8 +145,18 @@ input[type=number] {
         width: 64px;
         height: 64px;
     }
+    #logotipo_dual{
+        width: 80px;
+        height: 80px;
+    }
     main{
-        min-height: 100vh;
+        min-height: 80vh;
+    }
+    .borde_logo{        
+        width: 64px;
+        height: 64px;
+        border: black 2px solid; 
+        background-color: white;
     }
 
     #perfil,#cerrarSesion{
@@ -153,7 +164,7 @@ input[type=number] {
         width: 24px;
         height: 24px;
     }
-    #logoInstituto{        
+    #logoInstituto,#logoInstituto a{        
         align-self: center;
         width: 64px;
         height: 64px;
@@ -175,7 +186,8 @@ input[type=number] {
     }
 
     .borde_logo{
-        border: black 2px solid; background-color: white;
+        border: black 2px solid; 
+        background-color: white;
     }
 
     .titulo_app{
@@ -197,7 +209,7 @@ input[type=number] {
         width: 34px;
         height: 34px;
     }
-    #logoInstituto{        
+    #logoInstituto,#logoInstituto a{        
         align-self: center;
         width: 120px;
         height: 80px;
