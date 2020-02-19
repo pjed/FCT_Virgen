@@ -11,6 +11,10 @@ $lu = Conexion::listarEmpresasPagination();
 Gestionar Empresa
 @endsection
 
+@section('javascript') 
+<script src="{{asset ('js/tutor/js_gestionarEmpresa.js')}}"></script>
+@endsection
+
 @section('contenido') 
 <!-- Migas de pan -->
 <nav class="row">
@@ -59,37 +63,37 @@ Gestionar Empresa
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         CIF de la empresa:
-                                                        <input type="text" class="form-control form-control-sm" name="CIF" pattern="{9}"/>
+                                                        <input type="text" class="form-control form-control-sm" id="CIF" name="CIF" pattern="{9}"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Nombre de la empresa:
-                                                        <input type="text" class="form-control form-control-sm" name="nombreEmpresa"/>
+                                                        <input type="text" class="form-control form-control-sm" id="nombreEmpresa" name="nombreEmpresa"/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Dirección de la empresa:
-                                                        <input type="text" class="form-control form-control-sm" name="direccion" />
+                                                        <input type="text" class="form-control form-control-sm" id="direccion" name="direccion" />
                                                     </label>                
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Localidad:
-                                                        <input type="text" class="form-control form-control-sm" name="localidad" />
+                                                        <input type="text" class="form-control form-control-sm" id="localidad" name="localidad" />
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Horario:
-                                                        <input type="text" class="form-control form-control-sm" name="horario"/>
+                                                        <input type="text" class="form-control form-control-sm" id="horario" name="horario"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Dni del representante:
-                                                        <input type="text" class="form-control form-control-sm" name="dniRepresentante"/>
+                                                        <input type="text" class="form-control form-control-sm" id="dniRepresentante" name="dniRepresentante"/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Nombre del representante:
-                                                        <input type="text" class="form-control form-control-sm" name="nombreRepresentante" />
+                                                        <input type="text" class="form-control form-control-sm" id="nombreRepresentante" name="nombreRepresentante" />
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">

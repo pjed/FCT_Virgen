@@ -14,6 +14,10 @@ $l3 = Conexion::listarResponsables();
 Gestionar  Practicas
 @endsection
 
+@section('javascript') 
+<script src="{{asset ('js/tutor/js_gestionarPracticas.js')}}"></script>
+@endsection
+
 @section('contenido') 
 <!-- Migas de pan -->
 <nav class="row">
@@ -64,7 +68,7 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Empresa:
-                                                        <select name="idEmpresa">
+                                                        <select id="idEmpresa" name="idEmpresa">
                                                             <?php
                                                             foreach ($l1 as $k1) {
                                                                 ?>
@@ -78,7 +82,7 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Alumno:
-                                                        <select name="dniAlumno">                                    
+                                                        <select id="dniAlumno" name="dniAlumno">                                    
                                                             <?php
                                                             foreach ($l2 as $k2) {
                                                                 ?>
@@ -92,7 +96,7 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Responsable:
-                                                        <select name="idResponsable">
+                                                        <select id="idResponsable" name="idResponsable">
                                                             <?php
                                                             foreach ($l3 as $k3) {
                                                                 ?>
@@ -106,27 +110,27 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Cod proyecto:
-                                                        <input type="text" class="codProyecto form-control form-control-sm" name="codProyecto" pattern="[0-9]{6}"/>
+                                                        <input type="text" class="codProyecto form-control form-control-sm" id="codProyecto" name="codProyecto" pattern="[0-9]{6}"/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Gasto Total:
-                                                        <input type="text" class="form-control form-control-sm" name="gasto"/>
+                                                        <input type="text" class="form-control form-control-sm" id="gasto" name="gasto"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Apto:
-                                                        <input type="checkbox" class="form-control form-control-sm" name="apto"/>
+                                                        <input type="checkbox" class="form-control form-control-sm" id="apto" name="apto"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Fecha inicio:
-                                                        <input type="date" class="form-control form-control-sm" name="fechaInicio"/>
+                                                        <input type="date" class="form-control form-control-sm" id="fechaInicio" name="fechaInicio"/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Fecha fin:
-                                                        <input type="date" class="form-control form-control-sm" name="fechaFin"/>
+                                                        <input type="date" class="form-control form-control-sm" id="fechaFin" name="fechaFin"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">

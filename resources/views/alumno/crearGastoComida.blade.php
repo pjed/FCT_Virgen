@@ -5,7 +5,7 @@ Crear gasto comida
 @endsection
 
 @section('javascript') 
-<script src="{{asset ('js/js_crearGastoComida.js')}}"></script>
+<script src="{{asset ('js/alumno/js_crearGastoComida.js')}}"></script>
 @endsection
 
 @section('contenido')

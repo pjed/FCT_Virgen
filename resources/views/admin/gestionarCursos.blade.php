@@ -4,6 +4,10 @@
 Gestionar Cursos
 @endsection
 
+@section('javascript') 
+<script src="{{asset ('js/admin/js_gestionarCurso.js')}}"></script>
+@endsection
+
 @section('contenido') 
 <div class="container-fluid">  
 
@@ -51,27 +55,27 @@ Gestionar Cursos
                                                     <div class="row justify-content-center form-group">
                                                         <label class="col-sm text-center">
                                                             Grupo:
-                                                            <input type="text" class="form-control form-control-sm form-control-md" name="id"/>
+                                                            <input type="text" class="form-control form-control-sm form-control-md" id="id" name="id"/>
                                                         </label>
                                                     </div>
                                                     <div class="row justify-content-center form-group">
                                                         <label class="col-sm text-center">
                                                             Descripción:
-                                                            <input type="text" class="form-control form-control-sm form-control-md" name="descripcion"/>
+                                                            <input type="text" class="form-control form-control-sm form-control-md" id="descripcion" name="descripcion"/>
                                                         </label>           
                                                         <label class="col-sm text-center" >
                                                             Año Académico:
-                                                            <input type="text" class="form-control form-control-sm form-control-md" name="anioAcademico"/>
+                                                            <input type="text" class="form-control form-control-sm form-control-md" id="anioAcademico" name="anioAcademico"/>
                                                         </label>
                                                     </div>
                                                     <div class="row justify-content-center form-group">
                                                         <label class="col-sm text-center">
                                                             Familia:
-                                                            <input type="text" class="form-control form-control-sm form-control-md" name="familia"/>
+                                                            <input type="text" class="form-control form-control-sm form-control-md" id="familia" name="familia"/>
                                                         </label>
                                                         <label class="col-sm text-center" >
                                                             Total de horas:
-                                                            <input type="number" class="form-control form-control-sm form-control-md" name="horas"/>
+                                                            <input type="number" class="form-control form-control-sm form-control-md" id="horas" name="horas"/>
                                                         </label>
                                                     </div>
                                                     <div class="row justify-content-center form-group">

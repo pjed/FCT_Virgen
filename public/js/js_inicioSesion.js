@@ -1,17 +1,16 @@
 $(document).ready(function () {
-    $("#aceptarInicioSesion").click(function () {
-        if ($("#usuario").val() === "" || $("#pwd").val() === "") {
-            location.replace("inicioSesion");
-        }
-    });
     $("#usuario").blur(function () {
         if ($("#usuario").val() === "") {
             $("#usuario").css({'border-color': 'red'});
+        } else {
+            $("#usuario").css({'border-color': 'black'});
         }
     });
     $("#pwd").blur(function () {
-        if ($("#pwd").val() === "") {            
+        if ($("#pwd").val() === "") {
             $("#pwd").css({'border-color': 'red'});
-        }
+        }else{            
+            $("#pwd").css({'border-color': 'black'});
+        }        
     });
 });

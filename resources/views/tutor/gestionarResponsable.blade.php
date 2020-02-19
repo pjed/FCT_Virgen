@@ -11,6 +11,10 @@ $lu = Conexion::listarResponsablesPagination();
 Gestionar Responsable
 @endsection
 
+@section('javascript') 
+<script src="{{asset ('js/tutor/js_gestionarResponsable.js')}}"></script>
+@endsection
+
 @section('contenido') 
 <!-- Migas de pan -->
 <nav class="row">
@@ -56,27 +60,27 @@ Gestionar Responsable
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Dni:
-                                                        <input type="text" class="form-control form-control-sm" name="dni" pattern="[0-9]{8}[A-Za-z]{1}"/>
+                                                        <input type="text" class="form-control form-control-sm" id="dni" name="dni" pattern="[0-9]{8}[A-Za-z]{1}"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Nombre:
-                                                        <input type="text" class="form-control form-control-sm" name="nombre"/>
+                                                        <input type="text" class="form-control form-control-sm" id="nombre" name="nombre"/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Apellido:
-                                                        <input type="text" class="form-control form-control-sm" name="apellido" />
+                                                        <input type="text" class="form-control form-control-sm" id="apellido" name="apellido" />
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Email:
-                                                        <input type="email" class="form-control form-control-sm" name="email" />
+                                                        <input type="email" class="form-control form-control-sm" id="email" name="email" />
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Teléfono:
-                                                        <input type="tel" class="form-control form-control-sm" name="tel" pattern="[0-9]{9}"/>
+                                                        <input type="tel" class="form-control form-control-sm" id="tel" name="tel" pattern="[0-9]{9}"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
