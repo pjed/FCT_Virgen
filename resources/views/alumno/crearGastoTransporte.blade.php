@@ -4,6 +4,10 @@
 Crear gasto transporte
 @endsection
 
+@section('javascript') 
+<script src="{{asset ('js/js_crearGastoTransporte.js')}}"></script>
+@endsection
+
 @section('contenido') 
 <div class="container-fluid">  
 

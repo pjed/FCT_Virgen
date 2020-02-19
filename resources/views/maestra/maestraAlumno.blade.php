@@ -19,9 +19,9 @@
         <!-- Course CSS -->
         <link rel="stylesheet" type="text/css" href="{{asset ('css/css_general.css')}}" media="screen" />        
         <link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
+        <!-- Javascript -->
+        @yield('javascript')
         <script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>
-        <script src="{{asset ('js/crearGastoTransporte.js')}}"></script>
-        <script src="{{asset ('js/crearGastoComida.js')}}"></script>
     </head>
 
     <body>

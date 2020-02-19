@@ -4,6 +4,10 @@
 Inicio de sesion
 @endsection
 
+@section('javascript') 
+<script src="{{asset ('js/js_inicioSesion.js')}}"></script>
+@endsection
+
 @section('contenido') 
 <p class="text-center">Iniciar Sesión</p>
 <div class="container">

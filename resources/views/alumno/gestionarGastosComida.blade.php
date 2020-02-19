@@ -4,6 +4,10 @@
 Gestionar gastos comida
 @endsection
 
+@section('javascript') 
+<script src="{{asset ('js/js_crearGastoComida.js')}}"></script>
+@endsection
+
 @section('contenido') 
 <div class="container-fluid">  
     <!-- Migas de pan -->
