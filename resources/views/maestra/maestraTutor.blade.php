@@ -111,45 +111,45 @@ $rol1 = session()->get('rol1');
         </main>
         <footer class="footer bg-dark container-fluid">  
             <nav class="nav">
-                <div class="col-2 container text-center">
+                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" id="logoInstituto" href="https://europa.eu/european-union/index_es">
                             <img class="borde_logo" id="logotipo_dual" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
                         </a>
                     </div>
                 </div>
-                <div class="col-2 container text-center">
+                <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" id="logoInstituto" href="http://http://www.educa.jccm.es/es/fpclm/fp-dual">
                             <img class="borde_logo" id="logotipo_dual" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
                         </a>
                     </div>
                 </div>
-                <div class="col-2 container text-center">
+                <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" id="logoInstituto" href="http://www.cifpvirgendegracia.com/">
                             <img id="logoInstituto" class="borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
                         </a>
                     </div>
                 </div>
-                <div class="col-3 container text-center">
-                    <div class="row h-100 justify-content-center align-items-center">
-                        <p>Marina Estefanía Flores Fernández</p>
-                        <p>Pedro Javier Espinosa Duque</p>
-                        <p>Manuel Ruiz González</p>
-                    </div>
+                <div class="col-5">
+                    <p class="text-center">
+                        Marina Estefanía Flores Fernández
+                        <br>Pedro Javier Espinosa Duque<br>
+                        Manuel Ruiz González
+                    </p>
                 </div>
 
-                <div class="col-2 container text-center">
+                <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
-                        <p>2 - DAW <br>2019 - 2020</p>
+                        <p class="text-center">2 - DAW <br>2019 - 2020</p>
                     </div>
                 </div>
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <button type="button" class="btn" id="info"  data-toggle="modal" data-target="#exampleModal">
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal modal-sm fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">

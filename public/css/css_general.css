@@ -100,7 +100,7 @@ input[type=number] {
     }
 
     main{
-        min-height: 63vh;
+        min-height: 80vh;
     }
     footer,.footer{
         align-self: center;
@@ -116,9 +116,6 @@ input[type=number] {
     }
     a,label{
         font-size: 10px;
-    }
-    #imgPie{        
-        width: 34px;
     }
     .borde_logo{
         width: 34px;
