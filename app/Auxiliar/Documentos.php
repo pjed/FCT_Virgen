@@ -27,7 +27,7 @@ use Response;
  */
 class Documentos {
 
-    static function GenerarRecibi($dniAlumno) {
+    static function GenerarRecibi($dniAlumno, $periodo) {
         
             $centro = Conexion::listarCentro();
             $al = Conexion::listarAlumnoMatriculado($dniAlumno);
@@ -75,7 +75,6 @@ class Documentos {
             $empresa = $nombre_empresa;
             $familia = $familia;
             $ciclo = $descripcion;
-            $periodo = "";
             if ($horas !== null) {
                 $hora = $horas;
             } else {

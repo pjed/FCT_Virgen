@@ -327,8 +327,9 @@ class controladorTutor extends Controller {
         if (isset($_REQUEST['recibiFCT'])) {
 
             $dniAlumno = $req->get('dniAlumno');
+            $periodo = $req->get('periodo');
             
-            return Documentos::GenerarRecibi($dniAlumno);
+            return Documentos::GenerarRecibi($dniAlumno, $periodo);
         }
         if (isset($_REQUEST['recibiFPDUAL'])) {
 //            $datos = [

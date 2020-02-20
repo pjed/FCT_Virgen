@@ -193,8 +193,58 @@ Gestionar  Practicas
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>"/></td>
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaFin" value="<?php echo $key->fechaFin; ?>"/></td>
                             <td>
-                                <input type="submit" id="recibiFTC" class="btn btn-primary btn-sm" name="recibiFCT" value="FCT"/>
-                                <input type="submit" id="recibiFPDUAL" class="btn btn-primary btn-sm" name="recibiFPDUAL" value="FP DUAL"/>
+                                <!-- Añadir Practicas -->
+                                <button type="button" class="btn btn-sm btn-primary" id="addPeriodo"  data-toggle="modal" data-target="#exampleModal2">
+                                    FTC
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <h3 class="text-center">Añadir Período</h3>
+                                                <form action="gestionarPracticas" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <div class="row justify-content-center form-group">
+                                                        <label class="col-sm text-center">
+                                                            Periodo:
+                                                            <input type="text" name="periodo" id="periodo" placeholder="Periodo">
+                                                        </label>
+                                                    </div>
+                                                    <div class="row justify-content-center form-group">
+                                                        <input type="submit" required id="recibiFTC" class="btn btn-primary btn-sm" name="recibiFCT" value="Generar"/>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Añadir Practicas -->
+                                <button type="button" class="btn btn-sm btn-primary" id="addPeriodo" name="addPeriodo" data-toggle="modal" data-target="#exampleModal3">
+                                    FCT DUAL
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <h3 class="text-center">Añadir Período</h3>
+                                                <form action="gestionarPracticas" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <div class="row justify-content-center form-group">
+                                                        <label class="col-sm text-center">
+                                                            Periodo:
+                                                            <input type="text" required name="periodo" id="periodo" placeholder="Periodo">
+                                                        </label>
+                                                    </div>
+                                                    <div class="row justify-content-center form-group">
+                                                        <input type="submit" id="recibiFPDUAL" class="btn btn-primary btn-sm" name="recibiFPDUAL" value="Generar"/>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                             <td><button type="submit" id="editar" class="btn btn-sm" name="editar"/></td>
                             <td><button type="submit" id="eliminar" class="btn btn-sm" name="eliminar"/></td>
