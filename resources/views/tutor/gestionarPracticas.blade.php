@@ -193,11 +193,11 @@ Gestionar  Practicas
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>"/></td>
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaFin" value="<?php echo $key->fechaFin; ?>"/></td>
                             <td>
-                                <!-- Añadir Practicas -->
+<!--                                 Añadir Practicas 
                                 <button type="button" class="btn btn-sm btn-primary" id="addPeriodo"  data-toggle="modal" data-target="#exampleModal2">
                                     FTC
                                 </button>
-                                <!-- Modal -->
+                                 Modal 
                                 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -218,9 +218,9 @@ Gestionar  Practicas
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <!-- Añadir Practicas -->
-                                <button type="button" class="btn btn-sm btn-primary" id="addPeriodo" name="addPeriodo" data-toggle="modal" data-target="#exampleModal3">
+                                <button type="button" class="btn btn-sm btn-primary" id="addPeriodo2" data-toggle="modal" data-target="#exampleModal3">
                                     FCT DUAL
                                 </button>
                                 <!-- Modal -->
@@ -233,8 +233,26 @@ Gestionar  Practicas
                                                     {{ csrf_field() }}
                                                     <div class="row justify-content-center form-group">
                                                         <label class="col-sm text-center">
-                                                            Periodo:
-                                                            <input type="text" required name="periodo" id="periodo" placeholder="Periodo">
+                                                            Modalidad:
+                                                            <select id="modalidad" name="modalidad">
+                                                                <option selected value="0">Elige una modalidad</option>
+                                                                <option value="A">A</option>
+                                                                <option value="B">B</option>
+                                                                <option value="C">C</option>
+                                                            </select>
+                                                        </label>
+
+                                                        <label class="col-sm text-center">
+                                                            Duración del proyecto:
+                                                            <select id="modalidad" name="duracion">
+                                                                <option selected value="0">Elige duración</option>
+                                                                <option value="1">CURSO</option>
+                                                                <option value="2">CURSOS</option>
+                                                            </select>
+                                                        </label>
+                                                         <label class="col-sm text-center">
+                                                            Código del Proyecto:
+                                                            <input type="text" name="codigo" id="codigo" placeholder="Código" value="CLM" maxlength="6">
                                                         </label>
                                                     </div>
                                                     <div class="row justify-content-center form-group">

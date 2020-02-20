@@ -328,18 +328,17 @@ class controladorTutor extends Controller {
 
             $dniAlumno = $req->get('dniAlumno');
             $periodo = $req->get('periodo');
-            
+                        dd($dniAlumno);
+
             return Documentos::GenerarRecibi($dniAlumno, $periodo);
         }
         if (isset($_REQUEST['recibiFPDUAL'])) {
-//            $datos = [
-//                'titulo' => 'Styde.net'
-//            ];
-//            $pdf = \PDF::loadView('documentos.recibi.recibi_dual', $datos)
-//                    ->setPaper('a4', 'landscape')
-//                    ->save(storage_path('app/public/') . 'archivo.pdf');
-//            return $pdf->download('recibi_dual.pdf');
-            return view('documentos/recibi/recibi_dual');
+            $dniAlumno = $req->get('dniAlumno');
+            $modalidad = $req->get('modalidad');
+            $duracion = $req->get('duracion');
+            $cod = $req->get('codigo');
+
+            return Documentos::GenerarRecibiDUAL($dniAlumno, $modalidad, $duracion, $cod);
         }
 
         return view('tutor/gestionarPracticas');
