@@ -1615,6 +1615,16 @@ class Conexion {
                 ->get();
         return $v;
     }
+
+    static function listarGastosAlumno($dni) {
+        $v = \DB::table('gastos')
+                ->where('gastos.usuarios_dni', $dni)
+                ->select(
+                        'gastos.total_gasto_alumno AS total_gasto_alumno'
+                )
+                ->get();
+        return $v;
+    }
     
     static function listarCentro() {
         $v = \DB::table('centros')
