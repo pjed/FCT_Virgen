@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Modal;
+namespace App\Modals;
 
 use Illuminate\Database\Eloquent\Model;
 
-class curso extends Model {
+class empresa extends Model {
 
+    protected $primaryKey = ['cif'];
     public $incrementing = false;
     protected $keyType = ['string'];
 
