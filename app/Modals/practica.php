@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modal;
+namespace App\Modals;
 
 use Illuminate\Database\Eloquent\Model;
 
-class colectivo extends Model {
+class practica extends Model {
 
     public $incrementing = true;
 

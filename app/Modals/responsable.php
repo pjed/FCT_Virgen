@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modal;
+namespace App\Modals;
 
 use Illuminate\Database\Eloquent\Model;
 
-class centro extends Model {
+class responsable extends Model {
 
-    protected $primaryKey = ['cod'];
+    protected $primaryKey = ['dni'];
     public $incrementing = false;
     protected $keyType = ['string'];
 
