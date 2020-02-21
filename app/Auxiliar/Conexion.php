@@ -1634,6 +1634,7 @@ class Conexion {
                 )
                 ->get();
         return $v;
+    }
     static function obtenerIdUltimoTransporteIngresado() {
         $colectivo = colectivo::all()->last();
         $idUltimoColectivo = $colectivo->id;
