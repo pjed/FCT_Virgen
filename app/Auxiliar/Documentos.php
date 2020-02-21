@@ -128,7 +128,7 @@ class Documentos {
             $document->setValue('CICLO', ($data['ciclo']));
             $document->setValue('PERIODO', ($data['periodo']));
             $document->setValue('HORAS', ($data['horas']));
-            $document->setValue('DOM_EMPRESA', ($data['domicilio']));
+            $document->setValue('DOMICILIO', ($data['domicilio']));
             $document->setValue('CANTIDAD', ($data['cantidad']));
             $document->setValue('DIRECTOR', ($data['director']));
             $document->setValue('DIA', ($data['dia']));
@@ -156,7 +156,7 @@ class Documentos {
             return $response;
     }
     
-    static function GenerarRecibiDUAL($dniAlumno, $modalidad, $duracion, $cod_proyecto) {
+    static function GenerarRecibiDUAL($dniAlumno, $modalidad, $duracion, $cod_proyecto, $inicio, $final) {
         
             $centro = Conexion::listarCentro();
             $al = Conexion::listarAlumnoMatriculado($dniAlumno);
@@ -236,6 +236,8 @@ class Documentos {
                 'mes' => $mes,
                 'ano' => $ano,
                 'empresa' => $empresa,
+                'inicio' => $inicio,
+                'fin' => $final,
                 'localidad_centro' => $localidad_centro
             ];
 
@@ -259,7 +261,7 @@ class Documentos {
             $document->setValue('FAMILIA', ($data['familia']));
             $document->setValue('CICLO', ($data['ciclo']));
             $document->setValue('HORAS', ($data['horas']));
-            $document->setValue('DOMICILIO', ($data['domicilio']));
+            $document->setValue('DOM_EMPRESA', ($data['domicilio']));
             $document->setValue('CANTIDAD', ($data['cantidad']));
             $document->setValue('DIRECTOR', ($data['director']));
             $document->setValue('DIA', ($data['dia']));
@@ -269,6 +271,10 @@ class Documentos {
             $document->setValue('LOC_EMPRESA', ($data['localidad_empresa']));
             $document->setValue('MODALIDAD', ($data['modalidad']));
             $document->setValue('DURACION', ($data['duracion']));
+            $document->setValue('CUR_ACA_INI', ($data['inicio']));
+            $document->setValue('CUR_ACA_FIN', ($data['fin']));
+            
+            
 
             $name = 'Recibi_' . "$dniAlumno" ."_". $dia."-".$mes."-".$ano . '.docx';
             $document->saveAs($name);

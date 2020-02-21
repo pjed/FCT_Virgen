@@ -193,11 +193,9 @@ Gestionar  Practicas
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>"/></td>
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaFin" value="<?php echo $key->fechaFin; ?>"/></td>
                             <td>
-<!--                                 Añadir Practicas 
                                 <button type="button" class="btn btn-sm btn-primary" id="addPeriodo"  data-toggle="modal" data-target="#exampleModal2">
                                     FTC
                                 </button>
-                                 Modal 
                                 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -218,12 +216,10 @@ Gestionar  Practicas
                                             </div>
                                         </div>
                                     </div>
-                                </div>-->
-                                <!-- Añadir Practicas -->
-                                <button type="button" class="btn btn-sm btn-primary" id="addPeriodo2" data-toggle="modal" data-target="#exampleModal3">
+                                </div>
+<!--                                <button type="button" class="btn btn-sm btn-primary" id="addPeriodo2" data-toggle="modal" data-target="#exampleModal3">
                                     FCT DUAL
-                                </button>
-                                <!-- Modal -->
+                                </button> 
                                 <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -250,9 +246,17 @@ Gestionar  Practicas
                                                                 <option value="2">CURSOS</option>
                                                             </select>
                                                         </label>
-                                                         <label class="col-sm text-center">
+                                                        <label class="col-sm text-center">
                                                             Código del Proyecto:
                                                             <input type="text" name="codigo" id="codigo" placeholder="Código" value="CLM" maxlength="6">
+                                                        </label>
+                                                        <label class="col-sm text-center">
+                                                            Curso Académico de Inicio:
+                                                            <input type="date" name="inicio" id="inicio">
+                                                        </label>
+                                                        <label class="col-sm text-center">
+                                                            Curso académico de finalización:
+                                                            <input type="date" name="final" id="final">
                                                         </label>
                                                     </div>
                                                     <div class="row justify-content-center form-group">
@@ -262,7 +266,7 @@ Gestionar  Practicas
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                             </td>
                             <td><button type="submit" id="editar" class="btn btn-sm" name="editar"/></td>
                             <td><button type="submit" id="eliminar" class="btn btn-sm" name="eliminar"/></td>

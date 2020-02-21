@@ -328,7 +328,6 @@ class controladorTutor extends Controller {
 
             $dniAlumno = $req->get('dniAlumno');
             $periodo = $req->get('periodo');
-                        dd($dniAlumno);
 
             return Documentos::GenerarRecibi($dniAlumno, $periodo);
         }
@@ -337,8 +336,14 @@ class controladorTutor extends Controller {
             $modalidad = $req->get('modalidad');
             $duracion = $req->get('duracion');
             $cod = $req->get('codigo');
+            $inicio = $req->get('inicio');
+            $final = $req->get('final');
 
-            return Documentos::GenerarRecibiDUAL($dniAlumno, $modalidad, $duracion, $cod);
+
+            $inicioF = date("d-m-Y", strtotime($inicio));
+            $finalF = date("d-m-Y", strtotime($final));
+
+            return Documentos::GenerarRecibiDUAL($dniAlumno, $modalidad, $duracion, $cod, $inicioF, $finalF);
         }
 
         return view('tutor/gestionarPracticas');
