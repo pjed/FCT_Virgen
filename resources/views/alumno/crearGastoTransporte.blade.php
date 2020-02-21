@@ -30,7 +30,7 @@ Crear gasto transporte
     </div>
 
     <!-- Formulario para crear un gasto -->
-    <form name="form" action="crearGastoTransporte" method="POST">
+    <form name="form" action="crearGastoTransporte" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row justify-content-center"> 
 
@@ -104,6 +104,8 @@ Crear gasto transporte
         <div class="row justify-content-center"> 
 
             <div class="col-md-2">
+                
+                <input type="submit" id="comprobar" name="comprobar" value="Comprobar">
 
                 <input type="submit" id="guardar" name="guardar" value="Guardar">
 
