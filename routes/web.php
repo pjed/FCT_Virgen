@@ -40,33 +40,7 @@ Route::get('bienvenidaT', function () {
 });
 Route::get('consultarGastosAlumno', function () {
     if (isset($_GET['page'])) {
-        $dniAlumno = session()->get('dniAlumno');
-        $desplazamiento = session()->get('desplazamiento');
-        $tipo = session()->get('tipo');
-        if ($desplazamiento == 1) {
-            if ($tipo == 1) {
-                $gtp = null;
-                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-            } else {
-                $gtc = null;
-                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
-            }
-        } else {
-            $gtc = null;
-            $gtp = null;
-        }
-        $gc = Conexion::listarGastosComidasPagination($dniAlumno);
-        $datos = [
-            'gc' => $gc,
-            'gtp' => $gtp,
-            'gtc' => $gtc,
-        ];
-    } else {
-        $datos = [
-            'gc' => null,
-            'gtp' => null,
-            'gtc' => null,
-        ];
+        $datos = controladorAdmin::paginacionConsultarGastoAlumno();
     }
     return view('tutor/consultarGastosAlumno', $datos);
 });
@@ -85,7 +59,6 @@ Route::get('ExtraerDocT', function () {
 Route::get('perfilT', function () {
     return view('tutor/perfilTutor');
 });
-
 Route::post('consultarGastosAlumno', 'controladorTutor@consultarGastoAlumno');
 Route::post('extraerDocT', 'controladorTutor@extraerDocT');
 Route::post('gestionarEmpresa', 'controladorTutor@gestionarEmpresa');
@@ -108,41 +81,13 @@ Route::get('extraerDocA', function () {
 });
 Route::get('consultarGastos', function () {
     $l1 = Conexion::listaCursos();
-    if (isset($_GET['page'])) { //si hay paginacion
-        $ciclo = session()->get('ciclo');
-        $l2 = Conexion::listarAlumnosCurso($ciclo);
-        $dniAlumno = session()->get('dniAlumno');
-        $desplazamiento = session()->get('desplazamiento');
-        $tipo = session()->get('tipo');
-        if ($desplazamiento == 1) {
-            if ($tipo == 1) {
-                $gtp = null;
-                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-            } else {
-                $gtc = null;
-                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
-            }
-        } else {
-            $gtc = null;
-            $gtp = null;
-        }
-        $gc = Conexion::listarGastosComidasPagination($dniAlumno);
-        $datos = [
-            'l1' => $l1,
-            'l2' => $l2,
-            'gc' => $gc,
-            'gtp' => $gtp,
-            'gtc' => $gtc,
-        ];
-    } else {
-        $datos = [
-            'l1' => $l1,
-            'l2' => null,
-            'gc' => null,
-            'gtp' => null,
-            'gtc' => null,
-        ];
-    }
+    $datos = [
+        'l1' => $l1,
+        'l2' => null,
+        'gc' => null,
+        'gtp' => null,
+        'gtc' => null,
+    ];
     return view('admin/consultarGastos', $datos);
 });
 Route::get('gestionarCursos', function () {
@@ -170,6 +115,8 @@ Route::get('perfilAd', function () {
 Route::post('perfilAd', 'controladorAdmin@perfil');
 Route::post('perfilAd1', 'controladorGeneral@perfilAd'); //redirige al perfil
 Route::post('consultarGastos', 'controladorAdmin@consultarGastoAlumno');
+Route::post('consultarGastosAyax', 'Conexion@listarAlumnoPorTutor');
+
 Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');
 Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');
 Route::post('gestionarTablaAlumnos', 'controladorAdmin@gestionarAlumnos');

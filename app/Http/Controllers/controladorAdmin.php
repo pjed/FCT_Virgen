@@ -43,6 +43,38 @@ class controladorAdmin extends Controller {
         return view('admin/gestionarCursos', ['l1' => $l]);
     }
 
+    public static function paginacionConsultarGastoAlumno() {
+        $l1 = Conexion::listaCursos();
+        $ciclo = session()->get('ciclo');
+
+        $dniAlumno = session()->get('dniAlumno');
+        $l2 = Conexion::listarAlumnosCurso($ciclo);
+
+        $desplazamiento = session()->get('desplazamiento');
+        $tipo = session()->get('tipo');
+        if ($desplazamiento == 1) {
+            if ($tipo == 1) {
+                $gtp = null;
+                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+            } else {
+                $gtc = null;
+                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+            }
+        } else {
+            $gtc = null;
+            $gtp = null;
+        }
+        $gc = Conexion::listarGastosComidasPagination($dniAlumno);
+        $datos = [
+            'l1' => $l1,
+            'l2' => $l2,
+            'gc' => $gc,
+            'gtp' => $gtp,
+            'gtc' => $gtc,
+        ];
+        return $datos;
+    }
+
     /**
      * metodo para recoger los datos que se necesitan mostrar en la vista consultar gastos
      * @return type
