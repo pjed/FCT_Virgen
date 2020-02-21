@@ -1,15 +1,19 @@
+<?php
+$listaUsuarios = Conexion::listarUsuarios();
+$listaCiclos = Conexion::listarCiclos();
+?>
 @extends('maestra.maestraAdmin')
 
 @section('titulo') 
 Gestionar usuarios
 @endsection
+@section('javascript') 
+<script src="{{asset ('js/admin/js_aniadirUsuario.js')}}"></script>
+@endsection
 
 @section('contenido') 
 
-<?php
-$listaUsuarios = Conexion::listarUsuarios();
-$listaCiclos = Conexion::listarCiclos();
-?>
+
 
 <div class="container-fluid">  
 
