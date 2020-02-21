@@ -146,8 +146,15 @@ class controladorTutor extends Controller {
     public function extraerDocT(Request $req) {
         $id_curso = $req->get('id_curso');
         $dni_tutor = $req->get('dni_tutor');
+        
         if (isset($_REQUEST['recibiFCT'])) {
+            $curso = $req->get("id_curso");
+            $alumnos_curso = Conexion::obtenerAlumnosTutor($curso);
             
+            foreach ($alumnos_curso as $alumno) {
+                $response = Documentos::GenerarRecibiTodosAlumnos($alumno->dni);
+            }
+            return $response;
         }
         if (isset($_REQUEST['recibiFPDUAL'])) {
             
@@ -347,49 +354,6 @@ class controladorTutor extends Controller {
         }
 
         return view('tutor/gestionarPracticas');
-    }
-
-    static function getMes($mes) {
-        $mesNombre = "";
-        switch ($mes) {
-            case "01":
-                $mesNombre = "Enero";
-                break;
-            case "02":
-                $mesNombre = "Febrero";
-                break;
-            case "03":
-                $mesNombre = "Marzo";
-                break;
-            case "04":
-                $mesNombre = "Abril";
-                break;
-            case "05":
-                $mesNombre = "Mayo";
-                break;
-            case "06":
-                $mesNombre = "Junio";
-                break;
-            case "07":
-                $mesNombre = "Julio";
-                break;
-            case "08":
-                $mesNombre = "Agosto";
-                break;
-            case "09":
-                $mesNombre = "Septiembre";
-                break;
-            case "10":
-                $mesNombre = "Octubre";
-                break;
-            case "11":
-                $mesNombre = "Noviembre";
-                break;
-            case "12":
-                $mesNombre = "Diciembre";
-                break;
-        }
-        return $mesNombre;
     }
 
 }

@@ -1634,5 +1634,14 @@ class Conexion {
                 ->get();
         return $v;
     }
-
+    
+    static function obtenerAlumnosTutor($curso) {
+        $v = \DB::table('matriculados')
+                ->where('matriculados.cursos_id_curso', $curso)
+                ->select(
+                        'matriculados.usuarios_dni AS dni'
+                )
+                ->get();
+        return $v;
+    }
 }
