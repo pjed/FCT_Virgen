@@ -175,6 +175,7 @@ Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');
 Route::post('gestionarTablaAlumnos', 'controladorAdmin@gestionarAlumnos');
 Route::post('gestionarTablaTutores', 'controladorAdmin@gestionarTutores');
 Route::post('exportarDocumentos', 'controladorAdmin@exportarDocumentos');
+Route::post('aniadirUsuario', 'controladorAdmin@aniadirUsuario');
 //});
 //alumno
 //Route::group(['middleware' => ['alumno']], function() {

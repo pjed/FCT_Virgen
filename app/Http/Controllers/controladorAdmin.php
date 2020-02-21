@@ -301,4 +301,50 @@ class controladorAdmin extends Controller {
         return view('admin/perfilAdmin');
     }
 
+    public function aniadirUsuario(Request $req) {
+
+        $tipoUsuario = $req->get('tipoU');
+
+        if ($tipoUsuario == "Administrador") {
+            
+        }
+
+        if ($tipoUsuario == "Tutor") {
+            
+        }
+
+        if ($tipoUsuario == "Alumno") {
+
+            $dni = $req->get("dni");
+            $nombre = $req->get("nombre");
+            $apellidos = $req->get("apellidos");
+            $domicilio = $req->get("domicilio");
+            $email = $req->get("email");
+            $telefono = $req->get("telefono");
+            $movil = $req->get("movil");
+            $iban = $req->get("iban");
+            $ciclo = $req->get("selectCiclo");
+            $rol = 3;
+
+            if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+                Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil);
+                Conexion::insertarAlumnoTablaMatriculados($dni, $ciclo);
+                Conexion::insertarRol($dni, $rol);
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Debes rellenar los campos obligatorios como mínimo (*)
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
+
+            return view('admin/gestionarUsuarios');
+        }
+
+        if ($tipoUsuario == "TutorAdministrador") {
+            
+        }
+    }
+
 }

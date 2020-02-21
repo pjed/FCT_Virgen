@@ -8,6 +8,7 @@ Gestionar usuarios
 
 <?php
 $listaUsuarios = Conexion::listarUsuarios();
+$listaCiclos = Conexion::listarCiclos();
 ?>
 
 <div class="container-fluid">  
@@ -28,7 +29,7 @@ $listaUsuarios = Conexion::listarUsuarios();
         <div class="col-sm col-md col-lg">
             <h2 class="text-center">Gestión de usuarios</h2>
         </div>
-    </div>
+    </div>    
 
     <!-- Tabla de usuarios -->
     <div class="row">
@@ -48,6 +49,110 @@ $listaUsuarios = Conexion::listarUsuarios();
                             <th>Teléfono</th>
                             <th>Móvil</th>
                             <th>Rol</th>
+                            <th>
+                                <!-- Añadir Usuario -->
+                                <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
+                                </button> 
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">      
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">                            
+                                                <h3 class="text-center">Añadir Usuario</h3>
+                                                <form action="aniadirUsuario" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <div class="row justify-content-center form-group">
+                                                        <label class="col-sm text-center">
+                                                            Rol del usuario:
+                                                            <fieldset>
+                                                                <div>
+                                                                    <input type="radio" name="tipoU" id="administrador" value="Administrador" onclick="handleClick(this);">
+                                                                    <label for="colectivo">Administrador</label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="radio" name="tipoU" id="tutor" value="Tutor" onclick="handleClick(this);">
+                                                                    <label for="propio">Tutor</label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="radio" name="tipoU" id="alumno" value="Alumno" onclick="handleClick(this);">
+                                                                    <label for="propio">Alumno</label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="radio" name="tipoU" id="tutorAdministrador" value="TutorAdministrador" onclick="handleClick(this);">
+                                                                    <label for="propio">Tutor - Administrador</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="row justify-content-center" id="crearAlumno">
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *DNI:
+                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="{9}"/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                *Nombre:
+                                                                <input type="text" class="form-control form-control-sm" name="nombre"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Apellidos:
+                                                                <input type="text" class="form-control form-control-sm" name="apellidos"/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                *Domicilio:
+                                                                <input type="text" class="form-control form-control-sm" name="domicilio" />
+                                                            </label>                
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Email:
+                                                                <input type="text" class="form-control form-control-sm" name="email" />
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                Teléfono:
+                                                                <input type="text" class="form-control form-control-sm" name="telefono"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Móvil:
+                                                                <input type="text" class="form-control form-control-sm" name="movil"/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                Iban:
+                                                                <input type="text" class="form-control form-control-sm" name="iban" />
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                Ciclo:
+                                                                <select name="selectCiclo">
+
+                                                                    <?php
+                                                                    foreach ($listaCiclos as $value1) {
+                                                                        ?>
+                                                                        <option value="<?php echo $value1['id_curso'] ?>">
+                                                                            <?php echo $value1['id_curso'] ?>
+                                                                        </option>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row justify-content-center form-group">
+                                                        <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
