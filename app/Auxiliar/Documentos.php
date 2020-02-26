@@ -471,13 +471,13 @@ class Documentos {
         return $mesNombre;
     }
 
-    static function GenerarMemoriaAlumnos($alumnos_curso, $curso, $anio) {
+    static function GenerarMemoriaAlumnos($alumnos_memoria, $curso, $anio) {
 
         foreach ($anio as $value) {
             $anyo = $value->ano_academico;
         }
-        
-        Documentos::GenerarExcel($alumnos_curso, $curso, $anyo);
+
+        Documentos::GenerarExcel($alumnos_memoria, $curso, $anyo);
     }
 
     static function GenerarExcel($coleccion, $curso, $anio) {
@@ -489,6 +489,27 @@ class Documentos {
         $spreadsheet = $reader->load($path);
         $spreadsheet->getActiveSheet()->setCellValue('C2', $curso);
         $spreadsheet->getActiveSheet()->setCellValue('C3', $anio);
+        $row = 6;
+        $indice = 1;
+
+        foreach ($coleccion as $value) {
+            $spreadsheet->getActiveSheet()->setCellValue('A'.$row, $indice);
+            $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $value->alumno);
+            $spreadsheet->getActiveSheet()->setCellValue('C'.$row, $value->email);
+            $spreadsheet->getActiveSheet()->setCellValue('D'.$row, $value->movil);
+            $spreadsheet->getActiveSheet()->setCellValue('E'.$row, $value->nombre_empresa);
+            $spreadsheet->getActiveSheet()->setCellValue('F'.$row, $value->nueva);
+            $spreadsheet->getActiveSheet()->setCellValue('G'.$row, $value->nombre_responsable);
+            $spreadsheet->getActiveSheet()->setCellValue('H'.$row, $value->direccion_empresa);
+            $spreadsheet->getActiveSheet()->setCellValue('I'.$row, $value->localidad_empresa);
+            $spreadsheet->getActiveSheet()->setCellValue('J'.$row, $value->fecha_inicio);
+            $spreadsheet->getActiveSheet()->setCellValue('K'.$row, $value->fecha_fin);
+            $spreadsheet->getActiveSheet()->setCellValue('L'.$row, $value->horario);
+            $spreadsheet->getActiveSheet()->setCellValue('M'.$row, $value->gastos);
+            $spreadsheet->getActiveSheet()->setCellValue('N'.$row, $value->apto);
+            $row += 1;
+            $indice += 1;
+        }
 
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
         $writer->save("MD750601 Memoria Final_" . $curso . ".xlsx");

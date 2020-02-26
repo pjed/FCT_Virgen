@@ -1694,6 +1694,33 @@ class Conexion {
                 ->get();
         return $v;
     }
+    
+    static function obtenerAlumnosTutorMemoria($curso) {
+        $sql = "select concat(usuarios.apellidos,', ',usuarios.nombre) as alumno, 
+                usuarios.email as email,
+                usuarios.movil as movil,
+                empresas.nombre as nombre_empresa,
+                'SI/NO' as nueva,
+                responsables.nombre as nombre_responsable,
+                empresas.direccion as direccion_empresa,
+                empresas.localidad as localidad_empresa,
+                practicas.fecha_inicio as fecha_inicio,
+                practicas.fecha_fin as fecha_fin,
+                empresas.horario as horario,
+                'NO/SI/NO EMITE' as gastos,
+                'SI/NO' as apto
+
+                from matriculados, usuarios, practicas, empresas, responsables
+                where  matriculados.usuarios_dni = usuarios.dni
+                and usuarios.dni = practicas.usuarios_dni
+                and practicas.empresas_id = empresas.id
+                and practicas.responsables_id = responsables.id
+                and matriculados.cursos_id_curso = '2DAW';";
+
+        $alumnos_memoria = \DB::select($sql);
+
+        return $alumnos_memoria;
+    }
     static function obtenerIdUltimoTransporteIngresado() {
         $colectivo = colectivo::all()->last();
         $idUltimoColectivo = $colectivo->id;
