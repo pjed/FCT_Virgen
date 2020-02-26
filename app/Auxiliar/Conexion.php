@@ -94,6 +94,7 @@ class Conexion {
         $p->apellidos = $apellidos;
         $p->domicilio = $domicilio;
         $p->email = $email;
+        $p->pass = 1;
         $p->telefono = $tel;
         $p->movil = $movil;
         $p->iban = $iban;
@@ -1644,4 +1645,34 @@ class Conexion {
                 ->get();
         return $v;
     }
+    static function obtenerIdUltimoTransporteIngresado() {
+        $colectivo = colectivo::all()->last();
+        $idUltimoColectivo = $colectivo->id;
+
+        return $idUltimoColectivo;
+    }
+
+    static function insertarAlumnoTablaMatriculados($dni, $ciclo) {
+        $p = new matricula;
+        $p->idmatriculados = 0;
+        $p->usuarios_dni = $dni;
+        $p->cursos_id_curso = $ciclo;
+        try {
+            $p->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
 }

@@ -43,6 +43,38 @@ class controladorAdmin extends Controller {
         return view('admin/gestionarCursos', ['l1' => $l]);
     }
 
+    public static function paginacionConsultarGastoAlumno() {
+        $l1 = Conexion::listaCursos();
+        $ciclo = session()->get('ciclo');
+
+        $dniAlumno = session()->get('dniAlumno');
+        $l2 = Conexion::listarAlumnosCurso($ciclo);
+
+        $desplazamiento = session()->get('desplazamiento');
+        $tipo = session()->get('tipo');
+        if ($desplazamiento == 1) {
+            if ($tipo == 1) {
+                $gtp = null;
+                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+            } else {
+                $gtc = null;
+                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+            }
+        } else {
+            $gtc = null;
+            $gtp = null;
+        }
+        $gc = Conexion::listarGastosComidasPagination($dniAlumno);
+        $datos = [
+            'l1' => $l1,
+            'l2' => $l2,
+            'gc' => $gc,
+            'gtp' => $gtp,
+            'gtc' => $gtc,
+        ];
+        return $datos;
+    }
+
     /**
      * metodo para recoger los datos que se necesitan mostrar en la vista consultar gastos
      * @return type
@@ -299,6 +331,52 @@ class controladorAdmin extends Controller {
         session()->put('usu', $usu);
 
         return view('admin/perfilAdmin');
+    }
+
+    public function aniadirUsuario(Request $req) {
+
+        $tipoUsuario = $req->get('tipoU');
+
+        if ($tipoUsuario == "Administrador") {
+            
+        }
+
+        if ($tipoUsuario == "Tutor") {
+            
+        }
+
+        if ($tipoUsuario == "Alumno") {
+
+            $dni = $req->get("dni");
+            $nombre = $req->get("nombre");
+            $apellidos = $req->get("apellidos");
+            $domicilio = $req->get("domicilio");
+            $email = $req->get("email");
+            $telefono = $req->get("telefono");
+            $movil = $req->get("movil");
+            $iban = $req->get("iban");
+            $ciclo = $req->get("selectCiclo");
+            $rol = 3;
+
+            if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+                Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil);
+                Conexion::insertarAlumnoTablaMatriculados($dni, $ciclo);
+                Conexion::insertarRol($dni, $rol);
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Debes rellenar los campos obligatorios como mínimo (*)
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
+
+            return view('admin/gestionarUsuarios');
+        }
+
+        if ($tipoUsuario == "TutorAdministrador") {
+            
+        }
     }
 
 }

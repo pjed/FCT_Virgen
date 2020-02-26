@@ -269,9 +269,10 @@ class Documentos {
         $name = 'Recibi_' . "$dniAlumno" . "_" . $dia . "-" . $mes . "-" . $ano . '.docx';
         $document->saveAs($name);
         rename($name, storage_path() . "/documentos/recibi/{$name}");
-        $file = storage_path() . "/documentos/recibi/{$name}";
+        $file = storage_path() . "/documentos/recibi/todos/{$name}";
 
         //$file= storage_path(). "/word/{$name}";
+        $zipper->make('test.zip')->folder(storage_path('/documentos/recibi/todos'));
 
         $headers = array(
             //'Content-Type: application/msword',
@@ -478,4 +479,5 @@ class Documentos {
         $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
         $objWriter->save('some_excel_file.xlsx');
     }
+
 }

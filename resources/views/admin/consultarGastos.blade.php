@@ -1,36 +1,30 @@
 <?php
 
 use App\Auxiliar\Conexion;
+use App\Http\Controllers\controladorAdmin;
 
-if (session()->get('ciclo')!=null) {
+if (session()->get('ciclo') != null) {
     $ciclo = session()->get('ciclo');
 } else {
-    $ciclo = null; 
+    $ciclo = null;
     $dniAlumno = null;
 }
-if (session()->get('dniAlumno')!=null) {
+if (session()->get('dniAlumno') != null) {
     $dniAlumno = session()->get('dniAlumno');
     $l2 = Conexion::listarAlumnosCurso($ciclo);
 } else {
     $dniAlumno = null;
 }
 if (isset($_GET['page'])) {
-    $desplazamiento = session()->get('desplazamiento');
-    $tipo = session()->get('tipo');
-    if ($desplazamiento == 1) {
-        if ($tipo == 1) {
-            $gtp = null;
-            $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-        } else {
-            $gtc = null;
-            $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
-        }
-    } else {
-        $gtc = null;
-        $gtp = null;
+    $datos = controladorAdmin::paginacionConsultarGastoAlumno();
+    foreach ($datos as $e) {
+        $l1 = $datos['l1'];
+        $l2 = $datos['l2'];
+        $gc = $datos['gc'];
+        $gtp = $datos ['gtp'];
+        $gtc = $datos ['gtc'];
     }
-    $gc = Conexion::listarGastosComidasPagination($dniAlumno);
-    }
+}
 ?>
 @extends('maestra.maestraAdmin')
 
