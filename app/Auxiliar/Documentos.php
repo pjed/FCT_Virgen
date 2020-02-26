@@ -18,6 +18,10 @@ use App\Modals\usuarios_rol;
 use App\Modals\colectivo;
 use App\Modals\tutor;
 use Response;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+require "../vendor/autoload.php";
 
 /**
  * Description of Documentos
@@ -467,17 +471,29 @@ class Documentos {
         return $mesNombre;
     }
 
-    static function GenerarExcel() {
-        $objPHPExcel = new PHPExcel();
-        $objPHPExcel->setActiveSheetIndex(0);
-        $rowCount = 1;
-        while ($row = mysql_fetch_array($result)) {
-            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $row['name']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $row['age']);
-            $rowCount++;
-        }
-        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-        $objWriter->save('some_excel_file.xlsx');
+    static function GenerarMemoriaAlumnos($alumnos_curso, $curso) {
+        Documentos::GenerarExcel($alumnos_curso, $curso);
+    }
+
+    static function GenerarExcel($coleccion, $curso) {
+        $path = '../documentacion/plantillas/memoria alumno/MD750601 Memoria Final.xlsx';
+
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($path);
+        $reader->setReadDataOnly(true);
+        $reader->load($path);
+        $spreadsheet = $reader->load($path);
+
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
+        $writer->save("MD750601 Memoria Final_" . $curso . ".xlsx");
+
+        $filename = "MD750601 Memoria Final_" . $curso . ".xlsx";
+        header('Content-disposition: attachment; filename=' . $filename);
+        header('Content-Length: ' . filesize($filename));
+        header('Content-Transfer-Encoding: binary');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        $writer->save('php://output');
+        exit();
     }
 
 }

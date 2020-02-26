@@ -146,11 +146,11 @@ class controladorTutor extends Controller {
     public function extraerDocT(Request $req) {
         $id_curso = $req->get('id_curso');
         $dni_tutor = $req->get('dni_tutor');
-        
+
         if (isset($_REQUEST['recibiFCT'])) {
             $curso = $req->get("id_curso");
             $alumnos_curso = Conexion::obtenerAlumnosTutor($curso);
-            
+
             foreach ($alumnos_curso as $alumno) {
                 $response = Documentos::GenerarRecibiTodosAlumnos($alumno->dni);
             }
@@ -160,7 +160,10 @@ class controladorTutor extends Controller {
             
         }
         if (isset($_REQUEST['memoriaAlumnos'])) {
-            
+            $curso = $req->get("id_curso");
+            $alumnos_curso = Conexion::obtenerAlumnosTutor($curso);
+
+            Documentos::GenerarMemoriaAlumnos($alumnos_curso, $curso);
         }
         if (isset($_REQUEST['gastosFCT'])) {
             

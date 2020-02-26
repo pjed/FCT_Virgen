@@ -13,6 +13,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
+        "phpoffice/phpexcel": "^1.8",
+        "phpoffice/phpspreadsheet": "^1.10",
         "phpoffice/phpword": "dev-master"
     },
     "require-dev": {
