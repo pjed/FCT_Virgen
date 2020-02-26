@@ -162,8 +162,8 @@ class controladorTutor extends Controller {
         if (isset($_REQUEST['memoriaAlumnos'])) {
             $curso = $req->get("id_curso");
             $alumnos_curso = Conexion::obtenerAlumnosTutor($curso);
-
-            Documentos::GenerarMemoriaAlumnos($alumnos_curso, $curso);
+            $anio = Conexion::obtenerAnioAcademico();
+            Documentos::GenerarMemoriaAlumnos($alumnos_curso, $curso, $anio);
         }
         if (isset($_REQUEST['gastosFCT'])) {
             

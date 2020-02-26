@@ -275,8 +275,8 @@ class Documentos {
         rename($name, storage_path() . "/documentos/recibi/{$name}");
         $file = storage_path() . "/documentos/recibi/todos/{$name}";
 
-        //$file= storage_path(). "/word/{$name}";
-        $zipper->make('test.zip')->folder(storage_path('/documentos/recibi/todos'));
+//        //$file= storage_path(). "/word/{$name}";
+//        $zipper->make('test.zip')->folder(storage_path('/documentos/recibi/todos'));
 
         $headers = array(
             //'Content-Type: application/msword',
@@ -471,17 +471,24 @@ class Documentos {
         return $mesNombre;
     }
 
-    static function GenerarMemoriaAlumnos($alumnos_curso, $curso) {
-        Documentos::GenerarExcel($alumnos_curso, $curso);
+    static function GenerarMemoriaAlumnos($alumnos_curso, $curso, $anio) {
+
+        foreach ($anio as $value) {
+            $anyo = $value->ano_academico;
+        }
+        
+        Documentos::GenerarExcel($alumnos_curso, $curso, $anyo);
     }
 
-    static function GenerarExcel($coleccion, $curso) {
+    static function GenerarExcel($coleccion, $curso, $anio) {
         $path = '../documentacion/plantillas/memoria alumno/MD750601 Memoria Final.xlsx';
 
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($path);
         $reader->setReadDataOnly(true);
         $reader->load($path);
         $spreadsheet = $reader->load($path);
+        $spreadsheet->getActiveSheet()->setCellValue('C2', $curso);
+        $spreadsheet->getActiveSheet()->setCellValue('C3', $anio);
 
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
         $writer->save("MD750601 Memoria Final_" . $curso . ".xlsx");

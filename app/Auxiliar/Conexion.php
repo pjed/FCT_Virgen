@@ -1402,6 +1402,19 @@ class Conexion {
         $w = json_encode($v, true);
         echo $w;
     }
+    
+    /**
+     * metodo obtener anio academico
+     */
+    static function obtenerAnioAcademico() {
+        //$totalGastosCiclo = 0;
+
+        $sql = "SELECT cursos.ano_academico AS ano_academico from cursos group by cursos.ano_academico";
+
+        $ano_academico = \DB::select($sql);
+
+        return $ano_academico;
+    }
 
     /**
      * metodo listar alumnos de un cursos con ayax
