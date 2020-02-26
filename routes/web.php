@@ -115,6 +115,15 @@ Route::get('perfilAd', function () {
 Route::post('perfilAd', 'controladorAdmin@perfil');
 Route::post('perfilAd1', 'controladorGeneral@perfilAd'); //redirige al perfil
 Route::post('consultarGastos', 'controladorAdmin@consultarGastoAlumno');
+
+//ajax
+Route::get('consultarGastosAjax', function () {
+    return view('admin/consultarGastosAjax');
+});
+Route::get('consultarGastosAjaxCiclo',  ['uses' => 'Conexion@listaCursosAjax','as' => 'consultarGastosAjaxCiclo']);
+Route::get('consultarGastosAjaxDniAlumno', ['uses' => 'Conexion@listarAlumnosCursoAjax','as' => 'consultarGastosAjaxDniAlumno']);
+Route::post('consultarGastosAjaxCiclo',  ['uses' => 'Conexion@listaCursosAjax','as' => 'consultarGastosAjaxCiclo']);
+Route::post('consultarGastosAjaxDniAlumno', ['uses' => 'Conexion@listarAlumnosCursoAjax','as' => 'consultarGastosAjaxDniAlumno']);
 Route::post('consultarGastosAyax', 'Conexion@listarAlumnoPorTutor');
 
 Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');

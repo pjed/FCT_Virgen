@@ -765,7 +765,8 @@ class Conexion {
         $r = responsable::all();
         return $r;
     }
-/**
+
+    /**
      * Método para comprobar que el curso existe para no deje añadirla
      * @param type $dni
      * @return boolean
@@ -1384,6 +1385,41 @@ class Conexion {
     }
 
     /**
+     * metodo listar cursos con ayax
+     */
+    static function listaCursosAyax() {
+        $v = [];
+        $v = \DB::table('cursos')
+                ->join('tutores', 'cursos.id_curso', '=', 'tutores.cursos_id_curso')
+                ->join('usuarios', 'usuarios.dni', '=', 'tutores.usuarios_dni')
+                ->select(
+                        'tutores.idtutores AS idtutores', ' AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono'
+                )
+                ->select(
+                        'cursos.id_curso AS id', 'cursos.descripcion AS descripcion', 'cursos.ano_academico AS anioAcademico', 'cursos.familia AS familia', 'cursos.horas AS horas', 'tutores.usuarios_dni AS tutorDni', 'usuarios.nombre AS tutorNombre', 'usuarios.apellidos AS tutorApellidos'
+                )
+                ->get();
+        $w = json_encode($v, true);
+        echo $w;
+    }
+
+    /**
+     * metodo listar alumnos de un cursos con ayax
+     */
+    static function listarAlumnosCursoAyax($ciclo) {
+        $v = \DB::table('matriculados')
+                ->where('matriculados.cursos_id_curso', $ciclo)
+                ->join('cursos', 'matriculados.cursos_id_curso', '=', 'cursos.id_curso')
+                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
+                ->select(
+                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban'
+                )
+                ->get();
+        $w = json_encode($v, true);
+        echo $w;
+    }
+
+    /**
      * Método para obtener todos los cursos
      * @return type
      */
@@ -1626,7 +1662,7 @@ class Conexion {
                 ->get();
         return $v;
     }
-    
+
     static function listarCentro() {
         $v = \DB::table('centros')
                 ->select(
@@ -1645,6 +1681,36 @@ class Conexion {
                 ->get();
         return $v;
     }
+    static function obtenerIdUltimoTransporteIngresado() {
+        $colectivo = colectivo::all()->last();
+        $idUltimoColectivo = $colectivo->id;
+
+        return $idUltimoColectivo;
+    }
+
+    static function insertarAlumnoTablaMatriculados($dni, $ciclo) {
+        $p = new matricula;
+        $p->idmatriculados = 0;
+        $p->usuarios_dni = $dni;
+        $p->cursos_id_curso = $ciclo;
+        try {
+            $p->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
     static function obtenerIdUltimoTransporteIngresado() {
         $colectivo = colectivo::all()->last();
         $idUltimoColectivo = $colectivo->id;
