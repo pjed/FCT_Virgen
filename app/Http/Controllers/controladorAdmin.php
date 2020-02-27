@@ -75,40 +75,6 @@ class controladorAdmin extends Controller {
         return $datos;
     }
 
-    /**
-     * metodo para recoger los datos que se necesitan mostrar en la vista consultar gastos
-     * @return type
-     */
-    public function enviarConsultarGastoAlumno() {
-        $l1 = Conexion::listaCursos();
-        $ciclo = session()->get('ciclo');
-        $l2 = Conexion::listarAlumnosCurso($ciclo);
-        $dniAlumno = session()->get('dniAlumno');
-        $desplazamiento = session()->get('desplazamiento');
-        $tipo = session()->get('tipo');
-        if ($desplazamiento == 1) {
-            if ($tipo == 1) {
-                $gtp = null;
-                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-            } else {
-                $gtc = null;
-                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
-            }
-        } else {
-            $gtc = null;
-            $gtp = null;
-        }
-        $gc = Conexion::listarGastosComidasPagination($dniAlumno);
-        $datos = [
-            'l1' => $l1,
-            'l2' => $l2,
-            'gc' => $gc,
-            'gtp' => $gtp,
-            'gtc' => $gtc,
-        ];
-        return $datos;
-    }
-
     public function consultarGastoAlumno(Request $req) {
         //saca los alumnos de un curso
         if (isset($_REQUEST['buscar'])) {
@@ -191,7 +157,7 @@ class controladorAdmin extends Controller {
             $idTransporte = $req->get('idTransporte');
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
         }
-        $datos = $this->enviarConsultarGastoAlumno();
+        $datos = controladorAdmin::paginacionConsultarGastoAlumno();
         return view('admin/consultarGastos', $datos);
     }
 
