@@ -154,7 +154,7 @@
                             </div>
                         </div>
                     </div>  
-                </div>F
+                </div>
             </nav>
         </footer>
     </body>
