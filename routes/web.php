@@ -1,6 +1,8 @@
 <?php
 
 use App\Auxiliar\Conexion;
+use App\Http\Controllers\controladorAdmin;
+use App\Http\Controllers\controladorTutor;
 
 /*
   |--------------------------------------------------------------------------
@@ -40,7 +42,14 @@ Route::get('bienvenidaT', function () {
 });
 Route::get('consultarGastosAlumno', function () {
     if (isset($_GET['page'])) {
-        $datos = controladorAdmin::paginacionConsultarGastoAlumno();
+        $datos = controladorTutor::enviarConsultarGastoAlumno();
+    } else {
+        $datos = [
+        'l2' => Conexion::listarAlumnoPorTutor(),
+        'gtc' => null,
+        'gtp' => null,
+        'gc' => null
+        ];
     }
     return view('tutor/consultarGastosAlumno', $datos);
 });
@@ -80,14 +89,18 @@ Route::get('extraerDocA', function () {
     return view('admin/extraerDocA', $datos);
 });
 Route::get('consultarGastos', function () {
-    $l1 = Conexion::listaCursos();
-    $datos = [
-        'l1' => $l1,
-        'l2' => null,
-        'gc' => null,
-        'gtp' => null,
-        'gtc' => null,
-    ];
+    if (isset($_GET['page'])) {
+        $datos = controladorAdmin::paginacionConsultarGastoAlumno();
+    } else {
+        $l1 = Conexion::listaCursos();
+        $datos = [
+            'l1' => $l1,
+            'l2' => null,
+            'gc' => null,
+            'gtp' => null,
+            'gtc' => null,
+        ];
+    }
     return view('admin/consultarGastos', $datos);
 });
 Route::get('gestionarCursos', function () {
@@ -120,10 +133,10 @@ Route::post('consultarGastos', 'controladorAdmin@consultarGastoAlumno');
 Route::get('consultarGastosAjax', function () {
     return view('admin/consultarGastosAjax');
 });
-Route::get('consultarGastosAjaxCiclo',  ['uses' => 'Conexion@listaCursosAjax','as' => 'consultarGastosAjaxCiclo']);
-Route::get('consultarGastosAjaxDniAlumno', ['uses' => 'Conexion@listarAlumnosCursoAjax','as' => 'consultarGastosAjaxDniAlumno']);
-Route::post('consultarGastosAjaxCiclo',  ['uses' => 'Conexion@listaCursosAjax','as' => 'consultarGastosAjaxCiclo']);
-Route::post('consultarGastosAjaxDniAlumno', ['uses' => 'Conexion@listarAlumnosCursoAjax','as' => 'consultarGastosAjaxDniAlumno']);
+Route::get('consultarGastosAjaxCiclo', ['uses' => 'Conexion@listaCursosAjax', 'as' => 'consultarGastosAjaxCiclo']);
+Route::get('consultarGastosAjaxDniAlumno', ['uses' => 'Conexion@listarAlumnosCursoAjax', 'as' => 'consultarGastosAjaxDniAlumno']);
+Route::post('consultarGastosAjaxCiclo', ['uses' => 'Conexion@listaCursosAjax', 'as' => 'consultarGastosAjaxCiclo']);
+Route::post('consultarGastosAjaxDniAlumno', ['uses' => 'Conexion@listarAlumnosCursoAjax', 'as' => 'consultarGastosAjaxDniAlumno']);
 Route::post('consultarGastosAyax', 'Conexion@listarAlumnoPorTutor');
 
 Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');

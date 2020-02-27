@@ -41,7 +41,8 @@ class controladorTutor extends Controller {
      * metodo para recoger los datos que se necesitan mostrar en la vista consultar gastos
      * @return type
      */
-    public function enviarConsultarGastoAlumno() {
+    public static function enviarConsultarGastoAlumno() {
+        $l2 = Conexion::listarAlumnoPorTutor();
         $dniAlumno = session()->get('dniAlumno');
         $desplazamiento = session()->get('desplazamiento');
         $tipo = session()->get('tipo');
@@ -59,9 +60,10 @@ class controladorTutor extends Controller {
         }
         $gc = Conexion::listarGastosComidasPagination($dniAlumno);
         $datos = [
+            'l2' => $l2,
             'gc' => $gc,
             'gtp' => $gtp,
-            'gtc' => $gtc,
+            'gtc' => $gtc
         ];
         return $datos;
     }
@@ -128,7 +130,7 @@ class controladorTutor extends Controller {
             $idTransporte = $req->get('idTransporte');
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
         }
-        $datos = $this->enviarConsultarGastoAlumno();
+        $datos = controladorTutor::enviarConsultarGastoAlumno();
         return view('tutor/consultarGastosAlumno', $datos);
     }
 
