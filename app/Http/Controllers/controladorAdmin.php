@@ -325,7 +325,6 @@ class controladorAdmin extends Controller {
                     </button>
                   </div>';
             }
-
         }
 
         if ($tipoUsuario == "Tutor") {
@@ -333,7 +332,8 @@ class controladorAdmin extends Controller {
                 $val = Conexion::existeUsuario_Dni($dni);
                 if ($val) {
                     Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil);
-                    Conexion::insertarRol($dni, $rol);                } else {
+                    Conexion::insertarRol($dni, $rol);
+                } else {
                     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Ya existe.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -349,7 +349,6 @@ class controladorAdmin extends Controller {
                     </button>
                   </div>';
             }
-
         }
 
         if ($tipoUsuario == "Alumno") {
@@ -413,8 +412,46 @@ class controladorAdmin extends Controller {
                     </button>
                   </div>';
             }
-
         }
+    }
+
+    public function listarCursosAjax() {
+        $v = Conexion::listaCursos();
+
+        if (isset($_GET['ciclo'])) {
+            $ciclo = session()->put('ciclo', $_GET['ciclo']);
+        } else {
+            $ciclo = null;
+        }
+
+        foreach ($v as $value) {
+            if ($value->id == $ciclo) {
+                $w = '<option value="' . $value->id . '" selected>' . $value->id . '</option>';
+            } else {
+                $w = '<option value="' . $value->id . '">' . $value->id . '</option>';
+            }
+        }
+
+        echo $w;
+    }
+
+    public function listarAlumnosCursoAyax() {
+        $v = Conexion:: listarAlumnosCurso($ciclo);
+
+        if (isset($_GET['dniAlumno'])) {
+            $dniAlumno = session()->put('dniAlumno', $_GET['dniAlumno']);
+        }else{
+            $dniAlumno = null;
+        }
+        
+        foreach ($v as $value) {
+            if ($value->dni == $dniAlumno) {
+                $w = '<option value="' . $value->dni . '" selected>' . $value->nombre . ', ' . $value->apellidos . '</option>';
+            } else {
+                $w = '<option value="' . $value->dni . '">' . $value->nombre . ', ' . $value->apellidos .'</option>';
+            }
+        }
+        echo $w;
     }
 
 }

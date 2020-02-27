@@ -5,23 +5,21 @@
 $(document).ready(function () {
     var ciclo = null;
     var dniAlumno = null;
+    $.ajaxSetup({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
+    });
     /**
      * se carga nada mas iniciar la pagina
      */
-    $("#consultarGastosAjaxCiclo").ready(function () {
-        var listaCiclo = new Array();
+    $("#ciclo").ready(function () {
         $.ajax({
             url: 'consultarGastosAjaxCiclo',
-            data: {'parametros': "1"},
             type: 'POST',
+            data: {'parametros': null},
             success: function (response) {
                 alert('asd');
                 if (response !== null) {
-//                    listaCiclo = JSON.parse(response); //conversión a json de los datos de respuesta
-//                    if (listaCiclo !== null) {
-//                    MostrarConsultarGastosAjaxCiclo(listaCiclo);
-                    MostrarConsultarGastosAjaxCiclo(response);
-//                    }
+                    $("#ciclo").html(response);
                 }
             },
             statusCode: {
@@ -34,7 +32,8 @@ $(document).ready(function () {
                 //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
             }
         });
-    });
+    }
+    );
     /*
      * funciona cuando se selecciona un ciclo y muestra la lista de los alumnos de es curso
      * @param {type} listaCiclo
@@ -42,22 +41,17 @@ $(document).ready(function () {
      */
     $("#ciclo").blur(function () {
         ciclo = $("select#ciclo option:checked").val();
-        sessionStorage.setItem("ciclo", ciclo);
         jQuery(ciclo).load('session_write.php?ciclo=' + ciclo);
         var parametros = {
             "ciclo": ciclo
         };
-        var listaAlumno = new Array();
         $.ajax({
             url: 'consultarGastosAjaxDniAlumno',
             data: parametros,
             type: 'POST',
             success: function (response) {
                 if (response !== null) {
-                    listaAlumno = JSON.parse(response); //conversión a json de los datos de respuesta
-                    if (listaAlumno !== null) {
-                        MostrarconsultarGastosAjaxDniAlumno(listaAlumno);
-                    }
+                    $("#ciclo").html(response);
                 }
             },
             statusCode: {
@@ -73,59 +67,6 @@ $(document).ready(function () {
     });
     $("#dniAlumno").blur(function () {
         dniAlumno = $("select#dniAlumno option:checked").val();
-        sessionStorage.setItem("dniAlumno", dniAlumno);
         jQuery(dniAlumno).load('session_write.php?dniAlumno=' + dniAlumno);
-
     });
-    /**
-     * Escribe el formalario del select de ciclo
-     * @param {type} listaCiclo
-     * @return {undefined}
-     */
-    function MostrarConsultarGastosAjaxCiclo(listaCiclo) {
-        ciclo = sessionStorage.getItem("ciclo");
-        var $e = $('#consultarGastosAjaxCiclo');
-        $e.empty();
-        $e.append('<form action="consultarGastosAjaxCiclo" method="POST">');
-        $e.append('{{ csrf_field() }}');
-        $e.append('<label class="text-center"  for="ciclo">');
-        $e.append('Ciclo:');
-        $e.append(' <select id="ciclo" class="sel" name="ciclo"> ');
-        for (var i = 0; i < listaCiclo.length; i++) {
-            if (listaCiclo[i].id == ciclo) { //ciclo variable guarda en un sesion
-                $e.append('<option value="' + listaCiclo[i].id + '" selected>' + listaCiclo[i].id + '</option>');
-            } else {
-                $e.append('<option value="' + listaCiclo[i].id + '" > ' + listaCiclo[i].id + '</option>');
-            }
-        }
-        $e.append('</select>');
-        $e.append('</label> ');
-        $e.append('</form>');
-    }
-    /**
-     * Escribe el formalario del select de los alumnos de un ciclo
-     * @param {type} listaAlumno
-     * @return {undefined}
-     */
-    function MostrarconsultarGastosAjaxDniAlumno(listaAlumno) {
-        dniAlumno = sessionStorage.getItem("dniAlumno");
-        var $e = $("#consultarGastosAjaxDniAlumno");
-        $e.empty();
-        $e.append('<form action="consultarGastos" method="POST">');
-        $e.append('{{ csrf_field() }}');
-        $e.append('<label class="text-center">  for="dniAlumno"');
-        $e.append('Alumno:');
-        $e.append('<select id="dniAlumno" class="sel" name="dniAlumno">');
-        for (var i = 0; i < listaAlumno.length; i++) {
-            if (listaAlumno[i].dni == dniAlumno) { //$dniAlumno variable guarda en un sesion
-                $e.append('<option value="' + listaAlumno[i].dni + '" selected>' + listaAlumno[i].nombre + ', ' + +listaAlumno[i].apellidos + '</option>');
-            } else {
-                $e.append('<option value="' + listaAlumno[i].dni + '" > ' + listaAlumno[i].nombre + ', ' + +listaAlumno[i].apellidos + '</option>');
-            }
-        }
-        $e.append('</select>');
-        $e.append('</label> ');
-        $e.append('<button type="submit" id="buscar" class=" btn-sm-sm btn-sm-sm btn-sm-primary" name="buscar1"></button>');
-        $e.append('</form>');
-    }
 });

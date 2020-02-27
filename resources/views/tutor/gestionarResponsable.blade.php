@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Auxiliar\Conexion;
@@ -16,6 +15,7 @@ Gestionar Responsable
 @endsection
 
 @section('contenido') 
+
 <!-- Migas de pan -->
 <nav class="row">
     <nav class="col">

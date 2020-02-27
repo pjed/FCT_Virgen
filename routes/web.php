@@ -133,11 +133,10 @@ Route::post('consultarGastos', 'controladorAdmin@consultarGastoAlumno');
 Route::get('consultarGastosAjax', function () {
     return view('admin/consultarGastosAjax');
 });
-Route::get('consultarGastosAjaxCiclo', ['uses' => 'Conexion@listaCursosAjax', 'as' => 'consultarGastosAjaxCiclo']);
-Route::get('consultarGastosAjaxDniAlumno', ['uses' => 'Conexion@listarAlumnosCursoAjax', 'as' => 'consultarGastosAjaxDniAlumno']);
-Route::post('consultarGastosAjaxCiclo', ['uses' => 'Conexion@listaCursosAjax', 'as' => 'consultarGastosAjaxCiclo']);
-Route::post('consultarGastosAjaxDniAlumno', ['uses' => 'Conexion@listarAlumnosCursoAjax', 'as' => 'consultarGastosAjaxDniAlumno']);
-Route::post('consultarGastosAyax', 'Conexion@listarAlumnoPorTutor');
+Route::get('consultarGastosAjaxCiclo', ['uses' => 'contoldadorAdmin@listaCursosAjax', 'as' => 'consultarGastosAjaxCiclo']);
+Route::get('consultarGastosAjaxDniAlumno', ['uses' => 'contoldadorAdmin@listarAlumnosCursoAjax', 'as' => 'consultarGastosAjaxDniAlumno']);
+Route::post('consultarGastosAjaxCiclo', ['uses' => 'contoldadorAdmin@listaCursosAjax', 'as' => 'consultarGastosAjaxCiclo']);
+Route::post('consultarGastosAjaxDniAlumno', ['uses' => 'contoldadorAdmin@listarAlumnosCursoAjax', 'as' => 'consultarGastosAjaxDniAlumno']);
 
 Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');
 Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');

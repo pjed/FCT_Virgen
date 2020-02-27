@@ -10,33 +10,6 @@ if (isset($_GET['dniAlumno'])) {
     $gtp = null;
     $gtc = null;
 }
-if (isset($_GET['ciclo'])) {
-    $ciclo = session()->put('ciclo', $_GET['ciclo']);
-}
-
-
-//if (session()->get('ciclo') != null) {
-//    $ciclo = session()->get('ciclo');
-//} else {
-//    $ciclo = null;
-//    $dniAlumno = null;
-//}
-//if (session()->get('dniAlumno') != null) {
-//    $dniAlumno = session()->get('dniAlumno');
-//    $l2 = Conexion::listarAlumnosCurso($ciclo);
-//} else {
-//    $dniAlumno = null;
-//}
-//if (isset($_GET['page'])) {
-//    $datos = controladorAdmin::paginacionConsultarGastoAlumno();
-//    foreach ($datos as $e) {
-//        $l1 = $datos['l1'];
-//        $l2 = $datos['l2'];
-//        $gc = $datos['gc'];
-//        $gtp = $datos ['gtp'];
-//        $gtc = $datos ['gtc'];
-//    }
-//}
 ?>
 @extends('maestra.maestraAdmin')
 
@@ -69,14 +42,35 @@ Consultar Gastos Alumnos
 
     <!-- Seleccionar curso -->
     <div class="row justify-content-center">
-        <div id="consultarGastosAjaxCiclo" class="col-sm-3 col-md-3">
+        <div class="col-sm-3 col-md-3">
+            <div id="consultarGastosAjaxCiclo">
+                <form action="" method="POST">
+                    {{ csrf_field() }}
+                    <label class="text-center" for='ciclo'>
+                        Ciclo:
+                        <select id="ciclo" class="sel" name="ciclo">  
 
+                        </select>
+                    </label> 
+                </form>
+            </div>
         </div>
     </div>
     <!-- Seleccionar alumno -->
     <div class="row justify-content-center">
-        <div id="consultarGastosAjaxDniAlumno" class="col-sm-3 col-md-3">
-            
+        <div class="col-sm-3 col-md-3">
+            <div id="consultarGastosAjaxDniAlumno">
+                <form action="consultarGastos" method="POST">
+                    {{ csrf_field() }}
+                    <label class="text-center">
+                        Alumno:
+                        <select id="dniAlumno" class="sel" name="dniAlumno">                                    
+
+                        </select>
+                    </label>
+                    <button type="submit" id="buscar" class=" btn-sm-sm btn-sm-sm btn-sm-primary" name="buscar1"></button>
+                </form>
+            </div>
         </div>
     </div>
     @if ($gc !=null) 

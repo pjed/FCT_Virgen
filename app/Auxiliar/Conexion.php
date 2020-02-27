@@ -20,7 +20,7 @@ use App\Modals\tutor;
 /**
  * Description of Conexion
  *
- * @author daw207
+ * @author 
  */
 class Conexion {
 
@@ -52,7 +52,8 @@ class Conexion {
         }
         return $v;
     }
-/**
+
+    /**
      * Método para comprobar si el correo del usuario que quiere recuperar la contraseña existe
      * @param type $correo email del usuario
      * @return type usuario
@@ -65,6 +66,7 @@ class Conexion {
         }
         return $sal;
     }
+
     /**
      * Método para comprobar si el correo del usuario que quiere recuperar la contraseña existe
      * @param type $correo email del usuario
@@ -1397,27 +1399,6 @@ class Conexion {
     }
 
     /**
-     * metodo listar cursos con ayax
-     */
-    static function listaCursosAyax() {
-        $v = [];
-        $v = \DB::table('cursos')
-                ->join('tutores', 'cursos.id_curso', '=', 'tutores.cursos_id_curso')
-                ->join('usuarios', 'usuarios.dni', '=', 'tutores.usuarios_dni')
-                ->select(
-                        'tutores.idtutores AS idtutores', ' AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono'
-                )
-                ->select(
-                        'cursos.id_curso AS id', 'cursos.descripcion AS descripcion', 'cursos.ano_academico AS anioAcademico', 'cursos.familia AS familia', 'cursos.horas AS horas', 'tutores.usuarios_dni AS tutorDni', 'usuarios.nombre AS tutorNombre', 'usuarios.apellidos AS tutorApellidos'
-                )
-                ->get();
-//        $w = json_encode($v, true);
-//        echo $w;
-        echo $v;
-        return $v;
-    }
-    
-    /**
      * metodo obtener anio academico
      */
     static function obtenerAnioAcademico() {
@@ -1428,22 +1409,6 @@ class Conexion {
         $ano_academico = \DB::select($sql);
 
         return $ano_academico;
-    }
-
-    /**
-     * metodo listar alumnos de un cursos con ayax
-     */
-    static function listarAlumnosCursoAyax($ciclo) {
-        $v = \DB::table('matriculados')
-                ->where('matriculados.cursos_id_curso', $ciclo)
-                ->join('cursos', 'matriculados.cursos_id_curso', '=', 'cursos.id_curso')
-                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
-                ->select(
-                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban'
-                )
-                ->get();
-        $w = json_encode($v, true);
-        echo $w;
     }
 
     /**
@@ -1698,7 +1663,7 @@ class Conexion {
                 ->get();
         return $v;
     }
-    
+
     static function obtenerAlumnosTutor($curso) {
         $v = \DB::table('matriculados')
                 ->where('matriculados.cursos_id_curso', $curso)
@@ -1708,7 +1673,7 @@ class Conexion {
                 ->get();
         return $v;
     }
-    
+
     static function obtenerAlumnosTutorMemoria($curso) {
         $sql = "select concat(usuarios.apellidos,', ',usuarios.nombre) as alumno, 
                 usuarios.email as email,
@@ -1735,6 +1700,7 @@ class Conexion {
 
         return $alumnos_memoria;
     }
+
     static function obtenerIdUltimoTransporteIngresado() {
         $colectivo = colectivo::all()->last();
         $idUltimoColectivo = $colectivo->id;
@@ -1748,7 +1714,7 @@ class Conexion {
 //        $p->usuarios_dni = $dni;
 //        $p->cursos_id_curso = $ciclo;
         try {
-            \DB::insert('insert into matriculados (idmatriculados, usuarios_dni, cursos_id_curso) values (?,?,?)',[0,$dni,$ciclo]);
+            \DB::insert('insert into matriculados (idmatriculados, usuarios_dni, cursos_id_curso) values (?,?,?)', [0, $dni, $ciclo]);
 //            $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
@@ -1765,4 +1731,5 @@ class Conexion {
                   </div>';
         }
     }
+
 }
