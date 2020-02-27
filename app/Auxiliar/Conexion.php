@@ -52,7 +52,19 @@ class Conexion {
         }
         return $v;
     }
-
+/**
+     * Método para comprobar si el correo del usuario que quiere recuperar la contraseña existe
+     * @param type $correo email del usuario
+     * @return type usuario
+     */
+    static function existeUsuario_Dni($dni) {
+        $sal = true;
+        $p = usuario::where('dni', $dni)->first(); //aqui se cruzan
+        if ($p) {
+            $sal = false;
+        }
+        return $sal;
+    }
     /**
      * Método para comprobar si el correo del usuario que quiere recuperar la contraseña existe
      * @param type $correo email del usuario
@@ -98,7 +110,7 @@ class Conexion {
         $p->telefono = $tel;
         $p->movil = $movil;
         $p->iban = $iban;
-        $p->foto = null;
+        $p->foto = 'images/defecto.jpeg';
         try {
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -124,10 +136,10 @@ class Conexion {
      */
     static function insertarRol($dni, $rol) {
         $p = new usuarios_rol;
-        $p->dni = $dni;
+        $p->usuario_dni = $dni;
         $p->rol_id = $rol;
         try {
-            $pp->save(); //aqui se hace la insercion   
+            $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1399,8 +1411,10 @@ class Conexion {
                         'cursos.id_curso AS id', 'cursos.descripcion AS descripcion', 'cursos.ano_academico AS anioAcademico', 'cursos.familia AS familia', 'cursos.horas AS horas', 'tutores.usuarios_dni AS tutorDni', 'usuarios.nombre AS tutorNombre', 'usuarios.apellidos AS tutorApellidos'
                 )
                 ->get();
-        $w = json_encode($v, true);
-        echo $w;
+//        $w = json_encode($v, true);
+//        echo $w;
+        echo $v;
+        return $v;
     }
     
     /**
@@ -1729,12 +1743,13 @@ class Conexion {
     }
 
     static function insertarAlumnoTablaMatriculados($dni, $ciclo) {
-        $p = new matricula;
-        $p->idmatriculados = 0;
-        $p->usuarios_dni = $dni;
-        $p->cursos_id_curso = $ciclo;
+//        $p = new matricula;
+//        $p->idmatriculados = 0;
+//        $p->usuarios_dni = $dni;
+//        $p->cursos_id_curso = $ciclo;
         try {
-            $p->save(); //aqui se hace la insercion   
+            \DB::insert('insert into matriculados (idmatriculados, usuarios_dni, cursos_id_curso) values (?,?,?)',[0,$dni,$ciclo]);
+//            $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1743,7 +1758,7 @@ class Conexion {
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Clave duplicada.
+                    Error al inertar usuario.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>

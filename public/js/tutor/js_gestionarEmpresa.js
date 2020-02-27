@@ -1,3 +1,7 @@
+/**
+ * 
+ *  @author marina
+ */
 $(document).ready(function () {
   
     $("#CIF").blur(function () {

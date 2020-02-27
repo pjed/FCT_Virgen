@@ -1,3 +1,7 @@
+/**
+ * 
+ *  @author marina
+ */
 $(document).ready(function () {
     $("#dni").blur(function () {
         if ($("#dni").val() === "") {

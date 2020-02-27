@@ -57,7 +57,7 @@ Gestionar gastos transporte
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="n_diasC" value="<?php echo $key->n_diasC; ?>"></td>
                                 <td>
-                                    <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?>
+                                    <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
                                     <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'></td>
@@ -81,7 +81,8 @@ Gestionar gastos transporte
             {{ $gastosAlumno->links()}}
         </div>
     </div>
-    @else
+    @endif
+    @if ($tipo == 0)
     <?php $gastosAlumno = Conexion::listarGastosTransportesPropiosPagination($dniAlumno); ?>
     <!-- Tabla de gastos transporte propio del usuario -->
     <div id="propio" class="row">

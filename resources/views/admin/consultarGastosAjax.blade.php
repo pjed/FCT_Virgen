@@ -5,6 +5,10 @@ use App\Http\Controllers\controladorAdmin;
 
 if (isset($_GET['dniAlumno'])) {
     $dniAlumno = session()->put('dniAlumno', $_GET['dniAlumno']);
+} else {
+    $gc = null;
+    $gtp = null;
+    $gtc = null;
 }
 if (isset($_GET['ciclo'])) {
     $ciclo = session()->put('ciclo', $_GET['ciclo']);
@@ -72,6 +76,7 @@ Consultar Gastos Alumnos
     <!-- Seleccionar alumno -->
     <div class="row justify-content-center">
         <div id="consultarGastosAjaxDniAlumno" class="col-sm-3 col-md-3">
+            
         </div>
     </div>
     @if ($gc !=null) 
@@ -155,7 +160,7 @@ Consultar Gastos Alumnos
                                 <td><input type="number" class="form-control form-control-sm" name="n_diasC" value="<?php echo $key->n_diasC; ?>"/></td>
                                 <td><input type="text" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
                                 <td>
-                                    <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?>
+                                    <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
                                 </td>
                                 <td><button type="submit" id="editar" class="btn-sm" name="editarC"></button></td>
                                 <td><button type="submit" id="eliminar" class="btn-sm" name="eliminarC"></button></td>
