@@ -5,6 +5,10 @@ use App\Http\Controllers\controladorAdmin;
 
 if (isset($_GET['dniAlumno'])) {
     $dniAlumno = session()->put('dniAlumno', $_GET['dniAlumno']);
+} else {
+    $gc = null;
+    $gtp = null;
+    $gtc = null;
 }
 if (isset($_GET['ciclo'])) {
     $ciclo = session()->put('ciclo', $_GET['ciclo']);
@@ -72,6 +76,7 @@ Consultar Gastos Alumnos
     <!-- Seleccionar alumno -->
     <div class="row justify-content-center">
         <div id="consultarGastosAjaxDniAlumno" class="col-sm-3 col-md-3">
+            
         </div>
     </div>
     @if ($gc !=null) 

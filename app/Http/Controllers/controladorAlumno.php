@@ -166,6 +166,8 @@ class controladorAlumno extends Controller {
     public function gestionarGastoTransporte(Request $req) {
         $id = $req->get('ID');
         $idTransporte = $req->get('idTransporte');
+        $tipo = null;
+        
         if (isset($_REQUEST['editarP'])) {
             $n_diasP = $req->get('n_diasP');
             $kms = $req->get('kms');

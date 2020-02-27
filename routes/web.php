@@ -45,10 +45,10 @@ Route::get('consultarGastosAlumno', function () {
         $datos = controladorTutor::enviarConsultarGastoAlumno();
     } else {
         $datos = [
-        'l2' => Conexion::listarAlumnoPorTutor(),
-        'gtc' => null,
-        'gtp' => null,
-        'gc' => null
+            'l2' => Conexion::listarAlumnoPorTutor(),
+            'gtc' => null,
+            'gtp' => null,
+            'gc' => null
         ];
     }
     return view('tutor/consultarGastosAlumno', $datos);
@@ -167,6 +167,7 @@ Route::get('gestionarGastosComida', function () {
     return view('alumno/gestionarGastosComida', ['gastosAlumno' => $gastosAlumno]);
 });
 Route::get('gestionarGastosTransporte', function () {
+    $tipo = null;
     $n = session()->get('usu');
     foreach ($n as $u) {
         $dniAlumno = $u['dni'];

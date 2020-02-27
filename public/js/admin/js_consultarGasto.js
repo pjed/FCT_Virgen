@@ -4,20 +4,19 @@ $(document).ready(function () {
     /**
      * se carga nada mas iniciar la pagina
      */
-    $("#ciclo").ready(function () {
-        var parametros = null;
+    $("#consultarGastosAjaxCiclo").ready(function () {
         var listaCiclo = new Array();
         $.ajax({
             url: 'consultarGastosAjaxCiclo',
-            //data:{'nombre':"DAW2"},
-            data: parametros,
-            type: 'post',
+            data: {'parametros': "1"},
+            type: 'POST',
             success: function (response) {
+                alert('asd');
                 if (response !== null) {
-                    listaCiclo = JSON.parse(response); //conversión a json de los datos de respuesta
-                    if (listaCiclo !== null) {
-                        MostrarConsultarGastosAjaxCiclo(listaCiclo);
-                    }
+//                    listaCiclo = JSON.parse(response); //conversión a json de los datos de respuesta
+//                    if (listaCiclo !== null) {
+                    MostrarConsultarGastosAjaxCiclo(listaCiclo);
+//                    }
                 }
             },
             statusCode: {
@@ -47,7 +46,7 @@ $(document).ready(function () {
         $.ajax({
             url: 'consultarGastosAjaxDniAlumno',
             data: parametros,
-            type: 'post',
+            type: 'POST',
             success: function (response) {
                 if (response !== null) {
                     listaAlumno = JSON.parse(response); //conversión a json de los datos de respuesta
@@ -68,7 +67,7 @@ $(document).ready(function () {
         });
     });
     $("#dniAlumno").blur(function () {
-        dniAlumno = $("select#dniAlumno option:checked").val();        
+        dniAlumno = $("select#dniAlumno option:checked").val();
         sessionStorage.setItem("dniAlumno", dniAlumno);
         jQuery(dniAlumno).load('session_write.php?dniAlumno=' + dniAlumno);
 
@@ -79,7 +78,7 @@ $(document).ready(function () {
      * @return {undefined}
      */
     function MostrarConsultarGastosAjaxCiclo(listaCiclo) {
-        ciclo = sessionStorage.getItem("ciclo"); 
+        ciclo = sessionStorage.getItem("ciclo");
         var $e = $('#consultarGastosAjaxCiclo');
         $e.empty();
         $e.append('<form action="consultarGastosAjaxCiclo" method="POST">');
@@ -104,7 +103,7 @@ $(document).ready(function () {
      * @return {undefined}
      */
     function MostrarconsultarGastosAjaxDniAlumno(listaAlumno) {
-       dniAlumno = sessionStorage.getItem("dniAlumno"); 
+        dniAlumno = sessionStorage.getItem("dniAlumno");
         var $e = $("#consultarGastosAjaxDniAlumno");
         $e.empty();
         $e.append('<form action="consultarGastos" method="POST">');

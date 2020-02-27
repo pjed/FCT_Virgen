@@ -1399,8 +1399,10 @@ class Conexion {
                         'cursos.id_curso AS id', 'cursos.descripcion AS descripcion', 'cursos.ano_academico AS anioAcademico', 'cursos.familia AS familia', 'cursos.horas AS horas', 'tutores.usuarios_dni AS tutorDni', 'usuarios.nombre AS tutorNombre', 'usuarios.apellidos AS tutorApellidos'
                 )
                 ->get();
-        $w = json_encode($v, true);
-        echo $w;
+//        $w = json_encode($v, true);
+//        echo $w;
+        echo $v;
+        return $v;
     }
     
     /**
