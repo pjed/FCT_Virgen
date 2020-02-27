@@ -12,7 +12,7 @@ Inicio de sesion
 <p class="text-center">Iniciar Sesión</p>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-sm-3 col-md-3"> 
+        <div class="col-sm-3 col-md-3">
             <form name="inicioSesion" action="inicioSesion" method="POST">
                 {{ csrf_field() }}                
                 <div class="form-group mx-auto">
@@ -33,6 +33,8 @@ Inicio de sesion
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary btn-sm" id="aceptarInicioSesion" name="aceptarInicioSesion" value="Aceptar">
                 </div>
+                <img src="{{asset ('images/chrome_logo.jpg')}}" alt="logotipo chrome" class="logo_chrome"> Para generar documentos se recomienda usar Chrome<br>
+                    <img src="{{asset ('images/firefox_logo.png')}}" alt="logotipo chrome" class="logo_chrome"> Para visualizar la aplicación se recomienda usar Firefox
             </form>
         </div>
     </div>
