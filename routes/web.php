@@ -81,6 +81,12 @@ Route::post('perfilT1', 'controladorGeneral@perfilT'); //redirige al perfil
 Route::get('bienvenidaAd', function () {
     return view('admin/bienvenidaAd');
 });
+Route::get('crearBBDD', function () {
+    return view('admin/crearBBDD');
+});
+Route::get('importarDatos', function () {
+    return view('admin/importarDatos');
+});
 Route::get('extraerDocA', function () {
     $l1 = Conexion::listaCursos();
     $datos = [
