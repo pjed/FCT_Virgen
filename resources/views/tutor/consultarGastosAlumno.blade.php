@@ -2,30 +2,16 @@
 <?php
 
 use App\Auxiliar\Conexion;
+use App\Http\Controllers\controladorTutor;
 
-$l2 = Conexion::listarAlumnoPorTutor();
-if (session()->get('dniAlumno')!=null) {
+if (session()->get('dniAlumno') != null) {
     $dniAlumno = session()->get('dniAlumno');
 } else {
     $dniAlumno = null;
 }
 if (isset($_GET['page'])) {
-    $desplazamiento = session()->get('desplazamiento');
-    $tipo = session()->get('tipo');
-    if ($desplazamiento == 1) {
-        if ($tipo == 1) {
-            $gtp = null;
-            $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-        } else {
-            $gtc = null;
-            $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
-        }
-    } else {
-        $gtc = null;
-        $gtp = null;
-    }
-    $gc = Conexion::listarGastosComidasPagination($dniAlumno);
-    }
+    $datos = controladorTutor::enviarConsultarGastoAlumno();
+}
 ?>
 @extends('maestra.maestraTutor')
 
