@@ -28,7 +28,7 @@ Gestionar gastos transporte
         </div>
     </div>
     @if ($tipo == 1)
-<?php $gastosAlumno = Conexion::listarGastosTransportesColectivosPagination($dniAlumno); ?>
+    <?php $gastosAlumno = Conexion::listarGastosTransportesColectivosPagination($dniAlumno); ?>
     <!-- Tabla de gastos transporte colectivo del usuario -->
     <div id="colectivo" class="row justify-content-center">
         <div class="col-sm col-md-8">
@@ -57,7 +57,7 @@ Gestionar gastos transporte
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="n_diasC" value="<?php echo $key->n_diasC; ?>"></td>
                                 <td>
-    <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?>
+                                    <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
                                     <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'></td>
@@ -83,7 +83,7 @@ Gestionar gastos transporte
     </div>
     @endif
     @if ($tipo == 0)
-<?php $gastosAlumno = Conexion::listarGastosTransportesPropiosPagination($dniAlumno); ?>
+    <?php $gastosAlumno = Conexion::listarGastosTransportesPropiosPagination($dniAlumno); ?>
     <!-- Tabla de gastos transporte propio del usuario -->
     <div id="propio" class="row">
         <div class="col-md-12">

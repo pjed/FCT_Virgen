@@ -88,7 +88,7 @@ Consultar Gastos Alumnos
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm" name="importe" value="<?php echo $key->importe; ?>"/></td>
                                 <td>
-                                    <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?>
+                                    <a  href="<?php echo $key->foto; ?>" target="_blank">  <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
                                 </td>
                                 <td><button type="submit" id="editar" class="btn-sm" name="editar"></button>
                                     <button type="submit" id="eliminar" class="btn-sm" name="eliminar"></button></td> 
@@ -139,7 +139,9 @@ Consultar Gastos Alumnos
                                 </td>
                                 <td><input type="number" class="form-control form-control-sm" name="n_diasC" value="<?php echo $key->n_diasC; ?>"/></td>
                                 <td><input type="text" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
-                                <td><?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></td>
+                                <td>
+                                    <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
+                                </td>
                                 <td><button type="submit" id="editar" class="btn-sm" name="editarC"></button></td>
                                 <td><button type="submit" id="eliminar" class="btn-sm" name="eliminarC"></button></td>
                             </tr>
