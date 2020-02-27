@@ -1,3 +1,7 @@
+/**
+ * 
+ *  @author marina
+ */
 $(document).ready(function () {
     var ciclo = null;
     var dniAlumno = null;
@@ -15,7 +19,8 @@ $(document).ready(function () {
                 if (response !== null) {
 //                    listaCiclo = JSON.parse(response); //conversión a json de los datos de respuesta
 //                    if (listaCiclo !== null) {
-                    MostrarConsultarGastosAjaxCiclo(listaCiclo);
+//                    MostrarConsultarGastosAjaxCiclo(listaCiclo);
+                    MostrarConsultarGastosAjaxCiclo(response);
 //                    }
                 }
             },

@@ -1,3 +1,7 @@
+/**
+ * 
+ *  @author marina
+ */
 $(document).ready(function () {
   
     $("#idEmpresa").blur(function () {
