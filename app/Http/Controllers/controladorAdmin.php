@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Auxiliar\Conexion;
+use App\Auxiliar\Documentos;
 
 class controladorAdmin extends Controller {
 
@@ -326,6 +327,10 @@ class controladorAdmin extends Controller {
 
         if (isset($_REQUEST['memoriaAlumnos'])) {
             
+            $curso = $req->get("ciclo");
+            $anio = Conexion::obtenerAnioAcademico();
+            $alumnos_memoria = Conexion::obtenerAlumnosTutorMemoria($curso);
+            Documentos::GenerarMemoriaAlumnos($alumnos_memoria, $curso, $anio);
         }
         if (isset($_REQUEST['gastosFCT'])) {
             

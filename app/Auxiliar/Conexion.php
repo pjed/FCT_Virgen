@@ -1679,7 +1679,7 @@ class Conexion {
                 usuarios.email as email,
                 usuarios.movil as movil,
                 empresas.nombre as nombre_empresa,
-                'SI/NO' as nueva,
+                case when empresas.nueva = 0 THEN 'NO' ELSE 'SI' END as nueva,
                 responsables.nombre as nombre_responsable,
                 empresas.direccion as direccion_empresa,
                 empresas.localidad as localidad_empresa,
@@ -1694,7 +1694,7 @@ class Conexion {
                 and usuarios.dni = practicas.usuarios_dni
                 and practicas.empresas_id = empresas.id
                 and practicas.responsables_id = responsables.id
-                and matriculados.cursos_id_curso = '2DAW';";
+                and matriculados.cursos_id_curso = '".$curso."';";
 
         $alumnos_memoria = \DB::select($sql);
 
