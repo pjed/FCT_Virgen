@@ -160,6 +160,72 @@ class controladorAdmin extends Controller {
         $datos = controladorAdmin::paginacionConsultarGastoAlumno();
         return view('admin/consultarGastos', $datos);
     }
+    
+    public function consultarGastoAlumnoAjax(Request $req) {        
+        //saca los gastos de un alumno
+        if (isset($_REQUEST['buscar1'])) {
+
+//            si ese usuario no tiene ningun gasto que salga algo
+            $desplazamiento = null;
+            $tipo = null;
+
+            $dniAlumno = $req->get('dniAlumno');
+            session()->put('dniAlumno', $dniAlumno);
+            $gt = Conexion::listarGastosTransportes($dniAlumno);
+
+            foreach ($gt as $key) {
+                $desplazamiento = $key->desplazamiento;
+                $tipo = $key->tipo;
+            }
+
+            session()->put('desplazamiento', $desplazamiento);
+            session()->put('tipo', $tipo);
+        }
+//            editar y borrar comida
+        if (isset($_REQUEST['editar'])) {
+            $id = $req->get('ID');
+            $idGasto = $req->get('idGasto');
+            $fecha = $req->get('fecha');
+            $importe = $req->get('importe');
+            $foto = $req->get('foto');
+            Conexion::ModificarGastoComida($id, $fecha, $importe, $foto);
+        }
+        if (isset($_REQUEST['eliminar'])) {
+            $id = $req->get('ID');
+            $idGasto = $req->get('idGasto');
+            Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
+        }
+//            editar y borrar transporte propio
+        if (isset($_REQUEST['editarP'])) {
+            $id = $req->get('ID');
+            $idTransporte = $req->get('idTransporte');
+            $n_diasP = $req->get('n_diasP');
+            $kms = $req->get('kms');
+            $precio = $req->get('precio');
+            Conexion::ModificarGastoTransportePropio($id, $n_diasP, $precio, $kms);
+        }
+        if (isset($_REQUEST['eliminarP'])) {
+            $id = $req->get('ID');
+            $idTransporte = $req->get('idTransporte');
+            Conexion::borrarGastoTransportePropio($id, $idTransporte); //hay que mirarlo
+        }
+//            editar y borrar transporte colectivo
+        if (isset($_REQUEST['editarC'])) {
+            $id = $req->get('ID');
+            $idTransporte = $req->get('idTransporte');
+            $n_diasC = $req->get('n_diasC');
+            $precio = $req->get('precio');
+            $foto = $req->get('foto');
+            Conexion::ModificarGastoTransporteColectivo($id, $n_diasP, $precio, $foto);
+        }
+        if (isset($_REQUEST['eliminarC'])) {
+            $id = $req->get('ID');
+            $idTransporte = $req->get('idTransporte');
+            Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
+        }
+        $datos = controladorAdmin::paginacionConsultarGastoAlumno();
+        return view('admin/consultarGastosAjax', $datos);
+    }
 
     public function gestionarUsuarios(Request $req) {
 
@@ -417,38 +483,42 @@ class controladorAdmin extends Controller {
 
     public function listarCursosAjax() {
         $v = Conexion::listaCursos();
-
-        if (isset($_GET['ciclo'])) {
-            $ciclo = session()->put('ciclo', $_GET['ciclo']);
-        } else {
-            $ciclo = null;
-        }
+        $w = '';
+//        if (isset($_GET['ciclo'])) {
+////            $ciclo = session()->put('ciclo', $_GET['ciclo']);
+//        } else {
+        $ciclo = null;
+//        }
 
         foreach ($v as $value) {
             if ($value->id == $ciclo) {
-                $w = '<option value="' . $value->id . '" selected>' . $value->id . '</option>';
+                $w = $w . '<option value="' . $value->id . '" selected>' . $value->id . '</option>';
             } else {
-                $w = '<option value="' . $value->id . '">' . $value->id . '</option>';
+                $w = $w . '<option value="' . $value->id . '">' . $value->id . '</option>';
             }
         }
 
         echo $w;
     }
 
-    public function listarAlumnosCursoAyax() {
+    public function listarAlumnosCursoAjax() {
+        $ciclo = $_POST['ciclo'];
+        $w = '';
+//        if (isset($_GET['ciclo'])) {
+//            $ciclo = session()->put('ciclo', $_GET['ciclo']);
+//        }
         $v = Conexion:: listarAlumnosCurso($ciclo);
+//        if (isset($_GET['dniAlumno'])) {
+//            $dniAlumno = session()->put('dniAlumno', $_GET['dniAlumno']);
+//        }else{
+        $dniAlumno = null;
+//        }
 
-        if (isset($_GET['dniAlumno'])) {
-            $dniAlumno = session()->put('dniAlumno', $_GET['dniAlumno']);
-        }else{
-            $dniAlumno = null;
-        }
-        
         foreach ($v as $value) {
             if ($value->dni == $dniAlumno) {
-                $w = '<option value="' . $value->dni . '" selected>' . $value->nombre . ', ' . $value->apellidos . '</option>';
+                $w = $w . '<option value="' . $value->dni . '" selected>' . $value->nombre . ', ' . $value->apellidos . '</option>';
             } else {
-                $w = '<option value="' . $value->dni . '">' . $value->nombre . ', ' . $value->apellidos .'</option>';
+                $w = $w . '<option value="' . $value->dni . '">' . $value->nombre . ', ' . $value->apellidos . '</option>';
             }
         }
         echo $w;

@@ -136,13 +136,13 @@ Route::post('perfilAd1', 'controladorGeneral@perfilAd'); //redirige al perfil
 Route::post('consultarGastos', 'controladorAdmin@consultarGastoAlumno');
 
 //ajax
-Route::get('consultarGastosAjax', function () {
+Route::any('consultarGastosAjax', function () {
     return view('admin/consultarGastosAjax');
 });
-Route::get('consultarGastosAjaxCiclo', ['uses' => 'contoldadorAdmin@listaCursosAjax', 'as' => 'consultarGastosAjaxCiclo']);
-Route::get('consultarGastosAjaxDniAlumno', ['uses' => 'contoldadorAdmin@listarAlumnosCursoAjax', 'as' => 'consultarGastosAjaxDniAlumno']);
-Route::post('consultarGastosAjaxCiclo', ['uses' => 'contoldadorAdmin@listaCursosAjax', 'as' => 'consultarGastosAjaxCiclo']);
-Route::post('consultarGastosAjaxDniAlumno', ['uses' => 'contoldadorAdmin@listarAlumnosCursoAjax', 'as' => 'consultarGastosAjaxDniAlumno']);
+Route::any('consultarGastosAjaxCiclo', ['uses' => 'controladorAdmin@listarCursosAjax', 'as' => 'consultarGastosAjaxCiclo']);
+Route::any('consultarGastosAjaxDniAlumno', ['uses' => 'controladorAdmin@listarAlumnosCursoAjax', 'as' => 'consultarGastosAjaxDniAlumno']);
+
+Route::any('consultarGastosAjaxTabla', 'controladorAdmin@consultarGastoAlumnoAjax');
 
 Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');
 Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');

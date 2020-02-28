@@ -18,7 +18,95 @@ Consultar Gastos Alumnos
 @endsection
 
 @section('javascript') 
-<script src="{{asset ('js/admin/js_consultarGasto.js')}}"></script>
+<!--<script src="{{asset ('js/admin/js_consultarGasto.js')}}"></script>-->
+<script>
+    /**
+     * 
+     *  @author marina
+     */
+    $(document).ready(function () {
+        var ciclo = null;
+        var dniAlumno = null;
+        var token = '{{csrf_token()}}';
+        var parametros = {
+            "_token": token
+        };
+//    $.ajaxSetup({
+//        headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
+//    });
+        /**
+         * se carga nada mas iniciar la pagina
+         */
+        $("#ciclo").ready(function () {
+            $.ajax({
+                url: 'consultarGastosAjaxCiclo',
+                type: 'POST',
+                data: parametros,
+                success: function (response) {
+                    if (response !== null) {
+                        $("#ciclo").html(response);
+                    }
+                },
+                statusCode: {
+                    404: function () {
+                        alert('web not found');
+                    }
+                }
+            });
+        }
+        );
+        /*
+         * funciona cuando se selecciona un ciclo y muestra la lista de los alumnos de es curso
+         * @param {type} listaCiclo
+         * @return {undefined}
+         */
+        $("#ciclo").blur(function () {
+            ciclo = $("select#ciclo option:checked").val();
+            jQuery(ciclo).load('session_write.php?ciclo=' + ciclo);
+            parametros = {
+                "_token": token,
+                "ciclo": ciclo
+            };
+            $.ajax({
+                url: 'consultarGastosAjaxDniAlumno',
+                type: 'POST',
+                data: parametros,
+                success: function (response) {
+                    if (response !== null) {
+                        $("#dniAlumno").html(response);
+                    }
+                },
+                statusCode: {
+                    404: function () {
+                        alert('web not found');
+                    }
+                }
+            });
+        });
+//        $("#dniAlumno").blur(function () {
+//            dniAlumno = $("select#dniAlumno option:checked").val();
+//            jQuery(dniAlumno).load('session_write.php?dniAlumno=' + dniAlumno);
+//             parametros = {
+//                "_token": token
+//            };
+//            $.ajax({
+//                url: 'consultarGastosAjaxTabla',
+//                type: 'POST',
+//                data: parametros,
+//                success: function (response) {
+//                    if (response !== null) {
+//                        
+//                    }
+//                },
+//                statusCode: {
+//                    404: function () {
+//                        alert('web not found');
+//                    }
+//                }
+//            });
+//        });
+    });
+</script>
 @endsection
 
 @section('contenido') 
@@ -44,15 +132,12 @@ Consultar Gastos Alumnos
     <div class="row justify-content-center">
         <div class="col-sm-3 col-md-3">
             <div id="consultarGastosAjaxCiclo">
-                <form action="" method="POST">
-                    {{ csrf_field() }}
-                    <label class="text-center" for='ciclo'>
-                        Ciclo:
-                        <select id="ciclo" class="sel" name="ciclo">  
+                <label class="text-center" for='ciclo'>
+                    Ciclo:
+                    <select id="ciclo" class="sel" name="ciclo">  
 
-                        </select>
-                    </label> 
-                </form>
+                    </select>
+                </label> 
             </div>
         </div>
     </div>
@@ -60,7 +145,7 @@ Consultar Gastos Alumnos
     <div class="row justify-content-center">
         <div class="col-sm-3 col-md-3">
             <div id="consultarGastosAjaxDniAlumno">
-                <form action="consultarGastos" method="POST">
+                <form action="consultarGastosAjax" method="POST">
                     {{ csrf_field() }}
                     <label class="text-center">
                         Alumno:
@@ -92,7 +177,7 @@ Consultar Gastos Alumnos
                         <?php
                         foreach ($gc as $key) {
                             ?>
-                        <form action="consultarGastos" method="POST">
+                        <form action="consultarGastoAjax" method="POST">
                             {{ csrf_field() }}
                             <tr>
                                 <td>
@@ -143,7 +228,7 @@ Consultar Gastos Alumnos
                         <?php
                         foreach ($gtc as $key) {
                             ?>
-                        <form action="consultarGastos" method="POST">
+                        <form action="consultarGastoAjax" method="POST">
                             {{ csrf_field() }}
                             <tr>
                                 <td>
@@ -194,7 +279,7 @@ Consultar Gastos Alumnos
                         <?php
                         foreach ($gtp as $key) {
                             ?>
-                        <form action="consultarGastos" method="POST">
+                        <form action="consultarGastoAjax" method="POST">
                             {{ csrf_field() }}
                             <tr>
                                 <td>
