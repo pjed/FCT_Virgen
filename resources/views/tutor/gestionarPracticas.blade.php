@@ -217,7 +217,7 @@ Gestionar  Practicas
                                         </div>
                                     </div>
                                 </div>
-<!--                                <button type="button" class="btn btn-sm btn-primary" id="addPeriodo2" data-toggle="modal" data-target="#exampleModal3">
+                                <button type="button" class="btn btn-sm btn-primary" id="addPeriodo2" data-toggle="modal" data-target="#exampleModal3">
                                     FCT DUAL
                                 </button> 
                                 <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -266,7 +266,7 @@ Gestionar  Practicas
                                             </div>
                                         </div>
                                     </div>
-                                </div>-->
+                                </div>
                             </td>
                             <td><button type="submit" id="editar" class="btn btn-sm" name="editar"/></td>
                             <td><button type="submit" id="eliminar" class="btn btn-sm" name="eliminar"/></td>

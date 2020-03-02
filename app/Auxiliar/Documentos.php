@@ -480,6 +480,70 @@ class Documentos {
         Documentos::GenerarExcel($alumnos_memoria, $curso, $anyo);
     }
 
+    static function GenerarGastosAlumnos($alumnos_memoria, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director) {
+
+        foreach ($datos_director as $value) {
+            $nombre_director = $value->nombre_director;
+        }
+
+        foreach ($datos_tutor as $value) {
+            $nombre_tutor = $value->nombre_tutor;
+            $email_tutor = $value->email;
+        }
+
+        foreach ($datos_centro as $value) {
+            $cod_centro = $value->cod;
+            $nombre_centro = $value->nombre;
+            $localidad_centro = $value->localidad;
+        }
+
+        foreach ($datos_ciclo as $value) {
+            $descripcion_ciclo = $value->descripcion;
+            $horas = $value->horas;
+        }
+
+        Documentos::GenerarExcelGastos($alumnos_memoria, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director);
+    }
+
+    static function GenerarExcelGastos($coleccion, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director) {
+        $path = '../documentacion/plantillas/gastos/Anexo 6-Gastos_FCT.xlsx';
+
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($path);
+        $reader->setReadDataOnly(true);
+        $reader->load($path);
+        $spreadsheet = $reader->load($path);
+        $spreadsheet->getActiveSheet()->setCellValue('B1', $nombre_centro);
+        $spreadsheet->getActiveSheet()->setCellValue('B2', $nombre_tutor);
+        $spreadsheet->getActiveSheet()->setCellValue('I26', $nombre_tutor);
+        $spreadsheet->getActiveSheet()->setCellValue('E26', $nombre_director);
+        $spreadsheet->getActiveSheet()->setCellValue('B3', $descripcion_ciclo);
+        $spreadsheet->getActiveSheet()->setCellValue('K2', $fecha_actual);
+        $spreadsheet->getActiveSheet()->setCellValue('F1', $localidad_centro);
+        $spreadsheet->getActiveSheet()->setCellValue('J1', $cod_centro);
+        $spreadsheet->getActiveSheet()->setCellValue('J3', $horas);
+        $spreadsheet->getActiveSheet()->setCellValue('D3', $email_tutor);
+        $row = 8;
+        $indice = 1;
+
+        foreach ($coleccion as $value) {
+            $spreadsheet->getActiveSheet()->setCellValue('A' . $row, $value->alumno);
+            $row += 1;
+            $indice += 1;
+        }
+
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
+        $writer->save("Anexo 6-Gastos_FCT_" . $curso . ".xlsx");
+
+        $filename = "Anexo 6-Gastos_FCT_" . $curso . ".xlsx";
+        header('Content-disposition: attachment; filename=' . $filename);
+        header('Content-Length: ' . filesize($filename));
+        header('Content-Transfer-Encoding: binary');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        $writer->save('php://output');
+        exit();
+    }
+
     static function GenerarExcel($coleccion, $curso, $anio) {
         $path = '../documentacion/plantillas/memoria alumno/MD750601 Memoria Final.xlsx';
 
@@ -493,20 +557,20 @@ class Documentos {
         $indice = 1;
 
         foreach ($coleccion as $value) {
-            $spreadsheet->getActiveSheet()->setCellValue('A'.$row, $indice);
-            $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $value->alumno);
-            $spreadsheet->getActiveSheet()->setCellValue('C'.$row, $value->email);
-            $spreadsheet->getActiveSheet()->setCellValue('D'.$row, $value->movil);
-            $spreadsheet->getActiveSheet()->setCellValue('E'.$row, $value->nombre_empresa);
-            $spreadsheet->getActiveSheet()->setCellValue('F'.$row, $value->nueva);
-            $spreadsheet->getActiveSheet()->setCellValue('G'.$row, $value->nombre_responsable);
-            $spreadsheet->getActiveSheet()->setCellValue('H'.$row, $value->direccion_empresa);
-            $spreadsheet->getActiveSheet()->setCellValue('I'.$row, $value->localidad_empresa);
-            $spreadsheet->getActiveSheet()->setCellValue('J'.$row, $value->fecha_inicio);
-            $spreadsheet->getActiveSheet()->setCellValue('K'.$row, $value->fecha_fin);
-            $spreadsheet->getActiveSheet()->setCellValue('L'.$row, $value->horario);
-            $spreadsheet->getActiveSheet()->setCellValue('M'.$row, $value->gastos);
-            $spreadsheet->getActiveSheet()->setCellValue('N'.$row, $value->apto);
+            $spreadsheet->getActiveSheet()->setCellValue('A' . $row, $indice);
+            $spreadsheet->getActiveSheet()->setCellValue('B' . $row, $value->alumno);
+            $spreadsheet->getActiveSheet()->setCellValue('C' . $row, $value->email);
+            $spreadsheet->getActiveSheet()->setCellValue('D' . $row, $value->movil);
+            $spreadsheet->getActiveSheet()->setCellValue('E' . $row, $value->nombre_empresa);
+            $spreadsheet->getActiveSheet()->setCellValue('F' . $row, $value->nueva);
+            $spreadsheet->getActiveSheet()->setCellValue('G' . $row, $value->nombre_responsable);
+            $spreadsheet->getActiveSheet()->setCellValue('H' . $row, $value->direccion_empresa);
+            $spreadsheet->getActiveSheet()->setCellValue('I' . $row, $value->localidad_empresa);
+            $spreadsheet->getActiveSheet()->setCellValue('J' . $row, $value->fecha_inicio);
+            $spreadsheet->getActiveSheet()->setCellValue('K' . $row, $value->fecha_fin);
+            $spreadsheet->getActiveSheet()->setCellValue('L' . $row, $value->horario);
+            $spreadsheet->getActiveSheet()->setCellValue('M' . $row, $value->gastos);
+            $spreadsheet->getActiveSheet()->setCellValue('N' . $row, $value->apto);
             $row += 1;
             $indice += 1;
         }
