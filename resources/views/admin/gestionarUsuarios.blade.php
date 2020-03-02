@@ -1,6 +1,5 @@
 <?php
-$listaUsuarios = Conexion::listarUsuarios();
-$listaCiclos = Conexion::listarCiclos();
+use App\Auxiliar\Conexion;
 ?>
 @extends('maestra.maestraAdmin')
 
@@ -63,33 +62,36 @@ Gestionar usuarios
                                         <div class="modal-content">
                                             <div class="modal-body">                            
                                                 <h3 class="text-center">Añadir Usuario</h3>
-                                                <form action="aniadirUsuario" method="POST">
-                                                    {{ csrf_field() }}
-                                                    <div class="row justify-content-center form-group">
-                                                        <label class="col-sm text-center">
-                                                            Rol del usuario:
-                                                            <fieldset>
-                                                                <div>
-                                                                    <input type="radio" name="tipoU" id="administrador" value="Administrador" onclick="handleClick(this);">
-                                                                    <label for="colectivo">Administrador</label>
-                                                                </div>
-                                                                <div>
-                                                                    <input type="radio" name="tipoU" id="tutor" value="Tutor" onclick="handleClick(this);">
-                                                                    <label for="propio">Tutor</label>
-                                                                </div>
-                                                                <div>
-                                                                    <input type="radio" name="tipoU" id="alumno" value="Alumno" onclick="handleClick(this);">
-                                                                    <label for="propio">Alumno</label>
-                                                                </div>
-                                                                <div>
-                                                                    <input type="radio" name="tipoU" id="tutorAdministrador" value="TutorAdministrador" onclick="handleClick(this);">
-                                                                    <label for="propio">Tutor - Administrador</label>
-                                                                </div>
-                                                            </fieldset>
-                                                        </label>
-                                                    </div>
 
-                                                    <div class="row justify-content-center" id="crearAlumno">
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Rol del usuario:
+                                                        <fieldset>
+                                                            <div>
+                                                                <input type="radio" name="tipoU" id="administrador" value="Administrador" onclick="handleClick(this);">
+                                                                <label for="colectivo">Administrador</label>
+                                                            </div>
+                                                            <div>
+                                                                <input type="radio" name="tipoU" id="tutor" value="Tutor" onclick="handleClick(this);">
+                                                                <label for="propio">Tutor</label>
+                                                            </div>
+                                                            <div>
+                                                                <input type="radio" name="tipoU" id="alumno" value="Alumno" onclick="handleClick(this);">
+                                                                <label for="propio">Alumno</label>
+                                                            </div>
+                                                            <div>
+                                                                <input type="radio" name="tipoU" id="tutorAdministrador" value="TutorAdministrador" onclick="handleClick(this);">
+                                                                <label for="propio">Tutor - Administrador</label>
+                                                            </div>
+                                                        </fieldset>
+                                                    </label>
+                                                </div>
+
+                                                <!-- Formulario modal para crear un alumno -->
+                                                <div class="row justify-content-center" id="crearAlumno">
+                                                    <form action="aniadirUsuario" method="POST">
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" name="tipoU" value="Alumno">
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *DNI:
@@ -147,11 +149,188 @@ Gestionar usuarios
                                                                 </select>
                                                             </label>
                                                         </div>
-                                                    </div>
-                                                    <div class="row justify-content-center form-group">
-                                                        <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
-                                                    </div>
-                                                </form>
+                                                        <div class="row justify-content-center form-group">
+                                                            <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                                <!-- Formulario modal para crear un administrador -->
+                                                <div class="row justify-content-center" id="crearAdmin">
+                                                    <form action="aniadirUsuario" method="POST">
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" name="tipoU" value="Administrador">
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *DNI:
+                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="{9}"/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                *Nombre:
+                                                                <input type="text" class="form-control form-control-sm" name="nombre"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Apellidos:
+                                                                <input type="text" class="form-control form-control-sm" name="apellidos"/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                *Domicilio:
+                                                                <input type="text" class="form-control form-control-sm" name="domicilio" />
+                                                            </label>                
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Email:
+                                                                <input type="text" class="form-control form-control-sm" name="email" />
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                Teléfono:
+                                                                <input type="text" class="form-control form-control-sm" name="telefono"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Móvil:
+                                                                <input type="text" class="form-control form-control-sm" name="movil"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                                <!-- Formulario modal para crear un tutor -->
+                                                <div class="row justify-content-center" id="crearTutor">
+                                                    <form action="aniadirUsuario" method="POST">
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" name="tipoU" value="Tutor">
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *DNI:
+                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="{9}"/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                *Nombre:
+                                                                <input type="text" class="form-control form-control-sm" name="nombre"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Apellidos:
+                                                                <input type="text" class="form-control form-control-sm" name="apellidos"/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                *Domicilio:
+                                                                <input type="text" class="form-control form-control-sm" name="domicilio" />
+                                                            </label>                
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Email:
+                                                                <input type="text" class="form-control form-control-sm" name="email" />
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                Teléfono:
+                                                                <input type="text" class="form-control form-control-sm" name="telefono"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Móvil:
+                                                                <input type="text" class="form-control form-control-sm" name="movil"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                Ciclo:
+                                                                <select name="selectCiclo">
+
+                                                                    <?php
+                                                                    foreach ($listaCiclosSinTutor as $value1) {
+                                                                        ?>
+                                                                        <option value="<?php echo $value1->id_curso; ?>">
+                                                                            <?php echo $value1->id_curso; ?>
+                                                                        </option>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                                <!-- Formulario modal para crear un tutor administrador -->
+                                                <div class="row justify-content-center" id="crearTutorAdmin">
+                                                    <form action="aniadirUsuario" method="POST">
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" name="tipoU" value="TutorAdministrador">
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *DNI:
+                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="{9}"/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                *Nombre:
+                                                                <input type="text" class="form-control form-control-sm" name="nombre"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Apellidos:
+                                                                <input type="text" class="form-control form-control-sm" name="apellidos"/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                *Domicilio:
+                                                                <input type="text" class="form-control form-control-sm" name="domicilio" />
+                                                            </label>                
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Email:
+                                                                <input type="text" class="form-control form-control-sm" name="email" />
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                Teléfono:
+                                                                <input type="text" class="form-control form-control-sm" name="telefono"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Móvil:
+                                                                <input type="text" class="form-control form-control-sm" name="movil"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                Ciclo:
+                                                                <select name="selectCiclo">
+
+                                                                    <?php
+                                                                    foreach ($listaCiclosSinTutor as $value1) {
+                                                                        ?>
+                                                                        <option value="<?php echo $value1->id_curso; ?>">
+                                                                            <?php echo $value1->id_curso; ?>
+                                                                        </option>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -181,8 +360,20 @@ Gestionar usuarios
                                         <option value="<?php echo $value->rol_id ?>" <?php if ($value->rol_id == 4) { ?>selected<?php } ?>>Tutor-Administrador</option>
                                     </select>
                                 </td>
-                                <td><button type="submit" id="editar" class="btn" name="editar" /></td>
-                                <td><button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
+
+                                <?php if ($value->rol_id == 3) {
+                                    ?>
+                                    <td><button type="submit" id="editar" class="btn" name="editar" /></td>
+                                <?php } else {
+                                    ?>
+                                    <td>
+                                        <button type="submit" id="editar" class="btn" name="editar" />
+                                        <button type="submit" id="eliminar" class="btn" name="eliminar" />
+                                    </td>
+                                    <?php
+                                }
+                                ?>
+
                             </tr>
                         </form>
                         <?php

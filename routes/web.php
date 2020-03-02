@@ -114,13 +114,19 @@ Route::get('gestionarCursos', function () {
     return view('admin/gestionarCursos', ['l1' => $l]);
 });
 Route::get('gestionarUsuarios', function () {
-    return view('admin/gestionarUsuarios');
+    $listaUsuarios = Conexion::listarUsuarios();
+    $listaCiclos = Conexion::listarCiclos();
+    $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
+    $datos = [
+        'listaUsuarios' => $listaUsuarios,
+        'listaCiclos' => $listaCiclos,
+        'listaCiclosSinTutor' => $listaCiclosSinTutor
+    ];
+
+    return view('admin/gestionarUsuarios', $datos);
 });
 Route::get('gestionarAlumnos', function () {
     return view('admin/gestionarAlumnos');
-});
-Route::get('gestionarUsuarios', function () {
-    return view('admin/gestionarUsuarios');
 });
 Route::get('gestionarTutores', function () {
     return view('admin/gestionarTutores');
