@@ -3,8 +3,8 @@
 use App\Auxiliar\Conexion;
 use App\Http\Controllers\controladorAdmin;
 
-if (isset($_GET['dniAlumno'])) {
-    $dniAlumno = session()->put('dniAlumno', $_GET['dniAlumno']);
+if (isset($_SESSION['dniAlumno'])) {
+    $dniAlumno = session()->get('dniAlumno');
 } else {
     $gc = null;
     $gtp = null;

@@ -1547,6 +1547,68 @@ class Conexion {
 
         return $ano_academico;
     }
+    
+    /**
+     * metodo obtener datos centro
+     */
+    static function obtenerDatosCentro() {
+        //$totalGastosCiclo = 0;
+
+        $sql = "SELECT centros.cod, centros.nombre, centros.localidad from centros";
+
+        $datos_centro = \DB::select($sql);
+
+        return $datos_centro;
+    }
+    
+     /**
+     * metodo obtener datos ciclo
+     */
+    static function obtenerDatosCiclo($curso) {
+        //$totalGastosCiclo = 0;
+
+        $sql = "SELECT cursos.descripcion, cursos.horas from cursos where id_curso = '".$curso."';";
+
+        $datos_ciclo = \DB::select($sql);
+
+        return $datos_ciclo;
+    }
+    
+    
+     /**
+     * metodo obtener datos tutor ciclo
+     */
+    static function obtenerDatosTutorCiclo($curso) {
+        //$totalGastosCiclo = 0;
+
+        $sql = "SELECT cursos.id_curso, usuarios.dni, concat(usuarios.nombre,' ',usuarios.apellidos) as nombre_tutor, usuarios.email
+                FROM cursos, tutores, usuarios
+                where cursos.id_curso = tutores.cursos_id_curso
+                and tutores.usuarios_dni = usuarios.dni
+                and cursos.id_curso = '".$curso."';";
+
+        $datos_ciclo = \DB::select($sql);
+
+        return $datos_ciclo;
+    }
+    
+    /**
+     * metodo obtener datos director
+     */
+    static function obtenerDatosDirector() {
+        //$totalGastosCiclo = 0;
+
+        $sql = "SELECT concat(usuarios.nombre, ' ',usuarios.apellidos) as nombre_director
+                FROM usuarios, usuarios_roles 
+                WHERE usuarios_roles.usuario_dni = usuarios.dni
+                and usuarios_roles.rol_id=0;";
+
+        $datos_director = \DB::select($sql);
+
+        return $datos_director;
+    }
+    
+    
 
     /**
      * Método para obtener todos los cursos

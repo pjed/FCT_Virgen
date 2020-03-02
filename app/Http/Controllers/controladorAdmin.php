@@ -529,11 +529,11 @@ class controladorAdmin extends Controller {
     public function listarCursosAjax() {
         $v = Conexion::listaCursos();
         $w = '';
-//        if (isset($_GET['ciclo'])) {
-////            $ciclo = session()->put('ciclo', $_GET['ciclo']);
-//        } else {
-        $ciclo = null;
-//        }
+        if (isset($_SESSION['ciclo'])) {
+            $ciclo = session()->get('ciclo');
+        } else {
+            $ciclo = null;
+        }
 
         foreach ($v as $value) {
             if ($value->id == $ciclo) {
@@ -548,16 +548,15 @@ class controladorAdmin extends Controller {
 
     public function listarAlumnosCursoAjax() {
         $ciclo = $_POST['ciclo'];
+        session()->put('ciclo', $ciclo);
         $w = '';
-//        if (isset($_GET['ciclo'])) {
-//            $ciclo = session()->put('ciclo', $_GET['ciclo']);
-//        }
         $v = Conexion:: listarAlumnosCurso($ciclo);
-//        if (isset($_GET['dniAlumno'])) {
-//            $dniAlumno = session()->put('dniAlumno', $_GET['dniAlumno']);
-//        }else{
-        $dniAlumno = null;
-//        }
+        
+        if (isset($_SESSION['dniAlumno'])) {
+            $dniAlumno = session()->get('dniAlumno');
+        } else {
+            $dniAlumno = null;
+        }
 
         foreach ($v as $value) {
             if ($value->dni == $dniAlumno) {
