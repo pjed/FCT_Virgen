@@ -168,7 +168,15 @@ class controladorTutor extends Controller {
             Documentos::GenerarMemoriaAlumnos($alumnos_memoria, $curso, $anio);
         }
         if (isset($_REQUEST['gastosFCT'])) {
+            $curso = $req->get("id_curso");
+            $fecha_actual = date('d-m-Y');
+            $datos_centro = Conexion::obtenerDatosCentro();
+            $datos_ciclo = Conexion::obtenerDatosCiclo($curso);
+            $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
+            $datos_director = Conexion::obtenerDatosDirector();
             
+            $alumnos_memoria = Conexion::obtenerAlumnosTutorMemoria($curso);
+            Documentos::GenerarGastosAlumnos($alumnos_memoria, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
         }
         if (isset($_REQUEST['gastosFPDUAL'])) {
             
@@ -337,13 +345,12 @@ class controladorTutor extends Controller {
             }
         }
         if (isset($_REQUEST['recibiFCT'])) {
-
             $dniAlumno = $req->get('dniAlumno');
             $periodo = $req->get('periodo');
 
             return Documentos::GenerarRecibi($dniAlumno, $periodo);
         }
-        if (isset($_REQUEST['recibiFPDUAL'])) {
+        if (isset($_REQUEST['recibiFPDUAL'])) {            
             $dniAlumno = $req->get('dniAlumno');
             $modalidad = $req->get('modalidad');
             $duracion = $req->get('duracion');
