@@ -480,7 +480,7 @@ class Documentos {
         Documentos::GenerarExcel($alumnos_memoria, $curso, $anyo);
     }
 
-    static function GenerarGastosAlumnos($alumnos_memoria, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director) {
+    static function GenerarGastosAlumnos($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director) {
 
         foreach ($datos_director as $value) {
             $nombre_director = $value->nombre_director;
@@ -502,7 +502,7 @@ class Documentos {
             $horas = $value->horas;
         }
 
-        Documentos::GenerarExcelGastos($alumnos_memoria, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director);
+        Documentos::GenerarExcelGastos($alumnos_gastos, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director);
     }
 
     static function GenerarExcelGastos($coleccion, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director) {
@@ -527,6 +527,7 @@ class Documentos {
 
         foreach ($coleccion as $value) {
             $spreadsheet->getActiveSheet()->setCellValue('A' . $row, $value->alumno);
+            $spreadsheet->getActiveSheet()->setCellValue('K' . $row, $value->total_comida);
             $row += 1;
             $indice += 1;
         }

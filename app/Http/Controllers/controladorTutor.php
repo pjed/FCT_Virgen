@@ -174,9 +174,8 @@ class controladorTutor extends Controller {
             $datos_ciclo = Conexion::obtenerDatosCiclo($curso);
             $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
             $datos_director = Conexion::obtenerDatosDirector();
-            
-            $alumnos_memoria = Conexion::obtenerAlumnosTutorMemoria($curso);
-            Documentos::GenerarGastosAlumnos($alumnos_memoria, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
+            $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
+            Documentos::GenerarGastosAlumnos($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
         }
         if (isset($_REQUEST['gastosFPDUAL'])) {
             

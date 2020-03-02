@@ -1456,6 +1456,30 @@ class Conexion {
     }
     
     /**
+     * metodo obtener gastos alumnos por curso
+     */
+    static function obtenerAlumnosGastos($curso) {
+        //$totalGastosCiclo = 0;
+
+        $sql = "select dni, SUM(comidas.importe) as total_comida, SUM(colectivos.importe) as total_transporte_colectivo, SUM(propios.kms*propios.n_dias*propios.precio) as total_transporte_propio
+                from usuarios, gastos, colectivos, propios, comidas, transportes, cursos, matriculados
+                where usuarios.dni = gastos.usuarios_dni
+                and usuarios.dni = matriculados.usuarios_dni
+                and matriculados.cursos_id_curso = cursos.id_curso
+                and gastos.comidas_id = comidas.id
+                and gastos.transportes_id = transportes.id
+                and transportes.id = propios.transportes_id
+                and transportes.id = colectivos.id
+                and gastos.usuarios_dni <> '0'
+                and cursos.id_curso='".$curso."'
+                group by dni;";
+
+        $gastos_alumnos = \DB::select($sql);
+
+        return $gastos_alumnos;
+    }
+    
+    /**
      * metodo obtener datos director
      */
     static function obtenerDatosDirector() {
