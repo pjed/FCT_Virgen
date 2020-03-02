@@ -101,7 +101,8 @@ class Conexion {
      * @param type $iban
      * @param type $movil
      */
-    static function insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $iban, $movil) {
+    static function insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $iban, $movil, $rol) {
+//        usuario
         $p = new usuario;
         $p->dni = $dni;
         $p->nombre = $nombre;
@@ -113,8 +114,13 @@ class Conexion {
         $p->movil = $movil;
         $p->iban = $iban;
         $p->foto = 'images/defecto.jpeg';
+        //rol
+        $c = new usuarios_rol;
+        $c->usuario_dni = $dni;
+        $c->rol_id = $rol;
         try {
-            $p->save(); //aqui se hace la insercion   
+            $p->save();
+            $c->save();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -123,41 +129,13 @@ class Conexion {
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Clave duplicada.
+                    Error al insertar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         }
     }
-
-    /**
-     * Método para insertar el rol de los usuario en la tabla usarios_rol
-     * @param type $dni
-     * @param type $rol
-     */
-    static function insertarRol($dni, $rol) {
-        $p = new usuarios_rol;
-        $p->usuario_dni = $dni;
-        $p->rol_id = $rol;
-        try {
-            $p->save(); //aqui se hace la insercion   
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con exito.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-        } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Clave duplicada.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-        }
-    }
-
     /**
      * MODIFICAR USUARIO
      * @param type $correo
@@ -340,6 +318,152 @@ class Conexion {
     }
 
     /**
+     * Método para borrar un alumno de la BD
+     * @param type $dni dni del alumno a borrar
+     */
+    static function borrarAlumno($dni) {
+
+        try {
+            matricula::where('usuarios_dni', $dni)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
+     * Método para borrar un alumno de la BD en la tabla practicas
+     * @param type $dni dni del alumno a borrar
+     */
+    static function borrarAlumnoTablaPracticas($dni) {
+
+        try {
+            practiva::where('usuarios_dni', $dni)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
+     * Método para borrar un alumno de la BD en la tabla gastos
+     * @param type $dni dni del alumno a borrar
+     */
+    static function borrarAlumnoTablaGastos($dni) {
+
+        try {
+            gasto::where('usuarios_dni', $dni)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function obtenerIdsComidaAlumno($dni) {
+        $v = \DB::table('gastos')
+                ->where('usuarios_dni', $dni)
+                ->select(
+                        'comidas_id'
+                )
+                ->get();
+        return $v;
+    }
+
+    static function obtenerIdsTransporteAlumno($dni) {
+        $v = \DB::table('gastos')
+                ->where('usuarios_dni', $dni)
+                ->select(
+                        'transportes_id'
+                )
+                ->get();
+        return $v;
+    }
+
+    /**
+     * Método para borrar un alumno de la BD en la tabla gastos
+     * @param type $dni dni del alumno a borrar
+     */
+    static function borrarGastoComidaAlumno($comidas_id) {
+
+        try {
+            gasto::where('comidas_id', $comidas_id)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
+     * Método para borrar un alumno de la BD en la tabla gastos
+     * @param type $dni dni del alumno a borrar
+     */
+    static function borrarGastoTransporteAlumno($transportes_id) {
+
+        try {
+            gasto::where('$transportes_id', $transportes_id)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function buscarGastoTransporteColectivo($id) {
+        $t = colectivo::where('transportes_id', $id)->first();
+
+        return $t;
+    }
+
+    /**
      * Método para listar todos los usuarios que son alumnos
      * @return type lista de alumnos
      */
@@ -391,6 +515,19 @@ class Conexion {
         }
 
         return $listaCiclos;
+    }
+
+    /**
+     * Método para listar todos los ciclos que no tienen tutor
+     * @return type lista de ciclos sin tutor
+     */
+    static function listarCiclosSinTutor() {
+
+        $sql = "SELECT * FROM cursos WHERE id_curso NOT IN (SELECT cursos_id_curso FROM tutores)";
+
+        $listaTutores = \DB::select($sql);
+
+        return $listaTutores;
     }
 
     /**
@@ -1694,7 +1831,7 @@ class Conexion {
                 and usuarios.dni = practicas.usuarios_dni
                 and practicas.empresas_id = empresas.id
                 and practicas.responsables_id = responsables.id
-                and matriculados.cursos_id_curso = '".$curso."';";
+                and matriculados.cursos_id_curso = '" . $curso . "';";
 
         $alumnos_memoria = \DB::select($sql);
 
@@ -1730,6 +1867,36 @@ class Conexion {
                     </button>
                   </div>';
         }
+    }
+
+    static function insertarTutor($cursos_id_cursos, $usuarios_dni) {
+
+        try {
+            $t = new tutor;
+            $t->cursos_id_curso = $cursos_id_cursos;
+            $t->usuarios_dni = $usuarios_dni;
+
+            $t->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    static function obtenerCicloTutor($dni) {
+        $ciclo = tutor::where('usuarios_dni', $dni)->select('cursos_id_curso')->first();
+
+        return $ciclo;
     }
 
 }
