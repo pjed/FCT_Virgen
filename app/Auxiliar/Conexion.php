@@ -1598,7 +1598,7 @@ class Conexion {
     static function obtenerAlumnosGastos($curso) {
         //$totalGastosCiclo = 0;
 
-        $sql = "select dni, SUM(comidas.importe) as total_comida, SUM(colectivos.importe) as total_transporte_colectivo, SUM(propios.kms*propios.n_dias*propios.precio) as total_transporte_propio
+        $sql = "select dni, concat(usuarios.apellidos, ', ',usuarios.nombre) as alumno, SUM(comidas.importe) as total_comida, SUM(colectivos.importe) as total_transporte_colectivo, SUM(propios.kms*propios.n_dias*propios.precio) as total_transporte_propio
                 from usuarios, gastos, colectivos, propios, comidas, transportes, cursos, matriculados
                 where usuarios.dni = gastos.usuarios_dni
                 and usuarios.dni = matriculados.usuarios_dni
