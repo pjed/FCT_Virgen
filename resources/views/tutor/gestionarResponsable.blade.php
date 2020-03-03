@@ -109,8 +109,9 @@ Gestionar Responsable
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="apellido" value="<?php echo $key['apellidos']; ?>"/></td>
                             <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $key['email']; ?>"/></td>
                             <td><input type="tel" class="form-control form-control-sm form-control-md" name="tel" value="<?php echo $key['telefono']; ?>" pattern="[0-9]{9}"/></td>
-                            <td><button type="submit" id="editar" class="btn" name="editar" /></td>
-                            <td><button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
+                            <td><button type="submit" id="editar" class="btn" name="editar" />
+                                    <!-- </td><td>-->
+                                    <button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
                         </tr>
                     </form>
                     <?php

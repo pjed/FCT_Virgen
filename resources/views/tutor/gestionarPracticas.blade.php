@@ -268,8 +268,9 @@ Gestionar  Practicas
                                     </div>
                                 </div>
                             </td>
-                            <td><button type="submit" id="editar" class="btn btn-sm" name="editar"/></td>
-                            <td><button type="submit" id="eliminar" class="btn btn-sm" name="eliminar"/></td>
+                            <td><button type="submit" id="editar" class="btn" name="editar" />
+                                    <!-- </td><td>-->
+                                    <button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
                         </tr>
                     </form>
                     <?php

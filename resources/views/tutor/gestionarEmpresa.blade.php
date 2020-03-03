@@ -125,8 +125,9 @@ Gestionar Empresa
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="localidad" value="<?php echo $key->localidad; ?>"/></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="horario" value="<?php echo $key->horario; ?>"/></td>
                             <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="nueva" <?php if ($key->nueva == 1) { ?>checked<?php } ?>/></td>
-                            <td><button type="submit" id="editar" class="btn btn-sm" name="editar" /></td>
-                            <td><button type="submit" id="eliminar" class="btn btn-sm" name="eliminar" /></td>
+                           <td><button type="submit" id="editar" class="btn" name="editar" />
+                                    <!-- </td><td>-->
+                                    <button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
                         </tr>
                     </form>
                     <?php
