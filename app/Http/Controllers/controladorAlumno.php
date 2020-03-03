@@ -143,6 +143,8 @@ class controladorAlumno extends Controller {
                 $totalGastoCicloNuevo = $totalGastoCiclo + $precio;
 
                 $desplazamiento = 1;
+                
+                $tipo = 1;
                 $comidas_id = 0;
 
                 Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCicloNuevo, $usuarios_dni, $comidas_id, $transporte_id);
