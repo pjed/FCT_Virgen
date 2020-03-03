@@ -272,11 +272,10 @@ class Documentos {
 
         $name = 'Recibi_' . "$dniAlumno" . "_" . $dia . "-" . $mes . "-" . $ano . '.docx';
         $document->saveAs($name);
-        rename($name, storage_path() . "/documentos/recibi/{$name}");
+        rename($name, "{$name}");
 
         $lista_documentos = [
-            "nombre_archivo" => $name,
-            "path_archivo" => "/documentos/recibi/{$name}",
+            "path_archivo" => "{$name}",
         ];
 
         $headers = array(
@@ -652,16 +651,32 @@ class Documentos {
     }
 
     public static function generarArchivoZIP($lista_documentos, $curso) {
-        $zip_file = 'recibis' . $curso . '.zip'; // Name of our archive to download
+        $archive_file_name = 'recibis' . $curso . '.zip'; // Name of our archive to download
 
         $zip = new \ZipArchive();
-        if ($zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE)) {
-            foreach ($lista_documentos as $value) {
-                $zip->addFile(storage_path($value["nombre_archivo"]), $value["path_archivo"]);
-            }
-            $zip->close();
+        if ($zip->open($archive_file_name, \ZipArchive::CREATE) !== TRUE) {
+            exit("No se puede abrir el archivo <$archive_file_name>\n");
         }
-        return response()->download($zip_file);
+        foreach ($lista_documentos as $value) {
+            $zip->addFile($value["path_archivo"]);
+        }
+        if ($zip->close() === false) {
+            exit("Error creando el archivo ZIP: " . $archive_file_name);
+        }
+
+        if (file_exists($archive_file_name)) {
+            header("Content-Description: File Transfer");
+            header("Content-type: application/zip");
+            header("Content-Disposition: attachment; filename=" . $archive_file_name . "");
+            header("Pragma: no-cache");
+            header("Expires: 0");
+            return response(readfile($archive_file_name));
+            ob_clean();
+            flush();
+            exit;
+        } else {
+            exit("No encuentro el archivo zip para descargar");
+        }
     }
 
 }
