@@ -357,10 +357,26 @@ class controladorAdmin extends Controller {
             Documentos::GenerarMemoriaAlumnos($alumnos_memoria, $curso, $anio);
         }
         if (isset($_REQUEST['gastosFCT'])) {
+            $curso = $req->get("ciclo");
+            $fecha_actual = date('d-m-Y');
+            $datos_centro = Conexion::obtenerDatosCentro();
+            $datos_ciclo = Conexion::obtenerDatosCiclo($curso);
+            $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
+            $datos_director = Conexion::obtenerDatosDirector();
+            $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
             
+            Documentos::GenerarGastosAlumnos($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
         }
         if (isset($_REQUEST['gastosFPDUAL'])) {
+            $curso = $req->get("ciclo");
+            $fecha_actual = date('d-m-Y');
+            $datos_centro = Conexion::obtenerDatosCentro();
+            $datos_ciclo = Conexion::obtenerDatosCiclo($curso);
+            $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
+            $datos_director = Conexion::obtenerDatosDirector();
+            $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
             
+            Documentos::GenerarGastosAlumnosDUAL($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
         }
     }
 
