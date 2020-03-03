@@ -42,22 +42,29 @@ class controladorTutor extends Controller {
      * @return type
      */
     public static function enviarConsultarGastoAlumno() {
-        $l2 = Conexion::listarAlumnoPorTutor();
+//            si ese usuario no tiene ningun gasto que salga algo
+        $desplazamiento = null;
+        $tipo = null;
+        $gtc = null;
+        $gtp = null;
+        $gc = null;
+
         $dniAlumno = session()->get('dniAlumno');
-        $desplazamiento = session()->get('desplazamiento');
-        $tipo = session()->get('tipo');
-        if ($desplazamiento == 1) {
-            if ($tipo == 1) {
-                $gtp = null;
-                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-            } else {
-                $gtc = null;
-                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+        $l2 = Conexion::listarAlumnoPorTutor();
+
+        $gt = Conexion::listarGastosTransportes($dniAlumno);
+
+        foreach ($gt as $key) {
+            if ($key->desplazamiento == 1) {
+                if ($key->tipoTransporte == 1) {
+                    $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+                }
+                if ($key->tipoTransporte == 0) {
+                    $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+                }
             }
-        } else {
-            $gtc = null;
-            $gtp = null;
         }
+        
         $gc = Conexion::listarGastosComidasPagination($dniAlumno);
         $datos = [
             'l2' => $l2,
@@ -70,22 +77,8 @@ class controladorTutor extends Controller {
 
     public function consultarGastoAlumno(Request $req) {
         if (isset($_REQUEST['buscar'])) {
-            $desplazamiento = null;
-            $tipo = null;
-
-//            si ese usuario no tiene ningun gasto que salga algo
-
             $dniAlumno = $req->get('dniAlumno');
             session()->put('dniAlumno', $dniAlumno);
-            $gt = Conexion::listarGastosTransportes($dniAlumno);
-
-            foreach ($gt as $key) {
-                $desplazamiento = $key->desplazamiento;
-                $tipo = $key->tipo;
-            }
-
-            session()->put('desplazamiento', $desplazamiento);
-            session()->put('tipo', $tipo);
         }
 //            editar y borrar comida
         if (isset($_REQUEST['editar'])) {

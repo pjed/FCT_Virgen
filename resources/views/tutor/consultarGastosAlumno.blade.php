@@ -3,12 +3,10 @@
 
 use App\Auxiliar\Conexion;
 use App\Http\Controllers\controladorTutor;
-
+ $dniAlumno = null;
 if (session()->get('dniAlumno') != null) {
     $dniAlumno = session()->get('dniAlumno');
-} else {
-    $dniAlumno = null;
-}
+} 
 if (isset($_GET['page'])) {
     $datos = controladorTutor::enviarConsultarGastoAlumno();
 }

@@ -1314,11 +1314,12 @@ class Conexion {
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
                 ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')
                 ->select(
-                        'gastos.id AS idGasto', 'gastos.desplazamiento AS desplazamiento', 'transportes.id AS idTransporte', 'transportes.tipo AS tipo', 'transportes.donde AS donde'
+                        'gastos.id AS idGasto', 'gastos.desplazamiento AS desplazamiento', 'transportes.id AS idTransporte', 'transportes.tipo AS tipoTransporte', 'transportes.donde AS donde'
                 )
                 ->paginate(8);
         return $v;
     }
+
 
     /**
      * Método para obtener los gastos de transporte colectivo de un alumno determinado con paginacion de 4

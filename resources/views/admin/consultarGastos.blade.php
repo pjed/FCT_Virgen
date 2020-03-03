@@ -3,17 +3,14 @@
 use App\Auxiliar\Conexion;
 use App\Http\Controllers\controladorAdmin;
 
+$ciclo = null;
+$dniAlumno = null;
 if (session()->get('ciclo') != null) {
     $ciclo = session()->get('ciclo');
-} else {
-    $ciclo = null;
-    $dniAlumno = null;
 }
 if (session()->get('dniAlumno') != null) {
     $dniAlumno = session()->get('dniAlumno');
     $l2 = Conexion::listarAlumnosCurso($ciclo);
-} else {
-    $dniAlumno = null;
 }
 if (isset($_GET['page'])) {
     $datos = controladorAdmin::paginacionConsultarGastoAlumno();
