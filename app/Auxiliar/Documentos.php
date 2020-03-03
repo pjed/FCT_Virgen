@@ -504,6 +504,70 @@ class Documentos {
 
         Documentos::GenerarExcelGastos($alumnos_gastos, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director);
     }
+    
+    static function GenerarGastosAlumnosDUAL($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director) {
+
+        foreach ($datos_director as $value) {
+            $nombre_director = $value->nombre_director;
+        }
+
+        foreach ($datos_tutor as $value) {
+            $nombre_tutor = $value->nombre_tutor;
+            $email_tutor = $value->email;
+        }
+
+        foreach ($datos_centro as $value) {
+            $cod_centro = $value->cod;
+            $nombre_centro = $value->nombre;
+            $localidad_centro = $value->localidad;
+        }
+
+        foreach ($datos_ciclo as $value) {
+            $descripcion_ciclo = $value->descripcion;
+            $horas = $value->horas;
+        }
+
+        Documentos::GenerarExcelGastosDUAL($alumnos_gastos, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director);
+    }
+    
+    static function GenerarExcelGastosDUAL($coleccion, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director) {
+        $path = '../documentacion/plantillas/gastos/Anexo XI-Bis Gastos Alumnos FP DUAL.xlsx';
+
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($path);
+        $reader->setReadDataOnly(true);
+        $reader->load($path);
+        $spreadsheet = $reader->load($path);
+        $spreadsheet->getActiveSheet()->setCellValue('B1', $nombre_centro);
+        $spreadsheet->getActiveSheet()->setCellValue('B2', $nombre_tutor);
+        $spreadsheet->getActiveSheet()->setCellValue('B3', $descripcion_ciclo);
+        $spreadsheet->getActiveSheet()->setCellValue('H30', $nombre_tutor);
+        $spreadsheet->getActiveSheet()->setCellValue('E30', $nombre_director);
+        $spreadsheet->getActiveSheet()->setCellValue('K2', $fecha_actual);
+        $spreadsheet->getActiveSheet()->setCellValue('F1', $localidad_centro);
+        $spreadsheet->getActiveSheet()->setCellValue('J1', $cod_centro);
+        $spreadsheet->getActiveSheet()->setCellValue('J3', $horas);
+        $row = 8;
+        $indice = 1;
+
+        foreach ($coleccion as $value) {
+            $spreadsheet->getActiveSheet()->setCellValue('A' . $row, $value->alumno);
+            $spreadsheet->getActiveSheet()->setCellValue('K' . $row, $value->total_comida);
+            $row += 1;
+            $indice += 1;
+        }
+
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
+        $writer->save("Anexo XI-Bis Gastos Alumnos FP DUAL_" . $curso . ".xlsx");
+
+        $filename = "Anexo XI-Bis Gastos Alumnos FP DUAL_" . $curso . ".xlsx";
+        header('Content-disposition: attachment; filename=' . $filename);
+        header('Content-Length: ' . filesize($filename));
+        header('Content-Transfer-Encoding: binary');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        $writer->save('php://output');
+        exit();
+    }
 
     static function GenerarExcelGastos($coleccion, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director) {
         $path = '../documentacion/plantillas/gastos/Anexo 6-Gastos_FCT.xlsx';
