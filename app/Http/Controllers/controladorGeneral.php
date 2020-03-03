@@ -29,6 +29,10 @@ class controladorGeneral extends Controller {
                 foreach ($n as $u) {
                     $rol = $u['rol'];
                 }
+                if($rol == 0){
+                    $rol = 4;
+                }
+                
                 if ($rol == 1) {//admin
                     session()->put('rol', 1);
                     echo '
