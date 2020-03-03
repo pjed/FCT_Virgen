@@ -69,7 +69,7 @@ Crear gasto transporte
             <div class="col-md-2">
 
                 <p>Precio</p>
-                <input type="number" id="precioP" name="precioP" value="" min="0">
+                <input type="number" id="precioP" name="precioP" value="0.12" readonly>
 
                 <p>Localidad</p>
                 <input type="text" id="locP" name="locP" value="" placeholder="Localidad">
@@ -104,8 +104,6 @@ Crear gasto transporte
         <div class="row justify-content-center"> 
 
             <div class="col-md-2">
-                
-                <input type="submit" id="comprobar" name="comprobar" value="Comprobar">
 
                 <input type="submit" id="guardar" name="guardar" value="Guardar">
 

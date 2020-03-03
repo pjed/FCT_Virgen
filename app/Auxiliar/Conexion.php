@@ -553,17 +553,14 @@ class Conexion {
      * @param type $telefono número de teléfono del alumno
      * @param type $iban número iban del alumno
      */
-    static function actualizarDatosAlumno($dni, $nombre, $apellidos, $domicilio, $email, $password, $telefono, $movil, $iban, $updated_at) {
+    static function actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $updated_at) {
         try {
             usuario::where('dni', $dni)
                     ->update([
                         'nombre' => $nombre,
                         'apellidos' => $apellidos,
-                        'domicilio' => $domicilio,
                         'email' => $email,
-                        'pass' => $password,
                         'telefono' => $telefono,
-                        'movil' => $movil,
                         'iban' => $iban,
                         'updated_at' => $updated_at
             ]);
@@ -1397,6 +1394,30 @@ class Conexion {
                   </div>';
         }
     }
+    
+    static function ModificarGastoComidaSinFoto($id, $fecha, $importe) {
+        try {
+            $p = comida::where('id', $id)
+                    ->update([
+                'fecha' => $fecha,
+                'importe' => $importe,
+            ]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
 
     /**
      * Método para borrar los gastos de comida del alumno
@@ -1460,6 +1481,30 @@ class Conexion {
                     ->update([
                 'n_dias' => $n_diasC,
                 'foto' => $foto,
+                'importe' => $precio,
+            ]);
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Modificado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+    
+    static function ModificarGastoTransporteColectivoSinFoto($id, $n_diasC, $precio) {
+        try {
+            $p = colectivo::where('id', $id)
+                    ->update([
+                'n_dias' => $n_diasC,
                 'importe' => $precio,
             ]);
 

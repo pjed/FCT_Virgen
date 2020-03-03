@@ -9,45 +9,60 @@ class controladorAlumno extends Controller {
 
     public function crearGastoComida(Request $req) {
         //ingresar el gasto de comida en la tabla comidas
-        //$foto = $req->get('fotoTicket');
         $idComida = Conexion::obtenerIdUltimaComidaIngresada() + 1;
-        $req->file('fotoTicket')->move('imagenes_gastos/comida', $idComida);
-        $foto = 'imagenes_gastos/comida/' . $idComida;
+        //$req->file('fotoTicket')->move('imagenes_gastos/comida', $idComida);
+        //$foto = 'imagenes_gastos/comida/' . $idComida;
         $fecha = $req->get('fechaT');
         $importe = $req->get('importeT');
-
-        Conexion::insertarGastoComida($importe, $fecha, $foto);
-
-        //ingresar el gasto de comida en la tabla de gastos
-        $usuario = session()->get('usu');
-        foreach ($usuario as $u) {
-            $usuarios_dni = $u['dni'];
-        }
-
-        $comidas_id = Conexion::obtenerIdComidaIngresada();
-        $transporte_id = 0;
         $desplazamiento = $req->get('desplazado');
-        $tipo = 0;
+        $fot = $req->file('fotoTicket');
+        $foto = "";
 
-        $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($usuarios_dni);
-        $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] + $importe;
-        //dd($totalGastoAlumno);
+        if ($desplazamiento == null) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Debes indicar si te has desplazado o no.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
 
-        $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($usuarios_dni);
-        $totalGastoCiclo = 0;
-        foreach ($totalGastoCicloAntiguo as $a) {
-            $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+            return view('alumno/crearGastoComida');
+        } else {
+            if ($fot != null) {
+                $foto = $fot->move('imagenes_gastos/comida', $idComida);
+            }
+
+            Conexion::insertarGastoComida($importe, $fecha, $foto);
+
+            //ingresar el gasto de comida en la tabla de gastos
+            $usuario = session()->get('usu');
+            foreach ($usuario as $u) {
+                $usuarios_dni = $u['dni'];
+            }
+
+            $comidas_id = Conexion::obtenerIdComidaIngresada();
+            $transporte_id = 0;
+            $tipo = 0;
+
+            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($usuarios_dni);
+            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] + $importe;
+
+            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($usuarios_dni);
+            $totalGastoCiclo = 0;
+            foreach ($totalGastoCicloAntiguo as $a) {
+                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+            }
+
+            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+
+            Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCicloNuevo, $usuarios_dni, $comidas_id, $transporte_id);
+
+            Conexion::actualizarTotalGastosAlumno($usuarios_dni, $totalGastoAlumno);
+
+            Conexion::actualizarTotalGastosCiclo($usuarios_dni, $totalGastoCicloNuevo);
+
+            return view('alumno/crearGastoComida');
         }
-
-        $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
-
-        Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCicloNuevo, $usuarios_dni, $comidas_id, $transporte_id);
-
-        Conexion::actualizarTotalGastosAlumno($usuarios_dni, $totalGastoAlumno);
-
-        Conexion::actualizarTotalGastosCiclo($usuarios_dni, $totalGastoCicloNuevo);
-
-        return view('alumno/crearGastoComida');
     }
 
     public function crearGastoTransporte(Request $req) {
@@ -149,8 +164,14 @@ class controladorAlumno extends Controller {
         if (isset($_REQUEST['editar'])) {
             $fecha = $req->get('fecha');
             $importe = $req->get('importe');
-            $foto = $req->get('foto');
-            Conexion::ModificarGastoComida($id, $fecha, $importe, $foto);
+            $fot = $req->file('foto');
+
+            if ($fot == null) {
+                Conexion::ModificarGastoComidaSinFoto($id, $fecha, $importe);
+            } else {
+                $foto = $fot->move('imagenes_gastos/comida', $idGasto);
+                Conexion::ModificarGastoComida($id, $fecha, $importe, $foto);
+            }
         }
         if (isset($_REQUEST['eliminar'])) {
             Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
@@ -167,22 +188,31 @@ class controladorAlumno extends Controller {
         $id = $req->get('ID');
         $idTransporte = $req->get('idTransporte');
         $tipo = null;
-        
+
         if (isset($_REQUEST['editarP'])) {
             $n_diasP = $req->get('n_diasP');
             $kms = $req->get('kms');
             $precio = $req->get('precio');
             Conexion::ModificarGastoTransportePropio($id, $n_diasP, $precio, $kms);
         }
+
         if (isset($_REQUEST['eliminarP'])) {
             Conexion::borrarGastoTransportePropio($id, $idTransporte); //hay que mirarlo
         }
+
         if (isset($_REQUEST['editarC'])) {
             $n_diasC = $req->get('n_diasC');
             $precio = $req->get('precio');
-            $foto = $req->get('foto');
-            Conexion::ModificarGastoTransporteColectivo($id, $n_diasP, $precio, $foto);
+            $fot = $req->file('foto');
+
+            if ($fot == null) {
+                Conexion::ModificarGastoTransporteColectivoSinFoto($id, $n_diasC, $precio);
+            } else {
+                $foto = $fot->move('imagenes_gastos/transporte', $idTransporte);
+                Conexion::ModificarGastoTransporteColectivo($id, $n_diasC, $precio, $foto);
+            }
         }
+
         if (isset($_REQUEST['eliminarC'])) {
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
         }

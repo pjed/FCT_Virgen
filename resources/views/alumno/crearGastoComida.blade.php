@@ -42,7 +42,6 @@ Crear gasto comida
                 <input type="file" id="fotoTicket" name="fotoTicket"/><br><br>
 
                 <fieldset>
-                    <!--                    <legend>Tipo transporte</legend>-->
                     <p>¿Te has desplazado?</p>
                     <div>
                         <input type="radio" name="desplazado" id="si" value="1">
@@ -59,9 +58,9 @@ Crear gasto comida
             <div class="col-md-2">
 
                 <p>Fecha gasto</p>
-                <input type="date" id="fechaT" name="fechaT" value=""/><br><br>
+                <input type="date" id="fechaT" name="fechaT" value="" required/><br><br>
                 <p>Importe total</p>
-                <input type="number" id="importeT" name="importeT" min="0" max="9" step="0.01" value="0"/><br><br>
+                <input type="number" id="importeT" name="importeT" min="0" max="9" step="0.01" value="" required/><br><br>
 
             </div>
 

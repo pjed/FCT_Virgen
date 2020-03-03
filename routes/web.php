@@ -124,7 +124,7 @@ Route::get('gestionarUsuarios', function () {
     ];
 
     return view('admin/gestionarUsuarios', $datos);
-});
+})->name('gestionarUsuarios');
 Route::get('gestionarAlumnos', function () {
     return view('admin/gestionarAlumnos');
 });

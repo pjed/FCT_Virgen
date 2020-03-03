@@ -11,7 +11,6 @@
         <!-- Styles -->
         <script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>
         <script src="{{asset ('js/js_crearGastoComida.js')}}"></script>
-        <script src="{{asset ('js/js_crearGastoTransporte.js')}}"></script>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
