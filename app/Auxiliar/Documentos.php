@@ -273,20 +273,18 @@ class Documentos {
         $name = 'Recibi_' . "$dniAlumno" . "_" . $dia . "-" . $mes . "-" . $ano . '.docx';
         $document->saveAs($name);
         rename($name, storage_path() . "/documentos/recibi/{$name}");
-        $file = storage_path() . "/documentos/recibi/todos/{$name}";
 
-//        //$file= storage_path(). "/word/{$name}";
-//        $zipper->make('test.zip')->folder(storage_path('/documentos/recibi/todos'));
+        $lista_documentos = [
+            "nombre_archivo" => $name,
+            "path_archivo" => "/documentos/recibi/{$name}",
+        ];
 
         $headers = array(
             //'Content-Type: application/msword',
             'Content-Type: vnd.openxmlformats-officedocument.wordprocessingml.document'
         );
-
-        $response = Response::download($file, $name, $headers);
         ob_end_clean();
-
-        return $response;
+        return $lista_documentos;
     }
 
     static function GenerarRecibiDUAL($dniAlumno, $modalidad, $duracion, $cod_proyecto, $inicio, $final) {
@@ -504,7 +502,7 @@ class Documentos {
 
         Documentos::GenerarExcelGastos($alumnos_gastos, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director);
     }
-    
+
     static function GenerarGastosAlumnosDUAL($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director) {
 
         foreach ($datos_director as $value) {
@@ -529,7 +527,7 @@ class Documentos {
 
         Documentos::GenerarExcelGastosDUAL($alumnos_gastos, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director);
     }
-    
+
     static function GenerarExcelGastosDUAL($coleccion, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director) {
         $path = '../documentacion/plantillas/gastos/Anexo XI-Bis Gastos Alumnos FP DUAL.xlsx';
 
@@ -651,6 +649,19 @@ class Documentos {
         header('Pragma: public');
         $writer->save('php://output');
         exit();
+    }
+
+    public static function generarArchivoZIP($lista_documentos, $curso) {
+        $zip_file = 'recibis' . $curso . '.zip'; // Name of our archive to download
+
+        $zip = new \ZipArchive();
+        if ($zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE)) {
+            foreach ($lista_documentos as $value) {
+                $zip->addFile(storage_path($value["nombre_archivo"]), $value["path_archivo"]);
+            }
+            $zip->close();
+        }
+        return response()->download($zip_file);
     }
 
 }

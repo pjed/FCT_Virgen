@@ -154,9 +154,10 @@ class controladorTutor extends Controller {
             $alumnos_curso = Conexion::obtenerAlumnosTutor($curso);
 
             foreach ($alumnos_curso as $alumno) {
-                $response = Documentos::GenerarRecibiTodosAlumnos($alumno->dni);
+                $lista_documentos[] = Documentos::GenerarRecibiTodosAlumnos($alumno->dni);
             }
-            return $response;
+            
+            Documentos::generarArchivoZIP($lista_documentos, $curso);
         }
         if (isset($_REQUEST['recibiFPDUAL'])) {
             
@@ -175,7 +176,7 @@ class controladorTutor extends Controller {
             $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
             $datos_director = Conexion::obtenerDatosDirector();
             $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
-            
+
             Documentos::GenerarGastosAlumnos($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
         }
         if (isset($_REQUEST['gastosFPDUAL'])) {
@@ -186,7 +187,7 @@ class controladorTutor extends Controller {
             $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
             $datos_director = Conexion::obtenerDatosDirector();
             $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
-            
+
             Documentos::GenerarGastosAlumnosDUAL($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
         }
         return view('tutor/extraerDocT');
@@ -358,7 +359,7 @@ class controladorTutor extends Controller {
 
             return Documentos::GenerarRecibi($dniAlumno, $periodo);
         }
-        if (isset($_REQUEST['recibiFPDUAL'])) {            
+        if (isset($_REQUEST['recibiFPDUAL'])) {
             $dniAlumno = $req->get('dniAlumno');
             $modalidad = $req->get('modalidad');
             $duracion = $req->get('duracion');
