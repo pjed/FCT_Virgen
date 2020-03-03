@@ -27,12 +27,12 @@ Gestionar gastos transporte
             <h2 class="text-center">Gestionar gastos transporte</h2>
         </div>
     </div>
-    @if ($tipo == 1)
-    <?php $gastosAlumno = Conexion::listarGastosTransportesColectivosPagination($dniAlumno); ?>
+    @if ($gastosAlumno != null)
     <!-- Tabla de gastos transporte colectivo del usuario -->
     <div id="colectivo" class="row justify-content-center">
         <div class="col-sm col-md-8">
             <div class="table-responsive">
+                <h3 class="text-center">Colectivo</h3>
                 <table class="table table-striped table-hover table-bordered">
                     <thead class="thead-dark">
                         <tr>
@@ -62,8 +62,9 @@ Gestionar gastos transporte
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'></td>
 
-                                <td><button type="submit" id="editar" class="btn" name="editarC" /></td>
-                                <td><button type="submit" id="eliminar" class="btn" name="eliminarC" /></td>
+                                <td><button type="submit" id="editar" class="btn" name="editar" />
+                                    <!-- </td><td>-->
+                                    <button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
                             </tr>
                         </form>
 
@@ -82,11 +83,11 @@ Gestionar gastos transporte
         </div>
     </div>
     @endif
-    @if ($tipo == 0)
-    <?php $gastosAlumno = Conexion::listarGastosTransportesPropiosPagination($dniAlumno); ?>
+    @if ($gastosAlumno1 != null)
     <!-- Tabla de gastos transporte propio del usuario -->
     <div id="propio" class="row">
         <div class="col-md-12">
+            <h3 class="text-center">Propio</h3>
             <div class="table-responsive">
                 <table class="table table-striped table-hover table-bordered">
                     <thead class="thead-dark">
@@ -99,7 +100,7 @@ Gestionar gastos transporte
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($gastosAlumno as $key) {
+                        foreach ($gastosAlumno1 as $key) {
                             ?>
                         <form name="form" action="gestionarGastosTransporte" method="POST">
                             {{ csrf_field() }}
@@ -112,8 +113,9 @@ Gestionar gastos transporte
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="n_diasP" value="<?php echo $key->n_diasP; ?>"></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="kms" value="<?php echo $key->kms; ?>"></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'></td>
-                                <td><button type="submit" id="editar" class="btn" name="editarP" /></td>
-                                <td><button type="submit" id="eliminar" class="btn" name="eliminarP" /></td>
+                                <td><button type="submit" id="editar" class="btn" name="editar" />
+                                    <!-- </td><td>-->
+                                    <button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
                             </tr>
                         </form>
                         <?php
@@ -127,7 +129,7 @@ Gestionar gastos transporte
 
     <div class="row justify-content-center">
         <div class="col-sm col-md col-lg">
-            {{ $gastosAlumno->links()}}
+            {{ $gastosAlumno1->links()}}
         </div>
     </div>
     @endif

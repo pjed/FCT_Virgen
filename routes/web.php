@@ -3,6 +3,7 @@
 use App\Auxiliar\Conexion;
 use App\Http\Controllers\controladorAdmin;
 use App\Http\Controllers\controladorTutor;
+use App\Http\Controllers\controladorAlumno;
 
 /*
   |--------------------------------------------------------------------------
@@ -147,8 +148,8 @@ Route::any('consultarGastosAjax', function () {
 });
 Route::any('consultarGastosAjaxCiclo', ['uses' => 'controladorAdmin@listarCursosAjax', 'as' => 'consultarGastosAjaxCiclo']);
 Route::any('consultarGastosAjaxDniAlumno', ['uses' => 'controladorAdmin@listarAlumnosCursoAjax', 'as' => 'consultarGastosAjaxDniAlumno']);
-
-Route::any('consultarGastosAjaxTabla', 'controladorAdmin@consultarGastoAlumnoAjax');
+Route::any('consultarGastosAjaxTabla', ['uses' => 'controladorAdmin@consultarGastoAlumnoAjax', 'as' => 'consultarGastosAjaxTabla']);
+Route::any('tablaConsultarGastosAjax', ['uses' => 'controladorAdmin@tablaConsultarGastosAjax', 'as' => 'tablaConsultarGastosAjax']);
 
 Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');
 Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');
@@ -178,7 +179,9 @@ Route::get('gestionarGastosComida', function () {
     return view('alumno/gestionarGastosComida', ['gastosAlumno' => $gastosAlumno]);
 });
 Route::get('gestionarGastosTransporte', function () {
-    $tipo = null;
+    $gastosAlumno = null;
+    $gastosAlumno1 = null;
+    
     $n = session()->get('usu');
     foreach ($n as $u) {
         $dniAlumno = $u['dni'];
@@ -186,12 +189,18 @@ Route::get('gestionarGastosTransporte', function () {
     $gt = Conexion::listarGastosTransportes($dniAlumno);
 
     foreach ($gt as $key1) {
-        $tipo = $key1->tipo;
+        if ($key1->tipoTransporte == 1) {
+            $gastosAlumno = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+        }
+        if ($key1->tipoTransporte == 0) {
+            $gastosAlumno1 = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+        }
     }
-    $datos = ['tipo' => $tipo,
-        'dniAlumno' => $dniAlumno];
-    return view('alumno/gestionarGastosTransporte', $datos);
+    $datos1 = ['gastosAlumno' => $gastosAlumno,
+        'gastosAlumno1' => $gastosAlumno1];
+    return view('alumno/gestionarGastosTransporte', $datos1);
 });
+
 Route::get('perfilAl', function () {
     return view('alumno/perfilAlumno');
 });

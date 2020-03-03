@@ -143,6 +143,8 @@ class controladorAlumno extends Controller {
                 $totalGastoCicloNuevo = $totalGastoCiclo + $precio;
 
                 $desplazamiento = 1;
+                
+                $tipo = 1;
                 $comidas_id = 0;
 
                 Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCicloNuevo, $usuarios_dni, $comidas_id, $transporte_id);
@@ -187,7 +189,6 @@ class controladorAlumno extends Controller {
     public function gestionarGastoTransporte(Request $req) {
         $id = $req->get('ID');
         $idTransporte = $req->get('idTransporte');
-        $tipo = null;
 
         if (isset($_REQUEST['editarP'])) {
             $n_diasP = $req->get('n_diasP');
@@ -223,10 +224,15 @@ class controladorAlumno extends Controller {
         }
         $gt = Conexion::listarGastosTransportes($dniAlumno);
         foreach ($gt as $key1) {
-            $tipo = $key1->tipo;
+            if ($key1->tipoTransporte == 1) {
+                $gastosAlumno = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+            }
+            if ($key1->tipoTransporte == 0) {
+                $gastosAlumno1 = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+            }
         }
-        $datos = ['tipo' => $tipo,
-            'dniAlumno' => $dniAlumno];
+        $datos = ['gastosAlumno' => $gastosAlumno,
+            'gastosAlumno1' => $gastosAlumno1];
         return view('alumno/gestionarGastosTransporte', $datos);
     }
 

@@ -162,6 +162,169 @@ class controladorAdmin extends Controller {
         return view('admin/consultarGastos', $datos);
     }
 
+    public function tablaConsultarGastosAjax(Request $req) {
+        $v = null;
+        //            si ese usuario no tiene ningun gasto que salga algo
+        $desplazamiento = null;
+        $tipo = null;
+        if (isset($_SESSION['dniAlumno'])) {
+            $dniAlumno1 = session()->get('dniAlumno');
+        }
+        if (isset($_REQUEST['dniAlumno'])) {
+            $dniAlumno = $req->get('dniAlumno');
+        }
+        $gt = Conexion::listarGastosTransportes($dniAlumno);
+
+        foreach ($gt as $key) {
+            $desplazamiento = $key->desplazamiento;
+            $tipo = $key->tipo;
+        }
+        if ($desplazamiento == 1) {
+            if ($tipo == 1) {
+                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+                if ($gtc != null) {
+                    $v = $v . '<!-- Gestionar Gastos Transporte  Colectivo-->
+                    <div id="colectivo" class="row justify-content-center">
+                        <div class="col-sm col-md">
+                            <h2 class="text-center">Consultar Gastos Transporte Colectivo</h2>
+                            <div class="table-responsive ">
+                                <table class="table table-striped  table-hover table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr> 
+                                            <th>Donde es</th>
+                                            <th>Nº dias</th>                        
+                                            <th>Foto</th>
+                                            <th>Importe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>';
+                    foreach ($gtc as $key) {
+                        $v = $v . '<form action="consultarGastoAjax" method="POST">
+                                            {{ csrf_field() }}
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value="' . $key->idTransporte . '" readonly>
+                                                    <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="' . $key->donde . '"/>
+                                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="' . $key->idColectivos . '" readonly/>
+                                                </td>
+                                                <td><input type="number" class="form-control form-control-sm" name="n_diasC" value="' . $key->n_diasC . '"/></td>
+                                                <td><input type="text" class="form-control form-control-sm" name="precio" value="' . $key->precio . '"/></td>
+                                                <td>
+                                                    <a  href="' . $key->foto . '" target="_blank"> <img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/></a>
+                                                </td>
+                                                <td><button type="submit" id="editar" class="btn-sm" name="editarC"></button></td>
+                                                <td><button type="submit" id="eliminar" class="btn-sm" name="eliminarC"></button></td>
+                                            </tr>
+                                        </form>';
+                    }
+                    $v = $v . '</tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row justify-content-center">
+                        <div class="col-sm col-md col-lg">
+                                {{ $gtc->links()}}
+                        </div>
+                    </div>';
+                }
+            }
+            if ($tipo == 0) {
+                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+                if ($gtp != null) {
+                    $v = $v . 'Gestionar Gastos Transporte  Propio-->
+                    <div id="propio" class="row justify-content-center">
+                        <div class="col-sm col-md">
+                            <h2 class="text-center">Consultar Gastos Transporte Propio</h2>
+                            <div class="table-responsive ">
+                                <table class="table  table-sm  table-striped  table-hover table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>   
+                                            <th>Donde es</th>
+                                            <th>Nº dias</th>                        
+                                            <th>KMS</th>
+                                            <th>Importe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>';
+                    foreach ($gtp as $key) {
+                        $v = $v . ' <form action="consultarGastoAjax" method="POST">
+                                            {{ csrf_field() }}
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value="' . $key->idTransporte . '" readonly>
+                                                    <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="' . $key->donde . '"/>
+                                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="' . $key->idPropios . '" readonly/>
+                                                </td>
+                                                <td><input type="number" class="form-control form-control-sm" name="n_diasP" value="' . $key->n_diasP . '"/></td>
+                                                <td><input type="number" class="form-control form-control-sm" name="kms" value="' . $key->kms . '"/></td>
+                                                <td><input type="text" class="form-control form-control-sm" name="precio" value=""' . $key->precio . '>"/></td>
+                                                <td><button type="submit" id="editar" class="btn-sm" name="editarP"></button></td>
+                                                <td><button type="submit" id="eliminar" class="btn-sm" name="eliminarP"></button></td>
+                                            </tr>
+                                        </form>';
+                    }
+                    $v = $v . '</tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row justify-content-center">
+                        <div class="col-sm col-md col-lg">
+                            {{ $gtp->links()}}
+                        </div>
+                            </div>';
+                }
+            }
+        }
+        $gc = Conexion::listarGastosComidasPagination($dniAlumno);
+        if ($gc != null) {
+            $v = $v . '<!-- Gestionar Gastos Comida -->
+                <div id="comida" class="row justify-content-center">
+                    <div class="col-sm-8 col-md-8">
+                        <h2 class="text-center">Consultar Gastos Comida</h2>
+                        <div class="table-responsive ">
+                            <table class="table table-striped  table-hover table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>         
+                                        <th>Fecha</th>
+                                        <th>Importe</th>
+                                        <th>Foto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>';
+            foreach ($gc as $key) {
+                $v = $v . '<form action="consultarGastoAjax" method="POST">
+                                        {{ csrf_field() }}
+                                        <tr>
+                                            <td>
+                                                <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value="' . $key->idGasto . '" readonly>
+                                                <input type="text" class="form-control form-control-sm form-control-md" name="fecha" value="' . $key->fecha . '"/>
+                                                <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="' . $key->id . '" readonly/>
+                                            </td>
+                                            <td><input type="text" class="form-control form-control-sm" name="importe" value="' . $key->importe . '"/></td>
+                                            <td>
+                                                <img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>
+                                            </td>
+                                            <td><button type="submit" id="editar" class="btn-sm" name="editar"></button></td>
+                                            <td><button type="submit" id="eliminar" class="btn-sm" name="eliminar"></button></td> 
+                                        </tr>
+                                    </form>';
+            }
+            $v = $v . '</tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> 
+                <div class="row justify-content-center">
+                    <div class="col-sm col-md col-lg">
+                        {{ $gc->links()}}
+                    </div>
+                </div>';
+        }
+        echo $v;
+    }
+
     public function consultarGastoAlumnoAjax(Request $req) {
         //saca los gastos de un alumno
         if (isset($_REQUEST['buscar1'])) {
@@ -242,8 +405,7 @@ class controladorAdmin extends Controller {
 
             $rol_id = $req->get('selectRol');
 
-            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil);
-            Conexion::ModificarRol($dni, $rol_id);
+            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
         }
 
         if (isset($_REQUEST['eliminar'])) {
@@ -253,31 +415,24 @@ class controladorAdmin extends Controller {
 
             if ($rol_id == 1) {
 
-                Conexion::borrarUsuarioTablaRoles($dni);
                 Conexion::borrarUsuario($dni);
-            } else {
-                if ($rol_id == 2) {
+            } else if ($rol_id == 2) {
 
-                    $cursoTutor = Conexion::obtenerCicloTutor($dni);
+                $cursoTutor = Conexion::obtenerCicloTutor($dni);
 
-                    Conexion::borrarTutor($dni);
-                    Conexion::borrarCurso($cursoTutor);
-                    Conexion::borrarUsuarioTablaRoles($dni);
-                    Conexion::borrarUsuario($dni);
-                } else {
-                    if ($rol_id == 4) {
+                Conexion::borrarTutor($dni);
+//                    Conexion::borrarCurso($cursoTutor);
+                Conexion::borrarUsuario($dni);
+            } else if ($rol_id == 4) {
 
-                        $cursoTutor = Conexion::obtenerCicloTutor($dni);
+                $cursoTutor = Conexion::obtenerCicloTutor($dni);
 
-                        Conexion::borrarTutor($dni);
-                        Conexion::borrarCurso($cursoTutor);
-                        Conexion::borrarUsuarioTablaRoles($dni);
-                        Conexion::borrarUsuario($dni);
-                    }
-                }
+                Conexion::borrarTutor($dni);
+//                        Conexion::borrarCurso($cursoTutor);
+                Conexion::borrarUsuario($dni);
             }
         }
-        
+
         return redirect()->route('gestionarUsuarios');
 
 //        $listaUsuarios = Conexion::listarUsuarios();
@@ -302,7 +457,7 @@ class controladorAdmin extends Controller {
             $email = $req->get('email');
             $telefono = $req->get('telefono');
             $iban = $req->get('iban');
-            
+
             $now = new \DateTime();
             $updated_at = $now->format('Y-m-d H:i:s');
 
@@ -369,7 +524,7 @@ class controladorAdmin extends Controller {
             $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
             $datos_director = Conexion::obtenerDatosDirector();
             $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
-            
+
             Documentos::GenerarGastosAlumnos($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
         }
         if (isset($_REQUEST['gastosFPDUAL'])) {
@@ -380,7 +535,7 @@ class controladorAdmin extends Controller {
             $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
             $datos_director = Conexion::obtenerDatosDirector();
             $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
-            
+
             Documentos::GenerarGastosAlumnosDUAL($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
         }
     }
@@ -534,7 +689,7 @@ class controladorAdmin extends Controller {
                   </div>';
             }
         }
-        
+
         return redirect()->route('gestionarUsuarios');
 
 //        $listaUsuarios = Conexion::listarUsuarios();
@@ -574,7 +729,7 @@ class controladorAdmin extends Controller {
         session()->put('ciclo', $ciclo);
         $w = '';
         $v = Conexion:: listarAlumnosCurso($ciclo);
-        
+
         if (isset($_SESSION['dniAlumno'])) {
             $dniAlumno = session()->get('dniAlumno');
         } else {
