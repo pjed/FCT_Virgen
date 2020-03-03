@@ -100,6 +100,7 @@ class Conexion {
      * @param type $tel
      * @param type $iban
      * @param type $movil
+     * @param type $rol
      */
     static function insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $iban, $movil, $rol) {
 //        usuario
@@ -136,15 +137,19 @@ class Conexion {
                   </div>';
         }
     }
+
     /**
      * MODIFICAR USUARIO
-     * @param type $correo
+     * @param type $dni
      * @param type $nombre
-     * @param type $tf
-     * @param type $edad
-     * @param type $activo
+     * @param type $apellidos
+     * @param type $domicilio
+     * @param type $email
+     * @param type $tel
+     * @param type $movil
+     * @param type $rol_id
      */
-    static function ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil) {
+    static function ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id) {
         try {
             $p = usuario::where('dni', $dni)
                     ->update(['nombre' => $nombre,
@@ -153,7 +158,8 @@ class Conexion {
                 'email' => $email,
                 'telefono' => $tel,
                 'movil' => $movil]);
-
+            $r = usuarios_rol::where('usuario_dni', $dni)
+                    ->update(['rol_id' => $rol_id]);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado usuario con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -221,37 +227,13 @@ class Conexion {
     }
 
     /**
-     * Método para modificar el rol de un usuario
-     * @param type $dni dni del usuario
-     * @param type $rol_id nuevo rol del usuario
-     */
-    static function ModificarRol($dni, $rol_id) {
-        try {
-            $p = usuarios_rol::where('usuario_dni', $dni)
-                    ->update(['rol_id' => $rol_id]);
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado rol con exito.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-        } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al modificar rol.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-        }
-    }
-
-    /**
      * Método para eliminar un usuario de la BD
      * @param type $dni dni del usuario a borrar
      */
     static function borrarUsuario($dni) {
 
-        try {
+        try {            
+            usuarios_rol::where('usuario_dni', $dni)->delete();
             usuario::where('dni', $dni)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
@@ -269,29 +251,6 @@ class Conexion {
         }
     }
 
-    /**
-     * Método para eliminar a un usuario de la tabla usuarios_roles
-     * @param type $dni dni del usuario a eliminar de la tabla
-     */
-    static function borrarUsuarioTablaRoles($dni) {
-
-        try {
-            usuarios_rol::where('usuario_dni', $dni)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-        } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al borrar.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-        }
-    }
 
     /**
      * Método para borrar un tutor de la BD
@@ -348,7 +307,7 @@ class Conexion {
     static function borrarAlumnoTablaPracticas($dni) {
 
         try {
-            practiva::where('usuarios_dni', $dni)->delete();
+            practica::where('usuarios_dni', $dni)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1320,7 +1279,6 @@ class Conexion {
         return $v;
     }
 
-
     /**
      * Método para obtener los gastos de transporte colectivo de un alumno determinado con paginacion de 4
      * @param type $dni
@@ -1395,7 +1353,7 @@ class Conexion {
                   </div>';
         }
     }
-    
+
     static function ModificarGastoComidaSinFoto($id, $fecha, $importe) {
         try {
             $p = comida::where('id', $id)
@@ -1500,7 +1458,7 @@ class Conexion {
                   </div>';
         }
     }
-    
+
     static function ModificarGastoTransporteColectivoSinFoto($id, $n_diasC, $precio) {
         try {
             $p = colectivo::where('id', $id)
@@ -1593,7 +1551,7 @@ class Conexion {
 
         return $ano_academico;
     }
-    
+
     /**
      * metodo obtener datos centro
      */
@@ -1606,22 +1564,21 @@ class Conexion {
 
         return $datos_centro;
     }
-    
-     /**
+
+    /**
      * metodo obtener datos ciclo
      */
     static function obtenerDatosCiclo($curso) {
         //$totalGastosCiclo = 0;
 
-        $sql = "SELECT cursos.descripcion, cursos.horas from cursos where id_curso = '".$curso."';";
+        $sql = "SELECT cursos.descripcion, cursos.horas from cursos where id_curso = '" . $curso . "';";
 
         $datos_ciclo = \DB::select($sql);
 
         return $datos_ciclo;
     }
-    
-    
-     /**
+
+    /**
      * metodo obtener datos tutor ciclo
      */
     static function obtenerDatosTutorCiclo($curso) {
@@ -1631,13 +1588,13 @@ class Conexion {
                 FROM cursos, tutores, usuarios
                 where cursos.id_curso = tutores.cursos_id_curso
                 and tutores.usuarios_dni = usuarios.dni
-                and cursos.id_curso = '".$curso."';";
+                and cursos.id_curso = '" . $curso . "';";
 
         $datos_ciclo = \DB::select($sql);
 
         return $datos_ciclo;
     }
-    
+
     /**
      * metodo obtener gastos alumnos por curso
      */
@@ -1654,14 +1611,14 @@ class Conexion {
                 and transportes.id = propios.transportes_id
                 and transportes.id = colectivos.id
                 and gastos.usuarios_dni <> '0'
-                and cursos.id_curso='".$curso."'
+                and cursos.id_curso='" . $curso . "'
                 group by dni;";
 
         $gastos_alumnos = \DB::select($sql);
 
         return $gastos_alumnos;
     }
-    
+
     /**
      * metodo obtener datos director
      */
@@ -1677,8 +1634,6 @@ class Conexion {
 
         return $datos_director;
     }
-    
-    
 
     /**
      * Método para obtener todos los cursos

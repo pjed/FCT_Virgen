@@ -405,8 +405,7 @@ class controladorAdmin extends Controller {
 
             $rol_id = $req->get('selectRol');
 
-            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil);
-            Conexion::ModificarRol($dni, $rol_id);
+            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
         }
 
         if (isset($_REQUEST['eliminar'])) {
@@ -416,28 +415,21 @@ class controladorAdmin extends Controller {
 
             if ($rol_id == 1) {
 
-                Conexion::borrarUsuarioTablaRoles($dni);
                 Conexion::borrarUsuario($dni);
-            } else {
-                if ($rol_id == 2) {
+            } else if ($rol_id == 2) {
 
-                    $cursoTutor = Conexion::obtenerCicloTutor($dni);
+                $cursoTutor = Conexion::obtenerCicloTutor($dni);
 
-                    Conexion::borrarTutor($dni);
-                    Conexion::borrarCurso($cursoTutor);
-                    Conexion::borrarUsuarioTablaRoles($dni);
-                    Conexion::borrarUsuario($dni);
-                } else {
-                    if ($rol_id == 4) {
+                Conexion::borrarTutor($dni);
+//                    Conexion::borrarCurso($cursoTutor);
+                Conexion::borrarUsuario($dni);
+            } else if ($rol_id == 4) {
 
-                        $cursoTutor = Conexion::obtenerCicloTutor($dni);
+                $cursoTutor = Conexion::obtenerCicloTutor($dni);
 
-                        Conexion::borrarTutor($dni);
-                        Conexion::borrarCurso($cursoTutor);
-                        Conexion::borrarUsuarioTablaRoles($dni);
-                        Conexion::borrarUsuario($dni);
-                    }
-                }
+                Conexion::borrarTutor($dni);
+//                        Conexion::borrarCurso($cursoTutor);
+                Conexion::borrarUsuario($dni);
             }
         }
 
