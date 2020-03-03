@@ -62,7 +62,6 @@ Gestionar alumnos
                                     <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="iban" value="<?php echo $value->iban; ?>"/></td>
 
                                     <td><button type="submit" id="editar" class="btn" name="editar" value=""/></td>
-                                    <td><button type="submit" id="eliminar" class="btn" name="eliminar" value=""/></td>
                                 </tr>
                             </form>
                             <?php

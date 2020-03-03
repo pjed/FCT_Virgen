@@ -277,17 +277,19 @@ class controladorAdmin extends Controller {
                 }
             }
         }
+        
+        return redirect()->route('gestionarUsuarios');
 
-        $listaUsuarios = Conexion::listarUsuarios();
-        $listaCiclos = Conexion::listarCiclos();
-        $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
-        $datos = [
-            'listaUsuarios' => $listaUsuarios,
-            'listaCiclos' => $listaCiclos,
-            'listaCiclosSinTutor' => $listaCiclosSinTutor
-        ];
-
-        return view('admin/gestionarUsuarios', $datos);
+//        $listaUsuarios = Conexion::listarUsuarios();
+//        $listaCiclos = Conexion::listarCiclos();
+//        $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
+//        $datos = [
+//            'listaUsuarios' => $listaUsuarios,
+//            'listaCiclos' => $listaCiclos,
+//            'listaCiclosSinTutor' => $listaCiclosSinTutor
+//        ];
+//
+//        return view('admin/gestionarUsuarios', $datos);
     }
 
     public function gestionarAlumnos(Request $req) {
@@ -300,8 +302,11 @@ class controladorAdmin extends Controller {
             $email = $req->get('email');
             $telefono = $req->get('telefono');
             $iban = $req->get('iban');
+            
+            $now = new \DateTime();
+            $updated_at = $now->format('Y-m-d H:i:s');
 
-            Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban);
+            Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $updated_at);
 
             return view('admin/gestionarAlumnos');
         }
@@ -513,17 +518,19 @@ class controladorAdmin extends Controller {
                   </div>';
             }
         }
+        
+        return redirect()->route('gestionarUsuarios');
 
-        $listaUsuarios = Conexion::listarUsuarios();
-        $listaCiclos = Conexion::listarCiclos();
-        $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
-        $datos = [
-            'listaUsuarios' => $listaUsuarios,
-            'listaCiclos' => $listaCiclos,
-            'listaCiclosSinTutor' => $listaCiclosSinTutor
-        ];
-
-        return view('admin/gestionarUsuarios', $datos);
+//        $listaUsuarios = Conexion::listarUsuarios();
+//        $listaCiclos = Conexion::listarCiclos();
+//        $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
+//        $datos = [
+//            'listaUsuarios' => $listaUsuarios,
+//            'listaCiclos' => $listaCiclos,
+//            'listaCiclosSinTutor' => $listaCiclosSinTutor
+//        ];
+//
+//        return view('admin/gestionarUsuarios', $datos);
     }
 
     public function listarCursosAjax() {

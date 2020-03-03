@@ -47,7 +47,7 @@ Gestionar gastos comida
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value='<?php echo $key->idGasto; ?>' readonly>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->id; ?>' readonly>
-                                    <input type="text" class="form-control form-control-sm form-control-md" name ="importe" value='<?php echo $key->importe; ?>'>
+                                    <input type="number" class="form-control form-control-sm form-control-md" name ="importe" value='<?php echo $key->importe; ?>' max="9">
                                 </td>
                                 <td><input type="date" class="form-control form-control-sm form-control-md"  name ="fecha" value="<?php echo $key->fecha; ?>"/></td>
                                 <td>
