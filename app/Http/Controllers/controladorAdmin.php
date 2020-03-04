@@ -120,13 +120,23 @@ class controladorAdmin extends Controller {
             $idGasto = $req->get('idGasto');
             $fecha = $req->get('fecha');
             $importe = $req->get('importe');
-            $foto = $req->get('foto');
-            Conexion::ModificarGastoComida($id, $fecha, $importe, $foto);
+            $fot = $req->file('foto');
+
+            if ($fot == null) {
+                Conexion::ModificarGastoComidaSinFoto($id, $fecha, $importe);
+            } else {
+                $foto = $fot->move('imagenes_gastos/comida', $id);
+                Conexion::ModificarGastoComida($id, $fecha, $importe, $foto);
+            }
         }
         if (isset($_REQUEST['eliminar'])) {
             $id = $req->get('ID');
             $idGasto = $req->get('idGasto');
-            Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
+            $file = $req->get('fotoUrl');
+            if (file_exists($file)) {
+                unlink($file);
+            }
+            Conexion::borrarGastoComida($id, $idGasto);
         }
 //            editar y borrar transporte propio
         if (isset($_REQUEST['editarP'])) {
@@ -148,12 +158,22 @@ class controladorAdmin extends Controller {
             $idTransporte = $req->get('idTransporte');
             $n_diasC = $req->get('n_diasC');
             $precio = $req->get('precio');
-            $foto = $req->get('foto');
-            Conexion::ModificarGastoTransporteColectivo($id, $n_diasP, $precio, $foto);
+            $fot = $req->file('foto');
+
+            if ($fot == null) {
+                Conexion::ModificarGastoTransporteColectivoSinFoto($id, $n_diasC, $precio);
+            } else {
+                $foto = $fot->move('imagenes_gastos/transporte', $idTransporte);
+                Conexion::ModificarGastoTransporteColectivo($id, $n_diasC, $precio, $foto);
+            }
         }
         if (isset($_REQUEST['eliminarC'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
+            $file = $req->get('fotoUrl');
+            if (file_exists($file)) {
+                unlink($file);
+            }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
         }
         $datos = controladorAdmin::paginacionConsultarGastoAlumno();
@@ -178,11 +198,10 @@ class controladorAdmin extends Controller {
         $gt = Conexion::listarGastosTransportes($dniAlumno);
 
         foreach ($gt as $key) {
-            if ($key->desplazamiento == 1) {
-                if ($key->tipoTransporte == 1) {
-                    $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-                    if ($gtc != null) {
-                        $v = $v . '<!-- Gestionar Gastos Transporte  Colectivo-->
+            if ($key->tipoTransporte == 1) {
+                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+                if ($gtc != null) {
+                    $v = $v . '<!-- Gestionar Gastos Transporte  Colectivo-->
                     <div id="colectivo" class="row justify-content-center">
                         <div class="col-sm col-md">
                             <h2 class="text-center">Consultar Gastos Transporte Colectivo</h2>
@@ -197,8 +216,8 @@ class controladorAdmin extends Controller {
                                         </tr>
                                     </thead>
                                     <tbody>';
-                        foreach ($gtc as $key) {
-                            $v = $v . '<form action="consultarGastoAjax" method="POST">
+                    foreach ($gtc as $key) {
+                        $v = $v . '<form action="consultarGastoAjax" method="POST">
                                             {{ csrf_field() }}
                                             <tr>
                                                 <td>
@@ -215,8 +234,8 @@ class controladorAdmin extends Controller {
                                                 <td><button type="submit" id="eliminar" class="btn-sm" name="eliminarC"></button></td>
                                             </tr>
                                         </form>';
-                        }
-                        $v = $v . '</tbody>
+                    }
+                    $v = $v . '</tbody>
                                 </table>
                             </div>
                         </div>
@@ -226,12 +245,11 @@ class controladorAdmin extends Controller {
                                 {{ $gtc->links()}}
                         </div>
                     </div>';
-                    }
                 }
-                if ($key->tipoTransporte == 0) {
-                    $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
-                    if ($gtp != null) {
-                        $v = $v . 'Gestionar Gastos Transporte  Propio-->
+            } else if ($key->tipoTransporte == 0) {
+                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+                if ($gtp != null) {
+                    $v = $v . 'Gestionar Gastos Transporte  Propio-->
                     <div id="propio" class="row justify-content-center">
                         <div class="col-sm col-md">
                             <h2 class="text-center">Consultar Gastos Transporte Propio</h2>
@@ -246,8 +264,8 @@ class controladorAdmin extends Controller {
                                         </tr>
                                     </thead>
                                     <tbody>';
-                        foreach ($gtp as $key) {
-                            $v = $v . ' <form action="consultarGastoAjax" method="POST">
+                    foreach ($gtp as $key) {
+                        $v = $v . ' <form action="consultarGastoAjax" method="POST">
                                             {{ csrf_field() }}
                                             <tr>
                                                 <td>
@@ -262,8 +280,8 @@ class controladorAdmin extends Controller {
                                                 <td><button type="submit" id="eliminar" class="btn-sm" name="eliminarP"></button></td>
                                             </tr>
                                         </form>';
-                        }
-                        $v = $v . '</tbody>
+                    }
+                    $v = $v . '</tbody>
                                 </table>
                             </div>
                         </div>
@@ -273,7 +291,6 @@ class controladorAdmin extends Controller {
                             {{ $gtp->links()}}
                         </div>
                             </div>';
-                    }
                 }
             }
         }
@@ -349,6 +366,10 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['eliminar'])) {
             $id = $req->get('ID');
             $idGasto = $req->get('idGasto');
+            $file = $req->get('fotoUrl');
+            if (file_exists($file)) {
+                unlink($file);
+            }
             Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
         }
 //            editar y borrar transporte propio
@@ -377,6 +398,10 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['eliminarC'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
+            $file = $req->get('fotoUrl');
+            if (file_exists($file)) {
+                unlink($file);
+            }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
         }
         $datos = controladorAdmin::paginacionConsultarGastoAlumno();
@@ -557,35 +582,43 @@ class controladorAdmin extends Controller {
 
     /**
      * Pefil Admin
-     * @author Pedro
+     * @author Pedro (Todo lo demás) y Marina (contraseña)
      * @param Request $req
      * @return type
      */
     public function perfil(Request $req) {
-        $domicilio = $req->get('domicilio');
-        $pass = $req->get('pass');
-        $passHash = hash('sha256', $pass);
-        $telefono = $req->get('telefono');
-        $movil = $req->get('movil');
-
-        $now = new \DateTime();
-        $updated_at = $now->format('Y-m-d H:i:s');
         $usuario = session()->get('usu');
+        $clave = null;
         $nombre = null;
         $apellidos = null;
         $email = null;
         $dni = null;
-
         foreach ($usuario as $value) {
             $dni = $value['dni'];
+            $clave = $value['pass'];
             $nombre = $value['nombre'];
             $apellidos = $value['apellidos'];
             $email = $value['email'];
         }
 
-        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $passHash, $telefono, $movil, $updated_at);
 
-        $usu = Conexion::existeUsuario($email, $pass);
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
+
+        $domicilio = $req->get('domicilio');
+        $telefono = $req->get('telefono');
+        $movil = $req->get('movil');
+
+        $pass = $req->get('pass');
+        if ($pass != null) {
+            $passHash = hash('sha256', $pass);
+            Conexion::ModificarConstrasenia($dni, $passHash);
+            $clave = $passHash;
+        }
+
+        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $updated_at);
+
+        $usu = Conexion::existeUsuario($email, $clave);
 
         session()->put('usu', $usu);
 

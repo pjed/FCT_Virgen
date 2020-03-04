@@ -9,7 +9,6 @@ Perfil
 <?php
 $usuario = session()->get('usu');
 $domicilio = null;
-$password = null;
 $telefono = null;
 $movil = null;
 $iban = null;
@@ -17,7 +16,6 @@ $foto = null;
 
 foreach ($usuario as $value) {
     $domicilio = $value['domicilio'];
-    $password = $value['pass'];
     $telefono = $value['tel'];
     $movil = $value['movil'];
     $iban = $value['iban'];
@@ -42,11 +40,11 @@ foreach ($usuario as $value) {
                     {{ csrf_field() }}
                     <div class="form-group">
                         <div class="col-sm-4 col-md-4 col-lg-4 float-right">
-                            <label>Domicilio</label><input type="text" id="domicilio" name="domicilio" value="<?php echo $domicilio ?>" placeholder="Domicilio"><br>
-                            <label>Contraseña</label><input type="password" id="password" name="pass" value="<?php echo $password ?>" placeholder="Contraseña"><br>
-                            <label>Teléfono</label><input type="number" id="telefono" name="telefono" value="<?php echo $telefono ?>" placeholder="Telefono"><br>
-                            <label>Móvil</label><input type="number" id="movil" name="movil" value="<?php echo $movil ?>" placeholder="Movil"><br>
-                            <label>IBAN</label><input type="text" id="iban" name="iban" value="<?php echo $iban ?>" placeholder="IBAN"><br>
+                            <label>Domicilio</label><input type="text" id="domicilio" name="domicilio" value="<?php echo $domicilio ?>" placeholder="Domicilio" required><br>
+                            <label>Contraseña</label><input type="password" id="password" name="pass" value="" placeholder="Contraseña" required><br>
+                            <label>Teléfono</label><input type="number" id="telefono" name="telefono" value="<?php echo $telefono ?>" placeholder="Telefono" required pattern="[7-9]{1}[0-9]{8}"><br>
+                            <label>Móvil</label><input type="number" id="movil" name="movil" value="<?php echo $movil ?>" placeholder="Movil" required pattern="[7-9]{1}[0-9]{8}"><br>
+                            <label>IBAN</label><input type="text" id="iban" name="iban" value="<?php echo $iban ?>" placeholder="IBAN" required pattern="^ES\d{22}$"><br>
 
                             <input type="submit" class="btn btn-primary" name="perfil" value="Actualizar Perfil">
                         </div>

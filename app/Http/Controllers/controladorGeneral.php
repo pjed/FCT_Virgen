@@ -32,9 +32,7 @@ class controladorGeneral extends Controller {
         $correo = $req->get('usuario');
         $pass = $req->get('pwd');
         if ($correo != null && $pass != null) {
-//        $passHash = md5($pass);
             $passHash = hash('sha256', $pass);
-            
             $n = Conexion::existeUsuario($correo, $passHash);
 //            $n = Conexion::existeUsuario($correo, $pass);
             if ($n != null) { //si existe usuario
@@ -55,6 +53,15 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
+                    if (hash('sha256', 1) == $passHash) {
+                        echo '
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Su contraseña no es segura, debe cambiarla desde su perfil.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
                     return view('admin.bienvenidaAd');
                 } else if ($rol == 2) { //tutor                
                     session()->put('rol', 2);
@@ -65,6 +72,15 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>  ';
+                    if (hash('sha256', 1) == $passHash) {
+                        echo '
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Su contraseña no es segura, debe cambiarla desde su perfil.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
                     return view('tutor.bienvenidaT');
                 } else if ($rol == 3) {//alumno                
                     session()->put('rol', 3);
@@ -74,6 +90,15 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
+                    if (hash('sha256', 1) == $passHash) {
+                        echo '
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Su contraseña no es segura, debe cambiarla desde su perfil.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
                     return view('alumno.bienvenidaAl');
                 } else if ($rol == 4) {//tutor-admin                              
                     session()->put('rol1', 4);
@@ -84,6 +109,15 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
+                    if (hash('sha256', 1) == $passHash) {
+                        echo '
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Su contraseña no es segura, debe cambiarla desde su perfil.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
                     return view('admin.bienvenidaAd');
                 }
             } else {

@@ -121,7 +121,9 @@ Consultar Gastos Alumnos
                                 </td>
                                 <td><input type="number" step="0.01" class="form-control form-control-sm" name="importe" value="<?php echo $key->importe; ?>"/></td>
                                 <td>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>" readonly/>
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
+                                    <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
                                 <td><button type="submit" id="editar" class="btn-sm" name="editar"></button>
                                 <!--</td><td>-->
@@ -174,7 +176,9 @@ Consultar Gastos Alumnos
                                 <td><input type="number" class="form-control form-control-sm" name="n_diasC" value="<?php echo $key->n_diasC; ?>"/></td>
                                 <td><input type="number" step="0.01" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
                                 <td>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>" readonly/>
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
+                                    <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
                                 <td><button type="submit" id="editar" class="btn-sm" name="editarC"></button>
                                 <!--</td><td>-->

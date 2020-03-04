@@ -9,36 +9,43 @@ use App\Auxiliar\Documentos;
 class controladorTutor extends Controller {
 
     /**
-     * Perfil
-     * @author Pedro
+     * Perfil del tutor
+     * @author Pedro (Todo lo demás) y Marina (contraseña)
      * @param Request $req
      * @return type
      */
     public function perfil(Request $req) {
-        $domicilio = $req->get('domicilio');
-        $pass = $req->get('pass');
-        $passHash = hash('sha256', $pass);
-        $telefono = $req->get('telefono');
-        $movil = $req->get('movil');
-
-        $now = new \DateTime();
-        $updated_at = $now->format('Y-m-d H:i:s');
         $usuario = session()->get('usu');
+        $clave = null;
         $nombre = null;
         $apellidos = null;
         $email = null;
         $dni = null;
-
         foreach ($usuario as $value) {
             $dni = $value['dni'];
+            $clave = $value['pass'];
             $nombre = $value['nombre'];
             $apellidos = $value['apellidos'];
             $email = $value['email'];
         }
 
-        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $passHash, $telefono, $movil, $updated_at);
 
-        $usu = Conexion::existeUsuario($email, $pass);
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
+
+        $domicilio = $req->get('domicilio');
+        $telefono = $req->get('telefono');
+        $movil = $req->get('movil');
+
+        $pass = $req->get('pass');
+        if ($pass != null) {
+            $passHash = hash('sha256', $pass);
+            Conexion::ModificarConstrasenia($dni, $passHash);
+            $clave = $passHash;
+        }
+        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $updated_at);
+
+        $usu = Conexion::existeUsuario($email, $clave);
 
         session()->put('usu', $usu);
         return view('tutor/perfilTutor');
@@ -64,8 +71,7 @@ class controladorTutor extends Controller {
         foreach ($gt as $key) {
             if ($key->tipoTransporte == 1) {
                 $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-            }
-            if ($key->tipoTransporte == 0) {
+            } else if ($key->tipoTransporte == 0) {
                 $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
             }
         }
@@ -97,13 +103,22 @@ class controladorTutor extends Controller {
             $idGasto = $req->get('idGasto');
             $fecha = $req->get('fecha');
             $importe = $req->get('importe');
-            $foto = $req->get('foto');
-            Conexion::ModificarGastoComida($id, $fecha, $importe, $foto);
+            $fot = $req->file('foto');
+
+            if ($fot == null) {
+                Conexion::ModificarGastoComidaSinFoto($id, $fecha, $importe);
+            } else {
+                $foto = $fot->move('imagenes_gastos/comida', $id);
+                Conexion::ModificarGastoComida($id, $fecha, $importe, $foto);
+            }
         }
         if (isset($_REQUEST['eliminar'])) {
             $id = $req->get('ID');
             $idGasto = $req->get('idGasto');
-//            dd($id, $idGasto);
+            $file = $req->get('fotoUrl');
+            if (file_exists($file)) {
+                unlink($file);
+            }
             Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
         }
 //            editar y borrar transporte propio
@@ -126,12 +141,22 @@ class controladorTutor extends Controller {
             $idTransporte = $req->get('idTransporte');
             $n_diasC = $req->get('n_diasC');
             $precio = $req->get('precio');
-            $foto = $req->get('foto');
-            Conexion::ModificarGastoTransporteColectivo($id, $n_diasP, $precio, $foto);
+            $fot = $req->file('foto');
+
+            if ($fot == null) {
+                Conexion::ModificarGastoTransporteColectivoSinFoto($id, $n_diasC, $precio);
+            } else {
+                $foto = $fot->move('imagenes_gastos/transporte', $idTransporte);
+                Conexion::ModificarGastoTransporteColectivo($id, $n_diasC, $precio, $foto);
+            }
         }
         if (isset($_REQUEST['eliminarC'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
+            $file = $req->get('fotoUrl');
+            if (file_exists($file)) {
+                unlink($file);
+            }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
         }
         $datos = controladorTutor::enviarConsultarGastoAlumno();

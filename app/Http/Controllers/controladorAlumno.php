@@ -155,7 +155,7 @@ class controladorAlumno extends Controller {
                 $totalGastoCicloNuevo = $totalGastoCiclo + $precio;
 
                 $desplazamiento = 1;
-                
+
                 $tipo = 1;
                 $comidas_id = 0;
 
@@ -189,12 +189,16 @@ class controladorAlumno extends Controller {
             if ($fot == null) {
                 Conexion::ModificarGastoComidaSinFoto($id, $fecha, $importe);
             } else {
-                $foto = $fot->move('imagenes_gastos/comida', $idGasto);
+                $foto = $fot->move('imagenes_gastos/comida', $id);
                 Conexion::ModificarGastoComida($id, $fecha, $importe, $foto);
             }
         }
         if (isset($_REQUEST['eliminar'])) {
-            Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
+            $file = $req->get('fotoUrl');
+            if (file_exists($file)) {
+                unlink($file);
+            }
+            Conexion::borrarGastoComida($id, $idGasto);
         }
         $n = session()->get('usu');
         foreach ($n as $u) {
@@ -239,6 +243,10 @@ class controladorAlumno extends Controller {
         }
 
         if (isset($_REQUEST['eliminarC'])) {
+            $file = $req->get('fotoUrl');
+            if (file_exists($file)) {
+                unlink($file);
+            }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
         }
 
@@ -250,8 +258,7 @@ class controladorAlumno extends Controller {
         foreach ($gt as $key1) {
             if ($key1->tipoTransporte == 1) {
                 $gastosAlumno = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-            }
-            if ($key1->tipoTransporte == 0) {
+            } else if ($key1->tipoTransporte == 0) {
                 $gastosAlumno1 = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
             }
         }
@@ -262,36 +269,43 @@ class controladorAlumno extends Controller {
 
     /**
      * Perfil de alumno
-     * @author Pedro
+     * @author Pedro (Todo lo demás) y Marina (contraseña)
      * @param Request $req
      * @return type
      */
     public function perfil(Request $req) {
-        $domicilio = $req->get('domicilio');
-        $pass = $req->get('pass');
-        $passHash = hash('sha256', $pass);
-        $telefono = $req->get('telefono');
-        $movil = $req->get('movil');
-        $iban = $req->get('iban');
-
-        $now = new \DateTime();
-        $updated_at = $now->format('Y-m-d H:i:s');
         $usuario = session()->get('usu');
+        $clave = null;
         $nombre = null;
         $apellidos = null;
         $email = null;
         $dni = null;
-
         foreach ($usuario as $value) {
             $dni = $value['dni'];
+            $clave = $value['pass'];
             $nombre = $value['nombre'];
             $apellidos = $value['apellidos'];
             $email = $value['email'];
         }
 
-        Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $domicilio, $email, $passHash, $telefono, $movil, $iban, $updated_at);
 
-        $usu = Conexion::existeUsuario($email, $pass);
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
+
+        $domicilio = $req->get('domicilio');
+        $telefono = $req->get('telefono');
+        $movil = $req->get('movil');
+        $iban = $req->get('iban');
+
+        $pass = $req->get('pass');
+        if ($pass != null) {
+            $passHash = hash('sha256', $pass);
+            Conexion::ModificarConstrasenia($dni, $passHash);
+            $clave = $passHash;
+        }
+        Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $iban, $updated_at);
+
+        $usu = Conexion::existeUsuario($email, $clave);
 
         session()->put('usu', $usu);
 
