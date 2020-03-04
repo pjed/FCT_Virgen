@@ -270,12 +270,13 @@ class Documentos {
         $document->setValue('EMPRESA', ($data['empresa']));
         $document->setValue('LOCALIDAD_EMPRESA', ($data['localidad_empresa']));
 
-        $name = 'Recibi_' . "$dniAlumno" . "_" . $dia . "-" . $mes . "-" . $ano . '.docx';
-        $document->saveAs($name);
-        rename($name, "{$name}");
+        $name = '/Recibi_' . "$dniAlumno" . "_" . $dia . "-" . $mes . "-" . $ano . '.docx';
+        $document->saveAs(__DIR__ . $name);
+//        rename($name, "{$name}");
 
         $lista_documentos = [
-            "path_archivo" => "{$name}",
+            "path_archivo" => __DIR__ . "{$name}",
+            "nombre_archivo" => "{$name}",
         ];
 
         $headers = array(
@@ -657,8 +658,9 @@ class Documentos {
         if ($zip->open($archive_file_name, \ZipArchive::CREATE) !== TRUE) {
             exit("No se puede abrir el archivo <$archive_file_name>\n");
         }
+
         foreach ($lista_documentos as $value) {
-            $zip->addFile($value["path_archivo"]);
+            $zip->addFile($value["nombre_archivo"]);
         }
         if ($zip->close() === false) {
             exit("Error creando el archivo ZIP: " . $archive_file_name);
