@@ -1873,7 +1873,7 @@ class Conexion {
                 ->where('practicas.usuarios_dni', $dni)
                 ->join('empresas', 'practicas.empresas_id', '=', 'empresas.id')
                 ->select(
-                        'empresas.nombre AS nombre', 'empresas.localidad AS localidad'
+                        'empresas.nombre AS nombre', 'empresas.localidad AS localidad', 'empresas.direccion AS direccion'
                 )
                 ->get();
         return $v;

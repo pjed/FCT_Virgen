@@ -278,6 +278,141 @@ class Documentos {
             "path_archivo" => __DIR__ . "{$name}",
             "nombre_archivo" => "{$name}",
         ];
+        $headers = array(
+            //'Content-Type: application/msword',
+            'Content-Type: vnd.openxmlformats-officedocument.wordprocessingml.document'
+        );
+        ob_end_clean();
+        return $lista_documentos;
+    }
+
+    static function GenerarRecibiTodosAlumnosDUAL($dniAlumno) {
+        ob_start();
+
+        $centro = Conexion::listarCentro();
+        $al = Conexion::listarAlumnoMatriculado($dniAlumno);
+        $prac = Conexion::listarPracticasAlumno($dniAlumno);
+        $gas = Conexion::listarGastosAlumno($dniAlumno);
+
+        $nombre = "";
+        $apellidos = "";
+        $domicilio = "";
+        $domicilio_empresa = "";
+        $nombre_empresa = "";
+        $localidad_empresa = "";
+        $total_gasto_alumno = "";
+
+        $tutor = session()->get('usu');
+
+        foreach ($centro as $value) {
+            $nombre_centro = $value->nombre;
+            $localidad_centro = $value->localidad;
+        }
+
+        foreach ($tutor as $value) {
+            $nombre_tutor = $value["nombre"];
+            $apellidos_tutor = $value["apellidos"];
+        }
+
+        foreach ($prac as $value) {
+            $nombre_empresa = $value->nombre;
+            $localidad_empresa = $value->localidad;
+            $domicilio_empresa = $value->direccion;
+        }
+
+        foreach ($al as $value) {
+            $nombre = $value->nombre;
+            $apellidos = $value->apellidos;
+            $domicilio = $value->domicilio;
+            $descripcion = $value->descripcion;
+            $familia = $value->familia;
+            $horas = $value->horas;
+        }
+
+        foreach ($gas as $value) {
+            $total_gasto_alumno = $value->total_gasto_alumno;
+        }
+
+        $nombreAlumno = $nombre . " " . $apellidos;
+        $tutor = $nombre_tutor . ' ' . $apellidos_tutor;
+        $empresa = $nombre_empresa;
+        $familia = $familia;
+        $ciclo = $descripcion;
+        if ($horas !== null) {
+            $hora = $horas;
+        } else {
+            $hora = "0";
+        }
+        $dom = $domicilio;
+        $cantidad = $total_gasto_alumno;
+        $director = "Ana Belén Santos Cabañas";
+
+        $dia = date("d");
+        $mes = Documentos::getMes(date("m"));
+        $ano = date("Y");
+
+        $data = [
+            'centro' => $nombre_centro,
+            'localidad_empresa' => $localidad_empresa,
+            'alumno' => $nombreAlumno,
+            'tutor' => $tutor,
+            'familia' => $familia,
+            'ciclo' => $ciclo,
+            'periodo' => "",
+            'horas' => $hora,
+            'domicilio' => $dom,
+            'cantidad' => $cantidad,
+            'director' => $director,
+            'dia' => $dia,
+            'mes' => $mes,
+            'ano' => $ano,
+            'empresa' => $empresa,
+            'domicilio_empresa' => $domicilio_empresa,
+            'localidad_centro' => $localidad_centro
+        ];
+
+        // New Word document
+        setlocale(LC_TIME, 'es');
+        //return $id;
+
+        echo date('H:i:s'), " Create new PhpWord object", PHP_EOL;
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+
+        $path = '../documentacion/plantillas/recibi/Anexo XV Recibí del alumnadoDUAL.docx';
+        $document = $phpWord->loadTemplate($path);
+
+        //Mapeo de Variables 
+        $document->setValue('CENTRO', ($data['centro']));
+        $document->setValue('DOM_EMPRESA', ($data['domicilio_empresa']));
+        $document->setValue('LOC_CENTRO', ($data['localidad_centro']));
+        $document->setValue('COD', ("CLM"));
+        $document->setValue('ALUMNO', ($data['alumno']));
+        $document->setValue('TUTOR', ($data['tutor']));
+        $document->setValue('FAMILIA', ($data['familia']));
+        $document->setValue('CICLO', ($data['ciclo']));
+        $document->setValue('PERIODO', ($data['periodo']));
+        $document->setValue('HORAS', ($data['horas']));
+        $document->setValue('DOMICILIO', ($data['domicilio']));
+        $document->setValue('CANTIDAD', ($data['cantidad']));
+        $document->setValue('DIRECTOR', ($data['director']));
+        $document->setValue('DIA', ($data['dia']));
+        $document->setValue('MES', ($data['mes']));
+        $document->setValue('ANO', ($data['ano']));
+        $document->setValue('EMPRESA', ($data['empresa']));
+        $document->setValue('LOC_EMPRESA', ($data['localidad_empresa']));
+        $document->setValue('MODALIDAD', (""));
+        $document->setValue('DURACION', (""));
+        $document->setValue('CUR_ACA_INI', (""));
+        $document->setValue('CUR_ACA_FIN', (""));
+
+        $name = '/Recibi_DUAL_' . "$dniAlumno" . "_" . $dia . "-" . $mes . "-" . $ano . '.docx';
+        $document->saveAs(__DIR__ . $name);
+//        rename($name, "{$name}");
+
+        $lista_documentos = [
+            "path_archivo" => __DIR__ . "{$name}",
+            "nombre_archivo" => "{$name}",
+        ];
 
         $headers = array(
             //'Content-Type: application/msword',
@@ -407,7 +542,7 @@ class Documentos {
 
 
 
-        $name = 'Recibi_' . "$dniAlumno" . "_" . $dia . "-" . $mes . "-" . $ano . '.docx';
+        $name = 'Recibi_DUAL_' . "$dniAlumno" . "_" . $dia . "-" . $mes . "-" . $ano . '.docx';
         $document->saveAs($name);
         rename($name, storage_path() . "/documentos/recibi/{$name}");
         $file = storage_path() . "/documentos/recibi/{$name}";
@@ -651,8 +786,37 @@ class Documentos {
         exit();
     }
 
+    public static function generarArchivoZIPDUAL($lista_documentos, $curso) {
+        $archive_file_name = storage_path() . '/recibis_DUAL' . $curso . '.zip'; // Name of our archive to download
+
+        $zip = new \ZipArchive();
+        if ($zip->open($archive_file_name, \ZipArchive::CREATE) !== TRUE) {
+            exit("No se puede abrir el archivo <$archive_file_name>\n");
+        }
+        foreach ($lista_documentos as $value) {
+            $zip->addFile($value["path_archivo"], $value["nombre_archivo"]);
+        }
+        if ($zip->close() === false) {
+            exit("Error creando el archivo ZIP: " . $archive_file_name);
+        }
+
+        if (file_exists($archive_file_name)) {
+            header("Content-Description: File Transfer");
+            header("Content-type: application/zip");
+            header("Content-Disposition: attachment; filename=" . $archive_file_name . "");
+            header("Pragma: no-cache");
+            header("Expires: 0");
+            return response(readfile($archive_file_name));
+            ob_clean();
+            flush();
+            exit;
+        } else {
+            exit("No encuentro el archivo zip para descargar");
+        }
+    }
+
     public static function generarArchivoZIP($lista_documentos, $curso) {
-        $archive_file_name = storage_path().'/recibis' . $curso . '.zip'; // Name of our archive to download
+        $archive_file_name = storage_path() . '/recibis_' . $curso . '.zip'; // Name of our archive to download
 
         $zip = new \ZipArchive();
         if ($zip->open($archive_file_name, \ZipArchive::CREATE) !== TRUE) {
