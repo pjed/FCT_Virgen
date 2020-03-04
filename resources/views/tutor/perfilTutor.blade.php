@@ -39,10 +39,10 @@ foreach ($usuario as $value) {
                     {{ csrf_field() }}
                     <div class="form-group">
                         <div class="col-sm-4 col-md-4 col-lg-4 float-right">
-                            <label>Domicilio</label><input type="text" id="domicilio" name="domicilio" value="<?php echo $domicilio ?>" placeholder="Domicilio"><br>
-                            <label>Contraseña</label><input type="password" id="password" name="pass" value="" placeholder="Contraseña"><br>
-                            <label>Teléfono</label><input type="number" id="telefono" name="telefono" value="<?php echo $telefono ?>" placeholder="Telefono"><br>
-                            <label>Móvil</label><input type="number" id="movil" name="movil" value="<?php echo $movil ?>" placeholder="Movil"><br>
+                            <label>Domicilio</label><input type="text" id="domicilio" name="domicilio" value="<?php echo $domicilio ?>" placeholder="Domicilio" required><br>
+                            <label>Contraseña</label><input type="password" id="password" name="pass" value="" placeholder="Contraseña" required><br>
+                            <label>Teléfono</label><input type="number" id="telefono" name="telefono" value="<?php echo $telefono ?>" placeholder="Telefono" required pattern="[679][0-9]{8}"><br>
+                            <label>Móvil</label><input type="number" id="movil" name="movil" value="<?php echo $movil ?>" placeholder="Movil" required pattern="[679][0-9]{8}"><br>
 
                             <input type="submit" class="btn btn-primary" name="perfil" value="Actualizar Perfil">
                         </div>
