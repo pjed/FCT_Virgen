@@ -34,7 +34,7 @@ class controladorGeneral extends Controller {
         if ($correo != null && $pass != null) {
 //        $passHash = md5($pass);
             $passHash = hash('sha256', $pass);
-            dd($passHash);
+            
             $n = Conexion::existeUsuario($correo, $passHash);
 //            $n = Conexion::existeUsuario($correo, $pass);
             if ($n != null) { //si existe usuario
