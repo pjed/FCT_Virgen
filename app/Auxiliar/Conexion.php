@@ -1609,22 +1609,45 @@ class Conexion {
      * metodo obtener gastos alumnos por curso
      */
     static function obtenerAlumnosGastos($curso) {
-        //$totalGastosCiclo = 0;
+//        $sql = "select usuarios.dni, concat(usuarios.apellidos,', ',usuarios.nombre) as nombre_completo, sum(comidas.importe) as otros_gastos_2
+//                from usuarios, cursos, matriculados, gastos, comidas
+//                where usuarios.dni = matriculados.usuarios_dni
+//                and usuarios.dni = gastos.usuarios_dni
+//                and matriculados.cursos_id_curso = cursos.id_curso
+//                and gastos.comidas_id = comidas.id
+//                and usuarios.dni<> '0'
+//                and cursos.id_curso='".$curso."'
+//                group by usuarios.dni, concat(usuarios.apellidos,', ',usuarios.nombre);";
+//
+//        
+//        $gastos_alumnos_comida = \DB::select($sql);
 
-        $sql = "select dni, concat(usuarios.apellidos, ', ',usuarios.nombre) as alumno, SUM(comidas.importe) as total_comida, SUM(colectivos.importe) as total_transporte_colectivo, SUM(propios.kms*propios.n_dias*propios.precio) as total_transporte_propio
-                from usuarios, gastos, colectivos, propios, comidas, transportes, cursos, matriculados
-                where usuarios.dni = gastos.usuarios_dni
-                and usuarios.dni = matriculados.usuarios_dni
+        $sql = "select usuarios.dni, concat(usuarios.apellidos,', ',usuarios.nombre) as nombre_completo, colectivos.importe as importe_billete_colectivo, colectivos.n_dias as numero_dias
+                from usuarios, cursos, matriculados, gastos, transportes, colectivos
+                where usuarios.dni = matriculados.usuarios_dni
+                and usuarios.dni = gastos.usuarios_dni
+                and gastos.transportes_id = transportes.id
+                and transportes.id = colectivos.transportes_id
                 and matriculados.cursos_id_curso = cursos.id_curso
-                and gastos.comidas_id = comidas.id
+                and usuarios.dni<> '0'
+                and cursos.id_curso='".$curso."'
+                group by usuarios.dni, concat(usuarios.apellidos,', ',usuarios.nombre);";
+
+        $gastos_alumnos_transporte_colectivo = \DB::select($sql);
+        
+        $sql = "select usuarios.dni, concat(usuarios.apellidos,', ',usuarios.nombre) as nombre_completo, propios.id, propios.kms as kms, propios.n_dias as numero_dias, (propios.kms*propios.n_dias* propios.precio) as importe_gastos_kilometraje
+                from usuarios, cursos, matriculados, gastos, transportes, propios
+                where usuarios.dni = matriculados.usuarios_dni
+                and usuarios.dni = gastos.usuarios_dni
                 and gastos.transportes_id = transportes.id
                 and transportes.id = propios.transportes_id
-                and gastos.usuarios_dni <> '0'
-                and cursos.id_curso='" . $curso . "'
-                group by dni;";
-
-        $gastos_alumnos = \DB::select($sql);
-
+                and matriculados.cursos_id_curso = cursos.id_curso
+                and usuarios.dni<> '0'
+                and cursos.id_curso='".$curso."'
+                group by usuarios.dni;";
+        
+        $gastos_alumnos_transporte_propio = \DB::select($sql);
+        
         return $gastos_alumnos;
     }
 
