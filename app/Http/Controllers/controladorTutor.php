@@ -153,7 +153,13 @@ class controladorTutor extends Controller {
             Documentos::generarArchivoZIP($lista_documentos, $curso);
         }
         if (isset($_REQUEST['recibiFPDUAL'])) {
-            
+            $curso = $req->get("id_curso");
+            $alumnos_curso = Conexion::obtenerAlumnosTutor($curso);
+
+            foreach ($alumnos_curso as $alumno) {
+                $lista_documentos[] = Documentos::GenerarRecibiTodosAlumnosDUAL($alumno->dni);
+            }
+            Documentos::generarArchivoZIPDUAL($lista_documentos, $curso);
         }
         if (isset($_REQUEST['memoriaAlumnos'])) {
             $curso = $req->get("id_curso");
