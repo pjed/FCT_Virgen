@@ -39,15 +39,6 @@ class controladorGeneral extends Controller {
                 session()->put('usu', $n);
                 foreach ($n as $u) {
                     $rol = $u['rol'];
-                    if(hash('sha256', 1) == $passHash){
-                        echo '
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    Su contraseña no es segura, debe cambiarla desde su perfil.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-                    }
                 }
                 if ($rol == 0) {
                     $rol = 4;
@@ -62,7 +53,15 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                    
+                    if (hash('sha256', 1) == $passHash) {
+                        echo '
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Su contraseña no es segura, debe cambiarla desde su perfil.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
                     return view('admin.bienvenidaAd');
                 } else if ($rol == 2) { //tutor                
                     session()->put('rol', 2);
@@ -73,6 +72,15 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>  ';
+                    if (hash('sha256', 1) == $passHash) {
+                        echo '
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Su contraseña no es segura, debe cambiarla desde su perfil.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
                     return view('tutor.bienvenidaT');
                 } else if ($rol == 3) {//alumno                
                     session()->put('rol', 3);
@@ -82,6 +90,15 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
+                    if (hash('sha256', 1) == $passHash) {
+                        echo '
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Su contraseña no es segura, debe cambiarla desde su perfil.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
                     return view('alumno.bienvenidaAl');
                 } else if ($rol == 4) {//tutor-admin                              
                     session()->put('rol1', 4);
@@ -92,6 +109,15 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
+                    if (hash('sha256', 1) == $passHash) {
+                        echo '
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Su contraseña no es segura, debe cambiarla desde su perfil.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
                     return view('admin.bienvenidaAd');
                 }
             } else {
