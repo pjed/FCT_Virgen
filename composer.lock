@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5742b31b8319298cd6853250f85f3917",
+    "content-hash": "9657a5a9977cdd3a077ccebb2862139f",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -546,16 +546,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v6.17.1",
+            "version": "v6.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "32d1ed55dd46dcd706ff2e45bb7965be7320b87d"
+                "reference": "077b895d935b7fbcfb1d1eb34217fa4f80a130d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/32d1ed55dd46dcd706ff2e45bb7965be7320b87d",
-                "reference": "32d1ed55dd46dcd706ff2e45bb7965be7320b87d",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/077b895d935b7fbcfb1d1eb34217fa4f80a130d8",
+                "reference": "077b895d935b7fbcfb1d1eb34217fa4f80a130d8",
                 "shasum": ""
             },
             "require": {
@@ -688,7 +688,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-02-26T14:23:01+00:00"
+            "time": "2020-03-03T13:14:27+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1384,6 +1384,39 @@
                 "random"
             ],
             "time": "2018-07-02T15:55:56+00:00"
+        },
+        {
+            "name": "paranoiq/php-zip",
+            "version": "v1.40",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paranoiq/PHPZip.git",
+                "reference": "044a0fcefb8af58193e98f3e22f679de2fb5515d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paranoiq/PHPZip/zipball/044a0fcefb8af58193e98f3e22f679de2fb5515d",
+                "reference": "044a0fcefb8af58193e98f3e22f679de2fb5515d",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "A. Grandt",
+                    "email": "php@grandt.com"
+                }
+            ],
+            "description": "A pair of PHP classes to generate zip files",
+            "time": "2013-11-06T10:03:31+00:00"
         },
         {
             "name": "pclzip/pclzip",

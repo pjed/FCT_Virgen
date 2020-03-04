@@ -270,23 +270,21 @@ class Documentos {
         $document->setValue('EMPRESA', ($data['empresa']));
         $document->setValue('LOCALIDAD_EMPRESA', ($data['localidad_empresa']));
 
-        $name = 'Recibi_' . "$dniAlumno" . "_" . $dia . "-" . $mes . "-" . $ano . '.docx';
-        $document->saveAs($name);
-        rename($name, storage_path() . "/documentos/recibi/{$name}");
-        $file = storage_path() . "/documentos/recibi/todos/{$name}";
+        $name = '/Recibi_' . "$dniAlumno" . "_" . $dia . "-" . $mes . "-" . $ano . '.docx';
+        $document->saveAs(__DIR__ . $name);
+//        rename($name, "{$name}");
 
-//        //$file= storage_path(). "/word/{$name}";
-//        $zipper->make('test.zip')->folder(storage_path('/documentos/recibi/todos'));
+        $lista_documentos = [
+            "path_archivo" => __DIR__ . "{$name}",
+            "nombre_archivo" => "{$name}",
+        ];
 
         $headers = array(
             //'Content-Type: application/msword',
             'Content-Type: vnd.openxmlformats-officedocument.wordprocessingml.document'
         );
-
-        $response = Response::download($file, $name, $headers);
         ob_end_clean();
-
-        return $response;
+        return $lista_documentos;
     }
 
     static function GenerarRecibiDUAL($dniAlumno, $modalidad, $duracion, $cod_proyecto, $inicio, $final) {
@@ -504,7 +502,7 @@ class Documentos {
 
         Documentos::GenerarExcelGastos($alumnos_gastos, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director);
     }
-    
+
     static function GenerarGastosAlumnosDUAL($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director) {
 
         foreach ($datos_director as $value) {
@@ -529,7 +527,7 @@ class Documentos {
 
         Documentos::GenerarExcelGastosDUAL($alumnos_gastos, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director);
     }
-    
+
     static function GenerarExcelGastosDUAL($coleccion, $curso, $fecha_actual, $cod_centro, $nombre_centro, $localidad_centro, $descripcion_ciclo, $nombre_tutor, $horas, $email_tutor, $nombre_director) {
         $path = '../documentacion/plantillas/gastos/Anexo XI-Bis Gastos Alumnos FP DUAL.xlsx';
 
@@ -651,6 +649,35 @@ class Documentos {
         header('Pragma: public');
         $writer->save('php://output');
         exit();
+    }
+
+    public static function generarArchivoZIP($lista_documentos, $curso) {
+        $archive_file_name = storage_path().'/recibis' . $curso . '.zip'; // Name of our archive to download
+
+        $zip = new \ZipArchive();
+        if ($zip->open($archive_file_name, \ZipArchive::CREATE) !== TRUE) {
+            exit("No se puede abrir el archivo <$archive_file_name>\n");
+        }
+        foreach ($lista_documentos as $value) {
+            $zip->addFile($value["path_archivo"], $value["nombre_archivo"]);
+        }
+        if ($zip->close() === false) {
+            exit("Error creando el archivo ZIP: " . $archive_file_name);
+        }
+
+        if (file_exists($archive_file_name)) {
+            header("Content-Description: File Transfer");
+            header("Content-type: application/zip");
+            header("Content-Disposition: attachment; filename=" . $archive_file_name . "");
+            header("Pragma: no-cache");
+            header("Expires: 0");
+            return response(readfile($archive_file_name));
+            ob_clean();
+            flush();
+            exit;
+        } else {
+            exit("No encuentro el archivo zip para descargar");
+        }
     }
 
 }
