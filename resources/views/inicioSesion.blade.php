@@ -18,13 +18,13 @@ Inicio de sesion
                 <div class="form-group mx-auto">
                     <label class="text-center" for="email">
                         Usuario:
-                        <input type="email" class="form-control form-control-sm form-control-md form-control-lg" id="usuario" name="usuario" placeholder="usuario@x.x" data-toggle="tooltip" data-placement="left" data-html="true" title="Introduca un correo"><br>
+                        <input type="email" class="form-control form-control-sm form-control-md form-control-lg" id="usuario" name="usuario" placeholder="usuario@x.x" data-toggle="tooltip" data-placement="left" data-html="true" title="Introduca un correo" required><br>
                     </label>                   
                 </div>
                 <div class="form-group">
                     <label class="text-center" for="pwd">
                         Contraseña:
-                        <input type="password" class="form-control form-control-sm form-control-md form-control-lg" id="pwd" name="pwd" placeholder="Contraseña" data-toggle="tooltip" data-placement="left" data-html="true" title="Introduca una contraseña"><br>
+                        <input type="password" class="form-control form-control-sm form-control-md form-control-lg" id="pwd" name="pwd" placeholder="Contraseña" data-toggle="tooltip" data-placement="left" data-html="true" title="Introduca una contraseña" required ><br>
                     </label> 
                 </div>
                 <div class="form-group">

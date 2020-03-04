@@ -8,6 +8,12 @@ use App\Auxiliar\Documentos;
 
 class controladorAdmin extends Controller {
 
+    /**
+     * Gestionar Curso
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function gestionarCursos(Request $req) {
         $id = $req->get('id');
         $descripcion = $req->get('descripcion');
@@ -44,6 +50,10 @@ class controladorAdmin extends Controller {
         return view('admin/gestionarCursos', ['l1' => $l]);
     }
 
+    /**
+     * Devuelve las listas
+     * @author Marina
+     */
     public static function paginacionConsultarGastoAlumno() {
         $gc = null;
         $gtp = null;
@@ -76,6 +86,12 @@ class controladorAdmin extends Controller {
         return $datos;
     }
 
+    /**
+     * Gestionar gastos alumnos
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function consultarGastoAlumno(Request $req) {
         //saca los alumnos de un curso
         if (isset($_REQUEST['buscar'])) {
@@ -144,6 +160,12 @@ class controladorAdmin extends Controller {
         return view('admin/consultarGastos', $datos);
     }
 
+    /**
+     * Escribe las tablas
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function tablaConsultarGastosAjax(Request $req) {
         $v = null;
 
@@ -303,6 +325,12 @@ class controladorAdmin extends Controller {
         echo $v;
     }
 
+    /**
+     * Gestionar gastos alumnos ajax
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function consultarGastoAlumnoAjax(Request $req) {
         //saca los gastos de un alumno
         if (isset($_REQUEST['buscar1'])) {
@@ -355,6 +383,12 @@ class controladorAdmin extends Controller {
         return view('admin/consultarGastosAjax', $datos);
     }
 
+    /**
+     * Gestionar todos los usuarios
+     * @author Manu
+     * @param Request $req
+     * @return type
+     */
     public function gestionarUsuarios(Request $req) {
 
         if (isset($_REQUEST['editar'])) {
@@ -411,6 +445,12 @@ class controladorAdmin extends Controller {
 //        return view('admin/gestionarUsuarios', $datos);
     }
 
+    /**
+     * Gestionar alumnos
+     * @author Manu
+     * @param Request $req
+     * @return type
+     */
     public function gestionarAlumnos(Request $req) {
 
         if (isset($_REQUEST['editar'])) {
@@ -431,6 +471,12 @@ class controladorAdmin extends Controller {
         }
     }
 
+    /**
+     * Gestionar tutores
+     * @author Manu
+     * @param Request $req
+     * @return type
+     */
     public function gestionarTutores(Request $req) {
 
         if (isset($_REQUEST['editar'])) {
@@ -461,6 +507,12 @@ class controladorAdmin extends Controller {
         }
     }
 
+    /**
+     * Exportar Docmentos
+     * @author Pedro
+     * @param Request $req
+     * @return type
+     */
     public function exportarDocumentos(Request $req) {
         $familia = $req->get('familiaProfesional');
         $idCurso = $req->get('ciclo');
@@ -503,9 +555,16 @@ class controladorAdmin extends Controller {
         }
     }
 
+    /**
+     * Pefil Admin
+     * @author Pedro
+     * @param Request $req
+     * @return type
+     */
     public function perfil(Request $req) {
         $domicilio = $req->get('domicilio');
         $pass = $req->get('pass');
+        $passHash = hash('sha256', $pass);
         $telefono = $req->get('telefono');
         $movil = $req->get('movil');
 
@@ -524,7 +583,7 @@ class controladorAdmin extends Controller {
             $email = $value['email'];
         }
 
-        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $pass, $telefono, $movil, $updated_at);
+        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $passHash, $telefono, $movil, $updated_at);
 
         $usu = Conexion::existeUsuario($email, $pass);
 
@@ -533,6 +592,12 @@ class controladorAdmin extends Controller {
         return view('admin/perfilAdmin');
     }
 
+    /**
+     * Añadir usuario
+     * @author Manu
+     * @param Request $req
+     * @return type
+     */
     public function aniadirUsuario(Request $req) {
 
         $tipoUsuario = $req->get('tipoU');
@@ -667,6 +732,10 @@ class controladorAdmin extends Controller {
 //        return view('admin/gestionarUsuarios', $datos);
     }
 
+    /**
+     * Listar curso para consultar gastos ajax
+     * @author Marina
+     */
     public function listarCursosAjax() {
         $v = Conexion::listaCursos();
         $w = '';
@@ -687,6 +756,10 @@ class controladorAdmin extends Controller {
         echo $w;
     }
 
+    /**
+     * Listar curso para consultar gastos ajax
+     * @author Marina
+     */
     public function listarAlumnosCursoAjax() {
         $ciclo = $_POST['ciclo'];
         session()->put('ciclo', $ciclo);
