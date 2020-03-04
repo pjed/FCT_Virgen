@@ -52,7 +52,8 @@ Gestionar gastos transporte
                                     <input type="text" class="form-control form-control-sm form-control-md" name ="donde" value='<?php echo $key->donde; ?>' readonly>
                                 </td>
                                 <td><input type="number" class="form-control form-control-sm form-control-md" name ="n_diasC" value="<?php echo $key->n_diasC; ?>"></td>
-                                <td>
+                               <td>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>" readonly/>
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
                                     <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
