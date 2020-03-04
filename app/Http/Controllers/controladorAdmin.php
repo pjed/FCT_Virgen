@@ -8,6 +8,12 @@ use App\Auxiliar\Documentos;
 
 class controladorAdmin extends Controller {
 
+    /**
+     * Gestionar Curso
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function gestionarCursos(Request $req) {
         $id = $req->get('id');
         $descripcion = $req->get('descripcion');
@@ -44,26 +50,30 @@ class controladorAdmin extends Controller {
         return view('admin/gestionarCursos', ['l1' => $l]);
     }
 
+    /**
+     * Devuelve las listas
+     * @author Marina
+     */
     public static function paginacionConsultarGastoAlumno() {
-        $l1 = Conexion::listaCursos();
-        $ciclo = session()->get('ciclo');
+        $gc = null;
+        $gtp = null;
+        $gtc = null;
 
-        $dniAlumno = session()->get('dniAlumno');
+        $l1 = Conexion::listaCursos();
+
+        $ciclo = session()->get('ciclo');
         $l2 = Conexion::listarAlumnosCurso($ciclo);
 
-        $desplazamiento = session()->get('desplazamiento');
-        $tipo = session()->get('tipo');
-        if ($desplazamiento == 1) {
-            if ($tipo == 1) {
-                $gtp = null;
+        $dniAlumno = session()->get('dniAlumno');
+        $gt = Conexion::listarGastosTransportes($dniAlumno);
+
+        foreach ($gt as $key) {
+            if ($key->tipoTransporte == 1) {
                 $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-            } else {
-                $gtc = null;
+            }
+            if ($key->tipoTransporte == 0) {
                 $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
             }
-        } else {
-            $gtc = null;
-            $gtp = null;
         }
         $gc = Conexion::listarGastosComidasPagination($dniAlumno);
         $datos = [
@@ -76,16 +86,18 @@ class controladorAdmin extends Controller {
         return $datos;
     }
 
+    /**
+     * Gestionar gastos alumnos
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function consultarGastoAlumno(Request $req) {
         //saca los alumnos de un curso
         if (isset($_REQUEST['buscar'])) {
-
-//            si ese usuario no tiene ningun gasto que salga algo
-
             $l1 = Conexion::listaCursos();
             $ciclo = $req->get('ciclo');
             session()->put('ciclo', $ciclo);
-            session()->remove('dniAlumno');
 
             $l2 = Conexion::listarAlumnosCurso($ciclo);
             $datos = [
@@ -99,22 +111,8 @@ class controladorAdmin extends Controller {
         }
         //saca los gastos de un alumno
         if (isset($_REQUEST['buscar1'])) {
-
-//            si ese usuario no tiene ningun gasto que salga algo
-            $desplazamiento = null;
-            $tipo = null;
-
             $dniAlumno = $req->get('dniAlumno');
             session()->put('dniAlumno', $dniAlumno);
-            $gt = Conexion::listarGastosTransportes($dniAlumno);
-
-            foreach ($gt as $key) {
-                $desplazamiento = $key->desplazamiento;
-                $tipo = $key->tipo;
-            }
-
-            session()->put('desplazamiento', $desplazamiento);
-            session()->put('tipo', $tipo);
         }
 //            editar y borrar comida
         if (isset($_REQUEST['editar'])) {
@@ -162,11 +160,15 @@ class controladorAdmin extends Controller {
         return view('admin/consultarGastos', $datos);
     }
 
+    /**
+     * Escribe las tablas
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function tablaConsultarGastosAjax(Request $req) {
         $v = null;
-        //            si ese usuario no tiene ningun gasto que salga algo
-        $desplazamiento = null;
-        $tipo = null;
+
         if (isset($_SESSION['dniAlumno'])) {
             $dniAlumno1 = session()->get('dniAlumno');
         }
@@ -176,14 +178,11 @@ class controladorAdmin extends Controller {
         $gt = Conexion::listarGastosTransportes($dniAlumno);
 
         foreach ($gt as $key) {
-            $desplazamiento = $key->desplazamiento;
-            $tipo = $key->tipo;
-        }
-        if ($desplazamiento == 1) {
-            if ($tipo == 1) {
-                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-                if ($gtc != null) {
-                    $v = $v . '<!-- Gestionar Gastos Transporte  Colectivo-->
+            if ($key->desplazamiento == 1) {
+                if ($key->tipoTransporte == 1) {
+                    $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+                    if ($gtc != null) {
+                        $v = $v . '<!-- Gestionar Gastos Transporte  Colectivo-->
                     <div id="colectivo" class="row justify-content-center">
                         <div class="col-sm col-md">
                             <h2 class="text-center">Consultar Gastos Transporte Colectivo</h2>
@@ -198,8 +197,8 @@ class controladorAdmin extends Controller {
                                         </tr>
                                     </thead>
                                     <tbody>';
-                    foreach ($gtc as $key) {
-                        $v = $v . '<form action="consultarGastoAjax" method="POST">
+                        foreach ($gtc as $key) {
+                            $v = $v . '<form action="consultarGastoAjax" method="POST">
                                             {{ csrf_field() }}
                                             <tr>
                                                 <td>
@@ -216,8 +215,8 @@ class controladorAdmin extends Controller {
                                                 <td><button type="submit" id="eliminar" class="btn-sm" name="eliminarC"></button></td>
                                             </tr>
                                         </form>';
-                    }
-                    $v = $v . '</tbody>
+                        }
+                        $v = $v . '</tbody>
                                 </table>
                             </div>
                         </div>
@@ -227,12 +226,12 @@ class controladorAdmin extends Controller {
                                 {{ $gtc->links()}}
                         </div>
                     </div>';
+                    }
                 }
-            }
-            if ($tipo == 0) {
-                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
-                if ($gtp != null) {
-                    $v = $v . 'Gestionar Gastos Transporte  Propio-->
+                if ($key->tipoTransporte == 0) {
+                    $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+                    if ($gtp != null) {
+                        $v = $v . 'Gestionar Gastos Transporte  Propio-->
                     <div id="propio" class="row justify-content-center">
                         <div class="col-sm col-md">
                             <h2 class="text-center">Consultar Gastos Transporte Propio</h2>
@@ -247,8 +246,8 @@ class controladorAdmin extends Controller {
                                         </tr>
                                     </thead>
                                     <tbody>';
-                    foreach ($gtp as $key) {
-                        $v = $v . ' <form action="consultarGastoAjax" method="POST">
+                        foreach ($gtp as $key) {
+                            $v = $v . ' <form action="consultarGastoAjax" method="POST">
                                             {{ csrf_field() }}
                                             <tr>
                                                 <td>
@@ -263,8 +262,8 @@ class controladorAdmin extends Controller {
                                                 <td><button type="submit" id="eliminar" class="btn-sm" name="eliminarP"></button></td>
                                             </tr>
                                         </form>';
-                    }
-                    $v = $v . '</tbody>
+                        }
+                        $v = $v . '</tbody>
                                 </table>
                             </div>
                         </div>
@@ -274,6 +273,7 @@ class controladorAdmin extends Controller {
                             {{ $gtp->links()}}
                         </div>
                             </div>';
+                    }
                 }
             }
         }
@@ -325,25 +325,17 @@ class controladorAdmin extends Controller {
         echo $v;
     }
 
+    /**
+     * Gestionar gastos alumnos ajax
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function consultarGastoAlumnoAjax(Request $req) {
         //saca los gastos de un alumno
         if (isset($_REQUEST['buscar1'])) {
-
-//            si ese usuario no tiene ningun gasto que salga algo
-            $desplazamiento = null;
-            $tipo = null;
-
             $dniAlumno = $req->get('dniAlumno');
             session()->put('dniAlumno', $dniAlumno);
-            $gt = Conexion::listarGastosTransportes($dniAlumno);
-
-            foreach ($gt as $key) {
-                $desplazamiento = $key->desplazamiento;
-                $tipo = $key->tipo;
-            }
-
-            session()->put('desplazamiento', $desplazamiento);
-            session()->put('tipo', $tipo);
         }
 //            editar y borrar comida
         if (isset($_REQUEST['editar'])) {
@@ -391,6 +383,12 @@ class controladorAdmin extends Controller {
         return view('admin/consultarGastosAjax', $datos);
     }
 
+    /**
+     * Gestionar todos los usuarios
+     * @author Manu
+     * @param Request $req
+     * @return type
+     */
     public function gestionarUsuarios(Request $req) {
 
         if (isset($_REQUEST['editar'])) {
@@ -447,6 +445,12 @@ class controladorAdmin extends Controller {
 //        return view('admin/gestionarUsuarios', $datos);
     }
 
+    /**
+     * Gestionar alumnos
+     * @author Manu
+     * @param Request $req
+     * @return type
+     */
     public function gestionarAlumnos(Request $req) {
 
         if (isset($_REQUEST['editar'])) {
@@ -467,6 +471,12 @@ class controladorAdmin extends Controller {
         }
     }
 
+    /**
+     * Gestionar tutores
+     * @author Manu
+     * @param Request $req
+     * @return type
+     */
     public function gestionarTutores(Request $req) {
 
         if (isset($_REQUEST['editar'])) {
@@ -490,14 +500,19 @@ class controladorAdmin extends Controller {
             $cursoTutor = Conexion::obtenerCicloTutor($dni);
 
             Conexion::borrarTutor($dni);
-            Conexion::borrarCurso($cursoTutor);
-            Conexion::borrarUsuarioTablaRoles($dni);
+//                        Conexion::borrarCurso($cursoTutor);
             Conexion::borrarUsuario($dni);
 
             return view('admin/gestionarTutores');
         }
     }
 
+    /**
+     * Exportar Docmentos
+     * @author Pedro
+     * @param Request $req
+     * @return type
+     */
     public function exportarDocumentos(Request $req) {
         $familia = $req->get('familiaProfesional');
         $idCurso = $req->get('ciclo');
@@ -540,9 +555,16 @@ class controladorAdmin extends Controller {
         }
     }
 
+    /**
+     * Pefil Admin
+     * @author Pedro
+     * @param Request $req
+     * @return type
+     */
     public function perfil(Request $req) {
         $domicilio = $req->get('domicilio');
         $pass = $req->get('pass');
+        $passHash = hash('sha256', $pass);
         $telefono = $req->get('telefono');
         $movil = $req->get('movil');
 
@@ -561,7 +583,7 @@ class controladorAdmin extends Controller {
             $email = $value['email'];
         }
 
-        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $pass, $telefono, $movil, $updated_at);
+        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $passHash, $telefono, $movil, $updated_at);
 
         $usu = Conexion::existeUsuario($email, $pass);
 
@@ -570,6 +592,12 @@ class controladorAdmin extends Controller {
         return view('admin/perfilAdmin');
     }
 
+    /**
+     * Añadir usuario
+     * @author Manu
+     * @param Request $req
+     * @return type
+     */
     public function aniadirUsuario(Request $req) {
 
         $tipoUsuario = $req->get('tipoU');
@@ -704,6 +732,10 @@ class controladorAdmin extends Controller {
 //        return view('admin/gestionarUsuarios', $datos);
     }
 
+    /**
+     * Listar curso para consultar gastos ajax
+     * @author Marina
+     */
     public function listarCursosAjax() {
         $v = Conexion::listaCursos();
         $w = '';
@@ -724,6 +756,10 @@ class controladorAdmin extends Controller {
         echo $w;
     }
 
+    /**
+     * Listar curso para consultar gastos ajax
+     * @author Marina
+     */
     public function listarAlumnosCursoAjax() {
         $ciclo = $_POST['ciclo'];
         session()->put('ciclo', $ciclo);

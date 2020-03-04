@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class controladorAlumno extends Controller {
 
+    /**
+     * Crear gasto de comida
+     * @author Manu
+     * @param Request $req
+     * @return type
+     */
     public function crearGastoComida(Request $req) {
         //ingresar el gasto de comida en la tabla comidas
         $idComida = Conexion::obtenerIdUltimaComidaIngresada() + 1;
@@ -65,6 +71,12 @@ class controladorAlumno extends Controller {
         }
     }
 
+    /**
+     * Crear gasto transpote
+     * @author Manu
+     * @param Request $req
+     * @return type
+     */
     public function crearGastoTransporte(Request $req) {
 
         if (isset($_REQUEST['guardar'])) {
@@ -160,6 +172,12 @@ class controladorAlumno extends Controller {
         }
     }
 
+    /**
+     * Gestionar gasto comida
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function gestionarGastoComida(Request $req) {
         $id = $req->get('ID');
         $idGasto = $req->get('idGasto');
@@ -186,6 +204,12 @@ class controladorAlumno extends Controller {
         return view('alumno/gestionarGastosComida', ['gastosAlumno' => $gastosAlumno]);
     }
 
+    /**
+     * Gestionar Gasto Transporte
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function gestionarGastoTransporte(Request $req) {
         $id = $req->get('ID');
         $idTransporte = $req->get('idTransporte');
@@ -236,9 +260,16 @@ class controladorAlumno extends Controller {
         return view('alumno/gestionarGastosTransporte', $datos);
     }
 
+    /**
+     * Perfil de alumno
+     * @author Pedro
+     * @param Request $req
+     * @return type
+     */
     public function perfil(Request $req) {
         $domicilio = $req->get('domicilio');
         $pass = $req->get('pass');
+        $passHash = hash('sha256', $pass);
         $telefono = $req->get('telefono');
         $movil = $req->get('movil');
         $iban = $req->get('iban');
@@ -258,7 +289,7 @@ class controladorAlumno extends Controller {
             $email = $value['email'];
         }
 
-        Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $domicilio, $email, $pass, $telefono, $movil, $iban, $updated_at);
+        Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $domicilio, $email, $passHash, $telefono, $movil, $iban, $updated_at);
 
         $usu = Conexion::existeUsuario($email, $pass);
 

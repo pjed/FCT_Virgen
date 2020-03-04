@@ -8,9 +8,16 @@ use App\Auxiliar\Documentos;
 
 class controladorTutor extends Controller {
 
+    /**
+     * Perfil
+     * @author Pedro
+     * @param Request $req
+     * @return type
+     */
     public function perfil(Request $req) {
         $domicilio = $req->get('domicilio');
         $pass = $req->get('pass');
+        $passHash = hash('sha256', $pass);
         $telefono = $req->get('telefono');
         $movil = $req->get('movil');
 
@@ -29,7 +36,7 @@ class controladorTutor extends Controller {
             $email = $value['email'];
         }
 
-        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $pass, $telefono, $movil, $updated_at);
+        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $passHash, $telefono, $movil, $updated_at);
 
         $usu = Conexion::existeUsuario($email, $pass);
 
@@ -38,13 +45,13 @@ class controladorTutor extends Controller {
     }
 
     /**
-     * metodo para recoger los datos que se necesitan mostrar en la vista consultar gastos
+     * Metodo para recoger los datos que se necesitan mostrar en la vista consultar gastos
+     * @author Pedro
+     * @param Request $req
      * @return type
      */
     public static function enviarConsultarGastoAlumno() {
 //            si ese usuario no tiene ningun gasto que salga algo
-        $desplazamiento = null;
-        $tipo = null;
         $gtc = null;
         $gtp = null;
         $gc = null;
@@ -55,16 +62,14 @@ class controladorTutor extends Controller {
         $gt = Conexion::listarGastosTransportes($dniAlumno);
 
         foreach ($gt as $key) {
-            if ($key->desplazamiento == 1) {
-                if ($key->tipoTransporte == 1) {
-                    $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-                }
-                if ($key->tipoTransporte == 0) {
-                    $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
-                }
+            if ($key->tipoTransporte == 1) {
+                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+            }
+            if ($key->tipoTransporte == 0) {
+                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
             }
         }
-        
+
         $gc = Conexion::listarGastosComidasPagination($dniAlumno);
         $datos = [
             'l2' => $l2,
@@ -75,6 +80,12 @@ class controladorTutor extends Controller {
         return $datos;
     }
 
+    /**
+     * Consultar Gasto
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function consultarGastoAlumno(Request $req) {
         if (isset($_REQUEST['buscar'])) {
             $dniAlumno = $req->get('dniAlumno');
@@ -135,6 +146,7 @@ class controladorTutor extends Controller {
      *      memoriaAlumnos
      *      recibiFCT
      *      recibiFPDUAL
+     * @author Pedro
      * @param Request $req
      * @return type
      */
@@ -149,7 +161,7 @@ class controladorTutor extends Controller {
             foreach ($alumnos_curso as $alumno) {
                 $lista_documentos[] = Documentos::GenerarRecibiTodosAlumnos($alumno->dni);
             }
-            
+
             Documentos::generarArchivoZIP($lista_documentos, $curso);
         }
         if (isset($_REQUEST['recibiFPDUAL'])) {
@@ -198,6 +210,7 @@ class controladorTutor extends Controller {
      *      añadir responsable
      *      modificar responsable
      *      eliminar responsable
+     * @author Marina
      * @param Request $req
      * @return type
      */
@@ -255,6 +268,7 @@ class controladorTutor extends Controller {
      *      añadir responsable
      *      modificar responsable
      *      eliminar responsable
+     * @author Marina
      * @param Request $req
      * @return type
      */
@@ -305,6 +319,7 @@ class controladorTutor extends Controller {
      *      eliminar responsable
      *      recibiFCT
      *      recibiFPDUAL
+     * @author Marina (Todo lo demas) y Pedro (los recibis)
      * @param Request $req
      * @return type
      */

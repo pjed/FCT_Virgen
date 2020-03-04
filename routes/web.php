@@ -25,6 +25,9 @@ Route::get('/', function () {
 Route::post('inicioSesion', 'controladorGeneral@inicioSesion');
 Route::post('cerrarSesion', 'controladorGeneral@cerrarSesion');
 Route::post('olvidarPwd', 'controladorGeneral@olvidarPwd');
+
+Route::post('VolverIndex', 'controladorGeneral@VolverIndex');
+
 Route::get('inicioSesion', function () {
     return view('inicioSesion');
 });

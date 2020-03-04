@@ -75,11 +75,11 @@ Gestionar Cursos
                                                         </label>
                                                         <label class="col-sm text-center" >
                                                             Total de horas:
-                                                            <input type="number" class="form-control form-control-sm form-control-md" id="horas" name="horas"/>
+                                                            <input type="number" class="form-control form-control-sm form-control-md" id="horas" name="horas" placeholder="2019/2020"/>
                                                         </label>
                                                     </div>
                                                     <div class="row justify-content-center form-group">
-                                                        <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
+                                                        <input type="submit" id="aniadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
                                                     </div>
                                                 </form>
                                             </div>
@@ -96,11 +96,11 @@ Gestionar Cursos
                         <form action="gestionarCursos" method="POST">
                             {{ csrf_field() }}
                             <tr>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key->id; ?>" /></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="descripcion" value="<?php echo $key->descripcion; ?>" /></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="anioAcademico" value="<?php echo $key->anioAcademico; ?>" /></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="familia" value="<?php echo $key->familia; ?>" /></td>
-                                <td><input type="number" class="form-control form-control-sm form-control-md" name="horas" value="<?php echo $key->horas; ?>" /></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" id="id" name="id" value="<?php echo $key->id; ?>" /></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" id="descripcion" name="descripcion" value="<?php echo $key->descripcion; ?>" /></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" id="anioAcademico" name="anioAcademico" value="<?php echo $key->anioAcademico; ?>" placeholder="2019/2020"></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" id="familia" name="familia" value="<?php echo $key->familia; ?>" /></td>
+                                <td><input type="number" class="form-control form-control-sm form-control-md" id="horas" name="horas" value="<?php echo $key->horas; ?>" /></td>
 
                                 <td><button type="submit" id="editar" class="btn" name="editar" /></td>
                             </tr>

@@ -10,29 +10,42 @@ use Illuminate\Support\Facades\Mail;
 
 class controladorGeneral extends Controller {
 
+    /**
+     * Cerrar sesion
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function cerrarSesion(Request $req) {
         session()->invalidate();
         session()->regenerate();
         return view('inicioSesion');
     }
 
+    /**
+     * Inicio Sesion
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function inicioSesion(Request $req) {
         $correo = $req->get('usuario');
         $pass = $req->get('pwd');
         if ($correo != null && $pass != null) {
 //        $passHash = md5($pass);
-            $w = [];
-//        $w = Conexion::existeUsuario($correo, $passHash);        
-            $n = Conexion::existeUsuario($correo, $pass);
+            $passHash = hash('sha256', $pass);
+            
+            $n = Conexion::existeUsuario($correo, $passHash);
+//            $n = Conexion::existeUsuario($correo, $pass);
             if ($n != null) { //si existe usuario
                 session()->put('usu', $n);
                 foreach ($n as $u) {
                     $rol = $u['rol'];
                 }
-                if($rol == 0){
+                if ($rol == 0) {
                     $rol = 4;
                 }
-                
+
                 if ($rol == 1) {//admin
                     session()->put('rol', 1);
                     echo '
@@ -92,6 +105,12 @@ class controladorGeneral extends Controller {
         }
     }
 
+    /**
+     * Olvidar Contraseña
+     * @author Pedro
+     * @param Request $req
+     * @return type
+     */
     public function olvidarPwd(Request $req) {
         $email_usuario = $req->get('email');
         $n = Conexion::existeUsuario_Correo($email_usuario);
@@ -109,8 +128,9 @@ class controladorGeneral extends Controller {
         if ($n != null) { //si existe usuario
             //genera la contraseña
             $pass = $this->generateRandomString(5);
+            $passHash = hash('sha256', $pass);
             //cifrar contraseña
-            Conexion::RecuperarConstrasenia($dni, $pass);
+            Conexion::RecuperarConstrasenia($dni, $passHash);
 
 
             $objDemo = new \stdClass();
@@ -134,6 +154,12 @@ class controladorGeneral extends Controller {
         }
     }
 
+    /**
+     * Cambiar perfil
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function cambiarRol(Request $req) {
         if (isset($_REQUEST['tutor'])) {
             session()->put('rol', 2);
@@ -157,20 +183,39 @@ class controladorGeneral extends Controller {
         }
     }
 
+    /**
+     * Redirige al perfil Alumno
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function perfilAl(Request $req) {
         return view('alumno/perfilAlumno');
     }
 
+    /**
+     * Redirige al perfil Tutor
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function perfilT(Request $req) {
         return view('tutor/perfilTutor');
     }
 
+    /**
+     * Redirige al perfil Administrador
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function perfilAd(Request $req) {
         return view('admin/perfilAdmin');
     }
 
     /**
      * Genera la contraseña
+     * @author Manu
      * @param type $length
      * @return type
      */
@@ -178,6 +223,12 @@ class controladorGeneral extends Controller {
         return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
     }
 
+    /**
+     * Actualizar foto
+     * @author Pedro
+     * @param Request $req
+     * @return type
+     */
     public function actualizarFoto(Request $req) {
         $rolUsuario = $req->get('usuario');
         $usuario = session()->get('usu');
@@ -207,6 +258,16 @@ class controladorGeneral extends Controller {
                 return view('alumno/perfilAlumno');
                 break;
         }
+    }
+
+    /**
+     * Volver a Inicio sesion
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
+    public function VolverIndex(Request $req) {
+        return view('inicioSesion');
     }
 
 }
