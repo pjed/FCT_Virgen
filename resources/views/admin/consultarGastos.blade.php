@@ -228,7 +228,7 @@ Consultar Gastos Alumnos
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idPropios; ?>" readonly/>
                                 </td>
                                 <td><input type="number" class="form-control form-control-sm" name="n_diasP" value="<?php echo $key->n_diasP; ?>"/></td>
-                                <td><input type="number" class="form-control form-control-sm" name="kms" value="<?php echo $key->kms; ?>"/></td>
+                                <td><input type="number" step="0.01" class="form-control form-control-sm" name="kms" value="<?php echo $key->kms; ?>"/></td>
                                 <td><input type="number" step="0.01" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
                                 <td><button type="submit" id="editar" class="btn-sm" name="editarP"></button>
                                 <!--</td><td>-->

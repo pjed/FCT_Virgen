@@ -83,18 +83,200 @@ Consultar Gastos Alumnos
                 }
             });
         });
+        //mostrar los gastos del alumno
         $("#dniAlumno").blur(function () {
             dniAlumno = $("select#dniAlumno option:checked").val();
-
             parametros = {
-                "_token": token
+                "_token": token,
+                "dniAlumno": dniAlumno
             };
             $.ajax({
-                url: 'tablaConsultarGastosAjax',
+                url: 'muestraConsultarGastosAjax',
                 type: 'POST',
                 data: parametros,
                 success: function (response) {
                     if (response !== null) {
+                        $("#tablas").html(response);
+                    }
+                },
+                statusCode: {
+                    404: function () {
+                        alert('web not found');
+                    }
+                }
+            });
+        });
+        //gastos de transtporte colectivo
+        $(".editarC").click(function () {
+            var id = $('#ID').val();
+            var idTransporte = $('#idTransporte').val();
+            var n_diasC = $('#n_diasC').val();
+            var precio = $('#precio').val();
+            var foto = $('#foto').val();
+            parametros = {
+                "_token": token,
+                "editarC": 'editarC',
+                "id": id,
+                "idTransporte": idTransporte,
+                "n_diasC": n_diasC,
+                "precio": precio,
+                "foto": foto
+            };
+            $.ajax({
+                url: 'gestionarGastosAjax',
+                type: 'POST',
+                data: parametros,
+                success: function (response) {
+                    if (response !== null) {
+                        $$("#tablas").empty();
+                        $("#tablas").html(response);
+                    }
+                },
+                statusCode: {
+                    404: function () {
+                        alert('web not found');
+                    }
+                }
+            });
+        });
+        $(".eliminarC").click(function () {
+            var id = $('#ID').val();
+            var idTransporte = $('#idTransporte').val();
+            var fotoUrl = $('#fotoUrl').val();
+            parametros = {
+                "_token": token,
+                "editarC": 'eliminarC',
+                "id": id,
+                "idTransporte": idTransporte,
+                "fotoUrl": fotoUrl
+            };
+            $.ajax({
+                url: 'gestionarGastosAjax',
+                type: 'POST',
+                data: parametros,
+                success: function (response) {
+                    if (response !== null) {
+                        $$("#tablas").empty();
+                        $("#tablas").html(response);
+                    }
+                },
+                statusCode: {
+                    404: function () {
+                        alert('web not found');
+                    }
+                }
+            });
+        });
+        //gastos de transtporte propio
+        $(".editarP").click(function () {
+            var id = $('#ID').val();
+            var idTransporte = $('#idTransporte').val();
+            var n_diasP = $('#n_diasP').val();
+            var precio = $('#precio').val();
+            var kms = $('#kms').val();
+            parametros = {
+                "_token": token,
+                "editarC": 'editarP',
+                "id": id,
+                "idTransporte": idTransporte,
+                "n_diasP": n_diasP,
+                "precio": precio,
+                "kms": kms
+            };
+            $.ajax({
+                url: 'gestionarGastosAjax',
+                type: 'POST',
+                data: parametros,
+                success: function (response) {
+                    if (response !== null) {
+                        $$("#tablas").empty();
+                        $("#tablas").html(response);
+                    }
+                },
+                statusCode: {
+                    404: function () {
+                        alert('web not found');
+                    }
+                }
+            });
+        });
+        $(".eliminarP").click(function () {
+            var id = $('#ID').val();
+            var idTransporte = $('#idTransporte').val();
+            parametros = {
+                "_token": token,
+                "editarC": 'eliminarP',
+                "id": id,
+                "idTransporte": idTransporte
+            };
+            $.ajax({
+                url: 'gestionarGastosAjax',
+                type: 'POST',
+                data: parametros,
+                success: function (response) {
+                    if (response !== null) {
+                        $$("#tablas").empty();
+                        $("#tablas").html(response);
+                    }
+                },
+                statusCode: {
+                    404: function () {
+                        alert('web not found');
+                    }
+                }
+            });
+        });
+        //gastos de comida
+        $(".editar").click(function () {
+            var id = $('#ID').val();
+            var idGasto = $('#idGasto').val();
+            var fecha = $('#fecha').val();
+            var importe = $('#importe').val();
+            var foto = $('#foto').val();
+            parametros = {
+                "_token": token,
+                "editarC": 'editar',
+                "id": id,
+                "idGasto": idGasto,
+                "fecha": fecha,
+                "importe": importe,
+                "foto": foto
+            };
+            $.ajax({
+                url: 'gestionarGastosAjax',
+                type: 'POST',
+                data: parametros,
+                success: function (response) {
+                    if (response !== null) {
+                        $$("#tablas").empty();
+                        $("#tablas").html(response);
+                    }
+                },
+                statusCode: {
+                    404: function () {
+                        alert('web not found');
+                    }
+                }
+            });
+        });
+        $(".eliminar").click(function () {
+            var id = $('#ID').val();
+            var idGasto = $('#idGasto').val();
+            var fotoUrl = $('#fotoUrl').val();
+            parametros = {
+                "_token": token,
+                "editarC": 'eliminar',
+                "id": id,
+                "idGasto": idGasto,
+                "fotoUrl": fotoUrl
+            };
+            $.ajax({
+                url: 'gestionarGastosAjax',
+                type: 'POST',
+                data: parametros,
+                success: function (response) {
+                    if (response !== null) {
+                        $$("#tablas").empty();
                         $("#tablas").html(response);
                     }
                 },
@@ -158,7 +340,6 @@ Consultar Gastos Alumnos
         </div>
     </div>
     <div id="tablas">
-        
     </div>
 </div>
 @endsection
