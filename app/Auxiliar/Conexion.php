@@ -1609,7 +1609,6 @@ class Conexion {
                 and gastos.comidas_id = comidas.id
                 and gastos.transportes_id = transportes.id
                 and transportes.id = propios.transportes_id
-                and transportes.id = colectivos.id
                 and gastos.usuarios_dni <> '0'
                 and cursos.id_curso='" . $curso . "'
                 group by dni;";
