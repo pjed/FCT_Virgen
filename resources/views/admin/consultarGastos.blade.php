@@ -98,7 +98,7 @@ Consultar Gastos Alumnos
         <div class="col-sm-8 col-md-8">
             <h2 class="text-center">Consultar Gastos Comida</h2>
             <div class="table-responsive ">
-                <table class="table table-striped  table-hover table-bordered">
+                <table class="table table-sm table-striped  table-hover table-bordered">
                     <thead class="thead-dark">
                         <tr>         
                             <th>Fecha</th>
@@ -116,15 +116,16 @@ Consultar Gastos Alumnos
                             <tr>
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value='<?php echo $key->idGasto; ?>' readonly>
-                                    <input type="text" class="form-control form-control-sm form-control-md" name="fecha" value="<?php echo $key->fecha; ?>"/>
+                                    <input type="date" class="form-control form-control-sm form-control-md" name="fecha" value="<?php echo $key->fecha; ?>"/>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->id; ?>" readonly/>
                                 </td>
-                                <td><input type="text" class="form-control form-control-sm" name="importe" value="<?php echo $key->importe; ?>"/></td>
+                                <td><input type="number" step="0.01" class="form-control form-control-sm" name="importe" value="<?php echo $key->importe; ?>"/></td>
                                 <td>
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
                                 </td>
-                                <td><button type="submit" id="editar" class="btn-sm" name="editar"></button></td>
-                                <td><button type="submit" id="eliminar" class="btn-sm" name="eliminar"></button></td> 
+                                <td><button type="submit" id="editar" class="btn-sm" name="editar"></button>
+                                <!--</td><td>-->
+                                    <button type="submit" id="eliminar" class="btn-sm" name="eliminar"></button></td> 
                             </tr>
                         </form>
                         <?php
@@ -148,7 +149,7 @@ Consultar Gastos Alumnos
         <div class="col-sm col-md">
             <h2 class="text-center">Consultar Gastos Transporte Colectivo</h2>
             <div class="table-responsive ">
-                <table class="table table-striped  table-hover table-bordered">
+                <table class="table table-sm table-striped  table-hover table-bordered">
                     <thead class="thead-dark">
                         <tr> 
                             <th>Donde es</th>
@@ -171,12 +172,13 @@ Consultar Gastos Alumnos
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idColectivos; ?>" readonly/>
                                 </td>
                                 <td><input type="number" class="form-control form-control-sm" name="n_diasC" value="<?php echo $key->n_diasC; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
+                                <td><input type="number" step="0.01" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
                                 <td>
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
                                 </td>
-                                <td><button type="submit" id="editar" class="btn-sm" name="editarC"></button></td>
-                                <td><button type="submit" id="eliminar" class="btn-sm" name="eliminarC"></button></td>
+                                <td><button type="submit" id="editar" class="btn-sm" name="editarC"></button>
+                                <!--</td><td>-->
+                                    <button type="submit" id="eliminar" class="btn-sm" name="eliminarC"></button></td>
                             </tr>
                         </form>
                         <?php
@@ -223,9 +225,10 @@ Consultar Gastos Alumnos
                                 </td>
                                 <td><input type="number" class="form-control form-control-sm" name="n_diasP" value="<?php echo $key->n_diasP; ?>"/></td>
                                 <td><input type="number" class="form-control form-control-sm" name="kms" value="<?php echo $key->kms; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
-                                <td><button type="submit" id="editar" class="btn-sm" name="editarP"></button></td>
-                                <td><button type="submit" id="eliminar" class="btn-sm" name="eliminarP"></button></td>
+                                <td><input type="number" step="0.01" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
+                                <td><button type="submit" id="editar" class="btn-sm" name="editarP"></button>
+                                <!--</td><td>-->
+                                    <button type="submit" id="eliminar" class="btn-sm" name="eliminarP"></button></td>
                             </tr>
                         </form>
                         <?php
