@@ -57,10 +57,10 @@ $listaCiclos = Conexion::listarCiclos();
                             {{ csrf_field() }}
                             <tr>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $value->usuarios_dni; ?>" readonly/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
+                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" required/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" pattern="[0-9]{9}" title="Introduzca un teléfono válido" required/></td>
                                 <td>
                                     <select name="selectCiclo">
 
