@@ -58,7 +58,7 @@ Gestionar alumnos
                                     <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
                                     <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
                                     <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $value->email; ?>" required/></td>
-                                    <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value->telefono; ?>" required pattern="[0-9]{9}" title="Introduzca un teléfono válido"/></td>
+                                    <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value->telefono; ?>" required pattern="[9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
                                     <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="iban" value="<?php echo $value->iban; ?>" pattern="^ES\d{22}$" required/></td>
 
                                     <td><button type="submit" id="editar" class="btn" name="editar" value=""/></td>

@@ -158,6 +158,7 @@ class Conexion {
                 'email' => $email,
                 'telefono' => $tel,
                 'movil' => $movil]);
+
             $r = usuarios_rol::where('usuario_dni', $dni)
                     ->update(['rol_id' => $rol_id]);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -232,7 +233,7 @@ class Conexion {
      */
     static function borrarUsuario($dni) {
 
-        try {            
+        try {
             usuarios_rol::where('usuario_dni', $dni)->delete();
             usuario::where('dni', $dni)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -250,7 +251,6 @@ class Conexion {
                   </div>';
         }
     }
-
 
     /**
      * Método para borrar un tutor de la BD
@@ -625,13 +625,23 @@ class Conexion {
     static function actualizarDatosTutor($dni, $nombre, $apellidos, $email, $telefono, $ciclo) {
         try {
             usuario::where('dni', $dni)
-                    ->update(['nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 'telefono' => $telefono, 'curso_id' => $ciclo]);
+                    ->update(['nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 'telefono' => $telefono]);
 
-            curso::where('id', $ciclo)
-                    ->update(['tutor' => $dni]);
+            try {
+
+                curso::where('id', $ciclo)
+                        ->update(['tutor' => $dni]);
+            } catch (\Exception $e) {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Has seleccionado un ciclo con tutor asignado, seleccione otro por favor.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito usuario.
+                    Datos del usuario modificados con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>

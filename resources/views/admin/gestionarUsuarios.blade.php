@@ -350,14 +350,14 @@ Gestionar usuarios
                                 <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
                                 <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $value->email; ?>" required/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="domicilio" value="<?php echo $value->domicilio; ?>" required/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value->telefono; ?>" required pattern="[7-9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="movil" value="<?php echo $value->movil; ?>" required pattern="[7-9]{1}[0-9]{8}"  title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value->telefono; ?>" required pattern="[9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="movil" value="<?php echo $value->movil; ?>" required pattern="[6-7]{1}[0-9]{8}"  title="Introduzca un teléfono válido"/></td>
                                 <td>
                                     <select class="sel" name="selectRol">
-                                        <option value="<?php echo $value->rol_id; ?>" <?php if ($value->rol_id == 1) { ?>selected<?php } ?>>Administrador</option>
-                                        <option value="<?php echo $value->rol_id ?>" <?php if ($value->rol_id == 2) { ?>selected<?php } ?>>Tutor</option>
-                                        <option value="<?php echo $value->rol_id ?>" <?php if ($value->rol_id == 3) { ?>selected<?php } ?>>Alumno</option>
-                                        <option value="<?php echo $value->rol_id ?>" <?php if ($value->rol_id == 4) { ?>selected<?php } ?>>Tutor-Administrador</option>
+                                        <option value="1" <?php if ($value->rol_id == 1) { ?>selected<?php } ?>>Administrador</option>
+                                        <option value="2" <?php if ($value->rol_id == 2) { ?>selected<?php } ?>>Tutor</option>
+                                        <option value="3" <?php if ($value->rol_id == 3) { ?>selected<?php } ?>>Alumno</option>
+                                        <option value="4" <?php if ($value->rol_id == 4) { ?>selected<?php } ?>>Tutor-Administrador</option>
                                     </select>
                                 </td>
 
