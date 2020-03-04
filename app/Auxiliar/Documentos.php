@@ -652,15 +652,14 @@ class Documentos {
     }
 
     public static function generarArchivoZIP($lista_documentos, $curso) {
-        $archive_file_name = 'recibis' . $curso . '.zip'; // Name of our archive to download
+        $archive_file_name = storage_path().'/recibis' . $curso . '.zip'; // Name of our archive to download
 
         $zip = new \ZipArchive();
         if ($zip->open($archive_file_name, \ZipArchive::CREATE) !== TRUE) {
             exit("No se puede abrir el archivo <$archive_file_name>\n");
         }
-
         foreach ($lista_documentos as $value) {
-            $zip->addFile($value["nombre_archivo"]);
+            $zip->addFile($value["path_archivo"], $value["nombre_archivo"]);
         }
         if ($zip->close() === false) {
             exit("Error creando el archivo ZIP: " . $archive_file_name);
