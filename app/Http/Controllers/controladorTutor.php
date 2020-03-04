@@ -9,36 +9,43 @@ use App\Auxiliar\Documentos;
 class controladorTutor extends Controller {
 
     /**
-     * Perfil
-     * @author Pedro
+     * Perfil del tutor
+     * @author Pedro (Todo lo demás) y Marina (contraseña)
      * @param Request $req
      * @return type
      */
     public function perfil(Request $req) {
-        $domicilio = $req->get('domicilio');
-        $pass = $req->get('pass');
-        $passHash = hash('sha256', $pass);
-        $telefono = $req->get('telefono');
-        $movil = $req->get('movil');
-
-        $now = new \DateTime();
-        $updated_at = $now->format('Y-m-d H:i:s');
         $usuario = session()->get('usu');
+        $clave = null;
         $nombre = null;
         $apellidos = null;
         $email = null;
         $dni = null;
-
         foreach ($usuario as $value) {
             $dni = $value['dni'];
+            $clave = $value['pass'];
             $nombre = $value['nombre'];
             $apellidos = $value['apellidos'];
             $email = $value['email'];
         }
+        
+        
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
+        
+        $domicilio = $req->get('domicilio');
+        $telefono = $req->get('telefono');
+        $movil = $req->get('movil');
+        
+        $pass = $req->get('pass');
+        if ($pass != null) {
+            $passHash = hash('sha256', $pass);
+            Conexion::ModificarConstrasenia($dni, $passHash);            
+            $clave = $passHash;
+        }
+        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $updated_at);
 
-        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $passHash, $telefono, $movil, $updated_at);
-
-        $usu = Conexion::existeUsuario($email, $pass);
+        $usu = Conexion::existeUsuario($email, $clave);
 
         session()->put('usu', $usu);
         return view('tutor/perfilTutor');

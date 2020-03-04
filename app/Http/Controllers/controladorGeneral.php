@@ -32,15 +32,22 @@ class controladorGeneral extends Controller {
         $correo = $req->get('usuario');
         $pass = $req->get('pwd');
         if ($correo != null && $pass != null) {
-//        $passHash = md5($pass);
             $passHash = hash('sha256', $pass);
-            
             $n = Conexion::existeUsuario($correo, $passHash);
 //            $n = Conexion::existeUsuario($correo, $pass);
             if ($n != null) { //si existe usuario
                 session()->put('usu', $n);
                 foreach ($n as $u) {
                     $rol = $u['rol'];
+                    if(hash('sha256', 1) == $passHash){
+                        echo '
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Su contraseña no es segura, debe cambiarla desde su perfil.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
                 }
                 if ($rol == 0) {
                     $rol = 4;
@@ -55,6 +62,7 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
+                    
                     return view('admin.bienvenidaAd');
                 } else if ($rol == 2) { //tutor                
                     session()->put('rol', 2);
