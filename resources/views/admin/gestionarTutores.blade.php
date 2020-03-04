@@ -60,7 +60,7 @@ $listaCiclos = Conexion::listarCiclos();
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
                                 <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" required/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" pattern="[0-9]{9}" title="Introduzca un teléfono válido" required/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" title="Introduzca un teléfono válido" required pattern="[9]{1}[0-9]{8}"/></td>
                                 <td>
                                     <select name="selectCiclo">
 
