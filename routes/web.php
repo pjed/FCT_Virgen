@@ -137,8 +137,15 @@ Route::group(['middleware' => ['admin']], function() {
         return view('admin/gestionarUsuarios', $datos);
     })->name('gestionarUsuarios');
     Route::get('gestionarAlumnos', function () {
-        return view('admin/gestionarAlumnos');
-    });
+        $listaAlumnos = Conexion::listarAlumnos();
+        $listaCiclos = Conexion::listarCiclos();
+        $datos = [
+            'listaAlumnos' => $listaAlumnos,
+            'listaCiclos' => $listaCiclos
+        ];
+
+        return view('admin/gestionarAlumnos', $datos);
+    })->name('gestionarAlumnos');
     Route::get('gestionarTutores', function () {
         return view('admin/gestionarTutores');
     });
