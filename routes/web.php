@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('inicioSesion');
 });
 
+Route::post('inicioSesion', 'controladorGeneral@inicioSesion');
 Route::get('inicioSesion', function () {
     return view('inicioSesion');
 });
@@ -31,7 +32,6 @@ Route::get('VolverIndex', function () {
 
 //comunes
 Route::group(['middleware' => ['general']], function() {
-    Route::post('inicioSesion', 'controladorGeneral@inicioSesion');
     Route::post('cerrarSesion', 'controladorGeneral@cerrarSesion');
     Route::post('olvidarPwd', 'controladorGeneral@olvidarPwd');
 
