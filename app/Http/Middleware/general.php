@@ -15,7 +15,7 @@ class general {
      */
     public function handle($request, Closure $next) {
         $n = session()->get('usu');
-        //comprobar si eres admin
+        //comprobar si eres usuario de la página
 
         if ($n != null) {
             return $next($request);

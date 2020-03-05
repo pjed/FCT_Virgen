@@ -16,7 +16,7 @@ class tutor {
     public function handle($request, Closure $next) {
         $n = session()->get('usu');
         $rol1 = session()->get('rol1');
-        //comprobar si eres admin
+        //comprobar si eres tutor
         foreach ($n as $u) {
             if ($rol = $u['rol'] == 2 || $rol1 == 2) {
                 return $next($request);

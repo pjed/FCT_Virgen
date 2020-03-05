@@ -23,18 +23,19 @@
     background-color: white;
     /*border: none;*/
 }
-#eliminar{
+#eliminar,.eliminar{
     background-image :url('../images/delete.png');
     background-repeat: no-repeat;
     background-color: transparent;
     border: none;
 }
-#editar{
+#editar,.editar{
     background-image: url('../images/edit.png');
     background-repeat: no-repeat;
     background-color: transparent;
     border: none;
 }
+
 #buscar{
     background-image: url('../images/search.png');
     background-repeat: no-repeat;
@@ -56,7 +57,7 @@
         /*margin-top: 7rem;*/     
     }
     /*iconos*/
-    #confirmar,#buscar,#editar,#eliminar,#aniadir, #perfil,  #cerrarSesion{    
+    #confirmar,#buscar,#editar,.editar,.eliminar,#eliminar,#aniadir, #perfil,  #cerrarSesion{    
         width: 24px;
         background-size: 24px;
         height: 24px;
@@ -68,7 +69,7 @@
         /*margin-top: 7rem;*/     
     }
     /*iconos*/
-    #confirmar,#buscar,#editar,#eliminar,#aniadir, #perfil,  #cerrarSesion{    
+    #confirmar,#buscar,#editar,#eliminar,.editar,.eliminar,#aniadir, #perfil,  #cerrarSesion{    
         width: 24px;
         background-size: 24px;
         height: 24px;
@@ -88,7 +89,7 @@
         max-width: 700px;
     }*/
     /*iconos*/
-    #confirmar,#buscar,#editar,#eliminar, #perfil,#aniadir,  #cerrarSesion{    
+    #confirmar,#buscar,#editar,#eliminar,.editar,.eliminar, #perfil,#aniadir,  #cerrarSesion{    
         width: 34px;
         background-size: 34px;
         height: 34px;

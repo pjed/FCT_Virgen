@@ -194,7 +194,7 @@ class controladorAdmin extends Controller {
             session()->put('dniAlumno', $dniAlumno);
         }
 
-        $v = EscribirTablaCunsultarGastosAjax($dniAlumno);
+        $v = controladorAdmin::escribirTablaCunsultarGastosAjax($dniAlumno);
 
         echo $v;
     }
@@ -204,9 +204,9 @@ class controladorAdmin extends Controller {
      * @param type $dniAlumno
      * @return string
      */
-    public function EscribirTablaCunsultarGastosAjax($dniAlumno) {
+    public function escribirTablaCunsultarGastosAjax($dniAlumno) {
         $gt = Conexion::listarGastosTransportes($dniAlumno);
-
+        $v = null;
         foreach ($gt as $key) {
             if ($key->tipoTransporte == 1) {
                 $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
@@ -220,41 +220,34 @@ class controladorAdmin extends Controller {
                                     <thead class="thead-dark">
                                         <tr> 
                                             <th>Donde es</th>
-                                            <th>Nº dias</th>                        
+                                            <th>Nº dias</th>  
+                                            <th>Importe</th>                      
                                             <th>Foto</th>
-                                            <th>Importe</th>
                                         </tr>
                                     </thead>
                                     <tbody>';
                     foreach ($gtc as $key) {
-                        $v = $v . '<form action="consultarGastoAjax" method="POST">
-                                            {{ csrf_field() }}
+                        $v = $v . '
                                             <tr>
                                                 <td>
                                                     <input type="hidden" class="form-control form-control-sm form-control-md" id="idTransporte" name ="idTransporte" value="' . $key->idTransporte . '" readonly>
-                                                    <input type="text" class="form-control form-control-sm form-control-md" id="donde" name="donde" value="' . $key->donde . '"/>
+                                                    <input type="text" class="form-control form-control-sm form-control-md" id="dondeC" name="donde" value="' . $key->donde . '" readonly/>
                                                     <input type="hidden" class="form-control form-control-sm form-control-md" id="ID" name="ID" value="' . $key->idColectivos . '" readonly/>
                                                 </td>
                                                 <td><input type="number" class="form-control form-control-sm" id="n_diasC" name="n_diasC" value="' . $key->n_diasC . '"/></td>
                                                 <td><input type="number" step="0.01" class="form-control form-control-sm" id="precio" name="precio" value="' . $key->precio . '"/></td>
                                                 <td>
-                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="fotoUrl" name="fotoUrl" value="<?php echo $key->foto; ?>" readonly/>
+                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="fotoUrl" name="fotoUrl" value="' . $key->foto . '" readonly/>
                                                     <a  href="' . $key->foto . '" target="_blank"> <img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/></a>
                                                     <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                                 </td>
-                                                <td><button type="submit" id="editar" class="btn-sm editarC" name="editarC"></button></td>
-                                                <td><button type="submit" id="eliminar" class="btn-sm eliminarC" name="eliminarC"></button></td>
-                                            </tr>
-                                        </form>';
+                                                <td><button type="button" id="editarC" class="btn-sm editar" name="editarC"></button></td>
+                                                <td><button type="button" id="eliminarC" class="btn-sm eliminar" name="eliminarC"></button></td>
+                                            </tr>';
                     }
                     $v = $v . '</tbody>
                                 </table>
                             </div>
-                        </div>
-                    </div> 
-                    <div class="row justify-content-center">
-                        <div class="col-sm col-md col-lg">
-                                {{' . $gtc->links() . '}}
                         </div>
                     </div>';
                 }
@@ -266,7 +259,7 @@ class controladorAdmin extends Controller {
                         <div class="col-sm col-md">
                             <h2 class="text-center">Consultar Gastos Transporte Propio</h2>
                             <div class="table-responsive ">
-                                <table class="table  table-sm  table-striped  table-hover table-bordered">
+                                <table class="table  table-striped  table-hover table-bordered">
                                     <thead class="thead-dark">
                                         <tr>   
                                             <th>Donde es</th>
@@ -277,32 +270,25 @@ class controladorAdmin extends Controller {
                                     </thead>
                                     <tbody>';
                     foreach ($gtp as $key) {
-                        $v = $v . ' <form action="consultarGastoAjax" method="POST">
-                                            {{ csrf_field() }}
+                        $v = $v . '
                                             <tr>
                                                 <td>
-                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="idTransporte" name ="idTransporte" value="' . $key->idTransporte . '" readonly>
-                                                    <input type="text" class="form-control form-control-sm form-control-md" id="donde" name="donde" value="' . $key->donde . '"/>
-                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="ID" name="ID" value="' . $key->idPropios . '" readonly/>
+                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="idTransporte1" name ="idTransporte" value="' . $key->idTransporte . '" readonly>
+                                                    <input type="text" class="form-control form-control-sm form-control-md" id="donde" name="donde" value="' . $key->donde . '" readonly/>
+                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="ID1" name="ID" value="' . $key->idPropios . '" readonly/>
                                                 </td>
                                                 <td><input type="number" class="form-control form-control-sm" id="" name="n_diasP" value="' . $key->n_diasP . '"/></td>
-                                                <td><input type="number"  step="0.01" class="form-control form-control-sm" id="" name="kms" value="' . $key->kms . '"/></td>
-                                                <td><input type="number"  step="0.01" class="form-control form-control-sm" id="precio" name="precio" value=""' . $key->precio . '>"/></td>
-                                                <td><button type="submit" id="editar" class="btn-sm editarP" name="editarP"></button></td>
-                                                <td><button type="submit" id="eliminar" class="btn-sm eliminarP" name="eliminarP"></button></td>
-                                            </tr>
-                                        </form>';
+                                                <td><input type="number"  step="0.01" class="form-control form-control-sm" id="kms" name="kms" value="' . $key->kms . '"/></td>
+                                                <td><input type="number"  step="0.01" class="form-control form-control-sm" id="precio1" name="precio" value="' . $key->precio . '"/></td>
+                                                <td><button type="button" id="editarP" class="btn-sm editar" name="editarP"></button></td>
+                                                <td><button type="button" id="eliminarP" class="btn-sm eliminar" name="eliminarP"></button></td>
+                                            </tr>';
                     }
                     $v = $v . '</tbody>
                                 </table>
                             </div>
                         </div>
-                    </div> 
-                    <div class="row justify-content-center">
-                        <div class="col-sm col-md col-lg">
-                            {{' . $gtp->links() . '}}
-                        </div>
-                            </div>';
+                    </div>';
                 }
             }
         }
@@ -323,33 +309,26 @@ class controladorAdmin extends Controller {
                                 </thead>
                                 <tbody>';
             foreach ($gc as $key) {
-                $v = $v . '<form action="consultarGastoAjax" method="POST">
-                                        {{ csrf_field() }}
+                $v = $v . '
                                         <tr>
                                             <td>
                                                 <input type="hidden" class="form-control form-control-sm form-control-md" id="idGasto" name ="idGasto" value="' . $key->idGasto . '" readonly>
                                                 <input type="date" class="form-control form-control-sm form-control-md" id="fecha" name="fecha" value="' . $key->fecha . '"/>
-                                                <input type="hidden" class="form-control form-control-sm form-control-md" id="ID"  name="ID" value="' . $key->id . '" readonly/>
+                                                <input type="hidden" class="form-control form-control-sm form-control-md" id="ID2"  name="ID" value="' . $key->id . '" readonly/>
                                             </td>
                                             <td><input type="number"  step="0.01" class="form-control form-control-sm" id="importe" name="importe" value="' . $key->importe . '"/></td>
                                             <td>
-                                                <input type="hidden" class="form-control form-control-sm form-control-md" id="fotoUrl" name="fotoUrl" value="<?php echo $key->foto; ?>" readonly/>
+                                                <input type="hidden" class="form-control form-control-sm form-control-md" id="fotoUrl1" name="fotoUrl" value="' . $key->foto . '" readonly/>
                                                 <a  href="' . $key->foto . '" target="_blank"> <img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/></a>
-                                                <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
+                                                <input type="file" class="form-control form-control-sm form-control-md"  id="foto1" name="foto">
                                             </td>
-                                            <td><button type="submit" id="editar" class="btn-sm editar" name="editar"></button></td>
-                                            <td><button type="submit" id="eliminar" class="btn-sm eliminar" name="eliminar"></button></td> 
-                                        </tr>
-                                    </form>';
+                                            <td><button type="button" id="editar" class="btn-sm"></button></td>
+                                            <td><button type="button" id="eliminar" class="btn-sm"></button></td> 
+                                        </tr>';
             }
             $v = $v . '</tbody>
                             </table>
                         </div>
-                    </div>
-                </div> 
-                <div class="row justify-content-center">
-                    <div class="col-sm col-md col-lg">
-                        {{' . $gc->links() . '}}
                     </div>
                 </div>';
         }
@@ -364,7 +343,7 @@ class controladorAdmin extends Controller {
      */
     public function gestionarGastosAjax(Request $req) {
         $dniAlumno = session()->get('dniAlumno');
-        
+
         //            editar y borrar comida
         if (isset($_REQUEST['editar'])) {
             $id = $req->get('ID');
@@ -372,7 +351,7 @@ class controladorAdmin extends Controller {
             $fecha = $req->get('fecha');
             $importe = $req->get('importe');
             $foto = $req->get('foto');
-            
+
             if ($fot == null) {
                 Conexion::ModificarGastoComidaSinFoto($id, $fecha, $importe);
             } else {
@@ -384,7 +363,7 @@ class controladorAdmin extends Controller {
             $id = $req->get('ID');
             $idGasto = $req->get('idGasto');
             $file = $req->get('fotoUrl');
-            if (file_exists($file)) {
+            if (file_exists($file) && $file != "images/ticket.png") {
                 unlink($file);
             }
             Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
@@ -410,7 +389,7 @@ class controladorAdmin extends Controller {
             $n_diasC = $req->get('n_diasC');
             $precio = $req->get('precio');
             $foto = $req->get('foto');
-            
+
             if ($fot == null) {
                 Conexion::ModificarGastoTransporteColectivoSinFoto($id, $n_diasC, $precio);
             } else {
@@ -422,12 +401,12 @@ class controladorAdmin extends Controller {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
             $file = $req->get('fotoUrl');
-            if (file_exists($file)) {
+            if (file_exists($file) && $file != "images/ticket.png") {
                 unlink($file);
             }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
         }
-        $v = EscribirTablaCunsultarGastosAjax($dniAlumno);
+        $v = controladorAdmin::escribirTablaCunsultarGastosAjax($dniAlumno);
 
         echo $v;
     }
@@ -459,9 +438,15 @@ class controladorAdmin extends Controller {
 
             $dni = $req->get('dni');
             $rol_id = $req->get('selectRol');
-
+            $file = $req->get('fotoUrl');
+            
+            if (file_exists($file) && $file != "images/defecto.jpeg") {
+                unlink($file);
+            }
+            
             if ($rol_id == 1) {
 
+                Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
                 Conexion::borrarUsuario($dni);
             } else if ($rol_id == 2) {
 
@@ -545,6 +530,11 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['eliminar'])) {
 
             $dni = $req->get('dni');
+            $file = $req->get('fotoUrl');
+            
+            if (file_exists($file) && $file != "images/defecto.jpeg") {
+                unlink($file);
+            }
 
             $cursoTutor = Conexion::obtenerCicloTutor($dni);
 

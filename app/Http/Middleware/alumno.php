@@ -15,7 +15,7 @@ class alumno {
      */
     public function handle($request, Closure $next) {
         $n = session()->get('usu');
-        //comprobar si eres admin
+        //comprobar si eres alumno
         foreach ($n as $u) {
             if ($rol = $u['rol'] == 3) {
                 return $next($request);

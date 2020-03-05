@@ -27,10 +27,10 @@ $rol1 = session()->get('rol1');
 
 
         <!-- Javascript -->
-        @yield('javascript')
         <!--<script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>-->
         <script src="{{asset ('js/jquery-3.2.1.slim.min.js')}}"></script>
         <script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>
+        @yield('javascript')
 
 
         <!-- Optional JavaScript -->

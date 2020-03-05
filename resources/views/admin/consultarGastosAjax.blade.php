@@ -1,16 +1,3 @@
-<?php
-
-use App\Auxiliar\Conexion;
-use App\Http\Controllers\controladorAdmin;
-
-if (isset($_SESSION['dniAlumno'])) {
-    $dniAlumno = session()->get('dniAlumno');
-} else {
-    $gc = null;
-    $gtp = null;
-    $gtc = null;
-}
-?>
 @extends('maestra.maestraAdmin')
 
 @section('titulo') 
@@ -25,6 +12,7 @@ Consultar Gastos Alumnos
      *  @author marina
      */
     $(document).ready(function () {
+        var foto = null;
         var ciclo = null;
         var dniAlumno = null;
         var token = '{{csrf_token()}}';
@@ -107,20 +95,24 @@ Consultar Gastos Alumnos
             });
         });
         //gastos de transtporte colectivo
-        $(".editarC").click(function () {
+        $(document).on("click", "#editarC", function () {
+//        $("#editarC").click(function () {
             var id = $('#ID').val();
             var idTransporte = $('#idTransporte').val();
             var n_diasC = $('#n_diasC').val();
-            var precio = $('#precio').val();
-            var foto = $('#foto').val();
+            var importe = $('#importe').val();
+            foto= $('#foto').val();
+            var fotoUrl = $('#fotoUrl').val();
             parametros = {
                 "_token": token,
                 "editarC": 'editarC',
                 "id": id,
                 "idTransporte": idTransporte,
                 "n_diasC": n_diasC,
-                "precio": precio,
-                "foto": foto
+                "importe": importe,
+                "foto": foto,
+                "fotoUrl": fotoUrl
+
             };
             $.ajax({
                 url: 'gestionarGastosAjax',
@@ -128,7 +120,7 @@ Consultar Gastos Alumnos
                 data: parametros,
                 success: function (response) {
                     if (response !== null) {
-                        $$("#tablas").empty();
+                        $("#tablas").empty();
                         $("#tablas").html(response);
                     }
                 },
@@ -139,13 +131,14 @@ Consultar Gastos Alumnos
                 }
             });
         });
-        $(".eliminarC").click(function () {
+        $(document).on("click", "#eliminarC", function () {
+//        $("#eliminarC").click(function () {
             var id = $('#ID').val();
             var idTransporte = $('#idTransporte').val();
             var fotoUrl = $('#fotoUrl').val();
             parametros = {
                 "_token": token,
-                "editarC": 'eliminarC',
+                "eliminarC": 'eliminarC',
                 "id": id,
                 "idTransporte": idTransporte,
                 "fotoUrl": fotoUrl
@@ -156,7 +149,7 @@ Consultar Gastos Alumnos
                 data: parametros,
                 success: function (response) {
                     if (response !== null) {
-                        $$("#tablas").empty();
+                        $("#tablas").empty();
                         $("#tablas").html(response);
                     }
                 },
@@ -168,15 +161,16 @@ Consultar Gastos Alumnos
             });
         });
         //gastos de transtporte propio
-        $(".editarP").click(function () {
-            var id = $('#ID').val();
-            var idTransporte = $('#idTransporte').val();
+        $(document).on("click", "#editarP", function () {
+//        $("#editarP").click(function () {
+            var id = $('#ID1').val();
+            var idTransporte = $('#idTransporte1').val();
             var n_diasP = $('#n_diasP').val();
-            var precio = $('#precio').val();
+            var precio = $('#precio1').val();
             var kms = $('#kms').val();
             parametros = {
                 "_token": token,
-                "editarC": 'editarP',
+                "editarP": 'editarP',
                 "id": id,
                 "idTransporte": idTransporte,
                 "n_diasP": n_diasP,
@@ -189,7 +183,7 @@ Consultar Gastos Alumnos
                 data: parametros,
                 success: function (response) {
                     if (response !== null) {
-                        $$("#tablas").empty();
+                        $("#tablas").empty();
                         $("#tablas").html(response);
                     }
                 },
@@ -200,12 +194,13 @@ Consultar Gastos Alumnos
                 }
             });
         });
-        $(".eliminarP").click(function () {
-            var id = $('#ID').val();
-            var idTransporte = $('#idTransporte').val();
+//        $("#eliminarP").click(function () {
+        $(document).on("click", "#eliminarP", function () {
+            var id = $('#ID1').val();
+            var idTransporte = $('#idTransporte1').val();
             parametros = {
                 "_token": token,
-                "editarC": 'eliminarP',
+                "eliminarP": 'eliminarP',
                 "id": id,
                 "idTransporte": idTransporte
             };
@@ -215,7 +210,7 @@ Consultar Gastos Alumnos
                 data: parametros,
                 success: function (response) {
                     if (response !== null) {
-                        $$("#tablas").empty();
+                        $("#tablas").empty();
                         $("#tablas").html(response);
                     }
                 },
@@ -227,20 +222,23 @@ Consultar Gastos Alumnos
             });
         });
         //gastos de comida
-        $(".editar").click(function () {
-            var id = $('#ID').val();
+//        $("#editar").click(function () {
+        $(document).on("click", "#editar", function () {
+            var id = $('#ID2').val();
             var idGasto = $('#idGasto').val();
             var fecha = $('#fecha').val();
             var importe = $('#importe').val();
-            var foto = $('#foto').val();
+            foto= $('#foto1').val();
+            var fotoUrl = $('#fotoUrl1').val();
             parametros = {
                 "_token": token,
-                "editarC": 'editar',
+                "editar": 'editar',
                 "id": id,
                 "idGasto": idGasto,
                 "fecha": fecha,
                 "importe": importe,
-                "foto": foto
+                "foto": foto,
+                "fotoUrl": fotoUrl
             };
             $.ajax({
                 url: 'gestionarGastosAjax',
@@ -248,7 +246,7 @@ Consultar Gastos Alumnos
                 data: parametros,
                 success: function (response) {
                     if (response !== null) {
-                        $$("#tablas").empty();
+                        $("#tablas").empty();
                         $("#tablas").html(response);
                     }
                 },
@@ -259,13 +257,14 @@ Consultar Gastos Alumnos
                 }
             });
         });
-        $(".eliminar").click(function () {
-            var id = $('#ID').val();
+        $(document).on("click", "#eliminar", function () {
+//        $("#eliminar").click(function () {
+            var id = $('#ID2').val();
             var idGasto = $('#idGasto').val();
-            var fotoUrl = $('#fotoUrl').val();
+            var fotoUrl = $('#fotoUrl1').val();
             parametros = {
                 "_token": token,
-                "editarC": 'eliminar',
+                "eliminar": 'eliminar',
                 "id": id,
                 "idGasto": idGasto,
                 "fotoUrl": fotoUrl
@@ -276,7 +275,7 @@ Consultar Gastos Alumnos
                 data: parametros,
                 success: function (response) {
                     if (response !== null) {
-                        $$("#tablas").empty();
+                        $("#tablas").empty();
                         $("#tablas").html(response);
                     }
                 },
@@ -327,15 +326,12 @@ Consultar Gastos Alumnos
     <div class="row justify-content-center">
         <div class="col-sm-3 col-md-3">
             <div id="consultarGastosAjaxDniAlumno">
-                <form action="consultarGastosAjax" method="POST">
-                    {{ csrf_field() }}
-                    <label class="text-center">
-                        Alumno:
-                        <select id="dniAlumno" class="sel" name="dniAlumno">                                    
+                <label class="text-center">
+                    Alumno:
+                    <select id="dniAlumno" class="sel" name="dniAlumno">                                    
 
-                        </select>
-                    </label>
-                </form>
+                    </select>
+                </label>
             </div>
         </div>
     </div>

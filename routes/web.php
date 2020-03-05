@@ -1,10 +1,6 @@
 <?php
 
 use App\Auxiliar\Conexion;
-use App\Http\Middleware\tutorAdmin;
-use App\Http\Middleware\tutor;
-use App\Http\Middleware\admin;
-use App\Http\Middleware\alumno;
 use App\Http\Controllers\controladorAdmin;
 use App\Http\Controllers\controladorTutor;
 use App\Http\Controllers\controladorAlumno;
@@ -163,7 +159,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::any('consultarGastosAjaxCiclo', ['uses' => 'controladorAdmin@listarCursosAjax', 'as' => 'consultarGastosAjaxCiclo']);
     Route::any('consultarGastosAjaxDniAlumno', ['uses' => 'controladorAdmin@listarAlumnosCursoAjax', 'as' => 'consultarGastosAjaxDniAlumno']);
     Route::any('consultarGastosAjaxTabla', ['uses' => 'controladorAdmin@consultarGastoAlumnoAjax', 'as' => 'consultarGastosAjaxTabla']);
-    Route::any('muestraConsultarGastosAjax', ['uses' => 'controladorAdmin@tablaConsultarGastosAjax', 'as' => 'tablaConsultarGastosAjax']);
+    Route::any('muestraConsultarGastosAjax', ['uses' => 'controladorAdmin@muestraConsultarGastosAjax', 'as' => 'muestraConsultarGastosAjax']);
     Route::any('gestionarGastosAjax', ['uses' => 'controladorAdmin@gestionarGastosAjax', 'as' => 'gestionarGastosAjax']);
 
     Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');

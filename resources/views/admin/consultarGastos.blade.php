@@ -155,9 +155,9 @@ Consultar Gastos Alumnos
                     <thead class="thead-dark">
                         <tr> 
                             <th>Donde es</th>
-                            <th>Nº dias</th>                        
+                            <th>Nº dias</th>   
+                            <th>Importe</th>                     
                             <th>Foto</th>
-                            <th>Importe</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -170,7 +170,7 @@ Consultar Gastos Alumnos
                             <tr>
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>' readonly>
-                                    <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>"/>
+                                    <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>" readonly/>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idColectivos; ?>" readonly/>
                                 </td>
                                 <td><input type="number" class="form-control form-control-sm" name="n_diasC" value="<?php echo $key->n_diasC; ?>"/></td>
@@ -224,7 +224,7 @@ Consultar Gastos Alumnos
                             <tr>
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>' readonly>
-                                    <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>"/>
+                                    <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>" readonly/>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idPropios; ?>" readonly/>
                                 </td>
                                 <td><input type="number" class="form-control form-control-sm" name="n_diasP" value="<?php echo $key->n_diasP; ?>"/></td>
