@@ -17,13 +17,12 @@ class alumno {
         $n = session()->get('usu');
         //comprobar si eres admin
         foreach ($n as $u) {
-            $rol = $u['rol'];
-        }
-        if ($rol == 3) {
-            return $next($request);
-        } else {
-            abort(518);
-            //return view('errors/518');
+            if ($rol = $u['rol'] == 3) {
+                return $next($request);
+            } else {
+                abort(518);
+                //return view('errors/518');
+            }
         }
     }
 
