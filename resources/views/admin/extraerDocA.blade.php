@@ -43,7 +43,6 @@ Exportar documentos
                         </select>
                     </label> 
                 </div>
-                </br>
                 <div class="form-group">
                     <label>
                         Recibí (PDF):
