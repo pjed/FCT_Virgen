@@ -30,21 +30,6 @@ Exportar documentos
             <form name="form" action="exportarDocumentos" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label class="text-center" for='familiaProfesional'>
-                        Familia profesional:
-                        <select class="sel" name="familiaProfesional">  
-                            <?php
-                            foreach ($l1 as $value) {
-                                ?>
-                                <option value="<?php echo $value->familia; ?>"><?php echo $value->familia; ?></option>
-                                <?php
-                            }
-                            ?>
-                        </select>
-                    </label>  
-                </div>
-                <br>
-                <div class="form-group">
                     <label class="text-center" for='ciclo'>
                         Ciclo:
                         <select class="sel" name="ciclo">  
