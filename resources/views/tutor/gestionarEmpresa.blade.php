@@ -63,41 +63,41 @@ Gestionar Empresa
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         CIF de la empresa:
-                                                        <input type="text" class="form-control form-control-sm" id="CIF" name="CIF" pattern="{9}"/>
+                                                        <input type="text" class="form-control form-control-sm" id="CIF" name="CIF" pattern="{9}" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Nombre de la empresa:
-                                                        <input type="text" class="form-control form-control-sm" id="nombreEmpresa" name="nombreEmpresa"/>
+                                                        <input type="text" class="form-control form-control-sm" id="nombreEmpresa" name="nombreEmpresa" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Dirección de la empresa:
-                                                        <input type="text" class="form-control form-control-sm" id="direccion" name="direccion" />
+                                                        <input type="text" class="form-control form-control-sm" id="direccion" name="direccion" required/>
                                                     </label>                
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Localidad:
-                                                        <input type="text" class="form-control form-control-sm" id="localidad" name="localidad" />
+                                                        <input type="text" class="form-control form-control-sm" id="localidad" name="localidad" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Horario:
-                                                        <input type="text" class="form-control form-control-sm" id="horario" name="horario"/>
+                                                        <input type="text" class="form-control form-control-sm" id="horario" name="horario" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Dni del representante:
-                                                        <input type="text" class="form-control form-control-sm" id="dniRepresentante" name="dniRepresentante"/>
+                                                        <input type="text" class="form-control form-control-sm" id="dniRepresentante" name="dniRepresentante" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Nombre del representante:
-                                                        <input type="text" class="form-control form-control-sm" id="nombreRepresentante" name="nombreRepresentante" />
+                                                        <input type="text" class="form-control form-control-sm" id="nombreRepresentante" name="nombreRepresentante" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
-                                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
+                                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
                                                 </div>
                                             </form>
                                         </div>

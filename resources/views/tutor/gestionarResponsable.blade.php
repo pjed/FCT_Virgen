@@ -44,7 +44,7 @@ Gestionar Responsable
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
-                        <th>Teléfono</th>
+                        <th>Móvil</th>
                         <th>
                             <!-- Añadir Responsable -->
                             <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
@@ -60,31 +60,31 @@ Gestionar Responsable
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Dni:
-                                                        <input type="text" class="form-control form-control-sm" id="dni" name="dni" pattern="[0-9]{8}[A-Za-z]{1}"/>
+                                                        <input type="text" class="form-control form-control-sm" id="dni" name="dni" pattern="[0-9]{8}[A-Za-z]{1}" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Nombre:
-                                                        <input type="text" class="form-control form-control-sm" id="nombre" name="nombre"/>
+                                                        <input type="text" class="form-control form-control-sm" id="nombre" name="nombre" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Apellido:
-                                                        <input type="text" class="form-control form-control-sm" id="apellido" name="apellido" />
+                                                        <input type="text" class="form-control form-control-sm" id="apellido" name="apellido" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Email:
-                                                        <input type="email" class="form-control form-control-sm" id="email" name="email" />
+                                                        <input type="email" class="form-control form-control-sm" id="email" name="email" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
-                                                        Teléfono:
-                                                        <input type="tel" class="form-control form-control-sm" id="tel" name="tel" pattern="[0-9]{9}"/>
+                                                        Móvil:
+                                                        <input type="tel" class="form-control form-control-sm" id="tel" name="tel" pattern="[0-9]{9}" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
-                                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
+                                                    <input type="submit" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
                                                 </div>
                                             </form>
                                         </div>
@@ -105,10 +105,10 @@ Gestionar Responsable
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key['id']; ?>" readonly/>
                                 <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $key['dni']; ?>" readonly/>
                             </td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $key['nombre']; ?>"></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="apellido" value="<?php echo $key['apellidos']; ?>"/></td>
-                            <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $key['email']; ?>"/></td>
-                            <td><input type="tel" class="form-control form-control-sm form-control-md" name="tel" value="<?php echo $key['telefono']; ?>" pattern="[0-9]{9}"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $key['nombre']; ?>" required></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="apellido" value="<?php echo $key['apellidos']; ?>" required/></td>
+                            <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $key['email']; ?>" required/></td>
+                            <td><input type="tel" class="form-control form-control-sm form-control-md" name="tel" value="<?php echo $key['telefono']; ?>" pattern="[0-9]{9}" required/></td>
                             <td><button type="submit" id="editar" class="btn" name="editar" />
                                     <!-- </td><td>-->
                                     <button type="submit" id="eliminar" class="btn" name="eliminar" /></td>

@@ -68,7 +68,7 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Empresa:
-                                                        <select id="idEmpresa" name="idEmpresa">
+                                                        <select id="idEmpresa" name="idEmpresa" required>
                                                             <?php
                                                             foreach ($l1 as $k1) {
                                                                 ?>
@@ -82,7 +82,7 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Alumno:
-                                                        <select id="dniAlumno" name="dniAlumno">                                    
+                                                        <select id="dniAlumno" name="dniAlumno" required>                                    
                                                             <?php
                                                             foreach ($l2 as $k2) {
                                                                 ?>
@@ -96,7 +96,7 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Responsable:
-                                                        <select id="idResponsable" name="idResponsable">
+                                                        <select id="idResponsable" name="idResponsable" required>
                                                             <?php
                                                             foreach ($l3 as $k3) {
                                                                 ?>
@@ -110,7 +110,7 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Cod proyecto:
-                                                        <input type="text" class="codProyecto form-control form-control-sm" id="codProyecto" name="codProyecto" pattern="[0-9]{6}"/>
+                                                        <input type="text" class="codProyecto form-control form-control-sm" id="codProyecto" name="codProyecto" pattern="[0-9]{6}" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Gasto Total:
@@ -120,13 +120,13 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Apto:
-                                                        <input type="checkbox" class="form-control form-control-sm" id="apto" name="apto"/>
+                                                        <input type="checkbox" class="form-control form-control-sm" id="apto" name="apto" />
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Fecha inicio:
-                                                        <input type="date" class="form-control form-control-sm" id="fechaInicio" name="fechaInicio"/>
+                                                        <input type="date" class="form-control form-control-sm" id="fechaInicio" name="fechaInicio" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Fecha fin:
@@ -134,7 +134,7 @@ Gestionar  Practicas
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
-                                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="añadir" />
+                                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
                                                 </div>
                                             </form>
                                         </div>
@@ -190,7 +190,7 @@ Gestionar  Practicas
                                 <input type="text" class="form-control form-control-sm form-control-md" name="gasto" value="<?php echo $key->gasto; ?>"/>
                             </td>
                             <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" <?php if ($key->apto == 1) { ?>checked<?php } ?>/></td>
-                            <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>"/></td>
+                            <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>"required/></td>
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaFin" value="<?php echo $key->fechaFin; ?>"/></td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-primary" id="addPeriodo"  data-toggle="modal" data-target="#exampleModal2">
