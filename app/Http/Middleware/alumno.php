@@ -19,7 +19,7 @@ class alumno {
         foreach ($n as $u) {
             $rol = $u['rol'];
         }
-        if ($rol == 2) {
+        if ($rol == 3) {
             return $next($request);
         } else {
             abort(518);

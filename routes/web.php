@@ -1,6 +1,10 @@
 <?php
 
 use App\Auxiliar\Conexion;
+use App\Http\Middleware\tutorAdmin;
+use App\Http\Middleware\tutor;
+use App\Http\Middleware\admin;
+use App\Http\Middleware\alumno;
 use App\Http\Controllers\controladorAdmin;
 use App\Http\Controllers\controladorTutor;
 use App\Http\Controllers\controladorAlumno;
@@ -45,7 +49,7 @@ Route::group(['middleware' => ['general']], function() {
 
 
 //tutor
-Route::group(['middleware' => ['tutor', 'tutorAdmin']], function() {
+Route::group(['middleware' => ['tutor']], function() {
     Route::get('bienvenidaT', function () {
         return view('tutor/bienvenidaT');
     });
@@ -88,7 +92,7 @@ Route::group(['middleware' => ['tutor', 'tutorAdmin']], function() {
 
 
 //admin
-Route::group(['middleware' => ['admin', 'tutorAdmin']], function() {
+Route::group(['middleware' => ['admin']], function() {
     Route::get('bienvenidaAd', function () {
         return view('admin/bienvenidaAd');
     });

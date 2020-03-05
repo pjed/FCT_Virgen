@@ -19,7 +19,7 @@ class tutor
         foreach ($n as $u) {
             $rol = $u['rol'];
         }
-        if ($rol == 3) {
+        if ($rol == 2) {
             return $next($request);
         } else {
             abort(518);
