@@ -110,7 +110,6 @@ class Conexion {
         $p->apellidos = $apellidos;
         $p->domicilio = $domicilio;
         $p->email = $email;
-        $p->pass = 1;
         $p->telefono = $tel;
         $p->movil = $movil;
         $p->iban = $iban;
@@ -427,14 +426,11 @@ class Conexion {
      * @return type lista de alumnos
      */
     static function listarAlumnos() {
-
-        $v = \DB::table('usuarios_roles')
-                ->where('usuarios_roles.rol_id', 3)
-                ->join('usuarios', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
-                ->select(
-                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban'
-                )
-                ->paginate(8);
+        $v = \DB::table('matriculados')
+                        ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
+                        ->select(
+                                'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban', 'usuarios.foto AS foto', 'matriculados.cursos_id_curso as curso'
+                        )->paginate(8);
         return $v;
     }
 
@@ -1630,11 +1626,11 @@ class Conexion {
                 and transportes.id = colectivos.transportes_id
                 and matriculados.cursos_id_curso = cursos.id_curso
                 and usuarios.dni<> '0'
-                and cursos.id_curso='".$curso."'
+                and cursos.id_curso='" . $curso . "'
                 group by usuarios.dni, concat(usuarios.apellidos,', ',usuarios.nombre);";
 
         $gastos_alumnos_transporte_colectivo = \DB::select($sql);
-        
+
         $sql = "select usuarios.dni, concat(usuarios.apellidos,', ',usuarios.nombre) as nombre_completo, propios.id, propios.kms as kms, propios.n_dias as numero_dias, (propios.kms*propios.n_dias* propios.precio) as importe_gastos_kilometraje
                 from usuarios, cursos, matriculados, gastos, transportes, propios
                 where usuarios.dni = matriculados.usuarios_dni
@@ -1643,11 +1639,11 @@ class Conexion {
                 and transportes.id = propios.transportes_id
                 and matriculados.cursos_id_curso = cursos.id_curso
                 and usuarios.dni<> '0'
-                and cursos.id_curso='".$curso."'
+                and cursos.id_curso='" . $curso . "'
                 group by usuarios.dni;";
-        
+
         $gastos_alumnos_transporte_propio = \DB::select($sql);
-        
+
         return $gastos_alumnos;
     }
 
@@ -1970,7 +1966,7 @@ class Conexion {
 //        $p->usuarios_dni = $dni;
 //        $p->cursos_id_curso = $ciclo;
         try {
-            \DB::insert('insert into matriculados (idmatriculados, usuarios_dni, cursos_id_curso) values (?,?,?)', [0, $dni, $ciclo]);
+            \DB::insert('insert into matriculados (usuarios_dni, cursos_id_curso) values (?,?)', [$dni, $ciclo]);
 //            $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
