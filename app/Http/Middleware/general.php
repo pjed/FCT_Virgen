@@ -17,7 +17,7 @@ class general {
         $n = session()->get('usu');
         //comprobar si eres admin
 
-        if ($n == 2) {
+        if ($n != null) {
             return $next($request);
         } else {
             abort(518);
