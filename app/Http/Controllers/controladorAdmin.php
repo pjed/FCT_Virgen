@@ -589,12 +589,15 @@ class controladorAdmin extends Controller {
             $telefono = $req->get('telefono');
             $iban = $req->get('iban');
 
+            $ciclo = $req->get('selectCiclo');
+
             $now = new \DateTime();
             $updated_at = $now->format('Y-m-d H:i:s');
 
-            Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $updated_at);
+            Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $ciclo, $updated_at);
 
-            return view('admin/gestionarAlumnos');
+            //return view('admin/gestionarAlumnos');
+            return redirect()->route('gestionarAlumnos');
         }
     }
 
@@ -617,7 +620,7 @@ class controladorAdmin extends Controller {
 
             Conexion::actualizarDatosTutor($dni, $nombre, $apellidos, $email, $telefono, $ciclo);
 
-            return view('admin/gestionarTutores');
+            //return view('admin/gestionarTutores');
         }
 
         if (isset($_REQUEST['eliminar'])) {
@@ -635,8 +638,9 @@ class controladorAdmin extends Controller {
 //                        Conexion::borrarCurso($cursoTutor);
             Conexion::borrarUsuario($dni);
 
-            return view('admin/gestionarTutores');
+            //return view('admin/gestionarTutores');
         }
+        return redirect()->route('gestionarTutores');
     }
 
     /**

@@ -40,9 +40,6 @@ Gestionar usuarios
         <div class="col-sm col-md col-lg">
             <div class="table-responsive ">
                 <table class="table table-striped  table-hover table-bordered">
-                    <caption class="text-center blanco">
-                        Tabla de usuarios
-                    </caption>
                     <thead class="thead-dark">
                         <tr>                
                             <th>DNI</th>
