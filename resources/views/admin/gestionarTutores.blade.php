@@ -6,11 +6,6 @@ Gestionar tutores
 
 @section('contenido') 
 
-<?php
-$listaTutores = Conexion::listarTutores();
-$listaCiclos = Conexion::listarCiclos();
-?>
-
 <div class="container-fluid">  
 
     <!-- Migas de pan -->

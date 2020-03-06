@@ -417,7 +417,7 @@ class controladorAdmin extends Controller {
      * @param Request $req
      * @return type
      */
-   public function gestionarUsuarios(Request $req) {
+    public function gestionarUsuarios(Request $req) {
 
         if (isset($_REQUEST['editar'])) {
 
@@ -570,8 +570,7 @@ class controladorAdmin extends Controller {
         }
 
         return redirect()->route('gestionarUsuarios');
-    } 
-
+    }
 
     /**
      * Gestionar alumnos
@@ -590,12 +589,15 @@ class controladorAdmin extends Controller {
             $telefono = $req->get('telefono');
             $iban = $req->get('iban');
 
+            $ciclo = $req->get('selectCiclo');
+
             $now = new \DateTime();
             $updated_at = $now->format('Y-m-d H:i:s');
 
-            Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $updated_at);
+            Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $ciclo, $updated_at);
 
-            return view('admin/gestionarAlumnos');
+            //return view('admin/gestionarAlumnos');
+            return redirect()->route('gestionarAlumnos');
         }
     }
 
@@ -618,14 +620,14 @@ class controladorAdmin extends Controller {
 
             Conexion::actualizarDatosTutor($dni, $nombre, $apellidos, $email, $telefono, $ciclo);
 
-            return view('admin/gestionarTutores');
+            //return view('admin/gestionarTutores');
         }
 
         if (isset($_REQUEST['eliminar'])) {
 
             $dni = $req->get('dni');
             $file = $req->get('fotoUrl');
-            
+
             if (file_exists($file) && $file != "images/defecto.jpeg") {
                 unlink($file);
             }
@@ -636,8 +638,9 @@ class controladorAdmin extends Controller {
 //                        Conexion::borrarCurso($cursoTutor);
             Conexion::borrarUsuario($dni);
 
-            return view('admin/gestionarTutores');
+            //return view('admin/gestionarTutores');
         }
+        return redirect()->route('gestionarTutores');
     }
 
     /**
