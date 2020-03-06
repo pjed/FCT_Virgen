@@ -29,17 +29,17 @@ Route::get('VolverIndex', function () {
     return view('518'); //Error 404 NOT FOUND
 });
 
+Route::get('olvidarPwd', function () {
+    return view('olvidarPwd');
+});
+Route::post('olvidarPwd', 'controladorGeneral@olvidarPwd');
 
 //comunes
 Route::group(['middleware' => ['general']], function() {
     Route::post('cerrarSesion', 'controladorGeneral@cerrarSesion');
-    Route::post('olvidarPwd', 'controladorGeneral@olvidarPwd');
 
     Route::get('cerrarSesion', function () {
         return view('518'); //Error 404 NOT FOUND
-    });
-    Route::get('olvidarPwd', function () {
-        return view('olvidarPwd');
     });
 });
 
