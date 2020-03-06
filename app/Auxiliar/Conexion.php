@@ -1819,6 +1819,43 @@ class Conexion {
         }
     }
 
+    static function insertarTransporteColectivoSinFoto($tipo, $donde, $n_dias, $importe) {
+
+        try {
+
+            //insertar el gasto en la tabla transportes
+            $t = new transporte;
+            $t->tipo = $tipo;
+            $t->donde = $donde;
+
+            $t->save();
+
+            $transporte = transporte::all()->last();
+            $idTransporte = $transporte->id;
+
+            //insertar el gasto en la tabla colectivos
+            $c = new colectivo;
+            $c->n_dias = $n_dias;
+            $c->importe = $importe;
+            $c->transportes_id = $idTransporte;
+
+            $c->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+    
     static function insertarTransportePropio($tipo, $donde, $kms, $n_dias, $precio) {
 
         try {
