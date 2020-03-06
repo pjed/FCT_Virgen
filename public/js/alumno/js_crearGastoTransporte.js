@@ -19,7 +19,7 @@ $(document).ready(function () {
     });
 
     $("#importeT").blur(function () {
-        if ($("#importeT").val() === "" || $("#importeT").val() > 9.0 || $("#importeT").val() < 0) {
+        if ($("#importeT").val() === "" || $("#importeT").val() < 0) {
             $("#importeT").css({'border-color': 'red'});
         }
     });
