@@ -48,7 +48,7 @@ Exportar documentos
                         Recibí (PDF):
                         <div class="row">
                             <div class="col-sm col-md col-lg">
-                                <input type="submit" id="recibiFCT" class="btn btn-primary" name="recibiFCT" value="Anexo V Recibí FCT"/>
+                                <input type="submit" id="recibiFCT" class="btn btn-primary" name="recibiFCT" value="Anexo V Recibí FCT"/><br><br>
                             </div>
                             <div class="col-sm col-md col-lg">
                                 <a href="http://www.educa.jccm.es/es/fpclm/centros-formacion-profesional/formacion-centros-trabajo-proyecto.ficheros/100158-anexo5_recibi.doc">FCT</a>
@@ -79,7 +79,7 @@ Exportar documentos
                         Gastos de alumnos (EXCEL):  
                         <div class="row">
                             <div class="col-sm col-md col-lg">
-                                <input type="submit" id="gastosFCT" class="btn btn-primary" name="gastosFCT" value="Gastos alumnos FCT"/>
+                                <input type="submit" id="gastosFCT" class="btn btn-primary" name="gastosFCT" value="Gastos alumnos FCT"/><br><br>
                             </div>
                             <div class="col-sm col-md col-lg">
                                 <input type="submit" id="gastosFPDUAL" class="btn btn-primary" name="gastosFPDUAL" value="Gastos alumnos FP DUAL"/>

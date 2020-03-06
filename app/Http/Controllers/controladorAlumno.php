@@ -86,14 +86,21 @@ class controladorAlumno extends Controller {
             //si el transporte es colectivo        
             if ($tipoTransporte == "Colectivo") {
                 $idColectivo = Conexion::obtenerIdUltimoTransporteIngresado() + 1;
-                $req->file('fotoTicket')->move('imagenes_gastos/transporte', $idColectivo);
-                $foto = 'imagenes_gastos/transporte/' . $idColectivo;
+                //$req->file('fotoTicket')->move('imagenes_gastos/transporte', $idColectivo);
+                //$foto = 'imagenes_gastos/transporte/' . $idColectivo;
                 $importe = $req->get('importeT');
                 $localidadC = $req->get('locC');
                 $numDias = $req->get('diasC');
                 $tipo = 1;
+                $fot = $req->file('fotoTicket');
+                $foto = "";
 
-                Conexion::insertarTransporteColectivo($tipo, $localidadC, $foto, $numDias, $importe);
+                if ($fot != null) {
+                    $foto = $fot->move('imagenes_gastos/transporte', $idColectivo);
+                    Conexion::insertarTransporteColectivo($tipo, $localidadC, $foto, $numDias, $importe);
+                } else {
+                    Conexion::insertarTransporteColectivoSinFoto($tipo, $localidadC, $numDias, $importe);
+                }
 
                 //ingresar el gasto de transporte colectivo en la tabla de gastos
                 $usuario = session()->get('usu');

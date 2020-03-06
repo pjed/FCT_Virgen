@@ -52,7 +52,7 @@ Gestionar  Practicas
                         <th>Apto</th> 
                         <th>Fecha inicio</th>
                         <th>Fecha fin</th>
-                        <th>Recibí</th>
+                        <th colspan="2">Recibís</th>
                         <th>
                             <!-- Añadir Practicas -->
                             <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
@@ -86,7 +86,9 @@ Gestionar  Practicas
                                                             <?php
                                                             foreach ($l2 as $k2) {
                                                                 ?>
-                                                                <option value="<?php echo $k2->dni; ?>"> <?php echo $k2->nombre . ', ' . $k2->apellidos; ?></option>
+                                                                <option value="<?php echo $k2->dni; ?>"> 
+                                                                    <?php echo $k2->nombre . ', ' . $k2->apellidos; ?>
+                                                                </option>
                                                                 <?php
                                                             }
                                                             ?>
@@ -201,18 +203,15 @@ Gestionar  Practicas
                                         <div class="modal-content">
                                             <div class="modal-body">
                                                 <h3 class="text-center">Añadir Período</h3>
-                                                <form action="gestionarPracticas" method="POST">
-                                                    {{ csrf_field() }}
-                                                    <div class="row justify-content-center form-group">
-                                                        <label class="col-sm text-center">
-                                                            Periodo:
-                                                            <input type="text" name="periodo" id="periodo" placeholder="Periodo">
-                                                        </label>
-                                                    </div>
-                                                    <div class="row justify-content-center form-group">
-                                                        <input type="submit" required id="recibiFTC" class="btn btn-primary btn-sm" name="recibiFCT" value="Generar"/>
-                                                    </div>
-                                                </form>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Periodo:
+                                                        <input type="text" name="periodo" id="periodo" placeholder="Periodo">
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <input type="submit" required id="recibiFTC" class="btn btn-primary btn-sm" name="recibiFCT" value="Generar"/>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -225,52 +224,50 @@ Gestionar  Practicas
                                         <div class="modal-content">
                                             <div class="modal-body">
                                                 <h3 class="text-center">Añadir Período</h3>
-                                                <form action="gestionarPracticas" method="POST">
-                                                    {{ csrf_field() }}
-                                                    <div class="row justify-content-center form-group">
-                                                        <label class="col-sm text-center">
-                                                            Modalidad:
-                                                            <select id="modalidad" name="modalidad">
-                                                                <option selected value="0">Elige una modalidad</option>
-                                                                <option value="A">A</option>
-                                                                <option value="B">B</option>
-                                                                <option value="C">C</option>
-                                                            </select>
-                                                        </label>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Modalidad:
+                                                        <select id="modalidad" name="modalidad">
+                                                            <option selected value="0">Elige una modalidad</option>
+                                                            <option value="A">A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                        </select>
+                                                    </label>
 
-                                                        <label class="col-sm text-center">
-                                                            Duración del proyecto:
-                                                            <select id="modalidad" name="duracion">
-                                                                <option selected value="0">Elige duración</option>
-                                                                <option value="1">CURSO</option>
-                                                                <option value="2">CURSOS</option>
-                                                            </select>
-                                                        </label>
-                                                        <label class="col-sm text-center">
-                                                            Código del Proyecto:
-                                                            <input type="text" name="codigo" id="codigo" placeholder="Código" value="CLM" maxlength="6">
-                                                        </label>
-                                                        <label class="col-sm text-center">
-                                                            Curso Académico de Inicio:
-                                                            <input type="date" name="inicio" id="inicio">
-                                                        </label>
-                                                        <label class="col-sm text-center">
-                                                            Curso académico de finalización:
-                                                            <input type="date" name="final" id="final">
-                                                        </label>
-                                                    </div>
-                                                    <div class="row justify-content-center form-group">
-                                                        <input type="submit" id="recibiFPDUAL" class="btn btn-primary btn-sm" name="recibiFPDUAL" value="Generar"/>
-                                                    </div>
-                                                </form>
+                                                    <label class="col-sm text-center">
+                                                        Duración del proyecto:
+                                                        <select id="modalidad" name="duracion">
+                                                            <option selected value="0">Elige duración</option>
+                                                            <option value="1">CURSO</option>
+                                                            <option value="2">CURSOS</option>
+                                                        </select>
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Código del Proyecto:
+                                                        <input type="text" name="codigo" id="codigo" placeholder="Código" value="CLM" maxlength="6">
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Curso Académico de Inicio:
+                                                        <input type="date" name="inicio" id="inicio">
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Curso académico de finalización:
+                                                        <input type="date" name="final" id="final">
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <input type="submit" id="recibiFPDUAL" class="btn btn-primary btn-sm" name="recibiFPDUAL" value="Generar"/>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            <td><button type="submit" id="editar" class="btn" name="editar" />
-                                    <!-- </td><td>-->
-                                    <button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
+                            <td>
+                                <button type="submit" id="editar" class="btn" name="editar" />
+                                <button type="submit" id="eliminar" class="btn" name="eliminar" />
+                            </td>
                         </tr>
                     </form>
                     <?php

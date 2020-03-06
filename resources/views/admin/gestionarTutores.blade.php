@@ -6,11 +6,6 @@ Gestionar tutores
 
 @section('contenido') 
 
-<?php
-$listaTutores = Conexion::listarTutores();
-$listaCiclos = Conexion::listarCiclos();
-?>
-
 <div class="container-fluid">  
 
     <!-- Migas de pan -->
@@ -36,9 +31,6 @@ $listaCiclos = Conexion::listarCiclos();
         <div class="col-sm col-md col-lg">
             <div class="table-responsive ">
                 <table class="table table-striped  table-hover table-bordered">
-                    <caption class="text-center blanco">
-                        Tabla de tutores
-                    </caption>
                     <thead class="thead-dark">
                         <tr>                
                             <th>DNI</th>

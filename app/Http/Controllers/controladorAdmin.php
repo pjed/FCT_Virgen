@@ -606,12 +606,15 @@ class controladorAdmin extends Controller {
             $telefono = $req->get('telefono');
             $iban = $req->get('iban');
 
+            $ciclo = $req->get('selectCiclo');
+
             $now = new \DateTime();
             $updated_at = $now->format('Y-m-d H:i:s');
 
-            Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $updated_at);
+            Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $ciclo, $updated_at);
 
-            return view('admin/gestionarAlumnos');
+            //return view('admin/gestionarAlumnos');
+            return redirect()->route('gestionarAlumnos');
         }
     }
 
@@ -634,7 +637,7 @@ class controladorAdmin extends Controller {
 
             Conexion::actualizarDatosTutor($dni, $nombre, $apellidos, $email, $telefono, $ciclo);
 
-            return view('admin/gestionarTutores');
+            //return view('admin/gestionarTutores');
         }
 
         if (isset($_REQUEST['eliminar'])) {
@@ -652,8 +655,9 @@ class controladorAdmin extends Controller {
 //                        Conexion::borrarCurso($cursoTutor);
             Conexion::borrarUsuario($dni);
 
-            return view('admin/gestionarTutores');
+            //return view('admin/gestionarTutores');
         }
+        return redirect()->route('gestionarTutores');
     }
 
     /**
@@ -665,12 +669,55 @@ class controladorAdmin extends Controller {
     public function exportarDocumentos(Request $req) {
         $familia = $req->get('familiaProfesional');
         $idCurso = $req->get('ciclo');
-        if (isset($_REQUEST['recibiFPdual'])) {
+        if (isset($_REQUEST['recibiFPDUAL'])) {
+            $curso = $req->get("ciclo");
             
+            $alumnos_curso = Conexion::obtenerAlumnosTutor($curso);
+            $cuantos_alumnos = count($alumnos_curso);
+            
+            if ($cuantos_alumnos != 0) {
+                foreach ($alumnos_curso as $alumno) {
+                    $lista_documentos[] = Documentos::GenerarRecibiTodosAlumnosDUAL($alumno->dni);
+                }
+            }else{
+                $lista_documentos = null;
+            }
+            if ($lista_documentos != null) {
+                Documentos::generarArchivoZIPDUAL($lista_documentos, $curso);
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    No existen alumnos del ciclo  '.$curso.' con FP DUAL
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
         }
 
         if (isset($_REQUEST['recibiFCT'])) {
+            $curso = $req->get("ciclo");
             
+            $alumnos_curso = Conexion::obtenerAlumnosTutor($curso);
+            $cuantos_alumnos = count($alumnos_curso);
+            
+            if ($cuantos_alumnos != 0) {
+                foreach ($alumnos_curso as $alumno) {
+                    $lista_documentos[] = Documentos::GenerarRecibiTodosAlumnos($alumno->dni);
+                }
+            } else {
+                $lista_documentos = null;
+            }
+
+            if ($lista_documentos != null) {
+                Documentos::generarArchivoZIP($lista_documentos, $curso);
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    No existen alumnos del ciclo '.$curso.' con FP
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
         }
 
         if (isset($_REQUEST['memoriaAlumnos'])) {
@@ -678,7 +725,24 @@ class controladorAdmin extends Controller {
             $curso = $req->get("ciclo");
             $anio = Conexion::obtenerAnioAcademico();
             $alumnos_memoria = Conexion::obtenerAlumnosTutorMemoria($curso);
-            Documentos::GenerarMemoriaAlumnos($alumnos_memoria, $curso, $anio);
+            $cuantos_alumnos_memoria = count($alumnos_memoria);
+            
+            if ($cuantos_alumnos_memoria != 0) {
+                $alumnos_memoria = Conexion::obtenerAlumnosTutorMemoria($curso);
+            } else {
+                $alumnos_memoria = null;
+            }
+            
+            if ($alumnos_memoria != null) {
+                Documentos::GenerarMemoriaAlumnos($alumnos_memoria, $curso, $anio);
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    No existen alumnos del ciclo '.$curso.'
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
         }
         if (isset($_REQUEST['gastosFCT'])) {
             $curso = $req->get("ciclo");
@@ -702,6 +766,11 @@ class controladorAdmin extends Controller {
 
             Documentos::GenerarGastosAlumnosDUAL($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
         }
+        $l1 = Conexion::listaCursos();
+        $datos = [
+            'l1' => $l1
+        ];
+        return view('admin/extraerDocA', $datos);
     }
 
     /**

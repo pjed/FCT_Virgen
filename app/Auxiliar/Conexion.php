@@ -251,6 +251,13 @@ class Conexion {
         }
     }
 
+    static function obtenerRolUsuario($dni) {
+
+        $p = usuarios_rol::where('usuario_dni', $dni)->first();
+
+        return $p;
+    }
+
     /**
      * Método para borrar un tutor de la BD
      * @param type $dni dni del tutor a borrar
@@ -443,7 +450,7 @@ class Conexion {
         $v = \DB::table('tutores')
                 ->join('usuarios', 'usuarios.dni', '=', 'tutores.usuarios_dni')
                 ->select(
-                        'tutores.idtutores AS idtutores', 'tutores.cursos_id_curso AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono'
+                        'tutores.idtutores AS idtutores', 'tutores.cursos_id_curso AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.foto AS foto'
                 )
                 ->paginate(8);
         return $v;
@@ -493,7 +500,7 @@ class Conexion {
         $v = \DB::table('usuarios')
                 ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
                 ->select(
-                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios_roles.rol_id AS rol_id'
+                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios_roles.rol_id AS rol_id', 'usuarios.foto AS foto'
                 )
                 ->paginate(8);
         return $v;
@@ -508,7 +515,7 @@ class Conexion {
      * @param type $telefono número de teléfono del alumno
      * @param type $iban número iban del alumno
      */
-    static function actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $updated_at) {
+    static function actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $ciclo, $updated_at) {
         try {
             usuario::where('dni', $dni)
                     ->update([
@@ -519,6 +526,14 @@ class Conexion {
                         'iban' => $iban,
                         'updated_at' => $updated_at
             ]);
+
+            matricula::where('usuarios_dni', $dni)
+                    ->update([
+                        'cursos_id_curso' => $ciclo,
+                        'updated_at' => $updated_at
+            ]);
+
+            session()->put('dniAlumnoModificado', $dni);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito usuario.
@@ -1804,6 +1819,43 @@ class Conexion {
         }
     }
 
+    static function insertarTransporteColectivoSinFoto($tipo, $donde, $n_dias, $importe) {
+
+        try {
+
+            //insertar el gasto en la tabla transportes
+            $t = new transporte;
+            $t->tipo = $tipo;
+            $t->donde = $donde;
+
+            $t->save();
+
+            $transporte = transporte::all()->last();
+            $idTransporte = $transporte->id;
+
+            //insertar el gasto en la tabla colectivos
+            $c = new colectivo;
+            $c->n_dias = $n_dias;
+            $c->importe = $importe;
+            $c->transportes_id = $idTransporte;
+
+            $c->save(); //aqui se hace la insercion   
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Insertado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Clave duplicada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+    
     static function insertarTransportePropio($tipo, $donde, $kms, $n_dias, $precio) {
 
         try {
