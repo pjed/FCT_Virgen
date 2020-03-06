@@ -68,12 +68,21 @@ class controladorTutor extends Controller {
 
         $gt = Conexion::listarGastosTransportes($dniAlumno);
 
+        $colectivo = null;
+        $propio = null;
         foreach ($gt as $key) {
             if ($key->tipoTransporte == 1) {
-                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-            } else if ($key->tipoTransporte == 0) {
-                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+                $colectivo = 1;
             }
+            if ($key->tipoTransporte == 0) {
+                $propio = 0;
+            }
+        }
+        if ($colectivo == 1) {
+            $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+        }
+        if ($propio == 0) {
+            $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
         }
 
         $gc = Conexion::listarGastosComidasPagination($dniAlumno);
@@ -232,16 +241,16 @@ class controladorTutor extends Controller {
         if (isset($_REQUEST['memoriaAlumnos'])) {
             $curso = $req->get("id_curso");
             $anio = Conexion::obtenerAnioAcademico();
-            
+
             $alumnos_memoria = Conexion::obtenerAlumnosTutorMemoria($curso);
             $cuantos_alumnos_memoria = count($alumnos_memoria);
-            
+
             if ($cuantos_alumnos_memoria != 0) {
                 $alumnos_memoria = Conexion::obtenerAlumnosTutorMemoria($curso);
-            }else{
+            } else {
                 $alumnos_memoria = null;
             }
-            
+
             if ($alumnos_memoria != null) {
                 Documentos::GenerarMemoriaAlumnos($alumnos_memoria, $curso, $anio);
             } else {
