@@ -5,10 +5,6 @@ Gestionar alumnos
 @endsection
 
 @section('contenido') 
-<?php
-$listaAlumnos = Conexion::listarAlumnos();
-?>
-
 <div class="container-fluid">  
 
     <!-- Migas de pan -->
@@ -34,9 +30,6 @@ $listaAlumnos = Conexion::listarAlumnos();
         <div class="col-sm col-md col-lg">
             <div class="table-responsive ">
                 <table class="table table-striped  table-hover table-bordered">
-                    <caption class="text-center blanco">
-                        Tabla de alumnos
-                    </caption>
                     <thead class="thead-dark">
                         <tr>                
                             <th>DNI</th>
@@ -45,6 +38,7 @@ $listaAlumnos = Conexion::listarAlumnos();
                             <th>Email</th>
                             <th>Teléfono</th>
                             <th>Iban</th>
+                            <th>Ciclo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,9 +55,18 @@ $listaAlumnos = Conexion::listarAlumnos();
                                 <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
                                 <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $value->email; ?>" required/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value->telefono; ?>" required pattern="[9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value->telefono; ?>" required pattern="[6-9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="iban" value="<?php echo $value->iban; ?>" pattern="^ES\d{22}$" required/></td>
-
+                                <td>
+                                    <select class="sel" name="selectCiclo">
+                                        <?php foreach ($listaCiclos as $value1) {
+                                            ?>
+                                            <option value="<?php echo $value1['id_curso'] ?>" <?php if ($value1['id_curso'] == $value->curso) { ?>selected<?php } ?>><?php echo $value1['id_curso'] ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </td>
                                 <td><button type="submit" id="editar" class="btn" name="editar" value=""/></td>
                             </tr>
                         </form>
@@ -83,3 +86,4 @@ $listaAlumnos = Conexion::listarAlumnos();
     </div>
 </div>
 @endsection
+ 

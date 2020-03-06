@@ -417,7 +417,7 @@ class controladorAdmin extends Controller {
      * @param Request $req
      * @return type
      */
-    public function gestionarUsuarios(Request $req) {
+   public function gestionarUsuarios(Request $req) {
 
         if (isset($_REQUEST['editar'])) {
 
@@ -431,7 +431,111 @@ class controladorAdmin extends Controller {
 
             $rol_id = $req->get('selectRol');
 
-            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+            $rolUsuario = Conexion::obtenerRolUsuario($dni);
+            $rolAntiguo = $rolUsuario->rol_id;
+
+            //SI ES TUTOR:
+            if ($rolAntiguo == 2) {
+                //si antes era tutor y ahora va a ser administrador
+                if ($rolAntiguo == 2 && $rol_id == 1) {
+                    Conexion::borrarTutor($dni);
+                    Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                } else {
+                    //si antes era tutor y ahora va a ser alumno
+                    if ($rolAntiguo == 2 && $rol_id == 3) {
+                        Conexion::borrarTutor($dni);
+                        Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                        Conexion::insertarAlumnoTablaMatriculados($dni, 0);
+                    } else {
+                        //si antes era tutor y ahora va a ser tutor-administrador
+                        if ($rolAntiguo == 2 && $rol_id == 4) {
+                            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                        } //si antes era tutor y va a seguir siendo tutor
+                        if ($rolAntiguo == 2 && $rol_id == 2) {
+                            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                        }
+                    }
+                }
+            } else {
+                //SI ES ADMINISTRADOR:
+                if ($rolAntiguo == 1) {
+                    //si antes era administrador y ahora va a ser tutor
+                    if ($rolAntiguo == 1 && $rol_id == 2) {
+                        Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                        Conexion::insertarTutor(0, $dni);
+                    } else {
+                        //si antes era administrador y ahora va a ser alumno
+                        if ($rolAntiguo == 1 && $rol_id == 3) {
+                            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                            Conexion::insertarAlumnoTablaMatriculados($dni, 0);
+                        } else {
+                            //si antes era administrador y ahora va a ser tutor-administrador
+                            if ($rolAntiguo == 1 && $rol_id == 4) {
+                                Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                                Conexion::insertarTutor(0, $dni);
+                            } //si antes era administrador y va a seguir siendo administrador
+                            if ($rolAntiguo == 1 && $rol_id == 1) {
+                                Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                            }
+                        }
+                    }
+                } else {
+                    //SI ES TUTOR-ADMINISTRADOR:
+                    if ($rolAntiguo == 4) {
+                        //si antes era tutor-administrador y ahora va a ser administrador
+                        if ($rolAntiguo == 4 && $rol_id == 1) {
+                            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                            Conexion::borrarTutor($dni);
+                        } else {
+                            //si antes era tutor-administrador y ahora va a ser tutor
+                            if ($rolAntiguo == 4 && $rol_id == 2) {
+                                Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                            } else {
+                                //si antes era tutor-administrador y ahora va a ser alumno
+                                if ($rolAntiguo == 4 && $rol_id == 3) {
+                                    Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                                    Conexion::insertarAlumnoTablaMatriculados($dni, 0);
+                                } //si antes era tutor-administrador y va a seguir siendo tutor-administrador
+                                if ($rolAntiguo == 4 && $rol_id == 4) {
+                                    Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                                }
+                            }
+                        }
+                    } else {
+                        //SI ES ALUMNO:
+                        if ($rolAntiguo == 3) {
+                            //si antes era alumno y ahora va a ser administrador
+                            if ($rolAntiguo == 3 && $rol_id == 1) {
+                                Conexion::borrarAlumnoTablaPracticas($dni);
+                                Conexion::borrarAlumnoTablaGastos($dni);
+                                Conexion::borrarAlumno($dni);
+                                Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                            } else {
+                                //si antes era alumno y ahora va a ser alumno
+                                if ($rolAntiguo == 3 && $rol_id == 3) {
+                                    Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                                } else {
+                                    //si antes era alumno y ahora va a ser tutor
+                                    if ($rolAntiguo == 3 && $rol_id == 2) {
+                                        Conexion::borrarAlumnoTablaPracticas($dni);
+                                        Conexion::borrarAlumnoTablaGastos($dni);
+                                        Conexion::borrarAlumno($dni);
+                                        Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                                        Conexion::insertarTutor(0, $dni);
+                                    } //si antes era alumno y va a ser tutor-administrador
+                                    if ($rolAntiguo == 2 && $rol_id == 4) {
+                                        Conexion::borrarAlumnoTablaPracticas($dni);
+                                        Conexion::borrarAlumnoTablaGastos($dni);
+                                        Conexion::borrarAlumno($dni);
+                                        Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id);
+                                        Conexion::insertarTutor(0, $dni);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         if (isset($_REQUEST['eliminar'])) {
@@ -466,18 +570,8 @@ class controladorAdmin extends Controller {
         }
 
         return redirect()->route('gestionarUsuarios');
+    } 
 
-//        $listaUsuarios = Conexion::listarUsuarios();
-//        $listaCiclos = Conexion::listarCiclos();
-//        $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
-//        $datos = [
-//            'listaUsuarios' => $listaUsuarios,
-//            'listaCiclos' => $listaCiclos,
-//            'listaCiclosSinTutor' => $listaCiclosSinTutor
-//        ];
-//
-//        return view('admin/gestionarUsuarios', $datos);
-    }
 
     /**
      * Gestionar alumnos
