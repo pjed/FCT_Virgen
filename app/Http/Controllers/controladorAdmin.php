@@ -66,14 +66,21 @@ class controladorAdmin extends Controller {
 
         $dniAlumno = session()->get('dniAlumno');
         $gt = Conexion::listarGastosTransportes($dniAlumno);
-
+        $colectivo = null;
+        $propio = null;
         foreach ($gt as $key) {
             if ($key->tipoTransporte == 1) {
-                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+                $colectivo = 1;
             }
             if ($key->tipoTransporte == 0) {
-                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+                $propio = 0;
             }
+        }
+        if ($colectivo == 1) {
+            $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+        }
+        if ($propio == 0) {
+            $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
         }
         $gc = Conexion::listarGastosComidasPagination($dniAlumno);
         $datos = [
@@ -207,11 +214,21 @@ class controladorAdmin extends Controller {
     public function escribirTablaCunsultarGastosAjax($dniAlumno) {
         $gt = Conexion::listarGastosTransportes($dniAlumno);
         $v = null;
+        $colectivo = null;
+        $propio = null;
         foreach ($gt as $key) {
             if ($key->tipoTransporte == 1) {
-                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-                if ($gtc != null) {
-                    $v = $v . '<!-- Gestionar Gastos Transporte  Colectivo-->
+                $colectivo = 1;
+            }
+
+            if ($key->tipoTransporte == 0) {
+                $propio = 0;
+            }
+        }
+        if ($colectivo == 1) {
+            $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+            if ($gtc != null) {
+                $v = $v . '<!-- Gestionar Gastos Transporte  Colectivo-->
                     <div id="colectivo" class="row justify-content-center">
                         <div class="col-sm col-md">
                             <h2 class="text-center">Consultar Gastos Transporte Colectivo</h2>
@@ -226,8 +243,8 @@ class controladorAdmin extends Controller {
                                         </tr>
                                     </thead>
                                     <tbody>';
-                    foreach ($gtc as $key) {
-                        $v = $v . '
+                foreach ($gtc as $key) {
+                    $v = $v . '
                                             <tr>
                                                 <td>
                                                     <input type="hidden" class="form-control form-control-sm form-control-md" id="idTransporte" name ="idTransporte" value="' . $key->idTransporte . '" readonly>
@@ -244,17 +261,18 @@ class controladorAdmin extends Controller {
                                                 <td><button type="button" id="editarC" class="btn-sm editar" name="editarC"></button></td>
                                                 <td><button type="button" id="eliminarC" class="btn-sm eliminar" name="eliminarC"></button></td>
                                             </tr>';
-                    }
-                    $v = $v . '</tbody>
+                }
+                $v = $v . '</tbody>
                                 </table>
                             </div>
                         </div>
                     </div>';
-                }
-            } else if ($key->tipoTransporte == 0) {
-                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
-                if ($gtp != null) {
-                    $v = $v . '<!-- Gestionar Gastos Transporte  Propio-->
+            }
+        }
+        if ($propio == 0) {
+            $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+            if ($gtp != null) {
+                $v = $v . '<!-- Gestionar Gastos Transporte  Propio-->
                     <div id="propio" class="row justify-content-center">
                         <div class="col-sm col-md">
                             <h2 class="text-center">Consultar Gastos Transporte Propio</h2>
@@ -269,8 +287,8 @@ class controladorAdmin extends Controller {
                                         </tr>
                                     </thead>
                                     <tbody>';
-                    foreach ($gtp as $key) {
-                        $v = $v . '
+                foreach ($gtp as $key) {
+                    $v = $v . '
                                             <tr>
                                                 <td>
                                                     <input type="hidden" class="form-control form-control-sm form-control-md" id="idTransporte1" name ="idTransporte" value="' . $key->idTransporte . '" readonly>
@@ -283,13 +301,12 @@ class controladorAdmin extends Controller {
                                                 <td><button type="button" id="editarP" class="btn-sm editar" name="editarP"></button></td>
                                                 <td><button type="button" id="eliminarP" class="btn-sm eliminar" name="eliminarP"></button></td>
                                             </tr>';
-                    }
-                    $v = $v . '</tbody>
+                }
+                $v = $v . '</tbody>
                                 </table>
                             </div>
                         </div>
                     </div>';
-                }
             }
         }
         $gc = Conexion::listarGastosComidasPagination($dniAlumno);
@@ -417,7 +434,7 @@ class controladorAdmin extends Controller {
      * @param Request $req
      * @return type
      */
-   public function gestionarUsuarios(Request $req) {
+    public function gestionarUsuarios(Request $req) {
 
         if (isset($_REQUEST['editar'])) {
 
@@ -543,11 +560,11 @@ class controladorAdmin extends Controller {
             $dni = $req->get('dni');
             $rol_id = $req->get('selectRol');
             $file = $req->get('fotoUrl');
-            
+
             if (file_exists($file) && $file != "images/defecto.jpeg") {
                 unlink($file);
             }
-            
+
             if ($rol_id == 1) {
 
                 Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
@@ -570,8 +587,7 @@ class controladorAdmin extends Controller {
         }
 
         return redirect()->route('gestionarUsuarios');
-    } 
-
+    }
 
     /**
      * Gestionar alumnos
@@ -625,7 +641,7 @@ class controladorAdmin extends Controller {
 
             $dni = $req->get('dni');
             $file = $req->get('fotoUrl');
-            
+
             if (file_exists($file) && $file != "images/defecto.jpeg") {
                 unlink($file);
             }

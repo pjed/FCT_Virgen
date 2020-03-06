@@ -68,12 +68,21 @@ class controladorTutor extends Controller {
 
         $gt = Conexion::listarGastosTransportes($dniAlumno);
 
+        $colectivo = null;
+        $propio = null;
         foreach ($gt as $key) {
             if ($key->tipoTransporte == 1) {
-                $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-            } else if ($key->tipoTransporte == 0) {
-                $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+                $colectivo = 1;
             }
+            if ($key->tipoTransporte == 0) {
+                $propio = 0;
+            }
+        }
+        if ($colectivo == 1) {
+            $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+        }
+        if ($propio == 0) {
+            $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
         }
 
         $gc = Conexion::listarGastosComidasPagination($dniAlumno);

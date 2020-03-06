@@ -255,12 +255,21 @@ class controladorAlumno extends Controller {
             $dniAlumno = $u['dni'];
         }
         $gt = Conexion::listarGastosTransportes($dniAlumno);
-        foreach ($gt as $key1) {
-            if ($key1->tipoTransporte == 1) {
-                $gastosAlumno = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
-            } else if ($key1->tipoTransporte == 0) {
-                $gastosAlumno1 = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+        $colectivo = null;
+        $propio = null;
+        foreach ($gt as $key) {
+            if ($key->tipoTransporte == 1) {
+                $colectivo = 1;
             }
+            if ($key->tipoTransporte == 0) {
+                $propio = 0;
+            }
+        }
+        if ($colectivo == 1) {
+            $gastosAlumno = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+        }
+        if ($propio == 0) {
+            $gastosAlumno1 = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
         }
         $datos = ['gastosAlumno' => $gastosAlumno,
             'gastosAlumno1' => $gastosAlumno1];
