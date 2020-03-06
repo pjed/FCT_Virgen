@@ -96,7 +96,7 @@ class controladorAlumno extends Controller {
                 $foto = "";
 
                 if ($fot != null) {
-                    $foto = $fot->move('imagenes_gastos/comida', $idComida);
+                    $foto = $fot->move('imagenes_gastos/transporte', $idColectivo);
                     Conexion::insertarTransporteColectivo($tipo, $localidadC, $foto, $numDias, $importe);
                 } else {
                     Conexion::insertarTransporteColectivoSinFoto($tipo, $localidadC, $numDias, $importe);
