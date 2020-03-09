@@ -34,10 +34,9 @@ Crear gasto transporte
         {{ csrf_field() }}
         <div class="row justify-content-center"> 
 
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-2">
 
                 <fieldset>
-                    <!--                    <legend>Tipo transporte</legend>-->
                     <p>Tipo transporte</p>
                     <div>
                         <input type="radio" name="tipoT" id="colectivo" value="Colectivo" onclick="handleClick(this);">
@@ -56,17 +55,17 @@ Crear gasto transporte
         <!-- Campos para el gasto de transporte propio -->
         <div class="row justify-content-center" id="gastoPropio">
 
-            <div class="col-md-2">
+            <div class="col-md-4 col-sm-4 col-lg-4">
 
                 <p>Kilómetros</p>
                 <input type="number" id="kms" name="kms" value="" min="0">
 
-                <p>Número de días</p>
+                <p>Días</p>
                 <input type="number" id="diasP" name="diasP" value="" min="0">
 
             </div>  
 
-            <div class="col-md-2">
+            <div class="col-md-4 col-sm-4 col-lg-4">
 
                 <p>Precio</p>
                 <input type="number" id="precioP" name="precioP" value="0.12" readonly>
@@ -80,12 +79,12 @@ Crear gasto transporte
         <div class="row justify-content-center" id="gastoColectivo"> 
 
             <div class="col-md-2">
-
+                
                 <p>Ticket</p>
                 <img src="{{asset ('images/ticket.png')}}" class="fotoTicket"><br><br>
                 <p>Hacer foto</p>
                 <input type="file" id="fotoTicket" name="fotoTicket"/><br><br>
-                <p>Número de días</p>
+                <p>Días</p>
                 <input type="number" id="diasC" name="diasC" value="" min="0">
 
             </div>
@@ -95,7 +94,7 @@ Crear gasto transporte
                 <p>Localidad</p>
                 <input type="text" id="locC" name="locC" value="" placeholder="Localidad"><br><br>
                 <p>Importe total</p>
-                <input type="number" id="importeT" name="importeT" min="0" step="0.01" value="0"/><br><br>
+                <input type="number" id="importeT" name="importeT" min="0" step="0.01" value=""/><br><br>
 
             </div>
 
@@ -103,9 +102,9 @@ Crear gasto transporte
 
         <div class="row justify-content-center"> 
 
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-2">
 
-                <input type="submit" id="guardar" name="guardar" value="Guardar">
+                <br><input type="submit" id="guardar" name="guardar" value="Guardar">
 
             </div>
 
