@@ -47,17 +47,17 @@ Gestionar gastos transporte
                             {{ csrf_field() }}
                             <tr>
                                 <td>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>' readonly>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->idColectivos; ?>' readonly>
-                                    <input type="text" class="form-control form-control-sm form-control-md" name ="donde" value='<?php echo $key->donde; ?>' readonly>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>'/>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->idColectivos; ?>'/>
+                                    <input type="text" class="form-control form-control-sm form-control-md" name ="donde" value='<?php echo $key->donde; ?>' readonly/>
                                 </td>
                                 <td><input type="number" class="form-control form-control-sm form-control-md" name ="n_diasC" value="<?php echo $key->n_diasC; ?>"></td>
                                 <td>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>" readonly/>
-                                    <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>"/>
+                                    <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img name="ticketGasto" alt="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
                                     <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
-                                <td><input type="number" step="0.01" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'></td>
+                                <td><input type="number" step="0.01" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'/></td>
 
                                 <td>
                                     <button type="submit"class="btn editar" name="editar" />
@@ -105,8 +105,8 @@ Gestionar gastos transporte
                             {{ csrf_field() }}
                             <tr>
                                 <td>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>' readonly>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->idPropios; ?>' readonly>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>'/>>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->idPropios; ?>'/>>
                                     <input type="text" class="form-control form-control-sm form-control-md" name ="donde" value='<?php echo $key->donde; ?>' readonly>
                                 </td>
                                 <td><input type="number" class="form-control form-control-sm form-control-md" name ="n_diasP" value="<?php echo $key->n_diasP; ?>"></td>

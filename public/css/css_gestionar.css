@@ -36,7 +36,7 @@
     border: none;
 }
 
-#buscar{
+.buscar{
     background-image: url('../images/search.png');
     background-repeat: no-repeat;
     background-color: transparent;
@@ -57,7 +57,7 @@
         /*margin-top: 7rem;*/     
     }
     /*iconos*/
-    #confirmar,#buscar,.editar,.eliminar,#aniadir, #perfil,  #cerrarSesion{    
+    #confirmar,.buscar,.editar,.eliminar,#aniadir, #perfil,  #cerrarSesion{    
         width: 24px;
         background-size: 24px;
         height: 24px;
@@ -69,7 +69,7 @@
         /*margin-top: 7rem;*/     
     }
     /*iconos*/
-    #confirmar,#buscar,.editar,.eliminar,#aniadir, #perfil,  #cerrarSesion{    
+    #confirmar,.buscar,.editar,.eliminar,#aniadir, #perfil,#cerrarSesion{    
         width: 24px;
         background-size: 24px;
         height: 24px;
@@ -89,7 +89,7 @@
         max-width: 700px;
     }*/
     /*iconos*/
-    #confirmar,#buscar,.editar,.eliminar, #perfil,#aniadir, #cerrarSesion{    
+    #confirmar,.buscar,.editar,.eliminar, #perfil,#aniadir, #cerrarSesion{    
         width: 34px;
         background-size: 34px;
         height: 34px;

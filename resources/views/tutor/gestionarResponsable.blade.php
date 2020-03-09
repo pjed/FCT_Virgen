@@ -102,7 +102,7 @@ Gestionar Responsable
                         {{ csrf_field() }}
                         <tr>
                             <td>
-                                <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key['id']; ?>" readonly/>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key['id']; ?>"/>
                                 <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $key['dni']; ?>" readonly/>
                             </td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $key['nombre']; ?>" required></td>

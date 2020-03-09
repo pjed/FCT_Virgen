@@ -49,7 +49,7 @@ Gestionar tutores
                             {{ csrf_field() }}
                             <tr>
                                 <td>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="fotoUrl" name="fotoUrl" value="<?php echo $value->foto; ?>" readonly/>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="fotoUrl" name="fotoUrl" value="<?php echo $value->foto; ?>"/>
                                     <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $value->usuarios_dni; ?>" readonly/>
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
