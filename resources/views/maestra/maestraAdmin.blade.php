@@ -38,7 +38,7 @@ $rol1 = session()->get('rol');
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                 <div class="text-center col-2">
                     <a class="navbar-nav" href="#">
-                        <img class="borde_logo logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                        <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                     </a>
                 </div>
 
