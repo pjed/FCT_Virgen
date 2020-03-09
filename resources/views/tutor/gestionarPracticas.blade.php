@@ -188,7 +188,7 @@ Gestionar  Practicas
                                 </select>
                             </td>
                             <td>
-                                <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->id; ?>" readonly/>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->id; ?>"/>
                                 <input type="text" class="form-control form-control-sm form-control-md" name="gasto" value="<?php echo $key->gasto; ?>"/>
                             </td>
                             <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" <?php if ($key->apto == 1) { ?>checked<?php } ?>/></td>
@@ -265,9 +265,9 @@ Gestionar  Practicas
                                 </div>
                             </td>
                             <td>
-                                <button type="submit"class="btn editar" name="editar" />
+                                <button type="submit" class="btn editar" name="editar" ></button>
                                      <!-- </td><td>-->
-                                <button type="submit" class="btn eliminar" name="eliminar" />
+                                <button type="submit" class="btn eliminar" name="eliminar" ></button>
                             </td>
                         </tr>
                     </form>

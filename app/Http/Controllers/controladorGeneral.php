@@ -101,7 +101,7 @@ class controladorGeneral extends Controller {
                     }
                     return view('alumno.bienvenidaAl');
                 } else if ($rol == 4) {//tutor-admin                              
-                    session()->put('rol1', 4);
+                    session()->put('rol', 4);
                     echo '
                   <div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como administrador
@@ -196,7 +196,7 @@ class controladorGeneral extends Controller {
      */
     public function cambiarRol(Request $req) {
         if (isset($_REQUEST['tutor'])) {
-            session()->put('rol', 2);
+            session()->put('rol1', 2);
             echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como tutor
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -206,7 +206,7 @@ class controladorGeneral extends Controller {
             return view('tutor.bienvenidaT');
         }
         if (isset($_REQUEST['administrador'])) {
-            session()->put('rol', 1);
+            session()->put('rol1', 1);
             echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como administrador
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

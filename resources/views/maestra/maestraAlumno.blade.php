@@ -9,10 +9,11 @@
         <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet"> 
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
 
         <!-- Course CSS -->
         <link rel="stylesheet" type="text/css" href="{{asset ('css/css_general.css')}}" media="screen" />        
+        <link rel="stylesheet" type="text/css" href="{{asset ('css/bootstrap.min.css')}}" media="screen" />         
         <link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -21,7 +22,6 @@
         <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
 
         <!-- Javascript -->
-        <!--<script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>-->
         <script src="{{asset ('js/jquery-3.2.1.slim.min.js')}}"></script>
         <script src="{{asset ('js/popper.min.js')}}"></script>
         <script src="{{asset ('js/bootstrap.min.js')}}"></script>
@@ -33,7 +33,7 @@
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                 <div class="text-center col-2">
                     <a class="navbar-nav" href="#">
-                        <img class="borde_logo logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                        <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                     </a>
                 </div>
 
@@ -77,8 +77,8 @@
                             }
                             ?>
 
-                            <button type="submit" id="perfil" name="perfil" value="">
-                                <input type="image" name="submit" class="miniatura_perfil" src="<?php echo $foto ?>"/>
+                            <button type="submit" id="perfil" name="perfil">
+                                <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
                             </button>
                         </div>
                     </form>
@@ -101,21 +101,21 @@
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" href="https://europa.eu/european-union/index_es">
-                            <img class="logotipo_dual borde_logo" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
+                            <img class="borde_logo" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
                         </a>
                     </div>
                 </div>
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" href="http://http://www.educa.jccm.es/es/fpclm/fp-dual">
-                            <img class="logotipo_dual borde_logo" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
+                            <img class="borde_logo" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
                         </a>
                     </div>
                 </div>
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" href="http://www.cifpvirgendegracia.com/">
-                            <img class="logotipo_dual borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
+                            <img class="borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
                         </a>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                     <button type="button" class="btn" id="info"  data-toggle="modal" data-target="#exampleModal">
                     </button>
                     <!-- Modal -->
-                    <div class="modal  fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-body">

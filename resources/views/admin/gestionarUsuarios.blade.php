@@ -327,8 +327,6 @@ Gestionar usuarios
                                                         </div>
                                                     </form>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -344,15 +342,15 @@ Gestionar usuarios
                             {{ csrf_field() }}
                             <tr>
                                 <td>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="fotoUrl" name="fotoUrl" value="<?php echo $value->foto; ?>" readonly/>
-                                    <input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="dni" value="<?php echo $value->dni; ?>" readonly/>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="fotoUrl" name="fotoUrl" value="<?php echo $value->foto; ?>"/>
+                                    <input type="text" class="form-control form-control-sm form-control-md " name="dni" value="<?php echo $value->dni; ?>" readonly/>
                                 </td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
-                                <td><input type="email" class="form-control form-control-sm form-control-md form-control-lg" name="email" value="<?php echo $value->email; ?>" required/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md form-control-lg" name="domicilio" value="<?php echo $value->domicilio; ?>" required/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="telefono" value="<?php echo $value->telefono; ?>" required pattern="[9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md form-control-lg" name="movil" value="<?php echo $value->movil; ?>" required pattern="[6-7]{1}[0-9]{8}"  title="Introduzca un teléfono válido"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
+                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" required/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" required pattern="[9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" required pattern="[6-7]{1}[0-9]{8}"  title="Introduzca un teléfono válido"/></td>
                                 <td>
                                     <select class="sel" name="selectRol">
                                         <option value="1" <?php if ($value->rol_id == 1) { ?>selected<?php } ?>>Administrador</option>
@@ -364,13 +362,13 @@ Gestionar usuarios
 
                                 <?php if ($value->rol_id == 3) {
                                     ?>
-                                    <td><button type="submit"class="btn editar" name="editar" /></td>
+                                    <td><button type="submit" class="btn editar" name="editar" ></button>
                                 <?php } else {
                                     ?>
                                     <td>
-                                        <button type="submit"class="btn editar" name="editar" />
+                                        <button type="submit" class="btn editar" name="editar" ></button>
                                              <!-- </td><td>-->
-                                        <button type="submit" class="btn eliminar" name="eliminar" />
+                                        <button type="submit" class="btn eliminar" name="eliminar" ></button>
                                     </td>
                                     <?php
                                 }

@@ -36,7 +36,7 @@
     border: none;
 }
 
-#buscar{
+.buscar{
     background-image: url('../images/search.png');
     background-repeat: no-repeat;
     background-color: transparent;
@@ -51,13 +51,18 @@
 .sel{ /*para darle un maximo a las select y no sean muy garandes*/
     max-width: 150px;
 }
+/*foto del ticket al gestionar gastos*/
+.foto_small{
+    width: 50px;
+    height: 50px;
+}
 /*Movil site vertical*/
 @media only screen and (max-width:480px){
     main{
         /*margin-top: 7rem;*/     
     }
     /*iconos*/
-    #confirmar,#buscar,.editar,.eliminar,#aniadir, #perfil,  #cerrarSesion{    
+    #confirmar,.buscar,.editar,.eliminar,#aniadir, #perfil,  #cerrarSesion{    
         width: 24px;
         background-size: 24px;
         height: 24px;
@@ -69,7 +74,7 @@
         /*margin-top: 7rem;*/     
     }
     /*iconos*/
-    #confirmar,#buscar,.editar,.eliminar,#aniadir, #perfil,  #cerrarSesion{    
+    #confirmar,.buscar,.editar,.eliminar,#aniadir, #perfil,#cerrarSesion{    
         width: 24px;
         background-size: 24px;
         height: 24px;
@@ -89,7 +94,7 @@
         max-width: 700px;
     }*/
     /*iconos*/
-    #confirmar,#buscar,.editar,.eliminar, #perfil,#aniadir, #cerrarSesion{    
+    #confirmar,.buscar,.editar,.eliminar, #perfil,#aniadir, #cerrarSesion{    
         width: 34px;
         background-size: 34px;
         height: 34px;

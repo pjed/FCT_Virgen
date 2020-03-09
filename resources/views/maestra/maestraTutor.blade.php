@@ -1,5 +1,5 @@
 <?php
-$rol1 = session()->get('rol1');
+$rol1 = session()->get('rol');
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -11,21 +11,20 @@ $rol1 = session()->get('rol1');
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet"> 
 
-        <!-- Styles -->
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-        <!-- Course CSS -->
-        <link rel="stylesheet" type="text/css" href="{{asset ('css/css_general.css')}}" media="screen" />        
-        <link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
         
+        <!-- Bootstrap CSS -->
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+        
+        <!-- Styles -->
+        <link rel="stylesheet" type="text/css" href="{{asset ('css/css_general.css')}}" media="screen" />         
+        <link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
+
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
         <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
 
         <!-- Javascript -->
-        <!--<script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>-->
         <script src="{{asset ('js/jquery-3.2.1.slim.min.js')}}"></script>
         <script src="{{asset ('js/popper.min.js')}}"></script>
         <script src="{{asset ('js/bootstrap.min.js')}}"></script>
@@ -37,7 +36,7 @@ $rol1 = session()->get('rol1');
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                 <div class="text-center col-2">
                     <a class="navbar-nav" href="#">
-                        <img class="borde_logo logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                        <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                     </a>
                 </div>
 
@@ -95,7 +94,7 @@ $rol1 = session()->get('rol1');
                             ?>
 
                             <button type="submit" id="perfil" name="perfil">
-                                <input type="image" name="submit" class="miniatura_perfil" src="<?php echo $foto ?>"/>
+                                <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
                             </button>
                         </div>
                     </form>
@@ -116,24 +115,24 @@ $rol1 = session()->get('rol1');
         </main>
         <footer class="footer bg-dark container-fluid">  
             <nav class="nav">
-               <div class="col-1 container">
+                <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" href="https://europa.eu/european-union/index_es">
-                            <img class="logotipo_dual borde_logo" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
+                            <img class="borde_logo" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
                         </a>
                     </div>
                 </div>
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" href="http://http://www.educa.jccm.es/es/fpclm/fp-dual">
-                            <img class="logotipo_dual borde_logo" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
+                            <img class="borde_logo" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
                         </a>
                     </div>
                 </div>
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" href="http://www.cifpvirgendegracia.com/">
-                            <img class="logotipo_dual borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
+                            <img class="borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
                         </a>
                     </div>
                 </div>

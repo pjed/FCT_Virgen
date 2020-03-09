@@ -14,16 +14,14 @@ class tutorAdmin {
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        $n = session()->get('usu');
         $rol1 = session()->get('rol1');
+        $rol2 = session()->get('rol');
         //comprobar si eres tutor-admin
-        foreach ($n as $u) {
-            if (($rol = $u['rol'] == 4 && $rol1 == 1) || ($rol = $u['rol'] == 4 && $rol1 == 2)) {
-                return $next($request);
-            } else {
-                abort(518);
-                //return view('errors/518');
-            }
+        if (($rol2 == 4 && $rol1 == 1) || ($rol2 == 4 && $rol1 == 2)) {
+            return $next($request);
+        } else {
+            abort(518);
+            //return view('errors/518');
         }
     }
 

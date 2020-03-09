@@ -126,9 +126,9 @@ Gestionar Empresa
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="horario" value="<?php echo $key->horario; ?>"/></td>
                             <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="nueva" <?php if ($key->nueva == 1) { ?>checked<?php } ?>/></td>
                             <td>
-                                <button type="submit"class="btn editar" name="editar" />
+                                <button type="submit" class="btn editar" name="editar"></button>
                                      <!-- </td><td>-->
-                                <button type="submit" class="btn eliminar" name="eliminar" />
+                                <button type="submit" class="btn eliminar" name="eliminar" ></button>
                             </td>
                         </tr>
                     </form>
