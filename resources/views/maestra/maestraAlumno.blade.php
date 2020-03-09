@@ -37,7 +37,7 @@
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                 <div class="text-center col-2">
                     <a class="navbar-nav" href="#">
-                        <img class="borde_logo logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                        <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                     </a>
                 </div>
 
@@ -105,21 +105,21 @@
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" href="https://europa.eu/european-union/index_es">
-                            <img class="logotipo_dual borde_logo" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
+                            <img class="borde_logo" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
                         </a>
                     </div>
                 </div>
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" href="http://http://www.educa.jccm.es/es/fpclm/fp-dual">
-                            <img class="logotipo_dual borde_logo" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
+                            <img class="borde_logo" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
                         </a>
                     </div>
                 </div>
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" href="http://www.cifpvirgendegracia.com/">
-                            <img class="logotipo_dual borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
+                            <img class="borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
                         </a>
                     </div>
                 </div>

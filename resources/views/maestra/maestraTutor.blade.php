@@ -1,5 +1,5 @@
 <?php
-$rol1 = session()->get('rol1');
+$rol1 = session()->get('rol');
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">

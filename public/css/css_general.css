@@ -77,8 +77,17 @@ body{
     color: white; font-size: 18pt
 }
 
-
-
+/*imagenes del footer*/
+.borde_logo{
+    border: black 2px solid; 
+    background-color: white;
+}
+.logotipo{
+    border: black 2px solid; 
+    background-color: white;
+    align-self: center;
+    justify-content: center;
+}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -126,13 +135,11 @@ input[type=number] {
     .borde_logo{
         width: 34px;
         height: 34px;
-        border: black 2px solid; 
-        background-color: white;
     }
-    .logotipo,.logoInstituto img{
+    /*logotipo de la pagina*/
+    .logotipo{
         width: 34px;
         height: 34px;    
-        align-self: center;
     }
 }
 /*Tablet Apps */
@@ -140,6 +147,7 @@ input[type=number] {
     header{
         /*margin-bottom: 3.5rem;*/ 
     }
+    /*logotipo de la pagina*/
     .logotipo{
         width: 64px;
         height: 64px;
@@ -147,13 +155,11 @@ input[type=number] {
     main{
         min-height: 80vh;
     }
-    
+
     /*imagenes del footer*/
     .borde_logo{        
         width: 64px;
         height: 64px;
-        border: black 2px solid; 
-        background-color: white;
     }
 
     #perfil,#cerrarSesion{
@@ -161,28 +167,21 @@ input[type=number] {
         width: 24px;
         height: 24px;
     }
-    .logoInstituto,.logoInstituto a{        
-        align-self: center;
-        width: 64px;
-        height: 64px;
-        justify-content: center;
-    }
 }
 /*Pantalla de escritorio WebSite */
 @media only screen and (min-width:1025px){
     header{
         /*margin-bottom: 3.5rem;*/ 
     }
+    /*logotipo de la pagina*/
     .logotipo{
-        width: 200px;
+        width: 64px;
+        height: 64px;
     }
-
     /*imagenes del footer*/
     .borde_logo{
         width: 80px;
         height: 80px;
-        border: black 2px solid; 
-        background-color: white;
     }
 
     .titulo_app{
@@ -203,11 +202,5 @@ input[type=number] {
         background-size: 34px;
         width: 34px;
         height: 34px;
-    }
-    .logoInstituto,.logoInstituto a{        
-        align-self: center;
-        width: 120px;
-        height: 80px;
-        justify-content: center;
-    }   
+    } 
 }
