@@ -190,7 +190,7 @@ input[type=number] {
     }
 
     main{
-        min-height: 450rem;
+        min-height: 30rem;
     }
 
     #perfil,#cerrarSesion{

@@ -9,7 +9,7 @@ Inicio de sesion
 @endsection
 
 @section('contenido') 
-<p class="text-center">Iniciar Sesión</p>
+<h1 class="text-center">Iniciar Sesión</h1>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-sm-3 col-md-3">
