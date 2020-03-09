@@ -37,7 +37,7 @@
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                 <div class="text-center col-2">
                     <a class="navbar-nav" href="#">
-                        <img class="borde_logo" id="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                        <img class="borde_logo logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                     </a>
                 </div>
 
@@ -101,25 +101,25 @@
             @yield('contenido')
         </main>
         <footer class="footer bg-dark container-fluid">  
-            <nav class="nav navbar-expand-sm row h-100 justify-content-center align-items-center">
+            <nav class="nav">
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
-                        <a class="col nav-link" id="logoInstituto" href="https://europa.eu/european-union/index_es">
-                            <img class="borde_logo" id="logotipo_dual" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
+                        <a class="col nav-link" href="https://europa.eu/european-union/index_es">
+                            <img class="logotipo_dual borde_logo" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
                         </a>
                     </div>
                 </div>
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
-                        <a class="col nav-link" id="logoInstituto" href="http://http://www.educa.jccm.es/es/fpclm/fp-dual">
-                            <img class="borde_logo" id="logotipo_dual" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
+                        <a class="col nav-link" href="http://http://www.educa.jccm.es/es/fpclm/fp-dual">
+                            <img class="logotipo_dual borde_logo" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
                         </a>
                     </div>
                 </div>
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
-                        <a class="col nav-link" id="logoInstituto" href="http://www.cifpvirgendegracia.com/">
-                            <img id="logoInstituto" class="borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
+                        <a class="col nav-link" href="http://www.cifpvirgendegracia.com/">
+                            <img class="logotipo_dual borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
                         </a>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                     <button type="button" class="btn" id="info"  data-toggle="modal" data-target="#exampleModal">
                     </button>
                     <!-- Modal -->
-                    <div class="modal  fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal  fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-body">

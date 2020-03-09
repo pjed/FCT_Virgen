@@ -67,7 +67,7 @@ Gestionar alumnos
                                         ?>
                                     </select>
                                 </td>
-                                <td><button type="submit" id="editar" class="btn" name="editar" value=""/></td>
+                                <td><button type="submit"class="btn editar" name="editar" /></td>
                             </tr>
                         </form>
                         <?php

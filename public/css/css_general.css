@@ -122,17 +122,14 @@ input[type=number] {
     a,label{
         font-size: 10px;
     }
+    /*imagenes del footer*/
     .borde_logo{
         width: 34px;
         height: 34px;
         border: black 2px solid; 
         background-color: white;
     }
-    #logotipo_dual{
-        width: 34px;
-        height: 34px;
-    }
-    #logotipo,#logoInstituto img{
+    .logotipo,.logoInstituto img{
         width: 34px;
         height: 34px;    
         align-self: center;
@@ -143,17 +140,15 @@ input[type=number] {
     header{
         /*margin-bottom: 3.5rem;*/ 
     }
-    #logotipo{
+    .logotipo{
         width: 64px;
         height: 64px;
-    }
-    #logotipo_dual{
-        width: 80px;
-        height: 80px;
     }
     main{
         min-height: 80vh;
     }
+    
+    /*imagenes del footer*/
     .borde_logo{        
         width: 64px;
         height: 64px;
@@ -166,7 +161,7 @@ input[type=number] {
         width: 24px;
         height: 24px;
     }
-    #logoInstituto,#logoInstituto a{        
+    .logoInstituto,.logoInstituto a{        
         align-self: center;
         width: 64px;
         height: 64px;
@@ -178,16 +173,14 @@ input[type=number] {
     header{
         /*margin-bottom: 3.5rem;*/ 
     }
-    #logotipo{
+    .logotipo{
         width: 200px;
     }
 
-    #logotipo_dual{
+    /*imagenes del footer*/
+    .borde_logo{
         width: 80px;
         height: 80px;
-    }
-
-    .borde_logo{
         border: black 2px solid; 
         background-color: white;
     }
@@ -211,7 +204,7 @@ input[type=number] {
         width: 34px;
         height: 34px;
     }
-    #logoInstituto,#logoInstituto a{        
+    .logoInstituto,.logoInstituto a{        
         align-self: center;
         width: 120px;
         height: 80px;

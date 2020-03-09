@@ -53,7 +53,7 @@ Gestionar Empresa
                             <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
                             </button> 
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">      
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-hidden="true">      
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">                            
@@ -97,7 +97,7 @@ Gestionar Empresa
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
-                                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
+                                                    <input type="submit" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
                                                 </div>
                                             </form>
                                         </div>
@@ -125,9 +125,11 @@ Gestionar Empresa
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="localidad" value="<?php echo $key->localidad; ?>"/></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="horario" value="<?php echo $key->horario; ?>"/></td>
                             <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="nueva" <?php if ($key->nueva == 1) { ?>checked<?php } ?>/></td>
-                           <td><button type="submit" id="editar" class="btn" name="editar" />
-                                    <!-- </td><td>-->
-                                    <button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
+                            <td>
+                                <button type="submit"class="btn editar" name="editar" />
+                                     <!-- </td><td>-->
+                                <button type="submit" class="btn eliminar" name="eliminar" />
+                            </td>
                         </tr>
                     </form>
                     <?php

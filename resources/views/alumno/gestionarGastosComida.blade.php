@@ -55,9 +55,11 @@ Gestionar gastos comida
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
                                     <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
-                                <td><button type="submit" id="editar" class="btn" name="editar" />
-                                    <!-- </td><td>-->
-                                    <button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
+                                <td>
+                                    <button type="submit"class="btn editar" name="editar" />
+                                         <!-- </td><td>-->
+                                    <button type="submit" class="btn eliminar" name="eliminar" />
+                                </td>
                             </tr>
                         </form>
 

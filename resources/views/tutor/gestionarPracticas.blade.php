@@ -58,7 +58,7 @@ Gestionar  Practicas
                             <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
                             </button>
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
@@ -136,7 +136,7 @@ Gestionar  Practicas
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
-                                                    <input type="submit" id="añadir" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
+                                                    <input type="submit" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
                                                 </div>
                                             </form>
                                         </div>
@@ -198,7 +198,7 @@ Gestionar  Practicas
                                 <button type="button" class="btn btn-sm btn-primary" id="addPeriodo"  data-toggle="modal" data-target="#exampleModal2">
                                     FTC
                                 </button>
-                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-body">
@@ -219,7 +219,7 @@ Gestionar  Practicas
                                 <button type="button" class="btn btn-sm btn-primary" id="addPeriodo2" data-toggle="modal" data-target="#exampleModal3">
                                     FCT DUAL
                                 </button> 
-                                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-body">
@@ -265,8 +265,9 @@ Gestionar  Practicas
                                 </div>
                             </td>
                             <td>
-                                <button type="submit" id="editar" class="btn" name="editar" />
-                                <button type="submit" id="eliminar" class="btn" name="eliminar" />
+                                <button type="submit"class="btn editar" name="editar" />
+                                     <!-- </td><td>-->
+                                <button type="submit" class="btn eliminar" name="eliminar" />
                             </td>
                         </tr>
                     </form>

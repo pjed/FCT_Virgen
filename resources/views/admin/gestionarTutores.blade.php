@@ -71,9 +71,11 @@ Gestionar tutores
                                     </select>
                                 </td>
 
-                                <td><button type="submit" id="editar" class="btn" name="editar" />
-                                    <!-- </td><td>-->
-                                    <button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
+                                <td>
+                                    <button type="submit"class="btn editar" name="editar" />
+                                         <!-- </td><td>-->
+                                    <button type="submit" class="btn eliminar" name="eliminar" />
+                                </td>
                             </tr>
                         </form>
                         <?php
