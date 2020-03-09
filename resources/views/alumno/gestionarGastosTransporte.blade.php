@@ -106,7 +106,7 @@ Gestionar gastos transporte
                             <tr>
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>'/>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->idPropios; ?>'/>>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->idPropios; ?>'/>
                                     <input type="text" class="form-control form-control-sm form-control-md" name ="donde" value='<?php echo $key->donde; ?>' readonly>
                                 </td>
                                 <td><input type="number" class="form-control form-control-sm form-control-md" name ="n_diasP" value="<?php echo $key->n_diasP; ?>"></td>
