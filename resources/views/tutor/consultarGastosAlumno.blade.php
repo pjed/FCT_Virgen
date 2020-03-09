@@ -80,7 +80,7 @@ Consultar Gastos Alumnos
                             {{ csrf_field() }}
                             <tr>
                                 <td>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value='<?php echo $key->idGasto; ?>'>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value='<?php echo $key->idGasto; ?>'/>
                                     <input type="text" class="form-control form-control-sm form-control-md" name="fecha" value="<?php echo $key->fecha; ?>"/>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->id; ?>"/>
                                 </td>
@@ -88,7 +88,7 @@ Consultar Gastos Alumnos
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>"/>
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img alt="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
-                                    <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
+                                    <input type="file" class="form-control form-control-sm form-control-md" name="foto">
                                 </td>
                                 <td>
                                     <button type="submit" class="btn editar" name="editar" ></button>
@@ -136,16 +136,16 @@ Consultar Gastos Alumnos
                             {{ csrf_field() }}
                             <tr>
                                 <td>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>' readonly>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>' />
                                     <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>"/>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idColectivos; ?>" readonly/>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idColectivos; ?>"/>
                                 </td>
                                 <td><input type="number" class="form-control form-control-sm" name="n_diasC" value="<?php echo $key->n_diasC; ?>"/></td>
                                 <td><input type="number" step="0.01" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>" readonly/>
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img alt="ticketGasto"  class="foto_small" src="' . $key->foto . '"/>'; ?></a>
-                                    <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
+                                    <input type="file" class="form-control form-control-sm form-control-md" name="foto">
                                 </td>
                                 <td>
                                     <button type="submit" class="btn editar" name="editar" ></button>

@@ -45,15 +45,15 @@ Gestionar gastos comida
                             {{ csrf_field() }}
                             <tr>
                                 <td>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value='<?php echo $key->idGasto; ?>'/>>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->id; ?>'/>>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value='<?php echo $key->idGasto; ?>'/>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->id; ?>'/>
                                     <input type="number" step="0.01" class="form-control form-control-sm form-control-md" name ="importe" value='<?php echo $key->importe; ?>' max="9">
                                 </td>
                                 <td><input type="date" class="form-control form-control-sm form-control-md"  name ="fecha" value="<?php echo $key->fecha; ?>"/></td>
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>"/>
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img alt="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
-                                    <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
+                                    <input type="file" class="form-control form-control-sm form-control-md" name="foto">
                                 </td>
                                 <td>
                                     <button type="submit" class="btn editar" name="editar"></button>

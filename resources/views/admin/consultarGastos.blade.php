@@ -123,7 +123,7 @@ Consultar Gastos Alumnos
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>"/>
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img alt="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
-                                    <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
+                                    <input type="file" class="form-control form-control-sm form-control-md" name="foto">
                                 </td>
                                 <td>
                                     <button type="submit" class="btn editar" name="editar" ></button>
@@ -180,7 +180,7 @@ Consultar Gastos Alumnos
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>" />
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img alt="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
-                                    <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
+                                    <input type="file" class="form-control form-control-sm form-control-md" name="foto">
                                 </td>
                                 <td>
                                     <button type="submit" class="btn editar" name="editar" ></button>
