@@ -82,6 +82,7 @@ body{
     border: black 2px solid; 
     background-color: white;
 }
+/*logotipo de la pagina*/
 .logotipo{
     border: black 2px solid; 
     background-color: white;
@@ -175,7 +176,7 @@ input[type=number] {
     }
     /*logotipo de la pagina*/
     .logotipo{
-        width: 64px;
+        width: 150px;
         height: 64px;
     }
     /*imagenes del footer*/
@@ -193,9 +194,7 @@ input[type=number] {
     }
 
     main{
-        /*        margin-top:  4rem; 
-                margin-bottom: 4rem; */
-        min-height: 30rem;
+        min-height: 450rem;
     }
 
     #perfil,#cerrarSesion{

@@ -37,7 +37,7 @@ Crear gasto comida
             <div class="col-md-2">
 
                 <p>Ticket</p>
-                <img src="{{asset ('images/ticket.png')}}" class="fotoTicket"><br><br>
+                <img src="{{asset ('images/ticket.png')}}" alt="fotoTicket" class="fotoTicket"><br><br>
                 <p>Hacer foto</p>
                 <input type="file" id="fotoTicket" name="fotoTicket"/><br><br>
 
