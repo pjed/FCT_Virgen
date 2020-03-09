@@ -55,27 +55,27 @@ Gestionar Cursos
                                                     <div class="row justify-content-center form-group">
                                                         <label class="col-sm text-center">
                                                             Grupo:
-                                                            <input type="text" class="form-control form-control-sm form-control-md" id="id" name="id"/>
+                                                            <input type="text" class="form-control form-control-sm form-control-md id" name="id" required/>
                                                         </label>
                                                     </div>
                                                     <div class="row justify-content-center form-group">
                                                         <label class="col-sm text-center">
                                                             Descripción:
-                                                            <input type="text" class="form-control form-control-sm form-control-md" id="descripcion" name="descripcion"/>
+                                                            <input type="text" class="form-control form-control-sm form-control-md descripcion" name="descripcion" required/>
                                                         </label>           
                                                         <label class="col-sm text-center" >
                                                             Año Académico:
-                                                            <input type="text" class="form-control form-control-sm form-control-md" id="anioAcademico" name="anioAcademico"/>
+                                                            <input type="text" class="form-control form-control-sm form-control-md anioAcademico"  name="anioAcademico" placeholder="2019/2020" required/>
                                                         </label>
                                                     </div>
                                                     <div class="row justify-content-center form-group">
                                                         <label class="col-sm text-center">
                                                             Familia:
-                                                            <input type="text" class="form-control form-control-sm form-control-md" id="familia" name="familia"/>
+                                                            <input type="text" class="form-control form-control-sm form-control-md familia"  name="familia" required/>
                                                         </label>
                                                         <label class="col-sm text-center" >
                                                             Total de horas:
-                                                            <input type="number" class="form-control form-control-sm form-control-md" id="horas" name="horas" placeholder="2019/2020"/>
+                                                            <input type="number" class="form-control form-control-sm form-control-md horas"  name="horas"  required/>
                                                         </label>
                                                     </div>
                                                     <div class="row justify-content-center form-group">
@@ -96,11 +96,11 @@ Gestionar Cursos
                         <form action="gestionarCursos" method="POST">
                             {{ csrf_field() }}
                             <tr>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" id="id" name="id" value="<?php echo $key->id; ?>" /></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" id="descripcion" name="descripcion" value="<?php echo $key->descripcion; ?>" /></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" id="anioAcademico" name="anioAcademico" value="<?php echo $key->anioAcademico; ?>" placeholder="2019/2020"></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" id="familia" name="familia" value="<?php echo $key->familia; ?>" /></td>
-                                <td><input type="number" class="form-control form-control-sm form-control-md" id="horas" name="horas" value="<?php echo $key->horas; ?>" /></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md id" name="id" value="<?php echo $key->id; ?>" required/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md descripcion" name="descripcion" value="<?php echo $key->descripcion; ?>"  required/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md anioAcademico" name="anioAcademico" value="<?php echo $key->anioAcademico; ?>" placeholder="2019/2020" required></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md familia" name="familia" value="<?php echo $key->familia; ?>"  required/></td>
+                                <td><input type="number" class="form-control form-control-sm form-control-md horas" name="horas" value="<?php echo $key->horas; ?>"  required/></td>
 
                                 <td><button type="submit" class="btn editar" name="editar" ></button></td>
                             </tr>

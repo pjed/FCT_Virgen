@@ -63,37 +63,37 @@ Gestionar Empresa
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         CIF de la empresa:
-                                                        <input type="text" class="form-control form-control-sm" id="CIF" name="CIF" pattern="{9}" required/>
+                                                        <input type="text" class="form-control form-control-sm CIF" name="CIF" pattern="{9}" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Nombre de la empresa:
-                                                        <input type="text" class="form-control form-control-sm" id="nombreEmpresa" name="nombreEmpresa" required/>
+                                                        <input type="text" class="form-control form-control-sm nombreEmpresa" name="nombreEmpresa" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Dirección de la empresa:
-                                                        <input type="text" class="form-control form-control-sm" id="direccion" name="direccion" required/>
+                                                        <input type="text" class="form-control form-control-sm direccion" name="direccion" required/>
                                                     </label>                
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Localidad:
-                                                        <input type="text" class="form-control form-control-sm" id="localidad" name="localidad" required/>
+                                                        <input type="text" class="form-control form-control-sm localidad" name="localidad" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Horario:
-                                                        <input type="text" class="form-control form-control-sm" id="horario" name="horario" required/>
+                                                        <input type="text" class="form-control form-control-sm horario" name="horario" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Dni del representante:
-                                                        <input type="text" class="form-control form-control-sm" id="dniRepresentante" name="dniRepresentante" required  pattern="{9}"/>
+                                                        <input type="text" class="form-control form-control-sm dniRepresentante" name="dniRepresentante" required  pattern="{9}"/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Nombre del representante:
-                                                        <input type="text" class="form-control form-control-sm" id="nombreRepresentante" name="nombreRepresentante" required/>
+                                                        <input type="text" class="form-control form-control-sm nombreRepresentante" name="nombreRepresentante" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
@@ -116,14 +116,14 @@ Gestionar Empresa
                         <tr> 
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key->id; ?>"/>
-                                <input type="text" class="form-control form-control-sm form-control-md" name="CIF" value="<?php echo $key->cif; ?>" required/>
+                                <input type="text" class="form-control form-control-sm form-control-md CIF" name="CIF" value="<?php echo $key->cif; ?>" required/>
                             </td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $key->nombre; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="dniRepresentante" value="<?php echo $key->dni_representante; ?>" pattern="{9}" required/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreRepresentante" value="<?php echo $key->nombre_representante; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="direccion" value="<?php echo $key->direccion; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="localidad" value="<?php echo $key->localidad; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="horario" value="<?php echo $key->horario; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md nombreEmpresa" name="nombreEmpresa" value="<?php echo $key->nombre; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md dniRepresentante" name="dniRepresentante" value="<?php echo $key->dni_representante; ?>" pattern="{9}" required/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md nombreRepresentante" name="nombreRepresentante" value="<?php echo $key->nombre_representante; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md direccion" name="direccion" value="<?php echo $key->direccion; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md localidad" name="localidad" value="<?php echo $key->localidad; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md horario" name="horario" value="<?php echo $key->horario; ?>"/></td>
                             <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="nueva" <?php if ($key->nueva == 1) { ?>checked<?php } ?>/></td>
                             <td>
                                 <button type="submit" class="btn editar" name="editar"></button>

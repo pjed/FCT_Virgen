@@ -93,37 +93,37 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *DNI:
-                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="{9}"/>
+                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="{9}" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 *Nombre:
-                                                                <input type="text" class="form-control form-control-sm" name="nombre"/>
+                                                                <input type="text" class="form-control form-control-sm" name="nombre" required/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Apellidos:
-                                                                <input type="text" class="form-control form-control-sm" name="apellidos"/>
+                                                                <input type="text" class="form-control form-control-sm" name="apellidos" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 *Domicilio:
-                                                                <input type="text" class="form-control form-control-sm" name="domicilio" />
+                                                                <input type="text" class="form-control form-control-sm" name="domicilio" required />
                                                             </label>                
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Email:
-                                                                <input type="text" class="form-control form-control-sm" name="email" />
+                                                                <input type="email" class="form-control form-control-sm" name="email" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Teléfono:
-                                                                <input type="text" class="form-control form-control-sm" name="telefono"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[9]{1}[0-9]{8}"/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Móvil:
-                                                                <input type="text" class="form-control form-control-sm" name="movil"/>
+                                                                <input type="text" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}"/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Iban:
@@ -181,17 +181,17 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Email:
-                                                                <input type="text" class="form-control form-control-sm" name="email" />
+                                                                <input type="email" class="form-control form-control-sm" name="email" />
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Teléfono:
-                                                                <input type="text" class="form-control form-control-sm" name="telefono"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[9]{1}[0-9]{8}"/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Móvil:
-                                                                <input type="text" class="form-control form-control-sm" name="movil"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="movil"/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -228,17 +228,17 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Email:
-                                                                <input type="text" class="form-control form-control-sm" name="email" />
+                                                                <input type="email" class="form-control form-control-sm" name="email" />
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Teléfono:
-                                                                <input type="text" class="form-control form-control-sm" name="telefono"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[9]{1}[0-9]{8}"/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Móvil:
-                                                                <input type="text" class="form-control form-control-sm" name="movil"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}"/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -292,17 +292,17 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Email:
-                                                                <input type="text" class="form-control form-control-sm" name="email" />
+                                                                <input type="email" class="form-control form-control-sm" name="email" />
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Teléfono:
-                                                                <input type="text" class="form-control form-control-sm" name="telefono"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[9]{1}[0-9]{8}"/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Móvil:
-                                                                <input type="text" class="form-control form-control-sm" name="movil"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="movil"  pattern="[6-7]{1}[0-9]{8}"/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -342,7 +342,7 @@ Gestionar usuarios
                             {{ csrf_field() }}
                             <tr>
                                 <td>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="fotoUrl" name="fotoUrl" value="<?php echo $value->foto; ?>"/>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $value->foto; ?>"/>
                                     <input type="text" class="form-control form-control-sm form-control-md " name="dni" value="<?php echo $value->dni; ?>" readonly/>
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
