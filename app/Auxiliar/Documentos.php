@@ -683,8 +683,15 @@ class Documentos {
         $indice = 1;
 
         foreach ($coleccion as $value) {
-            $spreadsheet->getActiveSheet()->setCellValue('A' . $row, $value->alumno);
-            $spreadsheet->getActiveSheet()->setCellValue('K' . $row, $value->total_comida);
+            $spreadsheet->getActiveSheet()->setCellValue('A' . $row, $value->nombre_completo);
+            $spreadsheet->getActiveSheet()->setCellValue('E' . $row, $value->importe_billete_colectivo);
+            $spreadsheet->getActiveSheet()->setCellValue('F' . $row, $value->n_dias);
+            $spreadsheet->getActiveSheet()->setCellValue('G' . $row, $value->kms);
+            $spreadsheet->getActiveSheet()->setCellValue('H' . $row, $value->numero_dias);
+            $spreadsheet->getActiveSheet()->setCellValue('I' . $row, $value->importe_gastos_kilometraje);
+            $spreadsheet->getActiveSheet()->setCellValue('J' . $row, $value->total_transporte);
+            $spreadsheet->getActiveSheet()->setCellValue('K' . $row, $value->otros_gastos_2);
+            $spreadsheet->getActiveSheet()->setCellValue('L' . $row, $value->total);
             $row += 1;
             $indice += 1;
         }
@@ -723,8 +730,15 @@ class Documentos {
         $indice = 1;
 
         foreach ($coleccion as $value) {
-            $spreadsheet->getActiveSheet()->setCellValue('A' . $row, $value->alumno);
-            $spreadsheet->getActiveSheet()->setCellValue('K' . $row, $value->total_comida);
+            $spreadsheet->getActiveSheet()->setCellValue('A' . $row, $value->nombre_completo);
+            $spreadsheet->getActiveSheet()->setCellValue('E' . $row, $value->importe_billete_colectivo);
+            $spreadsheet->getActiveSheet()->setCellValue('F' . $row, $value->n_dias);
+            $spreadsheet->getActiveSheet()->setCellValue('G' . $row, $value->kms);
+            $spreadsheet->getActiveSheet()->setCellValue('H' . $row, $value->numero_dias);
+            $spreadsheet->getActiveSheet()->setCellValue('I' . $row, $value->importe_gastos_kilometraje);
+            $spreadsheet->getActiveSheet()->setCellValue('J' . $row, $value->total_transporte);
+            $spreadsheet->getActiveSheet()->setCellValue('K' . $row, $value->otros_gastos_2);
+            $spreadsheet->getActiveSheet()->setCellValue('L' . $row, $value->total);
             $row += 1;
             $indice += 1;
         }
