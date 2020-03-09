@@ -94,7 +94,7 @@ $rol1 = session()->get('rol');
                             ?>
 
                             <button type="submit" id="perfil" name="perfil">
-                                <input type="image" alt="perfil" name="submit" class="miniatura_perfil" src="<?php echo $foto ?>"/>
+                                <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
                             </button>
                         </div>
                     </form>
