@@ -102,7 +102,7 @@ Gestionar Cursos
                                 <td><input type="text" class="form-control form-control-sm form-control-md" id="familia" name="familia" value="<?php echo $key->familia; ?>" /></td>
                                 <td><input type="number" class="form-control form-control-sm form-control-md" id="horas" name="horas" value="<?php echo $key->horas; ?>" /></td>
 
-                                <td><button type="submit"class="btn editar" name="editar" /></td>
+                                <td><button type="submit" class="btn editar" name="editar" ></button></td>
                             </tr>
                         </form>
                         <?php

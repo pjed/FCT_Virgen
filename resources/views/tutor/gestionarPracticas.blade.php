@@ -265,9 +265,9 @@ Gestionar  Practicas
                                 </div>
                             </td>
                             <td>
-                                <button type="submit"class="btn editar" name="editar" />
+                                <button type="submit" class="btn editar" name="editar" ></button>
                                      <!-- </td><td>-->
-                                <button type="submit" class="btn eliminar" name="eliminar" />
+                                <button type="submit" class="btn eliminar" name="eliminar" ></button>
                             </td>
                         </tr>
                     </form>

@@ -327,8 +327,6 @@ Gestionar usuarios
                                                         </div>
                                                     </form>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -364,13 +362,13 @@ Gestionar usuarios
 
                                 <?php if ($value->rol_id == 3) {
                                     ?>
-                                    <td><button type="submit"class="btn editar" name="editar" /></td>
+                                    <td><button type="submit" class="btn editar" name="editar" ></button>
                                 <?php } else {
                                     ?>
                                     <td>
-                                        <button type="submit"class="btn editar" name="editar" />
+                                        <button type="submit" class="btn editar" name="editar" ></button>
                                              <!-- </td><td>-->
-                                        <button type="submit" class="btn eliminar" name="eliminar" />
+                                        <button type="submit" class="btn eliminar" name="eliminar" ></button>
                                     </td>
                                     <?php
                                 }

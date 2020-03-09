@@ -56,9 +56,9 @@ Gestionar gastos comida
                                     <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
                                 </td>
                                 <td>
-                                    <button type="submit"class="btn editar" name="editar" />
+                                    <button type="submit" class="btn editar" name="editar"></button>
                                          <!-- </td><td>-->
-                                    <button type="submit" class="btn eliminar" name="eliminar" />
+                                    <button type="submit" class="btn eliminar" name="eliminar" ></button>
                                 </td>
                             </tr>
                         </form>

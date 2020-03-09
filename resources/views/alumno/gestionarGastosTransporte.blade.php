@@ -60,9 +60,9 @@ Gestionar gastos transporte
                                 <td><input type="number" step="0.01" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'/></td>
 
                                 <td>
-                                    <button type="submit"class="btn editar" name="editar" />
+                                    <button type="submit" class="btn editar" name="editar" ></button>
                                          <!-- </td><td>-->
-                                    <button type="submit" class="btn eliminar" name="eliminar" />
+                                    <button type="submit" class="btn eliminar" name="eliminar" ></button>
                                 </td>
                             </tr>
                         </form>
@@ -113,9 +113,9 @@ Gestionar gastos transporte
                                 <td><input type="number" class="form-control form-control-sm form-control-md" name ="kms" value="<?php echo $key->kms; ?>"></td>
                                 <td><input type="number"  step="0.01" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'></td>
                                 <td>
-                                    <button type="submit"class="btn editar" name="editar" />
+                                    <button type="submit" class="btn editar" name="editar"></button>
                                          <!-- </td><td>-->
-                                    <button type="submit" class="btn eliminar" name="eliminar" />
+                                    <button type="submit" class="btn eliminar" name="eliminar" ></button>
                                 </td>
                             </tr>
                         </form>
