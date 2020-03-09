@@ -89,7 +89,7 @@ Gestionar Empresa
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Dni del representante:
-                                                        <input type="text" class="form-control form-control-sm" id="dniRepresentante" name="dniRepresentante" required/>
+                                                        <input type="text" class="form-control form-control-sm" id="dniRepresentante" name="dniRepresentante" required  pattern="{9}"/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Nombre del representante:
@@ -116,10 +116,10 @@ Gestionar Empresa
                         <tr> 
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key->id; ?>"/>
-                                <input type="text" class="form-control form-control-sm form-control-md" name="CIF" value="<?php echo $key->cif; ?>"/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="CIF" value="<?php echo $key->cif; ?>" required/>
                             </td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $key->nombre; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="dniRepresentante" value="<?php echo $key->dni_representante; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="dniRepresentante" value="<?php echo $key->dni_representante; ?>" pattern="{9}" required/></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreRepresentante" value="<?php echo $key->nombre_representante; ?>"/></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="direccion" value="<?php echo $key->direccion; ?>"/></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="localidad" value="<?php echo $key->localidad; ?>"/></td>

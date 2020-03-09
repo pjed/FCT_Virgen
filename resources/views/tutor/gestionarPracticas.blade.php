@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Auxiliar\Conexion;

@@ -80,7 +80,7 @@ Gestionar Responsable
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Móvil:
-                                                        <input type="tel" class="form-control form-control-sm" id="tel" name="tel" pattern="[0-9]{9}" required/>
+                                                        <input type="tel" class="form-control form-control-sm" id="tel" name="tel"  pattern="[6-7]{1}[0-9]{8}" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">

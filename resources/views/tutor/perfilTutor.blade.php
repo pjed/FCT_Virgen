@@ -57,7 +57,6 @@ foreach ($usuario as $value) {
                             </label>
                             <input type="submit" class="btn btn-primary" name="perfil" value="Actualizar Perfil">
                         </div>
-
                     </div>
                 </form>
             </div>
