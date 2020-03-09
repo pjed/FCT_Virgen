@@ -269,9 +269,26 @@ class controladorTutor extends Controller {
             $datos_ciclo = Conexion::obtenerDatosCiclo($curso);
             $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
             $datos_director = Conexion::obtenerDatosDirector();
+            
             $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
+            $cuantos_alumnos_gastos = count($alumnos_gastos);
+            
+            if ($cuantos_alumnos_gastos != 0) {
+                $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
+            } else {
+                $alumnos_gastos = null;
+            }
 
-            Documentos::GenerarGastosAlumnos($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
+            if ($alumnos_gastos != null) {
+                Documentos::GenerarGastosAlumnos($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    No hay alumnos con gastos de FCT en este curso
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
         }
         if (isset($_REQUEST['gastosFPDUAL'])) {
             $curso = $req->get("id_curso");
@@ -280,9 +297,26 @@ class controladorTutor extends Controller {
             $datos_ciclo = Conexion::obtenerDatosCiclo($curso);
             $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
             $datos_director = Conexion::obtenerDatosDirector();
+            
             $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
+            $cuantos_alumnos_gastos = count($alumnos_gastos);
+            
+            if ($cuantos_alumnos_gastos != 0) {
+                $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
+            } else {
+                $alumnos_gastos = null;
+            }
 
-            Documentos::GenerarGastosAlumnosDUAL($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
+            if ($alumnos_gastos != null) {
+                Documentos::GenerarGastosAlumnosDUAL($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    No hay alumnos con gastos de FCT DUAL en este curso
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
         }
         return view('tutor/extraerDocT');
     }
