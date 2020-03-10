@@ -244,7 +244,7 @@ Route::group(['middleware' => ['alumno']], function() {
     Route::post('crearGastoComida', 'controladorAlumno@crearGastoComida');
     Route::post('crearGastoTransporte', 'controladorAlumno@crearGastoTransporte');
     Route::post('gestionarGastosComida', 'controladorAlumno@gestionarGastoComida');
-    Route::post('gestionarGastosTransporte', 'controladorAlumno@gestionarGastoTransporte');
+    Route::post('gestionarGastosTransporte', 'controladorAlumno@gestionarGastosTransporte');
 });
 
 

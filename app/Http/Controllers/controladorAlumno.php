@@ -36,6 +36,8 @@ class controladorAlumno extends Controller {
         } else {
             if ($fot != null) {
                 $foto = $fot->move('imagenes_gastos/comida', $idComida);
+            } else {
+                $foto = 'images/ticket.png';
             }
 
             Conexion::insertarGastoComida($importe, $fecha, $foto);
@@ -90,10 +92,10 @@ class controladorAlumno extends Controller {
 
             if ($fot != null) {
                 $foto = $fot->move('imagenes_gastos/transporte', $idColectivo);
-                Conexion::insertarTransporteColectivo($tipo, $localidadC, $foto, $importe);
             } else {
-                Conexion::insertarTransporteColectivoSinFoto($tipo, $localidadC, $importe);
+                $foto = 'images/ticket.png';
             }
+            Conexion::insertarTransporteColectivo($tipo, $localidadC, $foto, $importe);
 
             //ingresar el gasto de transporte colectivo en la tabla de gastos
             $usuario = session()->get('usu');
@@ -210,15 +212,14 @@ class controladorAlumno extends Controller {
      * @param Request $req
      * @return type
      */
-    public function gestionarGastoTransporte(Request $req) {
+    public function gestionarGastosTransporte(Request $req) {
         $id = $req->get('ID');
         $idTransporte = $req->get('idTransporte');
 
         if (isset($_REQUEST['editarP'])) {
-            $n_diasP = $req->get('n_diasP');
             $kms = $req->get('kms');
             $precio = $req->get('precio');
-            Conexion::ModificarGastoTransportePropio($id, $n_diasP, $precio, $kms);
+            Conexion::ModificarGastoTransportePropio($id, $precio, $kms);
         }
 
         if (isset($_REQUEST['eliminarP'])) {
@@ -226,15 +227,14 @@ class controladorAlumno extends Controller {
         }
 
         if (isset($_REQUEST['editarC'])) {
-            $n_diasC = $req->get('n_diasC');
             $precio = $req->get('precio');
             $fot = $req->file('foto');
 
             if ($fot == null) {
-                Conexion::ModificarGastoTransporteColectivoSinFoto($id, $n_diasC, $precio);
+                Conexion::ModificarGastoTransporteColectivoSinFoto($id, $precio);
             } else {
                 $foto = $fot->move('imagenes_gastos/transporte', $idTransporte);
-                Conexion::ModificarGastoTransporteColectivo($id, $n_diasC, $precio, $foto);
+                Conexion::ModificarGastoTransporteColectivo($id, $precio, $foto);
             }
         }
 

@@ -167,9 +167,9 @@ Consultar Gastos Alumnos
                                     <input type="file" class="form-control form-control-sm form-control-md" name="foto">
                                 </td>
                                 <td>
-                                    <button type="submit" class="btn editar" name="editar" ></button>
+                                    <button type="submit" class="btn editar" name="editarC" ></button>
                                          <!-- </td><td>-->
-                                    <button type="submit" class="btn eliminar" name="eliminar" ></button>
+                                    <button type="submit" class="btn eliminar" name="eliminarC" ></button>
                                 </td>
                             </tr>
                         </form>
@@ -218,9 +218,9 @@ Consultar Gastos Alumnos
                                 <td><input type="number" step="0.01" class="form-control form-control-sm" name="kms" value="<?php echo $key->kms; ?>"/></td>
                                 <td><input type="number" step="0.01" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
                                 <td>
-                                    <button type="submit" class="btn editar" name="editar" ></button>
+                                    <button type="submit" class="btn editar" name="editarP" ></button>
                                          <!-- </td><td>-->
-                                    <button type="submit" class="btn eliminar" name="eliminar" ></button>
+                                    <button type="submit" class="btn eliminar" name="eliminarP" ></button>
                                 </td>
                             </tr>
                         </form>

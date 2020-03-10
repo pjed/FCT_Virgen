@@ -1244,7 +1244,7 @@ class Conexion {
 
             $g->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Gasto insertadon en la tabla con exito.
+                    Gasto insertado en la tabla con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1833,42 +1833,7 @@ class Conexion {
         }
     }
 
-    static function insertarTransporteColectivoSinFoto($tipo, $donde, $importe) {
-
-        try {
-
-            //insertar el gasto en la tabla transportes
-            $t = new transporte;
-            $t->tipo = $tipo;
-            $t->donde = $donde;
-
-            $t->save();
-
-            $transporte = transporte::all()->last();
-            $idTransporte = $transporte->id;
-
-            //insertar el gasto en la tabla colectivos
-            $c = new colectivo;
-            $c->importe = $importe;
-            $c->transportes_id = $idTransporte;
-
-            $c->save(); //aqui se hace la insercion   
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Transporte colectivo insertado con exito.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-        } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al guardar el transporte colectivo.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-        }
-    }
-
+    
     static function insertarTransportePropio($tipo, $donde, $kms, $precio) {
 
         try {
