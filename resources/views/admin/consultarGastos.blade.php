@@ -97,7 +97,7 @@ Consultar Gastos Alumnos
                         <?php
                         foreach ($gc as $key) {
                             ?>
-                        <form action="consultarGastos" method="POST">
+                        <form action="consultarGastos" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <tr>
                                 <td>
@@ -152,7 +152,7 @@ Consultar Gastos Alumnos
                         <?php
                         foreach ($gtc as $key) {
                             ?>
-                        <form action="consultarGastos" method="POST">
+                        <form action="consultarGastos" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <tr>
                                 <td>
