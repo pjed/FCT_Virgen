@@ -111,7 +111,7 @@ Gestionar Empresa
                     <?php
                     foreach ($lu as $key) {
                         ?>
-                    <form action="gestionaEmpresa" method="POST">
+                    <form action="gestionarEmpresa" method="POST">
                         {{ csrf_field() }}
                         <tr> 
                             <td>
