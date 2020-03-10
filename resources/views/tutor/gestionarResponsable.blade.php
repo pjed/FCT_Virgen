@@ -60,27 +60,27 @@ Gestionar Responsable
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Dni:
-                                                        <input type="text" class="form-control form-control-sm" id="dni" name="dni" pattern="[0-9]{8}[A-Za-z]{1}" required/>
+                                                        <input type="text" class="form-control form-control-sm dni"  name="dni" pattern="[0-9]{8}[A-Za-z]{1}" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Nombre:
-                                                        <input type="text" class="form-control form-control-sm" id="nombre" name="nombre" required/>
+                                                        <input type="text" class="form-control form-control-sm nombre" name="nombre" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Apellido:
-                                                        <input type="text" class="form-control form-control-sm" id="apellido" name="apellido" required/>
+                                                        <input type="text" class="form-control form-control-sm apellido" name="apellido" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Email:
-                                                        <input type="email" class="form-control form-control-sm" id="email" name="email" required/>
+                                                        <input type="email" class="form-control form-control-sm email" name="email" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Móvil:
-                                                        <input type="tel" class="form-control form-control-sm" id="tel" name="tel" pattern="[0-9]{9}" required/>
+                                                        <input type="tel" class="form-control form-control-sm tel" name="tel"  pattern="[6-7]{1}[0-9]{8}" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
@@ -103,12 +103,12 @@ Gestionar Responsable
                         <tr>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key['id']; ?>"/>
-                                <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $key['dni']; ?>" readonly/>
+                                <input type="text" class="form-control form-control-sm form-control-md dni" name="dni" value="<?php echo $key['dni']; ?>" readonly/>
                             </td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $key['nombre']; ?>" required></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="apellido" value="<?php echo $key['apellidos']; ?>" required/></td>
-                            <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $key['email']; ?>" required/></td>
-                            <td><input type="tel" class="form-control form-control-sm form-control-md" name="tel" value="<?php echo $key['telefono']; ?>" pattern="[0-9]{9}" required/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md nombre" name="nombre" value="<?php echo $key['nombre']; ?>" required></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md apellido" name="apellido" value="<?php echo $key['apellidos']; ?>" required/></td>
+                            <td><input type="email" class="form-control form-control-sm form-control-md email" name="email" value="<?php echo $key['email']; ?>" required/></td>
+                            <td><input type="tel" class="form-control form-control-sm form-control-md tel" name="tel" value="<?php echo $key['telefono']; ?>" pattern="[0-9]{9}" required/></td>
                             <td>
                                 <button type="submit" class="btn editar" name="editar" ></button>
                                      <!-- </td><td>-->

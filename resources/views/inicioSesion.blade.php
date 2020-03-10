@@ -9,7 +9,7 @@ Inicio de sesion
 @endsection
 
 @section('contenido') 
-<p class="text-center">Iniciar Sesión</p>
+<h1 class="text-center">Iniciar Sesión</h1>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-sm-3 col-md-3">
@@ -18,13 +18,13 @@ Inicio de sesion
                 <div class="form-group mx-auto">
                     <label class="text-center" for="usuario">
                         Usuario:
-                        <input type="email" class="form-control form-control-sm form-control-md form-control-lg" id="usuario" name="usuario" placeholder="usuario@x.x" data-toggle="tooltip" data-placement="left" data-html="true" title="Introduzca un correo" required><br>
+                        <input type="email" class="form-control form-control-sm form-control-md" id="usuario" name="usuario" placeholder="usuario@x.x" data-toggle="tooltip" data-placement="left" data-html="true" title="Introduzca un correo" required><br>
                     </label>                   
                 </div>
                 <div class="form-group">
                     <label class="text-center" for="pwd">
                         Contraseña:
-                        <input type="password" class="form-control form-control-sm form-control-md form-control-lg" id="pwd" name="pwd" placeholder="Contraseña" data-toggle="tooltip" data-placement="left" data-html="true" title="Introduzca una contraseña" required ><br>
+                        <input type="password" class="form-control form-control-sm form-control-md" id="pwd" name="pwd" placeholder="Contraseña" data-toggle="tooltip" data-placement="left" data-html="true" title="Introduzca una contraseña" required ><br>
                     </label> 
                 </div>
                 <div class="form-group">

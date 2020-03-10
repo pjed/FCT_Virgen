@@ -32,7 +32,7 @@ Exportar documentos
                 <div class="form-group">
                     <label class="text-center" for='ciclo'>
                         Ciclo:
-                        <select class="sel" name="ciclo">  
+                        <select class="sel" id="ciclo" name="ciclo">  
                             <?php
                             foreach ($l1 as $value) {
                                 ?>
@@ -46,46 +46,46 @@ Exportar documentos
                 <div class="form-group">
                     <label>
                         Recibí (PDF):
-                        <div class="row">
-                            <div class="col-sm col-md col-lg">
-                                <input type="submit" id="recibiFCT" class="btn btn-primary" name="recibiFCT" value="Anexo V Recibí FCT"/><br><br>
-                            </div>
-                            <div class="col-sm col-md col-lg">
-                                <a href="http://www.educa.jccm.es/es/fpclm/centros-formacion-profesional/formacion-centros-trabajo-proyecto.ficheros/100158-anexo5_recibi.doc">FCT</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm col-md col-lg">
-                                <input type="submit" id="recibiFPDUAL" class="btn btn-primary" name="recibiFPDUAL" value="Anexo XV Recibí FP DUAL"/>
-                            </div>
-                            <div class="col-sm col-md col-lg">
-                                <a href="http://www.educa.jccm.es/es/fpclm/fp-dual/proyectos-formacion-profesional-dual-curso-2019-2020.ficheros/317740-Anexo%20XV%20Recib%C3%AD%20del%20alumnado.docx">FP DUAL</a>
-                            </div>
                     </label>
+                    <div class="row">
+                        <div class="col-sm col-md col-lg">
+                            <input type="submit" id="recibiFCT" class="btn btn-primary" name="recibiFCT" value="Anexo V Recibí FCT"/><br><br>
+                        </div>
+                        <div class="col-sm col-md col-lg">
+                            <a href="http://www.educa.jccm.es/es/fpclm/centros-formacion-profesional/formacion-centros-trabajo-proyecto.ficheros/100158-anexo5_recibi.doc">FCT</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm col-md col-lg">
+                            <input type="submit" id="recibiFPDUAL" class="btn btn-primary" name="recibiFPDUAL" value="Anexo XV Recibí FP DUAL"/>
+                        </div>
+                        <div class="col-sm col-md col-lg">
+                            <a href="http://www.educa.jccm.es/es/fpclm/fp-dual/proyectos-formacion-profesional-dual-curso-2019-2020.ficheros/317740-Anexo%20XV%20Recib%C3%AD%20del%20alumnado.docx">FP DUAL</a>
+                        </div>
+                    </div>
                 </div>
-                </br>
                 <div class="form-group">
                     <label>
                         Memoria alumnos (EXCEL):   
-                        <div class="row">
-                            <div class="col-sm col-md col-lg">
-                                <input type="submit" id="memoriaAlumnos" class="btn btn-primary" name="memoriaAlumnos" value="Memoria alumnos"/>
-                            </div>
-                        </div>
                     </label>
+                    <div class="row">
+                        <div class="col-sm col-md col-lg">
+                            <input type="submit" id="memoriaAlumnos" class="btn btn-primary" name="memoriaAlumnos" value="Memoria alumnos"/>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>
-                        Gastos de alumnos (EXCEL):  
-                        <div class="row">
-                            <div class="col-sm col-md col-lg">
-                                <input type="submit" id="gastosFCT" class="btn btn-primary" name="gastosFCT" value="Gastos alumnos FCT"/><br><br>
-                            </div>
-                            <div class="col-sm col-md col-lg">
-                                <input type="submit" id="gastosFPDUAL" class="btn btn-primary" name="gastosFPDUAL" value="Gastos alumnos FP DUAL"/>
-                            </div>
-                        </div>
+                        Gastos de alumnos (EXCEL):                          
                     </label>
+                    <div class="row">
+                        <div class="col-sm col-md col-lg">
+                            <input type="submit" id="gastosFCT" class="btn btn-primary" name="gastosFCT" value="Gastos alumnos FCT"/><br><br>
+                        </div>
+                        <div class="col-sm col-md col-lg">
+                            <input type="submit" id="gastosFPDUAL" class="btn btn-primary" name="gastosFPDUAL" value="Gastos alumnos FP DUAL"/>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

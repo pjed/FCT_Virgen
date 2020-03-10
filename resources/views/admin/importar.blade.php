@@ -25,8 +25,11 @@ Consultar Gastos por curso
                         <tr>
                             <td>
                             </td>
-                            <td><button type="submit" id="editar" class="btn" name="editar" /></td>
-                            <td><button type="submit" id="eliminar" class="btn" name="eliminar" /></td>
+                            <td>
+                                <button type="submit" class="btn editar" name="editar"></button>
+                            <!--</td><td>-->
+                                <button type="submit" class="btn eliminar" name="eliminar" ></button>
+                            </td>
                         </tr>
                     </form>
                     <?php
