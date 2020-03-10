@@ -1780,7 +1780,7 @@ class Conexion {
         }
     }
 
-    static function insertarTransporteColectivo($tipo, $donde, $foto, $n_dias, $importe) {
+    static function insertarTransporteColectivo($tipo, $donde, $foto, $importe) {
 
         try {
 
@@ -1797,7 +1797,6 @@ class Conexion {
             //insertar el gasto en la tabla colectivos
             $c = new colectivo;
             $c->foto = $foto;
-            $c->n_dias = $n_dias;
             $c->importe = $importe;
             $c->transportes_id = $idTransporte;
 
@@ -1818,7 +1817,7 @@ class Conexion {
         }
     }
 
-    static function insertarTransporteColectivoSinFoto($tipo, $donde, $n_dias, $importe) {
+    static function insertarTransporteColectivoSinFoto($tipo, $donde, $importe) {
 
         try {
 
@@ -1834,7 +1833,6 @@ class Conexion {
 
             //insertar el gasto en la tabla colectivos
             $c = new colectivo;
-            $c->n_dias = $n_dias;
             $c->importe = $importe;
             $c->transportes_id = $idTransporte;
 
@@ -1855,7 +1853,7 @@ class Conexion {
         }
     }
     
-    static function insertarTransportePropio($tipo, $donde, $kms, $n_dias, $precio) {
+    static function insertarTransportePropio($tipo, $donde, $kms, $precio) {
 
         try {
 
@@ -1872,7 +1870,6 @@ class Conexion {
             //insertar el gasto en la tabla colectivos
             $c = new propio;
             $c->kms = $kms;
-            $c->n_dias = $n_dias;
             $c->precio = $precio;
             $c->transportes_id = $idTransporte;
 

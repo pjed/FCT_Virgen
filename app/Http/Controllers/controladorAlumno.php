@@ -85,14 +85,13 @@ class controladorAlumno extends Controller {
             $idColectivo = Conexion::obtenerIdUltimoTransporteIngresado() + 1;
             $importe = $req->get('importeT');
             $localidadC = $req->get('locC');
-            $numDias = $req->get('diasC');
             $tipo = 1;
             $fot = $req->file('fotoTicket');
             $foto = "";
 
             if ($fot != null) {
                 $foto = $fot->move('imagenes_gastos/transporte', $idColectivo);
-                Conexion::insertarTransporteColectivo($tipo, $localidadC, $foto, $numDias, $importe);
+                Conexion::insertarTransporteColectivo($tipo, $localidadC, $foto, $importe);
             } else {
                 Conexion::insertarTransporteColectivoSinFoto($tipo, $localidadC, $numDias, $importe);
             }
@@ -129,13 +128,12 @@ class controladorAlumno extends Controller {
         //si el transporte es propio
         if (isset($_REQUEST['guardarP'])) {
             $kms = $req->get('kms');
-            $n_dias = $req->get('diasP');
             $precio = $req->get('precioP');
             $localidadP = $req->get('locP');
 
             $tipo = 0;
 
-            Conexion::insertarTransportePropio($tipo, $localidadP, $kms, $n_dias, $precio);
+            Conexion::insertarTransportePropio($tipo, $localidadP, $kms, $precio);
 
             //ingresar el gasto de transporte propio en la tabla de gastos
             $usuario = session()->get('usu');
