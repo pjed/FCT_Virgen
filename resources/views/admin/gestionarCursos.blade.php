@@ -96,11 +96,11 @@ Gestionar Cursos
                         <form action="gestionarCursos" method="POST">
                             {{ csrf_field() }}
                             <tr>
-                                <td><input type="text" class="form-control form-control-sm form-control-md id" name="id" value="<?php echo $key->id; ?>" required/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md descripcion" name="descripcion" value="<?php echo $key->descripcion; ?>"  required/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md anioAcademico" name="anioAcademico" value="<?php echo $key->anioAcademico; ?>" placeholder="2019/2020" required></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md familia" name="familia" value="<?php echo $key->familia; ?>"  required/></td>
-                                <td><input type="number" class="form-control form-control-sm form-control-md horas" name="horas" value="<?php echo $key->horas; ?>"  required/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key->id; ?>" required/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="descripcion" value="<?php echo $key->descripcion; ?>"  required/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="anioAcademico" value="<?php echo $key->anioAcademico; ?>" placeholder="2019/2020"></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="familia" value="<?php echo $key->familia; ?>"/></td>
+                                <td><input type="number" class="form-control form-control-sm form-control-md" name="horas" value="<?php echo $key->horas; ?>"/></td>
 
                                 <td><button type="submit" class="btn editar" name="editar" ></button></td>
                             </tr>

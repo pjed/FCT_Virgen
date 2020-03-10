@@ -84,13 +84,6 @@
     main{
          min-height: 35rem;
     }
-    /*tablas*/
-/*    #colectivo,#propio{
-        max-width: 750px;
-    }
-    #comida{
-        max-width: 700px;
-    }*/
     /*iconos*/
     #confirmar,.buscar,.editar,.eliminar, #perfil,#aniadir, #cerrarSesion{    
         width: 34px;
