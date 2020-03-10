@@ -836,6 +836,26 @@ class Conexion {
     }
 
     /**
+     * Metodo para poder borrar el responsable
+     * @param type $dni
+     */
+    static function ModificarPracticaResponsable($dni) {
+        try {
+            $p = practica::where('responsables_id', $dni)
+                    ->update([
+                'responsables_id' => null
+            ]);
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
      * Método para modificar practicas
      * @param type $ID
      * @param type $CIF
@@ -1013,7 +1033,7 @@ class Conexion {
      */
     static function borrarResponsable($id) {
         try {
-            usuario::where('id', $id)->delete();
+            responsable::where('id', $id)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1656,9 +1676,9 @@ class Conexion {
                 and cursos.id_curso='" . $curso . "'
                 group by usuarios.dni, propios.kms, propios.n_dias, (propios.kms*propios.n_dias* propios.precio)) as transporte_propio ON transporte_colectivo.dni = transporte_propio.dni;";
 
-        
+
         $gastos_alumnos = \DB::select($sql);
-        
+
         return $gastos_alumnos;
     }
 
@@ -1853,7 +1873,7 @@ class Conexion {
                   </div>';
         }
     }
-    
+
     static function insertarTransportePropio($tipo, $donde, $kms, $precio) {
 
         try {

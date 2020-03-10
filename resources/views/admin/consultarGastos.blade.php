@@ -1,8 +1,5 @@
 <?php
 
-use App\Auxiliar\Conexion;
-use App\Http\Controllers\controladorAdmin;
-
 $ciclo = null;
 $dniAlumno = null;
 if (session()->get('ciclo') != null) {
@@ -10,17 +7,6 @@ if (session()->get('ciclo') != null) {
 }
 if (session()->get('dniAlumno') != null) {
     $dniAlumno = session()->get('dniAlumno');
-    $l2 = Conexion::listarAlumnosCurso($ciclo);
-}
-if (isset($_GET['page'])) {
-    $datos = controladorAdmin::paginacionConsultarGastoAlumno();
-    foreach ($datos as $e) {
-        $l1 = $datos['l1'];
-        $l2 = $datos['l2'];
-        $gc = $datos['gc'];
-        $gtp = $datos ['gtp'];
-        $gtc = $datos ['gtc'];
-    }
 }
 ?>
 @extends('maestra.maestraAdmin')

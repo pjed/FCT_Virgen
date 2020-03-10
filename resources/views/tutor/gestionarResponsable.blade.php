@@ -103,12 +103,12 @@ Gestionar Responsable
                         <tr>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key['id']; ?>"/>
-                                <input type="text" class="form-control form-control-sm form-control-md dni" name="dni" value="<?php echo $key['dni']; ?>" readonly/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $key['dni']; ?>" readonly/>
                             </td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md nombre" name="nombre" value="<?php echo $key['nombre']; ?>" required></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md apellido" name="apellido" value="<?php echo $key['apellidos']; ?>" required/></td>
-                            <td><input type="email" class="form-control form-control-sm form-control-md email" name="email" value="<?php echo $key['email']; ?>" required/></td>
-                            <td><input type="tel" class="form-control form-control-sm form-control-md tel" name="tel" value="<?php echo $key['telefono']; ?>" pattern="[0-9]{9}" required/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $key['nombre']; ?>" required></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="apellido" value="<?php echo $key['apellidos']; ?>" required/></td>
+                            <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $key['email']; ?>" required/></td>
+                            <td><input type="tel" class="form-control form-control-sm form-control-md" name="tel" value="<?php echo $key['telefono']; ?>" pattern="[0-9]{9}" required/></td>
                             <td>
                                 <button type="submit" class="btn editar" name="editar" ></button>
                                      <!-- </td><td>-->

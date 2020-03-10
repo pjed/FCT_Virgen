@@ -153,7 +153,7 @@ Gestionar  Practicas
                         {{ csrf_field() }}
                         <tr>
                             <td>
-                                <select class="sel idEmpresa" name="idEmpresa" required>
+                                <select class="sel" name="idEmpresa" required>
                                     <?php
                                     foreach ($l1 as $k1) {
                                         ?>
@@ -164,7 +164,7 @@ Gestionar  Practicas
                                 </select>
                             </td>
                             <td>
-                                <select class="sel dniAlumno" name="dniAlumno" required>                                    
+                                <select class="sel" name="dniAlumno" required>                                    
                                     <?php
                                     foreach ($l2 as $k2) {
                                         ?>                                    
@@ -174,9 +174,9 @@ Gestionar  Practicas
                                     ?>
                                 </select>
                             </td>
-                            <td><input type="text" class="codProyecto form-control form-control-sm form-control-md" name="codProyecto" value="<?php echo $key->codProyecto; ?>" required/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="codProyecto" value="<?php echo $key->codProyecto; ?>" required/></td>
                             <td>
-                                <select name="idResponsable" class="sel idResponsable"  required>
+                                <select name="idResponsable" class="sel"  required>
                                     <?php
                                     foreach ($l3 as $k3) {
                                         ?>
@@ -188,11 +188,11 @@ Gestionar  Practicas
                             </td>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->id; ?>"/>
-                                <input type="text" class="form-control form-control-sm form-control-md gasto" name="gasto" value="<?php echo $key->gasto; ?>" required/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="gasto" value="<?php echo $key->gasto; ?>" required/>
                             </td>
-                            <td><input type="checkbox" class="form-control form-control-sm form-control-md apto" name="apto" <?php if ($key->apto == 1) { ?>checked<?php } ?> /></td>
-                            <td><input type="date" class="form-control form-control-sm form-control-md fechaInicio" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>" required/></td>
-                            <td><input type="date" class="form-control form-control-sm form-control-md fechaFin" name="fechaFin" value="<?php echo $key->fechaFin; ?>"/></td>
+                            <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" <?php if ($key->apto == 1) { ?>checked<?php } ?> /></td>
+                            <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>" required/></td>
+                            <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaFin" value="<?php echo $key->fechaFin; ?>"/></td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-primary" id="addPeriodo"  data-toggle="modal" data-target="#exampleModal2">
                                     FTC

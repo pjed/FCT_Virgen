@@ -111,19 +111,19 @@ Gestionar Empresa
                     <?php
                     foreach ($lu as $key) {
                         ?>
-                    <form action="gestionaEmpresa" method="POST">
+                    <form action="gestionarEmpresa" method="POST">
                         {{ csrf_field() }}
                         <tr> 
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key->id; ?>"/>
-                                <input type="text" class="form-control form-control-sm form-control-md CIF" name="CIF" value="<?php echo $key->cif; ?>" required/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="CIF" value="<?php echo $key->cif; ?>" required/>
                             </td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md nombreEmpresa" name="nombreEmpresa" value="<?php echo $key->nombre; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md dniRepresentante" name="dniRepresentante" value="<?php echo $key->dni_representante; ?>" pattern="{9}" required/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md nombreRepresentante" name="nombreRepresentante" value="<?php echo $key->nombre_representante; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md direccion" name="direccion" value="<?php echo $key->direccion; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md localidad" name="localidad" value="<?php echo $key->localidad; ?>"/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md horario" name="horario" value="<?php echo $key->horario; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $key->nombre; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="dniRepresentante" value="<?php echo $key->dni_representante; ?>" pattern="{9}" required/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreRepresentante" value="<?php echo $key->nombre_representante; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="direccion" value="<?php echo $key->direccion; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="localidad" value="<?php echo $key->localidad; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="horario" value="<?php echo $key->horario; ?>"/></td>
                             <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="nueva" <?php if ($key->nueva == 1) { ?>checked<?php } ?>/></td>
                             <td>
                                 <button type="submit" class="btn editar" name="editar"></button>
