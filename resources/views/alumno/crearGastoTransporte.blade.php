@@ -29,87 +29,105 @@ Crear gasto transporte
         </div>
     </div>
 
-    <!-- Formulario para crear un gasto -->
-    <form name="form" action="crearGastoTransporte" method="POST" enctype="multipart/form-data">
+    <!-- Seleccionar tipo de transporte -->
+    <div class="row justify-content-center"> 
+
+        <div class="col-md-2 col-sm-2">
+
+            <fieldset>
+                <p>Tipo transporte</p>
+                <div>
+                    <input type="radio" name="tipoT" id="colectivo" value="Colectivo" onclick="handleClick(this);">
+                    <label for="colectivo">Colectivo</label>
+                </div>
+                <div>
+                    <input type="radio" name="tipoT" id="propio" value="Propio" onclick="handleClick(this);">
+                    <label for="propio">Propio</label>
+                </div>
+            </fieldset>
+
+        </div>
+
+    </div>
+
+    <!-- Campos para el gasto de transporte propio -->
+    <form name="formP" action="crearGastoTransporte" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
-        <div class="row justify-content-center"> 
+        <div id="gastoPropio">
+            <div class="row justify-content-center">
 
-            <div class="col-md-2 col-sm-2">
+                <div class="col-md-4 col-sm-4 col-lg-4">
 
-                <fieldset>
-                    <p>Tipo transporte</p>
-                    <div>
-                        <input type="radio" name="tipoT" id="colectivo" value="Colectivo" onclick="handleClick(this);">
-                        <label for="colectivo">Colectivo</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="tipoT" id="propio" value="Propio" onclick="handleClick(this);">
-                        <label for="propio">Propio</label>
-                    </div>
-                </fieldset>
+                    <p>Kilómetros</p>
+                    <input type="number" id="kms" name="kms" value="" min="0" required>
 
+                    <p>Días</p>
+                    <input type="number" id="diasP" name="diasP" value="" min="0" required>
+
+                </div>  
+
+                <div class="col-md-4 col-sm-4 col-lg-4">
+
+                    <p>Precio</p>
+                    <input type="number" id="precioP" name="precioP" value="0.12" readonly>
+
+                    <p>Localidad</p>
+                    <input type="text" id="locP" name="locP" value="" placeholder="Localidad" required>
+                </div>
             </div>
 
-        </div>
+            <div class="row justify-content-center"> 
 
-        <!-- Campos para el gasto de transporte propio -->
-        <div class="row justify-content-center" id="gastoPropio">
+                <div class="col-md-2 col-sm-2">
 
-            <div class="col-md-4 col-sm-4 col-lg-4">
+                    <br><input type="submit" id="guardarP" name="guardarP" value="Guardar">
 
-                <p>Kilómetros</p>
-                <input type="number" id="kms" name="kms" value="" min="0">
+                </div>
 
-                <p>Días</p>
-                <input type="number" id="diasP" name="diasP" value="" min="0">
-
-            </div>  
-
-            <div class="col-md-4 col-sm-4 col-lg-4">
-
-                <p>Precio</p>
-                <input type="number" id="precioP" name="precioP" value="0.12" readonly>
-
-                <p>Localidad</p>
-                <input type="text" id="locP" name="locP" value="" placeholder="Localidad">
             </div>
         </div>
-
-        <!-- Campos para el gasto de transporte colectivo -->
-        <div class="row justify-content-center" id="gastoColectivo"> 
-
-            <div class="col-md-2">
-                
-                <p>Ticket</p>
-                <img src="{{asset ('images/ticket.png')}}" alt="ticketGasto" class="fotoTicket"><br><br>
-                <p>Hacer foto</p>
-                <input type="file" id="fotoTicket" name="fotoTicket"/><br><br>
-                <p>Días</p>
-                <input type="number" id="diasC" name="diasC" value="" min="0">
-
-            </div>
-
-            <div class="col-md-2">
-
-                <p>Localidad</p>
-                <input type="text" id="locC" name="locC" value="" placeholder="Localidad"><br><br>
-                <p>Importe total</p>
-                <input type="number" id="importeT" name="importeT" min="0" step="0.01" value=""/><br><br>
-
-            </div>
-
-        </div>
-
-        <div class="row justify-content-center"> 
-
-            <div class="col-md-2 col-sm-2">
-
-                <br><input type="submit" id="guardar" name="guardar" value="Guardar">
-
-            </div>
-
-        </div>
-
     </form>
+
+    <!-- Campos para el gasto de transporte colectivo -->
+    <form name="formC" action="crearGastoTransporte" method="POST" enctype="multipart/form-data">
+        {{ csrf_field() }}
+        <div id="gastoColectivo">
+            <div class="row justify-content-center"> 
+
+                <div class="col-md-2">
+
+                    <p>Ticket</p>
+                    <img src="{{asset ('images/ticket.png')}}" alt="ticketGasto" class="fotoTicket"><br><br>
+                    <p>Hacer foto</p>
+                    <input type="file" id="fotoTicket" name="fotoTicket"/><br><br>
+                    <p>Días</p>
+                    <input type="number" id="diasC" name="diasC" value="" min="1" required>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <p>Localidad</p>
+                    <input type="text" id="locC" name="locC" value="" placeholder="Localidad" required><br><br>
+                    <p>Importe total</p>
+                    <input type="number" id="importeT" name="importeT" min="0" step="0.01" value="" required/><br><br>
+
+                </div>
+
+            </div>
+
+            <div class="row justify-content-center"> 
+
+                <div class="col-md-2 col-sm-2">
+
+                    <br><input type="submit" id="guardarC" name="guardarC" value="Guardar">
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <!--</form>-->
 </div>
 @endsection

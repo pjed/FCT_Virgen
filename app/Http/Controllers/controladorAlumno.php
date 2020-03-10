@@ -79,104 +79,96 @@ class controladorAlumno extends Controller {
      */
     public function crearGastoTransporte(Request $req) {
 
-        if (isset($_REQUEST['guardar'])) {
+        //si el transporte es colectivo        
+        if (isset($_REQUEST['guardarC'])) {
+            dd(isset($_REQUEST['guardarC']));
+            $idColectivo = Conexion::obtenerIdUltimoTransporteIngresado() + 1;
+            $importe = $req->get('importeT');
+            $localidadC = $req->get('locC');
+            $numDias = $req->get('diasC');
+            $tipo = 1;
+            $fot = $req->file('fotoTicket');
+            $foto = "";
 
-            $tipoTransporte = $req->get('tipoT');
-
-            //si el transporte es colectivo        
-            if ($tipoTransporte == "Colectivo") {
-                $idColectivo = Conexion::obtenerIdUltimoTransporteIngresado() + 1;
-                //$req->file('fotoTicket')->move('imagenes_gastos/transporte', $idColectivo);
-                //$foto = 'imagenes_gastos/transporte/' . $idColectivo;
-                $importe = $req->get('importeT');
-                $localidadC = $req->get('locC');
-                $numDias = $req->get('diasC');
-                $tipo = 1;
-                $fot = $req->file('fotoTicket');
-                $foto = "";
-
-                if ($fot != null) {
-                    $foto = $fot->move('imagenes_gastos/transporte', $idColectivo);
-                    Conexion::insertarTransporteColectivo($tipo, $localidadC, $foto, $numDias, $importe);
-                } else {
-                    Conexion::insertarTransporteColectivoSinFoto($tipo, $localidadC, $numDias, $importe);
-                }
-
-                //ingresar el gasto de transporte colectivo en la tabla de gastos
-                $usuario = session()->get('usu');
-                foreach ($usuario as $u) {
-                    $usuarios_dni = $u['dni'];
-                }
-
-                $transporte_id = Conexion::obtenerIdTransporteIngresado();
-
-                $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($usuarios_dni);
-                $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] + $importe;
-
-                $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($usuarios_dni);
-                $totalGastoCiclo = 0;
-                foreach ($totalGastoCicloAntiguo as $a) {
-                    $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
-                }
-
-                $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
-
-                $desplazamiento = 1;
-                $comidas_id = 0;
-
-                Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCicloNuevo, $usuarios_dni, $comidas_id, $transporte_id);
-
-                Conexion::actualizarTotalGastosAlumno($usuarios_dni, $totalGastoAlumno);
-
-                Conexion::actualizarTotalGastosCiclo($usuarios_dni, $totalGastoCicloNuevo);
+            if ($fot != null) {
+                $foto = $fot->move('imagenes_gastos/transporte', $idColectivo);
+                Conexion::insertarTransporteColectivo($tipo, $localidadC, $foto, $numDias, $importe);
+            } else {
+                Conexion::insertarTransporteColectivoSinFoto($tipo, $localidadC, $numDias, $importe);
             }
 
-            //si el transporte es propio
-            if ($tipoTransporte == "Propio") {
-                $kms = $req->get('kms');
-                $n_dias = $req->get('diasP');
-                $precio = $req->get('precioP');
-                $localidadP = $req->get('locP');
-
-                $tipo = 0;
-
-                Conexion::insertarTransportePropio($tipo, $localidadP, $kms, $n_dias, $precio);
-
-                //ingresar el gasto de transporte propio en la tabla de gastos
-                $usuario = session()->get('usu');
-                foreach ($usuario as $u) {
-                    $usuarios_dni = $u['dni'];
-                }
-
-                $transporte_id = Conexion::obtenerIdTransporteIngresado();
-
-                $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($usuarios_dni);
-                $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] + $precio;
-
-                $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($usuarios_dni);
-                $totalGastoCiclo = 0;
-                foreach ($totalGastoCicloAntiguo as $a) {
-                    $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
-                }
-
-                $totalGastoCicloNuevo = $totalGastoCiclo + $precio;
-
-                $desplazamiento = 1;
-
-                $tipo = 1;
-                $comidas_id = 0;
-
-                Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCicloNuevo, $usuarios_dni, $comidas_id, $transporte_id);
-
-                Conexion::actualizarTotalGastosAlumno($usuarios_dni, $totalGastoAlumno);
-
-                Conexion::actualizarTotalGastosCiclo($usuarios_dni, $totalGastoCicloNuevo);
+            //ingresar el gasto de transporte colectivo en la tabla de gastos
+            $usuario = session()->get('usu');
+            foreach ($usuario as $u) {
+                $usuarios_dni = $u['dni'];
             }
 
-            return view('alumno/crearGastoTransporte');
-        } else {
-            
+            $transporte_id = Conexion::obtenerIdTransporteIngresado();
+
+            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($usuarios_dni);
+            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] + $importe;
+
+            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($usuarios_dni);
+            $totalGastoCiclo = 0;
+            foreach ($totalGastoCicloAntiguo as $a) {
+                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+            }
+
+            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+
+            $desplazamiento = 1;
+            $comidas_id = 0;
+
+            Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCicloNuevo, $usuarios_dni, $comidas_id, $transporte_id);
+
+            Conexion::actualizarTotalGastosAlumno($usuarios_dni, $totalGastoAlumno);
+
+            Conexion::actualizarTotalGastosCiclo($usuarios_dni, $totalGastoCicloNuevo);
         }
+
+        //si el transporte es propio
+        if (isset($_REQUEST['guardarP'])) {
+            $kms = $req->get('kms');
+            $n_dias = $req->get('diasP');
+            $precio = $req->get('precioP');
+            $localidadP = $req->get('locP');
+
+            $tipo = 0;
+
+            Conexion::insertarTransportePropio($tipo, $localidadP, $kms, $n_dias, $precio);
+
+            //ingresar el gasto de transporte propio en la tabla de gastos
+            $usuario = session()->get('usu');
+            foreach ($usuario as $u) {
+                $usuarios_dni = $u['dni'];
+            }
+
+            $transporte_id = Conexion::obtenerIdTransporteIngresado();
+
+            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($usuarios_dni);
+            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] + $precio;
+
+            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($usuarios_dni);
+            $totalGastoCiclo = 0;
+            foreach ($totalGastoCicloAntiguo as $a) {
+                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+            }
+
+            $totalGastoCicloNuevo = $totalGastoCiclo + $precio;
+
+            $desplazamiento = 1;
+
+            $tipo = 1;
+            $comidas_id = 0;
+
+            Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCicloNuevo, $usuarios_dni, $comidas_id, $transporte_id);
+
+            Conexion::actualizarTotalGastosAlumno($usuarios_dni, $totalGastoAlumno);
+
+            Conexion::actualizarTotalGastosCiclo($usuarios_dni, $totalGastoCicloNuevo);
+        }
+
+        return view('alumno/crearGastoTransporte');
     }
 
     /**

@@ -2,25 +2,53 @@ $(document).ready(function () {
     $("#gastoPropio").hide();
     $("#gastoColectivo").hide();
 
-    $("#guardar").click(function () {
-        if ($("#importeT").val() === "" || $("#fotoTicket").val() === "") {
-            //location.replace("crearGastoTransporte");
+    //Campos del transporte colectivo
+    $("#locC").blur(function () {
+        if ($("#locC").val() === "") {
+            $("#locC").css({'border-color': 'red'});
+        } else {
+            $("#locC").css({'border-color': 'green'});
         }
     });
 
-    $("#fotoTicket").blur(function () {
-
-    });
-
-    $("#nombreAl").blur(function () {
-        if ($("#nombreAl").val() === "") {
-            $("#nombreAl").css({'border-color': 'red'});
+    $("#diasC").blur(function () {
+        if ($("#diasC").val() === "" || $("#diasC").val() < 1) {
+            $("#diasC").css({'border-color': 'red'});
+        } else {
+            $("#diasC").css({'border-color': 'green'});
         }
     });
 
     $("#importeT").blur(function () {
         if ($("#importeT").val() === "" || $("#importeT").val() < 0) {
             $("#importeT").css({'border-color': 'red'});
+        } else {
+            $("#importeT").css({'border-color': 'green'});
+        }
+    });
+
+    //campos del transporte propio
+    $("#kms").blur(function () {
+        if ($("#kms").val() === "") {
+            $("#kms").css({'border-color': 'red'});
+        } else {
+            $("#kms").css({'border-color': 'green'});
+        }
+    });
+    
+    $("#diasP").blur(function () {
+        if ($("#diasP").val() === "") {
+            $("#diasP").css({'border-color': 'red'});
+        } else {
+            $("#diasP").css({'border-color': 'green'});
+        }
+    });
+    
+    $("#locP").blur(function () {
+        if ($("#locP").val() === "") {
+            $("#locP").css({'border-color': 'red'});
+        } else {
+            $("#locP").css({'border-color': 'green'});
         }
     });
 });
@@ -30,93 +58,11 @@ function handleClick(myRadio) {
     if (myRadio.value === "Propio") {
         $("#gastoColectivo").hide();
         $("#gastoPropio").show();
-        //alert('Es propio');
     }
 
     if (myRadio.value === "Colectivo") {
         $("#gastoPropio").hide();
         $("#gastoColectivo").show();
-        //alert('Es colectivo');
     }
 
 }
-
-//$(document).ready(function () {
-//    $("#gastoPropio").hide();
-//    $("#gastoColectivo").hide();
-//    $("#guardar").hide();
-//
-//    $("#comprobar").click(function () {
-//
-//        $boolLoc;
-//        $boolFoto;
-//        $boolImporte;
-//        $boolDias;
-//
-//        if ($("#locC").val() === "") {
-//            $("#locC").css({'border-color': 'red'});
-//            $boolLoc = false;
-//        } else {
-//            $boolLoc = true;
-//        }
-//
-//
-//        if ($('input[type=file]').val()) {
-//            //alert("Imagen seleccionada");
-//            $boolFoto = true;
-//        } else {
-//            //alert("Imagen no seleccionada");
-//            $boolFoto = false;
-//        }
-//
-//
-//        if ($("#importeT").val() === "" || $("#importeT").val() === 0) {
-//            $("#importeT").css({'border-color': 'red'});
-//            $boolImporte = false;
-//        } else {
-//            $boolImporte = true;
-//        }
-//
-//
-//        if ($("#diasC").val() === "" || $("#diasC").val() === 0) {
-//            $("#diasC").css({'border-color': 'red'});
-//            $boolDias = false;
-//        } else {
-//            $boolDias = true;
-//        }
-//
-//        if ($boolFoto && $boolDias && $boolImporte && $boolLoc) {
-//            $("#guardar").show();
-//        }
-//    });
-//
-////    $("#fotoTicket").blur(function () {
-////
-////    });
-////
-////    $("#locC").blur(function () {
-////        if ($("#locC").val() === "") {
-////            $("#locC").css({'border-color': 'red'});
-////        }
-////    });
-////
-////    $("#importeT").blur(function () {
-////        if ($("#importeT").val() === "" || $("#importeT").val() < 0) {
-////            $("#importeT").css({'border-color': 'red'});
-////        }
-////    });
-//});
-//
-//function handleClick(myRadio) {
-//
-//    if (myRadio.value === "Propio") {
-//        $("#gastoColectivo").hide();
-//        $("#gastoPropio").show();
-//    }
-//
-//    if (myRadio.value === "Colectivo") {
-//        $("#gastoPropio").hide();
-//        $("#gastoColectivo").show();
-//    }
-//
-//}
