@@ -1335,7 +1335,7 @@ class Conexion {
                 ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')
                 ->join('colectivos', 'transportes.id', '=', 'colectivos.transportes_id')
                 ->select(
-                        'transportes.id AS idTransporte', 'transportes.donde AS donde', 'colectivos.id AS idColectivos', 'colectivos.n_dias AS n_diasC', 'colectivos.foto AS foto', 'colectivos.importe AS precio'
+                        'transportes.id AS idTransporte', 'transportes.donde AS donde', 'colectivos.id AS idColectivos', 'colectivos.foto AS foto', 'colectivos.importe AS precio'
                 )
                 ->paginate(8);
         return $v;
@@ -1348,7 +1348,7 @@ class Conexion {
      */
     static function listarGastosTransportesPropiosPagination($dni) {
         $v = [];
-        $sql = 'SELECT transportes.donde AS donde,propios.id AS idPropios, propios.n_dias AS n_diasP, propios.kms AS kms, propios.precio AS precio FROM `usuarios` join gastos on gastos.usuarios_dni=usuarios.dni join transportes on transportes.id=gastos.transportes_id join propios On transportes.id=propios.transportes_id WHERE usuarios.dni="05931616P" and gastos.tipo=1 and gastos.desplazamiento=1 ';
+        $sql = 'SELECT transportes.donde AS donde,propios.id AS idPropios, propios.kms AS kms, propios.precio AS precio FROM `usuarios` join gastos on gastos.usuarios_dni=usuarios.dni join transportes on transportes.id=gastos.transportes_id join propios On transportes.id=propios.transportes_id WHERE usuarios.dni="05931616P" and gastos.tipo=1 and gastos.desplazamiento=1 ';
         $v = \DB::table('usuarios')
                 ->where('usuarios.dni', $dni)
                 ->where('gastos.tipo', 1)
@@ -1357,7 +1357,7 @@ class Conexion {
                 ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')
                 ->join('propios', 'transportes.id', '=', 'propios.transportes_id')
                 ->select(
-                        'transportes.id AS idTransporte', 'transportes.donde AS donde', 'propios.id AS idPropios', 'propios.n_dias AS n_diasP', 'propios.kms AS kms', 'propios.precio AS precio'
+                        'transportes.id AS idTransporte', 'transportes.donde AS donde', 'propios.id AS idPropios', 'propios.kms AS kms', 'propios.precio AS precio'
                 )
                 ->paginate(8);
         return $v;
@@ -1471,15 +1471,13 @@ class Conexion {
      * Método para modificar los gastos de transporte colectivo del alumno
      * @param type $id
      * @param type $donde
-     * @param type $n_diasP
      * @param type $precio
      * @param type $foto
      */
-    static function ModificarGastoTransporteColectivo($id, $n_diasC, $precio, $foto) {
+    static function ModificarGastoTransporteColectivo($id,  $precio, $foto) {
         try {
             $p = colectivo::where('id', $id)
                     ->update([
-                'n_dias' => $n_diasC,
                 'foto' => $foto,
                 'importe' => $precio,
             ]);
@@ -1500,11 +1498,10 @@ class Conexion {
         }
     }
 
-    static function ModificarGastoTransporteColectivoSinFoto($id, $n_diasC, $precio) {
+    static function ModificarGastoTransporteColectivoSinFoto($id, $precio) {
         try {
             $p = colectivo::where('id', $id)
                     ->update([
-                'n_dias' => $n_diasC,
                 'importe' => $precio,
             ]);
 
@@ -1551,15 +1548,13 @@ class Conexion {
      * Método para modificar los gastos de transporte propio del alumno
      * @param type $id
      * @param type $donde
-     * @param type $n_diasP
      * @param type $precio
      * @param type $kms
      */
-    static function ModificarGastoTransportePropio($id, $n_diasP, $precio, $kms) {
+    static function ModificarGastoTransportePropio($id, $precio, $kms) {
         try {
             $p = propio::where('id', $id)
                     ->update([
-                'n_dias' => $n_diasP,
                 'kms' => $kms,
                 'precio' => $precio,
             ]);

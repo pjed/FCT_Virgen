@@ -114,8 +114,7 @@ Consultar Gastos Alumnos
                 <table class="table table-sm table-striped  table-hover table-bordered">
                     <thead class="thead-dark">
                         <tr> 
-                            <th>Donde es</th>
-                            <th>Nº dias</th>                        
+                            <th>Donde es</th>                     
                             <th>Foto</th>
                             <th>Importe</th>
                         </tr>
@@ -133,7 +132,6 @@ Consultar Gastos Alumnos
                                     <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>"/>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idColectivos; ?>"/>
                                 </td>
-                                <td><input type="number" class="form-control form-control-sm" name="n_diasC" value="<?php echo $key->n_diasC; ?>"/></td>
                                 <td><input type="number" step="0.01" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>" readonly/>
@@ -171,8 +169,7 @@ Consultar Gastos Alumnos
                 <table class="table  table-sm  table-striped  table-hover table-bordered">
                     <thead class="thead-dark">
                         <tr>   
-                            <th>Donde es</th>
-                            <th>Nº dias</th>                        
+                            <th>Donde es</th>                      
                             <th>KMS</th>
                             <th>Importe</th>
                         </tr>
@@ -189,7 +186,6 @@ Consultar Gastos Alumnos
                                     <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>"/>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idPropios; ?>" readonly/>
                                 </td>
-                                <td><input type="number" class="form-control form-control-sm" name="n_diasP" value="<?php echo $key->n_diasP; ?>"/></td>
                                 <td><input type="number" class="form-control form-control-sm" name="kms" value="<?php echo $key->kms; ?>"/></td>
                                 <td><input type="number" step="0.01" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
                                 <td>

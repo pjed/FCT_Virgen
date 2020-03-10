@@ -149,10 +149,9 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['editarP'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
-            $n_diasP = $req->get('n_diasP');
             $kms = $req->get('kms');
             $precio = $req->get('precio');
-            Conexion::ModificarGastoTransportePropio($id, $n_diasP, $precio, $kms);
+            Conexion::ModificarGastoTransportePropio($id, $precio, $kms);
         }
         if (isset($_REQUEST['eliminarP'])) {
             $id = $req->get('ID');
@@ -163,15 +162,14 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['editarC'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
-            $n_diasC = $req->get('n_diasC');
             $precio = $req->get('precio');
             $fot = $req->file('foto');
 
             if ($fot == null) {
-                Conexion::ModificarGastoTransporteColectivoSinFoto($id, $n_diasC, $precio);
+                Conexion::ModificarGastoTransporteColectivoSinFoto($id, $precio);
             } else {
                 $foto = $fot->move('imagenes_gastos/transporte', $idTransporte);
-                Conexion::ModificarGastoTransporteColectivo($id, $n_diasC, $precio, $foto);
+                Conexion::ModificarGastoTransporteColectivo($id, $precio, $foto);
             }
         }
         if (isset($_REQUEST['eliminarC'])) {
@@ -251,7 +249,6 @@ class controladorAdmin extends Controller {
                                                     <input type="text" class="form-control form-control-sm form-control-md" id="dondeC" name="donde" value="' . $key->donde . '" readonly/>
                                                     <input type="hidden" class="form-control form-control-sm form-control-md" id="ID" name="ID" value="' . $key->idColectivos . '" readonly/>
                                                 </td>
-                                                <td><input type="number" class="form-control form-control-sm" id="n_diasC" name="n_diasC" value="' . $key->n_diasC . '"/></td>
                                                 <td><input type="number" step="0.01" class="form-control form-control-sm" id="precio" name="precio" value="' . $key->precio . '"/></td>
                                                 <td>
                                                     <input type="hidden" class="form-control form-control-sm form-control-md" id="fotoUrl" name="fotoUrl" value="' . $key->foto . '" readonly/>
@@ -295,7 +292,6 @@ class controladorAdmin extends Controller {
                                                     <input type="text" class="form-control form-control-sm form-control-md" id="donde" name="donde" value="' . $key->donde . '" readonly/>
                                                     <input type="hidden" class="form-control form-control-sm form-control-md" id="ID1" name="ID" value="' . $key->idPropios . '" readonly/>
                                                 </td>
-                                                <td><input type="number" class="form-control form-control-sm" id="" name="n_diasP" value="' . $key->n_diasP . '"/></td>
                                                 <td><input type="number"  step="0.01" class="form-control form-control-sm" id="kms" name="kms" value="' . $key->kms . '"/></td>
                                                 <td><input type="number"  step="0.01" class="form-control form-control-sm" id="precio1" name="precio" value="' . $key->precio . '"/></td>
                                                 <td><button type="button" id="editarP" class="btn-sm editar" name="editarP"></button></td>
@@ -389,10 +385,9 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['editarP'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
-            $n_diasP = $req->get('n_diasP');
             $kms = $req->get('kms');
             $precio = $req->get('precio');
-            Conexion::ModificarGastoTransportePropio($id, $n_diasP, $precio, $kms);
+            Conexion::ModificarGastoTransportePropio($id, $precio, $kms);
         }
         if (isset($_REQUEST['eliminarP'])) {
             $id = $req->get('ID');
@@ -403,15 +398,14 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['editarC'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
-            $n_diasC = $req->get('n_diasC');
             $precio = $req->get('precio');
             $foto = $req->get('foto');
 
             if ($fot == null) {
-                Conexion::ModificarGastoTransporteColectivoSinFoto($id, $n_diasC, $precio);
+                Conexion::ModificarGastoTransporteColectivoSinFoto($id, $precio);
             } else {
                 $foto = $fot->move('imagenes_gastos/transporte', $idTransporte);
-                Conexion::ModificarGastoTransporteColectivo($id, $n_diasC, $precio, $foto);
+                Conexion::ModificarGastoTransporteColectivo($id, $precio, $foto);
             }
         }
         if (isset($_REQUEST['eliminarC'])) {
