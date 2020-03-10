@@ -81,7 +81,6 @@ class controladorAlumno extends Controller {
 
         //si el transporte es colectivo        
         if (isset($_REQUEST['guardarC'])) {
-            dd(isset($_REQUEST['guardarC']));
             $idColectivo = Conexion::obtenerIdUltimoTransporteIngresado() + 1;
             $importe = $req->get('importeT');
             $localidadC = $req->get('locC');
