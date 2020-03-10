@@ -92,7 +92,7 @@ class controladorAlumno extends Controller {
                 $foto = $fot->move('imagenes_gastos/transporte', $idColectivo);
                 Conexion::insertarTransporteColectivo($tipo, $localidadC, $foto, $importe);
             } else {
-                Conexion::insertarTransporteColectivoSinFoto($tipo, $localidadC, $numDias, $importe);
+                Conexion::insertarTransporteColectivoSinFoto($tipo, $localidadC, $importe);
             }
 
             //ingresar el gasto de transporte colectivo en la tabla de gastos
