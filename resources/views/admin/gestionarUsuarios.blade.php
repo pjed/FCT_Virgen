@@ -93,7 +93,7 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *DNI:
-                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="{9}" required/>
+                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="[0-9]{8}[A-Za-z]{1}" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 *Nombre:
@@ -123,11 +123,11 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Móvil:
-                                                                <input type="text" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}"/>
+                                                                <input type="text" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Iban:
-                                                                <input type="text" class="form-control form-control-sm" name="iban" />
+                                                                <input type="text" class="form-control form-control-sm" name="iban" pattern="^ES\d{22}$"/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -161,27 +161,27 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *DNI:
-                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="{9}"/>
+                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="[0-9]{8}[A-Za-z]{1}" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 *Nombre:
-                                                                <input type="text" class="form-control form-control-sm" name="nombre"/>
+                                                                <input type="text" class="form-control form-control-sm" name="nombre" required/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Apellidos:
-                                                                <input type="text" class="form-control form-control-sm" name="apellidos"/>
+                                                                <input type="text" class="form-control form-control-sm" name="apellidos" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 *Domicilio:
-                                                                <input type="text" class="form-control form-control-sm" name="domicilio" />
+                                                                <input type="text" class="form-control form-control-sm" name="domicilio" required/>
                                                             </label>                
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Email:
-                                                                <input type="email" class="form-control form-control-sm" name="email" />
+                                                                <input type="email" class="form-control form-control-sm" name="email" readonly/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Teléfono:
@@ -191,7 +191,7 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Móvil:
-                                                                <input type="tel" class="form-control form-control-sm" name="movil"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="movil" required/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -208,27 +208,27 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *DNI:
-                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="{9}"/>
+                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="[0-9]{8}[A-Za-z]{1}" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 *Nombre:
-                                                                <input type="text" class="form-control form-control-sm" name="nombre"/>
+                                                                <input type="text" class="form-control form-control-sm" name="nombre" required/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Apellidos:
-                                                                <input type="text" class="form-control form-control-sm" name="apellidos"/>
+                                                                <input type="text" class="form-control form-control-sm" name="apellidos" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 *Domicilio:
-                                                                <input type="text" class="form-control form-control-sm" name="domicilio" />
+                                                                <input type="text" class="form-control form-control-sm" name="domicilio" required/>
                                                             </label>                
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Email:
-                                                                <input type="email" class="form-control form-control-sm" name="email" />
+                                                                <input type="email" class="form-control form-control-sm" name="email" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Teléfono:
@@ -238,7 +238,7 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Móvil:
-                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}" required/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -272,27 +272,27 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *DNI:
-                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="{9}"/>
+                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="[0-9]{8}[A-Za-z]{1}" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 *Nombre:
-                                                                <input type="text" class="form-control form-control-sm" name="nombre"/>
+                                                                <input type="text" class="form-control form-control-sm" name="nombre" required/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Apellidos:
-                                                                <input type="text" class="form-control form-control-sm" name="apellidos"/>
+                                                                <input type="text" class="form-control form-control-sm" name="apellidos" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 *Domicilio:
-                                                                <input type="text" class="form-control form-control-sm" name="domicilio" />
+                                                                <input type="text" class="form-control form-control-sm" name="domicilio" required/>
                                                             </label>                
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Email:
-                                                                <input type="email" class="form-control form-control-sm" name="email" />
+                                                                <input type="email" class="form-control form-control-sm" name="email" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Teléfono:
@@ -302,7 +302,7 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 *Móvil:
-                                                                <input type="tel" class="form-control form-control-sm" name="movil"  pattern="[6-7]{1}[0-9]{8}"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="movil"  pattern="[6-7]{1}[0-9]{8}" required/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -349,7 +349,7 @@ Gestionar usuarios
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
                                 <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" required/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" required pattern="[9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" pattern="[9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
                                 <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" required pattern="[6-7]{1}[0-9]{8}"  title="Introduzca un teléfono válido"/></td>
                                 <td>
                                     <select class="sel" name="selectRol">
@@ -367,7 +367,6 @@ Gestionar usuarios
                                     ?>
                                     <td>
                                         <button type="submit" class="btn editar" name="editar" ></button>
-                                             <!-- </td><td>-->
                                         <button type="submit" class="btn eliminar" name="eliminar" ></button>
                                     </td>
                                     <?php
