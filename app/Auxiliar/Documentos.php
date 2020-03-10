@@ -66,7 +66,7 @@ class Documentos {
             $familia = $value->familia;
             $horas = $value->horas;
         }
-
+        
         foreach ($gas as $value) {
             $total_gasto_alumno = $value->total_gasto_alumno;
         }
@@ -689,9 +689,7 @@ class Documentos {
             $spreadsheet->getActiveSheet()->setCellValue('G' . $row, $value->kms);
             $spreadsheet->getActiveSheet()->setCellValue('H' . $row, $value->numero_dias);
             $spreadsheet->getActiveSheet()->setCellValue('I' . $row, $value->importe_gastos_kilometraje);
-            $spreadsheet->getActiveSheet()->setCellValue('J' . $row, $value->total_transporte);
             $spreadsheet->getActiveSheet()->setCellValue('K' . $row, $value->otros_gastos_2);
-            $spreadsheet->getActiveSheet()->setCellValue('L' . $row, $value->total);
             $row += 1;
             $indice += 1;
         }
@@ -736,9 +734,7 @@ class Documentos {
             $spreadsheet->getActiveSheet()->setCellValue('G' . $row, $value->kms);
             $spreadsheet->getActiveSheet()->setCellValue('H' . $row, $value->numero_dias);
             $spreadsheet->getActiveSheet()->setCellValue('I' . $row, $value->importe_gastos_kilometraje);
-            $spreadsheet->getActiveSheet()->setCellValue('J' . $row, $value->total_transporte);
             $spreadsheet->getActiveSheet()->setCellValue('K' . $row, $value->otros_gastos_2);
-            $spreadsheet->getActiveSheet()->setCellValue('L' . $row, $value->total);
             $row += 1;
             $indice += 1;
         }
