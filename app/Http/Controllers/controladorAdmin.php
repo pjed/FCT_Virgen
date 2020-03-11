@@ -150,7 +150,7 @@ class controladorAdmin extends Controller {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
             $kms = $req->get('kms');
-            $precio = $req->get('precio');
+            $precio = $kms * 0.12;
             Conexion::ModificarGastoTransportePropio($id, $precio, $kms);
         }
         if (isset($_REQUEST['eliminarP'])) {
