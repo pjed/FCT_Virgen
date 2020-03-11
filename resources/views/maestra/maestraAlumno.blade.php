@@ -48,34 +48,22 @@ $rol1 = session()->get('rol');
                         <div class="collapse navbar-collapse" id="menu">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="bienvenidaT">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="ExtraerDocT">Generar documentos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link"  href="consultarGastosAlumno">Consultar Gastos Alumno</a>
+                                    <a class="nav-link active" href="bienvenidaAl">Home</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar</a>
+                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Crear Gasto</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="gestionarEmpresa">Empresa</a>
-                                        <a class="dropdown-item" href="gestionarResponsable">Responsable</a>
-                                        <a class="dropdown-item" href="gestionarPracticas">Practicas</a>
+                                        <a class="dropdown-item" href="crearGastoComida">Comida</a>
+                                        <a class="dropdown-item" href="crearGastoTransporte">Transporte</a>
                                     </div>
                                 </li>
-                                @if ($rol1==4)
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Cambiar de rol</a>
+                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar Gastos</a>
                                     <div class="dropdown-menu">
-                                        <form name="cambiarRol" action="cambiarRol" method="POST">
-                                            {{ csrf_field() }}
-                                            <input type="submit" class="btn" name="tutor" value="Tutor">
-                                            <input type="submit" class="btn" name="administrador" value="Administrador">
-                                        </form>
+                                        <a class="dropdown-item" href="gestionarGastosComida">Comida</a>
+                                        <a class="dropdown-item" href="gestionarGastosTransporte">Transporte</a>
                                     </div>
                                 </li>
-                                @endif
                             </ul>
                         </div>
                     </div>
@@ -114,34 +102,22 @@ $rol1 = session()->get('rol');
                         <div class="collapse navbar-collapse" id="menu2">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="bienvenidaT">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="ExtraerDocT">Generar documentos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link"  href="consultarGastosAlumno">Consultar Gastos Alumno</a>
+                                    <a class="nav-link active" href="bienvenidaAl">Home</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar</a>
+                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Crear Gasto</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="gestionarEmpresa">Empresa</a>
-                                        <a class="dropdown-item" href="gestionarResponsable">Responsable</a>
-                                        <a class="dropdown-item" href="gestionarPracticas">Practicas</a>
+                                        <a class="dropdown-item" href="crearGastoComida">Comida</a>
+                                        <a class="dropdown-item" href="crearGastoTransporte">Transporte</a>
                                     </div>
                                 </li>
-                                @if ($rol1==4)
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Cambiar de rol</a>
+                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar Gastos</a>
                                     <div class="dropdown-menu">
-                                        <form name="cambiarRol" action="cambiarRol" method="POST">
-                                            {{ csrf_field() }}
-                                            <input type="submit" class="btn" name="tutor" value="Tutor">
-                                            <input type="submit" class="btn" name="administrador" value="Administrador">
-                                        </form>
+                                        <a class="dropdown-item" href="gestionarGastosComida">Comida</a>
+                                        <a class="dropdown-item" href="gestionarGastosTransporte">Transporte</a>
                                     </div>
                                 </li>
-                                @endif
                             </ul>
                         </div>
                     </div>
@@ -154,7 +130,7 @@ $rol1 = session()->get('rol');
 
 
                     <div class="col-1 text-center">
-                        <form name="perfil" action="perfilT1"  method="post">
+                        <form name="perfil" action="perfilAl1"  method="post">
                             {{ csrf_field() }}  
                             <?php
                             $usuario = session()->get('usu');
