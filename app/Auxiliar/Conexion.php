@@ -638,18 +638,8 @@ class Conexion {
             usuario::where('dni', $dni)
                     ->update(['nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 'telefono' => $telefono]);
 
-            try {
-
-                curso::where('id', $ciclo)
-                        ->update(['tutor' => $dni]);
-            } catch (\Exception $e) {
-                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Has seleccionado un ciclo con tutor asignado, seleccione otro por favor.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-            }
+            tutor::where('usuarios_dni', $dni)
+                    ->update(['cursos_id_curso' => $ciclo]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Datos del usuario modificados con éxito.
@@ -1474,7 +1464,7 @@ class Conexion {
      * @param type $precio
      * @param type $foto
      */
-    static function ModificarGastoTransporteColectivo($id,  $precio, $foto) {
+    static function ModificarGastoTransporteColectivo($id, $precio, $foto) {
         try {
             $p = colectivo::where('id', $id)
                     ->update([
@@ -1833,7 +1823,6 @@ class Conexion {
         }
     }
 
-    
     static function insertarTransportePropio($tipo, $donde, $kms, $precio) {
 
         try {

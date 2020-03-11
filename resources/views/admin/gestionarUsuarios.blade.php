@@ -67,19 +67,19 @@ Gestionar usuarios
                                                         <fieldset>
                                                             <div>
                                                                 <input type="radio" name="tipoU" id="administrador" value="Administrador" onclick="handleClick(this);">
-                                                                <label for="colectivo">Administrador</label>
+                                                                <label for="administrador">Administrador</label>
                                                             </div>
                                                             <div>
                                                                 <input type="radio" name="tipoU" id="tutor" value="Tutor" onclick="handleClick(this);">
-                                                                <label for="propio">Tutor</label>
+                                                                <label for="tutor">Tutor</label>
                                                             </div>
                                                             <div>
                                                                 <input type="radio" name="tipoU" id="alumno" value="Alumno" onclick="handleClick(this);">
-                                                                <label for="propio">Alumno</label>
+                                                                <label for="alumno">Alumno</label>
                                                             </div>
                                                             <div>
                                                                 <input type="radio" name="tipoU" id="tutorAdministrador" value="TutorAdministrador" onclick="handleClick(this);">
-                                                                <label for="propio">Tutor - Administrador</label>
+                                                                <label for="tutorAdministrador">Tutor - Administrador</label>
                                                             </div>
                                                         </fieldset>
                                                     </label>
@@ -112,8 +112,8 @@ Gestionar usuarios
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
-                                                                *Email:
-                                                                <input type="email" class="form-control form-control-sm" name="email" required/>
+                                                                Móvil:
+                                                                <input type="text" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}"/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Teléfono:
@@ -122,8 +122,8 @@ Gestionar usuarios
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
-                                                                *Móvil:
-                                                                <input type="text" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}" required/>
+                                                                *Email:
+                                                                <input type="email" class="form-control form-control-sm" name="email" required/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Iban:
@@ -180,8 +180,8 @@ Gestionar usuarios
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
-                                                                *Email:
-                                                                <input type="email" class="form-control form-control-sm" name="email" readonly/>
+                                                                Móvil:
+                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}"/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Teléfono:
@@ -190,8 +190,8 @@ Gestionar usuarios
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
-                                                                *Móvil:
-                                                                <input type="tel" class="form-control form-control-sm" name="movil" required/>
+                                                                *Email:
+                                                                <input type="email" class="form-control form-control-sm" name="email" required/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -227,8 +227,8 @@ Gestionar usuarios
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
-                                                                *Email:
-                                                                <input type="email" class="form-control form-control-sm" name="email" required/>
+                                                                Móvil:
+                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}"/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Teléfono:
@@ -237,8 +237,8 @@ Gestionar usuarios
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
-                                                                *Móvil:
-                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}" required/>
+                                                                *Email:
+                                                                <input type="email" class="form-control form-control-sm" name="email" required/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -291,8 +291,8 @@ Gestionar usuarios
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
-                                                                *Email:
-                                                                <input type="email" class="form-control form-control-sm" name="email" required/>
+                                                                Móvil:
+                                                                <input type="tel" class="form-control form-control-sm" name="movil"  pattern="[6-7]{1}[0-9]{8}"/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Teléfono:
@@ -301,8 +301,8 @@ Gestionar usuarios
                                                         </div>
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
-                                                                *Móvil:
-                                                                <input type="tel" class="form-control form-control-sm" name="movil"  pattern="[6-7]{1}[0-9]{8}" required/>
+                                                                *Email:
+                                                                <input type="email" class="form-control form-control-sm" name="email" required/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -363,8 +363,8 @@ Gestionar usuarios
                                 <?php if ($value->rol_id == 3) {
                                     ?>
                                     <td><button type="submit" class="btn editar" name="editar" ></button>
-                                <?php } else {
-                                    ?>
+                                    <?php } else {
+                                        ?>
                                     <td>
                                         <button type="submit" class="btn editar" name="editar" ></button>
                                         <button type="submit" class="btn eliminar" name="eliminar" ></button>

@@ -55,15 +55,19 @@ Gestionar tutores
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
                                 <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" required/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" title="Introduzca un teléfono válido" required pattern="[9]{1}[0-9]{8}"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" title="Introduzca un teléfono válido" required pattern="[6-9]{1}[0-9]{8}"/></td>
                                 <td>
                                     <select name="selectCiclo">
 
+                                        <option value="<?php echo $value->cursos_id_curso ?>" selected>
+                                            <?php echo $value->cursos_id_curso ?>
+                                        </option>
+
                                         <?php
-                                        foreach ($listaCiclos as $value1) {
+                                        foreach ($listaCiclosSinTutor as $value1) {
                                             ?>
-                                            <option value="<?php echo $value1['id_curso'] ?>"<?php if ($value1['id_curso'] == $value->cursos_id_curso) { ?>selected<?php } ?>>
-                                                <?php echo $value1['id_curso'] ?>
+                                            <option value="<?php echo $value1->id_curso; ?>">
+                                                <?php echo $value1->id_curso; ?>
                                             </option>
                                             <?php
                                         }

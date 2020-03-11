@@ -149,9 +149,11 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('gestionarTutores', function () {
         $listaTutores = Conexion::listarTutores();
         $listaCiclos = Conexion::listarCiclos();
+        $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
         $datos = [
             'listaTutores' => $listaTutores,
-            'listaCiclos' => $listaCiclos
+            'listaCiclos' => $listaCiclos,
+            'listaCiclosSinTutor' => $listaCiclosSinTutor
         ];
 
         return view('admin/gestionarTutores', $datos);
