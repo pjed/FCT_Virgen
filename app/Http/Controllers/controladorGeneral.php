@@ -250,21 +250,26 @@ class controladorGeneral extends Controller {
     public function actualizarFoto(Request $req) {
         $rolUsuario = $req->get('usuario');
         $usuario = session()->get('usu');
+        if ($req->file('subir') != null) {
 
-        foreach ($usuario as $value) {
-            $dni = $value['dni'];
-            $email = $value['email'];
-            $pass = $value['pass'];
-            $now = new \DateTime();
-            $updated_at = $now->format('Y-m-d H:i:s');
+            foreach ($usuario as $value) {
+                $dni = $value['dni'];
+                $email = $value['email'];
+                $pass = $value['pass'];
+                $now = new \DateTime();
+                $updated_at = $now->format('Y-m-d H:i:s');
+            }
+            $foto = $req->file('subir')->move('imagenes_perfil', $dni);
+
+            Conexion::actualizarFotoAlumno($dni, $email, $pass, $foto, $updated_at);
+        } else {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Tienes que seleccionar una foto.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
         }
-
-        $foto = $req->file('subir')->move('imagenes_perfil', $dni);
-        Conexion::actualizarFotoAlumno($dni, $email, $pass, $foto, $updated_at);
-
-        $usu = Conexion::existeUsuario($email, $pass);
-
-        session()->put('usu', $usu);
         switch ($rolUsuario) {
             case 'tutor':
                 return view('tutor/perfilTutor');
