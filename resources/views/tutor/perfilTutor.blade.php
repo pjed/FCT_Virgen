@@ -19,6 +19,7 @@ foreach ($usuario as $value) {
     $movil = $value['movil'];
     $iban = $value['iban'];
     $foto = $value['foto'];
+    $email = $value['email'];
 }
 ?>
 <h1 class="text-center">Perfil Usuario</h1>
@@ -26,7 +27,7 @@ foreach ($usuario as $value) {
     <div class="row">
         <div class="col-sm-8 col-md-8 col-lg-8 container">     
             <div class="row">
-                <div class="col-sm-4 col-md-4 col-lg-4 float-left">
+                <div class="col-sm-4 col-md-4 col-lg-6">
                     <form name="foto" action="actualizarFoto" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <input type="hidden" name="usuario" value="tutor"/>
@@ -35,10 +36,15 @@ foreach ($usuario as $value) {
                         <input type="submit" class="btn btn-primary" name="perfil" value="Actualizar Foto">
                     </form>
                 </div>
-                <form name="perfil" action="perfilAl" method="POST">
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                        <div class="col-sm-4 col-md-4 col-lg-4 float-right">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+
+                    <form name="perfil" action="perfilAl" method="POST">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="domicilio">
+                                Domicilio
+                                <input type="text" id="domicilio" disabled name="correo" value="<?php echo $email ?>"><br>
+                            </label>
                             <label for="domicilio">
                                 Domicilio
                                 <input type="text" id="domicilio" name="domicilio" value="<?php echo $domicilio ?>" placeholder="Domicilio" required><br>
@@ -57,8 +63,8 @@ foreach ($usuario as $value) {
                             </label>
                             <input type="submit" class="btn btn-primary" name="perfil" value="Actualizar Perfil">
                         </div>
-                    </div>
-                </form>
+                    </form>                
+                </div>
             </div>
         </div>
     </div>
