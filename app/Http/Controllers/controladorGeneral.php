@@ -120,38 +120,49 @@ class controladorGeneral extends Controller {
      */
     public function olvidarPwd(Request $req) {
         $email_usuario = $req->get('email');
-        $n = Conexion::existeUsuario_Correo($email_usuario);
+        if ($email_usuario != null) {
+            $n = Conexion::existeUsuario_Correo($email_usuario);
 
-        $nombre = null;
-        $apellidos = null;
-        $dni = null;
+            $nombre = null;
+            $apellidos = null;
+            $dni = null;
 
-        foreach ($n as $value) {
-            $nombre = $value['nombre'];
-            $apellidos = $value['apellidos'];
-            $dni = $value['dni'];
-        }
+            foreach ($n as $value) {
+                $nombre = $value['nombre'];
+                $apellidos = $value['apellidos'];
+                $dni = $value['dni'];
+            }
 
-        if ($n != null) { //si existe usuario
-            //genera la contraseña
-            $pass = $this->generateRandomString(5);
-            $passHash = hash('sha256', $pass);
-            //cifrar contraseña
-            Conexion::RecuperarConstrasenia($dni, $passHash);
+            if ($n != null) { //si existe usuario
+                //genera la contraseña
+                $pass = $this->generateRandomString(5);
+                $passHash = hash('sha256', $pass);
+                //cifrar contraseña
+                Conexion::RecuperarConstrasenia($dni, $passHash);
 
 
-            $objDemo = new \stdClass();
-            $objDemo->demo_one = $email_usuario;
-            $objDemo->demo_two = $pass;
-            $objDemo->sender = 'Servicio de recuperación de contraseñas';
-            $objDemo->receiver = $nombre . ', ' . $apellidos;
+                $objDemo = new \stdClass();
+                $objDemo->demo_one = $email_usuario;
+                $objDemo->demo_two = $pass;
+                $objDemo->sender = 'Servicio de recuperación de contraseñas';
+                $objDemo->receiver = $nombre . ', ' . $apellidos;
 
-            Mail::to($email_usuario)->send(new DemoEmail($objDemo));
+                Mail::to($email_usuario)->send(new DemoEmail($objDemo));
 
-            return view('inicioSesion');
+                return view('inicioSesion');
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error el usuario no existe o es incorrecto.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+
+                return view('olvidarPwd');
+            }
         } else {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Error el usuario no existe o es incorrecto.
+                    Introduce el correo, por favor.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
