@@ -594,7 +594,7 @@ class Conexion {
      * @param type $telefono número de teléfono del alumno
      * @param type $iban número iban del alumno
      */
-    static function actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $password, $telefono, $movil, $updated_at) {
+    static function actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $updated_at) {
         try {
             usuario::where('dni', $dni)
                     ->update([
@@ -602,7 +602,6 @@ class Conexion {
                         'apellidos' => $apellidos,
                         'domicilio' => $domicilio,
                         'email' => $email,
-                        'pass' => $password,
                         'telefono' => $telefono,
                         'movil' => $movil,
                         'updated_at' => $updated_at

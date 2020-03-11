@@ -35,7 +35,7 @@ foreach ($usuario as $value) {
                         <input type="submit" class="btn btn-primary" name="perfil" value="Actualizar Foto">
                     </form>
                 </div>
-                <form name="perfil" action="perfilAl" method="POST">
+                <form name="perfil" action="perfilAd" method="POST">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <div class="col-sm-4 col-md-4 col-lg-4 float-right">

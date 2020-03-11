@@ -38,7 +38,7 @@ foreach ($usuario as $value) {
                 </div>
                 <div class="col-sm-4 col-md-4 col-lg-4">
 
-                    <form name="perfil" action="perfilAl" method="POST">
+                    <form name="perfil" action="perfilT" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="domicilio">
