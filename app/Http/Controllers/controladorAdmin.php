@@ -135,6 +135,7 @@ class controladorAdmin extends Controller {
                 $foto = $fot->move('imagenes_gastos/comida', $id);
                 Conexion::ModificarGastoComida($id, $fecha, $importe, $foto);
             }
+            
         }
         if (isset($_REQUEST['eliminar'])) {
             $id = $req->get('ID');
@@ -143,7 +144,24 @@ class controladorAdmin extends Controller {
             if (file_exists($file)) {
                 unlink($file);
             }
-            Conexion::borrarGastoComida($id, $idGasto);
+            
+            //para borrar el gasto y actualizar el total del alumno y ciclo
+//            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($dniAlumno);
+//            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] - $importe;
+//            
+//            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($dniAlumno);
+//            $totalGastoCiclo = 0;
+//            foreach ($totalGastoCicloAntiguo as $a) {
+//                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+//            }
+//
+//            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+//            
+//            Conexion::actualizarTotalGastosAlumno($dniAlumno, $totalGastoAlumno);
+//
+//            Conexion::actualizarTotalGastosCiclo($dniAlumno, $totalGastoCicloNuevo);
+//            
+//            Conexion::borrarGastoComida($id, $idGasto);
         }
 //            editar y borrar transporte propio
         if (isset($_REQUEST['editarP'])) {
@@ -156,6 +174,23 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['eliminarP'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
+            
+            //para borrar el gasto y actualizar el total del alumno y ciclo
+//            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($dniAlumno);
+//            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] - $importe;
+//            
+//            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($dniAlumno);
+//            $totalGastoCiclo = 0;
+//            foreach ($totalGastoCicloAntiguo as $a) {
+//                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+//            }
+//
+//            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+//            
+//            Conexion::actualizarTotalGastosAlumno($dniAlumno, $totalGastoAlumno);
+//
+//            Conexion::actualizarTotalGastosCiclo($dniAlumno, $totalGastoCicloNuevo);
+            
             Conexion::borrarGastoTransportePropio($id, $idTransporte); //hay que mirarlo
         }
 //            editar y borrar transporte colectivo
@@ -179,6 +214,23 @@ class controladorAdmin extends Controller {
             if (file_exists($file)) {
                 unlink($file);
             }
+            
+            //para borrar el gasto y actualizar el total del alumno y ciclo
+//            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($dniAlumno);
+//            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] - $importe;
+//            
+//            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($dniAlumno);
+//            $totalGastoCiclo = 0;
+//            foreach ($totalGastoCicloAntiguo as $a) {
+//                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+//            }
+//
+//            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+//            
+//            Conexion::actualizarTotalGastosAlumno($dniAlumno, $totalGastoAlumno);
+//
+//            Conexion::actualizarTotalGastosCiclo($dniAlumno, $totalGastoCicloNuevo);
+            
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
         }
         $datos = controladorAdmin::paginacionConsultarGastoAlumno();
