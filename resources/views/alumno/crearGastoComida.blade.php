@@ -41,17 +41,7 @@ Crear gasto comida
                 <p>Hacer foto</p>
                 <input type="file" id="fotoTicket" name="fotoTicket"/><br><br>
 
-                <fieldset>
-                    <p>¿Te has desplazado?</p>
-                    <div>
-                        <input type="radio" name="desplazado" id="si" value="1">
-                        <label for="si">Si</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="desplazado" id="no" value="0">
-                        <label for="no">No</label>
-                    </div>
-                </fieldset>
+                
 
             </div>
 
@@ -66,6 +56,25 @@ Crear gasto comida
 
         </div>
 
+        <div class="row justify-content-center">
+
+            <div class="col-md-2">
+
+                <fieldset>
+                    <p>¿Te has desplazado?</p>
+                    <div>
+                        <input type="radio" name="desplazado" id="si" value="1">
+                        <label for="si">Si</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="desplazado" id="no" value="0">
+                        <label for="no">No</label>
+                    </div>
+                </fieldset>
+
+            </div>
+
+        </div>
 
         <div class="row justify-content-center">
 

@@ -56,22 +56,12 @@ Crear gasto transporte
         <div id="gastoPropio">
             <div class="row justify-content-center">
 
-<!--                <div class="col-md-4 col-sm-4 col-lg-4">
-
-                    <p>Kilómetros</p>
-                    <input type="number" id="kms" name="kms" value="" min="0" required>
-
-                    <p>Días</p>
-                    <input type="number" id="diasP" name="diasP" value="" min="0" required>
-
-                </div>  -->
-
-                <div class="col-md-2 col-sm-2 col-lg-2">
+                <div class="col-md-2">
                     
                     <p>Kilómetros</p>
                     <input type="number" id="kms" name="kms" value="" min="0" required>
 
-                    <p>Precio</p>
+                    <p>Precio km</p>
                     <input type="number" id="precioP" name="precioP" value="0.12" readonly>
 
                     <p>Localidad</p>
@@ -81,7 +71,7 @@ Crear gasto transporte
 
             <div class="row justify-content-center"> 
 
-                <div class="col-md-2 col-sm-2">
+                <div class="col-md-2">
 
                     <br><input type="submit" id="guardarP" name="guardarP" value="Guardar">
 
@@ -103,8 +93,6 @@ Crear gasto transporte
                     <img src="{{asset ('images/ticket.png')}}" alt="ticketGasto" class="fotoTicket"><br><br>
                     <p>Hacer foto</p>
                     <input type="file" id="fotoTicket" name="fotoTicket"/><br><br>
-<!--                    <p>Días</p>
-                    <input type="number" id="diasC" name="diasC" value="" min="1" required>-->
 
                 </div>
 
@@ -131,6 +119,5 @@ Crear gasto transporte
         </div>
     </form>
 
-    <!--</form>-->
 </div>
 @endsection

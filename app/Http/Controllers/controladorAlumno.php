@@ -16,8 +16,6 @@ class controladorAlumno extends Controller {
     public function crearGastoComida(Request $req) {
         //ingresar el gasto de comida en la tabla comidas
         $idComida = Conexion::obtenerIdUltimaComidaIngresada() + 1;
-        //$req->file('fotoTicket')->move('imagenes_gastos/comida', $idComida);
-        //$foto = 'imagenes_gastos/comida/' . $idComida;
         $fecha = $req->get('fechaT');
         $importe = $req->get('importeT');
         $desplazamiento = $req->get('desplazado');
@@ -131,10 +129,11 @@ class controladorAlumno extends Controller {
             $kms = $req->get('kms');
             $precio = $req->get('precioP');
             $localidadP = $req->get('locP');
+            $importeTotal = $precio * $kms;
 
             $tipo = 0;
 
-            Conexion::insertarTransportePropio($tipo, $localidadP, $kms, $precio);
+            Conexion::insertarTransportePropio($tipo, $localidadP, $kms, $importeTotal);
 
             //ingresar el gasto de transporte propio en la tabla de gastos
             $usuario = session()->get('usu');
@@ -218,12 +217,12 @@ class controladorAlumno extends Controller {
 
         if (isset($_REQUEST['editarP'])) {
             $kms = $req->get('kms');
-            $precio = $req->get('precio');
+            $precio = $kms * 0.12;
             Conexion::ModificarGastoTransportePropio($id, $precio, $kms);
         }
 
         if (isset($_REQUEST['eliminarP'])) {
-            Conexion::borrarGastoTransportePropio($id, $idTransporte); //hay que mirarlo
+            Conexion::borrarGastoTransportePropio($id, $idTransporte);
         }
 
         if (isset($_REQUEST['editarC'])) {
@@ -243,7 +242,7 @@ class controladorAlumno extends Controller {
             if (file_exists($file)) {
                 unlink($file);
             }
-            Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
+            Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
         }
 
         $n = session()->get('usu');
