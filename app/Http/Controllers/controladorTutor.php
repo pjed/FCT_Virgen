@@ -125,9 +125,26 @@ class controladorTutor extends Controller {
             $id = $req->get('ID');
             $idGasto = $req->get('idGasto');
             $file = $req->get('fotoUrl');
-            if (file_exists($file)) {
+            if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
+            $dniAlumno = session()->get('dniAlumno');
+            //para borrar el gasto y actualizar el total del alumno y ciclo
+            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($dniAlumno);
+            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] - $importe;
+
+            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($dniAlumno);
+            $totalGastoCiclo = 0;
+            foreach ($totalGastoCicloAntiguo as $a) {
+                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+            }
+
+            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+
+            Conexion::actualizarTotalGastosAlumno($dniAlumno, $totalGastoAlumno);
+
+            Conexion::actualizarTotalGastosCiclo($dniAlumno, $totalGastoCicloNuevo);
+
             Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
         }
 //            editar y borrar transporte propio
@@ -141,7 +158,28 @@ class controladorTutor extends Controller {
         }
         if (isset($_REQUEST['eliminarP'])) {
             $id = $req->get('ID');
-            $idTransporte = $req->get('idTransporte');
+            $idTransporte = $req->get('idTransporte');            
+            $importe = $req->get('precio');
+            if (file_exists($file) && $file!='images/ticket.png') {
+                unlink($file);
+            }
+             $dniAlumno = session()->get('dniAlumno');
+            //para borrar el gasto y actualizar el total del alumno y ciclo
+            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($dniAlumno);
+            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] - $importe;
+            
+            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($dniAlumno);
+            $totalGastoCiclo = 0;
+            foreach ($totalGastoCicloAntiguo as $a) {
+                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+            }
+
+            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+            
+            Conexion::actualizarTotalGastosAlumno($dniAlumno, $totalGastoAlumno);
+
+            Conexion::actualizarTotalGastosCiclo($dniAlumno, $totalGastoCicloNuevo);
+            
             Conexion::borrarGastoTransportePropio($id, $idTransporte); //hay que mirarlo
         }
 //            editar y borrar transporte colectivo
@@ -163,9 +201,27 @@ class controladorTutor extends Controller {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
             $file = $req->get('fotoUrl');
-            if (file_exists($file)) {
+            $importe = $req->get('precio');
+            if (file_exists($file) && $file!='images/ticket.png') {
                 unlink($file);
             }
+             $dniAlumno = session()->get('dniAlumno');
+            //para borrar el gasto y actualizar el total del alumno y ciclo
+            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($dniAlumno);
+            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] - $importe;
+            
+            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($dniAlumno);
+            $totalGastoCiclo = 0;
+            foreach ($totalGastoCicloAntiguo as $a) {
+                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+            }
+
+            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+            
+            Conexion::actualizarTotalGastosAlumno($dniAlumno, $totalGastoAlumno);
+
+            Conexion::actualizarTotalGastosCiclo($dniAlumno, $totalGastoCicloNuevo);
+            
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
         }
         $datos = controladorTutor::enviarConsultarGastoAlumno();
@@ -269,10 +325,10 @@ class controladorTutor extends Controller {
             $datos_ciclo = Conexion::obtenerDatosCiclo($curso);
             $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
             $datos_director = Conexion::obtenerDatosDirector();
-            
+
             $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
             $cuantos_alumnos_gastos = count($alumnos_gastos);
-            
+
             if ($cuantos_alumnos_gastos != 0) {
                 $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
             } else {
@@ -297,10 +353,10 @@ class controladorTutor extends Controller {
             $datos_ciclo = Conexion::obtenerDatosCiclo($curso);
             $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
             $datos_director = Conexion::obtenerDatosDirector();
-            
+
             $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
             $cuantos_alumnos_gastos = count($alumnos_gastos);
-            
+
             if ($cuantos_alumnos_gastos != 0) {
                 $alumnos_gastos = Conexion::obtenerAlumnosGastos($curso);
             } else {

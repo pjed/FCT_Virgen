@@ -176,11 +176,15 @@ class controladorAlumno extends Controller {
      * @return type
      */
     public function gestionarGastoComida(Request $req) {
+        $n = session()->get('usu');
+        foreach ($n as $u) {
+            $dniAlumno = $u['dni'];
+        }
         $id = $req->get('ID');
         $idGasto = $req->get('idGasto');
+        $importe = $req->get('importe');
         if (isset($_REQUEST['editar'])) {
             $fecha = $req->get('fecha');
-            $importe = $req->get('importe');
             $fot = $req->file('foto');
 
             if ($fot == null) {
@@ -192,15 +196,29 @@ class controladorAlumno extends Controller {
         }
         if (isset($_REQUEST['eliminar'])) {
             $file = $req->get('fotoUrl');
-            if (file_exists($file)) {
+            if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
+            
+            //para borrar el gasto y actualizar el total del alumno y ciclo
+            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($dniAlumno);
+            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] - $importe;
+
+            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($dniAlumno);
+            $totalGastoCiclo = 0;
+            foreach ($totalGastoCicloAntiguo as $a) {
+                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+            }
+
+            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+
+            Conexion::actualizarTotalGastosAlumno($dniAlumno, $totalGastoAlumno);
+
+            Conexion::actualizarTotalGastosCiclo($dniAlumno, $totalGastoCicloNuevo);
+
             Conexion::borrarGastoComida($id, $idGasto);
         }
-        $n = session()->get('usu');
-        foreach ($n as $u) {
-            $dniAlumno = $u['dni'];
-        }
+        
         $gastosAlumno = Conexion::listarGastosComidasPagination($dniAlumno);
         return view('alumno/gestionarGastosComida', ['gastosAlumno' => $gastosAlumno]);
     }
@@ -212,6 +230,10 @@ class controladorAlumno extends Controller {
      * @return type
      */
     public function gestionarGastosTransporte(Request $req) {
+        $n = session()->get('usu');
+        foreach ($n as $u) {
+            $dniAlumno = $u['dni'];
+        }
         $id = $req->get('ID');
         $idTransporte = $req->get('idTransporte');
 
@@ -239,15 +261,27 @@ class controladorAlumno extends Controller {
 
         if (isset($_REQUEST['eliminarC'])) {
             $file = $req->get('fotoUrl');
-            if (file_exists($file)) {
+            $importe = $req->get('precio');
+            if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
-        }
+            //para borrar el gasto y actualizar el total del alumno y ciclo
+            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($dniAlumno);
+            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] - $importe;
 
-        $n = session()->get('usu');
-        foreach ($n as $u) {
-            $dniAlumno = $u['dni'];
+            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($dniAlumno);
+            $totalGastoCiclo = 0;
+            foreach ($totalGastoCicloAntiguo as $a) {
+                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+            }
+
+            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+
+            Conexion::actualizarTotalGastosAlumno($dniAlumno, $totalGastoAlumno);
+
+            Conexion::actualizarTotalGastosCiclo($dniAlumno, $totalGastoCicloNuevo);
+
+            Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
         }
         $gt = Conexion::listarGastosTransportes($dniAlumno);
         $colectivo = null;
