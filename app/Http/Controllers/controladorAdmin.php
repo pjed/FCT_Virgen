@@ -177,20 +177,20 @@ class controladorAdmin extends Controller {
             
              $dniAlumno = session()->get('dniAlumno');
             //para borrar el gasto y actualizar el total del alumno y ciclo
-//            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($dniAlumno);
-//            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] - $importe;
-//            
-//            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($dniAlumno);
-//            $totalGastoCiclo = 0;
-//            foreach ($totalGastoCicloAntiguo as $a) {
-//                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
-//            }
-//
-//            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
-//            
-//            Conexion::actualizarTotalGastosAlumno($dniAlumno, $totalGastoAlumno);
-//
-//            Conexion::actualizarTotalGastosCiclo($dniAlumno, $totalGastoCicloNuevo);
+            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($dniAlumno);
+            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] - $importe;
+
+            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($dniAlumno);
+            $totalGastoCiclo = 0;
+            foreach ($totalGastoCicloAntiguo as $a) {
+                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+            }
+
+            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+
+            Conexion::actualizarTotalGastosAlumno($dniAlumno, $totalGastoAlumno);
+
+            Conexion::actualizarTotalGastosCiclo($dniAlumno, $totalGastoCicloNuevo);
             
             Conexion::borrarGastoTransportePropio($id, $idTransporte); //hay que mirarlo
         }
@@ -218,20 +218,20 @@ class controladorAdmin extends Controller {
             
              $dniAlumno = session()->get('dniAlumno');
             //para borrar el gasto y actualizar el total del alumno y ciclo
-//            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($dniAlumno);
-//            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] - $importe;
-//            
-//            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($dniAlumno);
-//            $totalGastoCiclo = 0;
-//            foreach ($totalGastoCicloAntiguo as $a) {
-//                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
-//            }
-//
-//            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
-//            
-//            Conexion::actualizarTotalGastosAlumno($dniAlumno, $totalGastoAlumno);
-//
-//            Conexion::actualizarTotalGastosCiclo($dniAlumno, $totalGastoCicloNuevo);
+            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($dniAlumno);
+            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] - $importe;
+            
+            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($dniAlumno);
+            $totalGastoCiclo = 0;
+            foreach ($totalGastoCicloAntiguo as $a) {
+                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
+            }
+
+            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
+            
+            Conexion::actualizarTotalGastosAlumno($dniAlumno, $totalGastoAlumno);
+
+            Conexion::actualizarTotalGastosCiclo($dniAlumno, $totalGastoCicloNuevo);
             
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
         }
