@@ -48,7 +48,7 @@ class controladorGeneral extends Controller {
                     session()->put('rol', 1);
                     echo '
                   <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    Has inicado sesion como administrador
+                    Has iniciado sesión como administrador
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -67,7 +67,7 @@ class controladorGeneral extends Controller {
                     session()->put('rol', 2);
                     echo '
                   <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    Has inicado sesion como tutor
+                    Has iniciado sesión como tutor
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -85,7 +85,7 @@ class controladorGeneral extends Controller {
                 } else if ($rol == 3) {//alumno                
                     session()->put('rol', 3);
                     echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    Has inicado sesion como alumno
+                    Has iniciado sesión como alumno
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -104,7 +104,7 @@ class controladorGeneral extends Controller {
                     session()->put('rol', 4);
                     echo '
                   <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    Has inicado sesion como administrador
+                    Has iniciado sesión como administrador
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
