@@ -120,11 +120,13 @@
                     </div>
                 </div>
                 <div class="col-5">
-                    <p class="text-center">
-                        Marina Estefanía Flores Fernández
-                        <br>Pedro Javier Espinosa Duque<br>
-                        Manuel Ruiz González
-                    </p>
+                    <div class="row h-100 justify-content-center align-items-center">
+                        <p class="text-center">
+                            Marina Estefanía Flores Fernández
+                            <br>Pedro Javier Espinosa Duque<br>
+                            Manuel Ruiz González
+                        </p>
+                    </div>
                 </div>
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
@@ -132,8 +134,10 @@
                     </div>
                 </div>
                 <div class="col-1">
-                    <button type="button" class="btn" id="info"  data-toggle="modal" data-target="#exampleModal">
-                    </button>
+                    <div class="row h-100 justify-content-center align-items-center">
+                        <button type="button" class="btn" id="info"  data-toggle="modal" data-target="#exampleModal">
+                        </button>
+                    </div>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">
