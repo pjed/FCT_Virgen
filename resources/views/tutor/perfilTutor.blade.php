@@ -42,8 +42,8 @@ foreach ($usuario as $value) {
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="domicilio">
-                                Domicilio
-                                <input type="text" id="domicilio" disabled name="correo" value="<?php echo $email ?>"><br>
+                                Correo
+                                <input type="text" id="correo" disabled name="correo" value="<?php echo $email ?>"><br>
                             </label>
                             <label for="domicilio">
                                 Domicilio
