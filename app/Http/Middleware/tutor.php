@@ -18,7 +18,7 @@ class tutor {
         $rol1 = session()->get('rol1');
         //comprobar si eres tutor
         foreach ($n as $u) {
-            if ($rol = $u['rol'] == 2 || $rol1 == 2) {
+            if ($u['rol'] == 2 || $rol1 == 2) {
                 return $next($request);
             } else {
                 abort(518);

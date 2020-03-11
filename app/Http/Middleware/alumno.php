@@ -17,7 +17,7 @@ class alumno {
         $n = session()->get('usu');
         //comprobar si eres alumno
         foreach ($n as $u) {
-            if ($rol = $u['rol'] == 3) {
+            if ($u['rol'] == 3) {
                 return $next($request);
             } else {
                 abort(518);
