@@ -69,7 +69,7 @@ $rol1 = session()->get('rol');
                     </div>
 
                     <div class="col-1 text-center">
-                        <form name="perfil" action="perfilT1"  method="post">
+                        <form name="perfil" action="perfilAl1"  method="post">
                             {{ csrf_field() }}  
                             <?php
                             $usuario = session()->get('usu');

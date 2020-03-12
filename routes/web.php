@@ -41,6 +41,8 @@ Route::group(['middleware' => ['general']], function() {
     Route::get('cerrarSesion', function () {
         return view('518'); //Error 404 NOT FOUND
     });
+    
+    Route::post('actualizarFoto', 'controladorGeneral@actualizarFoto');
 });
 
 
@@ -242,7 +244,6 @@ Route::group(['middleware' => ['alumno']], function() {
     });
     Route::post('perfilAl1', 'controladorGeneral@perfilAl'); //redirige al perfil
     Route::post('perfilAl', 'controladorAlumno@perfil');
-    Route::post('actualizarFoto', 'controladorGeneral@actualizarFoto');
     Route::post('crearGastoComida', 'controladorAlumno@crearGastoComida');
     Route::post('crearGastoTransporte', 'controladorAlumno@crearGastoTransporte');
     Route::post('gestionarGastosComida', 'controladorAlumno@gestionarGastoComida');

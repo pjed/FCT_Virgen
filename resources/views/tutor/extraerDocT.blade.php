@@ -37,11 +37,11 @@ Extraer Documentos
                     <div class="form-group">
                         <label>
                             Grupo:      
-                            <input type="text" id="id_curso" class="form-control form-control-sm form-control-md" name="id_curso" value="<?php echo $key['id_curso']; ?>"/>
+                            <input type="text" id="id_curso" class="form-control form-control-sm form-control-md" name="id_curso" value="<?php echo $key['id_curso']; ?>" readonly/>
                         </label>
                         <label>
                             Tutor:      
-                            <input type="text" id="nom_ape_tutor" class="form-control form-control-sm form-control-md" name="nom_ape_tutor" value="<?php echo $key['nombre_tutor'] . ', ' . $key['apellido_tutor']; ?>"/>
+                            <input type="text" id="nom_ape_tutor" class="form-control form-control-sm form-control-md" name="nom_ape_tutor" value="<?php echo $key['nombre_tutor'] . ', ' . $key['apellido_tutor']; ?>" readonly/>
                             <input type="hidden" id="dni_tutor" class="form-control form-control-sm form-control-md" name="dni_tutor" value="<?php echo $key['dni_tutor']; ?>"/>
                         </label>
                     </div>

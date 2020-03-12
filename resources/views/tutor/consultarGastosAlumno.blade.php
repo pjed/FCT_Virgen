@@ -114,9 +114,9 @@ Consultar Gastos Alumnos
                 <table class="table table-sm table-striped  table-hover table-bordered">
                     <thead class="thead-dark">
                         <tr> 
-                            <th>Donde es</th>                     
+                            <th>Donde es</th>    
+                            <th>Importe</th>                 
                             <th>Foto</th>
-                            <th>Importe</th>
                         </tr>
                     </thead>
                     <tbody>

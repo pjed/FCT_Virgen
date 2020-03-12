@@ -6,8 +6,6 @@ Recuperar contraseña
 
 @section('contenido') 
 <h1 class="text-center">Recuperar contraseña</h1>
-
-
 <div class="col-6 container text-center">
     <div class="row h-100 justify-content-center align-items-center">
         <div class="col-6">                   

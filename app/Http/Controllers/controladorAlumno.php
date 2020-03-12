@@ -176,11 +176,15 @@ class controladorAlumno extends Controller {
      * @return type
      */
     public function gestionarGastoComida(Request $req) {
+        $n = session()->get('usu');
+        foreach ($n as $u) {
+            $dniAlumno = $u['dni'];
+        }
         $id = $req->get('ID');
         $idGasto = $req->get('idGasto');
+        $importe = $req->get('importe');
         if (isset($_REQUEST['editar'])) {
             $fecha = $req->get('fecha');
-            $importe = $req->get('importe');
             $fot = $req->file('foto');
 
             if ($fot == null) {
@@ -196,11 +200,7 @@ class controladorAlumno extends Controller {
                 unlink($file);
             }
             Conexion::borrarGastoComida($id, $idGasto);
-        }
-        $n = session()->get('usu');
-        foreach ($n as $u) {
-            $dniAlumno = $u['dni'];
-        }
+        }        
         $gastosAlumno = Conexion::listarGastosComidasPagination($dniAlumno);
         return view('alumno/gestionarGastosComida', ['gastosAlumno' => $gastosAlumno]);
     }
@@ -212,6 +212,10 @@ class controladorAlumno extends Controller {
      * @return type
      */
     public function gestionarGastosTransporte(Request $req) {
+        $n = session()->get('usu');
+        foreach ($n as $u) {
+            $dniAlumno = $u['dni'];
+        }
         $id = $req->get('ID');
         $idTransporte = $req->get('idTransporte');
 
@@ -239,15 +243,11 @@ class controladorAlumno extends Controller {
 
         if (isset($_REQUEST['eliminarC'])) {
             $file = $req->get('fotoUrl');
+            $importe = $req->get('precio');
             if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
-        }
-
-        $n = session()->get('usu');
-        foreach ($n as $u) {
-            $dniAlumno = $u['dni'];
         }
         $gt = Conexion::listarGastosTransportes($dniAlumno);
         $colectivo = null;
