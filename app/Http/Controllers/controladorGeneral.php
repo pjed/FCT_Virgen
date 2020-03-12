@@ -207,8 +207,9 @@ class controladorGeneral extends Controller {
      * @param Request $req
      * @return type
      */
-    public function perfilAl(Request $req) {
-        return view('alumno/perfilAlumno');
+    public function perfilAl(Request $req) {        
+        $usu = session()->get('usu');
+        return view('alumno/perfilAlumno',['usu' => $usu]);
     }
 
     /**
@@ -218,7 +219,8 @@ class controladorGeneral extends Controller {
      * @return type
      */
     public function perfilT(Request $req) {
-        return view('tutor/perfilTutor');
+        $usu = session()->get('usu');
+        return view('tutor/perfilTutor',['usu' => $usu]);
     }
 
     /**
@@ -227,8 +229,9 @@ class controladorGeneral extends Controller {
      * @param Request $req
      * @return type
      */
-    public function perfilAd(Request $req) {
-        return view('admin/perfilAdmin');
+    public function perfilAd(Request $req) {        
+        $usu = session()->get('usu');
+        return view('admin/perfilAdmin',['usu' => $usu]);
     }
 
     /**
@@ -250,10 +253,10 @@ class controladorGeneral extends Controller {
     public function actualizarFoto(Request $req) {
 
         $rolUsuario = $req->get('usuario');
-        $usuario = session()->get('usu');
+        $usu = session()->get('usu');
         if ($req->file('subir') != null) {
 
-            foreach ($usuario as $value) {
+            foreach ($usu as $value) {
                 $dni = $value['dni'];
                 $email = $value['email'];
                 $pass = $value['pass'];
@@ -276,13 +279,13 @@ class controladorGeneral extends Controller {
         }
         switch ($rolUsuario) {
             case 'tutor':
-                return view('tutor/perfilTutor');
+                return view('tutor/perfilTutor',['usu' => $usu]);
                 break;
             case 'admin':
-                return view('admin/perfilAdmin');
+                return view('admin/perfilAdmin',['usu' => $usu]);
                 break;
             case 'alumno':
-                return view('alumno/perfilAlumno');
+                return view('alumno/perfilAlumno',['usu' => $usu]);
                 break;
         }
     }

@@ -313,7 +313,7 @@ class controladorAlumno extends Controller {
 
         session()->put('usu', $usu);
 
-        return view('alumno/perfilAlumno');
+        return view('alumno/perfilAlumno',['usu' => $usu]);
     }
 
 }
