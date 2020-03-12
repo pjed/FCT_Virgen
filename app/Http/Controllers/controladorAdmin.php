@@ -140,7 +140,7 @@ class controladorAdmin extends Controller {
             $id = $req->get('ID');
             $idGasto = $req->get('idGasto');
             $file = $req->get('fotoUrl');
-            if (file_exists($file)) {
+           if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
             Conexion::borrarGastoComida($id, $idGasto);
@@ -176,7 +176,7 @@ class controladorAdmin extends Controller {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
             $file = $req->get('fotoUrl');
-            if (file_exists($file)) {
+            if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
@@ -386,7 +386,7 @@ class controladorAdmin extends Controller {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
             $kms = $req->get('kms');
-            $precio = $req->get('precio');
+            $precio = $kms * 0.12;
             Conexion::ModificarGastoTransportePropio($id, $precio, $kms);
         }
         if (isset($_REQUEST['eliminarP'])) {

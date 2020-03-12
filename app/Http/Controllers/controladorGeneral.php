@@ -44,6 +44,15 @@ class controladorGeneral extends Controller {
                     $rol = 4;
                 }
 
+                if (hash('sha256', 1) == $passHash) {
+                    echo '
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Su contraseña no es segura, debe cambiarla desde su perfil.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
                 if ($rol == 1) {//admin
                     session()->put('rol', 1);
                     echo '
@@ -53,15 +62,6 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                    if (hash('sha256', 1) == $passHash) {
-                        echo '
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    Su contraseña no es segura, debe cambiarla desde su perfil.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-                    }
                     return view('admin.bienvenidaAd');
                 } else if ($rol == 2) { //tutor                
                     session()->put('rol', 2);
@@ -72,15 +72,6 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>  ';
-                    if (hash('sha256', 1) == $passHash) {
-                        echo '
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    Su contraseña no es segura, debe cambiarla desde su perfil.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-                    }
                     return view('tutor.bienvenidaT');
                 } else if ($rol == 3) {//alumno                
                     session()->put('rol', 3);
@@ -90,15 +81,6 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                    if (hash('sha256', 1) == $passHash) {
-                        echo '
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    Su contraseña no es segura, debe cambiarla desde su perfil.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-                    }
                     return view('alumno.bienvenidaAl');
                 } else if ($rol == 4) {//tutor-admin                              
                     session()->put('rol', 4);
@@ -109,15 +91,6 @@ class controladorGeneral extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-                    if (hash('sha256', 1) == $passHash) {
-                        echo '
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    Su contraseña no es segura, debe cambiarla desde su perfil.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-                    }
                     return view('admin.bienvenidaAd');
                 }
             } else {
@@ -129,6 +102,7 @@ class controladorGeneral extends Controller {
                   </div>';
                 return view('inicioSesion');
             }
+        } else {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Algún campo está vacio.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -264,23 +238,32 @@ class controladorGeneral extends Controller {
      * @return type
      */
     public function actualizarFoto(Request $req) {
+
         $rolUsuario = $req->get('usuario');
         $usuario = session()->get('usu');
+        if ($req->file('subir') != null) {
 
-        foreach ($usuario as $value) {
-            $dni = $value['dni'];
-            $email = $value['email'];
-            $pass = $value['pass'];
-            $now = new \DateTime();
-            $updated_at = $now->format('Y-m-d H:i:s');
+            foreach ($usuario as $value) {
+                $dni = $value['dni'];
+                $email = $value['email'];
+                $pass = $value['pass'];
+                $now = new \DateTime();
+                $updated_at = $now->format('Y-m-d H:i:s');
+            }
+
+            $foto = $req->file('subir')->move('imagenes_perfil', $dni);
+            Conexion::actualizarFotoAlumno($dni, $email, $pass, $foto, $updated_at);
+
+            $usu = Conexion::existeUsuario($email, $pass);
+            session()->put('usu', $usu);
+        } else {
+            echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    Sube una foto por favor.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
         }
-
-        $foto = $req->file('subir')->move('imagenes_perfil', $dni);
-        Conexion::actualizarFotoAlumno($dni, $email, $pass, $foto, $updated_at);
-
-        $usu = Conexion::existeUsuario($email, $pass);
-
-        session()->put('usu', $usu);
         switch ($rolUsuario) {
             case 'tutor':
                 return view('tutor/perfilTutor');

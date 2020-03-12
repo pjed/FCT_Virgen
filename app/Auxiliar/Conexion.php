@@ -570,14 +570,14 @@ class Conexion {
             ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito usuario.
+                    Modificada la foto del usuario con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al modificar usuario.
+                    Error al modificar foto del usuario.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>

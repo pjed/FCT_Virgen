@@ -197,8 +197,7 @@ Consultar Gastos Alumnos
                 <table class="table  table-sm  table-striped  table-hover table-bordered">
                     <thead class="thead-dark">
                         <tr>   
-                            <th>Donde es</th>
-                            <th>Nº dias</th>                        
+                            <th>Donde es</th>                       
                             <th>KMS</th>
                             <th>Importe</th>
                         </tr>

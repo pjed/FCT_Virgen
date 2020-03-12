@@ -51,7 +51,7 @@ foreach ($usuario as $value) {
                             </label>
                             <label for="password1">
                                 Contraseña
-                                <input type="password" id="password1" name="pass" value="" placeholder="Contraseña" required><br>
+                                <input type="password" id="password1" name="pass" value="" placeholder="Contraseña"><br>
                             </label>
                             <label for="telefono">
                                 Teléfono

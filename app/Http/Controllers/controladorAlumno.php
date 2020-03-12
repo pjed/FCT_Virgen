@@ -192,7 +192,7 @@ class controladorAlumno extends Controller {
         }
         if (isset($_REQUEST['eliminar'])) {
             $file = $req->get('fotoUrl');
-            if (file_exists($file)) {
+            if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
             Conexion::borrarGastoComida($id, $idGasto);
@@ -239,7 +239,7 @@ class controladorAlumno extends Controller {
 
         if (isset($_REQUEST['eliminarC'])) {
             $file = $req->get('fotoUrl');
-            if (file_exists($file)) {
+            if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte);

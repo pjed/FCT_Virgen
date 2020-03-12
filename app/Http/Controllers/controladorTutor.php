@@ -125,7 +125,7 @@ class controladorTutor extends Controller {
             $id = $req->get('ID');
             $idGasto = $req->get('idGasto');
             $file = $req->get('fotoUrl');
-            if (file_exists($file)) {
+            if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
             Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
@@ -134,10 +134,9 @@ class controladorTutor extends Controller {
         if (isset($_REQUEST['editarP'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
-            $n_diasP = $req->get('n_diasP');
             $kms = $req->get('kms');
-            $precio = $req->get('precio');
-            Conexion::ModificarGastoTransportePropio($id, $n_diasP, $precio, $kms);
+            $precio = $kms * 0.12;
+            Conexion::ModificarGastoTransportePropio($id, $precio, $kms);
         }
         if (isset($_REQUEST['eliminarP'])) {
             $id = $req->get('ID');
@@ -148,22 +147,21 @@ class controladorTutor extends Controller {
         if (isset($_REQUEST['editarC'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
-            $n_diasC = $req->get('n_diasC');
             $precio = $req->get('precio');
             $fot = $req->file('foto');
 
             if ($fot == null) {
-                Conexion::ModificarGastoTransporteColectivoSinFoto($id, $n_diasC, $precio);
+                Conexion::ModificarGastoTransporteColectivoSinFoto($id, $precio);
             } else {
                 $foto = $fot->move('imagenes_gastos/transporte', $idTransporte);
-                Conexion::ModificarGastoTransporteColectivo($id, $n_diasC, $precio, $foto);
+                Conexion::ModificarGastoTransporteColectivo($id, $precio, $foto);
             }
         }
         if (isset($_REQUEST['eliminarC'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
             $file = $req->get('fotoUrl');
-            if (file_exists($file)) {
+            if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
