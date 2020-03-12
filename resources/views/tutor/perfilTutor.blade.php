@@ -6,14 +6,8 @@ Perfil
 
 @section('contenido') 
 <?php
-$usuario = session()->get('usu');
-$domicilio = null;
-$telefono = null;
-$movil = null;
-$iban = null;
-$foto = null;
 
-foreach ($usuario as $value) {
+foreach ($usu as $value) {
     $domicilio = $value['domicilio'];
     $telefono = $value['tel'];
     $movil = $value['movil'];

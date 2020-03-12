@@ -834,7 +834,7 @@ class controladorAdmin extends Controller {
 
         session()->put('usu', $usu);
 
-        return view('admin/perfilAdmin');
+        return view('admin/perfilAdmin',['usu' => $usu]);
     }
 
     /**

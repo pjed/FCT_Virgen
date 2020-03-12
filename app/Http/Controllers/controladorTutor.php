@@ -48,7 +48,8 @@ class controladorTutor extends Controller {
         $usu = Conexion::existeUsuario($email, $clave);
 
         session()->put('usu', $usu);
-        return view('tutor/perfilTutor');
+        
+        return view('tutor/perfilTutor',['usu' => $usu]);
     }
 
     /**
