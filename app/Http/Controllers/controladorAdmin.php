@@ -657,11 +657,13 @@ class controladorAdmin extends Controller {
             $curso = $req->get("ciclo");
 
             $alumnos_curso = Conexion::obtenerAlumnosTutor($curso);
+            $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
+
             $cuantos_alumnos = count($alumnos_curso);
 
             if ($cuantos_alumnos != 0) {
                 foreach ($alumnos_curso as $alumno) {
-                    $lista_documentos[] = Documentos::GenerarRecibiTodosAlumnosDUAL($alumno->dni);
+                    $lista_documentos[] = Documentos::GenerarRecibiTodosAlumnosAdminDUAL($alumno->dni, $datos_tutor);
                 }
             } else {
                 $lista_documentos = null;
@@ -682,11 +684,12 @@ class controladorAdmin extends Controller {
             $curso = $req->get("ciclo");
 
             $alumnos_curso = Conexion::obtenerAlumnosTutor($curso);
+            $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
             $cuantos_alumnos = count($alumnos_curso);
 
             if ($cuantos_alumnos != 0) {
                 foreach ($alumnos_curso as $alumno) {
-                    $lista_documentos[] = Documentos::GenerarRecibiTodosAlumnos($alumno->dni);
+                    $lista_documentos[] = Documentos::GenerarRecibiTodosAdminAlumnos($alumno->dni, $datos_tutor);
                 }
             } else {
                 $lista_documentos = null;
@@ -708,6 +711,7 @@ class controladorAdmin extends Controller {
 
             $curso = $req->get("ciclo");
             $anio = Conexion::obtenerAnioAcademico();
+            $datos_tutor = Conexion::obtenerDatosTutorCiclo($curso);
             $alumnos_memoria = Conexion::obtenerAlumnosTutorMemoria($curso);
             $cuantos_alumnos_memoria = count($alumnos_memoria);
 
