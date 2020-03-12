@@ -21,7 +21,7 @@ class admin {
             if ($u['rol'] == 1 || $rol1 == 1) {
                 return $next($request);
             } else {
-                abort(518);
+                abort(404);
                 //return view('errors/518');
             }
         }

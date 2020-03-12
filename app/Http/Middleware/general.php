@@ -20,7 +20,7 @@ class general {
         if ($n != null) {
             return $next($request);
         } else {
-            abort(518);
+            abort(404);
             //return view('errors/518');
         }
     }

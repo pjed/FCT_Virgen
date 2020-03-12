@@ -20,7 +20,7 @@ class tutorAdmin {
         if (($rol2 == 4 && $rol1 == 1) || ($rol2 == 4 && $rol1 == 2)) {
             return $next($request);
         } else {
-            abort(518);
+            abort(404);
             //return view('errors/518');
         }
     }

@@ -26,7 +26,7 @@ Route::get('inicioSesion', function () {
 });
 Route::post('VolverIndex', 'controladorGeneral@VolverIndex');
 Route::get('VolverIndex', function () {
-    return view('518'); //Error 404 NOT FOUND
+    return view(404); //Error 404 NOT FOUND
 });
 
 Route::get('olvidarPwd', function () {

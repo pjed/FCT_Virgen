@@ -20,7 +20,7 @@ class alumno {
             if ($u['rol'] == 3) {
                 return $next($request);
             } else {
-                abort(518);
+                abort(404);
                 //return view('errors/518');
             }
         }
