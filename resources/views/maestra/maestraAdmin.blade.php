@@ -54,7 +54,6 @@ $rol1 = session()->get('rol');
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar BBDD</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="crearBBDD">Crear BBDD</a>
                                         <a class="dropdown-item" href="importarDatos">Importar Datos</a>
                                     </div>
                                 </li>
