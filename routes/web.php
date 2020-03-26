@@ -41,7 +41,7 @@ Route::group(['middleware' => ['general']], function() {
     Route::get('cerrarSesion', function () {
         return view('518'); //Error 404 NOT FOUND
     });
-    
+
     Route::post('actualizarFoto', 'controladorGeneral@actualizarFoto');
 });
 
@@ -97,6 +97,8 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('importarDatos', function () {
         return view('admin/importarDatos');
     });
+    Route::get('dropzone', 'DropzoneController@dropzone');
+    Route::post('dropzone/store', 'DropzoneController@dropzoneStore')->name('dropzone.store');
     Route::get('extraerDocA', function () {
         $l1 = Conexion::listaCursos();
         $datos = [
