@@ -24,7 +24,10 @@ Importar Datos
         Dropzone.options.imageUpload = {
             maxFilesize: 5, //MB
             acceptedFiles: ".sql",
-            addRemoveLinks: true
+            addRemoveLinks: true,
+            removedfile: function(file) {
+            file.previewElement.remove();
+}
         };
 </script>
 
