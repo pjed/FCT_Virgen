@@ -145,7 +145,7 @@ class controladorAdmin extends Controller {
             if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoComida($id, $idGasto);
+            Conexion::borrarGastoComida($id);
         }
 //            editar y borrar transporte propio
         if (isset($_REQUEST['editarP'])) {
@@ -181,7 +181,7 @@ class controladorAdmin extends Controller {
             if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
+            Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
         }
         $datos = controladorAdmin::paginacionConsultarGastoAlumno();
         return view('admin/consultarGastos', $datos);

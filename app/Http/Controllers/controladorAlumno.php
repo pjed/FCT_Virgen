@@ -154,7 +154,7 @@ class controladorAlumno extends Controller {
             if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoComida($id, $idGasto);
+            Conexion::borrarGastoComida($id);
         }        
         $gastosAlumno = Conexion::listarGastosComidasPagination($dniAlumno);
         return view('alumno/gestionarGastosComida', ['gastosAlumno' => $gastosAlumno]);

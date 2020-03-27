@@ -1380,11 +1380,12 @@ class Conexion {
      * Método para borrar los gastos de comida del alumno
      * @param type $id
      */
-    static function borrarGastoComida($id, $idGasto) {
+    static function borrarGastoComida($id) {
         try {
-            $c = \DB::update('update gastos set comidas_id = 0 where id = ? and comidas_id=?', [$idGasto, $id]);
-            $p = comida::where('id', $id)
-                    ->delete();
+            //eliminar tabla comida
+            comida::where('id', $id)->delete();
+            //eliminar tabla gasto
+            gasto::where('comidas_id', $id)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1405,8 +1406,13 @@ class Conexion {
      * Método para borrar los gastos de transporte colectivo del alumno
      * @param type $id
      */
-    static function borrarGastoTransporteColectivo($id) {
+    static function borrarGastoTransporteColectivo($id, $idTransporte) {
         try {
+            //eliminar tabla transporte
+            transporte::where('id', $idTransporte)->delete();
+            //eliminar tabla gasto
+            gasto::where('transportes_id', $idTransporte)->delete();
+            //eliminar tabla colectivo
             colectivo::where('id', $id)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
@@ -1482,8 +1488,13 @@ class Conexion {
      * Método para borrar los gastos de transporte propio del alumno
      * @param type $id
      */
-    static function borrarGastoTransportePropio($id) {
+    static function borrarGastoTransportePropio($id,$idTransporte) {
         try {
+            //eliminar tabla transporte
+            transporte::where('id', $idTransporte)->delete();
+            //eliminar tabla gasto
+            gasto::where('transportes_id', $idTransporte)->delete();
+            //eliminar tabla propio
             propio::where('id', $id)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.

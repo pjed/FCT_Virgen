@@ -129,7 +129,7 @@ class controladorTutor extends Controller {
             if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
+            Conexion::borrarGastoComida($id);
         }
 //            editar y borrar transporte propio
         if (isset($_REQUEST['editarP'])) {
@@ -146,7 +146,7 @@ class controladorTutor extends Controller {
             if (file_exists($file) && $file!='images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoTransportePropio($id, $idTransporte); //hay que mirarlo
+            Conexion::borrarGastoTransportePropio($id, $idTransporte);
         }
 //            editar y borrar transporte colectivo
         if (isset($_REQUEST['editarC'])) {
@@ -170,7 +170,7 @@ class controladorTutor extends Controller {
             if (file_exists($file) && $file!='images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
+            Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
         }
         $datos = controladorTutor::enviarConsultarGastoAlumno();
         return view('tutor/consultarGastosAlumno', $datos);
@@ -477,7 +477,6 @@ class controladorTutor extends Controller {
                     </button>
                   </div>';
                 }
-                Conexion::insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $fechaInicio, $fechaFin);
             } else {
                 echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Algún campo está vacio.
