@@ -45,7 +45,7 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['editar'])) {
             Conexion::ModificarCurso($id, $descripcion, $anioAcademico, $familia, $horas);
         }
-        if (isset($_REQUEST['eliminar'])) {            
+        if (isset($_REQUEST['eliminar'])) {
             Conexion::borrarCurso($id);
         }
         $l = Conexion::listaCursosPagination();
@@ -381,7 +381,7 @@ class controladorAdmin extends Controller {
             if (file_exists($file) && $file != "images/ticket.png") {
                 unlink($file);
             }
-            Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
+            Conexion::borrarGastoComida($id);
         }
 //            editar y borrar transporte propio
         if (isset($_REQUEST['editarP'])) {
@@ -394,7 +394,7 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['eliminarP'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
-            Conexion::borrarGastoTransportePropio($id, $idTransporte); //hay que mirarlo
+            Conexion::borrarGastoTransportePropio($id, $idTransporte);
         }
 //            editar y borrar transporte colectivo
         if (isset($_REQUEST['editarC'])) {
@@ -417,7 +417,7 @@ class controladorAdmin extends Controller {
             if (file_exists($file) && $file != "images/ticket.png") {
                 unlink($file);
             }
-            Conexion::borrarGastoTransporteColectivo($id, $idTransporte); //hay que mirarlo
+            Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
         }
         $v = controladorAdmin::escribirTablaCunsultarGastosAjax($dniAlumno);
 
@@ -562,8 +562,9 @@ class controladorAdmin extends Controller {
             }
 
             if ($rol_id == 1) {
-
-                Conexion::borrarGastoComida($id, $idGasto); //hay que mirarlo
+//                Conexion::borrarGastoComidaDNI($dni); 
+//                Conexion::borrarGastoPropioDNI($dni);
+//                Conexion::borrarGastoColectivoDNI($dni);
                 Conexion::borrarUsuario($dni);
             } else if ($rol_id == 2) {
 

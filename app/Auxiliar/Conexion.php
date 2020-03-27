@@ -265,6 +265,7 @@ class Conexion {
     static function borrarTutor($dni) {
 
         try {
+
             tutor::where('usuarios_dni', $dni)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
@@ -1377,6 +1378,103 @@ class Conexion {
     }
 
     /**
+     * borrar gastos cuando se borrar a un alumno por dni
+     * @author Marina
+     * @param type $dni
+     */
+    static function borrarGastoComidaDNI($dni) {
+        try {
+            //mirar los id de la tabla comidas para borrarlos
+            $r = gasto::where('usuarios_dni', $dni)->select('comidas_id as id')->get();
+            foreach ($r as $key) {
+                //eliminar tabla comida
+                comida::where('id', $key->id)->delete();
+            }
+            //eliminar tabla gasto
+            gasto::where('usuarios_dni', $dni)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
+     * borrar gastos cuando se borrar a un alumno por dni
+     * @author Marina
+     * @param type $dni
+     */
+    static function borrarGastoPropioDNI($dni) {
+        try {
+            //mirar los id de la tabla propio para borrarlos
+            $r = gasto::where('usuarios_dni', $dni)->select('transportes_id as id')->get();
+            foreach ($r as $key) {
+                //eliminar tabla transporte
+                transporte::where('id', $key->id)->delete();
+                //eliminar tabla propio
+                propio::where('transportes_id', $key->id)->delete();
+            }
+            //eliminar tabla gasto
+            gasto::where('usuarios_dni', $dni)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
+     * borrar gastos cuando se borrar a un alumno por dni
+     * @author Marina
+     * @param type $dni
+     */
+    static function borrarGastoColectivoDNI($dni) {
+        try {
+            //mirar los id de la tabla colectivo para borrarlos
+            $r = gasto::where('usuarios_dni', $dni)->select('transportes_id as id')->get();
+            foreach ($r as $key) {
+                //eliminar tabla transporte
+                transporte::where('id', $key->id)->delete();
+                //eliminar tabla colectivo
+                colectivo::where('transportes_id', $key->id)->delete();
+            }
+            //eliminar tabla gasto
+            gasto::where('usuarios_dni', $dni)->delete();
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Borrado con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al borrar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
      * Método para borrar los gastos de comida del alumno
      * @param type $id
      */
@@ -1488,7 +1586,7 @@ class Conexion {
      * Método para borrar los gastos de transporte propio del alumno
      * @param type $id
      */
-    static function borrarGastoTransportePropio($id,$idTransporte) {
+    static function borrarGastoTransportePropio($id, $idTransporte) {
         try {
             //eliminar tabla transporte
             transporte::where('id', $idTransporte)->delete();
