@@ -22,7 +22,7 @@ class controladorAdmin extends Controller {
         $horas = $req->get('horas');
         if (isset($_REQUEST['aniadir'])) {
             if ($id != null && $descripcion != null && $anioAcademico != null && $familia != null && $horas != null) {
-                $val = Conexion::existePractica($id);
+                $val = Conexion::existeCurso($id);
                 if ($val) {
                     Conexion::insertarCurso($id, $descripcion, $anioAcademico, $familia, $horas);
                 } else {
@@ -45,7 +45,9 @@ class controladorAdmin extends Controller {
         if (isset($_REQUEST['editar'])) {
             Conexion::ModificarCurso($id, $descripcion, $anioAcademico, $familia, $horas);
         }
-
+        if (isset($_REQUEST['eliminar'])) {            
+            Conexion::borrarCurso($id);
+        }
         $l = Conexion::listaCursosPagination();
         return view('admin/gestionarCursos', ['l1' => $l]);
     }
@@ -838,7 +840,7 @@ class controladorAdmin extends Controller {
 
         session()->put('usu', $usu);
 
-        return view('admin/perfilAdmin',['usu' => $usu]);
+        return view('admin/perfilAdmin', ['usu' => $usu]);
     }
 
     /**

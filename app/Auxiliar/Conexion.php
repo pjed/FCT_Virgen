@@ -910,7 +910,7 @@ class Conexion {
      */
     static function existeCurso($cilo) {
         $val = true;
-        $e = practica::where('id_curso', $cilo)->first();
+        $e = curso::where('id_curso', $cilo)->first();
         if ($e) {
             $val = false;
         }
@@ -1729,8 +1729,24 @@ class Conexion {
         }
     }
 
+    /**
+     * metodo borra el curso de la tabla cursos y pone a null el curso de la tabla tutor y matriculados
+     * @author Marina
+     * @param type $id
+     */
     static function borrarCurso($id) {
+        Conexion::ModificarCursoMatricula($id);
+        Conexion::ModificarCursoTutor($id);
         try {
+            //poner a null el curso en la tabla tutor
+            tutor::where('cursos_id_curso', $id)->update([
+                'cursos_id_curso' => null
+            ]);
+            //poner a null el curso en la tabla matricula
+            matricula::where('cursos_id_curso', $id)->update([
+                'cursos_id_curso' => null
+            ]);
+            //borrar curso
             curso::where('id_curso', $id)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
