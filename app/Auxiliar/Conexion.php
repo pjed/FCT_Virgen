@@ -1211,22 +1211,12 @@ class Conexion {
         return $id;
     }
 
-    static function obtenerTotalGastosAlumno($dni) {
-        //$gastos = gasto::where('usuarios_dni', $dni)->get('total_gasto_alumno');
-        $gastos = gasto::where('usuarios_dni', $dni)->select('total_gasto_alumno')->first();
-        //$gastos2 = gasto::where('usuarios_dni', $dni)->sum('total_gasto_alumno');
-        //dd($gastos);
-        return $gastos;
-    }
-
-    static function ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCiclo, $usuarios_dni, $comidas_id, $transporte_id) {
+    static function ingresarGastoTablaGastos($desplazamiento, $tipo, $usuarios_dni, $comidas_id, $transporte_id) {
 
         try {
             $g = new gasto;
             $g->desplazamiento = $desplazamiento;
             $g->tipo = $tipo;
-            $g->total_gasto_alumno = $totalGastoAlumno;
-            $g->total_gasto_ciclo = $totalGastoCiclo;
             $g->usuarios_dni = $usuarios_dni;
             $g->comidas_id = $comidas_id;
             $g->transportes_id = $transporte_id;
@@ -1246,28 +1236,6 @@ class Conexion {
                     </button>
                   </div>';
         }
-    }
-
-    static function obtenerGastosCicloAlumno($dni) {
-        //$totalGastosCiclo = 0;
-
-        $sql = "SELECT gastos.usuarios_dni AS usuarios_dni, gastos.total_gasto_alumno AS total_gasto_alumno from gastos where gastos.usuarios_dni In( select matriculados.usuarios_dni AS usuario from matriculados where cursos_id_curso = ( select matriculados.cursos_id_curso AS cursos_id_curso from matriculados where usuarios_dni = '" . $dni . "') ) group by gastos.usuarios_dni, gastos.total_gasto_alumno ";
-
-        $totalGastosCiclo = \DB::select($sql);
-
-        return $totalGastosCiclo;
-    }
-
-    static function actualizarTotalGastosAlumno($dni, $totalGastoAlumno) {
-        gasto::where('usuarios_dni', $dni)->update([
-            'total_gasto_alumno' => $totalGastoAlumno
-        ]);
-    }
-
-    static function actualizarTotalGastosCiclo($dni, $totalGastoCiclo) {
-
-        $sql = "UPDATE gastos SET total_gasto_ciclo = '" . $totalGastoCiclo . "' where gastos.usuarios_dni In(select matriculados.usuarios_dni AS usuario from matriculados where cursos_id_curso = (select 					matriculados.cursos_id_curso AS cursos_id_curso from matriculados where usuarios_dni = '" . $dni . "') )";
-        \DB::update($sql);
     }
 
     /**
@@ -1568,7 +1536,6 @@ class Conexion {
      * metodo obtener anio academico
      */
     static function obtenerAnioAcademico() {
-        //$totalGastosCiclo = 0;
 
         $sql = "SELECT cursos.ano_academico AS ano_academico from cursos group by cursos.ano_academico";
 
@@ -1581,7 +1548,6 @@ class Conexion {
      * metodo obtener datos centro
      */
     static function obtenerDatosCentro() {
-        //$totalGastosCiclo = 0;
 
         $sql = "SELECT centros.cod, centros.nombre, centros.localidad from centros";
 
@@ -1594,7 +1560,6 @@ class Conexion {
      * metodo obtener datos ciclo
      */
     static function obtenerDatosCiclo($curso) {
-        //$totalGastosCiclo = 0;
 
         $sql = "SELECT cursos.descripcion, cursos.horas from cursos where id_curso = '" . $curso . "';";
 
@@ -1607,7 +1572,6 @@ class Conexion {
      * metodo obtener datos tutor ciclo
      */
     static function obtenerDatosTutorCiclo($curso) {
-        //$totalGastosCiclo = 0;
 
         $sql = "SELECT cursos.id_curso, usuarios.dni, concat(usuarios.nombre,' ',usuarios.apellidos) as nombre_tutor, usuarios.email
                 FROM cursos, tutores, usuarios
@@ -1670,7 +1634,6 @@ class Conexion {
      * metodo obtener datos director
      */
     static function obtenerDatosDirector() {
-        //$totalGastosCiclo = 0;
 
         $sql = "SELECT concat(usuarios.nombre, ' ',usuarios.apellidos) as nombre_director
                 FROM usuarios, usuarios_roles 
@@ -1909,16 +1872,6 @@ class Conexion {
                 ->join('empresas', 'practicas.empresas_id', '=', 'empresas.id')
                 ->select(
                         'empresas.nombre AS nombre', 'empresas.localidad AS localidad', 'empresas.direccion AS direccion'
-                )
-                ->get();
-        return $v;
-    }
-
-    static function listarGastosAlumno($dni) {
-        $v = \DB::table('gastos')
-                ->where('gastos.usuarios_dni', $dni)
-                ->select(
-                        'gastos.total_gasto_alumno AS total_gasto_alumno'
                 )
                 ->get();
         return $v;

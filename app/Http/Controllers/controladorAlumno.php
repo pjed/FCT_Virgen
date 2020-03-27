@@ -50,22 +50,7 @@ class controladorAlumno extends Controller {
             $transporte_id = 0;
             $tipo = 0;
 
-            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($usuarios_dni);
-            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] + $importe;
-
-            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($usuarios_dni);
-            $totalGastoCiclo = 0;
-            foreach ($totalGastoCicloAntiguo as $a) {
-                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
-            }
-
-            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
-
-            Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCicloNuevo, $usuarios_dni, $comidas_id, $transporte_id);
-
-            Conexion::actualizarTotalGastosAlumno($usuarios_dni, $totalGastoAlumno);
-
-            Conexion::actualizarTotalGastosCiclo($usuarios_dni, $totalGastoCicloNuevo);
+            Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $usuarios_dni, $comidas_id, $transporte_id);
 
             return view('alumno/crearGastoComida');
         }
@@ -103,25 +88,10 @@ class controladorAlumno extends Controller {
 
             $transporte_id = Conexion::obtenerIdTransporteIngresado();
 
-            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($usuarios_dni);
-            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] + $importe;
-
-            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($usuarios_dni);
-            $totalGastoCiclo = 0;
-            foreach ($totalGastoCicloAntiguo as $a) {
-                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
-            }
-
-            $totalGastoCicloNuevo = $totalGastoCiclo + $importe;
-
             $desplazamiento = 1;
             $comidas_id = 0;
 
-            Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCicloNuevo, $usuarios_dni, $comidas_id, $transporte_id);
-
-            Conexion::actualizarTotalGastosAlumno($usuarios_dni, $totalGastoAlumno);
-
-            Conexion::actualizarTotalGastosCiclo($usuarios_dni, $totalGastoCicloNuevo);
+            Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo,$usuarios_dni, $comidas_id, $transporte_id);
         }
 
         //si el transporte es propio
@@ -143,27 +113,12 @@ class controladorAlumno extends Controller {
 
             $transporte_id = Conexion::obtenerIdTransporteIngresado();
 
-            $gastosAntiguos = Conexion::obtenerTotalGastosAlumno($usuarios_dni);
-            $totalGastoAlumno = $gastosAntiguos['total_gasto_alumno'] + $precio;
-
-            $totalGastoCicloAntiguo = Conexion::obtenerGastosCicloAlumno($usuarios_dni);
-            $totalGastoCiclo = 0;
-            foreach ($totalGastoCicloAntiguo as $a) {
-                $totalGastoCiclo = $totalGastoCiclo + $a->total_gasto_alumno;
-            }
-
-            $totalGastoCicloNuevo = $totalGastoCiclo + $precio;
-
+          
             $desplazamiento = 1;
-
             $tipo = 1;
             $comidas_id = 0;
 
-            Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $totalGastoAlumno, $totalGastoCicloNuevo, $usuarios_dni, $comidas_id, $transporte_id);
-
-            Conexion::actualizarTotalGastosAlumno($usuarios_dni, $totalGastoAlumno);
-
-            Conexion::actualizarTotalGastosCiclo($usuarios_dni, $totalGastoCicloNuevo);
+            Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $usuarios_dni, $comidas_id, $transporte_id);
         }
 
         return view('alumno/crearGastoTransporte');
