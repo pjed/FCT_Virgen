@@ -72,13 +72,21 @@ Route::group(['middleware' => ['tutor']], function() {
     });
     Route::get('gestionarPracticas', function () {
         return view('tutor/gestionarPracticas');
-    });
+    });    
     Route::get('ExtraerDocT', function () {
         return view('tutor/extraerDocT');
     });
     Route::get('perfilT', function () {
         return view('tutor/perfilTutor');
     });
+    //ayax
+    Route::get('gestionarPracticasAyax', function () {
+        return view('tutor/gestionarPracticasAyax');
+    });
+    Route::post('gestionarPracticasAyax', 'controladorTutor@gestionarPracticasAyax');
+    Route::any('listarResponsablesAyax', 'controladorTutor@listarResponsablesAyax'); //ayax para poder responsables de una empresa
+        
+    
     Route::post('consultarGastosAlumno', 'controladorTutor@consultarGastoAlumno');
     Route::post('extraerDocT', 'controladorTutor@extraerDocT');
     Route::post('gestionarEmpresa', 'controladorTutor@gestionarEmpresa');
