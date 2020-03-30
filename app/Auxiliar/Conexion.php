@@ -697,6 +697,43 @@ class Conexion {
     }
 
     /**
+     * Método para listar alumnos de un tutor determinado
+     * @return type lista de alumnos
+     */
+    static function listarAlumnoPorTutorSinPracticas() {
+        $tutor = session()->get('usu');
+        foreach ($tutor as $t) {
+            $dni = $t['dni'];
+        }
+//        $v = [];
+        
+        $sql = \DB::select('SELECT usuarios.dni AS dni, usuarios.nombre AS nombre, usuarios.apellidos AS apellidos FROM tutores,matriculados,usuarios,usuarios_roles'
+                . ' WHERE matriculados.cursos_id_curso = tutores.cursos_id_curso'
+                . ' AND usuarios.dni = matriculados.usuarios_dni'
+                . ' AND usuarios.dni = usuarios_roles.usuario_dni'
+                . ' AND tutores.usuarios_dni = "'.$dni.'"'
+                . ' AND usuarios.dni NOT IN (SELECT practicas.usuarios_dni FROM practicas WHERE practicas.usuarios_dni = usuarios.dni)');
+//        $v = \DB::table('tutores')
+//                ->where('tutores.usuarios_dni', $dni)
+//                ->join('matriculados', 'matriculados.cursos_id_curso', '=', 'tutores.cursos_id_curso')
+//                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
+//                ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
+//                ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
+//                ->join('practicas', 'practicas.usuarios_dni', '=', 'usuarios.dni')
+//                ->where('usuarios_roles.rol_id', 3)
+//                ->whereNotIn('usuarios.dni',['practicas.usuarios_dni'])
+//                ->select(
+//                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos'
+//                )
+//                ->get();
+        
+//        $sql = "SELECT cursos.descripcion, cursos.horas from cursos where id_curso = '" . $curso . "';";
+        $v = \DB::select($sql);
+        dd($v);
+        return $v;
+    }
+
+    /**
      * Método para recoger los requisitos necesarios para la vista extraerDocT
      * @return type 
      */
@@ -896,8 +933,18 @@ class Conexion {
     }
 
     /**
+     * Método para obtener los reponsables de una empresa
+     * @return type
+     * @author Marina
+     */
+    static function listarResponsablesEmpresa($cif) {
+        $r = responsable::where('cif_empresa', $cif)->get();
+        return $r;
+    }
+    /**
      * Método para obtener los reponsables sin paginacion
      * @return type
+     * @author Marina
      */
     static function listarResponsables() {
         $r = responsable::all();
@@ -954,7 +1001,7 @@ class Conexion {
      * @param type $email
      * @param type $tel
      */
-    static function insertarResponsable($dni, $nombre, $apellidos, $email, $tel) {
+    static function insertarResponsable($dni, $nombre, $apellidos, $email, $tel, $CIF) {
         try {
             $p = new responsable;
             $p->id = null;
@@ -963,6 +1010,7 @@ class Conexion {
             $p->apellidos = $apellidos;
             $p->email = $email;
             $p->telefono = $tel;
+            $p->cif_empresa = $CIF;
 
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -990,7 +1038,7 @@ class Conexion {
      * @param type $email
      * @param type $tel
      */
-    static function ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel) {
+    static function ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel, $CIF) {
         try {
             $p = responsable::where('id', $id)
                     ->update([
@@ -998,7 +1046,8 @@ class Conexion {
                 'nombre' => $nombre,
                 'apellidos' => $apellidos,
                 'email' => $email,
-                'telefono' => $tel
+                'telefono' => $tel,
+                'cif_empresa' => $CIF
             ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">

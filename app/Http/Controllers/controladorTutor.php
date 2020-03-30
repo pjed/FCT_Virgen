@@ -48,8 +48,8 @@ class controladorTutor extends Controller {
         $usu = Conexion::existeUsuario($email, $clave);
 
         session()->put('usu', $usu);
-        
-        return view('tutor/perfilTutor',['usu' => $usu]);
+
+        return view('tutor/perfilTutor', ['usu' => $usu]);
     }
 
     /**
@@ -141,9 +141,9 @@ class controladorTutor extends Controller {
         }
         if (isset($_REQUEST['eliminarP'])) {
             $id = $req->get('ID');
-            $idTransporte = $req->get('idTransporte');            
+            $idTransporte = $req->get('idTransporte');
             $importe = $req->get('precio');
-            if (file_exists($file) && $file!='images/ticket.png') {
+            if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
             Conexion::borrarGastoTransportePropio($id, $idTransporte);
@@ -167,7 +167,7 @@ class controladorTutor extends Controller {
             $idTransporte = $req->get('idTransporte');
             $file = $req->get('fotoUrl');
             $importe = $req->get('precio');
-            if (file_exists($file) && $file!='images/ticket.png') {
+            if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
@@ -398,19 +398,20 @@ class controladorTutor extends Controller {
         $apellidos = $req->get('apellido');
         $email = $req->get('email');
         $tel = $req->get('tel');
+        $CIF = $req->get('idEmpresa');
 
         if (isset($_REQUEST['editar'])) {
-            Conexion::ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel);
+            Conexion::ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel, $CIF);
         }
         if (isset($_REQUEST['eliminar'])) {
             Conexion::ModificarPracticaResponsable($dni);
             Conexion::borrarResponsable($id);
         }
         if (isset($_REQUEST['aniadir'])) {
-            if ($dni != null && $nombre != null && $apellidos != null && $email != null && $tel != null) {
+            if ($dni != null && $nombre != null && $apellidos != null && $email != null && $tel != null && $CIF!=null) {
                 $val = Conexion::existeResponsable($dni);
                 if ($val) {
-                    Conexion::insertarResponsable($dni, $nombre, $apellidos, $email, $tel);
+                    Conexion::insertarResponsable($dni, $nombre, $apellidos, $email, $tel, $CIF);
                 } else {
                     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Ya existe.
@@ -508,6 +509,91 @@ class controladorTutor extends Controller {
         }
 
         return view('tutor/gestionarPracticas');
+    }
+
+    /**
+     * Vista gestionarPracticas
+     * acciones que puedes realizar
+     *      añadir responsable
+     *      modificar responsable
+     *      eliminar responsable
+     *      recibiFCT
+     *      recibiFPDUAL
+     * @author Marina (Todo lo demas) y Pedro (los recibis)
+     * @param Request $req
+     * @return type
+     */
+    public function gestionarPracticasAyax(Request $req) {
+        $ID = $req->get('ID');
+        $CIF = $req->get('idEmpresa');
+        $dniAlumno = $req->get('dniAlumno');
+        $codProyecto = $req->get('codProyecto');
+        $dniResponsable = $req->get('idResponsable');
+        $gasto = $req->get('gasto');
+        if ($req->get('apto') == 'on') {
+            $apto = 1;
+        } else {
+            $apto = 0;
+        }
+        $fechaInicio = $req->get('fechaInicio');
+        $fechaFin = $req->get('fechaFin');
+
+        if (isset($_REQUEST['editar'])) {
+            Conexion::ModificarPractica($ID, $CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $apto, $fechaInicio, $fechaFin);
+        }
+        if (isset($_REQUEST['eliminar'])) {
+            Conexion::borrarPractica($ID);
+        }
+        if (isset($_REQUEST['aniadir'])) {
+            if ($CIF != null && $dniAlumno != null && $codProyecto != null && $dniResponsable != null && $gasto != null) {
+                $val = Conexion::existePractica($dniAlumno);
+                if ($val) {
+                    Conexion::insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $fechaInicio, $fechaFin);
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Ya existe.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Algún campo está vacio.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
+        }
+        if (isset($_REQUEST['recibiFCT'])) {
+            $dniAlumno = $req->get('dniAlumno');
+            $periodo = $req->get('periodo');
+
+            return Documentos::GenerarRecibi($dniAlumno, $periodo);
+        }
+        if (isset($_REQUEST['recibiFPDUAL'])) {
+            $dniAlumno = $req->get('dniAlumno');
+            $modalidad = $req->get('modalidad');
+            $duracion = $req->get('duracion');
+            $cod = $req->get('codigo');
+            $inicio = $req->get('inicio');
+            $final = $req->get('final');
+
+
+            $inicioF = date("d-m-Y", strtotime($inicio));
+            $finalF = date("d-m-Y", strtotime($final));
+
+            return Documentos::GenerarRecibiDUAL($dniAlumno, $modalidad, $duracion, $cod, $inicioF, $finalF);
+        }
+
+        return view('tutor/gestionarPracticas');
+    }
+
+    public function listarResponsablesAyax(Request $req) {
+        $cif = $req->get('empresa');
+        $res = Conexion::listarResponsablesEmpresa($cif);
+        echo $res;
     }
 
 }

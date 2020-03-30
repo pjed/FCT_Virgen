@@ -5,9 +5,7 @@ use App\Auxiliar\Conexion;
 $lu = Conexion::listarPracticasPagination();
 $l1 = Conexion::listarEmpresas();
 $l2 = Conexion::listarAlumnoPorTutor();
-$l3 = Conexion::listarResponsables();
 $l4 = Conexion::listarAlumnoPorTutorSinPracticas();
-dd($l1,$l2,$l3,$l4);
 ?>
 @extends('maestra.maestraTutor')
 
@@ -16,7 +14,7 @@ Gestionar  Practicas
 @endsection
 
 @section('javascript') 
-<script src="{{asset ('js/tutor/js_gestionarPracticas.js')}}"></script>
+<script src="{{asset ('js/tutor/js_gestionarPracticasAyax.js')}}"></script>
 @endsection
 
 @section('contenido') 
@@ -82,28 +80,21 @@ Gestionar  Practicas
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Alumno:
-                                                        <select id="dniAlumno" name="dniAlumno" required>                                    
-                                                            <?php
-                                                            foreach ($l4 as $k4) {
-                                                                ?>
-                                                                <option value="<?php echo $k4->dni; ?>"> 
-                                                                    <?php echo $k4->nombre . ', ' . $k4->apellidos; ?>
-                                                                </option>
-                                                                <?php
-                                                            }
-                                                            ?>
+                                                        Responsable:
+                                                        <select id="idResponsable" name="idResponsable" required>                                                            
                                                         </select>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Responsable:
-                                                        <select id="idResponsable" name="idResponsable" required>
+                                                        Alumno:
+                                                        <select id="dniAlumno" name="dniAlumno" required>                                    
                                                             <?php
-                                                            foreach ($l3 as $k3) {
+                                                            foreach ($l4 as $k4) {
                                                                 ?>
-                                                                <option value="<?php echo $k3->id; ?>"><?php echo $k3->nombre . ', ' . $k3->apellidos; ?></option>
+                                                                <option value="<?php echo $k2->dni; ?>"> 
+                                                                    <?php echo $k4->nombre . ', ' . $k4->apellidos; ?>
+                                                                </option>
                                                                 <?php
                                                             }
                                                             ?>
@@ -154,16 +145,18 @@ Gestionar  Practicas
                     <form action="gestionarPracticas" method="POST">
                         {{ csrf_field() }}
                         <tr>
-                            <td>
-                                <select class="sel" name="idEmpresa" required>
-                                    <?php
-                                    foreach ($l1 as $k1) {
-                                        ?>
-                                        <option value="<?php echo $k1->id; ?>" <?php if ($key->idEmpresa == $k1->id) { ?> selected<?php } ?>><?php echo $k1->nombre; ?></option>
+                            <td>     
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="idEmpresa" value="<?php echo $key->idEmpresa; ?>"/>  
+                                <?php
+                                foreach ($l1 as $k1) {
+                                    ?>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="idEmpresa" value="<?php echo $key->idEmpresa; ?>"/>  
+                                    <?php if ($key->idEmpresa == $k1->id) { ?> 
+                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $k1->nombre; ?>"/>  
                                         <?php
                                     }
-                                    ?>
-                                </select>
+                                }
+                                ?>
                             </td>
                             <td>
                                 <select class="sel" name="dniAlumno" required>                                    
