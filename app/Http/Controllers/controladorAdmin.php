@@ -9,6 +9,21 @@ use App\Auxiliar\Documentos;
 class controladorAdmin extends Controller {
 
     /**
+     * Metodo que permite borrar la DB gestionfct y importar el archivo 
+     * gestionfct_solo_usuario_auxiliardaw2@gmail.com.sql con el usuario 
+     * auxiliardaw2@gmail.com con password 1 por defecto.
+     * @author Pedro
+     * @param Request $req
+     */
+    public function DeleteDB(Request $req) {
+        //Borrar la DB
+        $database_name = 'gestionfct';
+        \DB::statement("DROP DATABASE IF EXISTS `{$database_name}`;");
+        \DB::statement("CREATE DATABASE `{$database_name}`;");
+        return view('admin/importarDatos');
+    }
+
+    /**
      * Gestionar Curso
      * @author Marina
      * @param Request $req

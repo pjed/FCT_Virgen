@@ -97,6 +97,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('importarDatos', function () {
         return view('admin/importarDatos');
     });
+    Route::post('DeleteDB', 'ControladorAdmin@DeleteDB');
     Route::get('dropzone', 'DropzoneController@index')->name('dropzone.store');
     Route::post('dropzone-image-upload', 'DropzoneController@store');
     Route::post('dropzone-image-delete', 'DropzoneController@destroy');

@@ -31,10 +31,11 @@ class controladorGeneral extends Controller {
     public function inicioSesion(Request $req) {
         $correo = $req->get('usuario');
         $pass = $req->get('pwd');
+
         if ($correo != null && $pass != null) {
             $passHash = hash('sha256', $pass);
             $n = Conexion::existeUsuario($correo, $passHash);
-//            $n = Conexion::existeUsuario($correo, $pass);
+
             if ($n != null) { //si existe usuario
                 session()->put('usu', $n);
                 foreach ($n as $u) {
@@ -207,9 +208,9 @@ class controladorGeneral extends Controller {
      * @param Request $req
      * @return type
      */
-    public function perfilAl(Request $req) {        
+    public function perfilAl(Request $req) {
         $usu = session()->get('usu');
-        return view('alumno/perfilAlumno',['usu' => $usu]);
+        return view('alumno/perfilAlumno', ['usu' => $usu]);
     }
 
     /**
@@ -220,7 +221,7 @@ class controladorGeneral extends Controller {
      */
     public function perfilT(Request $req) {
         $usu = session()->get('usu');
-        return view('tutor/perfilTutor',['usu' => $usu]);
+        return view('tutor/perfilTutor', ['usu' => $usu]);
     }
 
     /**
@@ -229,9 +230,9 @@ class controladorGeneral extends Controller {
      * @param Request $req
      * @return type
      */
-    public function perfilAd(Request $req) {        
+    public function perfilAd(Request $req) {
         $usu = session()->get('usu');
-        return view('admin/perfilAdmin',['usu' => $usu]);
+        return view('admin/perfilAdmin', ['usu' => $usu]);
     }
 
     /**
@@ -279,13 +280,13 @@ class controladorGeneral extends Controller {
         }
         switch ($rolUsuario) {
             case 'tutor':
-                return view('tutor/perfilTutor',['usu' => $usu]);
+                return view('tutor/perfilTutor', ['usu' => $usu]);
                 break;
             case 'admin':
-                return view('admin/perfilAdmin',['usu' => $usu]);
+                return view('admin/perfilAdmin', ['usu' => $usu]);
                 break;
             case 'alumno':
-                return view('alumno/perfilAlumno',['usu' => $usu]);
+                return view('alumno/perfilAlumno', ['usu' => $usu]);
                 break;
         }
     }
