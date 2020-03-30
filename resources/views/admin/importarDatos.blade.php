@@ -40,9 +40,15 @@ Importar Datos
                 addRemoveLinks: true,
             };
         </script>-->
+
     <div class="container">
 
-        <h3>Laravel Dropzone Multiple Images Uploading - W3Adda</h3>
+        <form name="formDeleteDB" action="DeleteDB"  method="post">
+            {{ csrf_field() }}
+            <input type="submit" name="deleteDB" id="deleteDB" value="Borrar DB"> 
+        </form>
+
+        <h3>Subir Archivos</h3>
         <form method="post" action="{{url('dropzone-image-upload')}}" enctype="multipart/form-data" 
               class="dropzone" id="dropzone">
             @csrf
@@ -70,7 +76,7 @@ Importar Datos
                                 url: '{{ url("uploads") }}',
                                 data: {filename: name},
                                 success: function (data) {
-                                    console.log("File deleted successfully!!");
+                                    console.log("Fichero borrado satisfactoriamente!!");
                                 },
                                 error: function (e) {
                                     console.log(e);
