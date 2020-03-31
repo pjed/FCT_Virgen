@@ -408,7 +408,7 @@ class controladorTutor extends Controller {
             Conexion::borrarResponsable($id);
         }
         if (isset($_REQUEST['aniadir'])) {
-            if ($dni != null && $nombre != null && $apellidos != null && $email != null && $tel != null && $CIF!=null) {
+            if ($dni != null && $nombre != null && $apellidos != null && $email != null && $tel != null && $CIF != null) {
                 $val = Conexion::existeResponsable($dni);
                 if ($val) {
                     Conexion::insertarResponsable($dni, $nombre, $apellidos, $email, $tel, $CIF);
@@ -445,7 +445,7 @@ class controladorTutor extends Controller {
      * @return type
      */
     public function gestionarPracticas(Request $req) {
-        $ID = $req->get('ID');
+        $ID = $req->get('idPracticas');
         $CIF = $req->get('idEmpresa');
         $dniAlumno = $req->get('dniAlumno');
         $codProyecto = $req->get('codProyecto');
@@ -507,8 +507,133 @@ class controladorTutor extends Controller {
 
             return Documentos::GenerarRecibiDUAL($dniAlumno, $modalidad, $duracion, $cod, $inicioF, $finalF);
         }
+        $datos = controladorTutor::datosGestionarPracticas();
+        return view('tutor/gestionarPracticas', $datos);
+    }
 
-        return view('tutor/gestionarPracticas');
+    /**
+     * Devuelve las listas necesarias para que funcione gestionar practicas
+     * @author Marina
+     * @return type
+     */
+    public static function DatosGestionarPracticas() {
+        $lu = Conexion::listarPracticasPagination();
+        $l1 = Conexion::listarEmpresas();
+        $l2 = Conexion::listarAlumnoPorTutor();
+        $l3 = Conexion::listarResponsables();
+        $l4 = Conexion::listarAlumnoPorTutorSinPracticas();
+
+        $datos = [
+            'lu' => $lu,
+            'l1' => $l1,
+            'l2' => $l2,
+            'l3' => $l3,
+            'l4' => $l4
+        ];
+        return $datos;
+    }
+
+    /**
+     * @author Marina
+     * muestr< a través de ajax una venta modal para poder modificar una practica
+     */
+    public function modalModificarPracticaAyax() {
+        $lu = Conexion::listarPracticasPagination();
+        $l1 = Conexion::listarEmpresas();
+        $l2 = Conexion::listarAlumnoPorTutor();
+        $l3 = Conexion::listarResponsables();
+        $l4 = Conexion::listarAlumnoPorTutorSinPracticas();
+        foreach ($lu as $key) {
+            $modal = ' <div class="modal" id="editar" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                             </button>
+                                                <h3 class="text-center">Modificar Practicas</h3>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Empresa:
+                                                        <select class="sel" name="idEmpresa" required>';
+            foreach ($l1 as $k1) {
+                if ($key->idEmpresa == $k1->id) {
+                    $modal = $modal . '<option value="' . $k1->id . '" selected>' . $k1->nombre . '</option>';
+                } else {
+                    $modal = $modal . '<option value="' . $k1->id . '">' . $k1->nombre . '</option>';
+                }
+            }
+            $modal = $modal . ' </select>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Alumno:
+                                                        <select id="dniAlumno" name="dniAlumno" required>';
+            foreach ($l2 as $k2) {
+                if ($key->dniAlumno == $k2->dni) {
+                    $modal = $modal . ' <option value="' . $k2->dni . '" selected>' . $k2->nombre . ', ' . $k2->apellidos . '</option>';
+                }
+            }
+            foreach ($l4 as $k4) {
+                $modal = $modal . ' <option value="' . $k4->dni . '">' . $k4->nombre . ', ' . $k4->apellidos . '</option>';
+            }
+            $modal = $modal . ' </select>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Responsable:
+                                                        <select id="idResponsable" name="idResponsable" required>';
+            foreach ($l3 as $k3) {
+                if ($key->idResponsable == $k3->id) {
+                    $modal = $modal . '<option value="' . $k3->id . '" selected>' . $k3->nombre . ', ' . $k3->apellidos . '</option>';
+                } else {
+                    $modal = $modal . '<option value="' . $k3->id . '">' . $k3->nombre . ', ' . $k3->apellidos . '</option>';
+                }
+            }
+            $modal = $modal . '</select>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Cod proyecto:
+                                                        <input type="text" class="form-control form-control-sm" name="codProyecto"  value="' . $key->codProyecto . '"  pattern="[0-9]{6}" required/>
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Gasto Total:
+                                                        <input type="text" class="form-control form-control-sm" name="gasto" value="' . $key->gasto . '" required/>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Apto:';
+            if ($key->apto == 1) {
+                $modal = $modal . '<input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" checked/>';
+            } else {
+                $modal = $modal . '<input type="checkbox" class="form-control form-control-sm form-control-md" name="apto"/>';
+            }
+            $modal = $modal . ' </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Fecha inicio:
+                                                        <input type="date" class="form-control form-control-sm" name="fechaInicio" value="' . $key->fechaInicio . '"required/>
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Fecha fin:
+                                                        <input type="date" class="form-control form-control-sm" name="fechaFin" value="' . $key->fechaFin . '"/>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <input type="submit" class="btn btn-sm btn-primary" name="editar" value="Modificar" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>';
+        }
+        echo $modal;
     }
 
     /**

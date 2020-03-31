@@ -2,12 +2,12 @@
 
 use App\Auxiliar\Conexion;
 
-$lu = Conexion::listarPracticasPagination();
-$l1 = Conexion::listarEmpresas();
-$l2 = Conexion::listarAlumnoPorTutor();
-$l3 = Conexion::listarResponsables();
-$l4 = Conexion::listarAlumnoPorTutorSinPracticas();
-dd($l1,$l2,$l3,$l4);
+//$lu = Conexion::listarPracticasPagination();
+//$l1 = Conexion::listarEmpresas();
+//$l2 = Conexion::listarAlumnoPorTutor();
+//$l3 = Conexion::listarResponsables();
+//$l4 = Conexion::listarAlumnoPorTutorSinPracticas();
+//dd($l1,$l2,$l3,$l4);
 ?>
 @extends('maestra.maestraTutor')
 
@@ -58,7 +58,7 @@ Gestionar  Practicas
                             <!-- Añadir Practicas -->
                             <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
                             </button>
-                            <!-- Modal -->
+                            <!-- Modal Añadir Practicas -->
                             <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -154,47 +154,50 @@ Gestionar  Practicas
                     <form action="gestionarPracticas" method="POST">
                         {{ csrf_field() }}
                         <tr>
-                            <td>
-                                <select class="sel" name="idEmpresa" required>
-                                    <?php
-                                    foreach ($l1 as $k1) {
+                            <td>                                
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="idEmpresa" value="<?php echo $key->idEmpresa; ?>"/>
+                                <?php
+                                foreach ($l1 as $k1) {
+                                    if ($key->idEmpresa == $k1->id) {
                                         ?>
-                                        <option value="<?php echo $k1->id; ?>" <?php if ($key->idEmpresa == $k1->id) { ?> selected<?php } ?>><?php echo $k1->nombre; ?></option>
+                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $k1->nombre; ?>" readonly/>
                                         <?php
                                     }
-                                    ?>
-                                </select>
+                                }
+                                ?>
                             </td>
                             <td>
-                                <select class="sel" name="dniAlumno" required>                                    
-                                    <?php
-                                    foreach ($l2 as $k2) {
-                                        ?>                                    
-                                        <option value="<?php echo $k2->dni; ?>" <?php if ($key->dniAlumno == $k2->dni) { ?> selected <?php } ?> > <?php echo $k2->nombre . ', ' . $k2->apellidos; ?></option>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="dniAlumno" value="<?php echo $key->dniAlumno; ?>"/>                                  
+                                <?php
+                                foreach ($l2 as $k2) {
+                                    if ($key->dniAlumno == $k2->dni) {
+                                        ?> 
+                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreAlumno" value="<?php echo $k2->nombre . ', ' . $k2->apellidos; ?>" readonly/>
                                         <?php
                                     }
-                                    ?>
-                                </select>
+                                }
+                                ?>
                             </td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="codProyecto" value="<?php echo $key->codProyecto; ?>" required/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="codProyecto" value="<?php echo $key->codProyecto; ?>" readonly/></td>
                             <td>
-                                <select name="idResponsable" class="sel"  required>
-                                    <?php
-                                    foreach ($l3 as $k3) {
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="idResponsable" value="<?php echo $key->idResponsable; ?>"/>
+                                <?php
+                                foreach ($l3 as $k3) {
+                                    if ($key->idResponsable == $k3->id) {
                                         ?>
-                                        <option value="<?php echo $k3->id; ?>" <?php if ($key->idResponsable == $k3->id) { ?> selected<?php } ?>><?php echo $k3->nombre . ', ' . $k3->apellidos; ?></option>
+                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreResponsable" value="<?php echo $k3->nombre . ', ' . $k3->apellidos; ?>" readonly/>
                                         <?php
                                     }
-                                    ?>
-                                </select>
+                                }
+                                ?>
                             </td>
                             <td>
-                                <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->id; ?>"/>
-                                <input type="text" class="form-control form-control-sm form-control-md" name="gasto" value="<?php echo $key->gasto; ?>" required/>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idPractica; ?>"/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="gasto" value="<?php echo $key->gasto; ?>" readonly/>
                             </td>
-                            <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" <?php if ($key->apto == 1) { ?>checked<?php } ?> /></td>
-                            <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>" required/></td>
-                            <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaFin" value="<?php echo $key->fechaFin; ?>"/></td>
+                            <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" <?php if ($key->apto == 1) { ?> checked <?php } ?>  readonly/></td>
+                            <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>" readonly/></td>
+                            <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaFin" value="<?php echo $key->fechaFin; ?>" readonly/></td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-primary" id="addPeriodo"  data-toggle="modal" data-target="#exampleModal2">
                                     FTC
@@ -228,7 +231,7 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Modalidad:
-                                                        <select id="modalidad" name="modalidad">
+                                                        <select name="modalidad">
                                                             <option selected value="0">Elige una modalidad</option>
                                                             <option value="A">A</option>
                                                             <option value="B">B</option>
@@ -238,7 +241,7 @@ Gestionar  Practicas
 
                                                     <label class="col-sm text-center">
                                                         Duración del proyecto:
-                                                        <select id="modalidad" name="duracion">
+                                                        <select name="duracion">
                                                             <option selected value="0">Elige duración</option>
                                                             <option value="1">CURSO</option>
                                                             <option value="2">CURSOS</option>
@@ -266,9 +269,15 @@ Gestionar  Practicas
                                 </div>
                             </td>
                             <td>
-                                <button type="submit" class="btn editar" name="editar" ></button>
-                                     <!-- </td><td>-->
-                                <button type="submit" class="btn eliminar" name="eliminar" ></button>
+                                <!-- Editar Practicas -->                                
+                                <!--<button type="submit" class="btn editar" name="editar" ></button>-->
+                                <button type="button" id="modificar" class="btn editar" value="<?php echo $key->idPractica; ?>"  data-toggle="modal" data-target="#editar"></button>
+                                <!-- Modal  Editar Practicas -->
+                                <div id="modalModificar">
+                                    
+                                </div>
+                                         <!-- </td><td>-->
+                                <!--<button type="submit" class="btn eliminar" name="eliminar" ></button>-->
                             </td>
                         </tr>
                     </form>
