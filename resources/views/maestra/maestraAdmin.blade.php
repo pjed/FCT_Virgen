@@ -103,7 +103,7 @@ $rol1 = session()->get('rol');
                             }
                             ?>
 
-                            <button type="submit" id="perfil" name="perfil">
+                            <button type="submit" class="perfil" name="perfil">
                                 <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
                             </button>
                         </form>
@@ -112,7 +112,7 @@ $rol1 = session()->get('rol');
                     <div class="col-1 text-center">
                         <form name="cerrarSesion" action="cerrarSesion"  method="post">
                             {{ csrf_field() }}  
-                            <button type="submit" id="cerrarSesion" name="cerrarSesion" value=""></button>
+                            <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
                         </form>
                     </div>
                 </nav>
@@ -188,7 +188,7 @@ $rol1 = session()->get('rol');
                             }
                             ?>
 
-                            <button type="submit" id="perfil" name="perfil">
+                            <button type="submit" class="perfil" name="perfil">
                                 <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
                             </button>
                         </form>
@@ -197,7 +197,7 @@ $rol1 = session()->get('rol');
                     <div class="col-1 text-center">
                         <form name="cerrarSesion" action="cerrarSesion"  method="post">
                             {{ csrf_field() }}  
-                            <button type="submit" id="cerrarSesion" name="cerrarSesion" value=""></button>
+                            <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
                         </form>
                     </div>
                 </nav>

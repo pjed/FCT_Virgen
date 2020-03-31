@@ -4,13 +4,13 @@ $rol1 = session()->get('rol');
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <meta name="csrf_token" content="{{ csrf_token() }}" />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>@yield('titulo')</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet"> 
-
 
         <!-- Bootstrap CSS -->
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
@@ -92,7 +92,7 @@ $rol1 = session()->get('rol');
                             }
                             ?>
 
-                            <button type="submit" id="perfil" name="perfil">
+                            <button type="submit" class="perfil" name="perfil">
                                 <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
                             </button>
                         </form>
@@ -101,7 +101,7 @@ $rol1 = session()->get('rol');
                     <div class="col-1 text-center">
                         <form name="cerrarSesion" action="cerrarSesion"  method="post">
                             {{ csrf_field() }}  
-                            <button type="submit" id="cerrarSesion" name="cerrarSesion" value=""></button>
+                            <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
                         </form>
                     </div>
                 </nav>
@@ -165,7 +165,7 @@ $rol1 = session()->get('rol');
                             }
                             ?>
 
-                            <button type="submit" id="perfil" name="perfil">
+                            <button type="submit" class="perfil" name="perfil">
                                 <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
                             </button>
                         </form>
@@ -174,7 +174,7 @@ $rol1 = session()->get('rol');
                     <div class="col-1 text-center">
                         <form name="cerrarSesion" action="cerrarSesion"  method="post">
                             {{ csrf_field() }}  
-                            <button type="submit" id="cerrarSesion" name="cerrarSesion" value=""></button>
+                            <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
                         </form>
                     </div>
                 </nav>
