@@ -705,14 +705,14 @@ class Conexion {
         foreach ($tutor as $t) {
             $dni = $t['dni'];
         }
-//        $v = [];
+        $v = [];
         
-        $sql = \DB::select('SELECT usuarios.dni AS dni, usuarios.nombre AS nombre, usuarios.apellidos AS apellidos FROM tutores,matriculados,usuarios,usuarios_roles'
+        $sql = 'SELECT usuarios.dni AS dni, usuarios.nombre AS nombre, usuarios.apellidos AS apellidos FROM tutores, matriculados, usuarios, usuarios_roles'
                 . ' WHERE matriculados.cursos_id_curso = tutores.cursos_id_curso'
                 . ' AND usuarios.dni = matriculados.usuarios_dni'
                 . ' AND usuarios.dni = usuarios_roles.usuario_dni'
-                . ' AND tutores.usuarios_dni = "'.$dni.'"'
-                . ' AND usuarios.dni NOT IN (SELECT practicas.usuarios_dni FROM practicas WHERE practicas.usuarios_dni = usuarios.dni)');
+                . ' AND tutores.usuarios_dni = "' . $dni . '"'
+                . ' AND usuarios.dni NOT IN (SELECT practicas.usuarios_dni FROM practicas WHERE practicas.usuarios_dni = usuarios.dni);';
 //        $v = \DB::table('tutores')
 //                ->where('tutores.usuarios_dni', $dni)
 //                ->join('matriculados', 'matriculados.cursos_id_curso', '=', 'tutores.cursos_id_curso')
@@ -729,7 +729,6 @@ class Conexion {
         
 //        $sql = "SELECT cursos.descripcion, cursos.horas from cursos where id_curso = '" . $curso . "';";
         $v = \DB::select($sql);
-        dd($v);
         return $v;
     }
 
@@ -773,7 +772,7 @@ class Conexion {
                 ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
                 ->join('practicas', 'practicas.usuarios_dni', '=', 'usuarios.dni')
                 ->select(
-                        'practicas.id AS id', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto'
+                        'practicas.id AS idPractica', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto'
                 )
                 ->paginate(8);
         return $v;
