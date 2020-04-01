@@ -62,7 +62,7 @@ Importar Datos
                             var time = dt.getTime();
                             return time + file.name;
                         },
-                        acceptedFiles: ".sql",
+                        acceptedFiles: ".csv",
                         timeout: 5000,
                         addRemoveLinks: true,
                         removedfile: function (file)

@@ -17,7 +17,7 @@ class DropzoneController extends Controller {
     }
 
     /**
-     * Método que almacena los archivos .sql para la bbdd
+     * Método que almacena los archivos .csv para la bbdd
      * @author Pedro
      */
     public function store(Request $request) {
