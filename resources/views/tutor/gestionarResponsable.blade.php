@@ -3,6 +3,7 @@
 use App\Auxiliar\Conexion;
 
 $lu = Conexion::listarResponsablesPagination();
+$l1 = Conexion::listarEmpresas();
 ?>
 @extends('maestra.maestraTutor')
 
@@ -44,7 +45,8 @@ Gestionar Responsable
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
-                        <th>Móvil</th>
+                        <th>Móvil</th>                        
+                        <th>Empresa</th>
                         <th>
                             <!-- Añadir Responsable -->
                             <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
@@ -82,6 +84,18 @@ Gestionar Responsable
                                                         Móvil:
                                                         <input type="tel" class="form-control form-control-sm tel" name="tel"  pattern="[6-7]{1}[0-9]{8}" required/>
                                                     </label>
+                                                    <label class="col-sm text-center">
+                                                        Empresa:
+                                                        <select id="idEmpresa" name="idEmpresa" required>
+                                                            <?php
+                                                            foreach ($l1 as $k1) {
+                                                                ?>
+                                                                <option value="<?php echo $k1->id; ?>"><?php echo $k1->nombre; ?></option>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <input type="submit" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
@@ -109,6 +123,17 @@ Gestionar Responsable
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="apellido" value="<?php echo $key['apellidos']; ?>" required/></td>
                             <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $key['email']; ?>" required/></td>
                             <td><input type="tel" class="form-control form-control-sm form-control-md" name="tel" value="<?php echo $key['telefono']; ?>" pattern="[0-9]{9}" required/></td>
+                            <td>
+                                <select class="sel" name="idEmpresa" required>
+                                    <?php
+                                    foreach ($l1 as $k1) {
+                                        ?>
+                                        <option value="<?php echo $key->empresa_id; ?>" <?php if ($key->empresa_id == $k1->id) { ?> selected<?php } ?>><?php echo $k1->nombre; ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </td>
                             <td>
                                 <button type="submit" class="btn editar" name="editar" ></button>
                                      <!-- </td><td>-->

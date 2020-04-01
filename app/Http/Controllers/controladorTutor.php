@@ -48,8 +48,8 @@ class controladorTutor extends Controller {
         $usu = Conexion::existeUsuario($email, $clave);
 
         session()->put('usu', $usu);
-        
-        return view('tutor/perfilTutor',['usu' => $usu]);
+
+        return view('tutor/perfilTutor', ['usu' => $usu]);
     }
 
     /**
@@ -141,9 +141,9 @@ class controladorTutor extends Controller {
         }
         if (isset($_REQUEST['eliminarP'])) {
             $id = $req->get('ID');
-            $idTransporte = $req->get('idTransporte');            
+            $idTransporte = $req->get('idTransporte');
             $importe = $req->get('precio');
-            if (file_exists($file) && $file!='images/ticket.png') {
+            if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
             Conexion::borrarGastoTransportePropio($id, $idTransporte);
@@ -167,7 +167,7 @@ class controladorTutor extends Controller {
             $idTransporte = $req->get('idTransporte');
             $file = $req->get('fotoUrl');
             $importe = $req->get('precio');
-            if (file_exists($file) && $file!='images/ticket.png') {
+            if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
@@ -398,19 +398,20 @@ class controladorTutor extends Controller {
         $apellidos = $req->get('apellido');
         $email = $req->get('email');
         $tel = $req->get('tel');
+        $CIF = $req->get('idEmpresa');
 
         if (isset($_REQUEST['editar'])) {
-            Conexion::ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel);
+            Conexion::ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel, $CIF);
         }
         if (isset($_REQUEST['eliminar'])) {
             Conexion::ModificarPracticaResponsable($dni);
             Conexion::borrarResponsable($id);
         }
         if (isset($_REQUEST['aniadir'])) {
-            if ($dni != null && $nombre != null && $apellidos != null && $email != null && $tel != null) {
+            if ($dni != null && $nombre != null && $apellidos != null && $email != null && $tel != null && $CIF != null) {
                 $val = Conexion::existeResponsable($dni);
                 if ($val) {
-                    Conexion::insertarResponsable($dni, $nombre, $apellidos, $email, $tel);
+                    Conexion::insertarResponsable($dni, $nombre, $apellidos, $email, $tel, $CIF);
                 } else {
                     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Ya existe.
@@ -444,6 +445,210 @@ class controladorTutor extends Controller {
      * @return type
      */
     public function gestionarPracticas(Request $req) {
+        $ID = $req->get('idPracticas');
+        $CIF = $req->get('idEmpresa');
+        $dniAlumno = $req->get('dniAlumno');
+        $codProyecto = $req->get('codProyecto');
+        $dniResponsable = $req->get('idResponsable');
+        $gasto = $req->get('gasto');
+        if ($req->get('apto') == 'on') {
+            $apto = 1;
+        } else {
+            $apto = 0;
+        }
+        $fechaInicio = $req->get('fechaInicio');
+        $fechaFin = $req->get('fechaFin');
+
+        if (isset($_REQUEST['editar'])) {
+            Conexion::ModificarPractica($ID, $CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $apto, $fechaInicio, $fechaFin);
+        }
+        if (isset($_REQUEST['eliminar'])) {
+            Conexion::borrarPractica($ID);
+        }
+        if (isset($_REQUEST['aniadir'])) {
+            if ($CIF != null && $dniAlumno != null && $codProyecto != null && $dniResponsable != null && $gasto != null) {
+                $val = Conexion::existePractica($dniAlumno);
+                if ($val) {
+                    Conexion::insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $fechaInicio, $fechaFin);
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Ya existe.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Algún campo está vacio.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
+        }
+        if (isset($_REQUEST['recibiFCT'])) {
+            $dniAlumno = $req->get('dniAlumno');
+            $periodo = $req->get('periodo');
+
+            return Documentos::GenerarRecibi($dniAlumno, $periodo);
+        }
+        if (isset($_REQUEST['recibiFPDUAL'])) {
+            $dniAlumno = $req->get('dniAlumno');
+            $modalidad = $req->get('modalidad');
+            $duracion = $req->get('duracion');
+            $cod = $req->get('codigo');
+            $inicio = $req->get('inicio');
+            $final = $req->get('final');
+
+
+            $inicioF = date("d-m-Y", strtotime($inicio));
+            $finalF = date("d-m-Y", strtotime($final));
+
+            return Documentos::GenerarRecibiDUAL($dniAlumno, $modalidad, $duracion, $cod, $inicioF, $finalF);
+        }
+        $datos = controladorTutor::datosGestionarPracticas();
+        return view('tutor/gestionarPracticas', $datos);
+    }
+
+    /**
+     * Devuelve las listas necesarias para que funcione gestionar practicas
+     * @author Marina
+     * @return type
+     */
+    public static function DatosGestionarPracticas() {
+        $lu = Conexion::listarPracticasPagination();
+        $l1 = Conexion::listarEmpresas();
+        $l2 = Conexion::listarAlumnoPorTutor();
+        $l3 = Conexion::listarResponsables();
+        $l4 = Conexion::listarAlumnoPorTutorSinPracticas();
+
+        $datos = [
+            'lu' => $lu,
+            'l1' => $l1,
+            'l2' => $l2,
+            'l3' => $l3,
+            'l4' => $l4
+        ];
+        return $datos;
+    }
+
+    /**
+     * @author Marina
+     * muestr< a través de ajax una venta modal para poder modificar una practica
+     */
+    public function modalModificarPracticaAyax() {
+        $lu = Conexion::listarPracticasPagination();
+        $l1 = Conexion::listarEmpresas();
+        $l2 = Conexion::listarAlumnoPorTutor();
+        $l3 = Conexion::listarResponsables();
+        $l4 = Conexion::listarAlumnoPorTutorSinPracticas();
+        foreach ($lu as $key) {
+            $modal = ' <div class="modal" id="editar" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                             </button>
+                                                <h3 class="text-center">Modificar Practicas</h3>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Empresa:
+                                                        <select class="sel" name="idEmpresa" required>';
+            foreach ($l1 as $k1) {
+                if ($key->idEmpresa == $k1->id) {
+                    $modal = $modal . '<option value="' . $k1->id . '" selected>' . $k1->nombre . '</option>';
+                } else {
+                    $modal = $modal . '<option value="' . $k1->id . '">' . $k1->nombre . '</option>';
+                }
+            }
+            $modal = $modal . ' </select>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Alumno:
+                                                        <select id="dniAlumno" name="dniAlumno" required>';
+            foreach ($l2 as $k2) {
+                if ($key->dniAlumno == $k2->dni) {
+                    $modal = $modal . ' <option value="' . $k2->dni . '" selected>' . $k2->nombre . ', ' . $k2->apellidos . '</option>';
+                }
+            }
+            foreach ($l4 as $k4) {
+                $modal = $modal . ' <option value="' . $k4->dni . '">' . $k4->nombre . ', ' . $k4->apellidos . '</option>';
+            }
+            $modal = $modal . ' </select>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Responsable:
+                                                        <select id="idResponsable" name="idResponsable" required>';
+            foreach ($l3 as $k3) {
+                if ($key->idResponsable == $k3->id) {
+                    $modal = $modal . '<option value="' . $k3->id . '" selected>' . $k3->nombre . ', ' . $k3->apellidos . '</option>';
+                } else {
+                    $modal = $modal . '<option value="' . $k3->id . '">' . $k3->nombre . ', ' . $k3->apellidos . '</option>';
+                }
+            }
+            $modal = $modal . '</select>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Cod proyecto:
+                                                        <input type="text" class="form-control form-control-sm" name="codProyecto"  value="' . $key->codProyecto . '"  pattern="[0-9]{6}" required/>
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Gasto Total:
+                                                        <input type="text" class="form-control form-control-sm" name="gasto" value="' . $key->gasto . '" required/>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Apto:';
+            if ($key->apto == 1) {
+                $modal = $modal . '<input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" checked/>';
+            } else {
+                $modal = $modal . '<input type="checkbox" class="form-control form-control-sm form-control-md" name="apto"/>';
+            }
+            $modal = $modal . ' </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Fecha inicio:
+                                                        <input type="date" class="form-control form-control-sm" name="fechaInicio" value="' . $key->fechaInicio . '"required/>
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Fecha fin:
+                                                        <input type="date" class="form-control form-control-sm" name="fechaFin" value="' . $key->fechaFin . '"/>
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <input type="submit" class="btn btn-sm btn-primary" name="editar" value="Modificar" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>';
+        }
+        echo $modal;
+    }
+
+    /**
+     * Vista gestionarPracticas
+     * acciones que puedes realizar
+     *      añadir responsable
+     *      modificar responsable
+     *      eliminar responsable
+     *      recibiFCT
+     *      recibiFPDUAL
+     * @author Marina (Todo lo demas) y Pedro (los recibis)
+     * @param Request $req
+     * @return type
+     */
+    public function gestionarPracticasAyax(Request $req) {
         $ID = $req->get('ID');
         $CIF = $req->get('idEmpresa');
         $dniAlumno = $req->get('dniAlumno');
@@ -508,6 +713,12 @@ class controladorTutor extends Controller {
         }
 
         return view('tutor/gestionarPracticas');
+    }
+
+    public function listarResponsablesAyax(Request $req) {
+        $cif = $req->get('empresa');
+        $res = Conexion::listarResponsablesEmpresa($cif);
+        echo $res;
     }
 
 }

@@ -89,7 +89,7 @@ return [
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'gestionfct'),
-            'username' => env('DB_USERNAME', 'pedro'),
+            'username' => env('DB_USERNAME', 'marina'),
             'password' => env('DB_PASSWORD', 'Chubaca2019'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
