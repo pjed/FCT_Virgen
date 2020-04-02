@@ -9,6 +9,157 @@ use App\Auxiliar\Documentos;
 class controladorAdmin extends Controller {
 
     /**
+     * Método que elimina los archivos .csv del directorio uploads
+     * @author Pedro
+     * @param Request $req
+     */
+    public function BorrarArchivosCSV(Request $req) {
+        $pathCSV = public_path() . '/uploads';
+        $ficherosCSV = scandir($pathCSV, 1);
+
+        if (count($ficherosCSV) != 2) {
+            foreach ($ficherosCSV as $file) {
+                $pathArchivo = $pathCSV . '/' . $file;
+                if (is_file($pathArchivo)) {
+                    unlink($pathArchivo); //elimino el fichero
+                }
+            }
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Archivos CSV eliminados correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } else {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    No hay archivos en el directorio para importar, por favor suba algún archivo CSV
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+        return view('admin/importarDatos');
+    }
+
+    /**
+     * Método que lanzar un load data por cada archivo .csv
+     * @param type $path
+     * @param type $filename
+     * @return type
+     */
+    private function _import_csv($file) {
+        // File Details 
+        $filename = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+        $tempPath = $file->getRealPath();
+        $fileSize = $file->getSize();
+        $mimeType = $file->getMimeType();
+
+        // Valid File Extensions
+        $valid_extension = array("csv");
+
+        // 2MB in Bytes
+        $maxFileSize = 2097152;
+
+        // Check file extension
+        if (in_array(strtolower($extension), $valid_extension)) {
+
+            // Check file size
+            if ($fileSize <= $maxFileSize) {
+
+                // File upload location
+                $location = 'uploads';
+
+                // Upload file
+                $file->move($location, $filename);
+
+                // Import CSV to Database
+                $filepath = public_path($location . "/" . $filename);
+
+                // Reading file
+                $file = fopen($filepath, "r");
+
+                $importData_arr = array();
+                $i = 0;
+
+                while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
+                    $num = count($filedata);
+
+                    // Skip first row (Remove below comment if you want to skip the first row)
+                    /* if($i == 0){
+                      $i++;
+                      continue;
+                      } */
+                    for ($c = 0; $c < $num; $c++) {
+                        $importData_arr[$i][] = $filedata [$c];
+                    }
+                    $i++;
+                }
+                fclose($file);
+
+                // Insert to MySQL database
+                foreach ($importData_arr as $importData) {
+
+                    $insertData = array(
+                        "username" => $importData[1],
+                        "name" => $importData[2],
+                        "gender" => $importData[3],
+                        "email" => $importData[4]);
+                    Page::insertData($insertData);
+                }
+
+                Session::flash('message', 'Import Successful.');
+            } else {
+                Session::flash('message', 'File too large. File must be less than 2MB.');
+            }
+        } else {
+            Session::flash('message', 'Invalid File Extension.');
+        }
+    }
+
+    /**
+     * Método que importa los datos de los archivos .csv a MariaDB
+     * @author Pedro
+     * @param Request $req
+     */
+    public function ImportarDatosCSV(Request $req) {
+        $pathCSV = public_path() . '/uploads';
+        $ficherosCSV = scandir($pathCSV, 1);
+
+        if (count($ficherosCSV) != 2) {
+//            foreach ($ficherosCSV as $file) {
+//                $pathArchivo = $pathCSV . '/' . $file;
+//                if (is_file($pathArchivo)) {
+//                    $this->_import_csv($pathArchivo);
+//                }
+//            }
+            // output all files and directories except for '.' and '..'
+            foreach (new \DirectoryIterator($pathCSV) as $fileInfo) {
+                if ($fileInfo->isDot())
+                    continue;
+                $this->_import_csv($fileInfo);
+            }
+
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Archivos CSV importados correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } else {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al importar los archivos CSV.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+
+        return view('admin/importarDatos');
+    }
+
+    /**
      * Metodo que permite borrar la DB gestionfct y importar el archivo 
      * gestionfct_solo_usuario_auxiliardaw2@gmail.com.sql con el usuario 
      * auxiliardaw2@gmail.com con password 1 por defecto.
@@ -20,8 +171,8 @@ class controladorAdmin extends Controller {
         $database_name = 'gestionfct';
         \DB::statement("DROP DATABASE IF EXISTS `{$database_name}`;");
         \DB::statement("CREATE DATABASE `{$database_name}`;");
-        $valor ='NO_AUTO_VALUE_ON_ZERO';
-        $valor2 ='+00:00';
+        $valor = 'NO_AUTO_VALUE_ON_ZERO';
+        $valor2 = '+00:00';
         $sqlDB = "USE `{$database_name}`;
                     -- phpMyAdmin SQL Dump
                     -- version 4.6.6deb5
@@ -563,7 +714,7 @@ class controladorAdmin extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
-        
+
         return view('admin/importarDatos');
     }
 

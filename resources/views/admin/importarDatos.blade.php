@@ -27,7 +27,7 @@ Importar Datos
             {{ csrf_field() }}
             <input type="submit" name="deleteDB" id="deleteDB" value="Borrar DB"> 
         </form>
-
+        <br>
         <h3>Subir Archivos</h3>
         <div class='content'>
             <form action="upload.php" class="dropzone" id="dropzonewidget">
@@ -47,11 +47,24 @@ Importar Datos
                                 }
                             });
                             var _ref;
-                            return (_ref = file.previewElement) != null _ref.parentNode.removeChild(file.previewElement) : void 0; 
-                       }
+                            return (_ref = file.previewElement) != null _ref.parentNode.removeChild(file.previewElement) : void 0;
+                        }
                     });
                 </script>
             </form> 
         </div> 
+        <p>Para borra los archivos csv del desplegable y del directorio donde se almacenan hay que hacer lo siguiente:</p>
+        <p>- Una vez subidos y que en el cuadro de subir archivos se muestren</p>
+        <p>- Pulsar sobre el botón Borrar Archivos CSV</p>
+        <br>
+        <form name="formBorrarArchivosCSV" action="BorrarArchivosCSV"  method="post">
+            {{ csrf_field() }}
+            <input type="submit" name="BorrarArchivosCSV" id="BorrarArchivosCSV" value="Borrar Archivos CSV"> 
+        </form>
+        <br>
+        <form name="formImportarDatosCSV" action="ImportarDatosCSV"  method="post">
+            {{ csrf_field() }}
+            <input type="submit" name="ImportarDatosCSV" id="ImportarDatosCSV" value="Importar Datos CSV"> 
+        </form>
     </div>
     @endsection
