@@ -534,17 +534,37 @@ class controladorTutor extends Controller {
     }
 
     /**
+     * Crea los option del select responsable según que empresa se haya seleccionado con anterioridad
      * @author Marina
-     * muestr< a través de ajax una venta modal para poder modificar una practica
+     * @param Request $req
      */
-    public function modalModificarPracticaAyax() {
-        $lu = Conexion::listarPracticasPagination();
+    public function idResponsableDeUnaEmpresaPracticaAyax(Request $req) {
+        $idEmpresa = $req->get('idEmpresa');
+        $l3 = Conexion::listarResponsablesEmpresa($idEmpresa);
+        $selectResponsable = '<select name="idResponsable" required>';
+        foreach ($l3 as $k3) {
+            if ($idEmpresa == $k3->empresa_id) {
+                $selectResponsable = $selectResponsable . '<option value="' . $k3->id . '" selected>' . $k3->nombre . ', ' . $k3->apellidos . '</option>';
+            } else {
+                $selectResponsable = $selectResponsable . '<option value="' . $k3->id . '" selected>' . $k3->nombre . ', ' . $k3->apellidos . '</option>';
+            }
+        }
+        $selectResponsable = $selectResponsable . '</select>';
+        echo $selectResponsable;
+    }
+
+    /**
+     * muestra a través de ajax una venta modal para poder modificar una practica
+     * @author Marina
+     */
+    public function modalModificarPracticaAyax(Request $req) {
+        $idPractica = $req->get('idPractica');
+        $lu = Conexion::buscarPracticaPorId($idPractica);
         $l1 = Conexion::listarEmpresas();
         $l2 = Conexion::listarAlumnoPorTutor();
         $l3 = Conexion::listarResponsables();
         $l4 = Conexion::listarAlumnoPorTutorSinPracticas();
-        foreach ($lu as $key) {
-            $modal = ' <div class="modal" id="editar" tabindex="-1" role="dialog" aria-hidden="true">
+        $modal = ' <div class="modal" id="editar" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-body">
@@ -555,7 +575,8 @@ class controladorTutor extends Controller {
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Empresa:
-                                                        <select class="sel" name="idEmpresa" required>';
+                                                        <select class="sel idEmpresaModalModificar" name="idEmpresa" required>';
+        foreach ($lu as $key) {            
             foreach ($l1 as $k1) {
                 if ($key->idEmpresa == $k1->id) {
                     $modal = $modal . '<option value="' . $k1->id . '" selected>' . $k1->nombre . '</option>';
@@ -584,7 +605,7 @@ class controladorTutor extends Controller {
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Responsable:
-                                                        <select id="idResponsable" name="idResponsable" required>';
+                                                        <select class="sel idResponsableModalModificar" name="idResponsable" required>';
             foreach ($l3 as $k3) {
                 if ($key->idResponsable == $k3->id) {
                     $modal = $modal . '<option value="' . $k3->id . '" selected>' . $k3->nombre . ', ' . $k3->apellidos . '</option>';

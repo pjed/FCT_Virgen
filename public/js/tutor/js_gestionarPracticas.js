@@ -26,10 +26,55 @@ $(document).ready(function () {
             }
         });
     });
-    $(".idEmpresa").blur(function () {
-        if ($(".idEmpresa").val() !== "selected") {
-            $(".idEmpresa").css({'border-color': 'red'});
+    /*si selecionas una empresa te tiene que aparecer un select con sus responsables*/
+    $(".idEmpresaModalModificar").blur(function () {
+        var idEmpresa = $(".idEmpresaModalModificar").val();
+        $.ajax({
+            url: 'idEmpresaModalModificarPracticaAyax',
+            type: 'POST',
+            data: {'idEmpresa': idEmpresa},
+            success: function (res) {
+                if (res !== null) {
+                    alert('entro en success');
+                    $(".idResponsableModalModificar").html(res);
+                }
+            },
+            statusCode: {
+                404: function () {
+                    alert('web not found');
+                }
+            },
+            error: function (x, xs, xt) {
+                window.open(JSON.stringify(x));
+                //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
+            }
+        });
+    });
+    $(".idEmpresaModalAniadir").blur(function () {
+        if ($(".idEmpresaModalAniadir").val() !== "selected") {
+            $(".idEmpresaModalAniadir").css({'border-color': 'red'});
         } else {
+            var idEmpresa = $(".idEmpresaModalAniadir").val();
+            $.ajax({
+                url: 'idEmpresaModalAniadirPracticasAyax',
+                type: 'POST',
+                data: {'idEmpresa': idEmpresa},
+                success: function (res) {
+                    if (res !== null) {
+                        alert('entro en success');
+                        $(".idResponsableModalAniadir").html(res);
+                    }
+                },
+                statusCode: {
+                    404: function () {
+                        alert('web not found');
+                    }
+                },
+                error: function (x, xs, xt) {
+                    window.open(JSON.stringify(x));
+                    //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
+                }
+            });
             $(".idEmpresa").css({'border-color': 'black'});
         }
     });
@@ -40,7 +85,7 @@ $(document).ready(function () {
             $(".dniAlumno").css({'border-color': 'black'});
         }
     });
-    $(".idResponsable").blur(function () {
+    $(".idResponsableModalAniadir").blur(function () {
         if ($(".idResponsable").val() !== "selected") {
             $(".idResponsable").css({'border-color': 'red'});
         }

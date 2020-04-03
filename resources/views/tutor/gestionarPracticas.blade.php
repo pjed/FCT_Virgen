@@ -69,7 +69,7 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Empresa:
-                                                        <select id="idEmpresa" name="idEmpresa" required>
+                                                        <select id="idEmpresaModalAniadir" name="idEmpresa" required>
                                                             <?php
                                                             foreach ($l1 as $k1) {
                                                                 ?>
@@ -99,15 +99,8 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Responsable:
-                                                        <select id="idResponsable" name="idResponsable" required>
-                                                            <?php
-                                                            foreach ($l3 as $k3) {
-                                                                ?>
-                                                                <option value="<?php echo $k3->id; ?>"><?php echo $k3->nombre . ', ' . $k3->apellidos; ?></option>
-                                                                <?php
-                                                            }
-                                                            ?>
-                                                        </select>
+                                                        <div id="idResponsableModalAniadir">
+                                                        </div>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">

@@ -87,8 +87,10 @@ Route::group(['middleware' => ['tutor']], function() {
     Route::post('gestionarPracticasAyax', 'controladorTutor@gestionarPracticasAyax');
     Route::any('listarResponsablesAyax', 'controladorTutor@listarResponsablesAyax'); //ayax para poder responsables de una empresa
     //ayax para poder mostrar la modal para modificar practicas
-    Route::any('modalModificarPracticaAyax', 'controladorTutor@modalModificarPracticaAyax'); 
-
+    Route::any('modalModificarPracticaAyax', 'controladorTutor@modalModificarPracticaAyax');
+    Route::any('idEmpresaModalModificarPracticaAyax', 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax');
+    //ayax para poder mostrar la modal para añadir practicas
+    Route::any('idEmpresaModalAniadirPracticasAyax', 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax');
 
     Route::post('consultarGastosAlumno', 'controladorTutor@consultarGastoAlumno');
     Route::post('extraerDocT', 'controladorTutor@extraerDocT');

@@ -706,7 +706,7 @@ class Conexion {
             $dni = $t['dni'];
         }
         $v = [];
-        
+
         $sql = 'SELECT usuarios.dni AS dni, usuarios.nombre AS nombre, usuarios.apellidos AS apellidos FROM tutores, matriculados, usuarios, usuarios_roles'
                 . ' WHERE matriculados.cursos_id_curso = tutores.cursos_id_curso'
                 . ' AND usuarios.dni = matriculados.usuarios_dni'
@@ -726,7 +726,6 @@ class Conexion {
 //                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos'
 //                )
 //                ->get();
-        
 //        $sql = "SELECT cursos.descripcion, cursos.horas from cursos where id_curso = '" . $curso . "';";
         $v = \DB::select($sql);
         return $v;
@@ -757,8 +756,26 @@ class Conexion {
     }
 
     /**
+     * Muestra la una practica, metodo hecho para la modal de modificar practicas
+     * @author Marina
+     * @param type $idPractica
+     * @return type
+     */
+    static function buscarPracticaPorId($idPractica) {
+        $v = [];
+        $v = \DB::table('practicas')
+                ->where('id', $idPractica)
+                ->select(
+                        'id AS idPractica', 'empresas_id AS idEmpresa', 'usuarios_dni AS dniAlumno', 'cod_proyecto AS codProyecto', 'responsables_id AS idResponsable', 'gastos AS gasto', 'fecha_inicio AS fechaInicio', 'fecha_fin AS fechaFin', 'apto'
+                )
+                ->paginate(8);
+        return $v;
+    }
+
+    /**
      * Método para obtener todas las practicas con paginacion
      * @return type
+     * @author Marina
      */
     static function listarPracticasPagination() {
         $v = [];
@@ -936,10 +953,11 @@ class Conexion {
      * @return type
      * @author Marina
      */
-    static function listarResponsablesEmpresa($cif) {
-        $r = responsable::where('cif_empresa', $cif)->get();
+    static function listarResponsablesEmpresa($idEmpresa) {
+        $r = responsable::where('empresa_id', $idEmpresa)->get();
         return $r;
     }
+
     /**
      * Método para obtener los reponsables sin paginacion
      * @return type
