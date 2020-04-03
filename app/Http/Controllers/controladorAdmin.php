@@ -48,74 +48,67 @@ class controladorAdmin extends Controller {
      * @param type $filename
      * @return type
      */
-    private function _import_csv($file) {
-        // File Details 
-        $filename = $file->getClientOriginalName();
-        $extension = $file->getClientOriginalExtension();
-        $tempPath = $file->getRealPath();
-        $fileSize = $file->getSize();
-        $mimeType = $file->getMimeType();
+    private function _import_csv($path, $filename) {
+        $csv = $path ."/". $filename;
 
-        // Valid File Extensions
-        $valid_extension = array("csv");
+        switch ($filename):
+            case "datAlumnos.csv":
+                $sql = "CREATE TABLE IF NOT EXISTS `gestionfct`.datAlumnos (
+                        `ALUMNO` INT(11) NULL DEFAULT NULL,
+                        `APELLIDOS` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `NOMBRE` VARCHAR(21) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `SEXO` VARCHAR(1) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `DNI` VARCHAR(9) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `NIE` INT(11) NULL DEFAULT NULL,
+                        `FECHA_NACIMIENTO` DATETIME NULL DEFAULT NULL,
+                        `LOCALIDAD_NACIMIENTO` VARCHAR(31) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `PROVINCIA_NACIMIENTO` VARCHAR(22) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `NOMBRE_CORRESPONDENCIA` VARCHAR(47) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `DOMICILIO` VARCHAR(53) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `LOCALIDAD` VARCHAR(40) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `PROVINCIA` VARCHAR(11) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `TELEFONO` INT(11) NULL DEFAULT NULL,
+                        `MOVIL` INT(11) NULL DEFAULT NULL,
+                        `CODIGO_POSTAL` VARCHAR(5) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `TUTOR1` VARCHAR(28) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `DNI_TUTOR1` VARCHAR(13) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `TUTOR2` VARCHAR(32) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `DNI_TUTOR2` VARCHAR(13) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `PAIS` VARCHAR(9) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `NACIONALIDAD` VARCHAR(9) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `EMAIL_ALUMNO` VARCHAR(40) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `EMAIL_TUTOR2` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `EMAIL_TUTOR1` VARCHAR(34) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `TELEFONOTUTOR1` INT(11) NULL DEFAULT NULL,
+                        `TELEFONOTUTOR2` INT(11) NULL DEFAULT NULL,
+                        `MOVILTUTOR1` INT(11) NULL DEFAULT NULL,
+                        `MOVILTUTOR2` VARCHAR(10) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `APELLIDO1` VARCHAR(20) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `APELLIDO2` VARCHAR(18) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `TIPODOM` VARCHAR(2) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `NTUTOR1` VARCHAR(19) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `NTUTOR2` VARCHAR(21) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `NSS` INT(11) NULL DEFAULT NULL)
+                    ENGINE = InnoDB
+                    DEFAULT CHARACTER SET = utf8
+                    COLLATE = utf8_unicode_ci;";
+                \DB::statement($sql);
+                $server="localhost";
+                $database="gestionfct";
+                $user="pedro";
+                $password="Chubaca2019";
+                $conn = new \PDO("mysql:host=$server;dbname=$database", "$user", "$password", array(
+                    \PDO::MYSQL_ATTR_LOCAL_INFILE => true,
+                    \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+                ));
 
-        // 2MB in Bytes
-        $maxFileSize = 2097152;
+                $query = sprintf("LOAD DATA local INFILE '%s' INTO TABLE `datalumnos` CHARACTER SET UTF8 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\"' "
+                        . "LINES TERMINATED BY '\\n' IGNORE 1 LINES (`ALUMNO`, `APELLIDOS`,`NOMBRE`,`SEXO`,`DNI`,`NIE`,`FECHA_NACIMIENTO`,`LOCALIDAD_NACIMIENTO`,`PROVINCIA_NACIMIENTO`,`NOMBRE_CORRESPONDENCIA`,`DOMICILIO`,`LOCALIDAD`,`PROVINCIA`,`TELEFONO`,`MOVIL`,`CODIGO_POSTAL`,`TUTOR1`,`DNI_TUTOR1`,`TUTOR2`,`DNI_TUTOR2`,`PAIS`,`NACIONALIDAD`,`EMAIL_ALUMNO`,`EMAIL_TUTOR2`,`EMAIL_TUTOR1`,`TELEFONOTUTOR1`,`TELEFONOTUTOR2`,`MOVILTUTOR1`,`MOVILTUTOR2`,`APELLIDO1`,`APELLIDO2`,`TIPODOM`,`NTUTOR1`,`NTUTOR2`,`NSS`)", addslashes($csv));
+                $conn->exec($query);
+                break;
 
-        // Check file extension
-        if (in_array(strtolower($extension), $valid_extension)) {
 
-            // Check file size
-            if ($fileSize <= $maxFileSize) {
-
-                // File upload location
-                $location = 'uploads';
-
-                // Upload file
-                $file->move($location, $filename);
-
-                // Import CSV to Database
-                $filepath = public_path($location . "/" . $filename);
-
-                // Reading file
-                $file = fopen($filepath, "r");
-
-                $importData_arr = array();
-                $i = 0;
-
-                while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
-                    $num = count($filedata);
-
-                    // Skip first row (Remove below comment if you want to skip the first row)
-                    /* if($i == 0){
-                      $i++;
-                      continue;
-                      } */
-                    for ($c = 0; $c < $num; $c++) {
-                        $importData_arr[$i][] = $filedata [$c];
-                    }
-                    $i++;
-                }
-                fclose($file);
-
-                // Insert to MySQL database
-                foreach ($importData_arr as $importData) {
-
-                    $insertData = array(
-                        "username" => $importData[1],
-                        "name" => $importData[2],
-                        "gender" => $importData[3],
-                        "email" => $importData[4]);
-                    Page::insertData($insertData);
-                }
-
-                Session::flash('message', 'Import Successful.');
-            } else {
-                Session::flash('message', 'File too large. File must be less than 2MB.');
-            }
-        } else {
-            Session::flash('message', 'Invalid File Extension.');
-        }
+        endswitch;
     }
 
     /**
@@ -138,7 +131,7 @@ class controladorAdmin extends Controller {
             foreach (new \DirectoryIterator($pathCSV) as $fileInfo) {
                 if ($fileInfo->isDot())
                     continue;
-                $this->_import_csv($fileInfo);
+                $this->_import_csv($fileInfo->getPath(), $fileInfo->getFilename());
             }
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -170,7 +163,7 @@ class controladorAdmin extends Controller {
         //Borrar la DB
         $database_name = 'gestionfct';
         \DB::statement("DROP DATABASE IF EXISTS `{$database_name}`;");
-        \DB::statement("CREATE DATABASE `{$database_name}`;");
+        \DB::statement("CREATE DATABASE `{$database_name}` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;");
         $valor = 'NO_AUTO_VALUE_ON_ZERO';
         $valor2 = '+00:00';
         $sqlDB = "USE `{$database_name}`;

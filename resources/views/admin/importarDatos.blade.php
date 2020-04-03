@@ -29,6 +29,10 @@ Importar Datos
         </form>
         <br>
         <h3>Subir Archivos</h3>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <b>¡¡ IMPORTANTE !!</b>
+            <BR>Para importar los archivos <b>CSV</b> la <b>codificación</b> de dichos archivos debe de ser <b>UTF-8</b> si no corre el riesgo que <b>no se visualice los datos correctamente.</b> Gracias.
+        </div>
         <div class='content'>
             <form action="upload.php" class="dropzone" id="dropzonewidget">
                 <script>
@@ -53,14 +57,22 @@ Importar Datos
                 </script>
             </form> 
         </div> 
-        <p>Para borra los archivos csv del desplegable y del directorio donde se almacenan hay que hacer lo siguiente:</p>
-        <p>- Una vez subidos y que en el cuadro de subir archivos se muestren</p>
-        <p>- Pulsar sobre el botón Borrar Archivos CSV</p>
-        <br>
-        <form name="formBorrarArchivosCSV" action="BorrarArchivosCSV"  method="post">
+        <div class="alert alert-dark" role="alert">
+            <b>¡¡ INFORMACIÓN PARA BORRAR LOS ARCHIVOS CSV !!</b>
+            <P>- Para borra los archivos csv del desplegable y del directorio donde se almacenan hay que hacer lo siguiente:</P>
+            <ol>
+                <li>Una vez subidos y que en el cuadro de subir archivos se muestren</li>
+                <li>Pulsar sobre el botón Borrar Archivos CSV</li>
+            </ol>
+            <br>
+            - Gracias
+            <br>
+            <br>
+            <form name="formBorrarArchivosCSV" action="BorrarArchivosCSV"  method="post">
             {{ csrf_field() }}
             <input type="submit" name="BorrarArchivosCSV" id="BorrarArchivosCSV" value="Borrar Archivos CSV"> 
         </form>
+        </div>
         <br>
         <form name="formImportarDatosCSV" action="ImportarDatosCSV"  method="post">
             {{ csrf_field() }}
