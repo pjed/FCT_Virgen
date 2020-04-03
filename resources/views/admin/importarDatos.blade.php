@@ -1,9 +1,11 @@
 @extends('maestra.maestraAdmin')
-<meta name="_token" content="{{csrf_token()}}" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
+<!-- CSS -->
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/dropzone.css" rel="stylesheet" type="text/css">
+
+<!-- Script -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/dropzone.js" type="text/javascript"></script>
 @section('titulo') 
 Importar Datos
 @endsection
@@ -20,80 +22,49 @@ Importar Datos
         </nav>
     </nav>
 
-    <!--    <h2 class="text-center">Subir Archivos</h2>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    {!! Form::open([ 'route' => [ 'dropzone.store' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'image-upload' ]) !!}
-                    <div>
-                        <h4>Arrastrar los archivos para añadirlos a la subida</h4>
-                        <h5>Archivos permitidos unicamente .sql</h5>
-                    </div>
-                    {!! Form::close() !!}
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            Dropzone.options.imageUpload = {
-                maxFilesize: 5, //MB
-                acceptedFiles: ".sql",
-                addRemoveLinks: true,
-            };
-        </script>-->
-
     <div class="container">
-
         <form name="formDeleteDB" action="DeleteDB"  method="post">
             {{ csrf_field() }}
             <input type="submit" name="deleteDB" id="deleteDB" value="Borrar DB"> 
         </form>
-
+        <br>
         <h3>Subir Archivos</h3>
-        <form method="post" action="{{url('dropzone-image-upload')}}" enctype="multipart/form-data" 
-              class="dropzone" id="dropzone">
-            @csrf
-        </form>   
-        <script type="text/javascript">
-            Dropzone.options.dropzone =
-                    {
-                        maxFilesize: 12,
-                        renameFile: function (file) {
-                            var dt = new Date();
-                            var time = dt.getTime();
-                            return time + file.name;
-                        },
-                        acceptedFiles: ".sql",
-                        timeout: 5000,
+        <div class='content'>
+            <form action="upload.php" class="dropzone" id="dropzonewidget">
+                <script>
+                    Dropzone.autoDiscover = false;
+                    $(".dropzone").dropzone({
                         addRemoveLinks: true,
-                        removedfile: function (file)
-                        {
-                            var name = file.upload.filename;
+                        removedfile: function (file) {
+                            var name = file.name;
+
                             $.ajax({
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                                },
                                 type: 'POST',
-                                url: '{{ url("uploads") }}',
-                                data: {filename: name},
-                                success: function (data) {
-                                    console.log("Fichero borrado satisfactoriamente!!");
-                                },
-                                error: function (e) {
-                                    console.log(e);
-                                }});
-                            var fileRef;
-                            return (fileRef = file.previewElement) != null ?
-                                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
-                        },
-                        success: function (file, response)
-                        {
-                            console.log(response);
-                        },
-                        error: function (file, response)
-                        {
-                            return false;
+                                url: 'upload.php',
+                                data: {name: name, request: 2},
+                                sucess: function (data) {
+                                    console.log('success: ' + data);
+                                }
+                            });
+                            var _ref;
+                            return (_ref = file.previewElement) != null _ref.parentNode.removeChild(file.previewElement) : void 0;
                         }
-                    };
-        </script>
+                    });
+                </script>
+            </form> 
+        </div> 
+        <p>Para borra los archivos csv del desplegable y del directorio donde se almacenan hay que hacer lo siguiente:</p>
+        <p>- Una vez subidos y que en el cuadro de subir archivos se muestren</p>
+        <p>- Pulsar sobre el botón Borrar Archivos CSV</p>
+        <br>
+        <form name="formBorrarArchivosCSV" action="BorrarArchivosCSV"  method="post">
+            {{ csrf_field() }}
+            <input type="submit" name="BorrarArchivosCSV" id="BorrarArchivosCSV" value="Borrar Archivos CSV"> 
+        </form>
+        <br>
+        <form name="formImportarDatosCSV" action="ImportarDatosCSV"  method="post">
+            {{ csrf_field() }}
+            <input type="submit" name="ImportarDatosCSV" id="ImportarDatosCSV" value="Importar Datos CSV"> 
+        </form>
     </div>
     @endsection
