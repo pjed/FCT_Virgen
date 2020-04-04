@@ -32,6 +32,17 @@ Importar Datos
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <b>¡¡ IMPORTANTE !!</b>
             <BR>Para importar los archivos <b>CSV</b> la <b>codificación</b> de dichos archivos debe de ser <b>UTF-8</b> si no corre el riesgo que <b>no se visualice los datos correctamente.</b> Gracias.
+            <p>Los archivos a importar de DELPHOS son los siguientes:</p>
+            <ul>
+                <li>datAlumnos</li>
+                <li>datMaterias</li>
+                <li>datMatriculas</li>
+                <li>datProfesores</li>
+                <li>datUnidades</li>
+            </ul>
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p>Cualquier otro archivo que no sea ninguno de los mencionados anteriormente no funcionara la aplicación.</p>
         </div>
         <div class='content'>
             <form action="upload.php" class="dropzone" id="dropzonewidget">

@@ -49,7 +49,12 @@ class controladorAdmin extends Controller {
      * @return type
      */
     private function _import_csv($path, $filename) {
-        $csv = $path ."/". $filename;
+        $csv = $path . "/" . $filename;
+
+        $server = "localhost";
+        $database = "gestionfct";
+        $user = "pedro";
+        $password = "Chubaca2019";
 
         switch ($filename):
             case "datAlumnos.csv":
@@ -93,10 +98,7 @@ class controladorAdmin extends Controller {
                     DEFAULT CHARACTER SET = utf8
                     COLLATE = utf8_unicode_ci;";
                 \DB::statement($sql);
-                $server="localhost";
-                $database="gestionfct";
-                $user="pedro";
-                $password="Chubaca2019";
+
                 $conn = new \PDO("mysql:host=$server;dbname=$database", "$user", "$password", array(
                     \PDO::MYSQL_ATTR_LOCAL_INFILE => true,
                     \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
@@ -107,6 +109,130 @@ class controladorAdmin extends Controller {
                 $conn->exec($query);
                 break;
 
+            case "datMaterias.csv":
+                $sql = "CREATE TABLE IF NOT EXISTS `gestionfct`.`datmaterias` (
+                        `MATERIA` INT(11) NULL DEFAULT NULL,
+                        `DESCRIPCION` VARCHAR(110) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `ABREVIATURA` VARCHAR(5) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `DEPARTAMENTO` VARCHAR(58) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `CURSO` VARCHAR(84) CHARACTER SET 'utf8' NULL DEFAULT NULL)
+                    ENGINE = InnoDB
+                    DEFAULT CHARACTER SET = utf8
+                    COLLATE = utf8_unicode_ci;";
+                \DB::statement($sql);
+
+                $conn = new \PDO("mysql:host=$server;dbname=$database", "$user", "$password", array(
+                    \PDO::MYSQL_ATTR_LOCAL_INFILE => true,
+                    \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+                ));
+
+                $query = sprintf("LOAD DATA local INFILE '%s' INTO TABLE `datmaterias` CHARACTER SET UTF8 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\"' "
+                        . "LINES TERMINATED BY '\\n' IGNORE 1 LINES (`MATERIA`, `DESCRIPCION`,`ABREVIATURA`,`DEPARTAMENTO`,`CURSO`)", addslashes($csv));
+                $conn->exec($query);
+                break;
+
+            case "datMatriculas.csv":
+                $sql = "CREATE TABLE IF NOT EXISTS `gestionfct`.`datmatriculas` (
+                        `ALUMNO` INT(11) NULL DEFAULT NULL,
+                        `APELLIDOS` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `NOMBRE` VARCHAR(21) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `MATRICULA` INT(11) NULL DEFAULT NULL,
+                        `ETAPA` INT(11) NULL DEFAULT NULL,
+                        `ANNO` INT(11) NULL DEFAULT NULL,
+                        `TIPO` VARCHAR(1) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `ESTUDIOS` VARCHAR(84) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `GRUPO` VARCHAR(10) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `REPETIDOR` VARCHAR(1) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `FECHAMATRICULA` DATETIME NULL DEFAULT NULL,
+                        `CENTRO` INT(11) NULL DEFAULT NULL,
+                        `PROCEDENCIA` INT(11) NULL DEFAULT NULL,
+                        `ESTADOMATRICULA` VARCHAR(14) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `FECHARESMATRICULA` DATETIME NULL DEFAULT NULL,
+                        `NUM_EXP_CENTRO` INT(11) NULL DEFAULT NULL,
+                        `PROGRAMA_2` INT(11) NULL DEFAULT NULL)
+                    ENGINE = InnoDB
+                    DEFAULT CHARACTER SET = utf8
+                    COLLATE = utf8_unicode_ci;";
+                \DB::statement($sql);
+
+                $conn = new \PDO("mysql:host=$server;dbname=$database", "$user", "$password", array(
+                    \PDO::MYSQL_ATTR_LOCAL_INFILE => true,
+                    \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+                ));
+
+                $query = sprintf("LOAD DATA local INFILE '%s' INTO TABLE `datmatriculas` CHARACTER SET UTF8 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\"' "
+                        . "LINES TERMINATED BY '\\n' "
+                        . "IGNORE 1 LINES (`ALUMNO`, `APELLIDOS`,`NOMBRE`,`MATRICULA`,`ETAPA`,`ANNO`,`TIPO`,`ESTUDIOS`,`GRUPO`,`REPETIDOR`,`FECHAMATRICULA`,`CENTRO`,`PROCEDENCIA`,`ESTADOMATRICULA`,`FECHARESMATRICULA`,`NUM_EXP_CENTRO`,`PROGRAMA_2`)", addslashes($csv));
+                $conn->exec($query);
+                break;
+
+            case "datProfesores.csv":
+                $sql = "CREATE TABLE IF NOT EXISTS `gestionfct`.`datprofesores` (
+                        `CODIGO` INT(11) NULL DEFAULT NULL,
+                        `APELLIDOS` VARCHAR(22) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `NOMBRE` VARCHAR(20) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `NRP` VARCHAR(16) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `DNI` VARCHAR(9) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `ABREVIATURA` VARCHAR(5) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `FECHA_NACIMIENTO` DATETIME NULL DEFAULT NULL,
+                        `SEXO` VARCHAR(1) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `TITULO` VARCHAR(91) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `DOMICILIO` VARCHAR(59) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `LOCALIDAD` VARCHAR(24) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `CODIGO_POSTAL` INT(11) NULL DEFAULT NULL,
+                        `PROVINCIA` VARCHAR(11) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `TELEFONO_RP` INT(11) NULL DEFAULT NULL,
+                        `ESPECIALIDAD` VARCHAR(5) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `CUERPO` VARCHAR(6) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `DEPARTAMENTO` VARCHAR(48) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `FECHA_ALTA_CENTRO` DATETIME NULL DEFAULT NULL,
+                        `FECHA_BAJA_CENTRO` DATETIME NULL DEFAULT NULL,
+                        `EMAIL` VARCHAR(32) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `TELEFONO` INT(11) NULL DEFAULT NULL)
+                    ENGINE = InnoDB
+                    DEFAULT CHARACTER SET = utf8
+                    COLLATE = utf8_unicode_ci;";
+                \DB::statement($sql);
+
+                $conn = new \PDO("mysql:host=$server;dbname=$database", "$user", "$password", array(
+                    \PDO::MYSQL_ATTR_LOCAL_INFILE => true,
+                    \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+                ));
+
+                $query = sprintf("LOAD DATA local INFILE '%s' INTO TABLE `datprofesores` CHARACTER SET UTF8 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\"' "
+                        . "LINES TERMINATED BY '\\n' "
+                        . "IGNORE 1 LINES (`CODIGO`, `APELLIDOS`,`NOMBRE`,"
+                        . "`NRP`,`DNI`,`ABREVIATURA`,`FECHA_NACIMIENTO`,"
+                        . "`SEXO`,`TITULO`,`DOMICILIO`,`LOCALIDAD`,"
+                        . "`CODIGO_POSTAL`,`PROVINCIA`,`TELEFONO_RP`,"
+                        . "`ESPECIALIDAD`,`CUERPO`,"
+                        . "`DEPARTAMENTO`, `FECHA_ALTA_CENTRO`, "
+                        . "`FECHA_BAJA_CENTRO`, `EMAIL`, `TELEFONO`)", addslashes($csv));
+                $conn->exec($query);
+                break;
+            
+            case "datUnidades.csv":
+                $sql = "CREATE TABLE IF NOT EXISTS `gestionfct`.`datunidades` (
+                        `ANNO` INT(11) NULL DEFAULT NULL,
+                        `GRUPO` VARCHAR(10) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `ESTUDIO` VARCHAR(71) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `CURSO` VARCHAR(84) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+                        `TUTOR` VARCHAR(34) CHARACTER SET 'utf8' NULL DEFAULT NULL)
+                    ENGINE = InnoDB
+                    DEFAULT CHARACTER SET = utf8
+                    COLLATE = utf8_unicode_ci;";
+                \DB::statement($sql);
+
+                $conn = new \PDO("mysql:host=$server;dbname=$database", "$user", "$password", array(
+                    \PDO::MYSQL_ATTR_LOCAL_INFILE => true,
+                    \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+                ));
+
+                $query = sprintf("LOAD DATA local INFILE '%s' INTO TABLE `datunidades` CHARACTER SET UTF8 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\"' "
+                        . "LINES TERMINATED BY '\\n' "
+                        . "IGNORE 1 LINES (`ANNO`, `GRUPO`,`ESTUDIO`,`CURSO`,`TUTOR`)", addslashes($csv));
+                $conn->exec($query);
+                break;
 
         endswitch;
     }
@@ -117,6 +243,7 @@ class controladorAdmin extends Controller {
      * @param Request $req
      */
     public function ImportarDatosCSV(Request $req) {
+        
         $pathCSV = public_path() . '/uploads';
         $ficherosCSV = scandir($pathCSV, 1);
 
