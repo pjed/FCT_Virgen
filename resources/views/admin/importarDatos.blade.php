@@ -40,6 +40,7 @@ Importar Datos
                 <li>datProfesores</li>
                 <li>datUnidades</li>
             </ul>
+            <b>Los archivos CSV deben de estar formateados por cada linea del archivo delimitarlo con una , si no no se importarán bien los datos</b>
         </div>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <p>Cualquier otro archivo que no sea ninguno de los mencionados anteriormente no funcionara la aplicación.</p>
