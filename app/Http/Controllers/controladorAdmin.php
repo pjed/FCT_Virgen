@@ -642,14 +642,6 @@ class controladorAdmin extends Controller {
                       `created_at` timestamp NULL DEFAULT NULL,
                       `updated_at` timestamp NULL DEFAULT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-                    --
-                    -- Volcado de datos para la tabla `centros`
-                    --
-
-                    INSERT INTO `centros` (`cod`, `nombre`, `localidad`, `created_at`, `updated_at`) VALUES
-                    ('13002691', 'CIFP Virgen de Gracia', 'Puertollano', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
                     -- --------------------------------------------------------
 
                     --
