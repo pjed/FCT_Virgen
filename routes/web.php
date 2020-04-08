@@ -84,13 +84,22 @@ Route::group(['middleware' => ['tutor']], function() {
     Route::get('gestionarPracticasAyax', function () {
         return view('tutor/gestionarPracticasAyax');
     });
-    Route::post('gestionarPracticasAyax', 'controladorTutor@gestionarPracticasAyax');
-    Route::any('listarResponsablesAyax', 'controladorTutor@listarResponsablesAyax'); //ayax para poder responsables de una empresa
-    //ayax para poder mostrar la modal para modificar practicas
-    Route::any('modalModificarPracticaAyax', 'controladorTutor@modalModificarPracticaAyax');
-    Route::any('idEmpresaModalModificarPracticaAyax', 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax');
+
+    Route::any('gestionarPracticasAyax', ['uses' => 'controladorTutor@gestionarPracticasAyax', 'as' => 'gestionarPracticasAyax']);
+    Route::any('listarResponsablesAyax', ['uses' => 'controladorTutor@listarResponsablesAyax', 'as' => 'listarResponsablesAyax']); //ayax para poder responsables de una empresa
+    
+    //ayax para poder mostrar la modal para modificar practicas    
+    Route::any('modalModificarPracticaAyax', ['uses' => 'Conexion@buscarPracticaPorIdAyax', 'as' => 'modalModificarPracticaAyax']);
+    Route::any('idEmpresaModalModificarPracticaAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'idEmpresaModalModificarPracticaAyax']);
+    
+    //listas para modificar una practica
+    Route::any('listarEmpresasAyax', ['uses' => 'Conexion@listarEmpresasAyax', 'as' => 'listarEmpresasAyax']);
+    Route::any('listarAlumnoPorTutorAyax', ['uses' => 'Conexion@listarAlumnoPorTutorAyax', 'as' => 'listarAlumnoPorTutorAyax']);
+    Route::any('listarResponsablesAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'listarResponsablesAyax']);
+    
+
     //ayax para poder mostrar la modal para añadir practicas
-    Route::any('idEmpresaModalAniadirPracticasAyax', 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax');
+    Route::any('idEmpresaModalAniadirPracticasAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'idEmpresaModalAniadirPracticasAyax']);
 
     Route::post('consultarGastosAlumno', 'controladorTutor@consultarGastoAlumno');
     Route::post('extraerDocT', 'controladorTutor@extraerDocT');
