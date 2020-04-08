@@ -210,7 +210,7 @@ class controladorAdmin extends Controller {
                         . "`FECHA_BAJA_CENTRO`, `EMAIL`, `TELEFONO`)", addslashes($csv));
                 $conn->exec($query);
                 break;
-            
+
             case "datUnidades.csv":
                 $sql = "CREATE TABLE IF NOT EXISTS `gestionfct`.`datunidades` (
                         `ANNO` INT(11) NULL DEFAULT NULL,
@@ -238,28 +238,341 @@ class controladorAdmin extends Controller {
     }
 
     /**
-     * Método que importa los datos de los archivos .csv a MariaDB
+     * Método que añade los archivos del csv a la BBDD gestionfct
+     * @author Pedro
+     * @param Request $req
+     */
+    public function AddDatosCSVtoBBDD(Request $req) {
+
+
+        $sql = "/*Sentencia para crear el centro*/
+                SET FOREIGN_KEY_CHECKS=0;
+                insert into centros(cod, nombre, localidad, created_at, updated_at) 
+                values(13002691, 'CIFP Virgen de Gracia', 'Puertollano', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
+        try {
+            \DB::connection()->getPdo()->exec($sql);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Centro creado correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } catch (Exception $ex) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ERROR al crear el centro.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+
+
+        $sql = "/*Sentencia para llenar los cursos*/
+                insert into cursos(id_curso, descripcion, ano_academico, familia, horas, centros_cod, created_at, updated_at)
+                select 	datunidades.GRUPO as id_curso, 
+                                datunidades.CURSO as descripcion, 
+                                datunidades.ANNO as ano_academico,
+                        datunidades.ESTUDIO as familia,  
+                        null as horas, 
+                                13002691 as centro_cod, 
+                        CURRENT_TIMESTAMP as created_at, 
+                        CURRENT_TIMESTAMP as updated_at 
+                        from datunidades;";
+        try {
+            \DB::connection()->getPdo()->exec($sql);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Cursos creados correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } catch (Exception $ex) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ERROR al crear los cursos.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+
+        $sql = "/* Sentencia para insertar a todos los profesores en la tabla usuarios*/
+                insert into usuarios(dni, nombre, apellidos, domicilio, email, telefono, movil, iban, created_at, updated_at)
+                select 	datprofesores.DNI, 
+                                datprofesores.NOMBRE, 
+                                datprofesores.APELLIDOS, 
+                                datprofesores.DOMICILIO, 
+                                datprofesores.EMAIL, 
+                                datprofesores.TELEFONO, 
+                                null as movil, 
+                        null as iban, 
+                                CURRENT_TIMESTAMP as created_at, 
+                                CURRENT_TIMESTAMP as updated_at
+                from datprofesores;";
+        try {
+            \DB::connection()->getPdo()->exec($sql);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Profesores creados correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } catch (Exception $ex) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ERROR al crear los profesores.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+
+        $sql = "/* Sentencia para insertar los roles */
+                insert into roles(id, nombre, created_at, updated_at)
+                values(0, 'Director', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+                insert into roles(id, nombre, created_at, updated_at)
+                values(1, 'Administrador', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+                insert into roles(id, nombre, created_at, updated_at)
+                values(2, 'Tutor', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+                insert into roles(id, nombre, created_at, updated_at)
+                values(3, 'Alumno', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+                insert into roles(id, nombre, created_at, updated_at)
+                values(4, 'Tutor - Administrador', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
+        try {
+            \DB::connection()->getPdo()->exec($sql);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Roles añadidos correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } catch (Exception $ex) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ERROR al crear los roles.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+
+        $sql = "/* Sentencia para insertar los alumnos matriculados que tienen matricula diferente de anulada y diferente de vacia*/
+                insert into usuarios(dni, nombre, apellidos, domicilio, email, telefono, movil, iban, created_at, updated_at)
+                select  datAlumnos.DNI, 
+                                datAlumnos.NOMBRE, 
+                        datAlumnos.APELLIDOS, 
+                        datAlumnos.DOMICILIO, 
+                        datAlumnos.EMAIL_ALUMNO, 
+                        datAlumnos.TELEFONO, 
+                        datAlumnos.MOVIL, 
+                        null as iban,  
+                        CURRENT_TIMESTAMP, 
+                        CURRENT_TIMESTAMP
+                from datmatriculas, datAlumnos
+                where datmatriculas.ALUMNO = datAlumnos.ALUMNO
+                and datAlumnos.ALUMNO = datmatriculas.ALUMNO 
+                and datmatriculas.ESTADOMATRICULA <> 'Anulada'
+                and datmatriculas.ESTADOMATRICULA <> '';";
+        try {
+            \DB::connection()->getPdo()->exec($sql);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Alumnos matriculados creados correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } catch (Exception $ex) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ERROR al matricular los alumnos.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+
+        $sql = "/* Sentencia para insertar los roles de los tutores*/
+                insert into usuarios_roles(id, rol_id, usuario_dni, created_at, updated_at)
+                select null, 2 as rol_id, datprofesores.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+                from datprofesores, datunidades
+                where datunidades.TUTOR = concat(datprofesores.APELLIDOS, ', ',datprofesores.NOMBRE);";
+        try {
+            \DB::connection()->getPdo()->exec($sql);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Roles de los tutores añadidos correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } catch (Exception $ex) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ERROR al añadir los roles de los tutores.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+
+        $sql = "/* Sentencia para dar de alta con permiso de Administrador y Director*/
+                /* Ana Belen Directora*/
+                insert into usuarios_roles(id, rol_id, usuario_dni, created_at, updated_at)
+                select null, 0 as rol_id, datprofesores.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+                from datprofesores
+                where DNI='05664525Q';
+
+                /* Ana Belen Administrador*/
+                insert into usuarios_roles(id, rol_id, usuario_dni, created_at, updated_at)
+                select null, 1 as rol_id, datprofesores.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+                from datprofesores
+                where DNI='05664525Q';
+
+                /* Jose Alberto como administrador */
+                insert into usuarios_roles(id, rol_id, usuario_dni, created_at, updated_at)
+                select null, 1 as rol_id, datprofesores.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+                from datprofesores
+                where DNI='05679252T';";
+        try {
+            \DB::connection()->getPdo()->exec($sql);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Roles de acceso Administrador y Director creados correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } catch (Exception $ex) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ERROR no se ha podido crear los roles de acceso Administrador y Director.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+
+        $sql = "/* Sentencia para insertar los roles de los alumnos*/
+                insert into usuarios_roles(id, rol_id, usuario_dni, created_at, updated_at)
+                select null, 3 as rol_id, datAlumnos.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+                from datmatriculas, datAlumnos
+                where datmatriculas.ALUMNO = datAlumnos.ALUMNO
+                and datAlumnos.ALUMNO = datmatriculas.ALUMNO and datmatriculas.ESTADOMATRICULA <> 'Anulada'
+                and datmatriculas.ESTADOMATRICULA <> '';";
+        try {
+            \DB::connection()->getPdo()->exec($sql);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Roles de alumnos creados correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } catch (Exception $ex) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ERROR al crear los roles de alumnos.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+
+        $sql = "/* Sentencia para dar de alta los profesores que son tutores de cada curso*/
+                insert into tutores(idtutores, cursos_id_curso, usuarios_dni, created_at, updated_at)
+                select null, datunidades.GRUPO, datprofesores.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP 
+                from datunidades, datprofesores
+                where datunidades.TUTOR = concat(datprofesores.APELLIDOS, ', ',datprofesores.NOMBRE);";
+        try {
+            \DB::connection()->getPdo()->exec($sql);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Tutores de cada curso creados correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } catch (Exception $ex) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ERROR al crear los tutores de cada curso.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+
+        $sql = "/* Sentencia para dar de alta los alumnos en los cursos que estan matriculados */
+                insert into matriculados(idmatriculados, usuarios_dni, cursos_id_curso, created_at, updated_at)
+                select null, datAlumnos.DNI, datmatriculas.GRUPO, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+                from datAlumnos, datmatriculas
+                where datAlumnos.ALUMNO = datmatriculas.ALUMNO
+                and datmatriculas.ESTADOMATRICULA <> 'Anulada'
+                and datmatriculas.ESTADOMATRICULA <> '';";
+        try {
+            \DB::connection()->getPdo()->exec($sql);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Alumnos matriculados en curso creados correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } catch (Exception $ex) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ERROR al crear los alumnos matriculados en curso.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+
+        $sql = "/* Sentencia para insertar empresas de prueba */
+                insert into empresas(id, cif, nombre, dni_representante, nombre_representante, direccion, localidad, horario, nueva, created_at, updated_at)
+                values(null, 'A28599033','Indra Sistemas',null,null,'Avenida de Bruselas nº 35','Alcobendas',null,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+
+                insert into empresas(id, cif, nombre, dni_representante, nombre_representante, direccion, localidad, horario, nueva, created_at, updated_at)
+                values(null, 'B83028084','Deimos Space',null,null,'Ronda de Poniente 19, – 28760','Tres Cantos',null,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+
+                insert into empresas(id, cif, nombre, dni_representante, nombre_representante, direccion, localidad, horario, nueva, created_at, updated_at)
+                values(null, 'B82387770','Everis',null,null,'Camino de la Fuente de la Mora, 1','Madrid',null,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+
+                insert into empresas(id, cif, nombre, dni_representante, nombre_representante, direccion, localidad, horario, nueva, created_at, updated_at)
+                values(null, 'A28855260','IECISA',null,null,'C/ Hermosilla 112','Madrid',null,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+                
+                SET FOREIGN_KEY_CHECKS=1;";
+        try {
+            \DB::connection()->getPdo()->exec($sql);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Empresas de prueba creadas correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } catch (Exception $ex) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ERROR al crear empresas de prueba.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+    }
+
+    /**
+     * Método que añade los datos de los archivos .csv a tablas en la BBDD gestionfct
      * @author Pedro
      * @param Request $req
      */
     public function ImportarDatosCSV(Request $req) {
-        
+
         $pathCSV = public_path() . '/uploads';
         $ficherosCSV = scandir($pathCSV, 1);
 
         if (count($ficherosCSV) != 2) {
-//            foreach ($ficherosCSV as $file) {
-//                $pathArchivo = $pathCSV . '/' . $file;
-//                if (is_file($pathArchivo)) {
-//                    $this->_import_csv($pathArchivo);
-//                }
-//            }
-            // output all files and directories except for '.' and '..'
+            /*
+             * Bucle que obtiene cada archivo CSV y lo inserta en la tabla del
+             * nombre del archivo en la BBDD gestionfct
+             */
             foreach (new \DirectoryIterator($pathCSV) as $fileInfo) {
                 if ($fileInfo->isDot())
                     continue;
                 $this->_import_csv($fileInfo->getPath(), $fileInfo->getFilename());
             }
+
+            //Método que añade los datos de los archivos .csv a tablas en la BBDD gestionfct
+            $this->AddDatosCSVtoBBDD($req);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Archivos CSV importados correctamente.
@@ -329,14 +642,6 @@ class controladorAdmin extends Controller {
                       `created_at` timestamp NULL DEFAULT NULL,
                       `updated_at` timestamp NULL DEFAULT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-                    --
-                    -- Volcado de datos para la tabla `centros`
-                    --
-
-                    INSERT INTO `centros` (`cod`, `nombre`, `localidad`, `created_at`, `updated_at`) VALUES
-                    ('13002691', 'CIFP Virgen de Gracia', 'Puertollano', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
                     -- --------------------------------------------------------
 
                     --
@@ -392,18 +697,19 @@ class controladorAdmin extends Controller {
                     --
 
                     CREATE TABLE `empresas` (
-                      `id` int(11) NOT NULL,
-                      `cif` varchar(9) NOT NULL,
-                      `nombre` varchar(100) NOT NULL,
-                      `dni_representante` varchar(9) DEFAULT NULL,
-                      `nombre_representante` varchar(100) DEFAULT NULL,
-                      `direccion` varchar(100) NOT NULL,
-                      `localidad` varchar(100) NOT NULL,
-                      `horario` varchar(100) DEFAULT NULL,
-                      `nueva` int(11) DEFAULT NULL,
-                      `created_at` timestamp NULL DEFAULT NULL,
-                      `updated_at` timestamp NULL DEFAULT NULL
-                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                        `id` int(11) NOT NULL AUTO_INCREMENT,
+                        `cif` varchar(9) NOT NULL,
+                        `nombre` varchar(100) NOT NULL,
+                        `dni_representante` varchar(9) DEFAULT NULL,
+                        `nombre_representante` varchar(100) DEFAULT NULL,
+                        `direccion` varchar(100) NOT NULL,
+                        `localidad` varchar(100) NOT NULL,
+                        `horario` varchar(100) DEFAULT NULL,
+                        `nueva` int(11) DEFAULT NULL,
+                        `created_at` timestamp NULL DEFAULT NULL,
+                        `updated_at` timestamp NULL DEFAULT NULL,
+                        PRIMARY KEY (`id`)
+                      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
                     -- --------------------------------------------------------
 
@@ -415,8 +721,8 @@ class controladorAdmin extends Controller {
                       `id` int(11) NOT NULL,
                       `desplazamiento` int(1) NOT NULL,
                       `tipo` int(1) NOT NULL,
-                      `created_at` date DEFAULT NULL,
-                      `updated_at` date DEFAULT NULL,
+                      `created_at` timestamp NULL DEFAULT NULL,
+                      `updated_at` timestamp NULL DEFAULT NULL,
                       `usuarios_dni` varchar(9) NOT NULL,
                       `comidas_id` int(11) NOT NULL,
                       `transportes_id` int(11) NOT NULL
@@ -429,11 +735,12 @@ class controladorAdmin extends Controller {
                     --
 
                     CREATE TABLE `matriculados` (
-                      `idmatriculados` int(11) NOT NULL,
-                      `usuarios_dni` varchar(9) NOT NULL,
-                      `cursos_id_curso` varchar(50) NOT NULL,
-                      `created_at` date DEFAULT NULL,
-                      `updated_at` date DEFAULT NULL
+                    `idmatriculados` int(11) NOT NULL AUTO_INCREMENT,
+                    `usuarios_dni` varchar(9) NOT NULL,
+                    `cursos_id_curso` varchar(50) NOT NULL,
+                    `created_at` timestamp NULL DEFAULT NULL,
+                    `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`idmatriculados`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
                     -- --------------------------------------------------------
@@ -503,17 +810,6 @@ class controladorAdmin extends Controller {
                       `updated_at` timestamp NULL DEFAULT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-                    --
-                    -- Volcado de datos para la tabla `roles`
-                    --
-
-                    INSERT INTO `roles` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
-                    (0, 'Director', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-                    (1, 'Administrador', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-                    (2, 'Tutor', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-                    (3, 'Alumno', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-                    (4, 'Tutor - Administrador', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
                     -- --------------------------------------------------------
 
                     --
@@ -535,12 +831,13 @@ class controladorAdmin extends Controller {
                     --
 
                     CREATE TABLE `tutores` (
-                      `idtutores` int(11) NOT NULL,
-                      `cursos_id_curso` varchar(50) NOT NULL,
-                      `usuarios_dni` varchar(9) NOT NULL,
-                      `created_at` date DEFAULT NULL,
-                      `updated_at` date DEFAULT NULL
-                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                        `idtutores` int(11) NOT NULL AUTO_INCREMENT,
+                        `cursos_id_curso` varchar(50) NOT NULL,
+                        `usuarios_dni` varchar(9) NOT NULL,
+                        `created_at` timestamp NULL DEFAULT NULL,
+                        `updated_at` timestamp NULL DEFAULT NULL,
+                        PRIMARY KEY (`idtutores`)
+                      ) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
 
                     -- --------------------------------------------------------
 
@@ -576,12 +873,13 @@ class controladorAdmin extends Controller {
                     --
 
                     CREATE TABLE `usuarios_roles` (
-                      `id` int(11) NOT NULL,
-                      `rol_id` int(11) NOT NULL,
-                      `usuario_dni` varchar(9) NOT NULL,
-                      `created_at` timestamp NULL DEFAULT NULL,
-                      `updated_at` timestamp NULL DEFAULT NULL
-                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                        `id` int(11) NOT NULL AUTO_INCREMENT,
+                        `rol_id` int(11) NOT NULL,
+                        `usuario_dni` varchar(9) NOT NULL,
+                        `created_at` timestamp NULL DEFAULT NULL,
+                        `updated_at` timestamp NULL DEFAULT NULL,
+                        PRIMARY KEY (`id`)
+                      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
                     --
                     -- Volcado de datos para la tabla `usuarios_roles`

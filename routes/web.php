@@ -126,8 +126,6 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('dropzone', 'DropzoneController@index')->name('dropzone.store');
     Route::post('dropzone-image-upload', 'DropzoneController@store');
     Route::post('dropzone-image-delete', 'DropzoneController@destroy');
-//    Route::get('dropzone', 'DropzoneController@dropzone');
-//    Route::post('dropzone/store', 'DropzoneController@dropzoneStore')->name('dropzone.store');
     Route::get('extraerDocA', function () {
         $l1 = Conexion::listaCursos();
         $datos = [
