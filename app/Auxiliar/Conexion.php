@@ -754,7 +754,6 @@ class Conexion {
         }
         return $v;
     }
-
     /**
      * Muestra la una practica, metodo hecho para la modal de modificar practicas
      * @author Marina
@@ -762,13 +761,12 @@ class Conexion {
      * @return type
      */
     static function buscarPracticaPorId($idPractica) {
-        $v = [];
         $v = \DB::table('practicas')
                 ->where('id', $idPractica)
                 ->select(
                         'id AS idPractica', 'empresas_id AS idEmpresa', 'usuarios_dni AS dniAlumno', 'cod_proyecto AS codProyecto', 'responsables_id AS idResponsable', 'gastos AS gasto', 'fecha_inicio AS fechaInicio', 'fecha_fin AS fechaFin', 'apto'
                 )
-                ->paginate(8);
+                ->first();
         return $v;
     }
 

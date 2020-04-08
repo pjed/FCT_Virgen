@@ -89,12 +89,12 @@ Route::group(['middleware' => ['tutor']], function() {
     Route::any('listarResponsablesAyax', ['uses' => 'controladorTutor@listarResponsablesAyax', 'as' => 'listarResponsablesAyax']); //ayax para poder responsables de una empresa
     
     //ayax para poder mostrar la modal para modificar practicas    
-    Route::any('modalModificarPracticaAyax', ['uses' => 'Conexion@buscarPracticaPorIdAyax', 'as' => 'modalModificarPracticaAyax']);
+    Route::any('modalModificarPracticaAyax', ['uses' => 'controladorTutor@buscarPracticaPorIdAyax', 'as' => 'modalModificarPracticaAyax']);
     Route::any('idEmpresaModalModificarPracticaAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'idEmpresaModalModificarPracticaAyax']);
     
     //listas para modificar una practica
-    Route::any('listarEmpresasAyax', ['uses' => 'Conexion@listarEmpresasAyax', 'as' => 'listarEmpresasAyax']);
-    Route::any('listarAlumnoPorTutorAyax', ['uses' => 'Conexion@listarAlumnoPorTutorAyax', 'as' => 'listarAlumnoPorTutorAyax']);
+    Route::any('listarEmpresasAyax', ['uses' => 'controladorTutor@listarEmpresasAyax', 'as' => 'listarEmpresasAyax']);
+    Route::any('listarAlumnoPorTutorAyax', ['uses' => 'controladorTutor@listarAlumnoPorTutorAyax', 'as' => 'listarAlumnoPorTutorAyax']);
     Route::any('listarResponsablesAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'listarResponsablesAyax']);
     
 

@@ -145,8 +145,7 @@ Gestionar  Practicas
                     <form action="gestionarPracticas" method="POST">
                         {{ csrf_field() }}
                         <tr>
-                            <td>     
-                                <input type="hidden" class="form-control form-control-sm form-control-md" name="idEmpresa" value="<?php echo $key->idEmpresa; ?>"/>  
+                            <td>
                                 <?php
                                 foreach ($l1 as $k1) {
                                     ?>
@@ -182,7 +181,7 @@ Gestionar  Practicas
                                 </select>
                             </td>
                             <td>
-                                <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->id; ?>"/>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idPractica; ?>"/>
                                 <input type="text" class="form-control form-control-sm form-control-md" name="gasto" value="<?php echo $key->gasto; ?>" required/>
                             </td>
                             <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" <?php if ($key->apto == 1) { ?>checked<?php } ?> /></td>

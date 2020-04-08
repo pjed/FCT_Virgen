@@ -534,127 +534,48 @@ class controladorTutor extends Controller {
     }
 
     /**
+     * Muestra la una practica, metodo hecho para la modal de modificar practicas con ayax
+     * @author Marina
+     * @param Request $req
+     */
+    public function buscarPracticaPorIdAyax(Request $req) {
+        $idPractica = $req->get('idPractica');
+        $v = Conexion::buscarPracticaPorId($idPractica);
+        $res = json_encode($v, true);
+        echo $res;
+    }
+
+    /**
+     * Muestra la informacion del empresa necesaria para el modificar practicas con ayax
+     * @author Marina
+     * @param Request $req
+     */
+    public function listarEmpresasAyax(Request $req) {
+        $v = Conexion::listarEmpresas();
+        $res = json_encode($v, true);
+        echo $res;
+    }
+
+    /**
+     * Muestra la informacion del alumno necesaria para el modificar practicas con ayax
+     * @author Marina
+     */
+    public function listarAlumnoPorTutorAyax(Request $req) {
+        $v = Conexion::listarAlumnoPorTutor();
+        $res = json_encode($v, true);
+        echo $res;
+    }
+
+    /**
      * Crea los option del select responsable según que empresa se haya seleccionado con anterioridad
      * @author Marina
      * @param Request $req
      */
     public function idResponsableDeUnaEmpresaPracticaAyax(Request $req) {
         $idEmpresa = $req->get('idEmpresa');
-        $l3 = Conexion::listarResponsablesEmpresa($idEmpresa);
-        $selectResponsable = '<select name="idResponsable" required>';
-        foreach ($l3 as $k3) {
-            if ($idEmpresa == $k3->empresa_id) {
-                $selectResponsable = $selectResponsable . '<option value="' . $k3->id . '" selected>' . $k3->nombre . ', ' . $k3->apellidos . '</option>';
-            } else {
-                $selectResponsable = $selectResponsable . '<option value="' . $k3->id . '" selected>' . $k3->nombre . ', ' . $k3->apellidos . '</option>';
-            }
-        }
-        $selectResponsable = $selectResponsable . '</select>';
-        echo $selectResponsable;
-    }
-
-    /**
-     * muestra a través de ajax una venta modal para poder modificar una practica
-     * @author Marina
-     */
-    public function modalModificarPracticaAyax(Request $req) {
-        $idPractica = $req->get('idPractica');
-        $lu = Conexion::buscarPracticaPorId($idPractica);
-        $l1 = Conexion::listarEmpresas();
-        $l2 = Conexion::listarAlumnoPorTutor();
-        $l3 = Conexion::listarResponsables();
-        $l4 = Conexion::listarAlumnoPorTutorSinPracticas();
-        $modal = ' <div class="modal" id="editar" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                             </button>
-                                                <h3 class="text-center">Modificar Practicas</h3>
-                                                <div class="row justify-content-center form-group">
-                                                    <label class="col-sm text-center">
-                                                        Empresa:
-                                                        <select class="sel idEmpresaModalModificar" name="idEmpresa" required>';
-        foreach ($lu as $key) {            
-            foreach ($l1 as $k1) {
-                if ($key->idEmpresa == $k1->id) {
-                    $modal = $modal . '<option value="' . $k1->id . '" selected>' . $k1->nombre . '</option>';
-                } else {
-                    $modal = $modal . '<option value="' . $k1->id . '">' . $k1->nombre . '</option>';
-                }
-            }
-            $modal = $modal . ' </select>
-                                                    </label>
-                                                </div>
-                                                <div class="row justify-content-center form-group">
-                                                    <label class="col-sm text-center">
-                                                        Alumno:
-                                                        <select id="dniAlumno" name="dniAlumno" required>';
-            foreach ($l2 as $k2) {
-                if ($key->dniAlumno == $k2->dni) {
-                    $modal = $modal . ' <option value="' . $k2->dni . '" selected>' . $k2->nombre . ', ' . $k2->apellidos . '</option>';
-                }
-            }
-            foreach ($l4 as $k4) {
-                $modal = $modal . ' <option value="' . $k4->dni . '">' . $k4->nombre . ', ' . $k4->apellidos . '</option>';
-            }
-            $modal = $modal . ' </select>
-                                                    </label>
-                                                </div>
-                                                <div class="row justify-content-center form-group">
-                                                    <label class="col-sm text-center">
-                                                        Responsable:
-                                                        <select class="sel idResponsableModalModificar" name="idResponsable" required>';
-            foreach ($l3 as $k3) {
-                if ($key->idResponsable == $k3->id) {
-                    $modal = $modal . '<option value="' . $k3->id . '" selected>' . $k3->nombre . ', ' . $k3->apellidos . '</option>';
-                } else {
-                    $modal = $modal . '<option value="' . $k3->id . '">' . $k3->nombre . ', ' . $k3->apellidos . '</option>';
-                }
-            }
-            $modal = $modal . '</select>
-                                                    </label>
-                                                </div>
-                                                <div class="row justify-content-center form-group">
-                                                    <label class="col-sm text-center">
-                                                        Cod proyecto:
-                                                        <input type="text" class="form-control form-control-sm" name="codProyecto"  value="' . $key->codProyecto . '"  pattern="[0-9]{6}" required/>
-                                                    </label>
-                                                    <label class="col-sm text-center">
-                                                        Gasto Total:
-                                                        <input type="text" class="form-control form-control-sm" name="gasto" value="' . $key->gasto . '" required/>
-                                                    </label>
-                                                </div>
-                                                <div class="row justify-content-center form-group">
-                                                    <label class="col-sm text-center">
-                                                        Apto:';
-            if ($key->apto == 1) {
-                $modal = $modal . '<input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" checked/>';
-            } else {
-                $modal = $modal . '<input type="checkbox" class="form-control form-control-sm form-control-md" name="apto"/>';
-            }
-            $modal = $modal . ' </label>
-                                                </div>
-                                                <div class="row justify-content-center form-group">
-                                                    <label class="col-sm text-center">
-                                                        Fecha inicio:
-                                                        <input type="date" class="form-control form-control-sm" name="fechaInicio" value="' . $key->fechaInicio . '"required/>
-                                                    </label>
-                                                    <label class="col-sm text-center">
-                                                        Fecha fin:
-                                                        <input type="date" class="form-control form-control-sm" name="fechaFin" value="' . $key->fechaFin . '"/>
-                                                    </label>
-                                                </div>
-                                                <div class="row justify-content-center form-group">
-                                                    <input type="submit" class="btn btn-sm btn-primary" name="editar" value="Modificar" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>';
-        }
-        echo $modal;
+        $v = Conexion::listarResponsablesEmpresa($idEmpresa);
+        $res = json_encode($v, true);
+        echo $res;
     }
 
     /**

@@ -5,7 +5,7 @@ use App\Auxiliar\Conexion;
 //$lu = Conexion::listarPracticasPagination();
 //$l1 = Conexion::listarEmpresas();
 //$l2 = Conexion::listarAlumnoPorTutor();
-//$l3 = Conexion::listarResponsables();
+//$l3 = Conexion::listarResponsablesEmpresa(idEmpresa);
 //$l4 = Conexion::listarAlumnoPorTutorSinPracticas();
 //dd($l1,$l2,$l3,$l4);
 ?>
@@ -87,9 +87,7 @@ Gestionar  Practicas
                                                             <?php
                                                             foreach ($l4 as $k4) {
                                                                 ?>
-                                                                <option value="<?php echo $k4->dni; ?>"> 
-                                                                    <?php echo $k4->nombre . ', ' . $k4->apellidos; ?>
-                                                                </option>
+                                                                <option value="<?php echo $k4->dni; ?>">  <?php echo $k4->nombre . ', ' . $k4->apellidos; ?></option>
                                                                 <?php
                                                             }
                                                             ?>
@@ -264,12 +262,9 @@ Gestionar  Practicas
                             <td>
                                 <!-- Editar Practicas -->                                
                                 <!--<button type="submit" class="btn editar" name="editar" ></button>-->
-                                <button type="button" id="modificar" class="btn editar" value="<?php echo $key->idPractica; ?>"  data-toggle="modal" data-target="#editar"></button>
-                                <!-- Modal  Editar Practicas -->
-                                <div id="modalModificar">
-                                    
-                                </div>
-                                         <!-- </td><td>-->
+                                <button type="button" class="btn editar modificar" value="<?php echo $key->idPractica; ?>" data_id="<?php echo $key->idPractica; ?>"  data-toggle="modal" data-target="#editar1"></button>
+
+                     <!-- </td><td>-->
                                 <!--<button type="submit" class="btn eliminar" name="eliminar" ></button>-->
                             </td>
                         </tr>
@@ -279,6 +274,77 @@ Gestionar  Practicas
                 ?>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+<!-- Modal  Editar Practicas -->
+<div class="modal" id="editar1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="text-center">Modificar Practicas</h3>
+                <form action="gestionarPracticas" method="POST">
+                    {{ csrf_field() }}
+                    <input type="hidden" id="idMod" name="idPractica"/>
+                    <div class="row justify-content-center form-group">
+                        <label class="col-sm text-center">
+                            Empresa:
+                            <select id="idEmpresaMod" class="idEmpresaModalModificar" name="idEmpresa" required>                                                                
+                            </select>
+                        </label>
+                    </div>
+                    <div class="row justify-content-center form-group">
+                        <label class="col-sm text-center">
+                            Alumno:
+                            <select id="dniAlumnoMod"  name="dniAlumno" required>
+                                <?php
+                                    foreach ($l4 as $k4) {
+                                    echo ' <option value="' . $k4->dni . '">' . $k4->nombre . ', ' . $k4->apellidos . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="row justify-content-center form-group">
+                        <label class="col-sm text-center">
+                            Responsable:
+                            <select id="idResponsableMod" class="idResponsableModalModificar" name="idResponsable" required>                                                               
+                            </select>
+                        </label>
+                    </div>
+                    <div class="row justify-content-center form-group">
+                        <label class="col-sm text-center">
+                            Cod proyecto:
+                            <input type="text" id="codProyectoMod" class="form-control form-control-sm" name="codProyecto"  pattern="[0-9]{6}" required/>
+                        </label>
+                        <label class="col-sm text-center">
+                            Gasto Total:
+                            <input type="text" id="gastoMod" class="form-control form-control-sm" name="gasto"  required/>
+                        </label>
+                    </div>
+                    <div class="row justify-content-center form-group">
+                        <label class="col-sm text-center">
+                            Apto: 
+                            <input type="checkbox" id="aptoMod" class="form-control form-control-sm form-control-md" name="apto"/>
+                    </div>
+                    <div class="row justify-content-center form-group">
+                        <label class="col-sm text-center">
+                            Fecha inicio:
+                            <input type="date" id="fechaInicioMod" class="form-control form-control-sm" name="fechaInicio" value="" required/>
+                        </label>
+                        <label class="col-sm text-center">
+                            Fecha fin:
+                            <input type="date" id="fechaFinMod" class="form-control form-control-sm" name="fechaFin" value=""/>
+                        </label>
+                    </div>
+                    <div class="row justify-content-center form-group">
+                        <input type="submit" class="btn btn-sm btn-primary" name="editar" value="Modificar" />
+                    </div>                
+                </form>
+            </div>
         </div>
     </div>
 </div>

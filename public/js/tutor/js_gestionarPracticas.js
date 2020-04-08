@@ -2,17 +2,35 @@ $(document).ready(function () {
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
     });
-    $("#modificar").click(function () {
-        var idPractica = $("#modificar").val();
+    $(".modificar").click(function () {
+        var practica = null;
+        var key = null;
+        var idPractica = $(".modificar").val();
+//        var idPractica = $(this).attr('data-id');
+        var dniResponsable = null;
+        var idEmpresa = null;
+        var dniAlumno = null;
+        var parametros = {'idPractica': idPractica};
         $.ajax({
             url: 'modalModificarPracticaAyax',
+            data: parametros,
             type: 'POST',
-            data: {'idPractica': idPractica},
             success: function (res) {
-                if (res !== null) {
-                    alert('entro en success');
-//                    $("#modalModificar").empty();
-                    $("#modalModificar").html(res);
+                practica = JSON.parse(res);
+                if (practica !== null) {
+//                        alert('entro en buscar practica por id');
+                    dniResponsable = practica.idResponsable;
+                    idEmpresa = practica.idEmpresa;
+                    dniAlumno = practica.dniAlumno;
+                    $("#idMod").val(practica.idPractica);
+                    $("#codProyectoMod").val(practica.codProyecto);
+                    $("#gastoMod").val(practica.gasto);
+                    $("#aptoMod").val(practica.apto);
+                    $("#fechaInicioMod").val(practica.fechaInicio);
+                    $("#fechaFinMod").val(practica.fechaFin);
+                    listarEmpresas(idEmpresa);
+                    listarResponsables(dniResponsable, idEmpresa);
+                    listarAlumnos(dniAlumno);
                 }
             },
             statusCode: {
@@ -26,17 +44,25 @@ $(document).ready(function () {
             }
         });
     });
-    /*si selecionas una empresa te tiene que aparecer un select con sus responsables*/
-    $(".idEmpresaModalModificar").blur(function () {
-        var idEmpresa = $(".idEmpresaModalModificar").val();
+    function listarResponsables(dniResponsable, idEmpresa) {
+        var listarResponsable = null;
+        var parametros = {'idEmpresa': idEmpresa};
+        // sacamos  Conexion::listarResponsablesEmpresa(idEmpresa);
         $.ajax({
-            url: 'idEmpresaModalModificarPracticaAyax',
+            url: 'listarResponsablesAyax',
+            data: parametros,
             type: 'POST',
-            data: {'idEmpresa': idEmpresa},
             success: function (res) {
+                alert(res);
                 if (res !== null) {
-                    alert('entro en success');
-                    $(".idResponsableModalModificar").html(res);
+                    listarResponsable = JSON.parse(res);
+                      for (var i = 0; i < listarResponsable.length; i++) {
+                        if (dniResponsable === listarResponsable[i].id) {
+                            document.getElementById("idResponsableMod").innerHTML += ' <option value="' + listarResponsable[i].id + '" selected>' + listarResponsable[i].nombre + ', ' + listarResponsable[i].apellidos + '</option>';
+                        } else {
+                            document.getElementById("idResponsableMod").innerHTML += ' <option value="' + listarResponsable[i].id + '">' + listarResponsable[i].nombre + ', ' + listarResponsable[i].apellidos + '</option>';
+                        }
+                    }
                 }
             },
             statusCode: {
@@ -49,36 +75,70 @@ $(document).ready(function () {
                 //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
             }
         });
-    });
-    $(".idEmpresaModalAniadir").blur(function () {
-        if ($(".idEmpresaModalAniadir").val() !== "selected") {
-            $(".idEmpresaModalAniadir").css({'border-color': 'red'});
-        } else {
-            var idEmpresa = $(".idEmpresaModalAniadir").val();
-            $.ajax({
-                url: 'idEmpresaModalAniadirPracticasAyax',
-                type: 'POST',
-                data: {'idEmpresa': idEmpresa},
-                success: function (res) {
-                    if (res !== null) {
-                        alert('entro en success');
-                        $(".idResponsableModalAniadir").html(res);
+    }
+    function listarEmpresas(idEmpresa) {
+        var listaEmpresa = null;
+        var parametros = {'parametro': null};
+        // sacamos Conexion::listarEmpresas();
+        $.ajax({
+            url: 'listarEmpresasAyax',
+            data: parametros,
+            type: 'POST',
+            success: function (res) {
+//                alert(res);
+                if (res !== null) {
+                    listaEmpresa = JSON.parse(res);
+                      for (var i = 0; i < listaEmpresa.length; i++) {
+                        if (idEmpresa === listaEmpresa[i].id) {
+                            document.getElementById("idEmpresaMod").innerHTML += '<option value="' + listaEmpresa[i].id + '" selected>' + listaEmpresa[i].nombre + '</option>';
+                        } else {
+                            document.getElementById("idEmpresaMod").innerHTML += '<option value="' + listaEmpresa[i].id + '">' + listaEmpresa[i].nombre + '</option>';
+                        }
                     }
-                },
-                statusCode: {
-                    404: function () {
-                        alert('web not found');
-                    }
-                },
-                error: function (x, xs, xt) {
-                    window.open(JSON.stringify(x));
-                    //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
                 }
-            });
-            $(".idEmpresa").css({'border-color': 'black'});
-        }
-    });
-    $(".dniAlumno").blur(function () {
+            },
+            statusCode: {
+                404: function () {
+                    alert('web not found');
+                }
+            },
+            error: function (x, xs, xt) {
+                window.open(JSON.stringify(x));
+                //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
+            }
+        });
+    }
+    function listarAlumnos(dniAlumno) {
+        var listaAlumnoPractica = null;
+        var parametros = {'parametro': null};
+        // sacamos  Conexion::listarAlumnoPorTutor();
+        $.ajax({
+            url: 'listarAlumnoPorTutorAyax',
+            data: parametros,
+            type: 'POST',
+            success: function (res) {
+//                    alert(res);
+                if (res !== null) {
+                    listaAlumnoPractica = JSON.parse(res);
+                    for (var i = 0; i < listaAlumnoPractica.length; i++) {
+                        if (dniAlumno === listaAlumnoPractica[i].dni) {
+                            document.getElementById("dniAlumnoMod").innerHTML += ' <option value="' + listaAlumnoPractica[i].dni + '" selected>' + listaAlumnoPractica[i].nombre + ', ' + listaAlumnoPractica[i].apellidos + '</option>';
+                        }
+                    }
+                }
+            },
+            statusCode: {
+                404: function () {
+                    alert('web not found');
+                }
+            },
+            error: function (x, xs, xt) {
+                window.open(JSON.stringify(x));
+                //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
+            }
+        });
+    }
+     $(".dniAlumno").blur(function () {
         if ($(".dniAlumno").val() !== "selected") {
             $(".dniAlumno").css({'border-color': 'red'});
         } else {
