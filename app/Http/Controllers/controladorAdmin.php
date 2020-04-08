@@ -252,14 +252,14 @@ class controladorAdmin extends Controller {
         try {
             \DB::connection()->getPdo()->exec($sql);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Datos añadidos correctamente.
+                    Centro creado correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
         } catch (Exception $ex) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Los datos del centro no se han añadido;
+                    ERROR al crear el centro.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -281,14 +281,14 @@ class controladorAdmin extends Controller {
         try {
             \DB::connection()->getPdo()->exec($sql);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Datos añadidos correctamente.
+                    Cursos creados correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
         } catch (Exception $ex) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Los datos de los cursos no se han añadido;
+                    ERROR al crear los cursos.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -311,14 +311,14 @@ class controladorAdmin extends Controller {
         try {
             \DB::connection()->getPdo()->exec($sql);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Datos añadidos correctamente.
+                    Profesores creados correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
         } catch (Exception $ex) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Los datos de los profesores no se han añadido a la tabla usuarios;
+                    ERROR al crear los profesores.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -343,14 +343,14 @@ class controladorAdmin extends Controller {
         try {
             \DB::connection()->getPdo()->exec($sql);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Datos añadidos correctamente.
+                    Roles añadidos correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
         } catch (Exception $ex) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Los datos de los roles no se han añadido;
+                    ERROR al crear los roles.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -377,14 +377,14 @@ class controladorAdmin extends Controller {
         try {
             \DB::connection()->getPdo()->exec($sql);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Datos añadidos correctamente.
+                    Alumnos matriculados creados correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
         } catch (Exception $ex) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Los datos de los alumnos matriculados no se han añadido;
+                    ERROR al matricular los alumnos.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -399,14 +399,14 @@ class controladorAdmin extends Controller {
         try {
             \DB::connection()->getPdo()->exec($sql);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Datos añadidos correctamente.
+                    Roles de los tutores añadidos correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
         } catch (Exception $ex) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Los datos de los roles de los tutores no se han añadido;
+                    ERROR al añadir los roles de los tutores.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -434,14 +434,14 @@ class controladorAdmin extends Controller {
         try {
             \DB::connection()->getPdo()->exec($sql);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Datos añadidos correctamente.
+                    Roles de acceso Administrador y Director creados correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
         } catch (Exception $ex) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Los roles de Ana Belen y Jose Alberto no se han añadido;
+                    ERROR no se ha podido crear los roles de acceso Administrador y Director.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -458,14 +458,14 @@ class controladorAdmin extends Controller {
         try {
             \DB::connection()->getPdo()->exec($sql);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Datos añadidos correctamente.
+                    Roles de alumnos creados correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
         } catch (Exception $ex) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Los roles de los alumnos no se han añadido;
+                    ERROR al crear los roles de alumnos.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -480,14 +480,14 @@ class controladorAdmin extends Controller {
         try {
             \DB::connection()->getPdo()->exec($sql);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Datos añadidos correctamente.
+                    Tutores de cada curso creados correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
         } catch (Exception $ex) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Los profesores que son tutores de cada curso no se han añadido;
+                    ERROR al crear los tutores de cada curso.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -504,14 +504,14 @@ class controladorAdmin extends Controller {
         try {
             \DB::connection()->getPdo()->exec($sql);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Datos añadidos correctamente.
+                    Alumnos matriculados en curso creados correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
         } catch (Exception $ex) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Los datos Sentencia para dar de alta los alumnos en los cursos que estan matriculados no se han añadido;
+                    ERROR al crear los alumnos matriculados en curso.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -535,14 +535,14 @@ class controladorAdmin extends Controller {
         try {
             \DB::connection()->getPdo()->exec($sql);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Datos añadidos correctamente.
+                    Empresas de prueba creadas correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
         } catch (Exception $ex) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Los datos de prueba de empresas no se han añadido;
+                    ERROR al crear empresas de prueba.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
