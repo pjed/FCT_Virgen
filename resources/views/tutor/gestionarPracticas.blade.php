@@ -96,9 +96,9 @@ Gestionar  Practicas
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Responsable:
-                                                        <div id="idResponsableA">
-                                                        </div>
+                                                        Responsable: 
+                                                        <select id="idResponsableA" name="idResponsable" required>
+                                                        </select>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
@@ -300,7 +300,7 @@ Gestionar  Practicas
                             Alumno:
                             <select id="dniAlumnoMod" name="dniAlumno" required>
                                 <?php
-                                    foreach ($l4 as $k4) {
+                                foreach ($l4 as $k4) {
                                     echo ' <option value="' . $k4->dni . '">' . $k4->nombre . ', ' . $k4->apellidos . '</option>';
                                 }
                                 ?>
