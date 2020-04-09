@@ -263,7 +263,6 @@ Gestionar  Practicas
                                 <!-- Editar Practicas -->                                
                                 <!--<button type="submit" class="btn editar" name="editar" ></button>-->
                                 <button type="button" class="btn editar modificar" value="<?php echo $key->idPractica; ?>" data-id="<?php echo $key->idPractica; ?>"  data-toggle="modal" data-target="#editar1"></button>
-
                      <!-- </td><td>-->
                                 <button type="submit" class="btn eliminar" name="eliminar" ></button>
                             </td>
