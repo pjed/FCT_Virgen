@@ -101,7 +101,7 @@ Consultar Gastos Alumnos
             var idTransporte = $('#idTransporte').val();
             var n_diasC = $('#n_diasC').val();
             var importe = $('#importe').val();
-            foto= $('#foto').val();
+            foto = $('#foto').val();
             var fotoUrl = $('#fotoUrl').val();
             parametros = {
                 "_token": token,
@@ -228,7 +228,7 @@ Consultar Gastos Alumnos
             var idGasto = $('#idGasto').val();
             var fecha = $('#fecha').val();
             var importe = $('#importe').val();
-            foto= $('#foto1').val();
+            foto = $('#foto1').val();
             var fotoUrl = $('#fotoUrl1').val();
             parametros = {
                 "_token": token,
@@ -336,6 +336,98 @@ Consultar Gastos Alumnos
         </div>
     </div>
     <div id="tablas">
+    </div>
+</div>
+<!-- Modal  Editar Colectivo -->
+<div class="modal fade" id="editarColectivo" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="text-center">Modificar Gasto Colectivo</h3>
+                <form action="consultarGastos" method="POST">
+                    {{ csrf_field() }}
+                    <div class="form-group">                                 
+                        <label class="col-sm text-center">
+                            Donde:
+                            <input type="hidden" class="form-control form-control-sm form-control-md" id="idTransporteCol" name ="idTransporte">
+                            <input type="text" class="form-control form-control-sm form-control-md" id="dondeCol" name="donde"/>
+                            <input type="hidden" class="form-control form-control-sm form-control-md" id="IDCol" name="ID"/>
+                        </label>
+                    </div>
+                    <div class="form-group">                                 
+                        <label class="col-sm text-center">
+                            Importe:
+                            <input type="number" step="0.01" class="form-control form-control-sm" id="precioCol" name="precio"/></td>
+                        </label>
+                    </div>
+                    <div class="form-group">                                 
+                        <label class="col-sm text-center">
+                            Foto:
+                            <div id="fotoCol1">
+                                <!--POR JAVASCRIPT-->
+<!--                                <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl"/>
+                                <a id="afotoCol" href="" target="_blank"> 
+                                    <img name="ticketGasto" id="imgfotoCol" class="foto_small" src=""/>
+                                </a>-->
+                            </div>
+                            <input type="file" class="form-control form-control-sm form-control-md"  id="fotoCol" name="foto">
+                        </label>
+                    </div>
+                    <div class="row justify-content-center form-group">
+                        <input type="submit" class="btn btn-sm btn-primary" name="editarCol" value="Modificar" />
+                    </div>                
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  Editar Comida -->
+<div class="modal fade" id="editarComida" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="text-center">Modificar Gasto Comida</h3>
+                <form action="consultarGastos" method="POST">
+                    {{ csrf_field() }} 
+                    <div class="form-group">                                 
+                        <label class="col-sm text-center">
+                            Fecha:
+                            <input type="date" class="form-control form-control-sm form-control-md" id="fechaCom" name="fecha"/>
+                            <input type="hidden" class="form-control form-control-sm form-control-md" id="idGasto" name ="idGasto">
+                            <input type="hidden" class="form-control form-control-sm form-control-md" id="IDCom" name="ID"/>
+                        </label>
+                    </div>
+                    <div class="form-group">                                 
+                        <label class="col-sm text-center">
+                            Importe:
+                            <input type="number" step="0.01" class="form-control form-control-sm" id="precioCom" name="importe"/></td>
+                        </label>
+                    </div>
+                    <div class="form-group">                                 
+                        <label class="col-sm text-center">
+                            Foto:
+                            <div id="fotoCol1">
+                                <!--POR JAVASCRIPT-->
+<!--                                <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl"/>
+                                <a id="afotoCol" href="" target="_blank"> 
+                                    <img name="ticketGasto" id="imgfotoCol" class="foto_small" src=""/>
+                                </a>-->
+                            </div>
+                            <input type="file" class="form-control form-control-sm form-control-md"  id="fotoCol" name="foto">
+                        </label>
+                    </div>
+                    <div class="row justify-content-center form-group">
+                        <input type="submit" class="btn btn-sm btn-primary" name="editarCom" value="Modificar" />
+                    </div>                
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

@@ -1348,7 +1348,6 @@ class controladorAdmin extends Controller {
             if ($key->tipoTransporte == 1) {
                 $colectivo = 1;
             }
-
             if ($key->tipoTransporte == 0) {
                 $propio = 0;
             }
@@ -1364,8 +1363,7 @@ class controladorAdmin extends Controller {
                                 <table class="table table-striped  table-hover table-bordered">
                                     <thead class="thead-dark">
                                         <tr> 
-                                            <th>Donde es</th>
-                                            <th>Nº dias</th>  
+                                            <th>Donde es</th> 
                                             <th>Importe</th>                      
                                             <th>Foto</th>
                                         </tr>
@@ -1375,18 +1373,19 @@ class controladorAdmin extends Controller {
                     $v = $v . '
                                             <tr>
                                                 <td>
-                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="idTransporte" name ="idTransporte" value="' . $key->idTransporte . '" readonly>
+                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="idTransporte" name ="idTransporte" value="' . $key->idTransporte . '">
                                                     <input type="text" class="form-control form-control-sm form-control-md" id="dondeC" name="donde" value="' . $key->donde . '" readonly/>
-                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="ID" name="ID" value="' . $key->idColectivos . '" readonly/>
+                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="ID" name="ID" value="' . $key->idColectivos . '"/>
                                                 </td>
-                                                <td><input type="number" step="0.01" class="form-control form-control-sm" id="precio" name="precio" value="' . $key->precio . '"/></td>
+                                                <td><input type="number" step="0.01" class="form-control form-control-sm" id="precio" name="precio" value="' . $key->precio . '" readonly/></td>
                                                 <td>
-                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="fotoUrl" name="fotoUrl" value="' . $key->foto . '" readonly/>
-                                                    <a  href="' . $key->foto . '" target="_blank"> <img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/></a>
-                                                    <input type="file" class="form-control form-control-sm form-control-md"  id="foto" name="foto">
+                                                     <a  href="' . $key->foto . '" target="_blank"> <img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/></a>
                                                 </td>
-                                                <td><button type="button" id="editarC" class="btn-sm editar" name="editarC"></button></td>
-                                                <td><button type="button" id="eliminarC" class="btn-sm eliminar" name="eliminarC"></button></td>
+                                                <td>
+                                                    <button type="button" class="btn editar editarC" value="'. $key->idColectivos .'" data-id="'. $key->idColectivos .'"  data-toggle="modal" data-target="#editarColectivo"></button>
+                                                <!-- </td><td>-->
+                                                    <button type="button" class="btn-sm eliminar eliminarC"  value="'. $key->idColectivos .'" data-id="'. $key->idColectivos .'" name="eliminarC"></button>
+                                                </td>
                                             </tr>';
                 }
                 $v = $v . '</tbody>
@@ -1407,8 +1406,7 @@ class controladorAdmin extends Controller {
                                 <table class="table  table-striped  table-hover table-bordered">
                                     <thead class="thead-dark">
                                         <tr>   
-                                            <th>Donde es</th>
-                                            <th>Nº dias</th>                        
+                                            <th>Donde es</th>                    
                                             <th>KMS</th>
                                             <th>Importe</th>
                                         </tr>
@@ -1418,14 +1416,17 @@ class controladorAdmin extends Controller {
                     $v = $v . '
                                             <tr>
                                                 <td>
-                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="idTransporte1" name ="idTransporte" value="' . $key->idTransporte . '" readonly>
+                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="idTransporte1" name ="idTransporte" value="' . $key->idTransporte . '"/>
                                                     <input type="text" class="form-control form-control-sm form-control-md" id="donde" name="donde" value="' . $key->donde . '" readonly/>
-                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="ID1" name="ID" value="' . $key->idPropios . '" readonly/>
+                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="ID1" name="ID" value="' . $key->idPropios . '"/>
                                                 </td>
-                                                <td><input type="number"  step="0.01" class="form-control form-control-sm" id="kms" name="kms" value="' . $key->kms . '"/></td>
-                                                <td><input type="number"  step="0.01" class="form-control form-control-sm" id="precio1" name="precio" value="' . $key->precio . '"/></td>
-                                                <td><button type="button" id="editarP" class="btn-sm editar" name="editarP"></button></td>
-                                                <td><button type="button" id="eliminarP" class="btn-sm eliminar" name="eliminarP"></button></td>
+                                                <td><input type="number"  step="0.01" class="form-control form-control-sm" id="kms" name="kms" value="' . $key->kms . '" readonly/></td>
+                                                <td><input type="number"  step="0.01" class="form-control form-control-sm" id="precio1" name="precio" value="' . $key->precio . '" readonly/></td>
+                                                 <td>
+                                                    <button type="button" class="btn editar editarP" value="'. $key->idPropios .'" data-id="'. $key->idPropios .'"  data-toggle="modal" data-target="#editarPropio"></button>
+                                                <!-- </td><td>-->
+                                                    <button type="button" class="btn-sm eliminar eliminarP"  value="'. $key->idPropios .'" data-id="'. $key->idPropios .'"></button>
+                                                </td>
                                             </tr>';
                 }
                 $v = $v . '</tbody>
@@ -1465,8 +1466,11 @@ class controladorAdmin extends Controller {
                                                 <a  href="' . $key->foto . '" target="_blank"> <img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/></a>
                                                 <input type="file" class="form-control form-control-sm form-control-md"  id="foto1" name="foto">
                                             </td>
-                                            <td><button type="button" id="editar" class="btn-sm"></button></td>
-                                            <td><button type="button" id="eliminar" class="btn-sm"></button></td> 
+                                             <td>
+                                                    <button type="button" class="btn editar editarCo" value="'. $key->id .'" data-id="'. $key->id .'"  data-toggle="modal" data-target="#editarComida"></button>
+                                                <!-- </td><td>-->
+                                                    <button type="button" class="btn-sm eliminar eliminarCo"  value="'. $key->id .'" data-id="'. $key->id .'"></button>
+                                                </td>
                                         </tr>';
             }
             $v = $v . '</tbody>
@@ -1488,7 +1492,7 @@ class controladorAdmin extends Controller {
         $dniAlumno = session()->get('dniAlumno');
 
         //            editar y borrar comida
-        if (isset($_REQUEST['editar'])) {
+        if (isset($_REQUEST['editarCom'])) {
             $id = $req->get('ID');
             $idGasto = $req->get('idGasto');
             $fecha = $req->get('fecha');
@@ -1502,7 +1506,7 @@ class controladorAdmin extends Controller {
                 Conexion::ModificarGastoComida($id, $fecha, $importe, $foto);
             }
         }
-        if (isset($_REQUEST['eliminar'])) {
+        if (isset($_REQUEST['eliminarCom'])) {
             $id = $req->get('ID');
             $idGasto = $req->get('idGasto');
             $file = $req->get('fotoUrl');
@@ -1525,7 +1529,7 @@ class controladorAdmin extends Controller {
             Conexion::borrarGastoTransportePropio($id, $idTransporte);
         }
 //            editar y borrar transporte colectivo
-        if (isset($_REQUEST['editarC'])) {
+        if (isset($_REQUEST['editarCol'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
             $precio = $req->get('precio');
@@ -1538,7 +1542,7 @@ class controladorAdmin extends Controller {
                 Conexion::ModificarGastoTransporteColectivo($id, $precio, $foto);
             }
         }
-        if (isset($_REQUEST['eliminarC'])) {
+        if (isset($_REQUEST['eliminarCol'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
             $file = $req->get('fotoUrl');
