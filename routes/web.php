@@ -80,15 +80,12 @@ Route::group(['middleware' => ['tutor']], function() {
     Route::get('perfilT', function () {
         return view('tutor/perfilTutor');
     });
-    //ayax
-    Route::any('gestionarPracticasAyax', ['uses' => 'controladorTutor@gestionarPracticasAyax', 'as' => 'gestionarPracticasAyax']);
-    Route::any('listarResponsablesAyax', ['uses' => 'controladorTutor@listarResponsablesAyax', 'as' => 'listarResponsablesAyax']); //ayax para poder responsables de una empresa
     
     //ayax para poder modificar practicas    
     Route::any('modalModificarPracticaAyax', ['uses' => 'controladorTutor@buscarPracticaPorIdAyax', 'as' => 'modalModificarPracticaAyax']);
     Route::any('idEmpresaModificarPracticaAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'idEmpresaModificarPracticaAyax']);
     
-    //listas para cargar la ventana modal modificar practica
+    //ayax listas para cargar la ventana modal modificar practica
     Route::any('listarEmpresasAyax', ['uses' => 'controladorTutor@listarEmpresasAyax', 'as' => 'listarEmpresasAyax']);
     Route::any('listarAlumnoPorTutorAyax', ['uses' => 'controladorTutor@listarAlumnoPorTutorAyax', 'as' => 'listarAlumnoPorTutorAyax']);
     Route::any('listarResponsablesAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'listarResponsablesAyax']);
