@@ -33,7 +33,7 @@ class controladorAdmin extends Controller {
               </div>';
         } else {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    No hay archivos en el directorio para importar, por favor suba algún archivo CSV
+                    No hay archivos para borrar, por favor suba algún archivo CSV
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -582,7 +582,8 @@ class controladorAdmin extends Controller {
               </div>';
         } else {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al importar los archivos CSV.
+                    No hay archivos CSV importados por favor suba los archivos datAlumnos, datMaterias, datMatriculas,
+                    datProfesores, datUnidades. Gracias.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -650,7 +651,6 @@ class controladorAdmin extends Controller {
 
                     CREATE TABLE `colectivos` (
                       `id` int(11) NOT NULL,
-                      `n_dias` varchar(45) DEFAULT NULL,
                       `importe` float(8,2) NOT NULL,
                       `transportes_id` int(11) DEFAULT NULL,
                       `foto` varchar(45) NOT NULL DEFAULT 'images/ticket.png',
@@ -772,7 +772,6 @@ class controladorAdmin extends Controller {
                     CREATE TABLE `propios` (
                       `id` int(11) NOT NULL,
                       `kms` int(11) NOT NULL,
-                      `n_dias` varchar(45) DEFAULT NULL,
                       `precio` double(8,2) NOT NULL,
                       `created_at` timestamp NULL DEFAULT NULL,
                       `updated_at` timestamp NULL DEFAULT NULL,
@@ -786,16 +785,28 @@ class controladorAdmin extends Controller {
                     --
 
                     CREATE TABLE `responsables` (
-                      `id` int(11) NOT NULL,
-                      `dni` varchar(9) NOT NULL,
-                      `nombre` varchar(100) NOT NULL,
-                      `apellidos` varchar(100) NOT NULL,
-                      `email` varchar(100) DEFAULT NULL,
-                      `telefono` varchar(9) DEFAULT NULL,
-                      `empresa_id` int(10) NOT NULL,
-                      `created_at` timestamp NULL DEFAULT NULL,
-                      `updated_at` timestamp NULL DEFAULT NULL
-                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                        `id` int(11) NOT NULL,
+                        `dni` varchar(9) NOT NULL,
+                        `nombre` varchar(100) NOT NULL,
+                        `apellidos` varchar(100) NOT NULL,
+                        `email` varchar(100) DEFAULT NULL,
+                        `telefono` varchar(9) DEFAULT NULL,
+                        `empresa_id` int(10) NOT NULL,
+                        `created_at` timestamp NULL DEFAULT NULL,
+                        `updated_at` timestamp NULL DEFAULT NULL
+                      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+                    --
+                    -- Indices de la tabla `responsables`
+                    --
+                    ALTER TABLE `responsables`
+                      ADD PRIMARY KEY (`id`);
+                      
+                    --
+                    -- AUTO_INCREMENT de la tabla `responsables`
+                    --
+                    ALTER TABLE `responsables`
+                      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
                     -- --------------------------------------------------------
 
