@@ -1015,6 +1015,7 @@ class Conexion {
      * @param type $apellidos
      * @param type $email
      * @param type $tel
+     * @param type $CIF
      */
     static function insertarResponsable($dni, $nombre, $apellidos, $email, $tel, $CIF) {
         try {
@@ -1025,7 +1026,7 @@ class Conexion {
             $p->apellidos = $apellidos;
             $p->email = $email;
             $p->telefono = $tel;
-            $p->cif_empresa = $CIF;
+            $p->empresa_id = $CIF;
 
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1052,6 +1053,7 @@ class Conexion {
      * @param type $apellidos
      * @param type $email
      * @param type $tel
+     * @param type $CIF
      */
     static function ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel, $CIF) {
         try {
@@ -1062,7 +1064,7 @@ class Conexion {
                 'apellidos' => $apellidos,
                 'email' => $email,
                 'telefono' => $tel,
-                'cif_empresa' => $CIF
+                'empresa_id' => $CIF
             ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">

@@ -53,7 +53,7 @@ Gestionar  Practicas
                         <th>Apto</th> 
                         <th>Fecha inicio</th>
                         <th>Fecha fin</th>
-                        <th colspan="2">Recibís</th>
+                        <th>Recibís</th>
                         <th>
                             <!-- Añadir Practicas -->
                             <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
@@ -96,9 +96,9 @@ Gestionar  Practicas
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Responsable:
-                                                        <div id="idResponsableA">
-                                                        </div>
+                                                        Responsable: 
+                                                        <select id="idResponsableA" name="idResponsable" required>
+                                                        </select>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
@@ -263,7 +263,6 @@ Gestionar  Practicas
                                 <!-- Editar Practicas -->                                
                                 <!--<button type="submit" class="btn editar" name="editar" ></button>-->
                                 <button type="button" class="btn editar modificar" value="<?php echo $key->idPractica; ?>" data-id="<?php echo $key->idPractica; ?>"  data-toggle="modal" data-target="#editar1"></button>
-
                      <!-- </td><td>-->
                                 <button type="submit" class="btn eliminar" name="eliminar" ></button>
                             </td>
@@ -301,7 +300,7 @@ Gestionar  Practicas
                             Alumno:
                             <select id="dniAlumnoMod" name="dniAlumno" required>
                                 <?php
-                                    foreach ($l4 as $k4) {
+                                foreach ($l4 as $k4) {
                                     echo ' <option value="' . $k4->dni . '">' . $k4->nombre . ', ' . $k4->apellidos . '</option>';
                                 }
                                 ?>
