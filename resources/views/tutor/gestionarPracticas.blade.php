@@ -53,7 +53,7 @@ Gestionar  Practicas
                         <th>Apto</th> 
                         <th>Fecha inicio</th>
                         <th>Fecha fin</th>
-                        <th colspan="2">Recibís</th>
+                        <th>Recibís</th>
                         <th>
                             <!-- Añadir Practicas -->
                             <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
