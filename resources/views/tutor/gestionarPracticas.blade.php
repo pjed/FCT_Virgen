@@ -69,7 +69,7 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Empresa:
-                                                        <select id="idEmpresaModalAniadir" name="idEmpresa" required>
+                                                        <select id="idEmpresaA" name="idEmpresa" required>
                                                             <?php
                                                             foreach ($l1 as $k1) {
                                                                 ?>
@@ -83,7 +83,7 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Alumno:
-                                                        <select id="dniAlumno" name="dniAlumno" required>                                    
+                                                        <select id="dniAlumnoA" name="dniAlumno" required>                                    
                                                             <?php
                                                             foreach ($l4 as $k4) {
                                                                 ?>
@@ -97,34 +97,34 @@ Gestionar  Practicas
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Responsable:
-                                                        <div id="idResponsableModalAniadir">
+                                                        <div id="idResponsableA">
                                                         </div>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Cod proyecto:
-                                                        <input type="text" class="codProyecto form-control form-control-sm" name="codProyecto" pattern="[0-9]{6}" required/>
+                                                        <input type="text" id="codProyectoA" class="form-control form-control-sm" name="codProyecto" pattern="[0-9]{6}" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Gasto Total:
-                                                        <input type="text" class="form-control form-control-sm gasto" name="gasto"/>
+                                                        <input type="text" id="gastoA" class="form-control form-control-sm" name="gasto"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Apto:
-                                                        <input type="checkbox" class="form-control form-control-sm apto"  name="apto" />
+                                                        <input type="checkbox" id="aptoA" class="form-control form-control-sm"  name="apto" />
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Fecha inicio:
-                                                        <input type="date" class="form-control form-control-sm fechaInicio" name="fechaInicio" required/>
+                                                        <input type="date" id="fechaInicioA" class="form-control form-control-sm" name="fechaInicio" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Fecha fin:
-                                                        <input type="date" class="form-control form-control-sm fechaFin" name="fechaFin"/>
+                                                        <input type="date" id=""fechaFinA class="form-control form-control-sm" name="fechaFin"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
@@ -262,7 +262,7 @@ Gestionar  Practicas
                             <td>
                                 <!-- Editar Practicas -->                                
                                 <!--<button type="submit" class="btn editar" name="editar" ></button>-->
-                                <button type="button" class="btn editar modificar" value="<?php echo $key->idPractica; ?>" data_id="<?php echo $key->idPractica; ?>"  data-toggle="modal" data-target="#editar1"></button>
+                                <button type="button" class="btn editar modificar" value="<?php echo $key->idPractica; ?>" data-id="<?php echo $key->idPractica; ?>"  data-toggle="modal" data-target="#editar1"></button>
 
                      <!-- </td><td>-->
                                 <!--<button type="submit" class="btn eliminar" name="eliminar" ></button>-->
@@ -292,14 +292,14 @@ Gestionar  Practicas
                     <div class="row justify-content-center form-group">
                         <label class="col-sm text-center">
                             Empresa:
-                            <select id="idEmpresaMod" class="idEmpresaModalModificar" name="idEmpresa" required>                                                                
+                            <select id="idEmpresaMod" name="idEmpresa" required>                                                                
                             </select>
                         </label>
                     </div>
                     <div class="row justify-content-center form-group">
                         <label class="col-sm text-center">
                             Alumno:
-                            <select id="dniAlumnoMod"  name="dniAlumno" required>
+                            <select id="dniAlumnoMod" name="dniAlumno" required>
                                 <?php
                                     foreach ($l4 as $k4) {
                                     echo ' <option value="' . $k4->dni . '">' . $k4->nombre . ', ' . $k4->apellidos . '</option>';
@@ -311,7 +311,7 @@ Gestionar  Practicas
                     <div class="row justify-content-center form-group">
                         <label class="col-sm text-center">
                             Responsable:
-                            <select id="idResponsableMod" class="idResponsableModalModificar" name="idResponsable" required>                                                               
+                            <select id="idResponsableMod" name="idResponsable" required>                                                               
                             </select>
                         </label>
                     </div>

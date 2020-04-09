@@ -2,11 +2,12 @@ $(document).ready(function () {
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
     });
+//cargar ventana modal modificar
     $(".modificar").click(function () {
         var practica = null;
         var key = null;
-        var idPractica = $(".modificar").val();
-//        var idPractica = $(this).attr('data-id');
+//        var idPractica = $(".modificar").val();
+        var idPractica = $(this).attr('data-id');
         var dniResponsable = null;
         var idEmpresa = null;
         var dniAlumno = null;
@@ -53,10 +54,11 @@ $(document).ready(function () {
             data: parametros,
             type: 'POST',
             success: function (res) {
-                alert(res);
+                $("#idResponsableMod").empty();
+//                alert(res);
                 if (res !== null) {
                     listarResponsable = JSON.parse(res);
-                      for (var i = 0; i < listarResponsable.length; i++) {
+                    for (var i = 0; i < listarResponsable.length; i++) {
                         if (dniResponsable === listarResponsable[i].id) {
                             document.getElementById("idResponsableMod").innerHTML += ' <option value="' + listarResponsable[i].id + '" selected>' + listarResponsable[i].nombre + ', ' + listarResponsable[i].apellidos + '</option>';
                         } else {
@@ -85,10 +87,11 @@ $(document).ready(function () {
             data: parametros,
             type: 'POST',
             success: function (res) {
+                $("#idEmpresaMod").empty();
 //                alert(res);
                 if (res !== null) {
                     listaEmpresa = JSON.parse(res);
-                      for (var i = 0; i < listaEmpresa.length; i++) {
+                    for (var i = 0; i < listaEmpresa.length; i++) {
                         if (idEmpresa === listaEmpresa[i].id) {
                             document.getElementById("idEmpresaMod").innerHTML += '<option value="' + listaEmpresa[i].id + '" selected>' + listaEmpresa[i].nombre + '</option>';
                         } else {
@@ -117,6 +120,7 @@ $(document).ready(function () {
             data: parametros,
             type: 'POST',
             success: function (res) {
+                $("#dniAlumnoMod").empty();
 //                    alert(res);
                 if (res !== null) {
                     listaAlumnoPractica = JSON.parse(res);
@@ -138,52 +142,178 @@ $(document).ready(function () {
             }
         });
     }
-     $(".dniAlumno").blur(function () {
-        if ($(".dniAlumno").val() !== "selected") {
-            $(".dniAlumno").css({'border-color': 'red'});
+
+//ventana modal añadir
+    $("#idEmpresaA").click(function () {/*si selecionas una empresa te tiene que aparecer un select con sus responsables*/
+        var listarResponsable = null;
+        var idEmpresa = $("#idEmpresaA").val();
+        var parametros = {'idEmpresa': idEmpresa};
+        $.ajax({
+            url: 'idEmpresaAniadirPracticasAyax',
+            type: 'POST',
+            data: parametros,
+            success: function (res) {
+                $("#idResponsableA").empty();
+//                alert(res);
+                if (res !== null) {
+                    listarResponsable = JSON.parse(res);
+                    for (var i = 0; i < listarResponsable.length; i++) {
+                        document.getElementById("idResponsableA").innerHTML += ' <option value="' + listarResponsable[i].id + '">' + listarResponsable[i].nombre + ', ' + listarResponsable[i].apellidos + '</option>';
+                    }
+                }
+            },
+            statusCode: {
+                404: function () {
+                    alert('web not found');
+                }
+            },
+            error: function (x, xs, xt) {
+                window.open(JSON.stringify(x));
+                //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
+            }
+        });
+    });
+    $("#idEmpresaA").blur(function () {
+        if ($("#idEmpresaA").val() !== "selected") {
+            $("#idEmpresaA").css({'border-color': 'red'});
         } else {
-            $(".dniAlumno").css({'border-color': 'black'});
+            $("#idEmpresaA").css({'border-color': 'black'});
         }
     });
-    $(".idResponsableModalAniadir").blur(function () {
-        if ($(".idResponsable").val() !== "selected") {
-            $(".idResponsable").css({'border-color': 'red'});
+    $("#dniAlumnoA").blur(function () {
+        if ($("#dniAlumnoA").val() !== "selected") {
+            $("#dniAlumnoA").css({'border-color': 'red'});
+        } else {
+            $("#dniAlumnoA").css({'border-color': 'black'});
+        }
+    });
+    $("#idResponsableAniadir").blur(function () {
+        if ($("#idResponsableAniadir").val() !== "selected") {
+            $("#idResponsableAniadir").css({'border-color': 'red'});
+        } else {
+            $("#idResponsableAniadir").css({'border-color': 'black'});
+        }
+    });
+    $("#fechaFinA").blur(function () {
+        if ($("#fechaFinA").val() === "") {
+            $("#fechaFinA").css({'border-color': 'red'});
+        } else {
+            $("#fechaFinA").css({'border-color': 'black'});
+        }
+    });
+    $("#fechaInicioA").blur(function () {
+        if ($("#fechaInicioA").val() === "") {
+            $("#fechaInicioA").css({'border-color': 'red'});
+        } else {
+            $("#fechaInicioA").css({'border-color': 'black'});
+        }
+    });
+    $("#aptoA").blur(function () {
+        if ($("#aptoA").val() !== "checked") {
+            $("#aptoA").css({'border-color': 'red'});
+        } else {
+            $("#aptoA").css({'border-color': 'black'});
+        }
+    });
+    $("#gastoA").blur(function () {
+        if ($("#gastoA").val() === "") {
+            $("#gastoA").css({'border-color': 'red'});
+        } else {
+            $("#gastoA").css({'border-color': 'black'});
+        }
+    });
+    $("#codProyectoA").blur(function () {
+        if ($("#codProyectoA").val() === "") {
+            $("#codProyectoA").css({'border-color': 'red'});
+        } else {
+            $("#codProyectoA").css({'border-color': 'black'});
         }
     });
 
-    $(".fechaFin").blur(function () {
-        if ($(".fechaFin").val() === "") {
-            $(".fechaFin").css({'border-color': 'red'});
+//ventana modal modificar
+    $("#idEmpresaMod").click(function () {
+        var idEmpresa = $("#idEmpresaMod").val();
+        var listarResponsable = null;
+        var parametros = {'idEmpresa': idEmpresa};
+        $.ajax({
+            url: 'idEmpresaAniadirPracticasAyax',
+            type: 'POST',
+            data: parametros,
+            success: function (res) {
+                $("#idResponsableMod").empty();
+//                alert(res);
+                if (res !== null) {
+                    listarResponsable = JSON.parse(res);
+                    for (var i = 0; i < listarResponsable.length; i++) {
+                        document.getElementById("idResponsableMod").innerHTML += ' <option value="' + listarResponsable[i].id + '">' + listarResponsable[i].nombre + ', ' + listarResponsable[i].apellidos + '</option>';
+                    }
+                }
+            },
+            statusCode: {
+                404: function () {
+                    alert('web not found');
+                }
+            },
+            error: function (x, xs, xt) {
+                window.open(JSON.stringify(x));
+                //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
+            }
+        });
+    });
+    $("#idEmpresaMod").blur(function () {
+        if ($("#idEmpresaMod").val() !== "selected") {
+            $("#idEmpresaMod").css({'border-color': 'red'});
         } else {
-            $(".fechaFin").css({'border-color': 'black'});
+            $("#idEmpresaMod").css({'border-color': 'black'});
         }
     });
-    $(".fechaInicio").blur(function () {
-        if ($(".fechaInicio").val() === "") {
-            $(".fechaInicio").css({'border-color': 'red'});
+    $("#dniAlumnoMod").blur(function () {
+        if ($("#dniAlumnoMod").val() !== "selected") {
+            $("#dniAlumnoMod").css({'border-color': 'red'});
         } else {
-            $(".fechaInicio").css({'border-color': 'black'});
+            $("#dniAlumnoMod").css({'border-color': 'black'});
         }
     });
-    $(".apto").blur(function () {
-        if ($(".apto").val() !== "checked") {
-            $(".apto").css({'border-color': 'red'});
+    $("#idResponsableMod").blur(function () {
+        if ($("#idResponsableMod").val() !== "selected") {
+            $("#idResponsableMod").css({'border-color': 'red'});
         } else {
-            $(".apto").css({'border-color': 'black'});
+            $("#idResponsableMod").css({'border-color': 'black'});
         }
     });
-    $(".gasto").blur(function () {
-        if ($(".gasto").val() === "") {
-            $(".gasto").css({'border-color': 'red'});
+    $("#fechaFinMod").blur(function () {
+        if ($("#fechaFinMod").val() === "") {
+            $("#fechaFinMod").css({'border-color': 'red'});
         } else {
-            $(".gasto").css({'border-color': 'black'});
+            $("#fechaFinMod").css({'border-color': 'black'});
         }
     });
-    $(".codProyecto").blur(function () {
-        if ($(".codProyecto").val() === "") {
-            $(".codProyecto").css({'border-color': 'red'});
+    $("#fechaInicioMod").blur(function () {
+        if ($("#fechaInicioMod").val() === "") {
+            $("#fechaInicioMod").css({'border-color': 'red'});
         } else {
-            $(".codProyecto").css({'border-color': 'black'});
+            $("#fechaInicioMod").css({'border-color': 'black'});
+        }
+    });
+    $("#aptoMod").blur(function () {
+        if ($("#aptoMod").val() !== "checked") {
+            $("#aptoMod").css({'border-color': 'red'});
+        } else {
+            $("#aptoMod").css({'border-color': 'black'});
+        }
+    });
+    $("#gastoMod").blur(function () {
+        if ($("#gastoMod").val() === "") {
+            $("#gastoMod").css({'border-color': 'red'});
+        } else {
+            $("#gastoMod").css({'border-color': 'black'});
+        }
+    });
+    $("#codProyectoMod").blur(function () {
+        if ($("#codProyectoMod").val() === "") {
+            $("#codProyectoMod").css({'border-color': 'red'});
+        } else {
+            $("#codProyectoMod").css({'border-color': 'black'});
         }
     });
 });

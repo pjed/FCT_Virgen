@@ -88,18 +88,18 @@ Route::group(['middleware' => ['tutor']], function() {
     Route::any('gestionarPracticasAyax', ['uses' => 'controladorTutor@gestionarPracticasAyax', 'as' => 'gestionarPracticasAyax']);
     Route::any('listarResponsablesAyax', ['uses' => 'controladorTutor@listarResponsablesAyax', 'as' => 'listarResponsablesAyax']); //ayax para poder responsables de una empresa
     
-    //ayax para poder mostrar la modal para modificar practicas    
+    //ayax para poder modificar practicas    
     Route::any('modalModificarPracticaAyax', ['uses' => 'controladorTutor@buscarPracticaPorIdAyax', 'as' => 'modalModificarPracticaAyax']);
-    Route::any('idEmpresaModalModificarPracticaAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'idEmpresaModalModificarPracticaAyax']);
+    Route::any('idEmpresaModificarPracticaAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'idEmpresaModificarPracticaAyax']);
     
-    //listas para modificar una practica
+    //listas para cargar la ventana modal modificar practica
     Route::any('listarEmpresasAyax', ['uses' => 'controladorTutor@listarEmpresasAyax', 'as' => 'listarEmpresasAyax']);
     Route::any('listarAlumnoPorTutorAyax', ['uses' => 'controladorTutor@listarAlumnoPorTutorAyax', 'as' => 'listarAlumnoPorTutorAyax']);
     Route::any('listarResponsablesAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'listarResponsablesAyax']);
     
 
     //ayax para poder mostrar la modal para añadir practicas
-    Route::any('idEmpresaModalAniadirPracticasAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'idEmpresaModalAniadirPracticasAyax']);
+    Route::any('idEmpresaAniadirPracticasAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'idEmpresaAniadirPracticasAyax']);
 
     Route::post('consultarGastosAlumno', 'controladorTutor@consultarGastoAlumno');
     Route::post('extraerDocT', 'controladorTutor@extraerDocT');
