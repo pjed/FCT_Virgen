@@ -13,7 +13,7 @@ $(document).ready(function () {
         var dniAlumno = null;
         var parametros = {'idPractica': idPractica};
         $.ajax({
-            url: 'modalModificarPracticaAyax',
+            url: 'modalModificarPracticaAjax',
             data: parametros,
             type: 'POST',
             success: function (res) {
@@ -50,7 +50,7 @@ $(document).ready(function () {
         var parametros = {'idEmpresa': idEmpresa};
         // sacamos  Conexion::listarResponsablesEmpresa(idEmpresa);
         $.ajax({
-            url: 'listarResponsablesAyax',
+            url: 'listarResponsablesAjax',
             data: parametros,
             type: 'POST',
             success: function (res) {
@@ -83,7 +83,7 @@ $(document).ready(function () {
         var parametros = {'parametro': null};
         // sacamos Conexion::listarEmpresas();
         $.ajax({
-            url: 'listarEmpresasAyax',
+            url: 'listarEmpresasAjax',
             data: parametros,
             type: 'POST',
             success: function (res) {
@@ -116,7 +116,7 @@ $(document).ready(function () {
         var parametros = {'parametro': null};
         // sacamos  Conexion::listarAlumnoPorTutor();
         $.ajax({
-            url: 'listarAlumnoPorTutorAyax',
+            url: 'listarAlumnoPorTutorAjax',
             data: parametros,
             type: 'POST',
             success: function (res) {
@@ -149,7 +149,7 @@ $(document).ready(function () {
         var idEmpresa = $("#idEmpresaA").val();
         var parametros = {'idEmpresa': idEmpresa};
         $.ajax({
-            url: 'idEmpresaAniadirPracticasAyax',
+            url: 'idEmpresaAniadirPracticasAjax',
             type: 'POST',
             data: parametros,
             success: function (res) {
@@ -236,7 +236,7 @@ $(document).ready(function () {
         var listarResponsable = null;
         var parametros = {'idEmpresa': idEmpresa};
         $.ajax({
-            url: 'idEmpresaAniadirPracticasAyax',
+            url: 'idEmpresaAniadirPracticasAjax',
             type: 'POST',
             data: parametros,
             success: function (res) {

@@ -538,7 +538,7 @@ class controladorTutor extends Controller {
      * @author Marina
      * @param Request $req
      */
-    public function buscarPracticaPorIdAyax(Request $req) {
+    public function buscarPracticaPorIdAjax(Request $req) {
         $idPractica = $req->get('idPractica');
         $v = Conexion::buscarPracticaPorId($idPractica);
         $res = json_encode($v, true);
@@ -550,7 +550,7 @@ class controladorTutor extends Controller {
      * @author Marina
      * @param Request $req
      */
-    public function listarEmpresasAyax(Request $req) {
+    public function listarEmpresasAjax(Request $req) {
         $v = Conexion::listarEmpresas();
         $res = json_encode($v, true);
         echo $res;
@@ -560,7 +560,7 @@ class controladorTutor extends Controller {
      * Muestra la informacion del alumno necesaria para el modificar practicas con ayax
      * @author Marina
      */
-    public function listarAlumnoPorTutorAyax(Request $req) {
+    public function listarAlumnoPorTutorAjax(Request $req) {
         $v = Conexion::listarAlumnoPorTutor();
         $res = json_encode($v, true);
         echo $res;
@@ -571,7 +571,7 @@ class controladorTutor extends Controller {
      * @author Marina
      * @param Request $req
      */
-    public function idResponsableDeUnaEmpresaPracticaAyax(Request $req) {
+    public function idResponsableDeUnaEmpresaPracticaAjax(Request $req) {
         $idEmpresa = $req->get('idEmpresa');
         $v = Conexion::listarResponsablesEmpresa($idEmpresa);
         $res = json_encode($v, true);

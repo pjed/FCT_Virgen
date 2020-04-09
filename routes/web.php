@@ -81,18 +81,18 @@ Route::group(['middleware' => ['tutor']], function() {
         return view('tutor/perfilTutor');
     });
     
-    //ayax para poder modificar practicas    
-    Route::any('modalModificarPracticaAyax', ['uses' => 'controladorTutor@buscarPracticaPorIdAyax', 'as' => 'modalModificarPracticaAyax']);
-    Route::any('idEmpresaModificarPracticaAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'idEmpresaModificarPracticaAyax']);
+    //Ajax para poder modificar practicas    
+    Route::any('modalModificarPracticaAjax', ['uses' => 'controladorTutor@buscarPracticaPorIdAjax', 'as' => 'modalModificarPracticaAjax']);
+    Route::any('idEmpresaModificarPracticaAjax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAjax', 'as' => 'idEmpresaModificarPracticaAjax']);
     
-    //ayax listas para cargar la ventana modal modificar practica
-    Route::any('listarEmpresasAyax', ['uses' => 'controladorTutor@listarEmpresasAyax', 'as' => 'listarEmpresasAyax']);
-    Route::any('listarAlumnoPorTutorAyax', ['uses' => 'controladorTutor@listarAlumnoPorTutorAyax', 'as' => 'listarAlumnoPorTutorAyax']);
-    Route::any('listarResponsablesAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'listarResponsablesAyax']);
+    //Ajax listas para cargar la ventana modal modificar practica
+    Route::any('listarEmpresasAjax', ['uses' => 'controladorTutor@listarEmpresasAjax', 'as' => 'listarEmpresasAjax']);
+    Route::any('listarAlumnoPorTutorAjax', ['uses' => 'controladorTutor@listarAlumnoPorTutorAjax', 'as' => 'listarAlumnoPorTutorAjax']);
+    Route::any('listarResponsablesAjax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAjax', 'as' => 'listarResponsablesAjax']);
     
 
-    //ayax para poder mostrar la modal para añadir practicas
-    Route::any('idEmpresaAniadirPracticasAyax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAyax', 'as' => 'idEmpresaAniadirPracticasAyax']);
+    //Ajax para poder mostrar la modal para añadir practicas
+    Route::any('idEmpresaAniadirPracticasAjax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAjax', 'as' => 'idEmpresaAniadirPracticasAjax']);
 
     Route::post('consultarGastosAlumno', 'controladorTutor@consultarGastoAlumno');
     Route::post('extraerDocT', 'controladorTutor@extraerDocT');
