@@ -81,10 +81,6 @@ Route::group(['middleware' => ['tutor']], function() {
         return view('tutor/perfilTutor');
     });
     //ayax
-    Route::get('gestionarPracticasAyax', function () {
-        return view('tutor/gestionarPracticasAyax');
-    });
-
     Route::any('gestionarPracticasAyax', ['uses' => 'controladorTutor@gestionarPracticasAyax', 'as' => 'gestionarPracticasAyax']);
     Route::any('listarResponsablesAyax', ['uses' => 'controladorTutor@listarResponsablesAyax', 'as' => 'listarResponsablesAyax']); //ayax para poder responsables de una empresa
     
