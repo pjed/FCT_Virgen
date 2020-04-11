@@ -1,3 +1,7 @@
+/**
+ * 
+ *  @author marina
+ */
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
@@ -5,7 +9,6 @@ $(document).ready(function () {
 //cargar ventana modal modificar
     $(".modificar").click(function () {
         var practica = null;
-        var key = null;
 //        var idPractica = $(".modificar").val();
         var idPractica = $(this).attr('data-id');
         var dniResponsable = null;
@@ -17,9 +20,8 @@ $(document).ready(function () {
             data: parametros,
             type: 'POST',
             success: function (res) {
-                practica = JSON.parse(res);
-                if (practica !== null) {
-//                        alert('entro en buscar practica por id');
+                if (res !== null) {
+                    practica = JSON.parse(res);
                     dniResponsable = practica.idResponsable;
                     idEmpresa = practica.idEmpresa;
                     dniAlumno = practica.dniAlumno;

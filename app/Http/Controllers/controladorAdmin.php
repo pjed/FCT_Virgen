@@ -243,8 +243,6 @@ class controladorAdmin extends Controller {
      * @param Request $req
      */
     public function AddDatosCSVtoBBDD(Request $req) {
-
-
         $sql = "/*Sentencia para crear el centro*/
                 SET FOREIGN_KEY_CHECKS=0;
                 insert into centros(cod, nombre, localidad, created_at, updated_at) 
@@ -1377,27 +1375,23 @@ class controladorAdmin extends Controller {
                                             <th>Donde es</th> 
                                             <th>Importe</th>                      
                                             <th>Foto</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>';
                 foreach ($gtc as $key) {
-                    $v = $v . '
-                                            <tr>
-                                                <td>
-                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="idTransporte" name ="idTransporte" value="' . $key->idTransporte . '">
-                                                    <input type="text" class="form-control form-control-sm form-control-md" id="dondeC" name="donde" value="' . $key->donde . '" readonly/>
-                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="ID" name="ID" value="' . $key->idColectivos . '"/>
-                                                </td>
-                                                <td><input type="number" step="0.01" class="form-control form-control-sm" id="precio" name="precio" value="' . $key->precio . '" readonly/></td>
-                                                <td>
-                                                     <a  href="' . $key->foto . '" target="_blank"> <img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/></a>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn editar editarC" value="'. $key->idColectivos .'" data-id="'. $key->idColectivos .'"  data-toggle="modal" data-target="#editarColectivo"></button>
-                                                <!-- </td><td>-->
-                                                    <button type="button" class="btn-sm eliminar eliminarC"  value="'. $key->idColectivos .'" data-id="'. $key->idColectivos .'" name="eliminarC"></button>
-                                                </td>
-                                            </tr>';
+                    $v = $v . ' <tr>
+                                    <td>' . $key->donde . '</td>
+                                    <td>' . $key->precio . '€</td>
+                                    <td>
+                                        <a  href="' . $key->foto . '" target="_blank"> <img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/></a>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn editar editarCol" data-id="' . $key->idColectivos . '"  data-toggle="modal" data-target="#editarColectivo"></button>
+                                    <!-- </td><td>-->
+                                        <button type="button" class="btn-sm eliminar eliminarCol"  value="' . $key->idColectivos . '" data-id="' . $key->idColectivos . '" name="eliminarC"></button>
+                                    </td>
+                                </tr>';
                 }
                 $v = $v . '</tbody>
                                 </table>
@@ -1418,27 +1412,23 @@ class controladorAdmin extends Controller {
                                     <thead class="thead-dark">
                                         <tr>   
                                             <th>Donde es</th>                    
-                                            <th>KMS</th>
+                                            <th>KM/S</th>
                                             <th>Importe</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>';
                 foreach ($gtp as $key) {
-                    $v = $v . '
-                                            <tr>
-                                                <td>
-                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="idTransporte1" name ="idTransporte" value="' . $key->idTransporte . '"/>
-                                                    <input type="text" class="form-control form-control-sm form-control-md" id="donde" name="donde" value="' . $key->donde . '" readonly/>
-                                                    <input type="hidden" class="form-control form-control-sm form-control-md" id="ID1" name="ID" value="' . $key->idPropios . '"/>
-                                                </td>
-                                                <td><input type="number"  step="0.01" class="form-control form-control-sm" id="kms" name="kms" value="' . $key->kms . '" readonly/></td>
-                                                <td><input type="number"  step="0.01" class="form-control form-control-sm" id="precio1" name="precio" value="' . $key->precio . '" readonly/></td>
-                                                 <td>
-                                                    <button type="button" class="btn editar editarP" value="'. $key->idPropios .'" data-id="'. $key->idPropios .'"  data-toggle="modal" data-target="#editarPropio"></button>
-                                                <!-- </td><td>-->
-                                                    <button type="button" class="btn-sm eliminar eliminarP"  value="'. $key->idPropios .'" data-id="'. $key->idPropios .'"></button>
-                                                </td>
-                                            </tr>';
+                    $v = $v . '<tr>
+                                    <td>' . $key->donde . '</td>
+                                    <td>' . $key->kms . '</td>
+                                    <td>' . $key->precio . '€</td>
+                                    <td>
+                                        <button type="button" class="btn editar editarP" data-id="' . $key->idPropios . '"  data-toggle="modal" data-target="#editarPropio"></button>
+                                    <!-- </td><td>-->
+                                        <button type="button" class="btn-sm eliminar eliminarP"  value="' . $key->idPropios . '" data-id="' . $key->idPropios . '"></button>
+                                    </td>
+                                </tr>';
                 }
                 $v = $v . '</tbody>
                                 </table>
@@ -1460,29 +1450,23 @@ class controladorAdmin extends Controller {
                                         <th>Fecha</th>
                                         <th>Importe</th>
                                         <th>Foto</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>';
             foreach ($gc as $key) {
-                $v = $v . '
-                                        <tr>
-                                            <td>
-                                                <input type="hidden" class="form-control form-control-sm form-control-md" id="idGasto" name ="idGasto" value="' . $key->idGasto . '" readonly>
-                                                <input type="date" class="form-control form-control-sm form-control-md" id="fecha" name="fecha" value="' . $key->fecha . '"/>
-                                                <input type="hidden" class="form-control form-control-sm form-control-md" id="ID2"  name="ID" value="' . $key->id . '" readonly/>
-                                            </td>
-                                            <td><input type="number"  step="0.01" class="form-control form-control-sm" id="importe" name="importe" value="' . $key->importe . '"/></td>
-                                            <td>
-                                                <input type="hidden" class="form-control form-control-sm form-control-md" id="fotoUrl1" name="fotoUrl" value="' . $key->foto . '" readonly/>
-                                                <a  href="' . $key->foto . '" target="_blank"> <img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/></a>
-                                                <input type="file" class="form-control form-control-sm form-control-md"  id="foto1" name="foto">
-                                            </td>
-                                             <td>
-                                                    <button type="button" class="btn editar editarCo" value="'. $key->id .'" data-id="'. $key->id .'"  data-toggle="modal" data-target="#editarComida"></button>
-                                                <!-- </td><td>-->
-                                                    <button type="button" class="btn-sm eliminar eliminarCo"  value="'. $key->id .'" data-id="'. $key->id .'"></button>
-                                                </td>
-                                        </tr>';
+                $v = $v . '<tr>
+                                <td>' . $key->fecha . '</td>
+                                <td>' . $key->importe . '€</td>
+                                <td>
+                                    <a  href="' . $key->foto . '" target="_blank"> <img name="ticketGasto" class="foto_small" src="' . $key->foto . '"/></a>
+                                </td>
+                                <td>
+                                        <button type="button" class="btn editar editarCom" data-id="' . $key->idGasto . '"  data-toggle="modal" data-target="#editarComida"></button>
+                                    <!-- </td><td>-->
+                                        <button type="button" class="btn-sm eliminar eliminarCom"  value="' . $key->idGasto . '" data-id="' . $key->idGasto . '"></button>
+                                    </td>
+                            </tr>';
             }
             $v = $v . '</tbody>
                             </table>
@@ -1491,6 +1475,32 @@ class controladorAdmin extends Controller {
                 </div>';
         }
         return $v;
+    }
+
+    /**
+     * Rellena las modelas de modificar los gastos de los alumnos
+     * @author Marina
+     * @param Request $req
+     */
+    public function buscarGastoAjax(Request $req) {
+        $tipo = $req->get('tipo');
+        $v = null;
+        switch ($tipo) {
+            case 'comida':
+                $idGasto = $req->get('idGasto');
+                $v = Conexion::buscarGastoComida($idGasto);
+                break;
+            case 'colectivo':
+                $idTransporte = $req->get('idTransporte');
+                $v = Conexion::buscarGastoTransporteColectivo($idTransporte);
+                break;
+            case 'propio':
+                $idTransporte = $req->get('idTransporte');
+                $v = Conexion::buscarGastoTransportePropio($idTransporte);
+                break;
+        }
+        $res = json_encode($v, true);
+        echo $res;
     }
 
     /**

@@ -423,9 +423,50 @@ class Conexion {
         }
     }
 
-    static function buscarGastoTransporteColectivo($id) {
-        $t = colectivo::where('transportes_id', $id)->first();
+    /**
+     * buscar Gasto de Transporte Colectivo por $idTransporte y devuleve todo lo relacionado con el gasto
+     * @author Marina
+     * @param type $idTransporte
+     * @return type
+     */
+    static function buscarGastoTransporteColectivo($idTransporte) {
+        $t = \DB::table('transportes')
+                ->where('transportes.id', $idTransporte)
+                ->join('colectivos', 'transportes.id', '=', 'colectivos.transportes_id')
+                ->select('transportes.id AS idTransporte', 'transportes.donde AS donde', 'colectivos.id AS idColectivos', 'colectivos.foto AS foto', 'colectivos.importe AS precio')
+                ->first();
 
+        return $t;
+    }
+
+    /**
+     * buscar Gasto de Transporte Propio por $idTransporte y devuleve todo lo relacionado con el gasto
+     * @author Marina
+     * @param type $idTransporte
+     * @return type
+     */
+    static function buscarGastoTransportePropio($idTransporte) {
+        $t = \DB::table('transportes')
+                ->where('transportes.id', $idTransporte)
+                ->join('propios', 'transportes.id', '=', 'propios.transportes_id')
+                ->select('transportes.id AS idTransporte', 'transportes.donde AS donde', 'propios.id AS idPropios', 'propios.kms AS kms', 'propios.precio AS precio')
+                ->first();
+
+        return $t;
+    }
+
+    /**
+     * buscar Gasto de Comida por $idGasto y devuleve todo lo relacionado con el gasto
+     * @author Marina
+     * @param type $idGasto
+     * @return type
+     */
+    static function buscarGastoComida($idGasto) {
+        $t = \DB::table('gastos')
+                ->where('id', $idGasto)
+                ->join('comidas', 'comidas.id', '=', 'gastos.comidas_id')
+                ->select('gastos.id AS idGasto', 'comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto')
+                ->first();
         return $t;
     }
 
@@ -754,6 +795,7 @@ class Conexion {
         }
         return $v;
     }
+
     /**
      * Muestra la una practica, metodo hecho para la modal de modificar practicas
      * @author Marina
