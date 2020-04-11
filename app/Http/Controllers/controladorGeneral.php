@@ -84,6 +84,7 @@ class controladorGeneral extends Controller {
                     return view('alumno.bienvenidaAl');
                 } else if ($rol == 4) {//tutor-admin                              
                     session()->put('rol', 4);
+                    session()->put('rol1',1);
                     echo '
                   <div class="alert alert-primary alert-dismissible fade show" role="alert">
                     Has iniciado sesión como administrador
