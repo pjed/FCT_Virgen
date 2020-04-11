@@ -653,7 +653,8 @@ class controladorAdmin extends Controller {
                       `transportes_id` int(11) DEFAULT NULL,
                       `foto` varchar(45) NOT NULL DEFAULT 'images/ticket.png',
                       `created_at` timestamp NULL DEFAULT NULL,
-                      `updated_at` timestamp NULL DEFAULT NULL
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                        PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
                     -- --------------------------------------------------------
@@ -668,7 +669,8 @@ class controladorAdmin extends Controller {
                       `fecha` date NOT NULL,
                       `foto` varchar(45) NOT NULL DEFAULT 'images/ticket.png',
                       `created_at` timestamp NULL DEFAULT NULL,
-                      `updated_at` timestamp NULL DEFAULT NULL
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                        PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
                     -- --------------------------------------------------------
@@ -716,14 +718,15 @@ class controladorAdmin extends Controller {
                     --
 
                     CREATE TABLE `gastos` (
-                      `id` int(11) NOT NULL,
+                      `id` int(11) NOT NULL AUTO_INCREMENT,
                       `desplazamiento` int(1) NOT NULL,
                       `tipo` int(1) NOT NULL,
                       `created_at` timestamp NULL DEFAULT NULL,
                       `updated_at` timestamp NULL DEFAULT NULL,
                       `usuarios_dni` varchar(9) NOT NULL,
                       `comidas_id` int(11) NOT NULL,
-                      `transportes_id` int(11) NOT NULL
+                      `transportes_id` int(11) NOT NULL,
+                        PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
                     -- --------------------------------------------------------
@@ -748,7 +751,7 @@ class controladorAdmin extends Controller {
                     --
 
                     CREATE TABLE `practicas` (
-                      `id` int(10) NOT NULL,
+                      `id` int(10) NOT NULL AUTO_INCREMENT,
                       `cod_proyecto` varchar(6) DEFAULT NULL,
                       `fecha_inicio` date DEFAULT NULL,
                       `fecha_fin` date DEFAULT NULL,
@@ -758,7 +761,8 @@ class controladorAdmin extends Controller {
                       `empresas_id` int(11) NOT NULL,
                       `responsables_id` int(11) DEFAULT NULL,
                       `created_at` timestamp NULL DEFAULT NULL,
-                      `updated_at` timestamp NULL DEFAULT NULL
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
                     -- --------------------------------------------------------
@@ -773,7 +777,8 @@ class controladorAdmin extends Controller {
                       `precio` double(8,2) NOT NULL,
                       `created_at` timestamp NULL DEFAULT NULL,
                       `updated_at` timestamp NULL DEFAULT NULL,
-                      `transportes_id` int(11) NOT NULL
+                      `transportes_id` int(11) NOT NULL,
+                        PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
                     -- --------------------------------------------------------
@@ -791,8 +796,10 @@ class controladorAdmin extends Controller {
                         `telefono` varchar(9) DEFAULT NULL,
                         `empresa_id` int(10) NOT NULL,
                         `created_at` timestamp NULL DEFAULT NULL,
-                        `updated_at` timestamp NULL DEFAULT NULL
+                        `updated_at` timestamp NULL DEFAULT NULL,
+                        PRIMARY KEY (`id`)
                       ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                      
 
                     --
                     -- Indices de la tabla `responsables`
@@ -816,7 +823,8 @@ class controladorAdmin extends Controller {
                       `id` int(11) NOT NULL,
                       `nombre` varchar(50) NOT NULL,
                       `created_at` timestamp NULL DEFAULT NULL,
-                      `updated_at` timestamp NULL DEFAULT NULL
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                        PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
                     -- --------------------------------------------------------
@@ -830,7 +838,8 @@ class controladorAdmin extends Controller {
                       `tipo` int(1) NOT NULL,
                       `donde` varchar(50) NOT NULL,
                       `created_at` timestamp NULL DEFAULT NULL,
-                      `updated_at` timestamp NULL DEFAULT NULL
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                        PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
                     -- --------------------------------------------------------
@@ -846,7 +855,7 @@ class controladorAdmin extends Controller {
                         `created_at` timestamp NULL DEFAULT NULL,
                         `updated_at` timestamp NULL DEFAULT NULL,
                         PRIMARY KEY (`idtutores`)
-                      ) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+                      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
                     -- --------------------------------------------------------
 
@@ -1004,69 +1013,6 @@ class controladorAdmin extends Controller {
                       ADD PRIMARY KEY (`id`),
                       ADD KEY `fk_usuarios_roles_roles` (`rol_id`),
                       ADD KEY `fk_usuarios_roles_usuarios_idx` (`usuario_dni`);
-
-                    --
-                    -- AUTO_INCREMENT de las tablas volcadas
-                    --
-
-                    --
-                    -- AUTO_INCREMENT de la tabla `colectivos`
-                    --
-                    ALTER TABLE `colectivos`
-                      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-                    --
-                    -- AUTO_INCREMENT de la tabla `comidas`
-                    --
-                    ALTER TABLE `comidas`
-                      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
-                    --
-                    -- AUTO_INCREMENT de la tabla `empresas`
-                    --
-                    ALTER TABLE `empresas`
-                      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-                    --
-                    -- AUTO_INCREMENT de la tabla `gastos`
-                    --
-                    ALTER TABLE `gastos`
-                      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-                    --
-                    -- AUTO_INCREMENT de la tabla `matriculados`
-                    --
-                    ALTER TABLE `matriculados`
-                      MODIFY `idmatriculados` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-                    --
-                    -- AUTO_INCREMENT de la tabla `practicas`
-                    --
-                    ALTER TABLE `practicas`
-                      MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
-                    --
-                    -- AUTO_INCREMENT de la tabla `propios`
-                    --
-                    ALTER TABLE `propios`
-                      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-                    --
-                    -- AUTO_INCREMENT de la tabla `responsables`
-                    --
-                    ALTER TABLE `responsables`
-                      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-                    --
-                    -- AUTO_INCREMENT de la tabla `transportes`
-                    --
-                    ALTER TABLE `transportes`
-                      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
-                    --
-                    -- AUTO_INCREMENT de la tabla `tutores`
-                    --
-                    ALTER TABLE `tutores`
-                      MODIFY `idtutores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
-                    --
-                    -- AUTO_INCREMENT de la tabla `usuarios_roles`
-                    --
-                    ALTER TABLE `usuarios_roles`
-                      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
-                    --
-                    -- Restricciones para tablas volcadas
-                    --
 
                     --
                     -- Filtros para la tabla `colectivos`
