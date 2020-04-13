@@ -155,6 +155,11 @@ Gestionar  Practicas
                                         <?php
                                     }
                                 }
+                                if ($key->idEmpresa == 0) {
+                                    ?>
+                                    <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value=" " readonly/>
+                                    <?php
+                                }
                                 ?>
                             </td>
                             <td>
@@ -179,6 +184,11 @@ Gestionar  Practicas
                                         <input type="text" class="form-control form-control-sm form-control-md" name="nombreResponsable" value="<?php echo $k3->nombre . ', ' . $k3->apellidos; ?>" readonly/>
                                         <?php
                                     }
+                                }
+                                if ($key->idResponsable == 0) {
+                                    ?>
+                                    <input type="text" class="form-control form-control-sm form-control-md" name="nombreResponsable" value=" " readonly/>
+                                    <?php
                                 }
                                 ?>
                             </td>

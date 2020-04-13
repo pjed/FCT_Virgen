@@ -103,6 +103,8 @@ class Conexion {
      * @param type $rol
      */
     static function insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $iban, $movil, $rol) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
 //        usuario
         $p = new usuario;
         $p->dni = $dni;
@@ -114,10 +116,14 @@ class Conexion {
         $p->movil = $movil;
         $p->iban = $iban;
         $p->foto = 'images/defecto.jpeg';
+        $p->created_at = $updated_at;
+        $p->updated_at = $updated_at;
         //rol
         $c = new usuarios_rol;
         $c->usuario_dni = $dni;
         $c->rol_id = $rol;
+        $c->created_at = $updated_at;
+        $c->updated_at = $updated_at;
         try {
             $p->save();
             $c->save();
@@ -149,6 +155,8 @@ class Conexion {
      * @param type $rol_id
      */
     static function ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = usuario::where('dni', $dni)
                     ->update(['nombre' => $nombre,
@@ -156,10 +164,12 @@ class Conexion {
                 'domicilio' => $domicilio,
                 'email' => $email,
                 'telefono' => $tel,
-                'movil' => $movil]);
+                'movil' => $movil,
+                'updated_at' => $updated_at]);
 
             $r = usuarios_rol::where('usuario_dni', $dni)
-                    ->update(['rol_id' => $rol_id]);
+                    ->update(['rol_id' => $rol_id,
+                'updated_at' => $updated_at]);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado usuario con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -231,7 +241,6 @@ class Conexion {
      * @param type $dni dni del usuario a borrar
      */
     static function borrarUsuario($dni) {
-
         try {
             usuarios_rol::where('usuario_dni', $dni)->delete();
             usuario::where('dni', $dni)->delete();
@@ -252,7 +261,6 @@ class Conexion {
     }
 
     static function obtenerRolUsuario($dni) {
-
         $p = usuarios_rol::where('usuario_dni', $dni)->first();
 
         return $p;
@@ -263,7 +271,6 @@ class Conexion {
      * @param type $dni dni del tutor a borrar
      */
     static function borrarTutor($dni) {
-
         try {
 
             tutor::where('usuarios_dni', $dni)->delete();
@@ -288,7 +295,6 @@ class Conexion {
      * @param type $dni dni del alumno a borrar
      */
     static function borrarAlumno($dni) {
-
         try {
             matricula::where('usuarios_dni', $dni)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -312,7 +318,6 @@ class Conexion {
      * @param type $dni dni del alumno a borrar
      */
     static function borrarAlumnoTablaPracticas($dni) {
-
         try {
             practica::where('usuarios_dni', $dni)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -336,7 +341,6 @@ class Conexion {
      * @param type $dni dni del alumno a borrar
      */
     static function borrarAlumnoTablaGastos($dni) {
-
         try {
             gasto::where('usuarios_dni', $dni)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -380,7 +384,6 @@ class Conexion {
      * @param type $dni dni del alumno a borrar
      */
     static function borrarGastoComidaAlumno($comidas_id) {
-
         try {
             gasto::where('comidas_id', $comidas_id)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -404,7 +407,6 @@ class Conexion {
      * @param type $dni dni del alumno a borrar
      */
     static function borrarGastoTransporteAlumno($transportes_id) {
-
         try {
             gasto::where('$transportes_id', $transportes_id)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -601,7 +603,6 @@ class Conexion {
      * @param type $updated_at la fecha en la que se actualizo el perfil
      */
     static function actualizarFotoAlumno($dni, $email, $password, $foto, $updated_at) {
-
         try {
             usuario::where('dni', $dni)
                     ->update([
@@ -967,18 +968,42 @@ class Conexion {
         $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
-            $p = practica::where('id', $ID)
-                    ->update([
-                'cod_proyecto' => $codProyecto,
-                'fecha_inicio' => $fechaInicio,
-                'fecha_fin' => $fechaFin,
-                'gastos' => $gasto,
-                'apto' => $apto,
-                'usuarios_dni' => $dniAlumno,
-                'empresas_id' => $CIF,
-                'responsables_id' => $dniResponsable,
-                'updated_at' => $updated_at
-            ]);
+//            \DB::table('practicas')
+//                    ->where('id', $ID)
+//                    ->update(['cod_proyecto' => $codProyecto,
+//                        'fecha_inicio' => $fechaInicio,
+//                        'fecha_fin' => $fechaFin,
+//                        'gastos' => $gasto,
+//                        'apto' => $apto,
+//                        'usuarios_dni' => $dniAlumno,
+//                        'empresas_id' => $CIF,
+//                        'responsables_id' => $dniResponsable,
+//                        'updated_at' => $updated_at]);
+
+            \DB::update('update practicas set '
+                    . 'cod_proyecto = ?, '
+                    . 'fecha_inicio = ?, '
+                    . 'fecha_fin = ?, '
+                    . 'gastos = ?, '
+                    . 'apto = ?, '
+                    . 'usuarios_dni = ?, '
+                    . 'empresas_id = ?, '
+                    . 'responsables_id = ?, '
+                    . 'updated_at = ?  where id = ?', [$codProyecto, $fechaInicio, $fechaFin, $gasto, $apto, $dniAlumno, $CIF, $dniResponsable, $updated_at, $ID]);
+            
+            
+//            $p = practica::where('id', $ID)
+//                    ->update([
+//                'cod_proyecto' => $codProyecto,
+//                'fecha_inicio' => $fechaInicio,
+//                'fecha_fin' => $fechaFin,
+//                'gastos' => $gasto,
+//                'apto' => $apto,
+//                'usuarios_dni' => $dniAlumno,
+//                'empresas_id' => $CIF,
+//                'responsables_id' => $dniResponsable,
+//                'updated_at' => $updated_at
+//            ]);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
