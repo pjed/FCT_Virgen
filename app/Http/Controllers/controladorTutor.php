@@ -353,8 +353,9 @@ class controladorTutor extends Controller {
             Conexion::ModificarEmpresa($id, $CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario, $nueva);
         }
         if (isset($_REQUEST['eliminar'])) {
+            Conexion::ModificarPracticaResponsable($id);
             Conexion::ModificarPracticaEmpresa($id);
-            Conexion::ModificarResponsableEmpresa($CIF);
+            Conexion::borrarResponsableEmpresa($id);
             Conexion::borrarEmpresa($id);
         }
         if (isset($_REQUEST['aniadir'])) {

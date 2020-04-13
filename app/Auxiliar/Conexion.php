@@ -937,7 +937,7 @@ class Conexion {
         $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
-            $p = practica::where('id', $id)
+            $p = practica::where('empresas_id', $id)
                     ->update([
                 'empresas_id' => 0,
                 'updated_at' => $updated_at
@@ -955,15 +955,12 @@ class Conexion {
      * Metodo para poder borrar el empresa
      * @param type $id
      */
-    static function ModificarResponsableEmpresa($id) {
+    static function borrarResponsableEmpresa($id) {
         $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = responsable::where('empresa_id', $id)
-                    ->update([
-                'empresa_id' => 0,
-                'updated_at' => $updated_at
-            ]);
+                    ->delete();
         } catch (\Exception $e) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Error.
@@ -982,7 +979,7 @@ class Conexion {
         $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
-            $p = practica::where('id', $id)
+            $p = practica::where('empresas_id', $id)
                     ->update([
                 'responsables_id' => 0,
                 'updated_at' => $updated_at
