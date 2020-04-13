@@ -604,6 +604,13 @@ class controladorAdmin extends Controller {
                       ADD CONSTRAINT `fk_usuarios_roles_roles` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`),
                       ADD CONSTRAINT `fk_usuarios_roles_usuarios` FOREIGN KEY (`usuario_dni`) REFERENCES `usuarios` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
+--
+                    -- Filtros para la tabla `responsables`
+                    --
+                    ALTER TABLE `responsables`
+                      ADD CONSTRAINT `fk_reponsables_empresas` FOREIGN KEY (`empresa_id`) REFERENCES `empresas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+                    --
+
                     --
                     -- Filtros para la tabla `matriculados`
                     --
@@ -892,7 +899,7 @@ class controladorAdmin extends Controller {
                         `apellidos` varchar(100) NOT NULL,
                         `email` varchar(100) DEFAULT NULL,
                         `telefono` varchar(9) DEFAULT NULL,
-                        `empresa_id` int(10) NOT NULL,
+                        `empresa_id` int(11) NOT NULL,
                         `created_at` timestamp NULL DEFAULT NULL,
                         `updated_at` timestamp NULL DEFAULT NULL,
                     PRIMARY KEY (`id`)
