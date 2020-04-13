@@ -548,6 +548,88 @@ class controladorAdmin extends Controller {
         }
     }
 
+    
+    /**
+     * Método que añade las FKS a la BBDD gestionfct
+     * @author Pedro
+     * @param Request $req
+     */
+    public function AddFKStoBBDD(Request $req) {
+        $sql = "/*Sentencias para añadir las FKS a la BBDD*/
+                
+                    --
+                    -- Filtros para la tabla `colectivos`
+                    --
+                    ALTER TABLE `colectivos`
+                      ADD CONSTRAINT `fk_colectivos_transportes1` FOREIGN KEY (`transportes_id`) REFERENCES `transportes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+                    --
+                    -- Filtros para la tabla `cursos`
+                    --
+                    ALTER TABLE `cursos`
+                      ADD CONSTRAINT `fk_cursos_centros1` FOREIGN KEY (`centros_cod`) REFERENCES `centros` (`cod`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+                    --
+                    -- Filtros para la tabla `gastos`
+                    --
+                    ALTER TABLE `gastos`
+                      ADD CONSTRAINT `fk_gastos_comidas1` FOREIGN KEY (`comidas_id`) REFERENCES `comidas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+                      ADD CONSTRAINT `fk_gastos_transportes1` FOREIGN KEY (`transportes_id`) REFERENCES `transportes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+                      ADD CONSTRAINT `fk_gastos_usuarios1` FOREIGN KEY (`usuarios_dni`) REFERENCES `usuarios` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+                    --
+                    -- Filtros para la tabla `practicas`
+                    --
+                    ALTER TABLE `practicas`
+                      ADD CONSTRAINT `fk_practicas_empresas1` FOREIGN KEY (`empresas_id`) REFERENCES `empresas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+                      ADD CONSTRAINT `fk_practicas_usuarios1` FOREIGN KEY (`usuarios_dni`) REFERENCES `usuarios` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+					  ADD CONSTRAINT `fk_practicas_responsables1` FOREIGN KEY (`responsables_id`) REFERENCES `responsables`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+                    --
+                    -- Filtros para la tabla `propios`
+                    --
+                    ALTER TABLE `propios`
+                      ADD CONSTRAINT `fk_propios_transportes1` FOREIGN KEY (`transportes_id`) REFERENCES `transportes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+                    --
+                    -- Filtros para la tabla `tutores`
+                    --
+                    ALTER TABLE `tutores`
+                      ADD CONSTRAINT `fk_tutores_cursos1` FOREIGN KEY (`cursos_id_curso`) REFERENCES `cursos` (`id_curso`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+                      ADD CONSTRAINT `fk_tutores_usuarios1` FOREIGN KEY (`usuarios_dni`) REFERENCES `usuarios` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+                    --
+                    -- Filtros para la tabla `usuarios_roles`
+                    --
+                    ALTER TABLE `usuarios_roles`
+                      ADD CONSTRAINT `fk_usuarios_roles_roles` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`),
+                      ADD CONSTRAINT `fk_usuarios_roles_usuarios` FOREIGN KEY (`usuario_dni`) REFERENCES `usuarios` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+                    --
+                    -- Filtros para la tabla `matriculados`
+                    --
+                    ALTER TABLE `matriculados`
+                      ADD CONSTRAINT `fk_matriculados_cursos` FOREIGN KEY (`cursos_id_curso`) REFERENCES `cursos` (`id_curso`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+                      ADD CONSTRAINT `fk_matriculados_usuarios1` FOREIGN KEY (`usuarios_dni`) REFERENCES `usuarios` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+                ";
+        try {
+            \DB::connection()->getPdo()->exec($sql);
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    FKS creadas correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        } catch (Exception $ex) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ERROR al crear las FKS.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+        }
+    }
+
     /**
      * Método que añade los datos de los archivos .csv a tablas en la BBDD gestionfct
      * @author Pedro
@@ -571,7 +653,10 @@ class controladorAdmin extends Controller {
 
             //Método que añade los datos de los archivos .csv a tablas en la BBDD gestionfct
             $this->AddDatosCSVtoBBDD($req);
-
+            
+            //Método que añade las FKS a la BBDD gestionfct
+            $this->AddFKStoBBDD($req);
+            
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Archivos CSV importados correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -768,8 +853,8 @@ class controladorAdmin extends Controller {
                       `gastos` int(11) DEFAULT NULL,
                       `apto` int(11) DEFAULT NULL,
                       `usuarios_dni` varchar(9) NOT NULL,
-                      `empresas_id` int(11) NOT NULL,
-                      `responsables_id` int(11) DEFAULT NULL,
+                      `empresas_id` int(11) NULL,
+                      `responsables_id` int(11) NULL,
                       `created_at` timestamp NULL DEFAULT NULL,
                       `updated_at` timestamp NULL DEFAULT NULL,
                     PRIMARY KEY (`id`),
