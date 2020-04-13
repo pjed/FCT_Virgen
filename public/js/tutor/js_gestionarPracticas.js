@@ -60,6 +60,9 @@ $(document).ready(function () {
 //                alert(res);
                 if (res !== null) {
                     listarResponsable = JSON.parse(res);
+                    if (dniResponsable === 0) {
+                        document.getElementById("idResponsableMod").innerHTML += ' <option value="0" selected>Ninguno</option>';
+                    }
                     for (var i = 0; i < listarResponsable.length; i++) {
                         if (dniResponsable === listarResponsable[i].id) {
                             document.getElementById("idResponsableMod").innerHTML += ' <option value="' + listarResponsable[i].id + '" selected>' + listarResponsable[i].nombre + ', ' + listarResponsable[i].apellidos + '</option>';
@@ -93,6 +96,9 @@ $(document).ready(function () {
 //                alert(res);
                 if (res !== null) {
                     listaEmpresa = JSON.parse(res);
+                    if (idEmpresa === 0) {
+                        document.getElementById("idEmpresaMod").innerHTML += ' <option value="0" selected>Ninguno</option>';
+                    }
                     for (var i = 0; i < listaEmpresa.length; i++) {
                         if (idEmpresa === listaEmpresa[i].id) {
                             document.getElementById("idEmpresaMod").innerHTML += '<option value="' + listaEmpresa[i].id + '" selected>' + listaEmpresa[i].nombre + '</option>';

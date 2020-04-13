@@ -353,6 +353,8 @@ class controladorTutor extends Controller {
             Conexion::ModificarEmpresa($id, $CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario, $nueva);
         }
         if (isset($_REQUEST['eliminar'])) {
+            Conexion::ModificarPracticaEmpresa($id);
+            Conexion::ModificarResponsableEmpresa($CIF);
             Conexion::borrarEmpresa($id);
         }
         if (isset($_REQUEST['aniadir'])) {
@@ -404,7 +406,7 @@ class controladorTutor extends Controller {
             Conexion::ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel, $CIF);
         }
         if (isset($_REQUEST['eliminar'])) {
-            Conexion::ModificarPracticaResponsable($dni);
+            Conexion::ModificarPracticaResponsable($id);
             Conexion::borrarResponsable($id);
         }
         if (isset($_REQUEST['aniadir'])) {
@@ -577,4 +579,5 @@ class controladorTutor extends Controller {
         $res = json_encode($v, true);
         echo $res;
     }
+
 }

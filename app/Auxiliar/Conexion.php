@@ -930,14 +930,59 @@ class Conexion {
     }
 
     /**
-     * Metodo para poder borrar el responsable
+     * Metodo para poder borrar el empresa
      * @param type $dni
      */
-    static function ModificarPracticaResponsable($dni) {
+    static function ModificarPracticaEmpresa($id) {
         $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
-            $p = practica::where('responsables_id', $dni)
+            $p = practica::where('id', $id)
+                    ->update([
+                'empresas_id' => 0,
+                'updated_at' => $updated_at
+            ]);
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+    /**
+     * Metodo para poder borrar el empresa
+     * @param type $id
+     */
+    static function ModificarResponsableEmpresa($id) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
+        try {
+            $p = responsable::where('empresas_id', $id)
+                    ->update([
+                'empresas_id' => 0,
+                'updated_at' => $updated_at
+            ]);
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
+     * Metodo para poder borrar el responsable
+     * @param type $dni
+     */
+    static function ModificarPracticaResponsable($id) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
+        try {
+            $p = practica::where('id', $id)
                     ->update([
                 'responsables_id' => 0,
                 'updated_at' => $updated_at
@@ -990,8 +1035,8 @@ class Conexion {
                     . 'empresas_id = ?, '
                     . 'responsables_id = ?, '
                     . 'updated_at = ?  where id = ?', [$codProyecto, $fechaInicio, $fechaFin, $gasto, $apto, $dniAlumno, $CIF, $dniResponsable, $updated_at, $ID]);
-            
-            
+
+
 //            $p = practica::where('id', $ID)
 //                    ->update([
 //                'cod_proyecto' => $codProyecto,

@@ -148,6 +148,11 @@ Gestionar  Practicas
                             <td>                                
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="idEmpresa" value="<?php echo $key->idEmpresa; ?>"/>
                                 <?php
+                                if ($key->idEmpresa == 0) {
+                                    ?>
+                                    <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="Ninguno" readonly/>
+                                    <?php
+                                }
                                 foreach ($l1 as $k1) {
                                     if ($key->idEmpresa == $k1->id) {
                                         ?>
@@ -155,12 +160,7 @@ Gestionar  Practicas
                                         <?php
                                     }
                                 }
-                                if ($key->idEmpresa == 0) {
-                                    ?>
-                                    <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value=" " readonly/>
-                                    <?php
-                                }
-                                ?>
+                                ?>                               
                             </td>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="dniAlumno" value="<?php echo $key->dniAlumno; ?>"/>                                  
@@ -178,17 +178,17 @@ Gestionar  Practicas
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="idResponsable" value="<?php echo $key->idResponsable; ?>"/>
                                 <?php
+                                if ($key->idResponsable == 0) {
+                                    ?>
+                                    <input type="text" class="form-control form-control-sm form-control-md" name="nombreResponsable" value="Ninguno" readonly/>
+                                    <?php
+                                }
                                 foreach ($l3 as $k3) {
                                     if ($key->idResponsable == $k3->id) {
                                         ?>
                                         <input type="text" class="form-control form-control-sm form-control-md" name="nombreResponsable" value="<?php echo $k3->nombre . ', ' . $k3->apellidos; ?>" readonly/>
                                         <?php
                                     }
-                                }
-                                if ($key->idResponsable == 0) {
-                                    ?>
-                                    <input type="text" class="form-control form-control-sm form-control-md" name="nombreResponsable" value=" " readonly/>
-                                    <?php
                                 }
                                 ?>
                             </td>
