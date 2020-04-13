@@ -2047,8 +2047,6 @@ class Conexion {
      * @param type $id
      */
     static function borrarCurso($id) {
-        Conexion::ModificarCursoMatricula($id);
-        Conexion::ModificarCursoTutor($id);
         try {
             //poner a null el curso en la tabla tutor
             tutor::where('cursos_id_curso', $id)->delete();
