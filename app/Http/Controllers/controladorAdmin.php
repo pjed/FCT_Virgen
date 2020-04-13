@@ -266,15 +266,15 @@ class controladorAdmin extends Controller {
 
 
         $sql = "/*Sentencia para llenar los cursos*/
-                insert into cursos(id_curso, descripcion, ano_academico, familia, horas, created_at, updated_at, centros_cod)
+                insert into cursos(id_curso, descripcion, ano_academico, familia, horas, centros_cod, created_at, updated_at)
                 select 	datunidades.GRUPO as id_curso, 
                                 datunidades.CURSO as descripcion, 
                                 datunidades.ANNO as ano_academico,
                         datunidades.ESTUDIO as familia,  
-                        null as horas,
+                        null as horas, 
+                                13002691 as centro_cod, 
                         CURRENT_TIMESTAMP as created_at, 
-                        CURRENT_TIMESTAMP as updated_at, 
-                                13002691 as centro_cod
+                        CURRENT_TIMESTAMP as updated_at 
                         from datunidades;";
         try {
             \DB::connection()->getPdo()->exec($sql);
@@ -390,8 +390,8 @@ class controladorAdmin extends Controller {
         }
 
         $sql = "/* Sentencia para insertar los roles de los tutores*/
-                insert into usuarios_roles(created_at, updated_at, usuarios_dni, roles_id)
-                select CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, datprofesores.DNI as usuarios_dni, 2 as roles_id
+                insert into usuarios_roles(id, rol_id, usuario_dni, created_at, updated_at)
+                select null, 2 as rol_id, datprofesores.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
                 from datprofesores, datunidades
                 where datunidades.TUTOR = concat(datprofesores.APELLIDOS, ', ',datprofesores.NOMBRE);";
         try {
@@ -413,20 +413,20 @@ class controladorAdmin extends Controller {
 
         $sql = "/* Sentencia para dar de alta con permiso de Administrador y Director*/
                 /* Ana Belen Directora*/
-                insert into usuarios_roles(id, created_at, updated_at, usuarios_dni, roles_id)
-                select null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, datprofesores.DNI, 0 as rol_id
+                insert into usuarios_roles(id, rol_id, usuario_dni, created_at, updated_at)
+                select null, 0 as rol_id, datprofesores.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
                 from datprofesores
                 where DNI='05664525Q';
 
                 /* Ana Belen Administrador*/
-                insert into usuarios_roles(id, created_at, updated_at, usuarios_dni, roles_id)
-                select null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, datprofesores.DNI, 1 as rol_id
+                insert into usuarios_roles(id, rol_id, usuario_dni, created_at, updated_at)
+                select null, 1 as rol_id, datprofesores.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
                 from datprofesores
                 where DNI='05664525Q';
 
                 /* Jose Alberto como administrador */
-                insert into usuarios_roles(id, created_at, updated_at, usuarios_dni, roles_id)
-                select null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, datprofesores.DNI, 1 as rol_id
+                insert into usuarios_roles(id, rol_id, usuario_dni, created_at, updated_at)
+                select null, 1 as rol_id, datprofesores.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
                 from datprofesores
                 where DNI='05679252T';";
         try {
@@ -447,8 +447,8 @@ class controladorAdmin extends Controller {
         }
 
         $sql = "/* Sentencia para insertar los roles de los alumnos*/
-                insert into usuarios_roles(id, created_at, updated_at, usuarios_dni, roles_id)
-                select null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, datAlumnos.DNI as usuarios_dni, 3 as roles_id
+                insert into usuarios_roles(id, rol_id, usuario_dni, created_at, updated_at)
+                select null, 3 as rol_id, datAlumnos.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
                 from datmatriculas, datAlumnos
                 where datmatriculas.ALUMNO = datAlumnos.ALUMNO
                 and datAlumnos.ALUMNO = datmatriculas.ALUMNO and datmatriculas.ESTADOMATRICULA <> 'Anulada'
@@ -471,8 +471,8 @@ class controladorAdmin extends Controller {
         }
 
         $sql = "/* Sentencia para dar de alta los profesores que son tutores de cada curso*/
-                insert into tutores(idtutores, created_at, updated_at, cursos_id_curso1, usuarios_dni)
-                select null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, datunidades.GRUPO, datprofesores.DNI
+                insert into tutores(idtutores, cursos_id_curso, usuarios_dni, created_at, updated_at)
+                select null, datunidades.GRUPO, datprofesores.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP 
                 from datunidades, datprofesores
                 where datunidades.TUTOR = concat(datprofesores.APELLIDOS, ', ',datprofesores.NOMBRE);";
         try {
@@ -493,8 +493,8 @@ class controladorAdmin extends Controller {
         }
 
         $sql = "/* Sentencia para dar de alta los alumnos en los cursos que estan matriculados */
-                insert into matriculados(idmatriculados, created_at, updated_at, cursos_id_curso1, usuarios_dni1)
-                select null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, datmatriculas.GRUPO, datAlumnos.DNI
+                insert into matriculados(idmatriculados, usuarios_dni, cursos_id_curso, created_at, updated_at)
+                select null, datAlumnos.DNI, datmatriculas.GRUPO, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
                 from datAlumnos, datmatriculas
                 where datAlumnos.ALUMNO = datmatriculas.ALUMNO
                 and datmatriculas.ESTADOMATRICULA <> 'Anulada'
@@ -628,346 +628,292 @@ class controladorAdmin extends Controller {
                     -- Base de datos: `gestionfct`
                     --
 
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`centros`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`centros` (
-                      `cod` VARCHAR(10) NOT NULL,
-                      `nombre` VARCHAR(100) NOT NULL,
-                      `localidad` VARCHAR(50) NOT NULL,
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      PRIMARY KEY (`cod`))
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
+                    -- --------------------------------------------------------
 
+                    --
+                    -- Estructura de tabla para la tabla `centros`
+                    --
 
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`transportes`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`transportes` (
-                      `id` INT(11) NOT NULL,
-                      `tipo` INT(1) NOT NULL,
-                      `donde` VARCHAR(50) NOT NULL,
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      PRIMARY KEY (`id`))
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
+                    CREATE TABLE `centros` (
+                      `cod` varchar(10) NOT NULL,
+                      `nombre` varchar(100) NOT NULL,
+                      `localidad` varchar(50) NOT NULL,
+                      `created_at` timestamp NULL DEFAULT NULL,
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`cod`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                    -- --------------------------------------------------------
 
+                    --
+                    -- Estructura de tabla para la tabla `colectivos`
+                    --
 
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`colectivos`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`colectivos` (
-                      `id` INT(11) NOT NULL,
-                      `importe` FLOAT(8,2) NOT NULL,
-                      `foto` VARCHAR(45) NOT NULL DEFAULT 'images/ticket.png',
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      `transportes_id1` INT(11) NOT NULL,
-                      PRIMARY KEY (`id`),
-                      INDEX `fk_colectivos_transportes1_idx` (`transportes_id1` ASC)  ,
-                      CONSTRAINT `fk_colectivos_transportes1`
-                        FOREIGN KEY (`transportes_id1`)
-                        REFERENCES `gestionfct`.`transportes` (`id`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION)
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
+                    CREATE TABLE `colectivos` (
+                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                      `importe` float(8,2) NOT NULL,
+                      `transportes_id` int(11) DEFAULT NULL,
+                      `foto` varchar(45) NOT NULL DEFAULT 'images/ticket.png',
+                      `created_at` timestamp NULL DEFAULT NULL,
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`id`),
+                    KEY `fk_colectivos_transportes1_idx` (`transportes_id`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+                    -- --------------------------------------------------------
 
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`comidas`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`comidas` (
-                      `id` INT(11) NOT NULL AUTO_INCREMENT,
-                      `importe` VARCHAR(8) NOT NULL,
-                      `fecha` DATE NOT NULL,
-                      `foto` VARCHAR(45) NOT NULL DEFAULT 'images/ticket.png',
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      PRIMARY KEY (`id`))
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
+                    --
+                    -- Estructura de tabla para la tabla `comidas`
+                    --
 
+                    CREATE TABLE `comidas` (
+                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                      `importe` varchar(8) NOT NULL,
+                      `fecha` date NOT NULL,
+                      `foto` varchar(45) NOT NULL DEFAULT 'images/ticket.png',
+                      `created_at` timestamp NULL DEFAULT NULL,
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`id`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`cursos`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`cursos` (
-                      `id_curso` VARCHAR(50) NOT NULL,
-                      `descripcion` VARCHAR(191) NOT NULL,
-                      `ano_academico` VARCHAR(9) NOT NULL,
-                      `familia` VARCHAR(100) NOT NULL,
-                      `horas` INT(11) NULL DEFAULT 400,
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      `centros_cod` VARCHAR(10) NOT NULL,
-                      PRIMARY KEY (`id_curso`),
-                      INDEX `fk_cursos_centros1_idx` (`centros_cod` ASC)  ,
-                      CONSTRAINT `fk_cursos_centros1`
-                        FOREIGN KEY (`centros_cod`)
-                        REFERENCES `gestionfct`.`centros` (`cod`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION)
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
+                    -- --------------------------------------------------------
 
+                    --
+                    -- Estructura de tabla para la tabla `cursos`
+                    --
 
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`empresas`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`empresas` (
-                      `id` INT(11) NOT NULL AUTO_INCREMENT,
-                      `cif` VARCHAR(9) NOT NULL,
-                      `nombre` VARCHAR(100) NOT NULL,
-                      `dni_representante` VARCHAR(9) NULL DEFAULT NULL,
-                      `nombre_representante` VARCHAR(100) NULL DEFAULT NULL,
-                      `direccion` VARCHAR(100) NOT NULL,
-                      `localidad` VARCHAR(100) NOT NULL,
-                      `horario` VARCHAR(100) NULL DEFAULT NULL,
-                      `nueva` INT(11) NULL DEFAULT NULL,
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      PRIMARY KEY (`id`))
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
+                    CREATE TABLE `cursos` (
+                      `id_curso` varchar(50) NOT NULL,
+                      `descripcion` varchar(191) NOT NULL,
+                      `ano_academico` varchar(9) NOT NULL,
+                      `familia` varchar(100) NOT NULL,
+                      `horas` int(11) DEFAULT '400',
+                      `centros_cod` varchar(10) DEFAULT NULL,
+                      `created_at` timestamp NULL DEFAULT NULL,
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`id_curso`),
+                    KEY `fk_cursos_centros1_idx` (`centros_cod`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+                    -- --------------------------------------------------------
 
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`usuarios`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`usuarios` (
-                      `dni` VARCHAR(9) NOT NULL,
-                      `nombre` VARCHAR(100) NOT NULL,
-                      `apellidos` VARCHAR(100) NOT NULL,
-                      `domicilio` VARCHAR(100) NULL DEFAULT NULL,
-                      `email` VARCHAR(100) NULL DEFAULT NULL,
-                      `pass` VARCHAR(65) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NOT NULL DEFAULT '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',
-                      `telefono` VARCHAR(9) NULL DEFAULT NULL,
-                      `movil` VARCHAR(9) NULL DEFAULT NULL,
-                      `iban` VARCHAR(24) NULL DEFAULT NULL,
-                      `foto` VARCHAR(45) NOT NULL DEFAULT 'images/defecto.jpeg',
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      PRIMARY KEY (`dni`))
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
-                    
+                    --
+                    -- Estructura de tabla para la tabla `empresas`
+                    --
+
+                    CREATE TABLE `empresas` (
+                        `id` int(11) NOT NULL AUTO_INCREMENT,
+                        `cif` varchar(9) NOT NULL,
+                        `nombre` varchar(100) NOT NULL,
+                        `dni_representante` varchar(9) DEFAULT NULL,
+                        `nombre_representante` varchar(100) DEFAULT NULL,
+                        `direccion` varchar(100) NOT NULL,
+                        `localidad` varchar(100) NOT NULL,
+                        `horario` varchar(100) DEFAULT NULL,
+                        `nueva` int(11) DEFAULT NULL,
+                        `created_at` timestamp NULL DEFAULT NULL,
+                        `updated_at` timestamp NULL DEFAULT NULL,
+                        PRIMARY KEY (`id`)
+                      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+                    -- --------------------------------------------------------
+
+                    --
+                    -- Estructura de tabla para la tabla `gastos`
+                    --
+
+                    CREATE TABLE `gastos` (
+                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                      `desplazamiento` int(1) NOT NULL,
+                      `tipo` int(1) NOT NULL,
+                      `created_at` timestamp NULL DEFAULT NULL,
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                      `usuarios_dni` varchar(9) NOT NULL,
+                      `comidas_id` int(11) NOT NULL,
+                      `transportes_id` int(11) NOT NULL,
+                        PRIMARY KEY (`id`),
+                        KEY `fk_gastos_usuarios1_idx` (`usuarios_dni`),
+                        KEY `fk_gastos_comidas1_idx` (`comidas_id`),
+                        KEY `fk_gastos_transportes1_idx` (`transportes_id`)
+                        
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+                    -- --------------------------------------------------------
+
+                    --
+                    -- Estructura de tabla para la tabla `matriculados`
+                    --
+
+                    CREATE TABLE `matriculados` (
+                    `idmatriculados` int(11) NOT NULL AUTO_INCREMENT,
+                    `usuarios_dni` varchar(9) NOT NULL,
+                    `cursos_id_curso` varchar(50) NOT NULL,
+                    `created_at` timestamp NULL DEFAULT NULL,
+                    `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`idmatriculados`),
+                    KEY `fk_matriculados_usuarios1_idx` (`usuarios_dni`),
+                    KEY `fk_matriculados_cursos1_idx` (`cursos_id_curso`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+                    -- --------------------------------------------------------
+
+                    --
+                    -- Estructura de tabla para la tabla `practicas`
+                    --
+
+                    CREATE TABLE `practicas` (
+                      `id` int(10) NOT NULL AUTO_INCREMENT,
+                      `cod_proyecto` varchar(6) DEFAULT NULL,
+                      `fecha_inicio` date DEFAULT NULL,
+                      `fecha_fin` date DEFAULT NULL,
+                      `gastos` int(11) DEFAULT NULL,
+                      `apto` int(11) DEFAULT NULL,
+                      `usuarios_dni` varchar(9) NOT NULL,
+                      `empresas_id` int(11) NOT NULL,
+                      `responsables_id` int(11) DEFAULT NULL,
+                      `created_at` timestamp NULL DEFAULT NULL,
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`id`),
+                    KEY `fk_practicas_usuarios1_idx` (`usuarios_dni`),
+                    KEY `fk_practicas_empresas1_idx` (`empresas_id`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+                    -- --------------------------------------------------------
+
+                    --
+                    -- Estructura de tabla para la tabla `propios`
+                    --
+
+                    CREATE TABLE `propios` (
+                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                      `kms` int(11) NOT NULL,
+                      `precio` double(8,2) NOT NULL,
+                      `created_at` timestamp NULL DEFAULT NULL,
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                      `transportes_id` int(11) NOT NULL,
+                    PRIMARY KEY (`id`),
+                    KEY `fk_propios_transportes1_idx` (`transportes_id`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+                    -- --------------------------------------------------------
+
+                    --
+                    -- Estructura de tabla para la tabla `responsables`
+                    --
+
+                    CREATE TABLE `responsables` (
+                        `id` int(11) NOT NULL AUTO_INCREMENT,
+                        `dni` varchar(9) NOT NULL,
+                        `nombre` varchar(100) NOT NULL,
+                        `apellidos` varchar(100) NOT NULL,
+                        `email` varchar(100) DEFAULT NULL,
+                        `telefono` varchar(9) DEFAULT NULL,
+                        `empresa_id` int(10) NOT NULL,
+                        `created_at` timestamp NULL DEFAULT NULL,
+                        `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`id`)
+                      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                    -- --------------------------------------------------------
+
+                    --
+                    -- Estructura de tabla para la tabla `roles`
+                    --
+
+                    CREATE TABLE `roles` (
+                      `id` int(11) NOT NULL,
+                      `nombre` varchar(50) NOT NULL,
+                      `created_at` timestamp NULL DEFAULT NULL,
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`id`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+                    -- --------------------------------------------------------
+
+                    --
+                    -- Estructura de tabla para la tabla `transportes`
+                    --
+
+                    CREATE TABLE `transportes` (
+                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                      `tipo` int(1) NOT NULL,
+                      `donde` varchar(50) NOT NULL,
+                      `created_at` timestamp NULL DEFAULT NULL,
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`id`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+                    -- --------------------------------------------------------
+
+                    --
+                    -- Estructura de tabla para la tabla `tutores`
+                    --
+
+                    CREATE TABLE `tutores` (
+                        `idtutores` int(11) NOT NULL AUTO_INCREMENT,
+                        `cursos_id_curso` varchar(50) NOT NULL,
+                        `usuarios_dni` varchar(9) NOT NULL,
+                        `created_at` timestamp NULL DEFAULT NULL,
+                        `updated_at` timestamp NULL DEFAULT NULL,
+                        PRIMARY KEY (`idtutores`),
+                        KEY `fk_tutores_cursos1_idx` (`cursos_id_curso`),
+                        KEY `fk_tutores_usuarios1_idx` (`usuarios_dni`)
+                      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+                    -- --------------------------------------------------------
+
+                    --
+                    -- Estructura de tabla para la tabla `usuarios`
+                    --
+
+                    CREATE TABLE `usuarios` (
+                      `dni` varchar(9) NOT NULL,
+                      `nombre` varchar(100) NOT NULL,
+                      `apellidos` varchar(100) NOT NULL,
+                      `domicilio` varchar(100) DEFAULT NULL,
+                      `email` varchar(100) DEFAULT NULL,
+                      `pass` varchar(65) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',
+                      `telefono` varchar(9) DEFAULT NULL,
+                      `movil` varchar(9) DEFAULT NULL,
+                      `iban` varchar(24) DEFAULT NULL,
+                      `foto` varchar(45) NOT NULL DEFAULT 'images/defecto.jpeg',
+                      `created_at` timestamp NULL DEFAULT NULL,
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                        PRIMARY KEY (`dni`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+                    --
+                    -- Volcado de datos para la tabla `usuarios`
+                    --
+
                     INSERT INTO `usuarios` (`dni`, `nombre`, `apellidos`, `domicilio`, `email`, `pass`, `telefono`, `movil`, `iban`, `foto`, `created_at`, `updated_at`) VALUES
                     ('0', 'Usuario', 'Borrado', '', 'auxiliardaw2@gmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', '', '', '', 'images/defecto.jpeg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+                    -- --------------------------------------------------------
 
+                    --
+                    -- Estructura de tabla para la tabla `usuarios_roles`
+                    --
 
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`gastos`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`gastos` (
-                      `id` INT(11) NOT NULL AUTO_INCREMENT,
-                      `desplazamiento` INT(1) NOT NULL,
-                      `tipo` INT(1) NOT NULL,
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      `usuarios_dni` VARCHAR(9) NOT NULL,
-                      `transportes_id` INT(11) NOT NULL,
-                      `comidas_id` INT(11) NOT NULL,
-                      PRIMARY KEY (`id`),
-                      INDEX `fk_gastos_usuarios1_idx` (`usuarios_dni` ASC)  ,
-                      INDEX `fk_gastos_transportes1_idx` (`transportes_id` ASC)  ,
-                      INDEX `fk_gastos_comidas1_idx` (`comidas_id` ASC)  ,
-                      CONSTRAINT `fk_gastos_comidas1`
-                        FOREIGN KEY (`comidas_id`)
-                        REFERENCES `gestionfct`.`comidas` (`id`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION,
-                      CONSTRAINT `fk_gastos_transportes1`
-                        FOREIGN KEY (`transportes_id`)
-                        REFERENCES `gestionfct`.`transportes` (`id`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION,
-                      CONSTRAINT `fk_gastos_usuarios1`
-                        FOREIGN KEY (`usuarios_dni`)
-                        REFERENCES `gestionfct`.`usuarios` (`dni`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION)
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
+                    CREATE TABLE `usuarios_roles` (
+                        `id` int(11) NOT NULL AUTO_INCREMENT,
+                        `rol_id` int(11) NOT NULL,
+                        `usuario_dni` varchar(9) NOT NULL,
+                        `created_at` timestamp NULL DEFAULT NULL,
+                        `updated_at` timestamp NULL DEFAULT NULL,
+                        PRIMARY KEY (`id`),
+                        KEY `fk_usuarios_roles_roles` (`rol_id`),
+                        KEY `fk_usuarios_roles_usuarios_idx` (`usuario_dni`)
+                      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+                    --
+                    -- Volcado de datos para la tabla `usuarios_roles`
+                    --
 
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`matriculados`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`matriculados` (
-                      `idmatriculados` INT(11) NOT NULL AUTO_INCREMENT,
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      `cursos_id_curso1` VARCHAR(50) NOT NULL,
-                      `usuarios_dni1` VARCHAR(9) NOT NULL,
-                      PRIMARY KEY (`idmatriculados`),
-                      INDEX `fk_matriculados_cursos1_idx` (`cursos_id_curso1` ASC)  ,
-                      INDEX `fk_matriculados_usuarios1_idx` (`usuarios_dni1` ASC)  ,
-                      CONSTRAINT `fk_matriculados_cursos1`
-                        FOREIGN KEY (`cursos_id_curso1`)
-                        REFERENCES `gestionfct`.`cursos` (`id_curso`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION,
-                      CONSTRAINT `fk_matriculados_usuarios1`
-                        FOREIGN KEY (`usuarios_dni1`)
-                        REFERENCES `gestionfct`.`usuarios` (`dni`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION)
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
+                    INSERT INTO `usuarios_roles` (`id`, `rol_id`, `usuario_dni`, `created_at`, `updated_at`) VALUES
+                    (1, 4, '0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`responsables`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`responsables` (
-                      `id` INT(11) NOT NULL AUTO_INCREMENT,
-                      `dni` VARCHAR(9) NOT NULL,
-                      `nombre` VARCHAR(100) NOT NULL,
-                      `apellidos` VARCHAR(100) NOT NULL,
-                      `email` VARCHAR(100) NULL DEFAULT NULL,
-                      `telefono` VARCHAR(9) NULL DEFAULT NULL,
-                      `empresa_id` INT(10) NOT NULL,
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      PRIMARY KEY (`id`))
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
-
-
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`practicas`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`practicas` (
-                      `id` INT(10) NOT NULL AUTO_INCREMENT,
-                      `cod_proyecto` VARCHAR(6) NULL DEFAULT NULL,
-                      `fecha_inicio` DATE NULL DEFAULT NULL,
-                      `fecha_fin` DATE NULL DEFAULT NULL,
-                      `gastos` INT(11) NULL DEFAULT NULL,
-                      `apto` INT(11) NULL DEFAULT NULL,
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      `usuarios_dni` VARCHAR(9) NOT NULL,
-                      `empresas_id` INT(11) NOT NULL,
-                      `responsables_id` INT(11) NOT NULL,
-                      PRIMARY KEY (`id`),
-                      INDEX `fk_practicas_usuarios1_idx` (`usuarios_dni` ASC)  ,
-                      INDEX `fk_practicas_empresas1_idx` (`empresas_id` ASC)  ,
-                      INDEX `fk_practicas_responsables1_idx` (`responsables_id` ASC)  ,
-                      CONSTRAINT `fk_practicas_empresas1`
-                        FOREIGN KEY (`empresas_id`)
-                        REFERENCES `gestionfct`.`empresas` (`id`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION,
-                      CONSTRAINT `fk_practicas_responsables1`
-                        FOREIGN KEY (`responsables_id`)
-                        REFERENCES `gestionfct`.`responsables` (`id`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION,
-                      CONSTRAINT `fk_practicas_usuarios1`
-                        FOREIGN KEY (`usuarios_dni`)
-                        REFERENCES `gestionfct`.`usuarios` (`dni`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION)
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
-
-
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`propios`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`propios` (
-                      `id` INT(11) NOT NULL,
-                      `kms` INT(11) NOT NULL,
-                      `precio` DOUBLE(8,2) NOT NULL,
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      `transportes_id1` INT(11) NOT NULL,
-                      PRIMARY KEY (`id`),
-                      INDEX `fk_propios_transportes1_idx` (`transportes_id1` ASC)  ,
-                      CONSTRAINT `fk_propios_transportes1`
-                        FOREIGN KEY (`transportes_id1`)
-                        REFERENCES `gestionfct`.`transportes` (`id`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION)
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
-
-
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`roles`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`roles` (
-                      `id` INT(11) NOT NULL,
-                      `nombre` VARCHAR(50) NOT NULL,
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      PRIMARY KEY (`id`))
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
-
-
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`tutores`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`tutores` (
-                      `idtutores` INT(11) NOT NULL AUTO_INCREMENT,
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      `cursos_id_curso1` VARCHAR(50) NOT NULL,
-                      `usuarios_dni` VARCHAR(9) NOT NULL,
-                      PRIMARY KEY (`idtutores`),
-                      INDEX `fk_tutores_cursos1_idx` (`cursos_id_curso1` ASC)  ,
-                      INDEX `fk_tutores_usuarios1_idx` (`usuarios_dni` ASC)  ,
-                      CONSTRAINT `fk_tutores_cursos1`
-                        FOREIGN KEY (`cursos_id_curso1`)
-                        REFERENCES `gestionfct`.`cursos` (`id_curso`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION,
-                      CONSTRAINT `fk_tutores_usuarios1`
-                        FOREIGN KEY (`usuarios_dni`)
-                        REFERENCES `gestionfct`.`usuarios` (`dni`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION)
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
-
-
-                    -- -----------------------------------------------------
-                    -- Table `gestionfct`.`usuarios_roles`
-                    -- -----------------------------------------------------
-                    CREATE TABLE IF NOT EXISTS `gestionfct`.`usuarios_roles` (
-                      `id` INT(11) NOT NULL AUTO_INCREMENT,
-                      `created_at` TIMESTAMP NULL DEFAULT NULL,
-                      `updated_at` TIMESTAMP NULL DEFAULT NULL,
-                      `usuarios_dni` VARCHAR(9) NOT NULL,
-                      `roles_id` INT(11) NOT NULL,
-                      PRIMARY KEY (`id`),
-                      INDEX `fk_usuarios_roles_usuarios1_idx` (`usuarios_dni` ASC)  ,
-                      INDEX `fk_usuarios_roles_roles1_idx` (`roles_id` ASC)  ,
-                      CONSTRAINT `fk_usuarios_roles_roles1`
-                        FOREIGN KEY (`roles_id`)
-                        REFERENCES `gestionfct`.`roles` (`id`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION,
-                      CONSTRAINT `fk_usuarios_roles_usuarios1`
-                        FOREIGN KEY (`usuarios_dni`)
-                        REFERENCES `gestionfct`.`usuarios` (`dni`)
-                        ON DELETE NO ACTION
-                        ON UPDATE NO ACTION)
-                    ENGINE = InnoDB
-                    DEFAULT CHARACTER SET = latin1;
-                    
-                    INSERT INTO `usuarios_roles` (`id`, `created_at`, `updated_at`, `usuarios_dni`, `roles_id`) VALUES
-                    (null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '0', 4);
-
-
-                    SET SQL_MODE=@OLD_SQL_MODE;
-                    SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-                    SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+                    /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+                    /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+                    /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+                    SET FOREIGN_KEY_CHECKS=0;
     
         ";
         \DB::connection()->getPdo()->exec($sqlDB);
