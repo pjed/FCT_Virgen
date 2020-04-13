@@ -447,7 +447,7 @@ class controladorTutor extends Controller {
      * @return type
      */
     public function gestionarPracticas(Request $req) {
-        $ID = $req->get('idPracticas');
+        $ID = $req->get('idPractica');
         $CIF = $req->get('idEmpresa');
         $dniAlumno = $req->get('dniAlumno');
         $codProyecto = $req->get('codProyecto');

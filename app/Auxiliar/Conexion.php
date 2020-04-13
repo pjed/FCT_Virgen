@@ -1013,42 +1013,18 @@ class Conexion {
         $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
-//            \DB::table('practicas')
-//                    ->where('id', $ID)
-//                    ->update(['cod_proyecto' => $codProyecto,
-//                        'fecha_inicio' => $fechaInicio,
-//                        'fecha_fin' => $fechaFin,
-//                        'gastos' => $gasto,
-//                        'apto' => $apto,
-//                        'usuarios_dni' => $dniAlumno,
-//                        'empresas_id' => $CIF,
-//                        'responsables_id' => $dniResponsable,
-//                        'updated_at' => $updated_at]);
-
-            \DB::update('update practicas set '
-                    . 'cod_proyecto = ?, '
-                    . 'fecha_inicio = ?, '
-                    . 'fecha_fin = ?, '
-                    . 'gastos = ?, '
-                    . 'apto = ?, '
-                    . 'usuarios_dni = ?, '
-                    . 'empresas_id = ?, '
-                    . 'responsables_id = ?, '
-                    . 'updated_at = ?  where id = ?', [$codProyecto, $fechaInicio, $fechaFin, $gasto, $apto, $dniAlumno, $CIF, $dniResponsable, $updated_at, $ID]);
-
-
-//            $p = practica::where('id', $ID)
-//                    ->update([
-//                'cod_proyecto' => $codProyecto,
-//                'fecha_inicio' => $fechaInicio,
-//                'fecha_fin' => $fechaFin,
-//                'gastos' => $gasto,
-//                'apto' => $apto,
-//                'usuarios_dni' => $dniAlumno,
-//                'empresas_id' => $CIF,
-//                'responsables_id' => $dniResponsable,
-//                'updated_at' => $updated_at
-//            ]);
+            \DB::table('practicas')
+                    ->where('id', $ID)
+                    ->update(['cod_proyecto' => $codProyecto,
+                        'fecha_inicio' => $fechaInicio,
+                        'fecha_fin' => $fechaFin,
+                        'gastos' => $gasto,
+                        'apto' => $apto,
+                        'usuarios_dni' => $dniAlumno,
+                        'empresas_id' => $CIF,
+                        'responsables_id' => $dniResponsable,
+                        'updated_at' => $updated_at]);
+            
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
