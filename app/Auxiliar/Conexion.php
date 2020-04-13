@@ -959,9 +959,9 @@ class Conexion {
         $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
-            $p = responsable::where('empresas_id', $id)
+            $p = responsable::where('empresa_id', $id)
                     ->update([
-                'empresas_id' => 0,
+                'empresa_id' => 0,
                 'updated_at' => $updated_at
             ]);
         } catch (\Exception $e) {
