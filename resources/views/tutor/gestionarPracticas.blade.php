@@ -145,8 +145,9 @@ Gestionar  Practicas
                     <form action="gestionarPracticas" method="POST">
                         {{ csrf_field() }}
                         <tr>
-                            <td>                                
-                                <input type="hidden" class="form-control form-control-sm form-control-md" name="idEmpresa" value="<?php echo $key->idEmpresa; ?>"/>
+                            <td>  
+                                <input type="hidden" name="idPractica" value="<?php echo $key->idPractica; ?>"/>                              
+                                <input type="hidden" name="idEmpresa" value="<?php echo $key->idEmpresa; ?>"/>
                                 <?php
                                 if ($key->idEmpresa == 0) {
                                     ?>
