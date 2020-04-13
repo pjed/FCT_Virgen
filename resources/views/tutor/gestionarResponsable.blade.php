@@ -126,9 +126,14 @@ Gestionar Responsable
                             <td>
                                 <select class="sel" name="idEmpresa" required>
                                     <?php
+                                    if ($key->empresa_id == 0) {
+                                        ?>
+                                        <option value="0" selected >Ninguno</option>
+                                        <?php
+                                    }
                                     foreach ($l1 as $k1) {
                                         ?>
-                                        <option value="<?php echo $key->empresa_id; ?>" <?php if ($key->empresa_id == $k1->id) { ?> selected<?php } ?>><?php echo $k1->nombre; ?></option>
+                                        <option value="<?php echo $k1->id; ?>" <?php if ($key->empresa_id == $k1->id) { ?> selected<?php } ?>><?php echo $k1->nombre; ?></option>
                                         <?php
                                     }
                                     ?>

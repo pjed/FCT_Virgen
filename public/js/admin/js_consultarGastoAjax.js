@@ -5,7 +5,6 @@
 $(document).ready(function () {
     var ciclo = null;
     var dniAlumno = null;
-    var parametros = {'parametros': null};
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
     });
@@ -13,6 +12,7 @@ $(document).ready(function () {
      * se carga nada mas iniciar la pagina
      */
     $("#ciclo").ready(function () {
+    var parametros = {'parametros': null};
         $.ajax({
             url: 'consultarGastosAjaxCiclo',
             type: 'POST',
@@ -38,7 +38,7 @@ $(document).ready(function () {
     $("#ciclo").click(function () {
         ciclo = $("select#ciclo option:checked").val();
         jQuery(ciclo).load('session_write.php?ciclo=' + ciclo);
-        parametros = {"ciclo": ciclo};
+        var parametros = {"ciclo": ciclo};
         $.ajax({
             url: 'consultarGastosAjaxDniAlumno',
             type: 'POST',
@@ -58,7 +58,7 @@ $(document).ready(function () {
     //mostrar los gastos del alumno
     $("#dniAlumno").click(function () {
         dniAlumno = $("select#dniAlumno option:checked").val();
-        parametros = {"dniAlumno": dniAlumno};
+        var parametros = {"dniAlumno": dniAlumno};
         $.ajax({
             url: 'muestraConsultarGastosAjax',
             type: 'POST',
@@ -78,7 +78,7 @@ $(document).ready(function () {
     //gastos de transtporte colectivo
     $(".editarCol").click(function () {
         var id = $(this).attr('data-id');
-        parametros = {
+        var parametros = {
             "idTransporte": id,
             "tipo": 'colectivo'
         };
@@ -108,7 +108,7 @@ $(document).ready(function () {
     });
     /* $(".eliminarCol").click(function () {
      var id = $(this).attr('data-id');
-     parametros = {
+     var parametros = {
      "id": id,
      "idTransporte": idTransporte,
      };
@@ -134,7 +134,7 @@ $(document).ready(function () {
     //gastos de transtporte propio
     $(".editarP").click(function () {
         var id = $(this).attr('data-id');
-        parametros = {
+        var parametros = {
             "idTransporte": id,
             "tipo": 'propio'
         };
@@ -164,7 +164,7 @@ $(document).ready(function () {
     });
     /*  $(".eliminarP").click(function () {
      var id = $(this).attr('data-id');
-     parametros = {
+     var parametros = {
      "id": id,
      "idTransporte": idTransporte
      };
@@ -224,7 +224,7 @@ $(document).ready(function () {
      //        2º eliminamos el idComida
      //        3º eliminamos el IdGatos
      //        4º enviamos el html para mostrar la tabla cargada con los nuevos datos
-     parametros = {
+     var parametros = {
      "idGasto": idGasto
      };
      $.ajax({

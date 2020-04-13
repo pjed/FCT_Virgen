@@ -83,17 +83,17 @@ Gestionar Empresa
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Horario:
-                                                        <input type="text" class="form-control form-control-sm horario" name="horario" required/>
+                                                        <input type="text" class="form-control form-control-sm horario" name="horario"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
                                                         Dni del representante:
-                                                        <input type="text" class="form-control form-control-sm dniRepresentante" name="dniRepresentante" required  pattern="{9}"/>
+                                                        <input type="text" class="form-control form-control-sm dniRepresentante" name="dniRepresentante"  pattern="{9}"/>
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Nombre del representante:
-                                                        <input type="text" class="form-control form-control-sm nombreRepresentante" name="nombreRepresentante" required/>
+                                                        <input type="text" class="form-control form-control-sm nombreRepresentante" name="nombreRepresentante"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
@@ -119,11 +119,11 @@ Gestionar Empresa
                                 <input type="text" class="form-control form-control-sm form-control-md" name="CIF" value="<?php echo $key->cif; ?>" required/>
                             </td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $key->nombre; ?>" required/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="dniRepresentante" value="<?php echo $key->dni_representante; ?>" pattern="{9}" required/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreRepresentante" value="<?php echo $key->nombre_representante; ?>" required/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="dniRepresentante" value="<?php echo $key->dni_representante; ?>" pattern="{9}"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreRepresentante" value="<?php echo $key->nombre_representante; ?>"/></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="direccion" value="<?php echo $key->direccion; ?>" required/></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="localidad" value="<?php echo $key->localidad; ?>" required/></td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="horario" value="<?php echo $key->horario; ?>" required/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="horario" value="<?php echo $key->horario; ?>"/></td>
                             <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="nueva" <?php if ($key->nueva == 1) { ?>checked<?php } ?>/></td>
                             <td>
                                 <button type="submit" class="btn editar" name="editar"></button>
