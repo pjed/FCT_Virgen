@@ -18,7 +18,7 @@ class admin {
         $rol1 = session()->get('rol1');
         //comprobar si eres admin
         foreach ($n as $u) {
-            if ($u['rol'] == 1 || $rol1 == 1) {
+            if ($u['rol'] == 1 || $u['rol'] == 0 || $rol1 == 1) {
                 return $next($request);
             } else {
                 abort(404);
