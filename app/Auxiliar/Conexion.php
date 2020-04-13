@@ -675,12 +675,16 @@ class Conexion {
      * @param type $ciclo ciclo del que es tutor
      */
     static function actualizarDatosTutor($dni, $nombre, $apellidos, $email, $telefono, $ciclo) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             usuario::where('dni', $dni)
-                    ->update(['nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 'telefono' => $telefono]);
+                    ->update(['nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 'telefono' => $telefono,
+                        'updated_at' => $updated_at]);
 
             tutor::where('usuarios_dni', $dni)
-                    ->update(['cursos_id_curso' => $ciclo]);
+                    ->update(['cursos_id_curso' => $ciclo,
+                        'updated_at' => $updated_at]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Datos del usuario modificados con éxito.
@@ -868,6 +872,9 @@ class Conexion {
      * @param type $fechaFin
      */
     static function insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $fechaInicio, $fechaFin) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
+
         $p = new practica;
         $p->cod_proyecto = $codProyecto;
         $p->fecha_inicio = $fechaInicio;
@@ -877,6 +884,9 @@ class Conexion {
         $p->usuarios_dni = $dniAlumno;
         $p->empresas_id = $CIF;
         $p->responsables_id = $dniResponsable;
+        $p->created_at = $updated_at;
+        $p->updated_at = $updated_at;
+
         try {
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -923,10 +933,13 @@ class Conexion {
      * @param type $dni
      */
     static function ModificarPracticaResponsable($dni) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = practica::where('responsables_id', $dni)
                     ->update([
-                'responsables_id' => null
+                'responsables_id' => 0,
+                'updated_at' => $updated_at
             ]);
         } catch (\Exception $e) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -951,6 +964,8 @@ class Conexion {
      * @param type $fechaFin
      */
     static function ModificarPractica($ID, $CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $apto, $fechaInicio, $fechaFin) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = practica::where('id', $ID)
                     ->update([
@@ -961,7 +976,8 @@ class Conexion {
                 'apto' => $apto,
                 'usuarios_dni' => $dniAlumno,
                 'empresas_id' => $CIF,
-                'responsables_id' => $dniResponsable
+                'responsables_id' => $dniResponsable,
+                'updated_at' => $updated_at
             ]);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
@@ -1060,6 +1076,8 @@ class Conexion {
      * @param type $CIF
      */
     static function insertarResponsable($dni, $nombre, $apellidos, $email, $tel, $CIF) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = new responsable;
             $p->id = null;
@@ -1069,7 +1087,8 @@ class Conexion {
             $p->email = $email;
             $p->telefono = $tel;
             $p->empresa_id = $CIF;
-
+            $p->created_at = $updated_at;
+            $p->updated_at = $updated_at;
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
@@ -1098,6 +1117,8 @@ class Conexion {
      * @param type $CIF
      */
     static function ModificarResponsable($id, $dni, $nombre, $apellidos, $email, $tel, $CIF) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = responsable::where('id', $id)
                     ->update([
@@ -1106,7 +1127,8 @@ class Conexion {
                 'apellidos' => $apellidos,
                 'email' => $email,
                 'telefono' => $tel,
-                'empresa_id' => $CIF
+                'empresa_id' => $CIF,
+                'updated_at' => $updated_at
             ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1192,6 +1214,8 @@ class Conexion {
      * @param type $nueva
      */
     static function insertarEmpresa($CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         $p = new empresa;
         $p->cif = $CIF;
         $p->nombre = $nombreEmpresa;
@@ -1201,6 +1225,8 @@ class Conexion {
         $p->localidad = $localidad;
         $p->horario = $horario;
         $p->nueva = 1;
+        $p->created_at = $updated_at;
+        $p->updated_at = $updated_at;
         try {
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1232,6 +1258,8 @@ class Conexion {
      * @param type $nueva
      */
     static function ModificarEmpresa($id, $CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario, $nueva) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = empresa::where('id', $id)
                     ->update([
@@ -1242,7 +1270,8 @@ class Conexion {
                 'direccion' => $direccion,
                 'localidad' => $localidad,
                 'horario' => $horario,
-                'nueva' => $nueva
+                'nueva' => $nueva,
+                'updated_at' => $updated_at
             ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1321,7 +1350,8 @@ class Conexion {
     }
 
     static function ingresarGastoTablaGastos($desplazamiento, $tipo, $usuarios_dni, $comidas_id, $transporte_id) {
-
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $g = new gasto;
             $g->desplazamiento = $desplazamiento;
@@ -1329,7 +1359,8 @@ class Conexion {
             $g->usuarios_dni = $usuarios_dni;
             $g->comidas_id = $comidas_id;
             $g->transportes_id = $transporte_id;
-
+            $g->created_at = $updated_at;
+            $g->updated_at = $updated_at;
             $g->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Gasto insertado en la tabla con exito.
@@ -1437,12 +1468,15 @@ class Conexion {
      * @param type $foto
      */
     static function ModificarGastoComida($id, $fecha, $importe, $foto) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = comida::where('id', $id)
                     ->update([
                 'fecha' => $fecha,
                 'importe' => $importe,
                 'foto' => $foto,
+                'updated_at' => $updated_at
             ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1462,13 +1496,15 @@ class Conexion {
     }
 
     static function ModificarGastoComidaSinFoto($id, $fecha, $importe) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = comida::where('id', $id)
                     ->update([
                 'fecha' => $fecha,
                 'importe' => $importe,
+                'updated_at' => $updated_at
             ]);
-
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1644,11 +1680,14 @@ class Conexion {
      * @param type $foto
      */
     static function ModificarGastoTransporteColectivo($id, $precio, $foto) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = colectivo::where('id', $id)
                     ->update([
                 'foto' => $foto,
                 'importe' => $precio,
+                'updated_at' => $updated_at
             ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1668,10 +1707,13 @@ class Conexion {
     }
 
     static function ModificarGastoTransporteColectivoSinFoto($id, $precio) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = colectivo::where('id', $id)
                     ->update([
                 'importe' => $precio,
+                'updated_at' => $updated_at
             ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1726,11 +1768,14 @@ class Conexion {
      * @param type $kms
      */
     static function ModificarGastoTransportePropio($id, $precio, $kms) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = propio::where('id', $id)
                     ->update([
                 'kms' => $kms,
                 'precio' => $precio,
+                'updated_at' => $updated_at
             ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1895,6 +1940,8 @@ class Conexion {
     }
 
     static function insertarCurso($id, $descripcion, $anioAcademico, $familia, $horas) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = new curso;
             $p->id_curso = $id;
@@ -1903,6 +1950,8 @@ class Conexion {
             $p->familia = $familia;
             $p->horas = $horas;
             $p->centros_cod = '13002691';
+            $p->created_at = $updated_at;
+            $p->updated_at = $updated_at;
             $p->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
@@ -1921,13 +1970,16 @@ class Conexion {
     }
 
     static function ModificarCurso($id, $descripcion, $anioAcademico, $familia, $horas) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $p = curso::where('id_curso', $id)
                     ->update([
                 'descripcion' => $descripcion,
                 'ano_academico' => $anioAcademico,
                 'familia' => $familia,
-                'horas' => $horas
+                'horas' => $horas,
+                'updated_at' => $updated_at
             ]);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1956,13 +2008,9 @@ class Conexion {
         Conexion::ModificarCursoTutor($id);
         try {
             //poner a null el curso en la tabla tutor
-            tutor::where('cursos_id_curso', $id)->update([
-                'cursos_id_curso' => null
-            ]);
+            tutor::where('cursos_id_curso', $id)->delete();
             //poner a null el curso en la tabla matricula
-            matricula::where('cursos_id_curso', $id)->update([
-                'cursos_id_curso' => null
-            ]);
+            matricula::where('cursos_id_curso', $id)->delete();
             //borrar curso
             curso::where('id_curso', $id)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -1982,14 +2030,16 @@ class Conexion {
     }
 
     static function insertarTransporteColectivo($tipo, $donde, $foto, $importe) {
-
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
 
             //insertar el gasto en la tabla transportes
             $t = new transporte;
             $t->tipo = $tipo;
             $t->donde = $donde;
-
+            $t->created_at = $updated_at;
+            $t->updated_at = $updated_at;
             $t->save();
 
             $transporte = transporte::all()->last();
@@ -2000,7 +2050,8 @@ class Conexion {
             $c->foto = $foto;
             $c->importe = $importe;
             $c->transportes_id = $idTransporte;
-
+            $c->created_at = $updated_at;
+            $c->updated_at = $updated_at;
             $c->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Transporte colectivo insertado con exito.
@@ -2019,14 +2070,16 @@ class Conexion {
     }
 
     static function insertarTransportePropio($tipo, $donde, $kms, $precio) {
-
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
 
             //insertar el gasto en la tabla transportes
             $t = new transporte;
             $t->tipo = $tipo;
             $t->donde = $donde;
-
+            $t->created_at = $updated_at;
+            $t->updated_at = $updated_at;
             $t->save();
 
             $transporte = transporte::all()->last();
@@ -2037,7 +2090,8 @@ class Conexion {
             $c->kms = $kms;
             $c->precio = $precio;
             $c->transportes_id = $idTransporte;
-
+            $c->created_at = $updated_at;
+            $c->updated_at = $updated_at;
             $c->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
@@ -2188,12 +2242,14 @@ class Conexion {
     }
 
     static function insertarTutor($cursos_id_cursos, $usuarios_dni) {
-
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
             $t = new tutor;
             $t->cursos_id_curso = $cursos_id_cursos;
             $t->usuarios_dni = $usuarios_dni;
-
+            $t->created_at = $updated_at;
+            $t->updated_at = $updated_at;
             $t->save(); //aqui se hace la insercion   
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
