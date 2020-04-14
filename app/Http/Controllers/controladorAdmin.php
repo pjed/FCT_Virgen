@@ -53,8 +53,8 @@ class controladorAdmin extends Controller {
 
         $server = "localhost";
         $database = "gestionfct";
-        $user = "pedro";
-        $password = "Chubaca2019";
+        $user = "fct";
+        $password = "fct";
 
         switch ($filename):
             case "datAlumnos.csv":
