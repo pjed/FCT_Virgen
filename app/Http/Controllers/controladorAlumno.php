@@ -47,7 +47,7 @@ class controladorAlumno extends Controller {
             }
 
             $comidas_id = Conexion::obtenerIdComidaIngresada();
-            $transporte_id = 0;
+            $transporte_id = null;
             $tipo = 0;
 
             Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $usuarios_dni, $comidas_id, $transporte_id);
@@ -89,7 +89,7 @@ class controladorAlumno extends Controller {
             $transporte_id = Conexion::obtenerIdTransporteIngresado();
 
             $desplazamiento = 1;
-            $comidas_id = 0;
+            $comidas_id = null;
 
             Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo,$usuarios_dni, $comidas_id, $transporte_id);
         }
@@ -116,7 +116,7 @@ class controladorAlumno extends Controller {
           
             $desplazamiento = 1;
             $tipo = 1;
-            $comidas_id = 0;
+            $comidas_id = null;
 
             Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $usuarios_dni, $comidas_id, $transporte_id);
         }
