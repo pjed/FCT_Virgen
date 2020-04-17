@@ -1119,22 +1119,6 @@ class controladorAdmin extends Controller {
      * @return type
      */
     public function consultarGastoAlumno(Request $req) {
-        //saca los alumnos de un curso
-        if (isset($_REQUEST['buscar'])) {
-            $l1 = Conexion::listaCursos();
-            $ciclo = $req->get('ciclo');
-            session()->put('ciclo', $ciclo);
-
-            $l2 = Conexion::listarAlumnosCurso($ciclo);
-            $datos = [
-                'l1' => $l1,
-                'l2' => $l2,
-                'gc' => null,
-                'gtp' => null,
-                'gtc' => null,
-            ];
-            return view('admin/consultarGastos', $datos);
-        }
         //saca los gastos de un alumno
         if (isset($_REQUEST['buscar1'])) {
             $dniAlumno = $req->get('dniAlumno');

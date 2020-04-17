@@ -1,11 +1,7 @@
 <?php
-
-$ciclo = null;
-$dniAlumno = null;
-if (session()->get('ciclo') != null) {
-    $ciclo = session()->get('ciclo');
-}
-if (session()->get('dniAlumno') != null) {
+if (isset($_SESSION['dniAlumno'])) {
+    $dniAlumno = null;
+} else {
     $dniAlumno = session()->get('dniAlumno');
 }
 ?>
@@ -13,6 +9,10 @@ if (session()->get('dniAlumno') != null) {
 
 @section('titulo') 
 Consultar Gastos Alumnos
+@endsection
+
+@section('javascript') 
+<script src="{{asset ('js/admin/js_consultarGasto.js')}}"></script>
 @endsection
 
 @section('contenido') 
@@ -41,21 +41,19 @@ Consultar Gastos Alumnos
                 {{ csrf_field() }}
                 <label class="text-center" for='ciclo'>
                     Ciclo:
-                    <select class="sel" name="ciclo">  
+                    <select id="ciclo" class="sel" name="ciclo">  
                         <?php
                         foreach ($l1 as $value) {
                             ?>
-                            <option value="<?php echo $value->id; ?>" <?php if ($value->id == $ciclo) { ?>selected<?php } ?>><?php echo $value->id; ?></option>
+                            <option value="<?php echo $value->id; ?>"><?php echo $value->id; ?></option>
                             <?php
                         }
                         ?>
                     </select>
                 </label> 
-                <button type="submit" class="buscar btn btn-primary" name="buscar"></button>
             </form>
         </div>
     </div>
-    @if ($l2 !=null) 
     <!-- Seleccionar alumno -->
     <div class="row justify-content-center">
         <div class="col-sm-3 col-md-3">
@@ -63,20 +61,26 @@ Consultar Gastos Alumnos
                 {{ csrf_field() }}
                 <label class="text-center">
                     Alumno:
-                    <select class="sel" name="dniAlumno">                                    
-                        <?php
-                        foreach ($l2 as $k2) {
-                            ?>
-                            <option value="<?php echo $k2->dni; ?>" <?php if ($k2->dni == $dniAlumno) { ?>selected<?php } ?>> <?php echo $k2->nombre . ', ' . $k2->apellidos; ?></option>
-                            <?php
-                        }
-                        ?>
+                    <select id="dniAlumno" class="sel" name="dniAlumno">        
                     </select>
                 </label>
                 <button type="submit" class="buscar btn btn-primary" name="buscar1"></button>
             </form>
         </div>
     </div>
+    @if($dniAlumno != null)
+    <br>
+    <h1 class="text-center">
+        <?php
+        $ciclo = session()->get('ciclo');
+        foreach ($l2 as $key) {
+            if ($key->dni == $dniAlumno) {
+                echo $key->nombre.' '.$key->apellidos.' de '.$ciclo;
+            }
+        }
+        ?>
+    </h1>
+    <br>
     @endif
     @if ($gc !=null) 
     <!-- Gestionar Gastos Comida -->

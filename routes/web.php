@@ -133,7 +133,6 @@ Route::group(['middleware' => ['admin']], function() {
             $l1 = Conexion::listaCursos();
             $datos = [
                 'l1' => $l1,
-                'l2' => null,
                 'gc' => null,
                 'gtp' => null,
                 'gtc' => null,
