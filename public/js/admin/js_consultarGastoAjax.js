@@ -8,28 +8,6 @@ $(document).ready(function () {
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
     });
-    /**
-     * se carga nada mas iniciar la pagina
-     */
-    $("#ciclo").ready(function () {
-    var parametros = {'parametros': null};
-        $.ajax({
-            url: 'consultarGastosAjaxCiclo',
-            type: 'POST',
-            data: parametros,
-            success: function (response) {
-                if (response !== null) {
-                    $("#ciclo").html(response);
-                }
-            },
-            statusCode: {
-                404: function () {
-                    alert('web not found');
-                }
-            }
-        });
-    }
-    );
     /*
      * funciona cuando se selecciona un ciclo y muestra la lista de los alumnos de es curso
      * @param {type} listaCiclo
@@ -37,7 +15,6 @@ $(document).ready(function () {
      */
     $("#ciclo").click(function () {
         ciclo = $("select#ciclo option:checked").val();
-        jQuery(ciclo).load('session_write.php?ciclo=' + ciclo);
         var parametros = {"ciclo": ciclo};
         $.ajax({
             url: 'consultarGastosAjaxDniAlumno',
@@ -106,31 +83,32 @@ $(document).ready(function () {
             }
         });
     });
-    /* $(".eliminarCol").click(function () {
-     var id = $(this).attr('data-id');
-     var parametros = {
-     "id": id,
-     "idTransporte": idTransporte,
-     };
-     $.ajax({
-     url: 'gestionarGastosAjax',
-     type: 'POST',
-     data: parametros,
-     success: function (response) {
-     if (response !== null) {
-     alert('entro');
-     practica = JSON.parse(response);
-     
-     $("#idMod").val(practica.idPractica);
-     }
-     },
-     statusCode: {
-     404: function () {
-     alert('web not found');
-     }
-     }
-     });
-     });*/
+    $(".eliminarCol").click(function () {
+        var id = $(this).attr('data-id');
+        var dniAlumno = $("select#dniAlumno option:checked").val();
+        var parametros = {
+            "idTransporte": id,
+            "eliminarCol": 'eliminarCol',
+            "dniAlumno" : dniAlumno
+        };
+        $.ajax({
+            url: 'gestionarGastosAjax',
+            type: 'POST',
+            data: parametros,
+            success: function (response) {
+                if (response !== null) {
+                    alert('entro');
+                    $("#tablas").empty();
+                    $("#tablas").html(response);
+                }
+            },
+            statusCode: {
+                404: function () {
+                    alert('web not found');
+                }
+            }
+        });
+    });
     //gastos de transtporte propio
     $(".editarP").click(function () {
         var id = $(this).attr('data-id');
@@ -162,31 +140,32 @@ $(document).ready(function () {
             }
         });
     });
-    /*  $(".eliminarP").click(function () {
-     var id = $(this).attr('data-id');
-     var parametros = {
-     "id": id,
-     "idTransporte": idTransporte
-     };
-     $.ajax({
-     url: 'gestionarGastosAjax',
-     type: 'POST',
-     data: parametros,
-     success: function (response) {
-     if (response !== null) {
-     alert('entro');
-     practica = JSON.parse(response);
-     
-     $("#idMod").val(practica.idPractica);
-     }
-     },
-     statusCode: {
-     404: function () {
-     alert('web not found');
-     }
-     }
-     });
-     });*/
+    $(".eliminarP").click(function () {
+        var id = $(this).attr('data-id');
+        var dniAlumno = $("select#dniAlumno option:checked").val();
+        var parametros = {
+            "idTransporte": id,
+            "eliminarP": 'eliminarP',
+            "dniAlumno" : dniAlumno
+        };
+        $.ajax({
+            url: 'gestionarGastosAjax',
+            type: 'POST',
+            data: parametros,
+            success: function (response) {
+                if (response !== null) {
+                    alert('entro');
+                    $("#tablas").empty();
+                    $("#tablas").html(response);
+                }
+            },
+            statusCode: {
+                404: function () {
+                    alert('web not found');
+                }
+            }
+        });
+    });
     //gastos de comida
     $(".editarCom").click(function () {
         var id = $(this).attr('data-id');
@@ -218,30 +197,33 @@ $(document).ready(function () {
             }
         });
     });
-    /*$(".eliminarCom").click(function () {
-     var idGasto = $(this).attr('data-id');
-     //        1º con el idGasto buscamos el idComida correspondiente
-     //        2º eliminamos el idComida
-     //        3º eliminamos el IdGatos
-     //        4º enviamos el html para mostrar la tabla cargada con los nuevos datos
-     var parametros = {
-     "idGasto": idGasto
-     };
-     $.ajax({
-     url: 'gestionarGastosAjax',
-     type: 'POST',
-     data: parametros,
-     success: function (response) {
-     if (response !== null) {
-     $("#tablas").empty();
-     $("#tablas").html(response);
-     }
-     },
-     statusCode: {
-     404: function () {
-     alert('web not found');
-     }
-     }
-     });
-     });*/
+    $(".eliminarCom").click(function () {
+        var id = $(this).attr('data-id');
+        var dniAlumno = $("select#dniAlumno option:checked").val();
+        //        1º con el idGasto buscamos el idComida correspondiente
+        //        2º eliminamos el idComida
+        //        3º eliminamos el IdGatos
+        //        4º enviamos el html para mostrar la tabla cargada con los nuevos datos
+        var parametros = {
+            "idGasto": id,
+            "eliminarCom": 'eliminarCom',
+            "dniAlumno" : dniAlumno
+        };
+        $.ajax({
+            url: 'gestionarGastosAjax',
+            type: 'POST',
+            data: parametros,
+            success: function (response) {
+                if (response !== null) {
+                    $("#tablas").empty();
+                    $("#tablas").html(response);
+                }
+            },
+            statusCode: {
+                404: function () {
+                    alert('web not found');
+                }
+            }
+        });
+    });
 });

@@ -1,3 +1,6 @@
+<?php
+$l1 = Conexion::listaCursos();
+?>
 @extends('maestra.maestraAdmin')
 
 @section('titulo') 
@@ -34,7 +37,13 @@ Consultar Gastos Alumnos
                 <label class="text-center" for='ciclo'>
                     Ciclo:
                     <select id="ciclo" class="sel" name="ciclo">  
-
+                        <?php
+                        foreach ($l1 as $value) {
+                            ?>
+                            <option value="<?php echo $value->id; ?>"><?php echo $value->id; ?></option>
+                            <?php
+                        }
+                        ?>
                     </select>
                 </label> 
             </div>

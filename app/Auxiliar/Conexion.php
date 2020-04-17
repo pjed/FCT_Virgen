@@ -951,6 +951,7 @@ class Conexion {
                   </div>';
         }
     }
+
     /**
      * Metodo para poder borrar el empresa
      * @param type $id
@@ -1021,7 +1022,7 @@ class Conexion {
                         'empresas_id' => $CIF,
                         'responsables_id' => $dniResponsable,
                         'updated_at' => $updated_at]);
-            
+
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1663,14 +1664,16 @@ class Conexion {
 
     /**
      * Método para borrar los gastos de comida del alumno
-     * @param type $id
+     * @param type $idGasto
      */
-    static function borrarGastoComida($id) {
+    static function borrarGastoComida($idGasto) {
         try {
+            //obtenemos el comidas_id
+            $v = gasto::where('id', $idGasto)->select('comidas_id')->first();
             //eliminar tabla comida
-            comida::where('id', $id)->delete();
+            comida::where('id', $v)->delete();
             //eliminar tabla gasto
-            gasto::where('comidas_id', $id)->delete();
+            gasto::where('id', $idGasto)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1689,16 +1692,16 @@ class Conexion {
 
     /**
      * Método para borrar los gastos de transporte colectivo del alumno
-     * @param type $id
+     * @param type $idTransporte
      */
-    static function borrarGastoTransporteColectivo($id, $idTransporte) {
+    static function borrarGastoTransporteColectivo($idTransporte) {
         try {
-            //eliminar tabla transporte
-            transporte::where('id', $idTransporte)->delete();
             //eliminar tabla gasto
             gasto::where('transportes_id', $idTransporte)->delete();
             //eliminar tabla colectivo
-            colectivo::where('id', $id)->delete();
+            colectivo::where('transportes_id', $idTransporte)->delete();
+            //eliminar tabla transporte
+            transporte::where('id', $idTransporte)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1779,14 +1782,14 @@ class Conexion {
      * Método para borrar los gastos de transporte propio del alumno
      * @param type $id
      */
-    static function borrarGastoTransportePropio($id, $idTransporte) {
+    static function borrarGastoTransportePropio($idTransporte) {
         try {
-            //eliminar tabla transporte
-            transporte::where('id', $idTransporte)->delete();
             //eliminar tabla gasto
             gasto::where('transportes_id', $idTransporte)->delete();
             //eliminar tabla propio
-            propio::where('id', $id)->delete();
+            propio::where('transportes_id', $idTransporte)->delete();
+            //eliminar tabla transporte
+            transporte::where('id', $idTransporte)->delete();
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

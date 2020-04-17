@@ -1143,7 +1143,6 @@ class controladorAdmin extends Controller {
 //            editar y borrar comida
         if (isset($_REQUEST['editar'])) {
             $id = $req->get('ID');
-            $idGasto = $req->get('idGasto');
             $fecha = $req->get('fecha');
             $importe = $req->get('importe');
             $fot = $req->file('foto');
@@ -1156,26 +1155,23 @@ class controladorAdmin extends Controller {
             }
         }
         if (isset($_REQUEST['eliminar'])) {
-            $id = $req->get('ID');
             $idGasto = $req->get('idGasto');
             $file = $req->get('fotoUrl');
             if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoComida($id);
+            Conexion::borrarGastoComida($idGasto);
         }
 //            editar y borrar transporte propio
         if (isset($_REQUEST['editarP'])) {
             $id = $req->get('ID');
-            $idTransporte = $req->get('idTransporte');
             $kms = $req->get('kms');
             $precio = $kms * 0.12;
             Conexion::ModificarGastoTransportePropio($id, $precio, $kms);
         }
         if (isset($_REQUEST['eliminarP'])) {
-            $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
-            Conexion::borrarGastoTransportePropio($id, $idTransporte); //hay que mirarlo
+            Conexion::borrarGastoTransportePropio($idTransporte);
         }
 //            editar y borrar transporte colectivo
         if (isset($_REQUEST['editarC'])) {
@@ -1192,13 +1188,12 @@ class controladorAdmin extends Controller {
             }
         }
         if (isset($_REQUEST['eliminarC'])) {
-            $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
             $file = $req->get('fotoUrl');
             if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
+            Conexion::borrarGastoTransporteColectivo($idTransporte);
         }
         $datos = controladorAdmin::paginacionConsultarGastoAlumno();
         return view('admin/consultarGastos', $datos);
@@ -1390,12 +1385,11 @@ class controladorAdmin extends Controller {
      * @return type
      */
     public function gestionarGastosAjax(Request $req) {
-        $dniAlumno = session()->get('dniAlumno');
+        $dniAlumno =  $req->get('dniAlumno');
 
         //            editar y borrar comida
         if (isset($_REQUEST['editarCom'])) {
             $id = $req->get('ID');
-            $idGasto = $req->get('idGasto');
             $fecha = $req->get('fecha');
             $importe = $req->get('importe');
             $foto = $req->get('foto');
@@ -1408,26 +1402,23 @@ class controladorAdmin extends Controller {
             }
         }
         if (isset($_REQUEST['eliminarCom'])) {
-            $id = $req->get('ID');
             $idGasto = $req->get('idGasto');
             $file = $req->get('fotoUrl');
             if (file_exists($file) && $file != "images/ticket.png") {
                 unlink($file);
             }
-            Conexion::borrarGastoComida($id);
+            Conexion::borrarGastoComida($idGasto);
         }
 //            editar y borrar transporte propio
         if (isset($_REQUEST['editarP'])) {
             $id = $req->get('ID');
-            $idTransporte = $req->get('idTransporte');
             $kms = $req->get('kms');
             $precio = $kms * 0.12;
             Conexion::ModificarGastoTransportePropio($id, $precio, $kms);
         }
         if (isset($_REQUEST['eliminarP'])) {
-            $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
-            Conexion::borrarGastoTransportePropio($id, $idTransporte);
+            Conexion::borrarGastoTransportePropio($idTransporte);
         }
 //            editar y borrar transporte colectivo
         if (isset($_REQUEST['editarCol'])) {
@@ -1444,17 +1435,16 @@ class controladorAdmin extends Controller {
             }
         }
         if (isset($_REQUEST['eliminarCol'])) {
-            $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
             $file = $req->get('fotoUrl');
             if (file_exists($file) && $file != "images/ticket.png") {
                 unlink($file);
             }
-            Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
+            Conexion::borrarGastoTransporteColectivo($idTransporte);
         }
         $v = controladorAdmin::escribirTablaCunsultarGastosAjax($dniAlumno);
 
-        echo $v;
+        return $v;
     }
 
     /**
