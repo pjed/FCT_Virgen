@@ -2,6 +2,7 @@
 if (isset($_SESSION['dniAlumno'])) {
     $dniAlumno = null;
 } else {
+    $ciclo = session()->get('ciclo');
     $dniAlumno = session()->get('dniAlumno');
 }
 ?>
@@ -45,7 +46,7 @@ Consultar Gastos Alumnos
                         <?php
                         foreach ($l1 as $value) {
                             ?>
-                            <option value="<?php echo $value->id; ?>"><?php echo $value->id; ?></option>
+                        <option value="<?php echo $value->id; ?>" <?php if($value->id == $ciclo){?> selected <?php }?>><?php echo $value->id; ?></option>
                             <?php
                         }
                         ?>
