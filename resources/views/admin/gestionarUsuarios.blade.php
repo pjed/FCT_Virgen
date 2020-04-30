@@ -359,20 +359,10 @@ Gestionar usuarios
                                         <option value="4" <?php if ($value->rol_id == 4) { ?>selected<?php } ?>>Tutor-Administrador</option>
                                     </select>
                                 </td>
-
-                                <?php if ($value->rol_id == 3) {
-                                    ?>
-                                    <td><button type="submit" class="btn editar" name="editar" ></button>
-                                    <?php } else {
-                                        ?>
-                                    <td>
-                                        <button type="submit" class="btn editar" name="editar" ></button>
-                                        <button type="submit" class="btn eliminar" name="eliminar" ></button>
-                                    </td>
-                                    <?php
-                                }
-                                ?>
-
+                                <td>
+                                    <button type="submit" class="btn editar" name="editar" ></button>
+                                    <button type="submit" class="btn eliminar" name="eliminar" ></button>
+                                </td>
                             </tr>
                         </form>
                         <?php
