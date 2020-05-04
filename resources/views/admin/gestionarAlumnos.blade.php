@@ -39,6 +39,12 @@ Gestionar alumnos
                             <th>Teléfono</th>
                             <th>Iban</th>
                             <th>Ciclo</th>
+                            <th>
+                                <!-- Añadir Alumno -->
+                                <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
+                                </button> 
+                                <!-- Modal -->
+                            </th>
                         </tr>
                     </thead>
                     <tbody>

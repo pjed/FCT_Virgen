@@ -39,6 +39,12 @@ Gestionar tutores
                             <th>Email</th>
                             <th>Teléfono</th>
                             <th>Ciclo</th>
+                            <th>
+                                <!-- Añadir Tutor -->
+                                <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
+                                </button> 
+                                <!-- Modal -->
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
