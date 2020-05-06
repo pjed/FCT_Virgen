@@ -478,10 +478,9 @@ class Conexion {
      */
     static function listarAlumnos() {
         $v = \DB::table('matriculados')
-                        ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
-                        ->select(
-                                'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban', 'usuarios.foto AS foto', 'matriculados.cursos_id_curso as curso'
-                        )->paginate(8);
+                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
+                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios.foto AS foto', 'matriculados.cursos_id_curso as curso')
+                ->paginate(8);
         return $v;
     }
 
@@ -490,12 +489,9 @@ class Conexion {
      * @return type lista de tutores
      */
     static function listarTutores() {
-
         $v = \DB::table('tutores')
                 ->join('usuarios', 'usuarios.dni', '=', 'tutores.usuarios_dni')
-                ->select(
-                        'tutores.idtutores AS idtutores', 'tutores.cursos_id_curso AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.foto AS foto'
-                )
+                ->select('tutores.idtutores AS idtutores', 'tutores.cursos_id_curso AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.foto AS foto')
                 ->paginate(8);
         return $v;
     }
@@ -505,7 +501,6 @@ class Conexion {
      * @return type lista de ciclos
      */
     static function listarCiclos() {
-
         $ur = curso::all();
         $listaCiclos = [];
 
@@ -519,7 +514,6 @@ class Conexion {
                 'horas' => $a->horas,
                 'tutor' => $a->tutor];
         }
-
         return $listaCiclos;
     }
 
@@ -528,11 +522,8 @@ class Conexion {
      * @return type lista de ciclos sin tutor
      */
     static function listarCiclosSinTutor() {
-
         $sql = "SELECT * FROM cursos WHERE id_curso NOT IN (SELECT cursos_id_curso FROM tutores)";
-
         $listaTutores = \DB::select($sql);
-
         return $listaTutores;
     }
 
@@ -543,9 +534,7 @@ class Conexion {
     static function listarUsuarios() {
         $v = \DB::table('usuarios')
                 ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
-                ->select(
-                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios_roles.rol_id AS rol_id', 'usuarios.foto AS foto'
-                )
+                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios_roles.rol_id AS rol_id', 'usuarios.foto AS foto')
                 ->paginate(8);
         return $v;
     }

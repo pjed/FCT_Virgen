@@ -153,7 +153,6 @@ Route::group(['middleware' => ['admin']], function() {
             'listaCiclos' => $listaCiclos,
             'listaCiclosSinTutor' => $listaCiclosSinTutor
         ];
-
         return view('admin/gestionarUsuarios', $datos);
     })->name('gestionarUsuarios');
     Route::get('gestionarAlumnos', function () {
@@ -163,7 +162,6 @@ Route::group(['middleware' => ['admin']], function() {
             'listaAlumnos' => $listaAlumnos,
             'listaCiclos' => $listaCiclos
         ];
-
         return view('admin/gestionarAlumnos', $datos);
     })->name('gestionarAlumnos');
     Route::get('gestionarTutores', function () {
@@ -175,7 +173,6 @@ Route::group(['middleware' => ['admin']], function() {
             'listaCiclos' => $listaCiclos,
             'listaCiclosSinTutor' => $listaCiclosSinTutor
         ];
-
         return view('admin/gestionarTutores', $datos);
     })->name('gestionarTutores');
     Route::get('importarTutores', function () {
@@ -199,9 +196,9 @@ Route::group(['middleware' => ['admin']], function() {
     Route::any('gestionarGastosAjax', ['uses' => 'controladorAdmin@gestionarGastosAjax', 'as' => 'gestionarGastosAjax']);
 
     Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');
-    Route::post('gestionarTablaUsuarios', 'controladorAdmin@gestionarUsuarios');
-    Route::post('gestionarTablaAlumnos', 'controladorAdmin@gestionarAlumnos');
-    Route::post('gestionarTablaTutores', 'controladorAdmin@gestionarTutores');
+    Route::post('gestionarUsuarios', 'controladorAdmin@gestionarUsuarios');
+    Route::post('gestionarAlumnos', 'controladorAdmin@gestionarAlumnos');
+    Route::post('gestionarTutores', 'controladorAdmin@gestionarTutores');
     Route::post('exportarDocumentos', 'controladorAdmin@exportarDocumentos');
     Route::post('aniadirUsuario', 'controladorAdmin@aniadirUsuario');
 });

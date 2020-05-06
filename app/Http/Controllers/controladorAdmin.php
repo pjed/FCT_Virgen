@@ -548,7 +548,6 @@ class controladorAdmin extends Controller {
         }
     }
 
-    
     /**
      * Método que añade las FKS a la BBDD gestionfct
      * @author Pedro
@@ -660,10 +659,10 @@ class controladorAdmin extends Controller {
 
             //Método que añade los datos de los archivos .csv a tablas en la BBDD gestionfct
             $this->AddDatosCSVtoBBDD($req);
-            
+
             //Método que añade las FKS a la BBDD gestionfct
             $this->AddFKStoBBDD($req);
-            
+
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Archivos CSV importados correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1369,7 +1368,7 @@ class controladorAdmin extends Controller {
      * @return type
      */
     public function gestionarGastosAjax(Request $req) {
-        $dniAlumno =  $req->get('dniAlumno');
+        $dniAlumno = $req->get('dniAlumno');
 
         //            editar y borrar comida
         if (isset($_REQUEST['editarCom'])) {
@@ -1438,9 +1437,126 @@ class controladorAdmin extends Controller {
      * @return type
      */
     public function gestionarUsuarios(Request $req) {
+        if (isset($_REQUEST['aniadir'])) {
+            $tipoUsuario = $req->get('tipoU');
+            $dni = $req->get("dni");
+            $nombre = $req->get("nombre");
+            $apellidos = $req->get("apellidos");
+            $domicilio = $req->get("domicilio");
+            $email = $req->get("email");
+            $telefono = $req->get("telefono");
+            $movil = $req->get("movil");
 
+            if ($tipoUsuario == "Administrador") {
+                $iban = "";
+                $rol = 1;
+                if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+                    $val = Conexion::existeUsuario_Dni($dni);
+                    if ($val) {
+                        Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
+                    } else {
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Ya existe.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Debes rellenar los campos obligatorios como mínimo (*)
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
+            }
+
+            if ($tipoUsuario == "Tutor") {
+                $iban = "";
+                $ciclo = $req->get("selectCiclo");
+                $rol = 2;
+
+                if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+                    $val = Conexion::existeUsuario_Dni($dni);
+                    if ($val) {
+                        Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
+                        Conexion::insertarTutor($ciclo, $dni);
+                    } else {
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Ya existe.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Debes rellenar los campos obligatorios como mínimo (*)
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
+            }
+
+            if ($tipoUsuario == "Alumno") {
+                $iban = $req->get("iban");
+                $ciclo = $req->get("selectCiclo");
+                $rol = 3;
+
+                if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+                    $val = Conexion::existeUsuario_Dni($dni);
+                    if ($val) {
+                        Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
+                        Conexion::insertarAlumnoTablaMatriculados($dni, $ciclo);
+                    } else {
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Ya existe.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Debes rellenar los campos obligatorios como mínimo (*)
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
+            }
+
+            if ($tipoUsuario == "TutorAdministrador") {
+                $iban = "";
+                $ciclo = $req->get("selectCiclo");
+                $rol = 4;
+
+                if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+                    $val = Conexion::existeUsuario_Dni($dni);
+                    if ($val) {
+                        Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
+                        Conexion::insertarTutor($ciclo, $dni);
+                    } else {
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Ya existe.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                    }
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Debes rellenar los campos obligatorios como mínimo (*)
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
+            }
+        }
         if (isset($_REQUEST['editar'])) {
-
             $dni = $req->get('dni');
             $nombre = $req->get('nombre');
             $apellidos = $req->get('apellidos');
@@ -1557,48 +1673,74 @@ class controladorAdmin extends Controller {
                 }
             }
         }
-
         if (isset($_REQUEST['eliminar'])) {
-
             $dni = $req->get('dni');
             $rol_id = $req->get('selectRol');
             $file = $req->get('fotoUrl');
-
             if (file_exists($file) && $file != "images/defecto.jpeg") {
                 unlink($file);
             }
-
-            if ($rol_id == 1) {
+            
+            if ($rol_id == 3) {
 //                Conexion::borrarGastoComidaDNI($dni); 
 //                Conexion::borrarGastoPropioDNI($dni);
-//                Conexion::borrarGastoColectivoDNI($dni);
+//                Conexion::borrarGastoColectivoDNI($dni);        
+                Conexion::borrarAlumno($dni);
+                Conexion::borrarUsuario($dni);
+            } else if ($rol_id == 1) {
                 Conexion::borrarUsuario($dni);
             } else if ($rol_id == 2) {
-
-                $cursoTutor = Conexion::obtenerCicloTutor($dni);
-
                 Conexion::borrarTutor($dni);
                 Conexion::borrarUsuario($dni);
             } else if ($rol_id == 4) {
-
-                $cursoTutor = Conexion::obtenerCicloTutor($dni);
-
                 Conexion::borrarTutor($dni);
                 Conexion::borrarUsuario($dni);
             }
         }
-
         return redirect()->route('gestionarUsuarios');
     }
 
     /**
      * Gestionar alumnos
-     * @author Manu
+     * @author Manu, Marina
      * @param Request $req
      * @return type
      */
     public function gestionarAlumnos(Request $req) {
+        if (isset($_REQUEST['aniadir'])) {
+            $dni = $req->get("dni");
+            $nombre = $req->get("nombre");
+            $apellidos = $req->get("apellidos");
+            $domicilio = $req->get("domicilio");
+            $email = $req->get("email");
+            $telefono = $req->get("telefono");
+            $movil = $req->get("movil");
+            $iban = $req->get("iban");
+            $ciclo = $req->get("selectCiclo");
+            $rol = 3;
 
+            if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+                $val = Conexion::existeUsuario_Dni($dni);
+                if ($val) {
+                    Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
+                    Conexion::insertarAlumnoTablaMatriculados($dni, $ciclo);
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Ya existe.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Debes rellenar los campos obligatorios como mínimo (*)
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
+        }
         if (isset($_REQUEST['editar'])) {
 
             $dni = $req->get('dni');
@@ -1617,6 +1759,17 @@ class controladorAdmin extends Controller {
 
             return redirect()->route('gestionarAlumnos');
         }
+        if (isset($_REQUEST['eliminar'])) {
+            $dni = $req->get('dni');
+            $file = $req->get('fotoUrl');
+            if (file_exists($file) && $file != "images/defecto.jpeg") {
+                unlink($file);
+            }
+            Conexion::borrarAlumno($dni);
+            Conexion::borrarUsuario($dni);
+        }
+
+        return redirect()->route('gestionarAlumnos');
     }
 
     /**
@@ -1626,9 +1779,42 @@ class controladorAdmin extends Controller {
      * @return type
      */
     public function gestionarTutores(Request $req) {
+        if (isset($_REQUEST['aniadir'])) {
+            $dni = $req->get("dni");
+            $nombre = $req->get("nombre");
+            $apellidos = $req->get("apellidos");
+            $domicilio = $req->get("domicilio");
+            $email = $req->get("email");
+            $telefono = $req->get("telefono");
+            $movil = $req->get("movil");
+            $iban = "";
+            $ciclo = $req->get("selectCiclo");
+            $rol = 2;
+
+            if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+                $val = Conexion::existeUsuario_Dni($dni);
+                if ($val) {
+                    Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
+                    Conexion::insertarTutor($ciclo, $dni);
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Ya existe.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Debes rellenar los campos obligatorios como mínimo (*)
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
+        }
 
         if (isset($_REQUEST['editar'])) {
-
             $dni = $req->get('dni');
             $nombre = $req->get('nombre');
             $apellidos = $req->get('apellidos');
@@ -1640,7 +1826,6 @@ class controladorAdmin extends Controller {
         }
 
         if (isset($_REQUEST['eliminar'])) {
-
             $dni = $req->get('dni');
             $file = $req->get('fotoUrl');
 
@@ -1849,135 +2034,6 @@ class controladorAdmin extends Controller {
         session()->put('usu', $usu);
 
         return view('admin/perfilAdmin', ['usu' => $usu]);
-    }
-
-    /**
-     * Añadir usuario
-     * @author Manu
-     * @param Request $req
-     * @return type
-     */
-    public function aniadirUsuario(Request $req) {
-
-        $tipoUsuario = $req->get('tipoU');
-        $dni = $req->get("dni");
-        $nombre = $req->get("nombre");
-        $apellidos = $req->get("apellidos");
-        $domicilio = $req->get("domicilio");
-        $email = $req->get("email");
-        $telefono = $req->get("telefono");
-        $movil = $req->get("movil");
-
-        if ($tipoUsuario == "Administrador") {
-            $iban = "";
-            $rol = 1;
-            if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
-                $val = Conexion::existeUsuario_Dni($dni);
-                if ($val) {
-                    Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
-                } else {
-                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Ya existe.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-                }
-            } else {
-                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Debes rellenar los campos obligatorios como mínimo (*)
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-            }
-        }
-
-        if ($tipoUsuario == "Tutor") {
-            $iban = "";
-            $ciclo = $req->get("selectCiclo");
-            $rol = 2;
-
-            if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
-                $val = Conexion::existeUsuario_Dni($dni);
-                if ($val) {
-                    Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
-                    Conexion::insertarTutor($ciclo, $dni);
-                } else {
-                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Ya existe.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-                }
-            } else {
-                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Debes rellenar los campos obligatorios como mínimo (*)
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-            }
-        }
-
-        if ($tipoUsuario == "Alumno") {
-            $iban = $req->get("iban");
-            $ciclo = $req->get("selectCiclo");
-            $rol = 3;
-
-            if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
-                $val = Conexion::existeUsuario_Dni($dni);
-                if ($val) {
-                    Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
-                    Conexion::insertarAlumnoTablaMatriculados($dni, $ciclo);
-                } else {
-                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Ya existe.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-                }
-            } else {
-                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Debes rellenar los campos obligatorios como mínimo (*)
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-            }
-        }
-
-        if ($tipoUsuario == "TutorAdministrador") {
-            $iban = "";
-            $ciclo = $req->get("selectCiclo");
-            $rol = 4;
-
-            if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
-                $val = Conexion::existeUsuario_Dni($dni);
-                if ($val) {
-                    Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
-                    Conexion::insertarTutor($ciclo, $dni);
-                } else {
-                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Ya existe.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-                }
-            } else {
-                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Debes rellenar los campos obligatorios como mínimo (*)
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-            }
-        }
-
-        return redirect()->route('gestionarUsuarios');
     }
 
     /**

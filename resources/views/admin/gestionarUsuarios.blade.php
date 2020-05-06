@@ -87,7 +87,7 @@ Gestionar usuarios
 
                                                 <!-- Formulario modal para crear un alumno -->
                                                 <div class="row justify-content-center" id="crearAlumno">
-                                                    <form action="aniadirUsuario" method="POST">
+                                                    <form action="gestionarUsuarios" method="POST">
                                                         {{ csrf_field() }}
                                                         <input type="hidden" name="tipoU" value="Alumno">
                                                         <div class="row justify-content-center form-group">
@@ -155,7 +155,7 @@ Gestionar usuarios
 
                                                 <!-- Formulario modal para crear un administrador -->
                                                 <div class="row justify-content-center" id="crearAdmin">
-                                                    <form action="aniadirUsuario" method="POST">
+                                                    <form action="gestionarUsuarios" method="POST">
                                                         {{ csrf_field() }}
                                                         <input type="hidden" name="tipoU" value="Administrador">
                                                         <div class="row justify-content-center form-group">
@@ -202,7 +202,7 @@ Gestionar usuarios
 
                                                 <!-- Formulario modal para crear un tutor -->
                                                 <div class="row justify-content-center" id="crearTutor">
-                                                    <form action="aniadirUsuario" method="POST">
+                                                    <form action="gestionarUsuarios" method="POST">
                                                         {{ csrf_field() }}
                                                         <input type="hidden" name="tipoU" value="Tutor">
                                                         <div class="row justify-content-center form-group">
@@ -266,7 +266,7 @@ Gestionar usuarios
 
                                                 <!-- Formulario modal para crear un tutor administrador -->
                                                 <div class="row justify-content-center" id="crearTutorAdmin">
-                                                    <form action="aniadirUsuario" method="POST">
+                                                    <form action="gestionarUsuarios" method="POST">
                                                         {{ csrf_field() }}
                                                         <input type="hidden" name="tipoU" value="TutorAdministrador">
                                                         <div class="row justify-content-center form-group">
@@ -338,7 +338,7 @@ Gestionar usuarios
                         <?php
                         foreach ($listaUsuarios as $value) {
                             ?>
-                        <form action="gestionarTablaUsuarios" method="POST">
+                        <form action="gestionarUsuarios" method="POST">
                             {{ csrf_field() }}
                             <tr>
                                 <td>
@@ -350,7 +350,7 @@ Gestionar usuarios
                                 <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" required/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required/></td>
                                 <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" pattern="[9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" required pattern="[6-7]{1}[0-9]{8}"  title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" pattern="[6-7]{1}[0-9]{8}"  title="Introduzca un teléfono válido"/></td>
                                 <td>
                                     <select class="sel" name="selectRol">
                                         <option value="1" <?php if ($value->rol_id == 1) { ?>selected<?php } ?>>Administrador</option>
@@ -360,8 +360,8 @@ Gestionar usuarios
                                     </select>
                                 </td>
                                 <td>
-                                    <button type="submit" class="btn editar" name="editar" ></button>
-                                    <button type="submit" class="btn eliminar" name="eliminar" ></button>
+                                    <button type="submit" class="btn editar" name="editar"></button>
+                                    <button type="submit" class="btn eliminar" name="eliminar"></button>
                                 </td>
                             </tr>
                         </form>

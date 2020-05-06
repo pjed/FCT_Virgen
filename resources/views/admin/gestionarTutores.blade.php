@@ -37,13 +37,85 @@ Gestionar tutores
                             <th>Nombre</th>
                             <th>Apellidos</th>
                             <th>Email</th>
+                            <th>Domicilio</th>
                             <th>Teléfono</th>
+                            <th>Móvil</th>
                             <th>Ciclo</th>
                             <th>
                                 <!-- Añadir Tutor -->
-                                <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
+                                <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#modalAniadir">
                                 </button> 
                                 <!-- Modal -->
+                                <div class="modal fade" id="modalAniadir" tabindex="-1" role="dialog" aria-hidden="true">      
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">                            
+                                                <h3 class="text-center">Añadir Tutor</h3>
+                                                <!-- Formulario modal para crear un tutor -->
+                                                <div class="row justify-content-center" id="crearTutor">
+                                                    <form action="gestionarTutores" method="POST">
+                                                        {{ csrf_field() }}
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *DNI:
+                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="[0-9]{8}[A-Za-z]{1}" required/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                *Nombre:
+                                                                <input type="text" class="form-control form-control-sm" name="nombre" required/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Apellidos:
+                                                                <input type="text" class="form-control form-control-sm" name="apellidos" required/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                *Domicilio:
+                                                                <input type="text" class="form-control form-control-sm" name="domicilio" required/>
+                                                            </label>                
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                Móvil:
+                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}"/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                Teléfono:
+                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[9]{1}[0-9]{8}"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Email:
+                                                                <input type="email" class="form-control form-control-sm" name="email" required/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                Ciclo:
+                                                                <select name="selectCiclo">
+                                                                    <?php
+                                                                    foreach ($listaCiclosSinTutor as $value1) {
+                                                                        ?>
+                                                                        <option value="<?php echo $value1->id_curso; ?>">
+                                                                            <?php echo $value1->id_curso; ?>
+                                                                        </option>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <input type="submit" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </th>
                         </tr>
                     </thead>
@@ -51,7 +123,7 @@ Gestionar tutores
                         <?php
                         foreach ($listaTutores as $value) {
                             ?>
-                        <form action="gestionarTablaTutores" method="POST">
+                        <form action="gestionarTutores" method="POST">
                             {{ csrf_field() }}
                             <tr>
                                 <td>
@@ -61,10 +133,11 @@ Gestionar tutores
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
                                 <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" required/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" title="Introduzca un teléfono válido" required pattern="[6-9]{1}[0-9]{8}"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" pattern="[9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" pattern="[6-7]{1}[0-9]{8}"  title="Introduzca un teléfono válido"/></td>
                                 <td>
                                     <select name="selectCiclo">
-
                                         <option value="<?php echo $value->cursos_id_curso ?>" selected>
                                             <?php echo $value->cursos_id_curso ?>
                                         </option>

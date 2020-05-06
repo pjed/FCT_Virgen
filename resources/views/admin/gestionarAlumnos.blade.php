@@ -36,7 +36,9 @@ Gestionar alumnos
                             <th>Nombre</th>
                             <th>Apellidos</th>
                             <th>Email</th>
+                            <th>Domicilio</th>
                             <th>Teléfono</th>
+                            <th>Móvil</th>
                             <th>Iban</th>
                             <th>Ciclo</th>
                             <th>
@@ -44,6 +46,81 @@ Gestionar alumnos
                                 <button type="button" class="btn" id="aniadir"  data-toggle="modal" data-target="#exampleModal1">
                                 </button> 
                                 <!-- Modal -->
+                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-hidden="true">      
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">                            
+                                                <h3 class="text-center">Añadir Alumno</h3>
+                                                <!-- Formulario modal para crear un alumno -->
+                                                <div class="row justify-content-center" id="crearAlumno">
+                                                    <form action="gestionarAlumnos" method="POST">
+                                                        {{ csrf_field() }}
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *DNI:
+                                                                <input type="text" class="form-control form-control-sm" name="dni" pattern="[0-9]{8}[A-Za-z]{1}" required/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                *Nombre:
+                                                                <input type="text" class="form-control form-control-sm" name="nombre" required/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Apellidos:
+                                                                <input type="text" class="form-control form-control-sm" name="apellidos" required/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                *Domicilio:
+                                                                <input type="text" class="form-control form-control-sm" name="domicilio" required />
+                                                            </label>                
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                Móvil:
+                                                                <input type="text" class="form-control form-control-sm" name="movil" pattern="[6-7]{1}[0-9]{8}"/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                Teléfono:
+                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[9]{1}[0-9]{8}"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                *Email:
+                                                                <input type="email" class="form-control form-control-sm" name="email" required/>
+                                                            </label>
+                                                            <label class="col-sm text-center">
+                                                                Iban:
+                                                                <input type="text" class="form-control form-control-sm" name="iban" pattern="^ES\d{22}$"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <label class="col-sm text-center">
+                                                                Ciclo:
+                                                                <select name="selectCiclo">
+
+                                                                    <?php
+                                                                    foreach ($listaCiclos as $value1) {
+                                                                        ?>
+                                                                        <option value="<?php echo $value1['id_curso'] ?>">
+                                                                            <?php echo $value1['id_curso'] ?>
+                                                                        </option>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row justify-content-center form-group">
+                                                            <input type="submit" class="btn btn-sm btn-primary" name="aniadir" value="Añadir" />
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </th>
                         </tr>
                     </thead>
@@ -51,7 +128,7 @@ Gestionar alumnos
                         <?php
                         foreach ($listaAlumnos as $value) {
                             ?>
-                        <form action="gestionarTablaAlumnos" method="POST">
+                        <form action="gestionarAlumnos" method="POST">
                             {{ csrf_field() }}
                             <tr>
                                 <td>
@@ -60,9 +137,11 @@ Gestionar alumnos
                                 </td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
-                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" required/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" required pattern="[6-9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="iban" value="<?php echo $value->iban; ?>" pattern="^ES\d{22}$" required/></td>
+                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" pattern="[9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" required pattern="[6-7]{1}[0-9]{8}"  title="Introduzca un teléfono válido"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="iban" value="<?php echo $value->iban; ?>" pattern="^ES\d{22}$"/></td>
                                 <td>
                                     <select class="sel" name="selectCiclo">
                                         <?php foreach ($listaCiclos as $value1) {
@@ -95,4 +174,4 @@ Gestionar alumnos
     </div>
 </div>
 @endsection
- 
+
