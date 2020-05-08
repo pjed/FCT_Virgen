@@ -80,19 +80,22 @@ Route::group(['middleware' => ['tutor']], function() {
     Route::get('perfilT', function () {
         return view('tutor/perfilTutor');
     });
-    
+
     //Ajax para poder modificar practicas    
     Route::any('modalModificarPracticaAjax', ['uses' => 'controladorTutor@buscarPracticaPorIdAjax', 'as' => 'modalModificarPracticaAjax']);
     Route::any('idEmpresaModificarPracticaAjax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAjax', 'as' => 'idEmpresaModificarPracticaAjax']);
-    
+
     //Ajax listas para cargar la ventana modal modificar practica
     Route::any('listarEmpresasAjax', ['uses' => 'controladorTutor@listarEmpresasAjax', 'as' => 'listarEmpresasAjax']);
     Route::any('listarAlumnoPorTutorAjax', ['uses' => 'controladorTutor@listarAlumnoPorTutorAjax', 'as' => 'listarAlumnoPorTutorAjax']);
     Route::any('listarResponsablesAjax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAjax', 'as' => 'listarResponsablesAjax']);
-    
+
 
     //Ajax para poder mostrar la modal para añadir practicas
     Route::any('idEmpresaAniadirPracticasAjax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAjax', 'as' => 'idEmpresaAniadirPracticasAjax']);
+
+    Route::post('buscarResponsables', 'controladorTutor@buscarResponsables');
+    Route::post('buscarEmpresas', 'controladorTutor@buscarEmpresas');
 
     Route::post('consultarGastosAlumno', 'controladorTutor@consultarGastoAlumno');
     Route::post('extraerDocT', 'controladorTutor@extraerDocT');
@@ -142,13 +145,18 @@ Route::group(['middleware' => ['admin']], function() {
     });
     Route::get('gestionarCursos', function () {
         $l = Conexion::listaCursosPagination();
-        return view('admin/gestionarCursos', ['l1' => $l]);
+        $datos = [
+            'buscarC' => null,
+            'l1' => $l
+        ];
+        return view('admin/gestionarCursos', $datos);
     });
     Route::get('gestionarUsuarios', function () {
         $listaUsuarios = Conexion::listarUsuarios();
-        $listaCiclos = Conexion::listarCiclos();
+        $listaCiclos = Conexion::listaCursos();
         $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
         $datos = [
+            'buscarU' => null,
             'listaUsuarios' => $listaUsuarios,
             'listaCiclos' => $listaCiclos,
             'listaCiclosSinTutor' => $listaCiclosSinTutor
@@ -157,8 +165,9 @@ Route::group(['middleware' => ['admin']], function() {
     })->name('gestionarUsuarios');
     Route::get('gestionarAlumnos', function () {
         $listaAlumnos = Conexion::listarAlumnos();
-        $listaCiclos = Conexion::listarCiclos();
+        $listaCiclos = Conexion::listaCursos();
         $datos = [
+            'buscarA' => null,
             'listaAlumnos' => $listaAlumnos,
             'listaCiclos' => $listaCiclos
         ];
@@ -166,15 +175,55 @@ Route::group(['middleware' => ['admin']], function() {
     })->name('gestionarAlumnos');
     Route::get('gestionarTutores', function () {
         $listaTutores = Conexion::listarTutores();
-        $listaCiclos = Conexion::listarCiclos();
+        $listaCiclos = Conexion::listaCursos();
         $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
         $datos = [
+            'buscarT' => null,
             'listaTutores' => $listaTutores,
             'listaCiclos' => $listaCiclos,
             'listaCiclosSinTutor' => $listaCiclosSinTutor
         ];
         return view('admin/gestionarTutores', $datos);
     })->name('gestionarTutores');
+    Route::get('buscargestionarTutores', function () {
+        $keywords = session()->get('keywords');
+        $l = Conexion::buscarTutores($keywords);
+        $listaCiclos = Conexion::listaCursos();
+        $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
+        $datos = [
+            'buscarT' => $l,
+            'listaCiclos' => $listaCiclos,
+            'listaCiclosSinTutor' => $listaCiclosSinTutor
+        ];
+        return view('admin/gestionarTutores', $datos);
+    })->name('buscargestionarTutores');
+    Route::get('buscargestionarUsuarios', function () {
+        $keywords = session()->get('keywords');
+        $l = Conexion::buscarUsuarios($keywords);
+        $listaCiclos = Conexion::listaCursos();
+        $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
+        $datos = [
+            'buscarU' => $l,
+            'listaCiclos' => $listaCiclos,
+            'listaCiclosSinTutor' => $listaCiclosSinTutor
+        ];
+        return view('admin/gestionarUsuarios', $datos);
+    })->name('buscargestionarUsuarios');
+    Route::get('buscargestionarAlumnos', function () {
+        $keywords = session()->get('keywords');
+        $l = Conexion::buscarAlumnos($keywords);
+        $listaCiclos = Conexion::listaCursos();
+        $datos = [
+            'buscarA' => $l,
+            'listaCiclos' => $listaCiclos
+        ];
+        return view('admin/gestionarAlumnos', $datos);
+    })->name('buscargestionarAlumnos');
+    Route::get('buscargestionarCursos', function () {
+        $keywords = session()->get('keywords');        
+        $l = Conexion::buscarCursos($keywords);
+        return view('admin/gestionarCursos', ['buscarC' => $l]);
+    })->name('buscargestionarCursos');
     Route::get('importarTutores', function () {
         return view('admin/importarTutores');
     });
@@ -194,6 +243,11 @@ Route::group(['middleware' => ['admin']], function() {
     Route::any('consultarGastosAjaxTabla', ['uses' => 'controladorAdmin@consultarGastoAlumnoAjax', 'as' => 'consultarGastosAjaxTabla']);
     Route::any('muestraConsultarGastosAjax', ['uses' => 'controladorAdmin@muestraConsultarGastosAjax', 'as' => 'muestraConsultarGastosAjax']);
     Route::any('gestionarGastosAjax', ['uses' => 'controladorAdmin@gestionarGastosAjax', 'as' => 'gestionarGastosAjax']);
+
+    Route::post('buscarUsuarios', 'controladorAdmin@buscarUsuarios');
+    Route::post('buscarAlumnos', 'controladorAdmin@buscarAlumnos');
+    Route::post('buscarTutores', 'controladorAdmin@buscarTutores');
+    Route::post('buscarCursos', 'controladorAdmin@buscarCursos');
 
     Route::post('gestionarCursos', 'controladorAdmin@gestionarCursos');
     Route::post('gestionarUsuarios', 'controladorAdmin@gestionarUsuarios');

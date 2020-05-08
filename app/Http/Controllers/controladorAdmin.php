@@ -8,6 +8,30 @@ use App\Auxiliar\Documentos;
 
 class controladorAdmin extends Controller {
 
+    public function buscarCursos(Request $req) {
+        $keywords = $req->get('keywords');
+        session()->put('keywords', $keywords);
+        return redirect()->route('buscargestionarCursos');
+    }
+
+    public function buscarUsuarios(Request $req) {
+        $keywords = $req->get('keywords');
+        session()->put('keywords', $keywords);
+        return redirect()->route('buscargestionarUsuarios');
+    }
+
+    public function buscarAlumnos(Request $req) {
+        $keywords = $req->get('keywords');
+        session()->put('keywords', $keywords);
+        return redirect()->route('buscargestionarAlumnos');
+    }
+
+    public function buscarTutores(Request $req) {
+        $keywords = $req->get('keywords');
+        session()->put('keywords', $keywords);
+        return redirect()->route('buscargestionarTutores');
+    }
+
     /**
      * Método que elimina los archivos .csv del directorio uploads
      * @author Pedro
@@ -1680,7 +1704,7 @@ class controladorAdmin extends Controller {
             if (file_exists($file) && $file != "images/defecto.jpeg") {
                 unlink($file);
             }
-            
+
             if ($rol_id == 3) {
 //                Conexion::borrarGastoComidaDNI($dni); 
 //                Conexion::borrarGastoPropioDNI($dni);

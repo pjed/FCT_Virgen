@@ -497,27 +497,6 @@ class Conexion {
     }
 
     /**
-     * Método para listar todos los ciclos disponibles del centro
-     * @return type lista de ciclos
-     */
-    static function listarCiclos() {
-        $ur = curso::all();
-        $listaCiclos = [];
-
-        foreach ($ur as $a) {
-            $listaCiclos [] = ['id' => $a->id,
-                'id_curso' => $a->id_curso,
-                'descripcion' => $a->descripcion,
-                'centro_cod' => $a->centro_cod,
-                'ano_academico' => $a->ano_academico,
-                'familia' => $a->familia,
-                'horas' => $a->horas,
-                'tutor' => $a->tutor];
-        }
-        return $listaCiclos;
-    }
-
-    /**
      * Método para listar todos los ciclos que no tienen tutor
      * @return type lista de ciclos sin tutor
      */
@@ -701,9 +680,7 @@ class Conexion {
                 ->where('matriculados.cursos_id_curso', $ciclo)
                 ->join('cursos', 'matriculados.cursos_id_curso', '=', 'cursos.id_curso')
                 ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
-                ->select(
-                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban'
-                )
+                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban')
                 ->get();
         return $v;
     }
@@ -724,9 +701,7 @@ class Conexion {
                 ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
                 ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
                 ->where('usuarios_roles.rol_id', 3)
-                ->select(
-                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos'
-                )
+                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos')
                 ->get();
         return $v;
     }
@@ -748,20 +723,6 @@ class Conexion {
                 . ' AND usuarios.dni = usuarios_roles.usuario_dni'
                 . ' AND tutores.usuarios_dni = "' . $dni . '"'
                 . ' AND usuarios.dni NOT IN (SELECT practicas.usuarios_dni FROM practicas WHERE practicas.usuarios_dni = usuarios.dni);';
-//        $v = \DB::table('tutores')
-//                ->where('tutores.usuarios_dni', $dni)
-//                ->join('matriculados', 'matriculados.cursos_id_curso', '=', 'tutores.cursos_id_curso')
-//                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
-//                ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
-//                ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
-//                ->join('practicas', 'practicas.usuarios_dni', '=', 'usuarios.dni')
-//                ->where('usuarios_roles.rol_id', 3)
-//                ->whereNotIn('usuarios.dni',['practicas.usuarios_dni'])
-//                ->select(
-//                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos'
-//                )
-//                ->get();
-//        $sql = "SELECT cursos.descripcion, cursos.horas from cursos where id_curso = '" . $curso . "';";
         $v = \DB::select($sql);
         return $v;
     }
@@ -799,9 +760,7 @@ class Conexion {
     static function buscarPracticaPorId($idPractica) {
         $v = \DB::table('practicas')
                 ->where('id', $idPractica)
-                ->select(
-                        'id AS idPractica', 'empresas_id AS idEmpresa', 'usuarios_dni AS dniAlumno', 'cod_proyecto AS codProyecto', 'responsables_id AS idResponsable', 'gastos AS gasto', 'fecha_inicio AS fechaInicio', 'fecha_fin AS fechaFin', 'apto'
-                )
+                ->select('id AS idPractica', 'empresas_id AS idEmpresa', 'usuarios_dni AS dniAlumno', 'cod_proyecto AS codProyecto', 'responsables_id AS idResponsable', 'gastos AS gasto', 'fecha_inicio AS fechaInicio', 'fecha_fin AS fechaFin', 'apto')
                 ->first();
         return $v;
     }
@@ -822,9 +781,7 @@ class Conexion {
                 ->join('matriculados', 'matriculados.cursos_id_curso', '=', 'tutores.cursos_id_curso')
                 ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
                 ->join('practicas', 'practicas.usuarios_dni', '=', 'usuarios.dni')
-                ->select(
-                        'practicas.id AS idPractica', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto'
-                )
+                ->select('practicas.id AS idPractica', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto')
                 ->paginate(8);
         return $v;
     }
@@ -844,9 +801,7 @@ class Conexion {
                 ->join('matriculados', 'matriculados.cursos_id_curso', '=', 'tutores.cursos_id_curso')
                 ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
                 ->join('practicas', 'practicas.usuarios_dni', '=', 'usuarios.dni')
-                ->select(
-                        'practicas.id AS id', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto'
-                )
+                ->select('practicas.id AS id', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto')
                 ->get();
         return $v;
     }
@@ -946,11 +901,8 @@ class Conexion {
      * @param type $id
      */
     static function borrarResponsableEmpresa($id) {
-        $now = new \DateTime();
-        $updated_at = $now->format('Y-m-d H:i:s');
         try {
-            $p = responsable::where('empresa_id', $id)
-                    ->delete();
+            $p = responsable::where('empresa_id', $id)->delete();
         } catch (\Exception $e) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Error.
@@ -1346,6 +1298,52 @@ class Conexion {
         }
     }
 
+    static function buscarCursos($keywords) {
+        $v = \DB::table('cursos')
+                ->where('id_curso', 'like', '%' . $keywords . '%')
+                ->orWhere('descripcion', 'like', '%' . $keywords . '%')
+                ->orWhere('familia', 'like', '%' . $keywords . '%')
+                ->select('id_curso AS id', 'descripcion', 'ano_academico AS anioAcademico', 'familia', 'horas')
+                ->paginate(8);
+        return $v;
+    }
+
+    static function buscarUsuarios($keywords) {
+        $v = [];
+        $v = \DB::table('usuarios')
+                ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
+                ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
+                ->orWhere('usuarios.apellidos', 'like', '%' . $keywords . '%')
+                ->orWhere('usuarios.email', 'like', '%' . $keywords . '%')
+                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios_roles.rol_id AS rol_id', 'usuarios.foto AS foto')
+                ->paginate(8);
+        return $v;
+    }
+
+    static function buscarAlumnos($keywords) {
+        $v = [];
+        $v = \DB::table('matriculados')
+                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
+                ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
+                ->orWhere('usuarios.apellidos', 'like', '%' . $keywords . '%')
+                ->orWhere('usuarios.email', 'like', '%' . $keywords . '%')
+                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios.foto AS foto', 'matriculados.cursos_id_curso as curso')
+                ->paginate(8);
+        return $v;
+    }
+
+    static function buscarTutores($keywords) {
+        $v = [];
+        $v = \DB::table('tutores')
+                ->join('usuarios', 'usuarios.dni', '=', 'tutores.usuarios_dni')
+                ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
+                ->orWhere('usuarios.apellidos', 'like', '%' . $keywords . '%')
+                ->orWhere('usuarios.email', 'like', '%' . $keywords . '%')
+                ->select('tutores.idtutores AS idtutores', 'tutores.cursos_id_curso AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.foto AS foto')
+                ->paginate(8);
+        return $v;
+    }
+
     static function insertarGastoComida($importe, $fecha, $foto) {
         try {
             $now = new \DateTime();
@@ -1378,7 +1376,6 @@ class Conexion {
     static function obtenerIdComidaIngresada() {
         $comida = comida::all()->last();
         $id = $comida->id;
-
         return $id;
     }
 
@@ -1424,9 +1421,7 @@ class Conexion {
                 ->whereNotIn('gastos.comidas_id', [0])
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
                 ->join('comidas', 'comidas.id', '=', 'gastos.comidas_id')
-                ->select(
-                        'gastos.id AS idGasto', 'comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto'
-                )
+                ->select('gastos.id AS idGasto', 'comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto')
                 ->paginate(8);
         return $v;
     }
@@ -1443,9 +1438,7 @@ class Conexion {
                 ->where('gastos.tipo', 1)
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
                 ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')
-                ->select(
-                        'gastos.id AS idGasto', 'gastos.desplazamiento AS desplazamiento', 'transportes.id AS idTransporte', 'transportes.tipo AS tipoTransporte', 'transportes.donde AS donde'
-                )
+                ->select('gastos.id AS idGasto', 'gastos.desplazamiento AS desplazamiento', 'transportes.id AS idTransporte', 'transportes.tipo AS tipoTransporte', 'transportes.donde AS donde')
                 ->paginate(8);
         return $v;
     }
@@ -1464,9 +1457,7 @@ class Conexion {
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
                 ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')
                 ->join('colectivos', 'transportes.id', '=', 'colectivos.transportes_id')
-                ->select(
-                        'transportes.id AS idTransporte', 'transportes.donde AS donde', 'colectivos.id AS idColectivos', 'colectivos.foto AS foto', 'colectivos.importe AS precio'
-                )
+                ->select('transportes.id AS idTransporte', 'transportes.donde AS donde', 'colectivos.id AS idColectivos', 'colectivos.foto AS foto', 'colectivos.importe AS precio')
                 ->paginate(8);
         return $v;
     }
@@ -1478,7 +1469,7 @@ class Conexion {
      */
     static function listarGastosTransportesPropiosPagination($dni) {
         $v = [];
-        $sql = 'SELECT transportes.donde AS donde,propios.id AS idPropios, propios.kms AS kms, propios.precio AS precio FROM `usuarios` join gastos on gastos.usuarios_dni=usuarios.dni join transportes on transportes.id=gastos.transportes_id join propios On transportes.id=propios.transportes_id WHERE usuarios.dni="05931616P" and gastos.tipo=1 and gastos.desplazamiento=1 ';
+//        $sql = 'SELECT transportes.donde AS donde,propios.id AS idPropios, propios.kms AS kms, propios.precio AS precio FROM `usuarios` join gastos on gastos.usuarios_dni=usuarios.dni join transportes on transportes.id=gastos.transportes_id join propios On transportes.id=propios.transportes_id WHERE usuarios.dni="05931616P" and gastos.tipo=1 and gastos.desplazamiento=1 ';
         $v = \DB::table('usuarios')
                 ->where('usuarios.dni', $dni)
                 ->where('gastos.tipo', 1)
@@ -1486,9 +1477,7 @@ class Conexion {
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
                 ->join('transportes', 'transportes.id', '=', 'gastos.transportes_id')
                 ->join('propios', 'transportes.id', '=', 'propios.transportes_id')
-                ->select(
-                        'transportes.id AS idTransporte', 'transportes.donde AS donde', 'propios.id AS idPropios', 'propios.kms AS kms', 'propios.precio AS precio'
-                )
+                ->select('transportes.id AS idTransporte', 'transportes.donde AS donde', 'propios.id AS idPropios', 'propios.kms AS kms', 'propios.precio AS precio')
                 ->paginate(8);
         return $v;
     }
@@ -1949,14 +1938,7 @@ class Conexion {
     static function listaCursos() {
         $v = [];
         $v = \DB::table('cursos')
-                ->join('tutores', 'cursos.id_curso', '=', 'tutores.cursos_id_curso')
-                ->join('usuarios', 'usuarios.dni', '=', 'tutores.usuarios_dni')
-                ->select(
-                        'tutores.idtutores AS idtutores', ' AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono'
-                )
-                ->select(
-                        'cursos.id_curso AS id', 'cursos.descripcion AS descripcion', 'cursos.ano_academico AS anioAcademico', 'cursos.familia AS familia', 'cursos.horas AS horas', 'tutores.usuarios_dni AS tutorDni', 'usuarios.nombre AS tutorNombre', 'usuarios.apellidos AS tutorApellidos'
-                )
+                ->select('id_curso AS id', 'descripcion', 'ano_academico AS anioAcademico', 'familia', 'horas')
                 ->get();
         return $v;
     }
@@ -1967,9 +1949,7 @@ class Conexion {
      */
     static function listaCursosPagination() {
         $v = [];
-        $v = \DB::table('cursos')->select(
-                        'id_curso AS id', 'descripcion', 'ano_academico AS anioAcademico', 'familia', 'horas'
-                )
+        $v = \DB::table('cursos')->select('id_curso AS id', 'descripcion', 'ano_academico AS anioAcademico', 'familia', 'horas')
                 ->paginate(8);
         return $v;
     }

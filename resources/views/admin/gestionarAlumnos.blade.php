@@ -25,9 +25,21 @@ Gestionar alumnos
         </div>
     </div>
 
+    <!-- Buscador Alumnos-->
+    <div class="row">
+        <div class="col-sm-9 col-md-9"></div>
+        <div class="col-sm-3 col-md-3">
+            <form action="buscarAlumnos" method="POST">
+                {{ csrf_field() }}
+                <input type="text" id="keywords" name="keywords" placeholder="nombre, apellido, correo" size="30" maxlength="30">
+                <button type="submit" class="buscar btn btn-primary" name="search"></button>
+            </form>
+        </div>
+    </div>
+
     <!-- Tabla de alumnos -->
     <div class="row">
-        <div class="col-sm col-md col-lg">
+        <div class="col-sm col-md">
             <div class="table-responsive ">
                 <table class="table table-striped  table-hover table-bordered">
                     <thead class="thead-dark">
@@ -99,16 +111,9 @@ Gestionar alumnos
                                                             <label class="col-sm text-center">
                                                                 Ciclo:
                                                                 <select name="selectCiclo">
-
-                                                                    <?php
-                                                                    foreach ($listaCiclos as $value1) {
-                                                                        ?>
-                                                                        <option value="<?php echo $value1['id_curso'] ?>">
-                                                                            <?php echo $value1['id_curso'] ?>
-                                                                        </option>
-                                                                        <?php
-                                                                    }
-                                                                    ?>
+                                                                    <?php foreach ($listaCiclos as $value1) { ?>
+                                                                        <option value="<?php echo $value1->id; ?>"><?php echo $value1->id; ?></option>
+                                                                    <?php } ?>
                                                                 </select>
                                                             </label>
                                                         </div>
@@ -125,9 +130,38 @@ Gestionar alumnos
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        foreach ($listaAlumnos as $value) {
-                            ?>
+                        @if($buscarA != null)
+                        <?php foreach ($buscarA as $value) { ?>
+                        <form action="gestionarAlumnos" method="POST">
+                            {{ csrf_field() }}
+                            <tr class="bg-success">
+                                <td>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $value->foto; ?>"/>
+                                    <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $value->dni; ?>" readonly/>
+                                </td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
+                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" pattern="[9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" required pattern="[6-7]{1}[0-9]{8}"  title="Introduzca un teléfono válido"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="iban" value="<?php echo $value->iban; ?>" pattern="^ES\d{22}$"/></td>
+                                <td>
+                                    <select class="sel" name="selectCiclo">
+                                        <?php foreach ($listaCiclos as $value1) { ?>
+                                            <option value="<?php echo $value1->id; ?>" <?php if ($value1->id == $value->curso) { ?>selected<?php } ?>><?php echo $value1->id; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn editar" name="editar" ></button>
+                                    <button type="submit" class="btn eliminar" name="eliminar" ></button>
+                                </td>
+                            </tr>
+                        </form>
+                    <?php } ?>
+                    @else
+                    <?php foreach ($listaAlumnos as $value) { ?>
                         <form action="gestionarAlumnos" method="POST">
                             {{ csrf_field() }}
                             <tr>
@@ -144,12 +178,9 @@ Gestionar alumnos
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="iban" value="<?php echo $value->iban; ?>" pattern="^ES\d{22}$"/></td>
                                 <td>
                                     <select class="sel" name="selectCiclo">
-                                        <?php foreach ($listaCiclos as $value1) {
-                                            ?>
-                                            <option value="<?php echo $value1['id_curso'] ?>" <?php if ($value1['id_curso'] == $value->curso) { ?>selected<?php } ?>><?php echo $value1['id_curso'] ?></option>
-                                            <?php
-                                        }
-                                        ?>
+                                        <?php foreach ($listaCiclos as $value1) { ?>
+                                            <option value="<?php echo $value1->id; ?>" <?php if ($value1->id == $value->curso) { ?>selected<?php } ?>><?php echo $value1->id; ?></option>
+                                        <?php } ?>
                                     </select>
                                 </td>
                                 <td>
@@ -158,9 +189,8 @@ Gestionar alumnos
                                 </td>
                             </tr>
                         </form>
-                        <?php
-                    }
-                    ?>
+                    <?php } ?>
+                    @endif
                     </tbody>
                 </table>
             </div>
@@ -168,10 +198,18 @@ Gestionar alumnos
     </div>
 </div>
 
+@if($buscarA != null)
+<div class="row">
+    <div class="col-sm col-md col-lg">
+        {{ $buscarA->links()}}
+    </div>
+</div>
+@else
 <div class="row">
     <div class="col-sm col-md col-lg">
         {{ $listaAlumnos->links()}}
     </div>
 </div>
+@endif
 @endsection
 

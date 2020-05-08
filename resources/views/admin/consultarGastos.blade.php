@@ -46,7 +46,7 @@ Consultar Gastos Alumnos
                         <?php
                         foreach ($l1 as $value) {
                             ?>
-                        <option value="<?php echo $value->id; ?>" <?php if($value->id == $ciclo){?> selected <?php }?>><?php echo $value->id; ?></option>
+                            <option value="<?php echo $value->id; ?>" <?php if ($value->id == $ciclo) { ?> selected <?php } ?>><?php echo $value->id; ?></option>
                             <?php
                         }
                         ?>
@@ -55,6 +55,7 @@ Consultar Gastos Alumnos
             </form>
         </div>
     </div>
+
     <!-- Seleccionar alumno -->
     <div class="row justify-content-center">
         <div class="col-sm-3 col-md-3">
@@ -69,6 +70,7 @@ Consultar Gastos Alumnos
             </form>
         </div>
     </div>
+
     @if($dniAlumno != null)
     <br>
     <h1 class="text-center">
@@ -76,13 +78,14 @@ Consultar Gastos Alumnos
         $ciclo = session()->get('ciclo');
         foreach ($l2 as $key) {
             if ($key->dni == $dniAlumno) {
-                echo $key->nombre.' '.$key->apellidos.' de '.$ciclo;
+                echo $key->nombre . ' ' . $key->apellidos . ' de ' . $ciclo;
             }
         }
         ?>
     </h1>
     <br>
     @endif
+
     @if ($gc !=null) 
     <!-- Gestionar Gastos Comida -->
     <div id="comida" class="row justify-content-center">
@@ -98,10 +101,7 @@ Consultar Gastos Alumnos
                         </tr>
                     </thead>
                     <tbody>
-
-                        <?php
-                        foreach ($gc as $key) {
-                            ?>
+                        <?php foreach ($gc as $key) { ?>
                         <form action="consultarGastos" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <tr>
@@ -123,9 +123,7 @@ Consultar Gastos Alumnos
                                 </td>
                             </tr>
                         </form>
-                        <?php
-                    }
-                    ?>
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -153,10 +151,7 @@ Consultar Gastos Alumnos
                         </tr>
                     </thead>
                     <tbody>
-
-                        <?php
-                        foreach ($gtc as $key) {
-                            ?>
+                        <?php foreach ($gtc as $key) { ?>
                         <form action="consultarGastos" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <tr>
@@ -178,9 +173,7 @@ Consultar Gastos Alumnos
                                 </td>
                             </tr>
                         </form>
-                        <?php
-                    }
-                    ?>
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -208,14 +201,12 @@ Consultar Gastos Alumnos
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        foreach ($gtp as $key) {
-                            ?>
+                        <?php foreach ($gtp as $key) { ?>
                         <form action="consultarGastos" method="POST">
                             {{ csrf_field() }}
                             <tr>
                                 <td>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>' >
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idTransporte" value='<?php echo $key->idTransporte; ?>'/>
                                     <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>" readonly/>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idPropios; ?>" />
                                 </td>
@@ -228,9 +219,7 @@ Consultar Gastos Alumnos
                                 </td>
                             </tr>
                         </form>
-                        <?php
-                    }
-                    ?>
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>

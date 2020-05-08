@@ -1,20 +1,14 @@
-<?php
-
-use App\Auxiliar\Conexion;
-?>
 @extends('maestra.maestraAdmin')
 
 @section('titulo') 
 Gestionar usuarios
 @endsection
+
 @section('javascript') 
 <script src="{{asset ('js/admin/js_aniadirUsuario.js')}}"></script>
 @endsection
 
 @section('contenido') 
-
-
-
 <div class="container-fluid">  
 
     <!-- Migas de pan -->
@@ -35,9 +29,21 @@ Gestionar usuarios
         </div>
     </div>    
 
+    <!-- Buscador Usuarios-->
+    <div class="row">
+        <div class="col-sm-9 col-md-9"></div>
+        <div class="col-sm-3 col-md-3">
+            <form action="buscarUsuarios" method="POST">
+                {{ csrf_field() }}
+                <input type="text" id="keywords" name="keywords" placeholder="nombre, apellido, correo" size="30" maxlength="30">
+                <button type="submit" class="buscar btn btn-primary" name="search"></button>
+            </form>
+        </div>
+    </div>
+
     <!-- Tabla de usuarios -->
     <div class="row">
-        <div class="col-sm col-md col-lg">
+        <div class="col-sm col-md">
             <div class="table-responsive ">
                 <table class="table table-striped  table-hover table-bordered">
                     <thead class="thead-dark">
@@ -134,16 +140,9 @@ Gestionar usuarios
                                                             <label class="col-sm text-center">
                                                                 Ciclo:
                                                                 <select name="selectCiclo">
-
-                                                                    <?php
-                                                                    foreach ($listaCiclos as $value1) {
-                                                                        ?>
-                                                                        <option value="<?php echo $value1['id_curso'] ?>">
-                                                                            <?php echo $value1['id_curso'] ?>
-                                                                        </option>
-                                                                        <?php
-                                                                    }
-                                                                    ?>
+                                                                    <?php foreach ($listaCiclos as $value1) { ?>
+                                                                        <option value="<?php echo $value1->id; ?>"><?php echo $value1->id; ?></option>
+                                                                    <?php } ?>
                                                                 </select>
                                                             </label>
                                                         </div>
@@ -245,16 +244,9 @@ Gestionar usuarios
                                                             <label class="col-sm text-center">
                                                                 Ciclo:
                                                                 <select name="selectCiclo">
-
-                                                                    <?php
-                                                                    foreach ($listaCiclosSinTutor as $value1) {
-                                                                        ?>
-                                                                        <option value="<?php echo $value1->id_curso; ?>">
-                                                                            <?php echo $value1->id_curso; ?>
-                                                                        </option>
-                                                                        <?php
-                                                                    }
-                                                                    ?>
+                                                                    <?php foreach ($listaCiclosSinTutor as $value) { ?>
+                                                                        <option value="<?php echo $value->id_curso; ?>"> <?php echo $value->id_curso; ?></option>
+                                                                    <?php } ?>
                                                                 </select>
                                                             </label>
                                                         </div>
@@ -309,16 +301,9 @@ Gestionar usuarios
                                                             <label class="col-sm text-center">
                                                                 Ciclo:
                                                                 <select name="selectCiclo">
-
-                                                                    <?php
-                                                                    foreach ($listaCiclosSinTutor as $value1) {
-                                                                        ?>
-                                                                        <option value="<?php echo $value1->id_curso; ?>">
-                                                                            <?php echo $value1->id_curso; ?>
-                                                                        </option>
-                                                                        <?php
-                                                                    }
-                                                                    ?>
+                                                                    <?php foreach ($listaCiclosSinTutor as $valu) { ?>
+                                                                        <option value="<?php echo $valu->id_curso; ?>"><?php echo $valu->id_curso; ?></option>
+                                                                    <?php } ?>
                                                                 </select>
                                                             </label>
                                                         </div>
@@ -334,10 +319,39 @@ Gestionar usuarios
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php
-                        foreach ($listaUsuarios as $value) {
-                            ?>
+                    <tbody>                        
+                        @if($buscarU != null)
+                        <?php foreach ($buscarU as $value) { ?>
+                        <form action="gestionarUsuarios" method="POST">
+                            {{ csrf_field() }}
+                            <tr class="bg-success">
+                                <td>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $value->foto; ?>"/>
+                                    <input type="text" class="form-control form-control-sm form-control-md " name="dni" value="<?php echo $value->dni; ?>" readonly/>
+                                </td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
+                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" required/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" pattern="[9]{1}[0-9]{8}" title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" pattern="[6-7]{1}[0-9]{8}"  title="Introduzca un teléfono válido"/></td>
+                                <td>
+                                    <select class="sel" name="selectRol">
+                                        <option value="1" <?php if ($value->rol_id == 1) { ?>selected<?php } ?>>Administrador</option>
+                                        <option value="2" <?php if ($value->rol_id == 2) { ?>selected<?php } ?>>Tutor</option>
+                                        <option value="3" <?php if ($value->rol_id == 3) { ?>selected<?php } ?>>Alumno</option>
+                                        <option value="4" <?php if ($value->rol_id == 4) { ?>selected<?php } ?>>Tutor-Administrador</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn editar" name="editar"></button>
+                                    <button type="submit" class="btn eliminar" name="eliminar"></button>
+                                </td>
+                            </tr>
+                        </form>
+                    <?php } ?>
+                    @else
+                    <?php foreach ($listaUsuarios as $value) { ?>
                         <form action="gestionarUsuarios" method="POST">
                             {{ csrf_field() }}
                             <tr>
@@ -365,19 +379,25 @@ Gestionar usuarios
                                 </td>
                             </tr>
                         </form>
-                        <?php
-                    }
-                    ?>
+                    <?php } ?>
+                    @endif
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-
+@if($buscarU != null)
+<div class="row">
+    <div class="col-sm col-md col-lg">
+        {{ $buscarU->links()}}
+    </div>
+</div>
+@else
 <div class="row">
     <div class="col-sm col-md col-lg">
         {{ $listaUsuarios->links()}}
     </div>
 </div>
+@endif
 @endsection

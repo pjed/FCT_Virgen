@@ -28,9 +28,21 @@ Gestionar Cursos
         </div>
     </div>
 
+    <!-- Buscador Cursos-->
+    <div class="row">
+        <div class="col-sm-9 col-md-9"></div>
+        <div class="col-sm-3 col-md-3">
+            <form action="buscarCursos" method="POST">
+                {{ csrf_field() }}
+                <input type="text" id="keywords" name="keywords" placeholder="ciclo, descripcion, familia" size="30" maxlength="30">
+                <button type="submit" class="buscar btn btn-primary" name="search"></button>
+            </form>
+        </div>
+    </div>
+
     <!-- Tabla de Cursos -->
     <div class="row">
-        <div class="col-sm col-md col-lg">
+        <div class="col-sm col-md">
             <div class="table-responsive ">
                 <table class="table table-striped  table-hover table-bordered">
                     <thead class="thead-dark">
@@ -90,27 +102,41 @@ Gestionar Cursos
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        foreach ($l1 as $key) {
-                            ?>
+                        @if($buscarC != null)
+                        <?php foreach ($buscarC as $key) { ?>
                         <form action="gestionarCursos" method="POST">
                             {{ csrf_field() }}
-                            <tr>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key->id; ?>" required/></td>
+                            <tr class="bg-success">
+                                <td><input type="text" class="form-control form-control-sm" name="id" value="<?php echo $key->id; ?>" required/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="descripcion" value="<?php echo $key->descripcion; ?>"  required/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="anioAcademico" value="<?php echo $key->anioAcademico; ?>" placeholder="2019/2020"></td>
+                                <td><input type="text" class="form-control form-control-sm" name="anioAcademico" value="<?php echo $key->anioAcademico; ?>" placeholder="2019/2020"></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="familia" value="<?php echo $key->familia; ?>"/></td>
-                                <td><input type="number" class="form-control form-control-sm form-control-md" name="horas" value="<?php echo $key->horas; ?>"/></td>
-
+                                <td><input type="number" class="form-control form-control-sm" name="horas" value="<?php echo $key->horas; ?>"/></td>
                                 <td>
                                     <button type="submit" class="btn editar" name="editar" ></button>
                                     <button type="submit" class="btn eliminar" name="eliminar" ></button>
                                 </td>
                             </tr>
                         </form>
-                        <?php
-                    }
-                    ?>
+                    <?php } ?>
+                    @else
+                    <?php foreach ($l1 as $key) { ?>
+                        <form action="gestionarCursos" method="POST">
+                            {{ csrf_field() }}
+                            <tr>
+                                <td><input type="text" class="form-control form-control-sm" name="id" value="<?php echo $key->id; ?>" required/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="descripcion" value="<?php echo $key->descripcion; ?>"  required/></td>
+                                <td><input type="text" class="form-control form-control-sm" name="anioAcademico" value="<?php echo $key->anioAcademico; ?>" placeholder="2019/2020"></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="familia" value="<?php echo $key->familia; ?>"/></td>
+                                <td><input type="number" class="form-control form-control-sm" name="horas" value="<?php echo $key->horas; ?>"/></td>
+                                <td>
+                                    <button type="submit" class="btn editar" name="editar" ></button>
+                                    <button type="submit" class="btn eliminar" name="eliminar" ></button>
+                                </td>
+                            </tr>
+                        </form>
+                    <?php } ?>
+                    @endif
                     </tbody>
                 </table>
             </div>
@@ -118,9 +144,17 @@ Gestionar Cursos
     </div>
 </div>
 
+@if($buscarC != null)
+<div class="row">
+    <div class="col-sm col-md col-lg">
+        {{ $buscarC->links()}}
+    </div>
+</div>
+@else
 <div class="row">
     <div class="col-sm col-md col-lg">
         {{ $l1->links()}}
     </div>
 </div>
+@endif
 @endsection
