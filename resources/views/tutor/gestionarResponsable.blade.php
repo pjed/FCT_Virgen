@@ -154,7 +154,7 @@ Gestionar Responsable
                 <?php foreach ($lu as $key) { ?>
                     <form action="gestionarResponsable" method="POST">
                         {{ csrf_field() }}
-                        <tr class="bg-success">
+                        <tr>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key['id']; ?>"/>
                                 <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $key['dni']; ?>" readonly/>

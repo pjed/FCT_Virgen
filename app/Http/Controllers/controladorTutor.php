@@ -49,7 +49,8 @@ class controladorTutor extends Controller {
             'l3' => $l3,
             'l4' => $l4
         ];
-        return view('tutor/gestionarPracticas', [$datos]);
+        return view('tutor/gestionarPracticas', $datos);
+        return view('tutor/gestionarPracticas', ['buscarP' => $l]);
 //        return redirect()->route('buscarPracticas');
     }
 

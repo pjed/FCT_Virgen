@@ -1331,9 +1331,10 @@ class Conexion {
                 ->join('matriculados', 'matriculados.cursos_id_curso', '=', 'tutores.cursos_id_curso')
                 ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
                 ->join('practicas', 'practicas.usuarios_dni', '=', 'usuarios.dni')
+                ->join('empresas', 'empresas.id', '=', 'practicas.empresas_id')
                 ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
                 ->orWhere('usuarios.apellidos', 'like', '%' . $keywords . '%')
-                ->orWhere('practicas.empresas_id', 'like', '%' . $keywords . '%')
+                ->orWhere('empresas.nombre', 'like', '%' . $keywords . '%')
                 ->select('practicas.id AS idPractica', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto')
                 ->paginate(8);
         return $v;

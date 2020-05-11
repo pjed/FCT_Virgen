@@ -1,3 +1,6 @@
+<?php
+
+?>
 @extends('maestra.maestraTutor')
 
 @section('titulo') 
@@ -32,7 +35,7 @@ Gestionar  Practicas
     <div class="col-sm-3 col-md-3">
         <form action="buscarPracticas" method="POST">
             {{ csrf_field() }}
-            <input type="text" id="keywords" name="keywords" placeholder="nombre, apellido, CIF" size="30" maxlength="30">
+            <input type="text" id="keywords" name="keywords" placeholder="nombre de alumno, apellido de alumno, nombre de empresa" size="30" maxlength="30">
             <button type="submit" class="buscar btn btn-primary" name="search"></button>
         </form>
     </div>
@@ -140,141 +143,7 @@ Gestionar  Practicas
                 </thead>
                 <tbody>
                     @if($buscarP != null)
-                    <?php foreach ($buscarP as $key) { ?>
-                    <form action="gestionarPracticas" method="POST">
-                        {{ csrf_field() }}
-                        <tr>
-                            <td>  
-                                <input type="hidden" name="idPractica" value="<?php echo $key->idPractica; ?>"/>                              
-                                <input type="hidden" name="idEmpresa" value="<?php echo $key->idEmpresa; ?>"/>
-                                <?php if ($key->idEmpresa == 0) { ?>
-                                    <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="Ninguno" readonly/>
-                                    <?php
-                                }
-                                foreach ($l1 as $k1) {
-                                    if ($key->idEmpresa == $k1->id) {
-                                        ?>
-                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $k1->nombre; ?>" readonly/>
-                                        <?php
-                                    }
-                                }
-                                ?>                               
-                            </td>
-                            <td>
-                                <input type="hidden" class="form-control form-control-sm form-control-md" name="dniAlumno" value="<?php echo $key->dniAlumno; ?>"/>                                  
-                                <?php
-                                foreach ($l2 as $k2) {
-                                    if ($key->dniAlumno == $k2->dni) {
-                                        ?> 
-                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreAlumno" value="<?php echo $k2->nombre . ', ' . $k2->apellidos; ?>" readonly/>
-                                        <?php
-                                    }
-                                }
-                                ?>
-                            </td>
-                            <td><input type="text" class="form-control form-control-sm form-control-md" name="codProyecto" value="<?php echo $key->codProyecto; ?>" readonly/></td>
-                            <td>
-                                <input type="hidden" class="form-control form-control-sm form-control-md" name="idResponsable" value="<?php echo $key->idResponsable; ?>"/>
-                                <?php if ($key->idResponsable == 0) { ?>
-                                    <input type="text" class="form-control form-control-sm form-control-md" name="nombreResponsable" value="Ninguno" readonly/>
-                                    <?php
-                                }
-                                foreach ($l3 as $k3) {
-                                    if ($key->idResponsable == $k3->id) {
-                                        ?>
-                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreResponsable" value="<?php echo $k3->nombre . ', ' . $k3->apellidos; ?>" readonly/>
-                                        <?php
-                                    }
-                                }
-                                ?>
-                            </td>
-                            <td>
-                                <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idPractica; ?>"/>
-                                <input type="text" class="form-control form-control-sm form-control-md" name="gasto" value="<?php echo $key->gasto; ?>" readonly/>
-                            </td>
-                            <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" <?php if ($key->apto == 1) { ?> checked <?php } ?>  readonly/></td>
-                            <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>" readonly/></td>
-                            <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaFin" value="<?php echo $key->fechaFin; ?>" readonly/></td>
-                            <td>
-                                <button type="button" class="btn btn-sm btn-primary" id="addPeriodo"  data-toggle="modal" data-target="#exampleModal2">
-                                    FTC
-                                </button>
-                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <h3 class="text-center">Añadir Período</h3>
-                                                <div class="row justify-content-center form-group">
-                                                    <label class="col-sm text-center">
-                                                        Periodo:
-                                                        <input type="text" name="periodo" id="periodo" placeholder="Periodo">
-                                                    </label>
-                                                </div>
-                                                <div class="row justify-content-center form-group">
-                                                    <input type="submit" required id="recibiFTC" class="btn btn-primary btn-sm" name="recibiFCT" value="Generar"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-sm btn-primary" id="addPeriodo2" data-toggle="modal" data-target="#exampleModal3">
-                                    FCT DUAL
-                                </button> 
-                                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <h3 class="text-center">Añadir Período</h3>
-                                                <div class="row justify-content-center form-group">
-                                                    <label class="col-sm text-center">
-                                                        Modalidad:
-                                                        <select name="modalidad">
-                                                            <option selected value="0">Elige una modalidad</option>
-                                                            <option value="A">A</option>
-                                                            <option value="B">B</option>
-                                                            <option value="C">C</option>
-                                                        </select>
-                                                    </label>
-
-                                                    <label class="col-sm text-center">
-                                                        Duración del proyecto:
-                                                        <select name="duracion">
-                                                            <option selected value="0">Elige duración</option>
-                                                            <option value="1">CURSO</option>
-                                                            <option value="2">CURSOS</option>
-                                                        </select>
-                                                    </label>
-                                                    <label class="col-sm text-center">
-                                                        Código del Proyecto:
-                                                        <input type="text" name="codigo" id="codigo" placeholder="Código" value="CLM" maxlength="6">
-                                                    </label>
-                                                    <label class="col-sm text-center">
-                                                        Curso Académico de Inicio:
-                                                        <input type="date" name="inicio" id="inicio">
-                                                    </label>
-                                                    <label class="col-sm text-center">
-                                                        Curso académico de finalización:
-                                                        <input type="date" name="final" id="final">
-                                                    </label>
-                                                </div>
-                                                <div class="row justify-content-center form-group">
-                                                    <input type="submit" id="recibiFPDUAL" class="btn btn-primary btn-sm" name="recibiFPDUAL" value="Generar"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <!-- Editar Practicas -->                                
-                                <button type="button" class="btn editar modificar" value="<?php echo $key->idPractica; ?>" data-id="<?php echo $key->idPractica; ?>"  data-toggle="modal" data-target="#editar1"></button>
-                                <button type="submit" class="btn eliminar" name="eliminar" ></button>
-                            </td>
-                        </tr>
-                    </form>
-                <?php } ?>
-                @else
-                <?php foreach ($lu as $key) { ?>
+<?php foreach ($buscarP as $key) { ?>
                     <form action="gestionarPracticas" method="POST">
                         {{ csrf_field() }}
                         <tr class="bg-success">
@@ -407,6 +276,140 @@ Gestionar  Practicas
                         </tr>
                     </form>
                 <?php } ?>
+                @else
+<?php foreach ($lu as $key) { ?>
+                    <form action="gestionarPracticas" method="POST">
+                        {{ csrf_field() }}
+                        <tr>
+                            <td>  
+                                <input type="hidden" name="idPractica" value="<?php echo $key->idPractica; ?>"/>                              
+                                <input type="hidden" name="idEmpresa" value="<?php echo $key->idEmpresa; ?>"/>
+                                <?php if ($key->idEmpresa == 0) { ?>
+                                    <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="Ninguno" readonly/>
+                                    <?php
+                                }
+                                foreach ($l1 as $k1) {
+                                    if ($key->idEmpresa == $k1->id) {
+                                        ?>
+                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $k1->nombre; ?>" readonly/>
+                                        <?php
+                                    }
+                                }
+                                ?>                               
+                            </td>
+                            <td>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="dniAlumno" value="<?php echo $key->dniAlumno; ?>"/>                                  
+                                <?php
+                                foreach ($l2 as $k2) {
+                                    if ($key->dniAlumno == $k2->dni) {
+                                        ?> 
+                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreAlumno" value="<?php echo $k2->nombre . ', ' . $k2->apellidos; ?>" readonly/>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="codProyecto" value="<?php echo $key->codProyecto; ?>" readonly/></td>
+                            <td>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="idResponsable" value="<?php echo $key->idResponsable; ?>"/>
+                                <?php if ($key->idResponsable == 0) { ?>
+                                    <input type="text" class="form-control form-control-sm form-control-md" name="nombreResponsable" value="Ninguno" readonly/>
+                                    <?php
+                                }
+                                foreach ($l3 as $k3) {
+                                    if ($key->idResponsable == $k3->id) {
+                                        ?>
+                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreResponsable" value="<?php echo $k3->nombre . ', ' . $k3->apellidos; ?>" readonly/>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idPractica; ?>"/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="gasto" value="<?php echo $key->gasto; ?>" readonly/>
+                            </td>
+                            <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" <?php if ($key->apto == 1) { ?> checked <?php } ?>  readonly/></td>
+                            <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>" readonly/></td>
+                            <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaFin" value="<?php echo $key->fechaFin; ?>" readonly/></td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary" id="addPeriodo"  data-toggle="modal" data-target="#exampleModal2">
+                                    FTC
+                                </button>
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <h3 class="text-center">Añadir Período</h3>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Periodo:
+                                                        <input type="text" name="periodo" id="periodo" placeholder="Periodo">
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <input type="submit" required id="recibiFTC" class="btn btn-primary btn-sm" name="recibiFCT" value="Generar"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-primary" id="addPeriodo2" data-toggle="modal" data-target="#exampleModal3">
+                                    FCT DUAL
+                                </button> 
+                                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <h3 class="text-center">Añadir Período</h3>
+                                                <div class="row justify-content-center form-group">
+                                                    <label class="col-sm text-center">
+                                                        Modalidad:
+                                                        <select name="modalidad">
+                                                            <option selected value="0">Elige una modalidad</option>
+                                                            <option value="A">A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                        </select>
+                                                    </label>
+
+                                                    <label class="col-sm text-center">
+                                                        Duración del proyecto:
+                                                        <select name="duracion">
+                                                            <option selected value="0">Elige duración</option>
+                                                            <option value="1">CURSO</option>
+                                                            <option value="2">CURSOS</option>
+                                                        </select>
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Código del Proyecto:
+                                                        <input type="text" name="codigo" id="codigo" placeholder="Código" value="CLM" maxlength="6">
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Curso Académico de Inicio:
+                                                        <input type="date" name="inicio" id="inicio">
+                                                    </label>
+                                                    <label class="col-sm text-center">
+                                                        Curso académico de finalización:
+                                                        <input type="date" name="final" id="final">
+                                                    </label>
+                                                </div>
+                                                <div class="row justify-content-center form-group">
+                                                    <input type="submit" id="recibiFPDUAL" class="btn btn-primary btn-sm" name="recibiFPDUAL" value="Generar"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <!-- Editar Practicas -->                                
+                                <button type="button" class="btn editar modificar" value="<?php echo $key->idPractica; ?>" data-id="<?php echo $key->idPractica; ?>"  data-toggle="modal" data-target="#editar1"></button>
+                                <button type="submit" class="btn eliminar" name="eliminar" ></button>
+                            </td>
+                        </tr>
+                    </form>
+<?php } ?>
                 @endif
                 </tbody>
             </table>
