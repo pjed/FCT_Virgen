@@ -23,7 +23,7 @@ Consultar Gastos Alumnos
         <nav class="col">
             <div class="breadcrumb">
                 <div class="breadcrumb-item"><a href="bienvenidaT">Home</a></div>
-                <div class="breadcrumb-item"><a href="#">Consultar Gastos</a></div>
+                <div class="breadcrumb-item"><a href="consultarGastos">Consultar Gastos</a></div>
             </div>
         </nav>
     </nav>
