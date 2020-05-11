@@ -1299,7 +1299,7 @@ class Conexion {
     }
 
     /**
-     * 
+     * buscarCursos y mostrarlas en la tabla 
      * @author Marina
      * @param type $keywords
      * @return type
@@ -1315,7 +1315,7 @@ class Conexion {
     }
 
     /**
-     * 
+     * buscarPracticas y mostrarlas en la tabla 
      * @author Marina
      * @param type $keywords
      * @return type
@@ -1341,7 +1341,7 @@ class Conexion {
     }
 
     /**
-     * 
+     * buscarResponsables y mostrarlas en la tabla 
      * @author Marina
      * @param type $keywords
      * @return type
@@ -1357,7 +1357,7 @@ class Conexion {
     }
 
     /**
-     * 
+     * buscarEmpresas y mostrarlas en la tabla 
      * @author Marina
      * @param type $keywords
      * @return type
@@ -1372,7 +1372,7 @@ class Conexion {
     }
 
     /**
-     * 
+     * buscarUsuarios y mostrarlas en la tabla 
      * @author Marina
      * @param type $keywords
      * @return type
@@ -1390,7 +1390,7 @@ class Conexion {
     }
 
     /**
-     * 
+     * buscarAlumnos y mostrarlas en la tabla 
      * @author Marina
      * @param type $keywords
      * @return type
@@ -1408,7 +1408,7 @@ class Conexion {
     }
 
     /**
-     * 
+     * buscarTutores y mostrarlas en la tabla 
      * @author Marina
      * @param type $keywords
      * @return type

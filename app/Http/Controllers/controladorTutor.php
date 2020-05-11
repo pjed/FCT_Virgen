@@ -9,33 +9,28 @@ use App\Auxiliar\Documentos;
 class controladorTutor extends Controller {
 
     /**
-     * 
+     * buscarResponsables y mostrarlas en la tabla 
      * @author Marina
      * @param Request $req
      * @return type
      */
     public function buscarResponsables(Request $req) {
         $keywords = $req->get('keywords');
-//        session()->put('keywords', $keywords);
-
         $l = Conexion::buscarResponsables($keywords);
         $l1 = Conexion::listarEmpresas();
         $datos = ['buscarR' => $l,
             'l1' => $l1];
         return view('tutor/gestionarResponsable', $datos);
-//        return redirect()->route('buscarResponsables');
     }
 
     /**
-     * 
+     * buscarPracticas y mostrarlas en la tabla 
      * @author Marina
      * @param Request $req
      * @return type
      */
     public function buscarPracticas(Request $req) {
         $keywords = $req->get('keywords');
-//        session()->put('keywords', $keywords);
-
         $l = Conexion::buscarPracticas($keywords);
         $l1 = Conexion::listarEmpresas();
         $l2 = Conexion::listarAlumnoPorTutor();
@@ -50,25 +45,18 @@ class controladorTutor extends Controller {
             'l4' => $l4
         ];
         return view('tutor/gestionarPracticas', $datos);
-        return view('tutor/gestionarPracticas', ['buscarP' => $l]);
-//        return redirect()->route('buscarPracticas');
     }
 
     /**
-     * 
+     * buscarEmpresas y mostrarlas en la tabla 
      * @author Marina
      * @param Request $req
      * @return type
      */
     public function buscarEmpresas(Request $req) {
         $keywords = $req->get('keywords');
-//        session()->put('keywords', $keywords);
-
-        $l = Conexion::buscarEmpresas($keywords);
-        
+        $l = Conexion::buscarEmpresas($keywords);        
         return view('tutor/gestionarEmpresa', ['buscarE' => $l]);
-
-//        return redirect()->route('buscarEmpresas');
     }
 
     /**

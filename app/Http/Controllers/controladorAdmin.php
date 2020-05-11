@@ -9,7 +9,7 @@ use App\Auxiliar\Documentos;
 class controladorAdmin extends Controller {
 
     /**
-     * 
+     * buscarCursos y mostrarlas en la tabla
      * @author Marina
      * @param Request $req
      * @return type
@@ -21,7 +21,7 @@ class controladorAdmin extends Controller {
     }
 
     /**
-     * 
+     * buscarUsuarios y mostrarlas en la tabla
      * @author Marina
      * @param Request $req
      * @return type
@@ -33,7 +33,7 @@ class controladorAdmin extends Controller {
     }
 
     /**
-     * 
+     * buscarAlumnos y mostrarlas en la tabla
      * @author Marina
      * @param Request $req
      * @return type
@@ -45,7 +45,7 @@ class controladorAdmin extends Controller {
     }
 
     /**
-     * 
+     * buscarTutores y mostrarlas en la tabla
      * @author Marina
      * @param Request $req
      * @return type

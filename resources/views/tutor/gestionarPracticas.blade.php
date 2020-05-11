@@ -1,6 +1,3 @@
-<?php
-
-?>
 @extends('maestra.maestraTutor')
 
 @section('titulo') 
