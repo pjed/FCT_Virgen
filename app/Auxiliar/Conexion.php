@@ -1298,6 +1298,12 @@ class Conexion {
         }
     }
 
+    /**
+     * 
+     * @author Marina
+     * @param type $keywords
+     * @return type
+     */
     static function buscarCursos($keywords) {
         $v = \DB::table('cursos')
                 ->where('id_curso', 'like', '%' . $keywords . '%')
@@ -1308,6 +1314,68 @@ class Conexion {
         return $v;
     }
 
+    /**
+     * 
+     * @author Marina
+     * @param type $keywords
+     * @return type
+     */
+    static function buscarPracticas($keywords) {
+        $v = [];
+        $tutor = session()->get('usu');
+        foreach ($tutor as $t) {
+            $dni = $t['dni'];
+        }
+        $v = \DB::table('tutores')
+                ->where('tutores.usuarios_dni', $dni)
+                ->join('matriculados', 'matriculados.cursos_id_curso', '=', 'tutores.cursos_id_curso')
+                ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
+                ->join('practicas', 'practicas.usuarios_dni', '=', 'usuarios.dni')
+                ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
+                ->orWhere('usuarios.apellidos', 'like', '%' . $keywords . '%')
+                ->orWhere('practicas.empresas_id', 'like', '%' . $keywords . '%')
+                ->select('practicas.id AS idPractica', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto')
+                ->paginate(8);
+        return $v;
+    }
+
+    /**
+     * 
+     * @author Marina
+     * @param type $keywords
+     * @return type
+     */
+    static function buscarResponsables($keywords) {
+        $v = [];
+        $v = responsable::where('empresa_id', 'like', '%' . $keywords . '%')
+                ->orWhere('nombre', 'like', '%' . $keywords . '%')
+                ->orWhere('apellidos', 'like', '%' . $keywords . '%')
+                ->orWhere('email', 'like', '%' . $keywords . '%')
+                ->paginate(8);
+        return $v;
+    }
+
+    /**
+     * 
+     * @author Marina
+     * @param type $keywords
+     * @return type
+     */
+    static function buscarEmpresas($keywords) {
+        $v = [];
+        $v = empresa::where('cif', 'like', '%' . $keywords . '%')
+                ->orWhere('nombre', 'like', '%' . $keywords . '%')
+                ->orWhere('localidad', 'like', '%' . $keywords . '%')
+                ->paginate(8);
+        return $v;
+    }
+
+    /**
+     * 
+     * @author Marina
+     * @param type $keywords
+     * @return type
+     */
     static function buscarUsuarios($keywords) {
         $v = [];
         $v = \DB::table('usuarios')
@@ -1320,6 +1388,12 @@ class Conexion {
         return $v;
     }
 
+    /**
+     * 
+     * @author Marina
+     * @param type $keywords
+     * @return type
+     */
     static function buscarAlumnos($keywords) {
         $v = [];
         $v = \DB::table('matriculados')
@@ -1332,6 +1406,12 @@ class Conexion {
         return $v;
     }
 
+    /**
+     * 
+     * @author Marina
+     * @param type $keywords
+     * @return type
+     */
     static function buscarTutores($keywords) {
         $v = [];
         $v = \DB::table('tutores')
