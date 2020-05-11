@@ -9,6 +9,68 @@ use App\Auxiliar\Documentos;
 class controladorTutor extends Controller {
 
     /**
+     * 
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
+    public function buscarResponsables(Request $req) {
+        $keywords = $req->get('keywords');
+//        session()->put('keywords', $keywords);
+
+        $l = Conexion::buscarResponsables($keywords);
+        $l1 = Conexion::listarEmpresas();
+        $datos = ['buscarR' => $l,
+            'l1' => $l1];
+        return view('tutor/gestionarResponsable', $datos);
+//        return redirect()->route('buscarResponsables');
+    }
+
+    /**
+     * 
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
+    public function buscarPracticas(Request $req) {
+        $keywords = $req->get('keywords');
+//        session()->put('keywords', $keywords);
+
+        $l = Conexion::buscarPracticas($keywords);
+        $l1 = Conexion::listarEmpresas();
+        $l2 = Conexion::listarAlumnoPorTutor();
+        $l3 = Conexion::listarResponsables();
+        $l4 = Conexion::listarAlumnoPorTutorSinPracticas();
+
+        $datos = [
+            'buscarP' => $l,
+            'l1' => $l1,
+            'l2' => $l2,
+            'l3' => $l3,
+            'l4' => $l4
+        ];
+        return view('tutor/gestionarPracticas', [$datos]);
+//        return redirect()->route('buscarPracticas');
+    }
+
+    /**
+     * 
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
+    public function buscarEmpresas(Request $req) {
+        $keywords = $req->get('keywords');
+//        session()->put('keywords', $keywords);
+
+        $l = Conexion::buscarEmpresas($keywords);
+        
+        return view('tutor/gestionarEmpresa', ['buscarE' => $l]);
+
+//        return redirect()->route('buscarEmpresas');
+    }
+
+    /**
      * Perfil del tutor
      * @author Pedro (Todo lo demás) y Marina (contraseña)
      * @param Request $req
@@ -54,7 +116,7 @@ class controladorTutor extends Controller {
 
     /**
      * Metodo para recoger los datos que se necesitan mostrar en la vista consultar gastos
-     * @author Pedro
+     * @author Marina
      * @param Request $req
      * @return type
      */
@@ -381,7 +443,10 @@ class controladorTutor extends Controller {
                   </div>';
             }
         }
-        return view('tutor/gestionarEmpresa');
+        $lu = Conexion::listarEmpresasPagination();
+        $datos = ['buscarP' => null,
+            'lu' => $lu];
+        return view('tutor/gestionarEmpresa', $datos);
     }
 
     /**
@@ -432,7 +497,12 @@ class controladorTutor extends Controller {
                   </div>';
             }
         }
-        return view('tutor/gestionarResponsable');
+        $lu = Conexion::listarResponsablesPagination();
+        $l1 = Conexion::listarEmpresas();
+        $datos = ['buscarR' => null,
+            'lu' => $lu,
+            'l1' => $l1];
+        return view('tutor/gestionarResponsable', $datos);
     }
 
     /**
@@ -527,6 +597,7 @@ class controladorTutor extends Controller {
         $l4 = Conexion::listarAlumnoPorTutorSinPracticas();
 
         $datos = [
+            'buscarP' => null,
             'lu' => $lu,
             'l1' => $l1,
             'l2' => $l2,
