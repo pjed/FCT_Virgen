@@ -140,7 +140,7 @@ Gestionar  Practicas
                 </thead>
                 <tbody>
                     @if($buscarP != null)
-<?php foreach ($buscarP as $key) { ?>
+                    <?php foreach ($buscarP as $key) { ?>
                     <form action="gestionarPracticas" method="POST">
                         {{ csrf_field() }}
                         <tr class="bg-success">
@@ -274,7 +274,7 @@ Gestionar  Practicas
                     </form>
                 <?php } ?>
                 @else
-<?php foreach ($lu as $key) { ?>
+                <?php foreach ($lu as $key) { ?>
                     <form action="gestionarPracticas" method="POST">
                         {{ csrf_field() }}
                         <tr>
@@ -406,7 +406,7 @@ Gestionar  Practicas
                             </td>
                         </tr>
                     </form>
-<?php } ?>
+                <?php } ?>
                 @endif
                 </tbody>
             </table>
@@ -435,12 +435,7 @@ Gestionar  Practicas
                     <div class="row justify-content-center form-group">
                         <label class="col-sm text-center">
                             Alumno:
-                            <select id="dniAlumnoMod" name="dniAlumno" required>
-                                <?php
-                                foreach ($l4 as $k4) {
-                                    echo ' <option value="' . $k4->dni . '">' . $k4->nombre . ', ' . $k4->apellidos . '</option>';
-                                }
-                                ?>
+                            <select id="dniAlumnoMod" name="dniAlumno" required>                                
                             </select>
                         </label>
                     </div>

@@ -135,6 +135,8 @@ $(document).ready(function () {
                     for (var i = 0; i < listaAlumnoPractica.length; i++) {
                         if (dniAlumno === listaAlumnoPractica[i].dni) {
                             document.getElementById("dniAlumnoMod").innerHTML += ' <option value="' + listaAlumnoPractica[i].dni + '" selected>' + listaAlumnoPractica[i].nombre + ', ' + listaAlumnoPractica[i].apellidos + '</option>';
+                        }else{
+                            document.getElementById("dniAlumnoMod").innerHTML += ' <option value="' + listaAlumnoPractica[i].dni + '">' + listaAlumnoPractica[i].nombre + ', ' + listaAlumnoPractica[i].apellidos + '</option>';
                         }
                     }
                 }
