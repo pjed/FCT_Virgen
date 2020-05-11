@@ -65,10 +65,18 @@ Route::group(['middleware' => ['tutor']], function() {
         return view('tutor/consultarGastosAlumno', $datos);
     });
     Route::get('gestionarEmpresa', function () {
-        return view('tutor/gestionarEmpresa');
+        $lu = Conexion::listarEmpresasPagination();
+        $datos = ['buscarE' => null,
+            'lu' => $lu];
+        return view('tutor/gestionarEmpresa', $datos);
     });
     Route::get('gestionarResponsable', function () {
-        return view('tutor/gestionarResponsable');
+        $lu = Conexion::listarResponsablesPagination();
+        $l1 = Conexion::listarEmpresas();
+        $datos = ['buscarR' => null,
+            'lu' => $lu,
+            'l1' => $l1];
+        return view('tutor/gestionarResponsable', $datos);
     });
     Route::get('gestionarPracticas', function () {
         $datos = controladorTutor::datosGestionarPracticas();
@@ -80,7 +88,47 @@ Route::group(['middleware' => ['tutor']], function() {
     Route::get('perfilT', function () {
         return view('tutor/perfilTutor');
     });
+    /*
+      Route::get('buscarResponsables', function () {
+      $keywords = session()->get('keywords');
+      $l = Conexion::buscarCursos($keywords);
+      $lu = Conexion::listarResponsablesPagination();
+      $l1 = Conexion::listarEmpresas();
+      $datos = ['buscarR' => $l,
+      'lu' => $lu,
+      'l1' => $l1];
+      return view('tutor/gestionarResponsable', $datos);
+      })->name('buscarResponsables');
 
+      Route::get('buscarPracticas', function () {
+      $keywords = session()->get('keywords');
+      $l = Conexion::buscarPracticas($keywords);
+      $lu = Conexion::listarPracticasPagination();
+      $l1 = Conexion::listarEmpresas();
+      $l2 = Conexion::listarAlumnoPorTutor();
+      $l3 = Conexion::listarResponsables();
+      $l4 = Conexion::listarAlumnoPorTutorSinPracticas();
+
+      $datos = [
+      'buscarP' => $l,
+      'lu' => $lu,
+      'l1' => $l1,
+      'l2' => $l2,
+      'l3' => $l3,
+      'l4' => $l4
+      ];
+      return view('tutor/gestionarPracticas', [$datos]);
+      })->name('buscarPracticas');
+
+      Route::get('buscarEmpresas', function () {
+      $keywords = session()->get('keywords');
+      $l = Conexion::buscarCursos($keywords);
+      $lu = Conexion::listarEmpresasPagination();
+      $datos = ['buscarE' => $l,
+      'lu' => $lu];
+      return view('tutor/gestionarEmpresa', $datos);
+      })->name('buscarEmpresas');
+     */
     //Ajax para poder modificar practicas    
     Route::any('modalModificarPracticaAjax', ['uses' => 'controladorTutor@buscarPracticaPorIdAjax', 'as' => 'modalModificarPracticaAjax']);
     Route::any('idEmpresaModificarPracticaAjax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAjax', 'as' => 'idEmpresaModificarPracticaAjax']);
@@ -90,10 +138,10 @@ Route::group(['middleware' => ['tutor']], function() {
     Route::any('listarAlumnoPorTutorAjax', ['uses' => 'controladorTutor@listarAlumnoPorTutorAjax', 'as' => 'listarAlumnoPorTutorAjax']);
     Route::any('listarResponsablesAjax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAjax', 'as' => 'listarResponsablesAjax']);
 
-
     //Ajax para poder mostrar la modal para añadir practicas
     Route::any('idEmpresaAniadirPracticasAjax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAjax', 'as' => 'idEmpresaAniadirPracticasAjax']);
 
+    Route::post('buscarPracticas', 'controladorTutor@buscarPracticas');
     Route::post('buscarResponsables', 'controladorTutor@buscarResponsables');
     Route::post('buscarEmpresas', 'controladorTutor@buscarEmpresas');
 
@@ -220,7 +268,7 @@ Route::group(['middleware' => ['admin']], function() {
         return view('admin/gestionarAlumnos', $datos);
     })->name('buscargestionarAlumnos');
     Route::get('buscargestionarCursos', function () {
-        $keywords = session()->get('keywords');        
+        $keywords = session()->get('keywords');
         $l = Conexion::buscarCursos($keywords);
         return view('admin/gestionarCursos', ['buscarC' => $l]);
     })->name('buscargestionarCursos');
