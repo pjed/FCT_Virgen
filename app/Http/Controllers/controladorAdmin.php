@@ -8,24 +8,48 @@ use App\Auxiliar\Documentos;
 
 class controladorAdmin extends Controller {
 
+    /**
+     * 
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function buscarCursos(Request $req) {
         $keywords = $req->get('keywords');
         session()->put('keywords', $keywords);
         return redirect()->route('buscargestionarCursos');
     }
 
+    /**
+     * 
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function buscarUsuarios(Request $req) {
         $keywords = $req->get('keywords');
         session()->put('keywords', $keywords);
         return redirect()->route('buscargestionarUsuarios');
     }
 
+    /**
+     * 
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function buscarAlumnos(Request $req) {
         $keywords = $req->get('keywords');
         session()->put('keywords', $keywords);
         return redirect()->route('buscargestionarAlumnos');
     }
 
+    /**
+     * 
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
     public function buscarTutores(Request $req) {
         $keywords = $req->get('keywords');
         session()->put('keywords', $keywords);
