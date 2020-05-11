@@ -2137,7 +2137,11 @@ class Conexion {
             $t->save();
 
             $transporte = transporte::all()->last();
-            $idTransporte = $transporte->id;
+            if ($transporte != null) {
+                $idTransporte = $transporte->id;
+            } else {
+                $idTransporte = 0;
+            }
 
             //insertar el gasto en la tabla colectivos
             $c = new colectivo;
@@ -2177,7 +2181,11 @@ class Conexion {
             $t->save();
 
             $transporte = transporte::all()->last();
-            $idTransporte = $transporte->id;
+            if ($transporte != null) {
+                $idTransporte = $transporte->id;
+            } else {
+                $idTransporte = 0;
+            }
 
             //insertar el gasto en la tabla colectivos
             $c = new propio;
@@ -2205,15 +2213,21 @@ class Conexion {
 
     static function obtenerIdTransporteIngresado() {
         $transporte = transporte::all()->last();
-        $idTransporte = $transporte->id;
-
+        if ($transporte != null) {
+            $idTransporte = $transporte->id;
+        } else {
+            $idTransporte = -1;
+        }
         return $idTransporte;
     }
 
     static function obtenerIdUltimaComidaIngresada() {
         $comidas = comida::all()->last();
-        $idUltimaComida = $comidas->id;
-
+        if ($comidas != null) {
+            $idUltimaComida = $comidas->id;
+        } else {
+            $idUltimaComida = -1;
+        }
         return $idUltimaComida;
     }
 
@@ -2306,7 +2320,11 @@ class Conexion {
 
     static function obtenerIdUltimoTransporteIngresado() {
         $colectivo = colectivo::all()->last();
-        $idUltimoColectivo = $colectivo->id;
+        if ($colectivo != null) {
+            $idUltimoColectivo = $colectivo->id;
+        } else {
+            $idUltimoColectivo = -1;
+        }
 
         return $idUltimoColectivo;
     }
