@@ -2273,10 +2273,10 @@ class Conexion {
     }
     
     static function listarGastosAlumno($dni) {
-        $v = \DB::table('gastos')
-                ->where('gastos.usuarios_dni', $dni)
+        $v = \DB::table('practicas')
+                ->where('practicas.usuarios_dni', $dni)
                 ->select(
-                        'gastos.total_gasto_alumno AS total_gasto_alumno'
+                        'practicas.gastos AS total_gasto_alumno'
                 )
                 ->get();
         return $v;
