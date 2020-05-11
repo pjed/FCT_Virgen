@@ -88,47 +88,7 @@ Route::group(['middleware' => ['tutor']], function() {
     Route::get('perfilT', function () {
         return view('tutor/perfilTutor');
     });
-    /*
-      Route::get('buscarResponsables', function () {
-      $keywords = session()->get('keywords');
-      $l = Conexion::buscarCursos($keywords);
-      $lu = Conexion::listarResponsablesPagination();
-      $l1 = Conexion::listarEmpresas();
-      $datos = ['buscarR' => $l,
-      'lu' => $lu,
-      'l1' => $l1];
-      return view('tutor/gestionarResponsable', $datos);
-      })->name('buscarResponsables');
-
-      Route::get('buscarPracticas', function () {
-      $keywords = session()->get('keywords');
-      $l = Conexion::buscarPracticas($keywords);
-      $lu = Conexion::listarPracticasPagination();
-      $l1 = Conexion::listarEmpresas();
-      $l2 = Conexion::listarAlumnoPorTutor();
-      $l3 = Conexion::listarResponsables();
-      $l4 = Conexion::listarAlumnoPorTutorSinPracticas();
-
-      $datos = [
-      'buscarP' => $l,
-      'lu' => $lu,
-      'l1' => $l1,
-      'l2' => $l2,
-      'l3' => $l3,
-      'l4' => $l4
-      ];
-      return view('tutor/gestionarPracticas', [$datos]);
-      })->name('buscarPracticas');
-
-      Route::get('buscarEmpresas', function () {
-      $keywords = session()->get('keywords');
-      $l = Conexion::buscarCursos($keywords);
-      $lu = Conexion::listarEmpresasPagination();
-      $datos = ['buscarE' => $l,
-      'lu' => $lu];
-      return view('tutor/gestionarEmpresa', $datos);
-      })->name('buscarEmpresas');
-     */
+    
     //Ajax para poder modificar practicas    
     Route::any('modalModificarPracticaAjax', ['uses' => 'controladorTutor@buscarPracticaPorIdAjax', 'as' => 'modalModificarPracticaAjax']);
     Route::any('idEmpresaModificarPracticaAjax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAjax', 'as' => 'idEmpresaModificarPracticaAjax']);
