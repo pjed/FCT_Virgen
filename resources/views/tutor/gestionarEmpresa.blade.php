@@ -1,10 +1,3 @@
-
-<?php
-
-use App\Auxiliar\Conexion;
-
-$lu = Conexion::listarEmpresasPagination();
-?>
 @extends('maestra.maestraTutor')
 
 @section('titulo') 
@@ -21,7 +14,7 @@ Gestionar Empresa
     <nav class="col">
         <div class="breadcrumb">
             <div class="breadcrumb-item"><a href="bienvenidaT">Home</a></div>
-            <div class="breadcrumb-item"><a href="#">Gestionar Empresa</a></div>
+            <div class="breadcrumb-item"><a href="gestionarEmpresa">Gestionar Empresa</a></div>
         </div>
     </nav>
 </nav>
@@ -30,6 +23,18 @@ Gestionar Empresa
 <div class="row">
     <div class="col-sm col-md col-lg">
         <h2 class="text-center">Gestionar Empresa</h2>
+    </div>
+</div>
+
+<!-- Buscador Empresas-->
+<div class="row">
+    <div class="col-sm-9 col-md-9"></div>
+    <div class="col-sm-3 col-md-3">
+        <form action="buscarEmpresas" method="POST">
+            {{ csrf_field() }}
+            <input type="text" id="keywords" name="keywords" placeholder="CIF, nombre, localidad" size="30" maxlength="30">
+            <button type="submit" class="buscar btn btn-primary" name="search"></button>
+        </form>
     </div>
 </div>
 
@@ -108,9 +113,31 @@ Gestionar Empresa
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    foreach ($lu as $key) {
-                        ?>
+                    @if($buscarE != null)
+                    <?php foreach ($buscarE as $key) { ?>
+                    <form action="gestionarEmpresa" method="POST">
+                        {{ csrf_field() }}
+                        <tr class="bg-success"> 
+                            <td>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key->id; ?>"/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="CIF" value="<?php echo $key->cif; ?>" required/>
+                            </td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $key->nombre; ?>" required/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="dniRepresentante" value="<?php echo $key->dni_representante; ?>" pattern="{9}"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombreRepresentante" value="<?php echo $key->nombre_representante; ?>"/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="direccion" value="<?php echo $key->direccion; ?>" required/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="localidad" value="<?php echo $key->localidad; ?>" required/></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="horario" value="<?php echo $key->horario; ?>"/></td>
+                            <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="nueva" <?php if ($key->nueva == 1) { ?>checked<?php } ?>/></td>
+                            <td>
+                                <button type="submit" class="btn editar" name="editar"></button>
+                                <button type="submit" class="btn eliminar" name="eliminar" ></button>
+                            </td>
+                        </tr>
+                    </form>
+                <?php } ?>
+                @else
+                <?php foreach ($lu as $key) { ?>
                     <form action="gestionarEmpresa" method="POST">
                         {{ csrf_field() }}
                         <tr> 
@@ -127,23 +154,29 @@ Gestionar Empresa
                             <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="nueva" <?php if ($key->nueva == 1) { ?>checked<?php } ?>/></td>
                             <td>
                                 <button type="submit" class="btn editar" name="editar"></button>
-                                     <!-- </td><td>-->
                                 <button type="submit" class="btn eliminar" name="eliminar" ></button>
                             </td>
                         </tr>
                     </form>
-                    <?php
-                }
-                ?>
+                <?php } ?>                
+                @endif
                 </tbody>
             </table>
         </div>
     </div>
 </div> 
 
+@if($buscarE != null)
+<div class="row">
+    <div class="col-sm col-md col-lg">
+        {{ $buscarE->links()}}
+    </div>
+</div>
+@else
 <div class="row">
     <div class="col-sm col-md col-lg">
         {{ $lu->links()}}
     </div>
-</div>
+</div>               
+@endif
 @endsection

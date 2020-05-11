@@ -1,10 +1,3 @@
-<?php
-
-use App\Auxiliar\Conexion;
-
-$lu = Conexion::listarResponsablesPagination();
-$l1 = Conexion::listarEmpresas();
-?>
 @extends('maestra.maestraTutor')
 
 @section('titulo') 
@@ -22,7 +15,7 @@ Gestionar Responsable
     <nav class="col">
         <div class="breadcrumb">
             <div class="breadcrumb-item"><a href="bienvenidaT">Home</a></div>
-            <div class="breadcrumb-item"><a href="#">Gestionar Responsable</a></div>
+            <div class="breadcrumb-item"><a href="gestionarResponsable">Gestionar Responsable</a></div>
         </div>
     </nav>
 </nav>
@@ -31,6 +24,18 @@ Gestionar Responsable
 <div class="row">
     <div class="col-sm col-md col-lg">
         <h2 class="text-center">Gestionar Responsable</h2>
+    </div>
+</div>
+
+<!-- Buscador Responsables-->
+<div class="row">
+    <div class="col-sm-9 col-md-9"></div>
+    <div class="col-sm-3 col-md-3">
+        <form action="buscarResponsables" method="POST">
+            {{ csrf_field() }}
+            <input type="text" id="keywords" name="keywords" placeholder="nombre, apellido, email, CIF" size="30" maxlength="30">
+            <button type="submit" class="buscar btn btn-primary" name="search"></button>
+        </form>
     </div>
 </div>
 
@@ -109,12 +114,11 @@ Gestionar Responsable
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    foreach ($lu as $key) {
-                        ?>
+                    @if($buscarR != null)
+                    <?php foreach ($buscarR as $key) { ?>
                     <form action="gestionarResponsable" method="POST">
                         {{ csrf_field() }}
-                        <tr>
+                        <tr class="bg-success">
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key['id']; ?>"/>
                                 <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $key['dni']; ?>" readonly/>
@@ -141,22 +145,64 @@ Gestionar Responsable
                             </td>
                             <td>
                                 <button type="submit" class="btn editar" name="editar" ></button>
-                                     <!-- </td><td>-->
                                 <button type="submit" class="btn eliminar" name="eliminar" ></button>
                             </td>
                         </tr>
                     </form>
-                    <?php
-                }
-                ?>
+                <?php } ?>
+                @else
+                <?php foreach ($lu as $key) { ?>
+                    <form action="gestionarResponsable" method="POST">
+                        {{ csrf_field() }}
+                        <tr class="bg-success">
+                            <td>
+                                <input type="hidden" class="form-control form-control-sm form-control-md" name="id" value="<?php echo $key['id']; ?>"/>
+                                <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $key['dni']; ?>" readonly/>
+                            </td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $key['nombre']; ?>" required></td>
+                            <td><input type="text" class="form-control form-control-sm form-control-md" name="apellido" value="<?php echo $key['apellidos']; ?>" required/></td>
+                            <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $key['email']; ?>" required/></td>
+                            <td><input type="tel" class="form-control form-control-sm form-control-md" name="tel" value="<?php echo $key['telefono']; ?>" pattern="[0-9]{9}" required/></td>
+                            <td>
+                                <select class="sel" name="idEmpresa" required>
+                                    <?php
+                                    if ($key->empresa_id == 0) {
+                                        ?>
+                                        <option value="0" selected >Ninguno</option>
+                                        <?php
+                                    }
+                                    foreach ($l1 as $k1) {
+                                        ?>
+                                        <option value="<?php echo $k1->id; ?>" <?php if ($key->empresa_id == $k1->id) { ?> selected<?php } ?>><?php echo $k1->nombre; ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn editar" name="editar" ></button>
+                                <button type="submit" class="btn eliminar" name="eliminar" ></button>
+                            </td>
+                        </tr>
+                    </form>
+                <?php } ?>
+                @endif
                 </tbody>
             </table>
         </div>
     </div>
 </div>  
+@if($buscarR != null)
+<div class="row">
+    <div class="col-sm col-md col-lg">
+        {{ $buscarR->links()}}
+    </div>
+</div>
+@else
 <div class="row">
     <div class="col-sm col-md col-lg">
         {{ $lu->links()}}
     </div>
 </div>
+@endif
 @endsection
