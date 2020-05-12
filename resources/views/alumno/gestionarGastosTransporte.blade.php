@@ -23,7 +23,7 @@ Gestionar gastos transporte
             <h2 class="text-center">Gestionar gastos transporte</h2>
         </div>
     </div>
-    @if ($gastosAlumno != null)
+    @if ($gastosAlumno != null)  
     <!-- Tabla de gastos transporte colectivo del usuario -->
     <div id="colectivo" class="row justify-content-center">
         <div class="col-sm col-md-8">
@@ -38,10 +38,7 @@ Gestionar gastos transporte
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        foreach ($gastosAlumno as $key) {
-                            ?>
-
+                        <?php foreach ($gastosAlumno as $key) {?>
                         <form name="form" action="gestionarGastosTransporte" method="POST"  enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <tr>
@@ -59,16 +56,11 @@ Gestionar gastos transporte
 
                                 <td>
                                     <button type="submit" class="btn editar" name="editarC" ></button>
-                                         <!-- </td><td>-->
                                     <button type="submit" class="btn eliminar" name="eliminarC" ></button>
                                 </td>
                             </tr>
                         </form>
-
-                        <?php
-                    }
-                    ?>
-
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -95,9 +87,7 @@ Gestionar gastos transporte
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        foreach ($gastosAlumno1 as $key) {
-                            ?>
+                        <?php  foreach ($gastosAlumno1 as $key) { ?>
                         <form name="form" action="gestionarGastosTransporte" method="POST">
                             {{ csrf_field() }}
                             <tr>
@@ -110,20 +100,16 @@ Gestionar gastos transporte
                                 <td><input type="number"  step="0.01" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>' readonly></td>
                                 <td>
                                     <button type="submit" class="btn editar" name="editarP"></button>
-                                         <!-- </td><td>-->
                                     <button type="submit" class="btn eliminar" name="eliminarP" ></button>
                                 </td>
                             </tr>
                         </form>
-                        <?php
-                    }
-                    ?>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
     <div class="row justify-content-center">
         <div class="col-sm col-md col-lg">
             {{ $gastosAlumno1->links()}}
@@ -131,5 +117,4 @@ Gestionar gastos transporte
     </div>
     @endif
 </div>
-
 @endsection

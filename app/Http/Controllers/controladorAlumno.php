@@ -8,6 +8,23 @@ use Illuminate\Http\Request;
 class controladorAlumno extends Controller {
 
     /**
+     * buscarGastoAlumnoComida y mostrarlas en la tabla 
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
+    public function buscarGastoAlumnoComida(Request $req) {
+        $keywords = $req->get('keywords');
+        $n = session()->get('usu');
+        foreach ($n as $u) {
+            $dniAlumno = $u['dni'];
+        }
+        $l = Conexion::buscarGastoAlumnoComida($keywords, $dniAlumno);
+        $datos = ['buscarGAC' => $l];
+        return view('alumno/gestionarGastosComida', $datos);
+    }
+
+    /**
      * Crear gasto de comida
      * @author Manu
      * @param Request $req
@@ -63,7 +80,6 @@ class controladorAlumno extends Controller {
      * @return type
      */
     public function crearGastoTransporte(Request $req) {
-
         //si el transporte es colectivo        
         if (isset($_REQUEST['guardarC'])) {
             $idColectivo = Conexion::obtenerIdUltimoTransporteIngresado() + 1;
@@ -91,7 +107,7 @@ class controladorAlumno extends Controller {
             $desplazamiento = 1;
             $comidas_id = null;
 
-            Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo,$usuarios_dni, $comidas_id, $transporte_id);
+            Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $usuarios_dni, $comidas_id, $transporte_id);
         }
 
         //si el transporte es propio
@@ -113,7 +129,7 @@ class controladorAlumno extends Controller {
 
             $transporte_id = Conexion::obtenerIdTransporteIngresado();
 
-          
+
             $desplazamiento = 1;
             $tipo = 1;
             $comidas_id = null;
@@ -155,7 +171,7 @@ class controladorAlumno extends Controller {
                 unlink($file);
             }
             Conexion::borrarGastoComida($id);
-        }        
+        }
         $gastosAlumno = Conexion::listarGastosComidasPagination($dniAlumno);
         return view('alumno/gestionarGastosComida', ['gastosAlumno' => $gastosAlumno]);
     }
@@ -268,7 +284,7 @@ class controladorAlumno extends Controller {
 
         session()->put('usu', $usu);
 
-        return view('alumno/perfilAlumno',['usu' => $usu]);
+        return view('alumno/perfilAlumno', ['usu' => $usu]);
     }
 
 }
