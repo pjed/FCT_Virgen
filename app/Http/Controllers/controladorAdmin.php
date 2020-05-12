@@ -17,7 +17,7 @@ class controladorAdmin extends Controller {
     public function buscarGastoAdminComida(Request $req) {
         $gtc = null;
         $gtp = null;
-        
+
         $keywords = $req->get('keywords');
         $dniAlumno = session()->get('dniAlumno');
         $ciclo = session()->get('ciclo');
@@ -784,10 +784,86 @@ class controladorAdmin extends Controller {
     public function DeleteDB(Request $req) {
         //Borrar la DB
         $database_name = 'gestionfct';
-        \DB::statement("DROP DATABASE IF EXISTS `{$database_name}`;");
-        \DB::statement("CREATE DATABASE `{$database_name}` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;");
+        $database_name_historico = 'historico';
+
         $valor = 'NO_AUTO_VALUE_ON_ZERO';
         $valor2 = '+00:00';
+
+        $ano_completo = strval((int) date('Y') - 1) . ' - ' . date('Y');
+        $ano_junto = strval((int) date('Y') - 1) . '_' . date('Y');
+
+        $database_name_new = 'gestionfct_' . $ano_junto;
+
+        \DB::statement("CREATE DATABASE IF NOT EXISTS `{$database_name_historico}` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;");
+        $sqlDB = "USE `{$database_name_historico}`;
+                    -- phpMyAdmin SQL Dump
+                    -- version 4.6.6deb5
+                    -- https://www.phpmyadmin.net/
+                    --
+                    -- Servidor: localhost:3306
+                    -- Tiempo de generación: 31-03-2020 a las 11:48:39
+                    -- Versión del servidor: 5.7.29-0ubuntu0.18.04.1
+                    -- Versión de PHP: 7.2.24-0ubuntu0.18.04.3
+
+                    SET SQL_MODE = `{$valor}`;
+                    SET time_zone = `{$valor2}`;
+
+
+                    /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+                    /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+                    /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+                    /*!40101 SET NAMES utf8mb4 */;
+
+                    --
+                    -- Base de datos: `historico`
+                    --
+
+                    -- --------------------------------------------------------
+
+                    --
+                    -- Estructura de tabla para la tabla `centros`
+                    --
+
+                    CREATE TABLE `historico` (
+                      `cod` varchar(20) NOT NULL,
+                      `descripcion` varchar(100) NOT NULL,
+                      `created_at` timestamp NULL DEFAULT NULL,
+                      `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`cod`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                    ";
+        \DB::connection()->getPdo()->exec($sqlDB);
+        
+        $sqlInsert = "INSERT INTO historico (cod, descripcion, created_at, updated_at) VALUES ('$database_name_new','$ano_completo',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);";
+        \DB::connection()->getPdo()->exec($sqlInsert);
+
+        \DB::statement("DROP DATABASE IF EXISTS `{$database_name_new}`;");
+        \DB::statement("CREATE DATABASE `{$database_name_new}` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;");
+
+        $sqlDB = "USE `{$database_name}`;";
+        \DB::connection()->getPdo()->exec($sqlDB);
+
+        \DB::statement("RENAME TABLE `centros` TO `{$database_name_new}`.centros");
+        \DB::statement("RENAME TABLE `colectivos` TO `{$database_name_new}`.colectivos");
+        \DB::statement("RENAME TABLE `comidas` TO `{$database_name_new}`.comidas");
+        \DB::statement("RENAME TABLE `cursos` TO `{$database_name_new}`.cursos");
+        \DB::statement("RENAME TABLE `empresas` TO `{$database_name_new}`.empresas");
+        \DB::statement("RENAME TABLE `gastos` TO `{$database_name_new}`.gastos");
+        \DB::statement("RENAME TABLE `matriculados` TO `{$database_name_new}`.matriculados");
+        \DB::statement("RENAME TABLE `practicas` TO `{$database_name_new}`.practicas");
+        \DB::statement("RENAME TABLE `propios` TO `{$database_name_new}`.propios");
+        \DB::statement("RENAME TABLE `responsables` TO `{$database_name_new}`.responsables");
+        \DB::statement("RENAME TABLE `roles` TO `{$database_name_new}`.roles");
+        \DB::statement("RENAME TABLE `transportes` TO `{$database_name_new}`.transportes");
+        \DB::statement("RENAME TABLE `tutores` TO `{$database_name_new}`.tutores");
+        \DB::statement("RENAME TABLE `usuarios` TO `{$database_name_new}`.usuarios");
+        \DB::statement("RENAME TABLE `usuarios_roles` TO `{$database_name_new}`.usuarios_roles");
+
+
+
+        \DB::statement("DROP DATABASE IF EXISTS `{$database_name}`;");
+        \DB::statement("CREATE DATABASE `{$database_name}` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;");
+
         $sqlDB = "USE `{$database_name}`;
                     -- phpMyAdmin SQL Dump
                     -- version 4.6.6deb5
