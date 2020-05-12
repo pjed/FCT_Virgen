@@ -33,7 +33,7 @@ Gestionar Responsable
     <div class="col-sm-3 col-md-3">
         <form action="buscarResponsables" method="POST">
             {{ csrf_field() }}
-            <input type="text" id="keywords" name="keywords" placeholder="nombre, apellido, email, CIF" size="30" maxlength="30">
+            <input type="text" id="keywords" name="keywords" placeholder="Nombre, apellido, email, nombre de empresa" size="30" maxlength="30">
             <button type="submit" class="buscar btn btn-primary" name="search"></button>
         </form>
     </div>

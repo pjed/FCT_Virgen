@@ -32,7 +32,7 @@ Gestionar  Practicas
     <div class="col-sm-3 col-md-3">
         <form action="buscarPracticas" method="POST">
             {{ csrf_field() }}
-            <input type="text" id="keywords" name="keywords" placeholder="nombre de alumno, apellido de alumno, nombre de empresa" size="30" maxlength="30">
+            <input type="text" id="keywords" name="keywords" placeholder="Nombre y apellido(alumno), empresa" size="30" maxlength="30">
             <button type="submit" class="buscar btn btn-primary" name="search"></button>
         </form>
     </div>
@@ -105,10 +105,6 @@ Gestionar  Practicas
                                                     <label class="col-sm text-center">
                                                         Cod proyecto:
                                                         <input type="text" id="codProyectoA" class="form-control form-control-sm" name="codProyecto" pattern="[0-9]{6}" required/>
-                                                    </label>
-                                                    <label class="col-sm text-center">
-                                                        Gasto Total:
-                                                        <input type="text" id="gastoA" class="form-control form-control-sm" name="gasto"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
