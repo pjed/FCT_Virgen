@@ -46,6 +46,7 @@ Gestionar gastos comida
                             <th>Importe</th>
                             <th>Fecha</th>
                             <th>Foto</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

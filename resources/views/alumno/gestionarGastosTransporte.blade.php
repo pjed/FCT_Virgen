@@ -35,10 +35,11 @@ Gestionar gastos transporte
                             <th>Donde es</th>
                             <th>Foto</th>
                             <th>Importe</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($gastosAlumno as $key) {?>
+                        <?php foreach ($gastosAlumno as $key) { ?>
                         <form name="form" action="gestionarGastosTransporte" method="POST"  enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <tr>
@@ -60,7 +61,7 @@ Gestionar gastos transporte
                                 </td>
                             </tr>
                         </form>
-                        <?php } ?>
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -74,8 +75,8 @@ Gestionar gastos transporte
     @endif
     @if ($gastosAlumno1 != null)
     <!-- Tabla de gastos transporte propio del usuario -->
-    <div id="propio" class="row">
-        <div class="col-md-12">
+    <div id="propio" class="row justify-content-center">
+        <div class="col-md-8">
             <h3 class="text-center">Propio</h3>
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover table-bordered">
@@ -84,10 +85,11 @@ Gestionar gastos transporte
                             <th>Donde es</th>
                             <th>KMS</th>
                             <th>Importe</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php  foreach ($gastosAlumno1 as $key) { ?>
+                        <?php foreach ($gastosAlumno1 as $key) { ?>
                         <form name="form" action="gestionarGastosTransporte" method="POST">
                             {{ csrf_field() }}
                             <tr>
@@ -104,7 +106,7 @@ Gestionar gastos transporte
                                 </td>
                             </tr>
                         </form>
-                        <?php } ?>
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>
