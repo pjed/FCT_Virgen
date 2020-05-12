@@ -15,6 +15,9 @@ class controladorAdmin extends Controller {
      * @return type
      */
     public function buscarGastoAdminComida(Request $req) {
+        $gtc = null;
+        $gtp = null;
+        
         $keywords = $req->get('keywords');
         $dniAlumno = session()->get('dniAlumno');
         $ciclo = session()->get('ciclo');

@@ -17,7 +17,7 @@ Consultar Gastos Alumnos
         <nav class="col">
             <div class="breadcrumb">
                 <div class="breadcrumb-item"><a href="bienvenidaT">Home</a></div>
-                <div class="breadcrumb-item"><a href="#">Consultar Gastos Alumnos</a></div>
+                <div class="breadcrumb-item"><a href="consultarGastosAlumno">Consultar Gastos Alumnos</a></div>
             </div>
         </nav>
     </nav>
@@ -50,7 +50,20 @@ Consultar Gastos Alumnos
             </form>
         </div>
     </div>
-    @if ($gc!=null) 
+    @if ($gc != null || $buscarGTC != null) 
+
+    <!-- Buscador Gasto tutor-->
+    <div class="row">
+        <div class="col-sm-9 col-md-9"></div>
+        <div class="col-sm-3 col-md-3">
+            <form action="buscarGastoTutorComida" method="POST">
+                {{ csrf_field() }}
+                <input type="date" id="keywords" name="keywords" placeholder="Fecha del gasto" size="30" maxlength="30">
+                <button type="submit" class="buscar btn btn-primary" name="search"></button>
+            </form>
+        </div>
+    </div>
+
     <!-- Gestionar Gastos Comida -->
     <div id="comida" class="row justify-content-center">
         <div class="col-sm-8 col-md-8">
@@ -62,13 +75,35 @@ Consultar Gastos Alumnos
                             <th>Fecha</th>
                             <th>Importe</th>
                             <th>Foto</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-
-                        <?php
-                        foreach ($gc as $key) {
-                            ?>
+                        @if($buscarGTC != null)
+                        <?php foreach ($buscarGTC as $key) { ?>
+                        <form action="consultarGastosAlumno" method="POST">
+                            {{ csrf_field() }}
+                            <tr class="bg-success">
+                                <td>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value='<?php echo $key->idGasto; ?>'/>
+                                    <input type="text" class="form-control form-control-sm form-control-md" name="fecha" value="<?php echo $key->fecha; ?>"/>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->id; ?>"/>
+                                </td>
+                                <td><input type="number" step="0.01" class="form-control form-control-sm" name="importe" value="<?php echo $key->importe; ?>"/></td>
+                                <td>
+                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>"/>
+                                    <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img alt="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
+                                    <input type="file" class="form-control form-control-sm form-control-md" name="foto">
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn editar" name="editar" ></button>
+                                    <button type="submit" class="btn eliminar" name="eliminar" ></button>
+                                </td>
+                            </tr>
+                        </form>
+                    <?php } ?>
+                    @else
+                    <?php foreach ($gc as $key) { ?>
                         <form action="consultarGastosAlumno" method="POST">
                             {{ csrf_field() }}
                             <tr>
@@ -85,24 +120,30 @@ Consultar Gastos Alumnos
                                 </td>
                                 <td>
                                     <button type="submit" class="btn editar" name="editar" ></button>
-                                         <!-- </td><td>-->
                                     <button type="submit" class="btn eliminar" name="eliminar" ></button>
                                 </td>
                             </tr>
                         </form>
-                        <?php
-                    }
-                    ?>
+                    <?php } ?>
+                    @endif
                     </tbody>
                 </table>
             </div>
         </div>
     </div> 
+    @if($buscarGTC != null)
+    <div class="row justify-content-center">
+        <div class="col-sm col-md col-lg">
+            {{ $buscarGTC->links()}}
+        </div>
+    </div>
+    @else
     <div class="row justify-content-center">
         <div class="col-sm col-md col-lg">
             {{ $gc->links()}}
         </div>
     </div>
+    @endif
     @endif
 
     @if ($gtc !=null) 
@@ -117,13 +158,11 @@ Consultar Gastos Alumnos
                             <th>Donde es</th>    
                             <th>Importe</th>                 
                             <th>Foto</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-
-                        <?php
-                        foreach ($gtc as $key) {
-                            ?>
+                        <?php foreach ($gtc as $key) { ?>
                         <form action="consultarGastosAlumno" method="POST">
                             {{ csrf_field() }}
                             <tr>
@@ -140,14 +179,11 @@ Consultar Gastos Alumnos
                                 </td>
                                 <td>
                                     <button type="submit" class="btn editar" name="editarC" ></button>
-                                         <!-- </td><td>-->
                                     <button type="submit" class="btn eliminar" name="eliminarC" ></button>
                                 </td>
                             </tr>
                         </form>
-                        <?php
-                    }
-                    ?>
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -172,12 +208,11 @@ Consultar Gastos Alumnos
                             <th>Donde es</th>                      
                             <th>KMS</th>
                             <th>Importe</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        foreach ($gtp as $key) {
-                            ?>
+                        <?php foreach ($gtp as $key) { ?>
                         <form action="consultarGastosAlumno" method="POST">
                             {{ csrf_field() }}
                             <tr>
@@ -190,14 +225,11 @@ Consultar Gastos Alumnos
                                 <td><input type="number" step="0.01" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
                                 <td>
                                     <button type="submit" class="btn editar" name="editarP" ></button>
-                                         <!-- </td><td>-->
                                     <button type="submit" class="btn eliminar" name="eliminarP" ></button>
                                 </td>
                             </tr>
                         </form>
-                        <?php
-                    }
-                    ?>
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>

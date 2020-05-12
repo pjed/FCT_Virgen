@@ -9,6 +9,47 @@ use App\Auxiliar\Documentos;
 class controladorTutor extends Controller {
 
     /**
+     * buscarGastoTutorComida y mostrarlas en la tabla 
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
+    public function buscarGastoTutorComida(Request $req) {
+        $gtc = null;
+        $gtp = null;
+        $keywords = $req->get('keywords');
+        $dniAlumno = session()->get('dniAlumno');
+        $l2 = Conexion::listarAlumnoPorTutor();
+        $gt = Conexion::listarGastosTransportes($dniAlumno);
+
+        $colectivo = null;
+        $propio = null;
+        foreach ($gt as $key) {
+            if ($key->tipoTransporte == 1) {
+                $colectivo = 1;
+            }
+            if ($key->tipoTransporte == 0) {
+                $propio = 0;
+            }
+        }
+        if ($colectivo == 1) {
+            $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+        }
+        if ($propio == 0) {
+            $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+        }
+        $l = Conexion::buscarGastoAlumnoComida($keywords, $dniAlumno);
+        $datos = [
+            'l2' => $l2,
+            'buscarGTC' => $l,
+            'gc' => null,
+            'gtp' => $gtp,
+            'gtc' => $gtc
+        ];
+        return view('tutor/consultarGastosAlumno', $datos);
+    }
+
+    /**
      * buscarResponsables y mostrarlas en la tabla 
      * @author Marina
      * @param Request $req
@@ -55,7 +96,7 @@ class controladorTutor extends Controller {
      */
     public function buscarEmpresas(Request $req) {
         $keywords = $req->get('keywords');
-        $l = Conexion::buscarEmpresas($keywords);        
+        $l = Conexion::buscarEmpresas($keywords);
         return view('tutor/gestionarEmpresa', ['buscarE' => $l]);
     }
 
@@ -140,6 +181,7 @@ class controladorTutor extends Controller {
         $gc = Conexion::listarGastosComidasPagination($dniAlumno);
         $datos = [
             'l2' => $l2,
+            'buscarGTC' => null,
             'gc' => $gc,
             'gtp' => $gtp,
             'gtc' => $gtc

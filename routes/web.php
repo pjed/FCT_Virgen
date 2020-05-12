@@ -112,6 +112,7 @@ Route::group(['middleware' => ['tutor']], function() {
     Route::post('gestionarPracticas', 'controladorTutor@gestionarPracticas');
     Route::post('perfilT', 'controladorTutor@perfil');
     Route::post('perfilT1', 'controladorGeneral@perfilT'); //redirige al perfil
+    Route::post('buscarGastoTutorComida', 'controladorTutor@buscarGastoTutorComida');  
 });
 
 
