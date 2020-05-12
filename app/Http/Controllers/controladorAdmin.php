@@ -9,6 +9,47 @@ use App\Auxiliar\Documentos;
 class controladorAdmin extends Controller {
 
     /**
+     * buscarGastoAdminComida y mostrarlas en la tabla 
+     * @author Marina
+     * @param Request $req
+     * @return type
+     */
+    public function buscarGastoAdminComida(Request $req) {
+        $keywords = $req->get('keywords');
+        $dniAlumno = session()->get('dniAlumno');
+        $ciclo = session()->get('ciclo');
+        $l = Conexion::buscarGastoAdminComida($keywords, $dniAlumno);
+        $l1 = Conexion::listaCursos();
+        $l2 = Conexion::listarAlumnosCurso($ciclo);
+        $gt = Conexion::listarGastosTransportes($dniAlumno);
+        $colectivo = null;
+        $propio = null;
+        foreach ($gt as $key) {
+            if ($key->tipoTransporte == 1) {
+                $colectivo = 1;
+            }
+            if ($key->tipoTransporte == 0) {
+                $propio = 0;
+            }
+        }
+        if ($colectivo == 1) {
+            $gtc = Conexion::listarGastosTransportesColectivosPagination($dniAlumno);
+        }
+        if ($propio == 0) {
+            $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
+        }
+        $datos = [
+            'l1' => $l1,
+            'l2' => $l2,
+            'buscarGAdC' => $l,
+            'gc' => null,
+            'gtp' => $gtp,
+            'gtc' => $gtc,
+        ];
+        return view('admin/consultarGastos', $datos);
+    }
+
+    /**
      * buscarCursos y mostrarlas en la tabla
      * @author Marina
      * @param Request $req
@@ -1150,6 +1191,7 @@ class controladorAdmin extends Controller {
         }
         $gc = Conexion::listarGastosComidasPagination($dniAlumno);
         $datos = [
+            'buscarGAdC' => null,
             'l1' => $l1,
             'l2' => $l2,
             'gc' => $gc,

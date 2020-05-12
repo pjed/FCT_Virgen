@@ -256,7 +256,8 @@ Route::group(['middleware' => ['admin']], function() {
     Route::post('gestionarAlumnos', 'controladorAdmin@gestionarAlumnos');
     Route::post('gestionarTutores', 'controladorAdmin@gestionarTutores');
     Route::post('exportarDocumentos', 'controladorAdmin@exportarDocumentos');
-    Route::post('aniadirUsuario', 'controladorAdmin@aniadirUsuario');    
+    Route::post('aniadirUsuario', 'controladorAdmin@aniadirUsuario');   
+    Route::post('buscarGastoAdminComida', 'controladorAdmin@buscarGastoAdminComida');   
 });
 
 

@@ -1375,6 +1375,25 @@ class Conexion {
                 ->paginate(8);
         return $v;
     }
+     /**
+     * buscarGastoAlumnoComida y mostrarlas en la tabla 
+     * @author Marina
+     * @param type $keywords
+     * @param type $dniAlumno
+     * @return type
+     */
+    static function buscarGastoAdminComida($keywords, $dniAlumno) {
+        $v = [];
+        $v = \DB::table('usuarios')
+                ->where('usuarios.dni', $dniAlumno)
+                ->where('gastos.tipo', 0)
+                ->where('comidas.fecha', 'like', '%' . $keywords . '%')
+                ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
+                ->join('comidas', 'comidas.id', '=', 'gastos.comidas_id')
+                ->select('gastos.id AS idGasto', 'comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto')
+                ->paginate(8);
+        return $v;
+    }
 
     /**
      * buscarEmpresas y mostrarlas en la tabla 
