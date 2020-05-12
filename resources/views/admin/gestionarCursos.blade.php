@@ -34,7 +34,7 @@ Gestionar Cursos
         <div class="col-sm-3 col-md-3">
             <form action="buscarCursos" method="POST">
                 {{ csrf_field() }}
-                <input type="text" id="keywords" name="keywords" placeholder="ciclo, descripcion, familia" size="30" maxlength="30">
+                <input type="text" id="keywords" name="keywords" placeholder="Ciclo, descripción, familia" size="30" maxlength="30">
                 <button type="submit" class="buscar btn btn-primary" name="search"></button>
             </form>
         </div>
