@@ -88,7 +88,7 @@ Route::group(['middleware' => ['tutor']], function() {
     Route::get('perfilT', function () {
         return view('tutor/perfilTutor');
     });
-    
+
     //Ajax para poder modificar practicas    
     Route::any('modalModificarPracticaAjax', ['uses' => 'controladorTutor@buscarPracticaPorIdAjax', 'as' => 'modalModificarPracticaAjax']);
     Route::any('idEmpresaModificarPracticaAjax', ['uses' => 'controladorTutor@idResponsableDeUnaEmpresaPracticaAjax', 'as' => 'idEmpresaModificarPracticaAjax']);
@@ -132,15 +132,10 @@ Route::group(['middleware' => ['admin']], function() {
     Route::post('dropzone-image-delete', 'DropzoneController@destroy');
     Route::get('extraerDocA', function () {
         $l1 = Conexion::listaCursos();
-        $datos = [
-            'l1' => $l1
-        ];
-        return view('admin/extraerDocA', $datos);
+        return view('admin/extraerDocA', ['l1' => $l1]);
     });
     Route::get('consultarGastos', function () {
-        if (isset($_GET['page'])) {
-            $datos = controladorAdmin::paginacionConsultarGastoAlumno();
-        } else {
+        if (isset($_SESSION['dniAlumno'])) {
             $l1 = Conexion::listaCursos();
             $datos = [
                 'l1' => $l1,
@@ -148,6 +143,8 @@ Route::group(['middleware' => ['admin']], function() {
                 'gtp' => null,
                 'gtc' => null,
             ];
+        } else {
+            $datos = controladorAdmin::paginacionConsultarGastoAlumno();
         }
         return view('admin/consultarGastos', $datos);
     });
@@ -232,9 +229,6 @@ Route::group(['middleware' => ['admin']], function() {
         $l = Conexion::buscarCursos($keywords);
         return view('admin/gestionarCursos', ['buscarC' => $l]);
     })->name('buscargestionarCursos');
-    Route::get('importarTutores', function () {
-        return view('admin/importarTutores');
-    });
     Route::get('perfilAd', function () {
         return view('admin/perfilAdmin');
     });
@@ -262,7 +256,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::post('gestionarAlumnos', 'controladorAdmin@gestionarAlumnos');
     Route::post('gestionarTutores', 'controladorAdmin@gestionarTutores');
     Route::post('exportarDocumentos', 'controladorAdmin@exportarDocumentos');
-    Route::post('aniadirUsuario', 'controladorAdmin@aniadirUsuario');
+    Route::post('aniadirUsuario', 'controladorAdmin@aniadirUsuario');    
 });
 
 
@@ -272,7 +266,6 @@ Route::group(['middleware' => ['alumno']], function() {
         return view('alumno/bienvenidaAl');
     });
     Route::get('crearGastoComida', function () {
-
         return view('alumno/crearGastoComida');
     });
     Route::get('crearGastoTransporte', function () {
@@ -284,7 +277,9 @@ Route::group(['middleware' => ['alumno']], function() {
             $dniAlumno = $u['dni'];
         }
         $gastosAlumno = Conexion::listarGastosComidasPagination($dniAlumno);
-        return view('alumno/gestionarGastosComida', ['gastosAlumno' => $gastosAlumno]);
+        $datos = ['buscarGAC' => null,
+            'gastosAlumno' => $gastosAlumno];
+        return view('alumno/gestionarGastosComida', $datos);
     });
     Route::get('gestionarGastosTransporte', function () {
         $gastosAlumno = null;
@@ -325,6 +320,7 @@ Route::group(['middleware' => ['alumno']], function() {
     Route::post('crearGastoTransporte', 'controladorAlumno@crearGastoTransporte');
     Route::post('gestionarGastosComida', 'controladorAlumno@gestionarGastoComida');
     Route::post('gestionarGastosTransporte', 'controladorAlumno@gestionarGastosTransporte');
+    Route::post('buscarGastoAlumnoComida', 'controladorAlumno@buscarGastoAlumnoComida');      
 });
 
 

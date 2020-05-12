@@ -1357,6 +1357,26 @@ class Conexion {
     }
 
     /**
+     * buscarGastoAlumnoComida y mostrarlas en la tabla 
+     * @author Marina
+     * @param type $keywords
+     * @param type $dniAlumno
+     * @return type
+     */
+    static function buscarGastoAlumnoComida($keywords, $dniAlumno) {
+        $v = [];
+        $v = \DB::table('usuarios')
+                ->where('usuarios.dni', $dniAlumno)
+                ->where('gastos.tipo', 0)
+                ->where('comidas.fecha', 'like', '%' . $keywords . '%')
+                ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
+                ->join('comidas', 'comidas.id', '=', 'gastos.comidas_id')
+                ->select('gastos.id AS idGasto', 'comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto')
+                ->paginate(8);
+        return $v;
+    }
+
+    /**
      * buscarEmpresas y mostrarlas en la tabla 
      * @author Marina
      * @param type $keywords
@@ -1499,7 +1519,6 @@ class Conexion {
         $v = \DB::table('usuarios')
                 ->where('usuarios.dni', $dni)
                 ->where('gastos.tipo', 0)
-                ->whereNotIn('gastos.comidas_id', [0])
                 ->join('gastos', 'gastos.usuarios_dni', '=', 'usuarios.dni')
                 ->join('comidas', 'comidas.id', '=', 'gastos.comidas_id')
                 ->select('gastos.id AS idGasto', 'comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto')
@@ -2271,7 +2290,7 @@ class Conexion {
                 ->get();
         return $v;
     }
-    
+
     static function listarGastosAlumno($dni) {
         $v = \DB::table('practicas')
                 ->where('practicas.usuarios_dni', $dni)
