@@ -2072,6 +2072,16 @@ class Conexion {
                 ->paginate(8);
         return $v;
     }
+    
+    /**
+     * Método para obtener todos los cursos con paginacion de 4
+     * @return type
+     */
+    static function listarCursosAnteriores() {
+        $v = [];
+        $v = \DB::table('historico.historico')->get();
+        return $v;
+    }
 
     static function insertarCurso($id, $descripcion, $anioAcademico, $familia, $horas) {
         $now = new \DateTime();
@@ -2431,6 +2441,27 @@ class Conexion {
         $ciclo = tutor::where('usuarios_dni', $dni)->select('cursos_id_curso')->first();
 
         return $ciclo;
+    }
+    
+    /**
+     * Método que obtiene los gastos del curso anterior seleccionado obteniendo 
+     * como valor el nombre de la bbdd a la que tiene que consultar.
+     * @param type $cursoAnteriorSeleccionado
+     */
+    static function obtenerGastosCursoAnteriorSeleccionado($cursoAnteriorSeleccionado){
+        $v=null;
+        if($cursoAnteriorSeleccionado=="0"){
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Por favor seleccione un curso academico. Gracias.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }else{
+            $v = \DB::table($cursoAnteriorSeleccionado.'.gastos')->get();
+        }
+        
+        return $v;
     }
 
 }

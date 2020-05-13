@@ -9,6 +9,25 @@ use App\Auxiliar\Documentos;
 class controladorAdmin extends Controller {
 
     /**
+     * Método que obtiene los gastos del curso anterior seleccionado
+     * @param Request $req
+     * @return type
+     */
+    public function consultarGastosAnteriores(Request $req) {
+        $anio_seleccionado = $req->get('curso');
+
+        $lista_cursos = Conexion::listarCursosAnteriores();
+        $tabla_gastos = Conexion::obtenerGastosCursoAnteriorSeleccionado($anio_seleccionado);
+        
+        $datos = [
+            'lista_cursos' => $lista_cursos,
+            'tabla_gastos' => $tabla_gastos
+        ];
+
+        return view('admin/consultarGastosAnteriores', $datos);
+    }
+
+    /**
      * buscarGastoAdminComida y mostrarlas en la tabla 
      * @author Marina
      * @param Request $req
@@ -831,12 +850,14 @@ class controladorAdmin extends Controller {
                       `updated_at` timestamp NULL DEFAULT NULL,
                     PRIMARY KEY (`cod`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                    
+                    INSERT INTO historico (cod, descripcion, created_at, updated_at) VALUES ('0','-- Selecciona un curso --',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
                     ";
         \DB::connection()->getPdo()->exec($sqlDB);
-        
+
         $sqlInsert = "INSERT INTO historico (cod, descripcion, created_at, updated_at) VALUES ('$database_name_new','$ano_completo',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);";
         \DB::connection()->getPdo()->exec($sqlInsert);
-
+        
         \DB::statement("DROP DATABASE IF EXISTS `{$database_name_new}`;");
         \DB::statement("CREATE DATABASE `{$database_name_new}` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;");
 

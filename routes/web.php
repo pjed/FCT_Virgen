@@ -131,6 +131,16 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('dropzone', 'DropzoneController@index')->name('dropzone.store');
     Route::post('dropzone-image-upload', 'DropzoneController@store');
     Route::post('dropzone-image-delete', 'DropzoneController@destroy');
+    
+    Route::get('consultarGastosAnteriores', function () {
+        $lista_cursos = Conexion::listarCursosAnteriores();
+        $datos = [
+            'lista_cursos' => $lista_cursos
+        ];
+        
+        return view('admin/consultarGastosAnteriores', $datos);
+    });
+    Route::post('consultarGastosAnteriores', 'controladorAdmin@consultarGastosAnteriores');
     Route::get('extraerDocA', function () {
         $l1 = Conexion::listaCursos();
         return view('admin/extraerDocA', ['l1' => $l1]);
