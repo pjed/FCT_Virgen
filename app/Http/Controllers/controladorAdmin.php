@@ -1154,6 +1154,7 @@ class controladorAdmin extends Controller {
                       `telefono` varchar(9) DEFAULT NULL,
                       `movil` varchar(9) DEFAULT NULL,
                       `iban` varchar(24) DEFAULT NULL,
+                      `activo` int(1) NOT NULL DEFAULT '1',
                       `foto` varchar(45) NOT NULL DEFAULT 'images/defecto.jpeg',
                       `created_at` timestamp NULL DEFAULT NULL,
                       `updated_at` timestamp NULL DEFAULT NULL,
@@ -1164,8 +1165,8 @@ class controladorAdmin extends Controller {
                     -- Volcado de datos para la tabla `usuarios`
                     --
 
-                    INSERT INTO `usuarios` (`dni`, `nombre`, `apellidos`, `domicilio`, `email`, `pass`, `telefono`, `movil`, `iban`, `foto`, `created_at`, `updated_at`) VALUES
-                    ('0', 'Usuario', 'Borrado', '', 'auxiliardaw2@gmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', '', '', '', 'images/defecto.jpeg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+                    INSERT INTO `usuarios` (`dni`, `nombre`, `apellidos`, `domicilio`, `email`, `pass`, `telefono`, `movil`, `iban`, `activo`, `foto`, `created_at`, `updated_at`) VALUES
+                    ('0', 'Usuario', 'Borrado', '', 'auxiliardaw2@gmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', '', '', '', 1, 'images/defecto.jpeg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
                     -- --------------------------------------------------------
 
                     --
