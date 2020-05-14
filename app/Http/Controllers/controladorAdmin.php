@@ -801,6 +801,8 @@ class controladorAdmin extends Controller {
      * @param Request $req
      */
     public function DeleteDB(Request $req) {
+        $now = new \DateTime();
+        $fechaActual = $now->format('Y-m-d H:i:s');
         //Borrar la DB
         $database_name = 'gestionfct';
         $database_name_historico = 'historico';
@@ -974,6 +976,7 @@ class controladorAdmin extends Controller {
                     KEY `fk_cursos_centros1_idx` (`centros_cod`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+                    insert into cursos (id_curso, descripcion, ano_academico, familia, horas, centros_cod, created_at, updated_at) values ('Ninguno', 'Ninguno', '', '' ,'', '13002691', '".$fechaActual."', '".$fechaActual."');
                     -- --------------------------------------------------------
 
                     --
@@ -1799,7 +1802,7 @@ class controladorAdmin extends Controller {
                     //si antes era administrador y ahora va a ser tutor
                     if ($rolAntiguo == 1 && $rol_id == 2) {
                         Conexion::ModificarRol($dni, $rol_id);
-                        Conexion::insertarTutor(0, $dni);
+                        Conexion::insertarTutor('Ninguno', $dni);
                     } else {
                         //si antes era administrador y ahora va a ser alumno
                         if ($rolAntiguo == 1 && $rol_id == 3) {
@@ -1809,7 +1812,7 @@ class controladorAdmin extends Controller {
                             //si antes era administrador y ahora va a ser tutor-administrador
                             if ($rolAntiguo == 1 && $rol_id == 4) {
                                 Conexion::ModificarRol($dni, $rol_id);
-                                Conexion::insertarTutor(0, $dni);
+                                Conexion::insertarTutor('Ninguno', $dni);
                             } //si antes era administrador y va a seguir siendo administrador
                             if ($rolAntiguo == 1 && $rol_id == 1) {
                                 Conexion::ModificarRol($dni, $rol_id);
@@ -1858,14 +1861,14 @@ class controladorAdmin extends Controller {
                                         Conexion::borrarAlumnoTablaGastos($dni);
                                         Conexion::borrarAlumno($dni);
                                         Conexion::ModificarRol($dni, $rol_id);
-                                        Conexion::insertarTutor(0, $dni);
+                                        Conexion::insertarTutor('Ninguno', $dni);
                                     } //si antes era alumno y va a ser tutor-administrador
                                     if ($rolAntiguo == 2 && $rol_id == 4) {
                                         Conexion::borrarAlumnoTablaPracticas($dni);
                                         Conexion::borrarAlumnoTablaGastos($dni);
                                         Conexion::borrarAlumno($dni);
                                         Conexion::ModificarRol($dni, $rol_id);
-                                        Conexion::insertarTutor(0, $dni);
+                                        Conexion::insertarTutor('Ninguno', $dni);
                                     }
                                 }
                             }
