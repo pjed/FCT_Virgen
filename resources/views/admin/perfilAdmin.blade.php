@@ -43,11 +43,11 @@ foreach ($usu as $value) {
                             </label>
                             <label for="telefono">
                                 Móvil 1
-                                <input type="tel" id="telefono" name="telefono" value="<?php echo $telefono ?>" placeholder="Telefono" pattern="[9]{1}[0-9]{8}"><br>
+                                <input type="tel" id="telefono" name="telefono" value="<?php echo $telefono ?>"  maxlength=9><br>
                             </label>
                             <label for="movil">
                                 Móvil 2
-                                <input type="tel" id="movil" name="movil" value="<?php echo $movil ?>" placeholder="Movil" pattern="[6-7]{1}[0-9]{8}"><br>
+                                <input type="tel" id="movil" name="movil" value="<?php echo $movil ?>"  maxlength=9><br>
                             </label>
                             <input type="submit" class="btn btn-primary" name="perfil" value="Actualizar Perfil">
                         </div>

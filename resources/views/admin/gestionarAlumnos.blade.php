@@ -95,11 +95,11 @@ Gestionar alumnos
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 Móvil 1:
-                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[6-7,9]{1}[0-9]{0,8}"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="telefono" maxlength=9/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Móvil 2:
-                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7,9]{1}[0-9]{0,8}"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="movil" maxlength=9/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -163,8 +163,8 @@ Gestionar alumnos
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
                                 <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>"/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>"/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" pattern="[6-7,9]{1}[0-9]{0,8}" title="Introduzca un teléfono válido"/></td> <!--pattern="[9]{1}[0-9]{8}"-->
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" pattern="[6-7,9]{1}[0-9]{0,8}"  title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" maxlength=9 title="Introduzca un teléfono válido"/></td> <!--pattern="[9]{1}[0-9]{8}"-->
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" maxlength=9  title="Introduzca un teléfono válido"/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="iban" value="<?php echo $value->iban; ?>" pattern="^ES\d{22}$"/></td>
                                 <td>
                                     <select class="sel" name="selectCiclo">
@@ -208,8 +208,8 @@ Gestionar alumnos
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
                                 <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>"/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>"/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" pattern="[6-7,9]{1}[0-9]{0,8}" title="Introduzca un teléfono válido"/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" pattern="[6-7,9]{1}[0-9]{0,8}"  title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" maxlength=9 title="Introduzca un teléfono válido"/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" maxlength=9  title="Introduzca un teléfono válido"/></td>
                                 <td><input type="text" class="form-control form-control-sm form-control-md" name="iban" value="<?php echo $value->iban; ?>" pattern="^ES\d{22}$"/></td>
                                 <td>
                                     <select class="sel" name="selectCiclo">
