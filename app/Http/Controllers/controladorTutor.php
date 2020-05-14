@@ -132,7 +132,7 @@ class controladorTutor extends Controller {
         $pass = $req->get('pass');
         if ($pass != null) {
             $passHash = hash('sha256', $pass);
-            Conexion::ModificarConstrasenia($dni, $passHash);
+            Conexion::ModificarConstrasenia($dni, $passHash, 0); //0->cambiar contraseña al perfil 1-> restablecer contraseña
             $clave = $passHash;
         }
         Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $updated_at);

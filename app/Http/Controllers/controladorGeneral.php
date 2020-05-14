@@ -140,7 +140,7 @@ class controladorGeneral extends Controller {
                 $pass = $this->generateRandomString(5);
                 $passHash = hash('sha256', $pass);
                 //cifrar contraseña
-                Conexion::RecuperarConstrasenia($dni, $passHash);
+                Conexion::ModificarConstrasenia($dni, $passHash, 1);//1-> restablecer contraseña 0->cambiar contraseña al perfil
 
 
                 $objDemo = new \stdClass();
