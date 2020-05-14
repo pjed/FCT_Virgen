@@ -1755,7 +1755,11 @@ class controladorAdmin extends Controller {
             $tel = $req->get('telefono');
             $movil = $req->get('movil');
             $domicilio = $req->get('domicilio');
-            $activo = $req->get('activo');
+            if ($req->get('activo') == 'on') {
+                $activo = 1;
+            } else {
+                $activo = 0;
+            }
             $rol_id = $req->get('selectRol');
 
             $rolUsuario = Conexion::obtenerRolUsuario($dni);
@@ -1954,7 +1958,11 @@ class controladorAdmin extends Controller {
             $telefono = $req->get("telefono");
             $movil = $req->get("movil");
             $iban = $req->get("iban");
-            $activo = $req->get("activo");
+            if ($req->get('activo') == 'on') {
+                $activo = 1;
+            } else {
+                $activo = 0;
+            }
             $ciclo = $req->get("selectCiclo");
 
             Conexion::ModificarMatricula($dni, $ciclo);
@@ -2025,7 +2033,11 @@ class controladorAdmin extends Controller {
             $email = $req->get("email");
             $telefono = $req->get("telefono");
             $movil = $req->get("movil");
-            $activo = $req->get("activo");
+            if ($req->get('activo') == 'on') {
+                $activo = 1;
+            } else {
+                $activo = 0;
+            }
             $iban = "";
             $ciclo = $req->get("selectCiclo");
 

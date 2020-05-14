@@ -552,7 +552,12 @@ class Conexion {
                         'updated_at' => $updated_at
             ]);
         } catch (\Exception $e) {
-            
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al actualizar matricula.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
         }
     }
 
@@ -602,7 +607,12 @@ class Conexion {
                     ->update(['cursos_id_curso' => $ciclo,
                         'updated_at' => $updated_at]);
         } catch (\Exception $e) {
-            
+             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al actualizar tutoría.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
         }
     }
 
