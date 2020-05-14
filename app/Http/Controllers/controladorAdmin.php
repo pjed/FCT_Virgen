@@ -1761,32 +1761,34 @@ class controladorAdmin extends Controller {
                 $activo = 0;
             }
             $rol_id = $req->get('selectRol');
-
+            if ($req->get('activo') != null) {
+                $iban = $req->get('iban');
+            } else {
+                $iban = "";
+            }
             $rolUsuario = Conexion::obtenerRolUsuario($dni);
             $rolAntiguo = $rolUsuario->rol_id;
+
+            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $iban, $activo);
 
             //SI ES TUTOR:
             if ($rolAntiguo == 2) {
                 //si antes era tutor y ahora va a ser administrador
                 if ($rolAntiguo == 2 && $rol_id == 1) {
                     Conexion::borrarTutor($dni);
-                    Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                     Conexion::ModificarRol($dni, $rol_id);
                 } else {
                     //si antes era tutor y ahora va a ser alumno
                     if ($rolAntiguo == 2 && $rol_id == 3) {
                         Conexion::borrarTutor($dni);
-                        Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                         Conexion::ModificarRol($dni, $rol_id);
                         Conexion::insertarAlumnoTablaMatriculados($dni, 0);
                     } else {
                         //si antes era tutor y ahora va a ser tutor-administrador
                         if ($rolAntiguo == 2 && $rol_id == 4) {
-                            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                             Conexion::ModificarRol($dni, $rol_id);
                         } //si antes era tutor y va a seguir siendo tutor
                         if ($rolAntiguo == 2 && $rol_id == 2) {
-                            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                             Conexion::ModificarRol($dni, $rol_id);
                         }
                     }
@@ -1796,24 +1798,20 @@ class controladorAdmin extends Controller {
                 if ($rolAntiguo == 1) {
                     //si antes era administrador y ahora va a ser tutor
                     if ($rolAntiguo == 1 && $rol_id == 2) {
-                        Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                         Conexion::ModificarRol($dni, $rol_id);
                         Conexion::insertarTutor(0, $dni);
                     } else {
                         //si antes era administrador y ahora va a ser alumno
                         if ($rolAntiguo == 1 && $rol_id == 3) {
-                            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                             Conexion::ModificarRol($dni, $rol_id);
                             Conexion::insertarAlumnoTablaMatriculados($dni, 0);
                         } else {
                             //si antes era administrador y ahora va a ser tutor-administrador
                             if ($rolAntiguo == 1 && $rol_id == 4) {
-                                Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                                 Conexion::ModificarRol($dni, $rol_id);
                                 Conexion::insertarTutor(0, $dni);
                             } //si antes era administrador y va a seguir siendo administrador
                             if ($rolAntiguo == 1 && $rol_id == 1) {
-                                Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                                 Conexion::ModificarRol($dni, $rol_id);
                             }
                         }
@@ -1823,23 +1821,19 @@ class controladorAdmin extends Controller {
                     if ($rolAntiguo == 4) {
                         //si antes era tutor-administrador y ahora va a ser administrador
                         if ($rolAntiguo == 4 && $rol_id == 1) {
-                            Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                             Conexion::ModificarRol($dni, $rol_id);
                             Conexion::borrarTutor($dni);
                         } else {
                             //si antes era tutor-administrador y ahora va a ser tutor
                             if ($rolAntiguo == 4 && $rol_id == 2) {
-                                Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                                 Conexion::ModificarRol($dni, $rol_id);
                             } else {
                                 //si antes era tutor-administrador y ahora va a ser alumno
                                 if ($rolAntiguo == 4 && $rol_id == 3) {
-                                    Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                                     Conexion::ModificarRol($dni, $rol_id);
                                     Conexion::insertarAlumnoTablaMatriculados($dni, 0);
                                 } //si antes era tutor-administrador y va a seguir siendo tutor-administrador
                                 if ($rolAntiguo == 4 && $rol_id == 4) {
-                                    Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                                     Conexion::ModificarRol($dni, $rol_id);
                                 }
                             }
@@ -1852,12 +1846,10 @@ class controladorAdmin extends Controller {
                                 Conexion::borrarAlumnoTablaPracticas($dni);
                                 Conexion::borrarAlumnoTablaGastos($dni);
                                 Conexion::borrarAlumno($dni);
-                                Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                                 Conexion::ModificarRol($dni, $rol_id);
                             } else {
                                 //si antes era alumno y ahora va a ser alumno
                                 if ($rolAntiguo == 3 && $rol_id == 3) {
-                                    Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                                     Conexion::ModificarRol($dni, $rol_id);
                                 } else {
                                     //si antes era alumno y ahora va a ser tutor
@@ -1865,7 +1857,6 @@ class controladorAdmin extends Controller {
                                         Conexion::borrarAlumnoTablaPracticas($dni);
                                         Conexion::borrarAlumnoTablaGastos($dni);
                                         Conexion::borrarAlumno($dni);
-                                        Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                                         Conexion::ModificarRol($dni, $rol_id);
                                         Conexion::insertarTutor(0, $dni);
                                     } //si antes era alumno y va a ser tutor-administrador
@@ -1873,7 +1864,6 @@ class controladorAdmin extends Controller {
                                         Conexion::borrarAlumnoTablaPracticas($dni);
                                         Conexion::borrarAlumnoTablaGastos($dni);
                                         Conexion::borrarAlumno($dni);
-                                        Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo);
                                         Conexion::ModificarRol($dni, $rol_id);
                                         Conexion::insertarTutor(0, $dni);
                                     }
