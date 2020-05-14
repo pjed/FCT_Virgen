@@ -47,7 +47,8 @@ Gestionar alumnos
             <div class="table-responsive ">
                 <table class="table table-striped  table-hover table-bordered">
                     <thead class="thead-dark">
-                        <tr>                
+                        <tr>      
+                            <th></th>          
                             <th>DNI</th>
                             <th>Nombre</th>
                             <th>Apellidos</th>
