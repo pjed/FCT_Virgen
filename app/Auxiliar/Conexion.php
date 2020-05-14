@@ -171,6 +171,7 @@ class Conexion {
                 'iban' => $iban,
                 'activo' => $activo,
                 'updated_at' => $updated_at]);
+            
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado usuario con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
