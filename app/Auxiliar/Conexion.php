@@ -2404,9 +2404,36 @@ class Conexion {
                     </button>
                   </div>';
         } else {
-            $v = \DB::table($cursoAnteriorSeleccionado . '.gastos')->get();
-        }
 
+            $sqlDB = "USE `{$cursoAnteriorSeleccionado}`;";
+            \DB::connection()->getPdo()->exec($sqlDB);
+            $v = \DB::table($cursoAnteriorSeleccionado . '.gastos')
+                    ->join('usuarios', $cursoAnteriorSeleccionado . '.gastos.usuarios_dni', '=', $cursoAnteriorSeleccionado . '.usuarios.dni')
+                    ->join('practicas', $cursoAnteriorSeleccionado . '.practicas.usuarios_dni', '=', $cursoAnteriorSeleccionado . '.usuarios.dni')
+                    ->join('matriculados', $cursoAnteriorSeleccionado . '.matriculados.usuarios_dni', '=', $cursoAnteriorSeleccionado . '.usuarios.dni')
+                    ->select($cursoAnteriorSeleccionado . '.usuarios.dni', $cursoAnteriorSeleccionado . '.usuarios.nombre', $cursoAnteriorSeleccionado . '.usuarios.apellidos', $cursoAnteriorSeleccionado . '.matriculados.cursos_id_curso', $cursoAnteriorSeleccionado . '.practicas.gastos')
+                    ->get();
+
+            $sqlDB = "USE gestionfct;";
+            \DB::connection()->getPdo()->exec($sqlDB);
+            
+            if (count($v) == 0) {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    No existen gastos en el año academico seleccionado.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            } else {
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Se han encontrado registros ...
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            }
+        }
+        
         return $v;
     }
 

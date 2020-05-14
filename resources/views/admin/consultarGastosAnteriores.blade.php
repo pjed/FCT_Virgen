@@ -7,7 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="js/dropzone.js" type="text/javascript"></script>
 @section('titulo') 
-Importar Datos
+Consultar gastos anteriores
 @endsection
 
 @section('contenido') 
@@ -39,22 +39,43 @@ Importar Datos
                 ?>
             </select><br><br>
             <input type="submit" id="verTabla" class="btn btn-primary" name="verTabla" value="Ver Gastos"/>
-
+            <br><br><br>
             <?php
             if (isset($tabla_gastos)) {
-                if (count($tabla_gastos) == 0) {
-                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    No existen gastos en el año academico seleccionado.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-                } else {
-                    foreach ($tabla_gastos as $gastos) {
-                        ?>
-                        <option value="<?php echo $gastos->usuarios_dni; ?>"><?php echo $gastos->usuarios_dni; ?></option>
-                        <?php
-                    }
+                if (count($tabla_gastos) > 0) {
+                    ?>
+                    <div class="row">
+                        <div class="col-sm col-md">
+                            <div class="table-responsive ">
+                                <table class="table table-striped  table-hover table-bordered">
+                                    <thead class="thead-dark">
+                                    <thead>
+                                    <th>DNI</th>
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>Curso</th>
+                                    <th>Importe Gasto</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        foreach ($tabla_gastos as $gastos) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $gastos->dni; ?></td>
+                                                <td><?php echo $gastos->nombre; ?></td>
+                                                <td><?php echo $gastos->apellidos; ?></td>
+                                                <td><?php echo $gastos->cursos_id_curso; ?></td>
+                                                <td><?php echo $gastos->gastos; ?> €</td>
+                                            </tr>
+                                            <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
                 }
             }
             ?>
