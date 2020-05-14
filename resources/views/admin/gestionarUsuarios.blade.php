@@ -46,7 +46,8 @@ Gestionar usuarios
             <div class="table-responsive ">
                 <table class="table table-striped  table-hover table-bordered">
                     <thead class="thead-dark">
-                        <tr>                
+                        <tr>  
+                            <th></th>
                             <th>DNI</th>
                             <th>Nombre</th>
                             <th>Apellidos</th>
@@ -354,6 +355,27 @@ Gestionar usuarios
                         <form action="gestionarUsuarios" method="POST">
                             {{ csrf_field() }}
                             <tr>
+                                <?php
+                                if ($value->activo == 0) {
+                                    ?>
+                                    <td>
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="acti custom-control-input" name="activo"/>
+                                            <span class="custom-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <?php
+                                } else if ($value->activo == 1) {
+                                    ?>
+                                    <td>
+                                        <label class="custom-control custom-checkbox">                                                    
+                                            <input type="checkbox" class="acti custom-control-input" name="activo" checked/>
+                                            <span class="custom-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <?php
+                                }
+                                ?>
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $value->foto; ?>"/>
                                     <input type="text" class="form-control form-control-sm form-control-md " name="dni" value="<?php echo $value->dni; ?>" readonly/>
