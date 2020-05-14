@@ -121,10 +121,6 @@ class controladorTutor extends Controller {
             $email = $value['email'];
         }
 
-
-        $now = new \DateTime();
-        $updated_at = $now->format('Y-m-d H:i:s');
-
         $domicilio = $req->get('domicilio');
         $telefono = $req->get('telefono');
         $movil = $req->get('movil');
@@ -135,7 +131,7 @@ class controladorTutor extends Controller {
             Conexion::ModificarConstrasenia($dni, $passHash, 0); //0->cambiar contraseña al perfil 1-> restablecer contraseña
             $clave = $passHash;
         }
-        Conexion::actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $updated_at);
+        Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, null, 1);
 
         $usu = Conexion::existeUsuario($email, $clave);
 

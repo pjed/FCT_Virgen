@@ -263,10 +263,6 @@ class controladorAlumno extends Controller {
             $email = $value['email'];
         }
 
-
-        $now = new \DateTime();
-        $updated_at = $now->format('Y-m-d H:i:s');
-
         $domicilio = $req->get('domicilio');
         $telefono = $req->get('telefono');
         $movil = $req->get('movil');
@@ -278,7 +274,7 @@ class controladorAlumno extends Controller {
             Conexion::ModificarConstrasenia($dni, $passHash,0); //0->cambiar contraseña al perfil 1-> restablecer contraseña
             $clave = $passHash;
         }
-        Conexion::actualizarDatosAlumno($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $iban, $updated_at);
+        Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $iban, 1, 3);
 
         $usu = Conexion::existeUsuario($email, $clave);
 
