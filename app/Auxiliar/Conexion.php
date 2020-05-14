@@ -157,7 +157,7 @@ class Conexion {
      * @param type $movil
      * @param type $rol_id
      */
-    static function ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo, $rol_id) {
+    static function ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $iban, $activo) {
         $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
@@ -168,11 +168,8 @@ class Conexion {
                 'email' => $email,
                 'telefono' => $tel,
                 'movil' => $movil,
+                'iban' => $iban,
                 'activo' => $activo,
-                'updated_at' => $updated_at]);
-
-            $r = usuarios_rol::where('usuario_dni', $dni)
-                    ->update(['rol_id' => $rol_id,
                 'updated_at' => $updated_at]);
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado usuario con exito.
@@ -187,6 +184,24 @@ class Conexion {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
+        }
+    }
+
+    /**
+     * Modificar rol
+     * @param type $dni
+     * @param type $rol_id
+     */
+    static function ModificarRol($dni, $rol_id) {
+        try {
+            $now = new \DateTime();
+            $updated_at = $now->format('Y-m-d H:i:s');
+
+            $r = usuarios_rol::where('usuario_dni', $dni)
+                    ->update(['rol_id' => $rol_id,
+                'updated_at' => $updated_at]);
+        } catch (\Exception $e) {
+            
         }
     }
 
@@ -518,7 +533,7 @@ class Conexion {
     }
 
     /**
-     * Método para actualiar los datos de un tutor
+     * Método para actualiar los el alumno de curso
      * @param type $dni dni del alumno
      * @param type $nombre nombre del alumno
      * @param type $apellidos apellidos del alumno
@@ -526,40 +541,18 @@ class Conexion {
      * @param type $telefono número de teléfono del alumno
      * @param type $iban número iban del alumno
      */
-    static function actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $ciclo, $activo, $updated_at) {
+    static function ModificarMatricula($dni, $ciclo) {
         try {
-            usuario::where('dni', $dni)
-                    ->update([
-                        'nombre' => $nombre,
-                        'apellidos' => $apellidos,
-                        'email' => $email,
-                        'telefono' => $telefono,
-                        'iban' => $iban,
-                        'activo' => $activo,
-                        'updated_at' => $updated_at
-            ]);
+            $now = new \DateTime();
+            $updated_at = $now->format('Y-m-d H:i:s');
 
             matricula::where('usuarios_dni', $dni)
                     ->update([
                         'cursos_id_curso' => $ciclo,
                         'updated_at' => $updated_at
             ]);
-
-            session()->put('dniAlumnoModificado', $dni);
-
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito usuario.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al modificar usuario.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
+            
         }
     }
 
@@ -597,78 +590,19 @@ class Conexion {
     }
 
     /**
-     * Método para actualiar los datos de un tutor
-     * @param type $dni dni del alumno
-     * @param type $nombre nombre del alumno
-     * @param type $apellidos apellidos del alumno
-     * @param type $email email del alumno
-     * @param type $telefono número de teléfono del alumno
-     * @param type $iban número iban del alumno
-     */
-    static function actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $activo, $updated_at) {
-        try {
-            usuario::where('dni', $dni)
-                    ->update([
-                        'nombre' => $nombre,
-                        'apellidos' => $apellidos,
-                        'domicilio' => $domicilio,
-                        'email' => $email,
-                        'telefono' => $telefono,
-                        'movil' => $movil,
-                        'activo' => $activo,
-                        'updated_at' => $updated_at
-            ]);
-
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito usuario.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-        } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al modificar usuario.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-        }
-    }
-
-    /**
-     * Método para actualiar los datos de un tutor
+     * Método para actualiar el curso del tutor
      * @param type $dni dni del tutor
-     * @param type $nombre nombre del tutor
-     * @param type $apellidos apellidos del tutor
-     * @param type $email email del tutor
-     * @param type $telefono número de teléfono del tutor
      * @param type $ciclo ciclo del que es tutor
      */
-    static function actualizarDatosTutor($dni, $nombre, $apellidos, $email, $telefono, $activo, $ciclo) {
-        $now = new \DateTime();
-        $updated_at = $now->format('Y-m-d H:i:s');
+    static function ModificarTutor($dni, $ciclo) {
         try {
-            usuario::where('dni', $dni)
-                    ->update(['nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 'telefono' => $telefono,'activo' => $activo,
-                        'updated_at' => $updated_at]);
-
+            $now = new \DateTime();
+            $updated_at = $now->format('Y-m-d H:i:s');
             tutor::where('usuarios_dni', $dni)
                     ->update(['cursos_id_curso' => $ciclo,
                         'updated_at' => $updated_at]);
-
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Datos del usuario modificados con éxito.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al modificar usuario.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
+            
         }
     }
 
@@ -1443,7 +1377,7 @@ class Conexion {
                 ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
                 ->orWhere('usuarios.apellidos', 'like', '%' . $keywords . '%')
                 ->orWhere('usuarios.email', 'like', '%' . $keywords . '%')
-                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios.foto AS foto', 'matriculados.cursos_id_curso as curso' , 'usuarios.activo AS activo')
+                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios.foto AS foto', 'matriculados.cursos_id_curso as curso', 'usuarios.activo AS activo')
                 ->paginate(8);
         return $v;
     }
