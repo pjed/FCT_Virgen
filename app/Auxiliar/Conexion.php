@@ -45,6 +45,7 @@ class Conexion {
                     'tel' => $p->telefono,
                     'movil' => $p->movil,
                     'iban' => $p->iban,
+                    'activo' => $p->activo,
                     'foto' => $p->foto,
                     'rol' => $a->rol_id,
                 ];
@@ -83,6 +84,7 @@ class Conexion {
                 'tel' => $p->telefono,
                 'movil' => $p->movil,
                 'iban' => $p->iban,
+                'activo' => $p->activo,
                 'foto' => $p->foto,
                 'rol' => null,
             ];
@@ -115,6 +117,7 @@ class Conexion {
         $p->telefono = $tel;
         $p->movil = $movil;
         $p->iban = $iban;
+        $p->activo = 1;
         $p->foto = 'images/defecto.jpeg';
         $p->created_at = $updated_at;
         $p->updated_at = $updated_at;
@@ -154,7 +157,7 @@ class Conexion {
      * @param type $movil
      * @param type $rol_id
      */
-    static function ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $rol_id) {
+    static function ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $tel, $movil, $activo, $rol_id) {
         $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
@@ -165,6 +168,7 @@ class Conexion {
                 'email' => $email,
                 'telefono' => $tel,
                 'movil' => $movil,
+                'activo' => $activo,
                 'updated_at' => $updated_at]);
 
             $r = usuarios_rol::where('usuario_dni', $dni)
@@ -188,51 +192,46 @@ class Conexion {
 
     /**
      * Método para modificar la contraseña de un usuario
+     * 1-> restablecer contraseña
+     * 0->cambiar contraseña al perfil
      * @param type $dni dni del usuario
      * @param type $pass nueva contraseña
      */
-    static function ModificarConstrasenia($dni, $pass) {
+    static function ModificarConstrasenia($dni, $pass, $sitio) {
         try {
             $p = usuario::where('dni', $dni)
                     ->update(['pass' => $pass]);
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            if ($sitio == 0) {
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado contraseña con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-        } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al modificar contraseña.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-        }
-    }
-
-    /**
-     * Método para modificar la contraseña de un usuario
-     * @param type $dni dni del usuario
-     * @param type $pass nueva contraseña
-     */
-    static function RecuperarConstrasenia($dni, $pass) {
-        try {
-            $p = usuario::where('dni', $dni)
-                    ->update(['pass' => $pass]);
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            } else {
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Contraseña restablecida correctamente y enviada al correo.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
+            }
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            if ($sitio == 0) {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar contraseña.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Error al restablecer la contraseña.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
+            }
         }
     }
 
@@ -527,7 +526,7 @@ class Conexion {
      * @param type $telefono número de teléfono del alumno
      * @param type $iban número iban del alumno
      */
-    static function actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $ciclo, $updated_at) {
+    static function actualizarDatosAlumno($dni, $nombre, $apellidos, $email, $telefono, $iban, $ciclo, $activo, $updated_at) {
         try {
             usuario::where('dni', $dni)
                     ->update([
@@ -536,6 +535,7 @@ class Conexion {
                         'email' => $email,
                         'telefono' => $telefono,
                         'iban' => $iban,
+                        'activo' => $activo,
                         'updated_at' => $updated_at
             ]);
 
@@ -605,7 +605,7 @@ class Conexion {
      * @param type $telefono número de teléfono del alumno
      * @param type $iban número iban del alumno
      */
-    static function actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $updated_at) {
+    static function actualizarDatosAdminTutor($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $activo, $updated_at) {
         try {
             usuario::where('dni', $dni)
                     ->update([
@@ -615,6 +615,7 @@ class Conexion {
                         'email' => $email,
                         'telefono' => $telefono,
                         'movil' => $movil,
+                        'activo' => $activo,
                         'updated_at' => $updated_at
             ]);
 
@@ -643,12 +644,12 @@ class Conexion {
      * @param type $telefono número de teléfono del tutor
      * @param type $ciclo ciclo del que es tutor
      */
-    static function actualizarDatosTutor($dni, $nombre, $apellidos, $email, $telefono, $ciclo) {
+    static function actualizarDatosTutor($dni, $nombre, $apellidos, $email, $telefono, $activo, $ciclo) {
         $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
             usuario::where('dni', $dni)
-                    ->update(['nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 'telefono' => $telefono,
+                    ->update(['nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 'telefono' => $telefono,'activo' => $activo,
                         'updated_at' => $updated_at]);
 
             tutor::where('usuarios_dni', $dni)
@@ -680,7 +681,7 @@ class Conexion {
                 ->where('matriculados.cursos_id_curso', $ciclo)
                 ->join('cursos', 'matriculados.cursos_id_curso', '=', 'cursos.id_curso')
                 ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
-                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban')
+                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban', 'usuarios.activo AS activo')
                 ->get();
         return $v;
     }
@@ -1375,7 +1376,8 @@ class Conexion {
                 ->paginate(8);
         return $v;
     }
-     /**
+
+    /**
      * buscarGastoAlumnoComida y mostrarlas en la tabla 
      * @author Marina
      * @param type $keywords
@@ -1423,7 +1425,7 @@ class Conexion {
                 ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
                 ->orWhere('usuarios.apellidos', 'like', '%' . $keywords . '%')
                 ->orWhere('usuarios.email', 'like', '%' . $keywords . '%')
-                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios_roles.rol_id AS rol_id', 'usuarios.foto AS foto')
+                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios_roles.rol_id AS rol_id', 'usuarios.foto AS foto', 'usuarios.activo AS activo')
                 ->paginate(8);
         return $v;
     }
@@ -1441,7 +1443,7 @@ class Conexion {
                 ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
                 ->orWhere('usuarios.apellidos', 'like', '%' . $keywords . '%')
                 ->orWhere('usuarios.email', 'like', '%' . $keywords . '%')
-                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios.foto AS foto', 'matriculados.cursos_id_curso as curso')
+                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios.foto AS foto', 'matriculados.cursos_id_curso as curso' , 'usuarios.activo AS activo')
                 ->paginate(8);
         return $v;
     }
@@ -1459,7 +1461,7 @@ class Conexion {
                 ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
                 ->orWhere('usuarios.apellidos', 'like', '%' . $keywords . '%')
                 ->orWhere('usuarios.email', 'like', '%' . $keywords . '%')
-                ->select('tutores.idtutores AS idtutores', 'tutores.cursos_id_curso AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.foto AS foto')
+                ->select('tutores.idtutores AS idtutores', 'tutores.cursos_id_curso AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.foto AS foto', 'usuarios.activo AS activo')
                 ->paginate(8);
         return $v;
     }
@@ -2072,7 +2074,7 @@ class Conexion {
                 ->paginate(8);
         return $v;
     }
-    
+
     /**
      * Método para obtener todos los cursos con paginacion de 4
      * @return type
@@ -2442,25 +2444,25 @@ class Conexion {
 
         return $ciclo;
     }
-    
+
     /**
      * Método que obtiene los gastos del curso anterior seleccionado obteniendo 
      * como valor el nombre de la bbdd a la que tiene que consultar.
      * @param type $cursoAnteriorSeleccionado
      */
-    static function obtenerGastosCursoAnteriorSeleccionado($cursoAnteriorSeleccionado){
-        $v=null;
-        if($cursoAnteriorSeleccionado=="0"){
+    static function obtenerGastosCursoAnteriorSeleccionado($cursoAnteriorSeleccionado) {
+        $v = null;
+        if ($cursoAnteriorSeleccionado == "0") {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Por favor seleccione un curso academico. Gracias.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-        }else{
-            $v = \DB::table($cursoAnteriorSeleccionado.'.gastos')->get();
+        } else {
+            $v = \DB::table($cursoAnteriorSeleccionado . '.gastos')->get();
         }
-        
+
         return $v;
     }
 
