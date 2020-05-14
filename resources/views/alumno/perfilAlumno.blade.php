@@ -47,11 +47,11 @@ foreach ($usu as $value) {
                                 <input type="password" id="password1" name="pass" value="" placeholder="Contraseña"><br>
                             </label>
                             <label for="telefono">
-                                Teléfono
+                                Móvil 1
                                 <input type="tel" id="telefono" name="telefono" value="<?php echo $telefono ?>" placeholder="Telefono" required pattern="[9]{1}[0-9]{8}"><br>
                             </label>
                             <label for="movil">
-                                Móvil
+                                Móvil 2
                                 <input type="tel" id="movil" name="movil" value="<?php echo $movil ?>" placeholder="Movil" required pattern="[6-7]{1}[0-9]{8}"><br>
                             </label>
                             <label for="iban">

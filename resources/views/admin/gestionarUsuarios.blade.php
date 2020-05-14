@@ -123,11 +123,11 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 Móvil 1:
-                                                                <input type="text" class="form-control form-control-sm" name="movil" pattern="[6-7,9]{1}[0-9]{0,8}"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[6-7,9]{1}[0-9]{0,8}"/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Móvil 2:
-                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[6-7,9]{1}[0-9]{0,8}"/>
+                                                                <input type="text" class="form-control form-control-sm" name="movil" pattern="[6-7,9]{1}[0-9]{0,8}"/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -184,11 +184,11 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 Móvil 1:
-                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7,9]{1}[0-9]{0,8}"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[6-7,9]{1}[0-9]{0,8}"/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Móvil 2:
-                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[6-7,9]{1}[0-9]{0,8}"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7,9]{1}[0-9]{0,8}"/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -231,11 +231,11 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 Móvil 1:
-                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7,9]{1}[0-9]{0,8}"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[6-7,9]{1}[0-9]{0,8}"/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Móvil 2:
-                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[6-7,9]{1}[0-9]{0,8}"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7,9]{1}[0-9]{0,8}"/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
@@ -288,11 +288,11 @@ Gestionar usuarios
                                                         <div class="row justify-content-center form-group">
                                                             <label class="col-sm text-center">
                                                                 Móvil 1:
-                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7,9]{1}[0-9]{0,8}"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[6-7,9]{1}[0-9]{0,8}"/>
                                                             </label>
                                                             <label class="col-sm text-center">
                                                                 Móvil 2:
-                                                                <input type="tel" class="form-control form-control-sm" name="telefono" pattern="[6-7,9]{1}[0-9]{0,8}"/>
+                                                                <input type="tel" class="form-control form-control-sm" name="movil" pattern="[6-7,9]{1}[0-9]{0,8}"/>
                                                             </label>
                                                         </div>
                                                         <div class="row justify-content-center form-group">
