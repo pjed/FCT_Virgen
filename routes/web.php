@@ -57,6 +57,7 @@ Route::group(['middleware' => ['tutor']], function() {
         } else {
             $datos = [
                 'l2' => Conexion::listarAlumnoPorTutor(),
+                'buscarGTC' => null,
                 'gtc' => null,
                 'gtp' => null,
                 'gc' => null
