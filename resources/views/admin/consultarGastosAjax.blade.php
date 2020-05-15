@@ -167,7 +167,7 @@ Consultar Gastos Alumnos
                     <div class="form-group">                                 
                         <label class="col-sm text-center">
                             Importe:
-                            <input type="number" step="0.01" class="form-control form-control-sm" id="precioCom" name="importe"/>
+                            <input type="number" class="form-control form-control-sm" id="precioCom" name="importe" min="0" max="9" step="0.01"/>
                         </label>
                     </div>
                     <div class="form-group">                                 

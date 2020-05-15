@@ -976,7 +976,7 @@ class controladorAdmin extends Controller {
                     KEY `fk_cursos_centros1_idx` (`centros_cod`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-                    insert into cursos (id_curso, descripcion, ano_academico, familia, horas, centros_cod, created_at, updated_at) values ('Ninguno', 'Ninguno', '', '' ,'', '13002691', '".$fechaActual."', '".$fechaActual."');
+                    insert into cursos (id_curso, descripcion, ano_academico, familia, horas, centros_cod, created_at, updated_at) values ('Ninguno', 'Ninguno', '', '' ,'', '13002691', '" . $fechaActual . "', '" . $fechaActual . "');
                     -- --------------------------------------------------------
 
                     --
@@ -1372,6 +1372,11 @@ class controladorAdmin extends Controller {
             }
             Conexion::borrarGastoTransporteColectivo($idTransporte);
         }
+
+        $dniAlumno = session()->get('dniAlumno');
+        $gastoTotal = Conexion::obtenerTotalGastosAlumnoParticular($dniAlumno);
+        Conexion::ModificarPracticaGastoTotal($dniAlumno, $gastoTotal);
+
         $datos = controladorAdmin::paginacionConsultarGastoAlumno();
         return view('admin/consultarGastos', $datos);
     }
@@ -1619,8 +1624,11 @@ class controladorAdmin extends Controller {
             }
             Conexion::borrarGastoTransporteColectivo($idTransporte);
         }
-        $v = controladorAdmin::escribirTablaCunsultarGastosAjax($dniAlumno);
 
+        $gastoTotal = Conexion::obtenerTotalGastosAlumnoParticular($dniAlumno);
+        Conexion::ModificarPracticaGastoTotal($dniAlumno, $gastoTotal);
+
+        $v = controladorAdmin::escribirTablaCunsultarGastosAjax($dniAlumno);
         return $v;
     }
 

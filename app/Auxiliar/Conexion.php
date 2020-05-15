@@ -820,7 +820,32 @@ class Conexion {
     }
 
     /**
-     * Metodo para poder borrar el empresa
+     * Metodo para poder modificar el gasto total de la practica
+     * @author Marina
+     * @param type $dni
+     */
+    static function ModificarPracticaGastoTotal($dni,$gastoTotal) {
+        $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
+        try {
+            $p = practica::where('usuarios_dni', $dni)
+                    ->update([
+                'gastos' => $gastoTotal,
+                'updated_at' => $updated_at
+            ]);
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error al modificar el gasto total.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
+    }
+
+    /**
+     * Metodo para poder modificar la empresa de la practica
+     * @author Marina
      * @param type $dni
      */
     static function ModificarPracticaEmpresa($id) {
@@ -843,7 +868,8 @@ class Conexion {
     }
 
     /**
-     * Metodo para poder borrar el empresa
+     * Metodo para poder borrar al responsable de la practica
+     * @author Marina
      * @param type $id
      */
     static function borrarResponsableEmpresa($id) {
@@ -860,7 +886,8 @@ class Conexion {
     }
 
     /**
-     * Metodo para poder borrar el responsable
+     * Metodo para poder modificar al responsable de la practica
+     * @author Marina
      * @param type $dni
      */
     static function ModificarPracticaResponsable($id) {
@@ -2456,21 +2483,21 @@ class Conexion {
         foreach ($gastoC as $key) {
             $gastoComida = $key->gastoComida;
         }
-        
+
         //gasto total de Transportes Propios
         $sql2 = "SELECT sum(colectivos.importe) as gastoColectivo FROM colectivos,transportes,gastos  WHERE colectivos.transportes_id = transportes.id and gastos.transportes_id = transportes.id GROUP BY gastos.usuarios_dni";
         $gastoTC = \DB::select($sql2);
         foreach ($gastoTC as $key) {
             $gastoColectivo = $key->gastoColectivo;
         }
-        
+
         //gasto total de Transporte Colectivos
         $sql3 = "SELECT sum(propios.precio) as gastoPropio FROM propios,transportes,gastos WHERE propios.transportes_id = transportes.id and gastos.transportes_id = transportes.id GROUP BY gastos.usuarios_dni";
         $gastoTP = \DB::select($sql3);
         foreach ($gastoTP as $key) {
             $gastoPropio = $key->gastoPropio;
         }
-        
+
         $totalGasto = $gastoComida + $gastoColectivo + $gastoPropio;
         return $totalGasto;
     }

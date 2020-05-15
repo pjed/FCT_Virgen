@@ -46,8 +46,6 @@ class controladorAlumno extends Controller {
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
-
-            return view('alumno/crearGastoComida');
         } else {
             if ($fot != null) {
                 $foto = $fot->move('imagenes_gastos/comida', $idComida);
@@ -68,9 +66,16 @@ class controladorAlumno extends Controller {
             $tipo = 0;
 
             Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $usuarios_dni, $comidas_id, $transporte_id);
-
-            return view('alumno/crearGastoComida');
         }
+        
+        $usuario = session()->get('usu');
+        foreach ($usuario as $u) {
+            $usuarios_dni = $u['dni'];
+        }
+        $gastoTotal = Conexion::obtenerTotalGastosAlumnoParticular($usuarios_dni);
+        Conexion::ModificarPracticaGastoTotal($usuarios_dni, $gastoTotal);
+        
+        return view('alumno/crearGastoComida');
     }
 
     /**
@@ -136,7 +141,14 @@ class controladorAlumno extends Controller {
 
             Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $usuarios_dni, $comidas_id, $transporte_id);
         }
-
+        
+        $usuario = session()->get('usu');
+        foreach ($usuario as $u) {
+            $usuarios_dni = $u['dni'];
+        }
+        $gastoTotal = Conexion::obtenerTotalGastosAlumnoParticular($usuarios_dni);
+        Conexion::ModificarPracticaGastoTotal($usuarios_dni, $gastoTotal);
+        
         return view('alumno/crearGastoTransporte');
     }
 
@@ -172,6 +184,10 @@ class controladorAlumno extends Controller {
             }
             Conexion::borrarGastoComida($id);
         }
+
+        $gastoTotal = Conexion::obtenerTotalGastosAlumnoParticular($dniAlumno);
+        Conexion::ModificarPracticaGastoTotal($dniAlumno, $gastoTotal);
+
         $gastosAlumno = Conexion::listarGastosComidasPagination($dniAlumno);
         return view('alumno/gestionarGastosComida', ['gastosAlumno' => $gastosAlumno]);
     }
@@ -237,6 +253,10 @@ class controladorAlumno extends Controller {
         if ($propio == 0) {
             $gastosAlumno1 = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
         }
+
+        $gastoTotal = Conexion::obtenerTotalGastosAlumnoParticular($dniAlumno);
+        Conexion::ModificarPracticaGastoTotal($dniAlumno, $gastoTotal);
+
         $datos = ['gastosAlumno' => $gastosAlumno,
             'gastosAlumno1' => $gastosAlumno1];
         return view('alumno/gestionarGastosTransporte', $datos);
@@ -271,7 +291,7 @@ class controladorAlumno extends Controller {
         $pass = $req->get('pass');
         if ($pass != null) {
             $passHash = hash('sha256', $pass);
-            Conexion::ModificarConstrasenia($dni, $passHash,0); //0->cambiar contraseña al perfil 1-> restablecer contraseña
+            Conexion::ModificarConstrasenia($dni, $passHash, 0); //0->cambiar contraseña al perfil 1-> restablecer contraseña
             $clave = $passHash;
         }
         Conexion::ModificarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $movil, $iban, 1, 3);

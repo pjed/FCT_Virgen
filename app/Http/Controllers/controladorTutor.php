@@ -261,6 +261,11 @@ class controladorTutor extends Controller {
             }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
         }
+        
+        $dniAlumno = session()->get('dniAlumno');
+        $gastoTotal = Conexion::obtenerTotalGastosAlumnoParticular($dniAlumno);
+        Conexion::ModificarPracticaGastoTotal($dniAlumno, $gastoTotal);
+        
         $datos = controladorTutor::enviarConsultarGastoAlumno();
         return view('tutor/consultarGastosAlumno', $datos);
     }

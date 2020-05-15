@@ -58,7 +58,7 @@ Gestionar gastos comida
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value='<?php echo $key->idGasto; ?>'/>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->id; ?>'/>
-                                    <input type="number" step="0.01" class="form-control form-control-sm form-control-md" name ="importe" value='<?php echo $key->importe; ?>' max="9">
+                                    <input type="number" class="form-control form-control-sm form-control-md" name ="importe"  value='<?php echo $key->importe; ?>'  min="0" max="9" step="0.01">
                                 </td>
                                 <td><input type="date" class="form-control form-control-sm form-control-md"  name ="fecha" value="<?php echo $key->fecha; ?>"/></td>
                                 <td>
@@ -81,7 +81,7 @@ Gestionar gastos comida
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name ="idGasto" value='<?php echo $key->idGasto; ?>'/>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name ="ID" value='<?php echo $key->id; ?>'/>
-                                    <input type="number" step="0.01" class="form-control form-control-sm form-control-md" name ="importe" value='<?php echo $key->importe; ?>' max="9">
+                                    <input type="number" class="form-control form-control-sm form-control-md" name ="importe" value='<?php echo $key->importe; ?>' min="0" max="9" step="0.01">
                                 </td>
                                 <td><input type="date" class="form-control form-control-sm form-control-md"  name ="fecha" value="<?php echo $key->fecha; ?>"/></td>
                                 <td>

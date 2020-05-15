@@ -120,7 +120,7 @@ Consultar Gastos Alumnos
                                     <input type="date" class="form-control form-control-sm form-control-md" name="fecha" value="<?php echo $key->fecha; ?>"/>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->id; ?>"/>
                                 </td>
-                                <td><input type="number" step="0.01" class="form-control form-control-sm" name="importe" value="<?php echo $key->importe; ?>" max="9" min="0"/></td>
+                                <td><input type="number" class="form-control form-control-sm" name="importe" value="<?php echo $key->importe; ?>" min="0" max="9" step="0.01"/></td>
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>"/>
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img alt="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
@@ -143,7 +143,7 @@ Consultar Gastos Alumnos
                                     <input type="date" class="form-control form-control-sm form-control-md" name="fecha" value="<?php echo $key->fecha; ?>"/>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->id; ?>"/>
                                 </td>
-                                <td><input type="number" step="0.01" class="form-control form-control-sm" name="importe" value="<?php echo $key->importe; ?>" max="9" min="0"/></td>
+                                <td><input type="number" class="form-control form-control-sm" name="importe" value="<?php echo $key->importe; ?>"  min="0" max="9" step="0.01"/></td>
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>"/>
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img alt="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>

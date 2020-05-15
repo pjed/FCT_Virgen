@@ -53,7 +53,7 @@ Gestionar gastos transporte
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img alt="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
                                     <input type="file" class="form-control form-control-sm form-control-md"  name="foto">
                                 </td>
-                                <td><input type="number" step="0.01" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'/></td>
+                                <td><input type="number" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>'  min="0" step="0.01"/></td>
 
                                 <td>
                                     <button type="submit" class="btn editar" name="editarC" ></button>
@@ -99,7 +99,7 @@ Gestionar gastos transporte
                                     <input type="text" class="form-control form-control-sm form-control-md" name ="donde" value='<?php echo $key->donde; ?>' readonly>
                                 </td>
                                 <td><input type="number" class="form-control form-control-sm form-control-md" name ="kms" value="<?php echo $key->kms; ?>"></td>
-                                <td><input type="number"  step="0.01" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>' readonly></td>
+                                <td><input type="number" step="0.01" class="form-control form-control-sm form-control-md" name ="precio" value='<?php echo $key->precio; ?>' readonly></td>
                                 <td>
                                     <button type="submit" class="btn editar" name="editarP"></button>
                                     <button type="submit" class="btn eliminar" name="eliminarP" ></button>
