@@ -34,7 +34,7 @@ class Conexion {
         $ur = usuarios_rol::all();
         $v = [];
         foreach ($ur as $a) {
-            $p = usuario::where('email', $correo)->where('pass', $pwd)->where('dni', $a->usuario_dni)->first(); //aqui se cruzan
+            $p = usuario::where('email', $correo)->where('pass', $pwd)->where('activo', 1)->where('dni', $a->usuario_dni)->first(); //aqui se cruzan
             if ($p) {
                 $v[] = ['dni' => $p->dni,
                     'nombre' => $p->nombre,
