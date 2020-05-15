@@ -33,33 +33,23 @@ Crear gasto comida
     <form name="form" action="crearGastoComida" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row justify-content-center">
-
             <div class="col-md-2">
-
                 <p>Ticket</p>
                 <img src="{{asset ('images/ticket.png')}}" alt="fotoTicket" class="fotoTicket"><br><br>
                 <p>Hacer foto</p>
                 <input type="file" id="fotoTicket" name="fotoTicket"/><br><br>
-
-                
-
             </div>
 
             <div class="col-md-2">
-
                 <p>Fecha gasto</p>
                 <input type="date" id="fechaT" name="fechaT" value="" required/><br><br>
                 <p>Importe total</p>
-                <input type="number" id="importeT" name="importeT" min="0" max="9" step="0.01" value="" required/><br><br>
-
+                <input type="number" id="importeT" name="importeT" min="0" max="9" step="0.01" value="" required/><p>€</p><br><br>
             </div>
-
         </div>
 
         <div class="row justify-content-center">
-
             <div class="col-md-2">
-
                 <fieldset>
                     <p>¿Te has desplazado?</p>
                     <div>
@@ -71,19 +61,13 @@ Crear gasto comida
                         <label for="no">No</label>
                     </div>
                 </fieldset>
-
             </div>
-
         </div>
 
         <div class="row justify-content-center">
-
             <div class="col-md-2">
-
                 <input type="submit" id="guardar" name="guardar" value="Guardar">
-
             </div>
-
         </div>
 
     </form>

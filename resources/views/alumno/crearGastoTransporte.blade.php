@@ -31,9 +31,7 @@ Crear gasto transporte
 
     <!-- Seleccionar tipo de transporte -->
     <div class="row justify-content-center"> 
-
         <div class="col-md-2 col-sm-2">
-
             <fieldset>
                 <p>Tipo transporte</p>
                 <div>
@@ -45,9 +43,7 @@ Crear gasto transporte
                     <label for="propio">Propio</label>
                 </div>
             </fieldset>
-
         </div>
-
     </div>
 
     <!-- Campos para el gasto de transporte propio -->
@@ -55,14 +51,12 @@ Crear gasto transporte
         {{ csrf_field() }}
         <div id="gastoPropio">
             <div class="row justify-content-center">
-
                 <div class="col-md-2">
-                    
                     <p>Kilómetros</p>
                     <input type="number" id="kms" name="kms" value="" min="0" required>
 
                     <p>Precio km</p>
-                    <input type="number" id="precioP" name="precioP" value="0.12" readonly>
+                    <input type="number" id="precioP" name="precioP" value="0.12" readonly><p>€</p>
 
                     <p>Localidad</p>
                     <input type="text" id="locP" name="locP" value="" placeholder="Localidad" required>
@@ -70,13 +64,9 @@ Crear gasto transporte
             </div>
 
             <div class="row justify-content-center"> 
-
                 <div class="col-md-2">
-
                     <br><input type="submit" id="guardarP" name="guardarP" value="Guardar">
-
                 </div>
-
             </div>
         </div>
     </form>
@@ -86,38 +76,27 @@ Crear gasto transporte
         {{ csrf_field() }}
         <div id="gastoColectivo">
             <div class="row justify-content-center"> 
-
                 <div class="col-md-2">
-
                     <p>Ticket</p>
                     <img src="{{asset ('images/ticket.png')}}" alt="ticketGasto" class="fotoTicket"><br><br>
                     <p>Hacer foto</p>
                     <input type="file" id="fotoTicket" name="fotoTicket"/><br><br>
-
                 </div>
 
                 <div class="col-md-2">
-
                     <p>Localidad</p>
                     <input type="text" id="locC" name="locC" value="" placeholder="Localidad" required><br><br>
                     <p>Importe total</p>
-                    <input type="number" id="importeT" name="importeT" min="0" step="0.01" value="" required/><br><br>
-
+                    <input type="number" id="importeT" name="importeT" min="0" step="0.01" value="" required/><p>€</p><br><br>
                 </div>
-
             </div>
 
             <div class="row justify-content-center"> 
-
                 <div class="col-md-2 col-sm-2">
-
                     <br><input type="submit" id="guardarC" name="guardarC" value="Guardar">
-
                 </div>
-
             </div>
         </div>
     </form>
-
 </div>
 @endsection
