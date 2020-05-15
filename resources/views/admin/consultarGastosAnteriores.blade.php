@@ -26,7 +26,7 @@ Consultar gastos anteriores
         <h3>Consultar Gastos Años Anteriores</h3>
         <form name="formCursos" action="consultarGastosAnteriores"  method="post">
             {{ csrf_field() }}
-            Año Escolar: 
+            Curso: 
             <select name="curso">
                 <?php
                 if (isset($lista_cursos)) {
@@ -38,47 +38,79 @@ Consultar gastos anteriores
                 }
                 ?>
             </select><br><br>
+            Familia Profesional: 
+            <select name="familias">
+                <?php
+                if (isset($lista_familias)) {
+                    foreach ($lista_familias as $familia) {
+                        ?>
+                        <option value="<?php echo $familia->id_curso; ?>"><?php echo $familia->familia; ?></option>
+                        <?php
+                    }
+                }
+                ?>
+            </select><br><br>
+            Empresas: 
+            <select name="empresas">
+                <?php
+                if (isset($lista_empresas)) {
+                    foreach ($lista_empresas as $empresas) {
+                        ?>
+                        <option value="<?php echo $empresas->cif; ?>"><?php echo $empresas->nombre; ?></option>
+                        <?php
+                    }
+                }
+                ?>
+            </select><br><br>
             <input type="submit" id="verTabla" class="btn btn-primary" name="verTabla" value="Ver Gastos"/>
-            <br><br><br>
-            <?php
-            if (isset($tabla_gastos)) {
-                if (count($tabla_gastos) > 0) {
-                    ?>
-                    <div class="row">
-                        <div class="col-sm col-md">
-                            <div class="table-responsive ">
-                                <table class="table table-striped  table-hover table-bordered">
-                                    <thead class="thead-dark">
-                                    <thead>
-                                    <th>DNI</th>
-                                    <th>Nombre</th>
-                                    <th>Apellidos</th>
-                                    <th>Curso</th>
-                                    <th>Importe Gasto</th>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        foreach ($tabla_gastos as $gastos) {
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $gastos->dni; ?></td>
-                                                <td><?php echo $gastos->nombre; ?></td>
-                                                <td><?php echo $gastos->apellidos; ?></td>
-                                                <td><?php echo $gastos->cursos_id_curso; ?></td>
-                                                <td><?php echo $gastos->gastos; ?> €</td>
-                                            </tr>
-                                            <?php
-                                        }
+            <br><br>
+        </form>
+
+        <?php
+        if (isset($tabla_gastos)) {
+            if (count($tabla_gastos) > 0) {
+                ?>
+                <form name="formExportarPDF" action="exportarPDF"  method="post">
+                    <input type="submit" id="exportarPDF" class="btn btn-primary" name="exportarPDF" value="Exportar PDF"/>
+                </form>
+                <div class="row">
+                    <div class="col-sm col-md">
+                        <div class="table-responsive ">
+                            <table class="table table-striped  table-hover table-bordered">
+                                <thead class="thead-dark">
+                                <thead>
+                                <th>Ciclo</th>
+                                <th>DNI</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Gastos</th>
+                                <th>CIF</th>
+                                <th>Empresa</th>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    foreach ($tabla_gastos as $gastos) {
                                         ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        <tr>
+                                            <td><?php echo $gastos->cursos_id_curso; ?></td>
+                                            <td><?php echo $gastos->dni; ?></td>
+                                            <td><?php echo $gastos->nombre; ?></td>
+                                            <td><?php echo $gastos->apellidos; ?></td>
+                                            <td><?php echo $gastos->gastos; ?> €</td>
+                                            <td><?php echo $gastos->cif; ?></td>
+                                            <td><?php echo $gastos->nombre; ?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <?php
-                }
+                </div>
+                <?php
             }
-            ?>
-        </form>
+        }
+        ?>
     </div>
     @endsection

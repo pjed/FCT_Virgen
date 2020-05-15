@@ -17,11 +17,20 @@ class controladorAdmin extends Controller {
         $anio_seleccionado = $req->get('curso');
 
         $lista_cursos = Conexion::listarCursosAnteriores();
+        if ($anio_seleccionado != "0") {
+            $lista_empresas = Conexion::listarEmpresasAnteriores($anio_seleccionado);
+            $lista_familias = Conexion::listarFamiliasAnteriores($anio_seleccionado);
+        }else{
+            $lista_empresas = null;
+            $lista_familias = null;
+        }
         $tabla_gastos = Conexion::obtenerGastosCursoAnteriorSeleccionado($anio_seleccionado);
 
         $datos = [
             'lista_cursos' => $lista_cursos,
-            'tabla_gastos' => $tabla_gastos
+            'tabla_gastos' => $tabla_gastos,
+            'lista_familias' => $lista_familias,
+            'lista_empresas' => $lista_empresas
         ];
 
         return view('admin/consultarGastosAnteriores', $datos);
@@ -810,7 +819,7 @@ class controladorAdmin extends Controller {
         $valor = 'NO_AUTO_VALUE_ON_ZERO';
         $valor2 = '+00:00';
 
-        $ano_completo = strval((int) date('Y') - 1) . ' - ' . date('Y');
+        $ano_completo = strval((int) date('Y') - 1) . ' / ' . date('Y');
         $ano_junto = strval((int) date('Y') - 1) . '_' . date('Y');
 
         $database_name_new = 'gestionfct_' . $ano_junto;

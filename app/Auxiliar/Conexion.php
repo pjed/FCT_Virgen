@@ -2417,7 +2417,30 @@ class Conexion {
 
         return $ciclo;
     }
+    
+    /**
+     * Método que obtiene las empresas del curso anterior seleccionado
+     * @param type $cursoAnteriorSeleccionado
+     * @return type
+     */
+    static function listarEmpresasAnteriores($cursoAnteriorSeleccionado) {
+        $empresas = \DB::table($cursoAnteriorSeleccionado . '.empresas')
+                ->get();
 
+        return $empresas;
+    }
+    
+    /**
+     * Método que obtiene las familias profesionales del curso anterior seleccionado
+     * @param type $cursoAnteriorSeleccionado
+     * @return type
+     */
+    static function listarFamiliasAnteriores($cursoAnteriorSeleccionado) {
+        $familias = \DB::table($cursoAnteriorSeleccionado . '.cursos')
+                ->get();
+        return $familias;
+    }
+    
     /**
      * Método que obtiene los gastos del curso anterior seleccionado obteniendo 
      * como valor el nombre de la bbdd a la que tiene que consultar.
@@ -2440,7 +2463,9 @@ class Conexion {
                     ->join('usuarios', $cursoAnteriorSeleccionado . '.gastos.usuarios_dni', '=', $cursoAnteriorSeleccionado . '.usuarios.dni')
                     ->join('practicas', $cursoAnteriorSeleccionado . '.practicas.usuarios_dni', '=', $cursoAnteriorSeleccionado . '.usuarios.dni')
                     ->join('matriculados', $cursoAnteriorSeleccionado . '.matriculados.usuarios_dni', '=', $cursoAnteriorSeleccionado . '.usuarios.dni')
-                    ->select($cursoAnteriorSeleccionado . '.usuarios.dni', $cursoAnteriorSeleccionado . '.usuarios.nombre', $cursoAnteriorSeleccionado . '.usuarios.apellidos', $cursoAnteriorSeleccionado . '.matriculados.cursos_id_curso', $cursoAnteriorSeleccionado . '.practicas.gastos')
+                    ->join('empresas', $cursoAnteriorSeleccionado . '.empresas.id', '=', $cursoAnteriorSeleccionado . '.practicas.empresas_id')
+                    ->select($cursoAnteriorSeleccionado . '.matriculados.cursos_id_curso', $cursoAnteriorSeleccionado . '.usuarios.dni', $cursoAnteriorSeleccionado . '.usuarios.nombre', $cursoAnteriorSeleccionado . '.usuarios.apellidos', $cursoAnteriorSeleccionado . '.practicas.gastos', $cursoAnteriorSeleccionado . '.empresas.cif', $cursoAnteriorSeleccionado . '.empresas.nombre')
+                    ->groupBy($cursoAnteriorSeleccionado . '.matriculados.cursos_id_curso', $cursoAnteriorSeleccionado . '.usuarios.dni', $cursoAnteriorSeleccionado . '.usuarios.nombre', $cursoAnteriorSeleccionado . '.usuarios.apellidos', $cursoAnteriorSeleccionado . '.practicas.gastos', $cursoAnteriorSeleccionado . '.empresas.cif', $cursoAnteriorSeleccionado . '.empresas.nombre')
                     ->get();
 
             $sqlDB = "USE gestionfct;";
