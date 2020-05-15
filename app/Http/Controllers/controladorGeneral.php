@@ -40,6 +40,7 @@ class controladorGeneral extends Controller {
                 session()->put('usu', $n);
                 foreach ($n as $u) {
                     $rol = $u['rol'];
+                    $activo = $u['activo'];
                 }
                 if ($rol == 0) {
                     $rol = 4;
@@ -48,6 +49,15 @@ class controladorGeneral extends Controller {
                     echo '
                   <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     Su contraseña no es segura, debe cambiarla desde su perfil.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+                }
+                if ($activo == 0) {
+                    echo '
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Mande un correo al administrador para que le active el usuario.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
