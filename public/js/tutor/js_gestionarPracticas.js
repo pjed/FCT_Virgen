@@ -1,5 +1,4 @@
 /**
- * 
  *  @author marina
  */
 $(document).ready(function () {
@@ -135,7 +134,7 @@ $(document).ready(function () {
                     for (var i = 0; i < listaAlumnoPractica.length; i++) {
                         if (dniAlumno === listaAlumnoPractica[i].dni) {
                             document.getElementById("dniAlumnoMod").innerHTML += ' <option value="' + listaAlumnoPractica[i].dni + '" selected>' + listaAlumnoPractica[i].nombre + ', ' + listaAlumnoPractica[i].apellidos + '</option>';
-                        }else{
+                        } else {
                             document.getElementById("dniAlumnoMod").innerHTML += ' <option value="' + listaAlumnoPractica[i].dni + '">' + listaAlumnoPractica[i].nombre + ', ' + listaAlumnoPractica[i].apellidos + '</option>';
                         }
                     }
@@ -183,56 +182,56 @@ $(document).ready(function () {
             }
         });
     });
-    $("#idEmpresaA").blur(function () {
-        if ($("#idEmpresaA").val() !== "selected") {
-            $("#idEmpresaA").css({'border-color': 'red'});
-        } else {
+    $("#idEmpresaA").click(function () {
+        if ($("#idEmpresaA").val() === "selected") {
             $("#idEmpresaA").css({'border-color': 'black'});
+        } else {
+            $("#idEmpresaA").css({'border-color': 'red'});
         }
     });
-    $("#dniAlumnoA").blur(function () {
-        if ($("#dniAlumnoA").val() !== "selected") {
-            $("#dniAlumnoA").css({'border-color': 'red'});
-        } else {
+    $("#dniAlumnoA").click(function () {
+        if ($("#dniAlumnoA").val() === "selected") {
             $("#dniAlumnoA").css({'border-color': 'black'});
-        }
-    });
-    $("#idResponsableAniadir").blur(function () {
-        if ($("#idResponsableAniadir").val() !== "selected") {
-            $("#idResponsableAniadir").css({'border-color': 'red'});
         } else {
-            $("#idResponsableAniadir").css({'border-color': 'black'});
+            $("#dniAlumnoA").css({'border-color': 'red'});
         }
     });
-    $("#fechaFinA").blur(function () {
+    $("#idResponsableAniadir").click(function () {
+        if ($("#idResponsableAniadir").val() === "selected") {
+            $("#idResponsableAniadir").css({'border-color': 'black'});
+        } else {
+            $("#idResponsableAniadir").css({'border-color': 'red'});
+        }
+    });
+    $("#fechaFinA").click(function () {
         if ($("#fechaFinA").val() === "") {
             $("#fechaFinA").css({'border-color': 'red'});
         } else {
             $("#fechaFinA").css({'border-color': 'black'});
         }
     });
-    $("#fechaInicioA").blur(function () {
+    $("#fechaInicioA").click(function () {
         if ($("#fechaInicioA").val() === "") {
             $("#fechaInicioA").css({'border-color': 'red'});
         } else {
             $("#fechaInicioA").css({'border-color': 'black'});
         }
     });
-    $("#aptoA").blur(function () {
+    $("#aptoA").click(function () {
         if ($("#aptoA").val() !== "checked") {
             $("#aptoA").css({'border-color': 'red'});
         } else {
             $("#aptoA").css({'border-color': 'black'});
         }
     });
-    $("#gastoA").blur(function () {
+    $("#gastoA").click(function () {
         if ($("#gastoA").val() === "") {
             $("#gastoA").css({'border-color': 'red'});
         } else {
             $("#gastoA").css({'border-color': 'black'});
         }
     });
-    $("#codProyectoA").blur(function () {
+    $("#codProyectoA").click(function () {
         if ($("#codProyectoA").val() === "") {
             $("#codProyectoA").css({'border-color': 'red'});
         } else {
@@ -257,7 +256,7 @@ $(document).ready(function () {
                     for (var i = 0; i < listarResponsable.length; i++) {
                         document.getElementById("idResponsableMod").innerHTML += ' <option value="' + listarResponsable[i].id + '">' + listarResponsable[i].nombre + ', ' + listarResponsable[i].apellidos + '</option>';
                     }
-                }
+                } 
             },
             statusCode: {
                 404: function () {
@@ -270,56 +269,56 @@ $(document).ready(function () {
             }
         });
     });
-    $("#idEmpresaMod").blur(function () {
+    $("#idEmpresaMod").click(function () {
         if ($("#idEmpresaMod").val() !== "selected") {
             $("#idEmpresaMod").css({'border-color': 'red'});
         } else {
             $("#idEmpresaMod").css({'border-color': 'black'});
         }
     });
-    $("#dniAlumnoMod").blur(function () {
+    $("#dniAlumnoMod").click(function () {
         if ($("#dniAlumnoMod").val() !== "selected") {
             $("#dniAlumnoMod").css({'border-color': 'red'});
         } else {
             $("#dniAlumnoMod").css({'border-color': 'black'});
         }
     });
-    $("#idResponsableMod").blur(function () {
+    $("#idResponsableMod").click(function () {
         if ($("#idResponsableMod").val() !== "selected") {
             $("#idResponsableMod").css({'border-color': 'red'});
         } else {
             $("#idResponsableMod").css({'border-color': 'black'});
         }
     });
-    $("#fechaFinMod").blur(function () {
+    $("#fechaFinMod").click(function () {
         if ($("#fechaFinMod").val() === "") {
             $("#fechaFinMod").css({'border-color': 'red'});
         } else {
             $("#fechaFinMod").css({'border-color': 'black'});
         }
     });
-    $("#fechaInicioMod").blur(function () {
+    $("#fechaInicioMod").click(function () {
         if ($("#fechaInicioMod").val() === "") {
             $("#fechaInicioMod").css({'border-color': 'red'});
         } else {
             $("#fechaInicioMod").css({'border-color': 'black'});
         }
     });
-    $("#aptoMod").blur(function () {
+    $("#aptoMod").click(function () {
         if ($("#aptoMod").val() !== "checked") {
             $("#aptoMod").css({'border-color': 'red'});
         } else {
             $("#aptoMod").css({'border-color': 'black'});
         }
     });
-    $("#gastoMod").blur(function () {
+    $("#gastoMod").click(function () {
         if ($("#gastoMod").val() === "") {
             $("#gastoMod").css({'border-color': 'red'});
         } else {
             $("#gastoMod").css({'border-color': 'black'});
         }
     });
-    $("#codProyectoMod").blur(function () {
+    $("#codProyectoMod").click(function () {
         if ($("#codProyectoMod").val() === "") {
             $("#codProyectoMod").css({'border-color': 'red'});
         } else {

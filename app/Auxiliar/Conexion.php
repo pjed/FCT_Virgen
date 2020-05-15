@@ -171,7 +171,7 @@ class Conexion {
                 'iban' => $iban,
                 'activo' => $activo,
                 'updated_at' => $updated_at]);
-            
+
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Modificado usuario con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -608,7 +608,7 @@ class Conexion {
                     ->update(['cursos_id_curso' => $ciclo,
                         'updated_at' => $updated_at]);
         } catch (\Exception $e) {
-             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Error al actualizar tutoría.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1281,6 +1281,7 @@ class Conexion {
                 ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
                 ->orWhere('usuarios.apellidos', 'like', '%' . $keywords . '%')
                 ->orWhere('empresas.nombre', 'like', '%' . $keywords . '%')
+                ->orWhere('empresas.cif', 'like', '%' . $keywords . '%')
                 ->select('practicas.id AS idPractica', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto')
                 ->paginate(8);
         return $v;
@@ -2417,7 +2418,7 @@ class Conexion {
 
             $sqlDB = "USE gestionfct;";
             \DB::connection()->getPdo()->exec($sqlDB);
-            
+
             if (count($v) == 0) {
                 echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     No existen gastos en el año academico seleccionado.
@@ -2434,8 +2435,44 @@ class Conexion {
                   </div>';
             }
         }
-        
+
         return $v;
+    }
+
+    /**
+     * Obtener el gasto total de un alumno
+     * author Marina
+     * @param type $dni
+     * @return type
+     */
+    static function obtenerTotalGastosAlumnoParticular($dni) {
+        $gastoComida = 0;
+        $gastoColectivo = 0;
+        $gastoPropio = 0;
+
+        //gasto total de Comidas
+        $sql1 = "SELECT sum(comidas.importe) as gastoComida FROM comidas, gastos WHERE gastos.comidas_id = comidas.id GROUP BY gastos.usuarios_dni";
+        $gastoC = \DB::select($sql1);
+        foreach ($gastoC as $key) {
+            $gastoComida = $key->gastoComida;
+        }
+        
+        //gasto total de Transportes Propios
+        $sql2 = "SELECT sum(colectivos.importe) as gastoColectivo FROM colectivos,transportes,gastos  WHERE colectivos.transportes_id = transportes.id and gastos.transportes_id = transportes.id GROUP BY gastos.usuarios_dni";
+        $gastoTC = \DB::select($sql2);
+        foreach ($gastoTC as $key) {
+            $gastoColectivo = $key->gastoColectivo;
+        }
+        
+        //gasto total de Transporte Colectivos
+        $sql3 = "SELECT sum(propios.precio) as gastoPropio FROM propios,transportes,gastos WHERE propios.transportes_id = transportes.id and gastos.transportes_id = transportes.id GROUP BY gastos.usuarios_dni";
+        $gastoTP = \DB::select($sql3);
+        foreach ($gastoTP as $key) {
+            $gastoPropio = $key->gastoPropio;
+        }
+        
+        $totalGasto = $gastoComida + $gastoColectivo + $gastoPropio;
+        return $totalGasto;
     }
 
 }

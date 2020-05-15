@@ -545,30 +545,50 @@ class controladorTutor extends Controller {
      * @return type
      */
     public function gestionarPracticas(Request $req) {
-        $ID = $req->get('idPractica');
-        $CIF = $req->get('idEmpresa');
-        $dniAlumno = $req->get('dniAlumno');
-        $codProyecto = $req->get('codProyecto');
-        $dniResponsable = $req->get('idResponsable');
-        $gasto = $req->get('gasto');
-        if ($req->get('apto') == 'on') {
-            $apto = 1;
-        } else {
-            $apto = 0;
-        }
-        $fechaInicio = $req->get('fechaInicio');
-        $fechaFin = $req->get('fechaFin');
-
         if (isset($_REQUEST['editar'])) {
+            $ID = $req->get('idPractica');
+            $CIF = $req->get('idEmpresa');
+            $dniAlumno = $req->get('dniAlumno');
+            $codProyecto = $req->get('codProyecto');
+            $dniResponsable = $req->get('idResponsable');
+            if ($req->get('apto') == 'on') {
+                $apto = 1;
+            } else {
+                $apto = 0;
+            }
+            $fechaInicio = $req->get('fechaInicio');
+            if ($req->get('fechaFin') != null) {
+                $fechaFin = $req->get('fechaFin');
+            } else {
+                $fechaFin = null;
+            }
+            $gasto = $req->get('gasto');
             Conexion::ModificarPractica($ID, $CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $apto, $fechaInicio, $fechaFin);
         }
         if (isset($_REQUEST['eliminar'])) {
+            $ID = $req->get('idPractica');
             Conexion::borrarPractica($ID);
         }
         if (isset($_REQUEST['aniadir'])) {
-            if ($CIF != null && $dniAlumno != null && $codProyecto != null && $dniResponsable != null && $gasto != null) {
+            $CIF = $req->get('idEmpresa');
+            $dniAlumno = $req->get('dniAlumno');
+            $codProyecto = $req->get('codProyecto');
+            $dniResponsable = $req->get('idResponsable');
+            if ($req->get('apto') == 'on') {
+                $apto = 1;
+            } else {
+                $apto = 0;
+            }
+            $fechaInicio = $req->get('fechaInicio');
+            if ($req->get('fechaFin') != null) {
+                $fechaFin = $req->get('fechaFin');
+            } else {
+                $fechaFin = null;
+            }
+            if ($CIF != null && $dniAlumno != null && $codProyecto != null && $dniResponsable != null) {
                 $val = Conexion::existePractica($dniAlumno);
                 if ($val) {
+                    $gasto = Conexion::obtenerTotalGastosAlumnoParticular($dniAlumno);
                     Conexion::insertarPractica($CIF, $dniAlumno, $codProyecto, $dniResponsable, $gasto, $fechaInicio, $fechaFin);
                 } else {
                     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">

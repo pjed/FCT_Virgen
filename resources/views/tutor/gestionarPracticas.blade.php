@@ -120,7 +120,7 @@ Gestionar  Practicas
                                                     </label>
                                                     <label class="col-sm text-center">
                                                         Fecha fin:
-                                                        <input type="date" id=""fechaFinA class="form-control form-control-sm" name="fechaFin"/>
+                                                        <input type="date" id="fechaFinA" class="form-control form-control-sm" name="fechaFin"/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
@@ -186,7 +186,7 @@ Gestionar  Practicas
                             </td>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idPractica; ?>"/>
-                                <input type="text" class="form-control form-control-sm form-control-md" name="gasto" value="<?php echo $key->gasto; ?>" readonly/>
+                                <input type="number" class="form-control form-control-sm form-control-md" name="gasto" step="0.01" value="<?php echo $key->gasto; ?>" readonly/>
                             </td>
                             <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="apto" <?php if ($key->apto == 1) { ?> checked <?php } ?>  readonly/></td>
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaInicio" value="<?php echo $key->fechaInicio; ?>" readonly/></td>
