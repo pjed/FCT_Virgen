@@ -17,11 +17,15 @@ class tutorAdmin {
         $rol1 = session()->get('rol1');
         $rol2 = session()->get('rol');
         //comprobar si eres tutor-admin
-        if (($rol2 == 4 && $rol1 == 1) || ($rol2 == 4 && $rol1 == 2)) {
-            return $next($request);
+        if ($n != null) {
+            if (($rol2 == 4 && $rol1 == 1) || ($rol2 == 4 && $rol1 == 2)) {
+                return $next($request);
+            } else {
+                abort(404);
+                //return view('errors/518');
+            }
         } else {
             abort(404);
-            //return view('errors/518');
         }
     }
 

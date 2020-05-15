@@ -17,13 +17,17 @@ class admin {
         $n = session()->get('usu');
         $rol1 = session()->get('rol1');
         //comprobar si eres admin
-        foreach ($n as $u) {
-            if ($u['rol'] == 1 || $u['rol'] == 0 || $rol1 == 1) {
-                return $next($request);
-            } else {
-                abort(404);
-                //return view('errors/518');
+        if ($n != null) {
+            foreach ($n as $u) {
+                if ($u['rol'] == 1 || $u['rol'] == 0 || $rol1 == 1) {
+                    return $next($request);
+                } else {
+                    abort(404);
+                    //return view('errors/518');
+                }
             }
+        } else {
+            abort(404);
         }
     }
 
