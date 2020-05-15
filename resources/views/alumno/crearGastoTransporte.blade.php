@@ -56,7 +56,7 @@ Crear gasto transporte
                     <input type="number" id="kms" name="kms" value="" min="0" required>
 
                     <p>Precio km</p>
-                    <input type="number" id="precioP" name="precioP" value="0.12" readonly><p>€</p>
+                    <input type="number" id="precioP" name="precioP" value="0.12" readonly>
 
                     <p>Localidad</p>
                     <input type="text" id="locP" name="locP" value="" placeholder="Localidad" required>

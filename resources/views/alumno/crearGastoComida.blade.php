@@ -44,7 +44,7 @@ Crear gasto comida
                 <p>Fecha gasto</p>
                 <input type="date" id="fechaT" name="fechaT" value="" required/><br><br>
                 <p>Importe total</p>
-                <input type="number" id="importeT" name="importeT" min="0" max="9" step="0.01" value="" required/><p>€</p><br><br>
+                <input type="number" id="importeT" name="importeT" min="0" max="9" step="0.01" value="" required/><br><br>
             </div>
         </div>
 
