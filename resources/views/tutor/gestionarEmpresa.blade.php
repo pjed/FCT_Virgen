@@ -4,6 +4,10 @@
 Gestionar Empresa
 @endsection
 
+@section('css')       
+<link rel="stylesheet" type="text/css" href="{{asset ('css/css_activo.css')}}" media="screen" />
+@endsection
+
 @section('javascript') 
 <script src="{{asset ('js/tutor/js_gestionarEmpresa.js')}}"></script>
 @endsection
@@ -128,7 +132,21 @@ Gestionar Empresa
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="direccion" value="<?php echo $key->direccion; ?>" required/></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="localidad" value="<?php echo $key->localidad; ?>" required/></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="horario" value="<?php echo $key->horario; ?>"/></td>
-                            <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="nueva" <?php if ($key->nueva == 1) { ?>checked<?php } ?>/></td>
+                            <?php if ($key->nueva == 0) { ?>
+                                <td>
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="acti custom-control-input" name="nueva"/>
+                                        <span class="custom-control-indicator"></span>
+                                    </label>
+                                </td>
+                            <?php } else if ($key->nueva == 1) { ?>
+                                <td>
+                                    <label class="custom-control custom-checkbox">                                                    
+                                        <input type="checkbox" class="acti custom-control-input" name="nueva" checked/>
+                                        <span class="custom-control-indicator"></span>
+                                    </label>
+                                </td>
+                            <?php } ?>
                             <td>
                                 <button type="submit" class="btn editar" name="editar"></button>
                                 <button type="submit" class="btn eliminar" name="eliminar" ></button>
@@ -151,7 +169,21 @@ Gestionar Empresa
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="direccion" value="<?php echo $key->direccion; ?>" required/></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="localidad" value="<?php echo $key->localidad; ?>" required/></td>
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="horario" value="<?php echo $key->horario; ?>"/></td>
-                            <td><input type="checkbox" class="form-control form-control-sm form-control-md" name="nueva" <?php if ($key->nueva == 1) { ?>checked<?php } ?>/></td>
+                            <?php if ($key->nueva == 0) { ?>
+                                <td>
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="acti custom-control-input" name="nueva"/>
+                                        <span class="custom-control-indicator"></span>
+                                    </label>
+                                </td>
+                            <?php } else if ($key->nueva == 1) { ?>
+                                <td>
+                                    <label class="custom-control custom-checkbox">                                                    
+                                        <input type="checkbox" class="acti custom-control-input" name="nueva" checked/>
+                                        <span class="custom-control-indicator"></span>
+                                    </label>
+                                </td>
+                            <?php } ?>
                             <td>
                                 <button type="submit" class="btn editar" name="editar"></button>
                                 <button type="submit" class="btn eliminar" name="eliminar" ></button>
