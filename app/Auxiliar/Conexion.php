@@ -2446,17 +2446,9 @@ class Conexion {
      * como valor el nombre de la bbdd a la que tiene que consultar.
      * @param type $cursoAnteriorSeleccionado
      */
-    static function obtenerGastosCursoAnteriorSeleccionado($cursoAnteriorSeleccionado) {
-        $v = null;
-        if ($cursoAnteriorSeleccionado == "0") {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Por favor seleccione un curso academico. Gracias.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
-        } else {
-
+    static function obtenerGastosCursoAnteriorSeleccionado($cursoAnteriorSeleccionado, $familias, $empresas) {
+        $v = array();
+        if ($cursoAnteriorSeleccionado != "0") {
             $sqlDB = "USE `{$cursoAnteriorSeleccionado}`;";
             \DB::connection()->getPdo()->exec($sqlDB);
             $v = \DB::table($cursoAnteriorSeleccionado . '.gastos')
@@ -2464,6 +2456,8 @@ class Conexion {
                     ->join('practicas', $cursoAnteriorSeleccionado . '.practicas.usuarios_dni', '=', $cursoAnteriorSeleccionado . '.usuarios.dni')
                     ->join('matriculados', $cursoAnteriorSeleccionado . '.matriculados.usuarios_dni', '=', $cursoAnteriorSeleccionado . '.usuarios.dni')
                     ->join('empresas', $cursoAnteriorSeleccionado . '.empresas.id', '=', $cursoAnteriorSeleccionado . '.practicas.empresas_id')
+                    ->where($cursoAnteriorSeleccionado . '.matriculados.cursos_id_curso', $familias)
+                    ->orWhere($cursoAnteriorSeleccionado . '.empresas.cif', $empresas)
                     ->select($cursoAnteriorSeleccionado . '.matriculados.cursos_id_curso', $cursoAnteriorSeleccionado . '.usuarios.dni', $cursoAnteriorSeleccionado . '.usuarios.nombre', $cursoAnteriorSeleccionado . '.usuarios.apellidos', $cursoAnteriorSeleccionado . '.practicas.gastos', $cursoAnteriorSeleccionado . '.empresas.cif', $cursoAnteriorSeleccionado . '.empresas.nombre')
                     ->groupBy($cursoAnteriorSeleccionado . '.matriculados.cursos_id_curso', $cursoAnteriorSeleccionado . '.usuarios.dni', $cursoAnteriorSeleccionado . '.usuarios.nombre', $cursoAnteriorSeleccionado . '.usuarios.apellidos', $cursoAnteriorSeleccionado . '.practicas.gastos', $cursoAnteriorSeleccionado . '.empresas.cif', $cursoAnteriorSeleccionado . '.empresas.nombre')
                     ->get();
@@ -2487,7 +2481,6 @@ class Conexion {
                   </div>';
             }
         }
-
         return $v;
     }
 

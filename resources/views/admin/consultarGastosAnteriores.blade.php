@@ -44,7 +44,7 @@ Consultar gastos anteriores
                 if (isset($lista_familias)) {
                     foreach ($lista_familias as $familia) {
                         ?>
-                        <option value="<?php echo $familia->id_curso; ?>"><?php echo $familia->familia; ?></option>
+                        <option value="<?php echo $familia->id_curso; ?>"><?php echo $familia->id_curso; ?> -> <?php echo $familia->familia; ?></option>
                         <?php
                     }
                 }
@@ -64,53 +64,61 @@ Consultar gastos anteriores
             </select><br><br>
             <input type="submit" id="verTabla" class="btn btn-primary" name="verTabla" value="Ver Gastos"/>
             <br><br>
-        </form>
 
-        <?php
-        if (isset($tabla_gastos)) {
-            if (count($tabla_gastos) > 0) {
-                ?>
-                <form name="formExportarPDF" action="exportarPDF"  method="post">
-                    <input type="submit" id="exportarPDF" class="btn btn-primary" name="exportarPDF" value="Exportar PDF"/>
-                </form>
-                <div class="row">
-                    <div class="col-sm col-md">
-                        <div class="table-responsive ">
-                            <table class="table table-striped  table-hover table-bordered">
-                                <thead class="thead-dark">
-                                <thead>
-                                <th>Ciclo</th>
-                                <th>DNI</th>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
-                                <th>Gastos</th>
-                                <th>CIF</th>
-                                <th>Empresa</th>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    foreach ($tabla_gastos as $gastos) {
+            <?php
+            if (isset($tabla_gastos)) {
+                if (count($tabla_gastos) > 0) {
+                    ?>
+            <input type="submit" id="exportarPDF" class="btn btn-primary" name="exportarPDF" value="Exportar PDF"/>
+                    <div class="row">
+                        <div class="col-sm col-md">
+                            <div class="table-responsive ">
+                                <table class="table table-striped  table-hover table-bordered" id="tabla">
+                                    <thead class="thead-dark">
+                                    <thead>
+                                    <th>Ciclo</th>
+                                    <th>DNI</th>
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>Gastos</th>
+                                    <th>CIF</th>
+                                    <th>Empresa</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $total_alumnos = 0;
+                                        $total_gastos = 0;
+                                        foreach ($tabla_gastos as $gastos) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $gastos->cursos_id_curso; ?></td>
+                                                <td><?php echo $gastos->dni; ?></td>
+                                                <td><?php echo $gastos->nombre; ?></td>
+                                                <td><?php echo $gastos->apellidos; ?></td>
+                                                <td><?php echo $gastos->gastos; ?> €</td>
+                                                <td><?php echo $gastos->cif; ?></td>
+                                                <td><?php echo $gastos->nombre; ?></td>
+                                            </tr>
+                                            <?php
+                                            $total_alumnos++;
+                                            $total_gastos += $gastos->gastos;
+                                        }
                                         ?>
                                         <tr>
-                                            <td><?php echo $gastos->cursos_id_curso; ?></td>
-                                            <td><?php echo $gastos->dni; ?></td>
-                                            <td><?php echo $gastos->nombre; ?></td>
-                                            <td><?php echo $gastos->apellidos; ?></td>
-                                            <td><?php echo $gastos->gastos; ?> €</td>
-                                            <td><?php echo $gastos->cif; ?></td>
-                                            <td><?php echo $gastos->nombre; ?></td>
+                                            <td><b>TOTAL ALUMNOS</b></td>
+                                            <td colspan="2"><?php echo $total_alumnos; ?></td>
+                                            <td><b>TOTAL GASTOS</b></td>
+                                            <td colspan="3"><?php echo $total_gastos; ?> €</td>
                                         </tr>
-                                        <?php
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <?php
+                    <?php
+                }
             }
-        }
-        ?>
+            ?>
+        </form>
     </div>
     @endsection

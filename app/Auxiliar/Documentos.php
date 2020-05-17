@@ -30,6 +30,35 @@ require "../vendor/autoload.php";
  */
 class Documentos {
 
+    static function exportarPDF($tabla_gastos) {
+        $html = '';
+
+        $html = '<!DOCTYPE html>
+                    <html>
+                        <head>
+                        <title>Page Title</title>
+                        </head>
+                        <body>
+
+                        <table>
+                          <thead>
+                            <th>Ciclo</th>
+                            <th>DNI</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Gastos</th>
+                            <th>CIF</th>
+                            <th>Empresa</th>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                          </table>
+
+                        </body>
+                    </html>';
+        return \PDF::loadHTML($html, 'A4', 'portrait')->download('my_pdf');
+    }
+
     static function GenerarRecibi($dniAlumno, $periodo) {
         $centro = Conexion::listarCentro();
         $al = Conexion::listarAlumnoMatriculado($dniAlumno);
@@ -66,7 +95,7 @@ class Documentos {
             $familia = $value->familia;
             $horas = $value->horas;
         }
-        
+
         foreach ($gas as $value) {
             $total_gasto_alumno = $value->total_gasto_alumno;
         }
@@ -285,7 +314,7 @@ class Documentos {
         ob_end_clean();
         return $lista_documentos;
     }
-    
+
     static function GenerarRecibiTodosAdminAlumnos($dniAlumno, $datos_tutor) {
         ob_start();
 
@@ -302,12 +331,12 @@ class Documentos {
         $total_gasto_alumno = "";
 
         $tutor = session()->get('usu');
-        
+
         foreach ($datos_tutor as $value) {
             $nombre_tutor = $value->nombre_tutor;
             $email_tutor = $value->email;
         }
-        
+
         foreach ($centro as $value) {
             $cod_centro = $value->cod;
             $nombre_centro = $value->nombre;
@@ -418,7 +447,7 @@ class Documentos {
         ob_end_clean();
         return $lista_documentos;
     }
-    
+
     static function GenerarRecibiTodosAlumnosAdminDUAL($dniAlumno, $datos_tutor) {
         ob_start();
 
@@ -436,12 +465,12 @@ class Documentos {
         $total_gasto_alumno = "";
 
         $tutor = session()->get('usu');
-        
+
         foreach ($centro as $value) {
             $nombre_centro = $value->nombre;
             $localidad_centro = $value->localidad;
         }
-        
+
         foreach ($datos_tutor as $value) {
             $nombre_tutor = $value->nombre_tutor;
         }

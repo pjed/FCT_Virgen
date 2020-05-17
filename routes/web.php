@@ -141,6 +141,8 @@ Route::group(['middleware' => ['admin']], function() {
         
         return view('admin/consultarGastosAnteriores', $datos);
     });
+
+    
     Route::post('consultarGastosAnteriores', 'controladorAdmin@consultarGastosAnteriores');
     Route::get('extraerDocA', function () {
         $l1 = Conexion::listaCursos();

@@ -15,16 +15,32 @@ class controladorAdmin extends Controller {
      */
     public function consultarGastosAnteriores(Request $req) {
         $anio_seleccionado = $req->get('curso');
-
+        $familias = $req->get('familias');
+        $empresas = $req->get('empresas');
+        $tabla_gastos = array();
         $lista_cursos = Conexion::listarCursosAnteriores();
+
         if ($anio_seleccionado != "0") {
             $lista_empresas = Conexion::listarEmpresasAnteriores($anio_seleccionado);
             $lista_familias = Conexion::listarFamiliasAnteriores($anio_seleccionado);
-        }else{
+            if ($familias != "" && $empresas != "") {
+                $tabla_gastos = Conexion::obtenerGastosCursoAnteriorSeleccionado($anio_seleccionado, $familias, $empresas);
+            }
+        } else {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Por favor seleccione un curso academico. Gracias.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
             $lista_empresas = null;
             $lista_familias = null;
         }
-        $tabla_gastos = Conexion::obtenerGastosCursoAnteriorSeleccionado($anio_seleccionado);
+
+        if (isset($_POST['exportarPDF'])) {
+            Documentos::exportarPDF($tabla_gastos);
+        }
+
 
         $datos = [
             'lista_cursos' => $lista_cursos,
