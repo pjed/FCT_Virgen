@@ -1175,7 +1175,7 @@ class controladorAdmin extends Controller {
 
                     CREATE TABLE `usuarios` (
                       `dni` varchar(9) NOT NULL,
-                      `nombre_` varchar(100) NOT NULL,
+                      `nombre` varchar(100) NOT NULL,
                       `apellidos` varchar(100) NOT NULL,
                       `domicilio` varchar(100) DEFAULT NULL,
                       `email` varchar(100) DEFAULT NULL,

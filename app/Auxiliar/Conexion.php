@@ -2426,7 +2426,7 @@ class Conexion {
     static function listarEmpresasAnteriores($cursoAnteriorSeleccionado) {
         $empresas = \DB::table($cursoAnteriorSeleccionado . '.empresas')
                 ->get();
-
+        
         return $empresas;
     }
     
