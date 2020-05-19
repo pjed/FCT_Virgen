@@ -100,9 +100,9 @@ $(document).ready(function () {
                     }
                     for (var i = 0; i < listaEmpresa.length; i++) {
                         if (idEmpresa === listaEmpresa[i].id) {
-                            document.getElementById("idEmpresaMod").innerHTML += '<option value="' + listaEmpresa[i].id + '" selected>' + listaEmpresa[i].nombre + '</option>';
+                            document.getElementById("idEmpresaMod").innerHTML += '<option value="' + listaEmpresa[i].id + '" selected>' + listaEmpresa[i].nombre_empresa + '</option>';
                         } else {
-                            document.getElementById("idEmpresaMod").innerHTML += '<option value="' + listaEmpresa[i].id + '">' + listaEmpresa[i].nombre + '</option>';
+                            document.getElementById("idEmpresaMod").innerHTML += '<option value="' + listaEmpresa[i].id + '">' + listaEmpresa[i].nombre_empresa + '</option>';
                         }
                     }
                 }

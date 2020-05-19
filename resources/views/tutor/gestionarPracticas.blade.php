@@ -73,7 +73,7 @@ Gestionar  Practicas
                                                             <?php
                                                             foreach ($l1 as $k1) {
                                                                 ?>
-                                                                <option value="<?php echo $k1->id; ?>"><?php echo $k1->nombre; ?></option>
+                                                                <option value="<?php echo $k1->id; ?>"><?php echo $k1->nombre_empresa; ?></option>
                                                                 <?php
                                                             }
                                                             ?>
@@ -150,7 +150,7 @@ Gestionar  Practicas
                                 foreach ($l1 as $k1) {
                                     if ($key->idEmpresa == $k1->id) {
                                         ?>
-                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $k1->nombre; ?>" readonly/>
+                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $k1->nombre_empresa; ?>" readonly/>
                                         <?php
                                     }
                                 }
@@ -284,7 +284,7 @@ Gestionar  Practicas
                                 foreach ($l1 as $k1) {
                                     if ($key->idEmpresa == $k1->id) {
                                         ?>
-                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $k1->nombre; ?>" readonly/>
+                                        <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="<?php echo $k1->nombre_empresa; ?>" readonly/>
                                         <?php
                                     }
                                 }

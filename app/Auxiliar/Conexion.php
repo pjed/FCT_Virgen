@@ -1176,7 +1176,7 @@ class Conexion {
         $updated_at = $now->format('Y-m-d H:i:s');
         $p = new empresa;
         $p->cif = $CIF;
-        $p->nombre = $nombreEmpresa;
+        $p->nombre_empresa = $nombreEmpresa;
         $p->dni_representante = $dniRepresentante;
         $p->nombre_Representante = $nombreRepresentante;
         $p->direccion = $direccion;
@@ -1222,7 +1222,7 @@ class Conexion {
             $p = empresa::where('id', $id)
                     ->update([
                 'cif' => $CIF,
-                'nombre' => $nombreEmpresa,
+                'nombre_empresa' => $nombreEmpresa,
                 'dni_representante' => $dniRepresentante,
                 'nombre_representante' => $nombreRepresentante,
                 'direccion' => $direccion,
@@ -1307,7 +1307,7 @@ class Conexion {
                 ->join('empresas', 'empresas.id', '=', 'practicas.empresas_id')
                 ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
                 ->orWhere('usuarios.apellidos', 'like', '%' . $keywords . '%')
-                ->orWhere('empresas.nombre', 'like', '%' . $keywords . '%')
+                ->orWhere('empresas.nombre_empresa', 'like', '%' . $keywords . '%')
                 ->orWhere('empresas.cif', 'like', '%' . $keywords . '%')
                 ->select('practicas.id AS idPractica', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto')
                 ->paginate(8);
@@ -1379,7 +1379,7 @@ class Conexion {
     static function buscarEmpresas($keywords) {
         $v = [];
         $v = empresa::where('cif', 'like', '%' . $keywords . '%')
-                ->orWhere('nombre', 'like', '%' . $keywords . '%')
+                ->orWhere('nombre_empresa', 'like', '%' . $keywords . '%')
                 ->orWhere('localidad', 'like', '%' . $keywords . '%')
                 ->paginate(8);
         return $v;
@@ -2289,7 +2289,7 @@ class Conexion {
                 ->where('practicas.usuarios_dni', $dni)
                 ->join('empresas', 'practicas.empresas_id', '=', 'empresas.id')
                 ->select(
-                        'empresas.nombre AS nombre', 'empresas.localidad AS localidad', 'empresas.direccion AS direccion'
+                        'empresas.nombre_empresa AS nombre', 'empresas.localidad AS localidad', 'empresas.direccion AS direccion'
                 )
                 ->get();
         return $v;
@@ -2328,7 +2328,7 @@ class Conexion {
         $sql = "select concat(usuarios.apellidos,', ',usuarios.nombre) as alumno, 
                 usuarios.email as email,
                 usuarios.movil as movil,
-                empresas.nombre as nombre_empresa,
+                empresas.nombre_empresa as nombre_empresa,
                 case when empresas.nueva = 0 THEN 'NO' ELSE 'SI' END as nueva,
                 responsables.nombre as nombre_responsable,
                 empresas.direccion as direccion_empresa,
