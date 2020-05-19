@@ -38,7 +38,8 @@ class controladorAdmin extends Controller {
         }
 
         if (isset($_POST['exportarPDF'])) {
-            Documentos::exportarPDF($tabla_gastos);
+            $pdf = Documentos::exportarPDF($tabla_gastos);
+            return $pdf->download('Gastos_'.$anio_seleccionado.'.pdf');
         }
 
 
@@ -653,16 +654,16 @@ class controladorAdmin extends Controller {
         }
 
         $sql = "/* Sentencia para insertar empresas de prueba */
-                insert into empresas(id, cif, nombre, dni_representante, nombre_representante, direccion, localidad, horario, nueva, created_at, updated_at)
+                insert into empresas(id, cif, nombre_empresa, dni_representante, nombre_representante, direccion, localidad, horario, nueva, created_at, updated_at)
                 values(null, 'A28599033','Indra Sistemas',null,null,'Avenida de Bruselas nº 35','Alcobendas',null,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 
-                insert into empresas(id, cif, nombre, dni_representante, nombre_representante, direccion, localidad, horario, nueva, created_at, updated_at)
+                insert into empresas(id, cif, nombre_empresa, dni_representante, nombre_representante, direccion, localidad, horario, nueva, created_at, updated_at)
                 values(null, 'B83028084','Deimos Space',null,null,'Ronda de Poniente 19, – 28760','Tres Cantos',null,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 
-                insert into empresas(id, cif, nombre, dni_representante, nombre_representante, direccion, localidad, horario, nueva, created_at, updated_at)
+                insert into empresas(id, cif, nombre_empresa, dni_representante, nombre_representante, direccion, localidad, horario, nueva, created_at, updated_at)
                 values(null, 'B82387770','Everis',null,null,'Camino de la Fuente de la Mora, 1','Madrid',null,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 
-                insert into empresas(id, cif, nombre, dni_representante, nombre_representante, direccion, localidad, horario, nueva, created_at, updated_at)
+                insert into empresas(id, cif, nombre_empresa, dni_representante, nombre_representante, direccion, localidad, horario, nueva, created_at, updated_at)
                 values(null, 'A28855260','IECISA',null,null,'C/ Hermosilla 112','Madrid',null,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
                 
                 SET FOREIGN_KEY_CHECKS=1;";
@@ -1011,7 +1012,7 @@ class controladorAdmin extends Controller {
                     CREATE TABLE `empresas` (
                         `id` int(11) NOT NULL AUTO_INCREMENT,
                         `cif` varchar(9) NOT NULL,
-                        `nombre` varchar(100) NOT NULL,
+                        `nombre_empresa` varchar(100) NOT NULL,
                         `dni_representante` varchar(9) DEFAULT NULL,
                         `nombre_representante` varchar(100) DEFAULT NULL,
                         `direccion` varchar(100) NOT NULL,
@@ -1174,7 +1175,7 @@ class controladorAdmin extends Controller {
 
                     CREATE TABLE `usuarios` (
                       `dni` varchar(9) NOT NULL,
-                      `nombre` varchar(100) NOT NULL,
+                      `nombre_` varchar(100) NOT NULL,
                       `apellidos` varchar(100) NOT NULL,
                       `domicilio` varchar(100) DEFAULT NULL,
                       `email` varchar(100) DEFAULT NULL,

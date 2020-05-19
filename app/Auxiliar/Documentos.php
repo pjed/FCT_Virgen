@@ -31,32 +31,52 @@ require "../vendor/autoload.php";
 class Documentos {
 
     static function exportarPDF($tabla_gastos) {
-        $html = '';
-
         $html = '<!DOCTYPE html>
-                    <html>
-                        <head>
-                        <title>Page Title</title>
-                        </head>
-                        <body>
+                <html>
+                <head>
+                <title>Gastos Anteriores</title>
+                </head>
+                <body>';
+        $html .= '<table style="text-align: center;">';
+        $html .= "<tr>";
+        $html .= "<thead style='color:#fff;background-color:#212529;border-color:#32383e'>";
+        $html .= "<th>Ciclo</th>";
+        $html .= "<th>DNI</th>";
+        $html .= "<th>Nombre</th>";
+        $html .= "<th>Apellidos</th>";
+        $html .= "<th>Gastos</th>";
+        $html .= "<th>CIF</th>";
+        $html .= "<th>Empresa</th>";
+        $html .= "</thead>";
+        $html .= "</tr>";
+        $total_alumnos = 0;
+        $total_gastos = 0;
+        foreach ($tabla_gastos as $gastos) {
+            $html .= "<tr>";
+            $html .= "<td>$gastos->cursos_id_curso</td>";
+            $html .= "<td>$gastos->dni</td>";
+            $html .= "<td>$gastos->nombre</td>";
+            $html .= "<td>$gastos->apellidos</td>";
+            $html .= "<td>$gastos->gastos €</td>";
+            $html .= "<td>$gastos->cif</td>";
+            $html .= "<td>$gastos->nombre_empresa</td>";
+            $html .= "</tr>";
+            $total_alumnos++;
+            $total_gastos += $gastos->gastos;
+        }
+        $html .= "<tr>";
+        $html .= "<td style='color:#fff;background-color:#212529;border-color:#32383e'><b>TOTAL ALUMNOS</b></td>";
+        $html .= "<td colspan='2'>$total_alumnos</td>";
+        $html .= "<td style='color:#fff;background-color:#212529;border-color:#32383e'><b>TOTAL GASTOS</b></td>";
+        $html .= "<td colspan='3'>$total_gastos €</td>";
+        $html .= "</tr>";
+        $html .= "</table>";
+        $html .= "</body>
+               </html>";
 
-                        <table>
-                          <thead>
-                            <th>Ciclo</th>
-                            <th>DNI</th>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>Gastos</th>
-                            <th>CIF</th>
-                            <th>Empresa</th>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                          </table>
-
-                        </body>
-                    </html>';
-        return \PDF::loadHTML($html, 'A4', 'portrait')->download('my_pdf');
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadHTML($html);
+        return $pdf;
     }
 
     static function GenerarRecibi($dniAlumno, $periodo) {
@@ -138,9 +158,9 @@ class Documentos {
             'localidad_centro' => $localidad_centro
         ];
 
-        // New Word document
+// New Word document
         setlocale(LC_TIME, 'es');
-        //return $id;
+//return $id;
 
         echo date('H:i:s'), " Create new PhpWord object", PHP_EOL;
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -148,7 +168,7 @@ class Documentos {
         $path = '../documentacion/plantillas/recibi/anexo5_recib_FCT.docx';
         $document = $phpWord->loadTemplate($path);
 
-        //Mapeo de Variables 
+//Mapeo de Variables 
         $document->setValue('CENTRO', ($data['centro']));
         $document->setValue('LOCALIDAD_CENTRO', ($data['localidad_centro']));
         $document->setValue('CODIGO', ($data['codigo']));
@@ -172,10 +192,10 @@ class Documentos {
         rename($name, storage_path() . "/documentos/recibi/{$name}");
         $file = storage_path() . "/documentos/recibi/{$name}";
 
-        //$file= storage_path(). "/word/{$name}";
+//$file= storage_path(). "/word/{$name}";
 
         $headers = array(
-            //'Content-Type: application/msword',
+//'Content-Type: application/msword',
             'Content-Type: vnd.openxmlformats-officedocument.wordprocessingml.document'
         );
 
@@ -270,9 +290,9 @@ class Documentos {
             'localidad_centro' => $localidad_centro
         ];
 
-        // New Word document
+// New Word document
         setlocale(LC_TIME, 'es');
-        //return $id;
+//return $id;
 
         echo date('H:i:s'), " Create new PhpWord object", PHP_EOL;
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -280,7 +300,7 @@ class Documentos {
         $path = '../documentacion/plantillas/recibi/anexo5_recib_FCT.docx';
         $document = $phpWord->loadTemplate($path);
 
-        //Mapeo de Variables 
+//Mapeo de Variables 
         $document->setValue('CENTRO', ($data['centro']));
         $document->setValue('LOCALIDAD_CENTRO', ($data['localidad_centro']));
         $document->setValue('CODIGO', ($data['codigo']));
@@ -308,7 +328,7 @@ class Documentos {
             "nombre_archivo" => "{$name}",
         ];
         $headers = array(
-            //'Content-Type: application/msword',
+//'Content-Type: application/msword',
             'Content-Type: vnd.openxmlformats-officedocument.wordprocessingml.document'
         );
         ob_end_clean();
@@ -403,9 +423,9 @@ class Documentos {
             'localidad_centro' => $localidad_centro
         ];
 
-        // New Word document
+// New Word document
         setlocale(LC_TIME, 'es');
-        //return $id;
+//return $id;
 
         echo date('H:i:s'), " Create new PhpWord object", PHP_EOL;
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -413,7 +433,7 @@ class Documentos {
         $path = '../documentacion/plantillas/recibi/anexo5_recib_FCT.docx';
         $document = $phpWord->loadTemplate($path);
 
-        //Mapeo de Variables 
+//Mapeo de Variables 
         $document->setValue('CENTRO', ($data['centro']));
         $document->setValue('LOCALIDAD_CENTRO', ($data['localidad_centro']));
         $document->setValue('CODIGO', ($data['codigo']));
@@ -441,7 +461,7 @@ class Documentos {
             "nombre_archivo" => "{$name}",
         ];
         $headers = array(
-            //'Content-Type: application/msword',
+//'Content-Type: application/msword',
             'Content-Type: vnd.openxmlformats-officedocument.wordprocessingml.document'
         );
         ob_end_clean();
@@ -532,9 +552,9 @@ class Documentos {
             'localidad_centro' => $localidad_centro
         ];
 
-        // New Word document
+// New Word document
         setlocale(LC_TIME, 'es');
-        //return $id;
+//return $id;
 
         echo date('H:i:s'), " Create new PhpWord object", PHP_EOL;
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -542,7 +562,7 @@ class Documentos {
         $path = '../documentacion/plantillas/recibi/Anexo XV Recibí del alumnadoDUAL.docx';
         $document = $phpWord->loadTemplate($path);
 
-        //Mapeo de Variables 
+//Mapeo de Variables 
         $document->setValue('CENTRO', ($data['centro']));
         $document->setValue('DOM_EMPRESA', ($data['domicilio_empresa']));
         $document->setValue('LOC_CENTRO', ($data['localidad_centro']));
@@ -576,7 +596,7 @@ class Documentos {
         ];
 
         $headers = array(
-            //'Content-Type: application/msword',
+//'Content-Type: application/msword',
             'Content-Type: vnd.openxmlformats-officedocument.wordprocessingml.document'
         );
         ob_end_clean();
@@ -668,9 +688,9 @@ class Documentos {
             'localidad_centro' => $localidad_centro
         ];
 
-        // New Word document
+// New Word document
         setlocale(LC_TIME, 'es');
-        //return $id;
+//return $id;
 
         echo date('H:i:s'), " Create new PhpWord object", PHP_EOL;
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -678,7 +698,7 @@ class Documentos {
         $path = '../documentacion/plantillas/recibi/Anexo XV Recibí del alumnadoDUAL.docx';
         $document = $phpWord->loadTemplate($path);
 
-        //Mapeo de Variables 
+//Mapeo de Variables 
         $document->setValue('CENTRO', ($data['centro']));
         $document->setValue('DOM_EMPRESA', ($data['domicilio_empresa']));
         $document->setValue('LOC_CENTRO', ($data['localidad_centro']));
@@ -712,7 +732,7 @@ class Documentos {
         ];
 
         $headers = array(
-            //'Content-Type: application/msword',
+//'Content-Type: application/msword',
             'Content-Type: vnd.openxmlformats-officedocument.wordprocessingml.document'
         );
         ob_end_clean();
@@ -804,9 +824,9 @@ class Documentos {
             'localidad_centro' => $localidad_centro
         ];
 
-        // New Word document
+// New Word document
         setlocale(LC_TIME, 'es');
-        //return $id;
+//return $id;
 
         echo date('H:i:s'), " Create new PhpWord object", PHP_EOL;
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -814,7 +834,7 @@ class Documentos {
         $path = '../documentacion/plantillas/recibi/Anexo XV Recibí del alumnadoDUAL.docx';
         $document = $phpWord->loadTemplate($path);
 
-        //Mapeo de Variables 
+//Mapeo de Variables 
         $document->setValue('CENTRO', ($data['centro']));
         $document->setValue('LOC_CENTRO', ($data['localidad_centro']));
         $document->setValue('COD', ($data['cod_proyecto']));
@@ -844,10 +864,10 @@ class Documentos {
         rename($name, storage_path() . "/documentos/recibi/{$name}");
         $file = storage_path() . "/documentos/recibi/{$name}";
 
-        //$file= storage_path(). "/word/{$name}";
+//$file= storage_path(). "/word/{$name}";
 
         $headers = array(
-            //'Content-Type: application/msword',
+//'Content-Type: application/msword',
             'Content-Type: vnd.openxmlformats-officedocument.wordprocessingml.document'
         );
 

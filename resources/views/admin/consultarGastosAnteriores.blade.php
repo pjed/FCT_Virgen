@@ -38,7 +38,7 @@ Consultar gastos anteriores
                 }
                 ?>
             </select><br><br>
-            Familia Profesional: 
+            Ciclo Formativo: 
             <select name="familias">
                 <?php
                 if (isset($lista_familias)) {
@@ -56,7 +56,7 @@ Consultar gastos anteriores
                 if (isset($lista_empresas)) {
                     foreach ($lista_empresas as $empresas) {
                         ?>
-                        <option value="<?php echo $empresas->cif; ?>"><?php echo $empresas->nombre; ?></option>
+                        <option value="<?php echo $empresas->cif; ?>"><?php echo $empresas->nombre_empresa; ?></option>
                         <?php
                     }
                 }
@@ -69,13 +69,12 @@ Consultar gastos anteriores
             if (isset($tabla_gastos)) {
                 if (count($tabla_gastos) > 0) {
                     ?>
-            <input type="submit" id="exportarPDF" class="btn btn-primary" name="exportarPDF" value="Exportar PDF"/>
-                    <div class="row">
+            <input type="submit" id="exportarPDF" class="btn btn-primary" name="exportarPDF" value="Exportar PDF"/>     
+            <div class="row">
                         <div class="col-sm col-md">
                             <div class="table-responsive ">
-                                <table class="table table-striped  table-hover table-bordered" id="tabla">
+                                <table class="table table-striped  table-hover table-bordered" style="text-align: center;" id="tabla">
                                     <thead class="thead-dark">
-                                    <thead>
                                     <th>Ciclo</th>
                                     <th>DNI</th>
                                     <th>Nombre</th>
@@ -97,7 +96,7 @@ Consultar gastos anteriores
                                                 <td><?php echo $gastos->apellidos; ?></td>
                                                 <td><?php echo $gastos->gastos; ?> €</td>
                                                 <td><?php echo $gastos->cif; ?></td>
-                                                <td><?php echo $gastos->nombre; ?></td>
+                                                <td><?php echo $gastos->nombre_empresa; ?></td>
                                             </tr>
                                             <?php
                                             $total_alumnos++;
