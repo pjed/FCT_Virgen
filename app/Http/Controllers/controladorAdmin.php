@@ -1001,8 +1001,6 @@ class controladorAdmin extends Controller {
                     PRIMARY KEY (`id_curso`),
                     KEY `fk_cursos_centros1_idx` (`centros_cod`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-                    insert into cursos (id_curso, descripcion, ano_academico, familia, horas, centros_cod, created_at, updated_at) values ('Ninguno', 'Ninguno', '', '' ,'', '13002691', '" . $fechaActual . "', '" . $fechaActual . "');
                     -- --------------------------------------------------------
 
                     --

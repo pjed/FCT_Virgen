@@ -113,7 +113,7 @@ Route::group(['middleware' => ['tutor']], function() {
     Route::post('gestionarPracticas', 'controladorTutor@gestionarPracticas');
     Route::post('perfilT', 'controladorTutor@perfil');
     Route::post('perfilT1', 'controladorGeneral@perfilT'); //redirige al perfil
-    Route::post('buscarGastoTutorComida', 'controladorTutor@buscarGastoTutorComida');  
+    Route::post('buscarGastoTutorComida', 'controladorTutor@buscarGastoTutorComida');
 });
 
 
@@ -132,17 +132,22 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('dropzone', 'DropzoneController@index')->name('dropzone.store');
     Route::post('dropzone-image-upload', 'DropzoneController@store');
     Route::post('dropzone-image-delete', 'DropzoneController@destroy');
-    
+
     Route::get('consultarGastosAnteriores', function () {
         $lista_cursos = Conexion::listarCursosAnteriores();
-        $datos = [
-            'lista_cursos' => $lista_cursos
-        ];
-        
-        return view('admin/consultarGastosAnteriores', $datos);
+
+        if (count($lista_cursos) == 0) {
+            return view('admin/bienvenidaAd');
+        } else {
+
+            $datos = [
+                'lista_cursos' => $lista_cursos
+            ];
+            return view('admin/consultarGastosAnteriores', $datos);
+        }
     });
 
-    
+
     Route::post('consultarGastosAnteriores', 'controladorAdmin@consultarGastosAnteriores');
     Route::get('extraerDocA', function () {
         $l1 = Conexion::listaCursos();
@@ -270,8 +275,8 @@ Route::group(['middleware' => ['admin']], function() {
     Route::post('gestionarAlumnos', 'controladorAdmin@gestionarAlumnos');
     Route::post('gestionarTutores', 'controladorAdmin@gestionarTutores');
     Route::post('exportarDocumentos', 'controladorAdmin@exportarDocumentos');
-    Route::post('aniadirUsuario', 'controladorAdmin@aniadirUsuario');   
-    Route::post('buscarGastoAdminComida', 'controladorAdmin@buscarGastoAdminComida');   
+    Route::post('aniadirUsuario', 'controladorAdmin@aniadirUsuario');
+    Route::post('buscarGastoAdminComida', 'controladorAdmin@buscarGastoAdminComida');
 });
 
 
@@ -335,7 +340,7 @@ Route::group(['middleware' => ['alumno']], function() {
     Route::post('crearGastoTransporte', 'controladorAlumno@crearGastoTransporte');
     Route::post('gestionarGastosComida', 'controladorAlumno@gestionarGastoComida');
     Route::post('gestionarGastosTransporte', 'controladorAlumno@gestionarGastosTransporte');
-    Route::post('buscarGastoAlumnoComida', 'controladorAlumno@buscarGastoAlumnoComida');      
+    Route::post('buscarGastoAlumnoComida', 'controladorAlumno@buscarGastoAlumnoComida');
 });
 
 

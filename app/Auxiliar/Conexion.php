@@ -824,7 +824,7 @@ class Conexion {
      * @author Marina
      * @param type $dni
      */
-    static function ModificarPracticaGastoTotal($dni,$gastoTotal) {
+    static function ModificarPracticaGastoTotal($dni, $gastoTotal) {
         $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
@@ -2054,7 +2054,18 @@ class Conexion {
      */
     static function listarCursosAnteriores() {
         $v = [];
-        $v = \DB::table('historico.historico')->get();
+        $existeHistorico = \DB::table('INFORMATION_SCHEMA.SCHEMATA')->where('SCHEMA_NAME', 'historico')->first();
+        
+        if ($existeHistorico != null) {
+            $v = \DB::table('historico.historico')->get();
+        } else {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    No hay datos de histórico.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
+        }
         return $v;
     }
 
@@ -2417,7 +2428,7 @@ class Conexion {
 
         return $ciclo;
     }
-    
+
     /**
      * Método que obtiene las empresas del curso anterior seleccionado
      * @param type $cursoAnteriorSeleccionado
@@ -2426,10 +2437,10 @@ class Conexion {
     static function listarEmpresasAnteriores($cursoAnteriorSeleccionado) {
         $empresas = \DB::table($cursoAnteriorSeleccionado . '.empresas')
                 ->get();
-        
+
         return $empresas;
     }
-    
+
     /**
      * Método que obtiene las familias profesionales del curso anterior seleccionado
      * @param type $cursoAnteriorSeleccionado
@@ -2440,7 +2451,7 @@ class Conexion {
                 ->get();
         return $familias;
     }
-    
+
     /**
      * Método que obtiene los gastos del curso anterior seleccionado obteniendo 
      * como valor el nombre de la bbdd a la que tiene que consultar.
@@ -2461,10 +2472,10 @@ class Conexion {
                     ->select($cursoAnteriorSeleccionado . '.matriculados.cursos_id_curso', $cursoAnteriorSeleccionado . '.usuarios.dni', $cursoAnteriorSeleccionado . '.usuarios.nombre', $cursoAnteriorSeleccionado . '.usuarios.apellidos', $cursoAnteriorSeleccionado . '.practicas.gastos', $cursoAnteriorSeleccionado . '.empresas.cif', $cursoAnteriorSeleccionado . '.empresas.nombre_empresa')
                     ->groupBy($cursoAnteriorSeleccionado . '.matriculados.cursos_id_curso', $cursoAnteriorSeleccionado . '.usuarios.dni', $cursoAnteriorSeleccionado . '.usuarios.nombre', $cursoAnteriorSeleccionado . '.usuarios.apellidos', $cursoAnteriorSeleccionado . '.practicas.gastos', $cursoAnteriorSeleccionado . '.empresas.cif', $cursoAnteriorSeleccionado . '.empresas.nombre_empresa')
                     ->get();
-            
+
             $sqlDB = "USE gestionfct;";
             \DB::connection()->getPdo()->exec($sqlDB);
-            
+
             if (count($v) == 0) {
                 echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     No existen gastos en el año academico seleccionado.
