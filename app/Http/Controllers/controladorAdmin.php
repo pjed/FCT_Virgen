@@ -19,7 +19,7 @@ class controladorAdmin extends Controller {
         $empresas = $req->get('empresas');
         $tabla_gastos = array();
         $lista_cursos = Conexion::listarCursosAnteriores();
-
+        
         if ($anio_seleccionado != "0") {
             $lista_empresas = Conexion::listarEmpresasAnteriores($anio_seleccionado);
             $lista_familias = Conexion::listarFamiliasAnteriores($anio_seleccionado);
@@ -39,7 +39,7 @@ class controladorAdmin extends Controller {
 
         if (isset($_POST['exportarPDF'])) {
             $pdf = Documentos::exportarPDF($tabla_gastos);
-            return $pdf->download('Gastos_'.$anio_seleccionado.'.pdf');
+            return $pdf->download('Gastos_' . $anio_seleccionado . '.pdf');
         }
 
 
@@ -883,37 +883,46 @@ class controladorAdmin extends Controller {
                     ";
         \DB::connection()->getPdo()->exec($sqlDB);
 
-        $sqlInsert = "INSERT INTO historico (cod, descripcion, created_at, updated_at) VALUES ('$database_name_new','$ano_completo',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);";
-        \DB::connection()->getPdo()->exec($sqlInsert);
+        $duplicadoHistorico = false;
 
-        \DB::statement("DROP DATABASE IF EXISTS `{$database_name_new}`;");
-        \DB::statement("CREATE DATABASE `{$database_name_new}` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;");
+        $sql = "select count(1) as duplicado from historico where cod = '" . $database_name_new . "';";
+        $historico = \DB::select($sql);
+        foreach ($historico as $key) {
+            $duplicadoHistorico = $key->duplicado;
+        }
 
-        $sqlDB = "USE `{$database_name}`;";
-        \DB::connection()->getPdo()->exec($sqlDB);
+        if ($duplicadoHistorico != 1) {
+            $sqlInsert = "INSERT INTO historico (cod, descripcion, created_at, updated_at) VALUES ('$database_name_new','$ano_completo',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);";
+            $historico_duplicado = \DB::connection()->getPdo()->exec($sqlInsert);
 
-        \DB::statement("RENAME TABLE `centros` TO `{$database_name_new}`.centros");
-        \DB::statement("RENAME TABLE `colectivos` TO `{$database_name_new}`.colectivos");
-        \DB::statement("RENAME TABLE `comidas` TO `{$database_name_new}`.comidas");
-        \DB::statement("RENAME TABLE `cursos` TO `{$database_name_new}`.cursos");
-        \DB::statement("RENAME TABLE `empresas` TO `{$database_name_new}`.empresas");
-        \DB::statement("RENAME TABLE `gastos` TO `{$database_name_new}`.gastos");
-        \DB::statement("RENAME TABLE `matriculados` TO `{$database_name_new}`.matriculados");
-        \DB::statement("RENAME TABLE `practicas` TO `{$database_name_new}`.practicas");
-        \DB::statement("RENAME TABLE `propios` TO `{$database_name_new}`.propios");
-        \DB::statement("RENAME TABLE `responsables` TO `{$database_name_new}`.responsables");
-        \DB::statement("RENAME TABLE `roles` TO `{$database_name_new}`.roles");
-        \DB::statement("RENAME TABLE `transportes` TO `{$database_name_new}`.transportes");
-        \DB::statement("RENAME TABLE `tutores` TO `{$database_name_new}`.tutores");
-        \DB::statement("RENAME TABLE `usuarios` TO `{$database_name_new}`.usuarios");
-        \DB::statement("RENAME TABLE `usuarios_roles` TO `{$database_name_new}`.usuarios_roles");
+            \DB::statement("DROP DATABASE IF EXISTS `{$database_name_new}`;");
+            \DB::statement("CREATE DATABASE `{$database_name_new}` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;");
+
+            $sqlDB = "USE `{$database_name}`;";
+            \DB::connection()->getPdo()->exec($sqlDB);
+
+            \DB::statement("RENAME TABLE `centros` TO `{$database_name_new}`.centros");
+            \DB::statement("RENAME TABLE `colectivos` TO `{$database_name_new}`.colectivos");
+            \DB::statement("RENAME TABLE `comidas` TO `{$database_name_new}`.comidas");
+            \DB::statement("RENAME TABLE `cursos` TO `{$database_name_new}`.cursos");
+            \DB::statement("RENAME TABLE `empresas` TO `{$database_name_new}`.empresas");
+            \DB::statement("RENAME TABLE `gastos` TO `{$database_name_new}`.gastos");
+            \DB::statement("RENAME TABLE `matriculados` TO `{$database_name_new}`.matriculados");
+            \DB::statement("RENAME TABLE `practicas` TO `{$database_name_new}`.practicas");
+            \DB::statement("RENAME TABLE `propios` TO `{$database_name_new}`.propios");
+            \DB::statement("RENAME TABLE `responsables` TO `{$database_name_new}`.responsables");
+            \DB::statement("RENAME TABLE `roles` TO `{$database_name_new}`.roles");
+            \DB::statement("RENAME TABLE `transportes` TO `{$database_name_new}`.transportes");
+            \DB::statement("RENAME TABLE `tutores` TO `{$database_name_new}`.tutores");
+            \DB::statement("RENAME TABLE `usuarios` TO `{$database_name_new}`.usuarios");
+            \DB::statement("RENAME TABLE `usuarios_roles` TO `{$database_name_new}`.usuarios_roles");
 
 
 
-        \DB::statement("DROP DATABASE IF EXISTS `{$database_name}`;");
-        \DB::statement("CREATE DATABASE `{$database_name}` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;");
+            \DB::statement("DROP DATABASE IF EXISTS `{$database_name}`;");
+            \DB::statement("CREATE DATABASE `{$database_name}` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;");
 
-        $sqlDB = "USE `{$database_name}`;
+            $sqlDB = "USE `{$database_name}`;
                     -- phpMyAdmin SQL Dump
                     -- version 4.6.6deb5
                     -- https://www.phpmyadmin.net/
@@ -1224,21 +1233,47 @@ class controladorAdmin extends Controller {
                     SET FOREIGN_KEY_CHECKS=0;
     
         ";
-        \DB::connection()->getPdo()->exec($sqlDB);
-        echo '<div class="alert alert alert-success alert-dismissible fade show" role="alert">
+            \DB::connection()->getPdo()->exec($sqlDB);
+            echo '<div class="alert alert alert-success alert-dismissible fade show" role="alert">
                     Restaurada la base de datos correctamente
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
-        echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                     Debe de adjuntar los archivos .csv en el cuadro Subir Archivos para importar los datos. Gracias.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
               </div>';
 
-        return view('admin/importarDatos');
+            return view('admin/importarDatos');
+        } else {
+            //Elimino los archivos CSV si intenta restaurar la aplicacion 
+            //para evitar problemas si le pulsa a importar datos ya que petaria
+            $pathCSV = public_path() . '/uploads';
+            $ficherosCSV = scandir($pathCSV, 1);
+
+            if (count($ficherosCSV) != 2) {
+                foreach ($ficherosCSV as $file) {
+                    $pathArchivo = $pathCSV . '/' . $file;
+                    if (is_file($pathArchivo)) {
+                        unlink($pathArchivo); //elimino el fichero
+                    }
+                }
+            }
+
+            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    No se puede restaurar la base de datos dos veces en un mismo año. 
+                    Inserte los datos a mano en la aplicacion.
+                    Gracias.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+              </div>';
+
+            return view('admin/importarDatos');
+        }
     }
 
     /**

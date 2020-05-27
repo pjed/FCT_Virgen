@@ -2055,7 +2055,7 @@ class Conexion {
     static function listarCursosAnteriores() {
         $v = [];
         $existeHistorico = \DB::table('INFORMATION_SCHEMA.SCHEMATA')->where('SCHEMA_NAME', 'historico')->first();
-        
+
         if ($existeHistorico != null) {
             $v = \DB::table('historico.historico')->get();
         } else {
@@ -2437,7 +2437,6 @@ class Conexion {
     static function listarEmpresasAnteriores($cursoAnteriorSeleccionado) {
         $empresas = \DB::table($cursoAnteriorSeleccionado . '.empresas')
                 ->get();
-
         return $empresas;
     }
 
