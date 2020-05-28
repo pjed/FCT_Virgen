@@ -189,7 +189,7 @@ input[type=number] {
     } 
 }
 
-/*@media only screen and (min-width: 767px){
+@media only screen and (min-width: 767px){
     .hide-desktop{
         display: none !important;
     }
@@ -199,4 +199,4 @@ input[type=number] {
     .hide-mobile{
         display: none !important;
     }
-}*/
+}
