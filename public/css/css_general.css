@@ -102,19 +102,10 @@ input[type=number] {
 
 /*Movil site vertical */
 @media only screen and (max-width:480px){
-    header{
-        /*margin-bottom: 6rem;*/ 
-        font-size: 10px;
-        padding: 0px;
-    }
-
     .titulo_app{
         color: white; font-size: 14pt
     }
 
-    main{
-        min-height: 80vh;
-    }
     footer,.footer{
         align-self: center;
         font-size: 8px; 
@@ -137,20 +128,17 @@ input[type=number] {
     }
     /*logotipo de la pagina*/
     .logotipo{
-        width: 90px;
-        height: 34px;    
+        width: 64px;
+        height: 44px;  
     }
 }
 /*Tablet Apps */
 @media only screen and (min-width:481px) and (max-width:1024px){
 
-    header{
-        /*margin-bottom: 3.5rem;*/ 
-    }
     /*logotipo de la pagina*/
     .logotipo{
         width: 64px;
-        height: 64px;
+        height: 44px;
     }
     main{
         min-height: 80vh;
@@ -170,9 +158,7 @@ input[type=number] {
 }
 /*Pantalla de escritorio WebSite */
 @media only screen and (min-width:1025px){
-    header{
-        /*margin-bottom: 3.5rem;*/ 
-    }
+
     /*logotipo de la pagina*/
     .logotipo{
         width: 150px;
@@ -203,7 +189,7 @@ input[type=number] {
     } 
 }
 
-@media only screen and (min-width: 767px){
+/*@media only screen and (min-width: 767px){
     .hide-desktop{
         display: none !important;
     }
@@ -213,4 +199,4 @@ input[type=number] {
     .hide-mobile{
         display: none !important;
     }
-}
+}*/

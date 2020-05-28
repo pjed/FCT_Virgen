@@ -37,20 +37,20 @@ $rol1 = session()->get('rol');
     <body>
         <div class="wrapper">
             <nav id="sidebar" class="bg-dark">
-                <div class="sidebar-header">
-                    <a href="#">
-                        <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
-                    </a>
-                </div>  
                 <ul class="list-unstyled components">
                     <li>
-                        <a class="nav-link active" href="bienvenidaAd">Home</a>
+                        <a href="#">
+                            <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="bienvenidaAd">Home</a>
                     </li>
                     <li>
                         <a href="#GestionarBBDD" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gestionar BBDD</a>
                         <ul class="collapse list-unstyled" id="GestionarBBDD">
-                            <li><a class="dropdown-item" href="consultarGastosAnteriores">Gastos Anteriores</a></li>
-                            <li><a class="dropdown-item" href="importarDatos">Importar Datos</a></li>
+                            <li><a href="consultarGastosAnteriores">Gastos Anteriores</a></li>
+                            <li><a href="importarDatos">Importar Datos</a></li>
                         </ul>   
                     </li>
                     <li>
@@ -92,8 +92,6 @@ $rol1 = session()->get('rol');
                             <div class="navbar-header">
                                 <button class="navbar-toggler navbar-btn" type="button" id="sidebarCollapse" data-toggle="collapse" >
                                     <span class="navbar-toggler-icon"></span>  
-                                    <span class="navbar-toggler-icon"></span>  
-                                    <span class="navbar-toggler-icon"></span>
                                 </button>
                             </div>
                             <ul class="nav navbar-nav navbar-right">
@@ -126,7 +124,7 @@ $rol1 = session()->get('rol');
                 <main>
                     @yield('contenido')
                 </main>
-                <footer class="footer bg-dark container-fluid">  
+                <footer class="footer bg-dark container">  
                     <nav class="nav">
                         <div class="col-1 container">
                             <div class="row h-100 justify-content-center align-items-center">
@@ -192,17 +190,17 @@ $rol1 = session()->get('rol');
                 </footer>
             </div>
         </div>
-              <!-- jQuery CDN -->
-        <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>-->
+        <!-- jQuery CDN -->
+  <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>-->
         <!-- Bootstrap Js CDN -->
         <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
         <script type="text/javascript">
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
-                    $(this).toggleClass('active');
-                });
-            });
+$(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $(this).toggleClass('active');
+    });
+});
         </script>
     </body>
 </html>

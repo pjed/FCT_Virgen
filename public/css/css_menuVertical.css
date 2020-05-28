@@ -28,6 +28,9 @@ a, a:hover, a:focus {
 i, span {
     display: inline-block;
 }
+navbar-toggler-icon{  
+    background: #fff;
+}
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -50,14 +53,6 @@ i, span {
     min-width: 80px;
     max-width: 85px;
     text-align: center;
-}
-
-#sidebar.active .sidebar-header{
-    display: none;
-}
-
-#sidebar.active .sidebar-header strong {
-    display: block;
 }
 
 #sidebar ul li a {
@@ -88,16 +83,6 @@ i, span {
     -webkit-transform: translateX(50%);
     -ms-transform: translateX(50%);
     transform: translateX(50%);
-}
-
-#sidebar .sidebar-header {
-    padding: 20px;
-    background: #555555;
-}
-
-#sidebar .sidebar-header strong {
-    display: none;
-    font-size: 1.8em;
 }
 
 #sidebar ul.components {
@@ -196,23 +181,19 @@ ul ul li {
         margin-left: 0 !important;
     }
 
-
-    /* Toggling the sidebar header content, 
-       hide the big heading [h3] and showing the small heading [strong] and vice versa
-    */
-    #sidebar .sidebar-header h3 {
-        display: none;
-    }
-    #sidebar .sidebar-header strong {
-        display: block;
+    #sidebar.active img{
+            width: 20px;
+            height: 14px;    
+            background-size: 20px 14px;
+      
     }
 
     /* Downsize the navigation links font size */
     #sidebar ul li a {
         padding: 20px 10px;
     }
-    
-   #sidebar ul li a span {
+
+    #sidebar ul li a span {
         font-size: 0.85em;
     }
     #sidebar ul li a i {
