@@ -112,14 +112,6 @@ input[type=number] {
         color: white; font-size: 14pt
     }
 
-
-    .miniatura_perfil{
-        width: 24px; 
-        height: 24px;
-        border: solid 2px black;
-        border-radius: 25px;
-    }
-
     main{
         min-height: 80vh;
     }
@@ -131,9 +123,9 @@ input[type=number] {
         font-size: 25px;
     }
     .perfil,.cerrarSesion{
-        background-size: 15px;
-        width: 15px;
-        height: 15px;
+        background-size: 34px;
+        width: 34px; 
+        height: 34px;
     }
     a,label{
         font-size: 10px;
@@ -171,9 +163,9 @@ input[type=number] {
     }
 
     .perfil,.cerrarSesion{
-        background-size: 24px;
-        width: 24px;
-        height: 24px;
+        background-size: 34px;
+        width: 34px; 
+        height: 34px;
     }
 }
 /*Pantalla de escritorio WebSite */
