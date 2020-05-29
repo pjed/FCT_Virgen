@@ -127,10 +127,10 @@ input[type=number] {
         height: 34px;
     }
     /*logotipo de la pagina*/
-    .logotipo{
+/*    .logotipo{
         width: 64px;
         height: 44px;  
-    }
+    }*/
 }
 /*Tablet Apps */
 @media only screen and (min-width:481px) and (max-width:1024px){

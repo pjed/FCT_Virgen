@@ -48,7 +48,10 @@ navbar-toggler-icon{
     color: #ffffff;
     transition: all 0.3s;
 }
-
+#logotipo.active {
+    width: 64px;
+    height: 44px;
+}
 #sidebar.active {
     min-width: 80px;
     max-width: 85px;
@@ -163,6 +166,11 @@ ul ul li {
         text-align: center;
         margin-left: -80px !important;
     }
+    
+    #logotipo {
+        width: 64px;
+        height: 44px;
+    }
 
     /* Changing the arrow position to bottom center position, 
         translateX(50%) works with right: 50% 
@@ -181,12 +189,7 @@ ul ul li {
         margin-left: 0 !important;
     }
 
-    #sidebar.active img{
-            width: 20px;
-            height: 14px;    
-            background-size: 20px 14px;
-      
-    }
+   
 
     /* Downsize the navigation links font size */
     #sidebar ul li a {

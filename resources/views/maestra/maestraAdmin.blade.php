@@ -45,7 +45,7 @@ $rol1 = session()->get('rol');
                 <ul class="list-unstyled components">
                     <li>
                         <a href="#">
-                            <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                            <img id="logotipo" class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                         </a>
                     </li>
                     <li>
@@ -196,8 +196,9 @@ $rol1 = session()->get('rol');
         <script type="text/javascript">
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
+        $('#sidebar').toggleClass('active');         
         $(this).toggleClass('active');
+        $('#logotipo').toggleClass('active');
     });
 });
         </script>
