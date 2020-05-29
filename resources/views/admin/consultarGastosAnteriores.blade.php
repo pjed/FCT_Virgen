@@ -1,13 +1,17 @@
 @extends('maestra.maestraAdmin')
-<!-- CSS -->
-<link href="css/style.css" rel="stylesheet" type="text/css">
-<link href="css/dropzone.css" rel="stylesheet" type="text/css">
 
-<!-- Script -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="js/dropzone.js" type="text/javascript"></script>
 @section('titulo') 
 Consultar gastos anteriores
+@endsection
+
+@section('css') 
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/dropzone.css" rel="stylesheet" type="text/css">
+@endsection
+
+@section('javascript') 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/dropzone.js" type="text/javascript"></script>
 @endsection
 
 @section('contenido') 

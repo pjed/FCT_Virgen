@@ -4,6 +4,10 @@
 Gestionar Responsable
 @endsection
 
+@section('css') 
+<link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
+@endsection
+
 @section('javascript') 
 <script src="{{asset ('js/tutor/js_gestionarResponsable.js')}}"></script>
 @endsection

@@ -12,6 +12,10 @@ if (isset($_SESSION['dniAlumno'])) {
 Consultar Gastos Alumnos
 @endsection
 
+@section('css') 
+<link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
+@endsection
+
 @section('javascript') 
 <script src="{{asset ('js/admin/js_consultarGasto.js')}}"></script>
 @endsection

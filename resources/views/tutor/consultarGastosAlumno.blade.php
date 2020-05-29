@@ -10,6 +10,10 @@ if (session()->get('dniAlumno') != null) {
 Consultar Gastos Alumnos
 @endsection
 
+@section('css') 
+<link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
+@endsection
+
 @section('contenido') 
 <div class="container">
     <!-- Migas de pan -->

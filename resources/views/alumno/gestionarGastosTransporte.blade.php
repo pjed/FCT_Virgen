@@ -4,6 +4,10 @@
 Gestionar gastos transporte
 @endsection
 
+@section('css') 
+<link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
+@endsection
+
 @section('contenido') 
 <div class="container-fluid">  
     <!-- Migas de pan -->

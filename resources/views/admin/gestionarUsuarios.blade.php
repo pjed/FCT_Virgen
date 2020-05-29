@@ -4,7 +4,8 @@
 Gestionar usuarios
 @endsection
 
-@section('css')       
+@section('css') 
+<link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
 <link rel="stylesheet" type="text/css" href="{{asset ('css/css_activo.css')}}" media="screen" />
 @endsection
 
