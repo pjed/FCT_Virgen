@@ -47,7 +47,7 @@ class controladorGeneral extends Controller {
                 }
                 if (hash('sha256', 1) == $passHash) {
                     echo '
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <div class="m-0 alert alert-warning alert-dismissible fade show" role="alert">
                     Su contraseña no es segura, debe cambiarla desde su perfil.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -56,7 +56,7 @@ class controladorGeneral extends Controller {
                 }
                 if ($activo == 0) {
                     echo '
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <div class="m-0 alert alert-warning alert-dismissible fade show" role="alert">
                     Mande un correo al administrador para que le active el usuario.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -66,7 +66,7 @@ class controladorGeneral extends Controller {
                 if ($rol == 1) {//admin
                     session()->put('rol', 1);
                     echo '
-                  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                  <div class="m-0 alert alert-primary alert-dismissible fade show" role="alert">
                     Has iniciado sesión como administrador
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -76,7 +76,7 @@ class controladorGeneral extends Controller {
                 } else if ($rol == 2) { //tutor                
                     session()->put('rol', 2);
                     echo '
-                  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                  <div class="m-0 alert alert-primary alert-dismissible fade show" role="alert">
                     Has iniciado sesión como tutor
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -85,7 +85,7 @@ class controladorGeneral extends Controller {
                     return view('tutor.bienvenidaT');
                 } else if ($rol == 3) {//alumno                
                     session()->put('rol', 3);
-                    echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    echo '<div class="m-0 alert alert-primary alert-dismissible fade show" role="alert">
                     Has iniciado sesión como alumno
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -96,7 +96,7 @@ class controladorGeneral extends Controller {
                     session()->put('rol', 4);
                     session()->put('rol1',1);
                     echo '
-                  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                  <div class="m-0 alert alert-primary alert-dismissible fade show" role="alert">
                     Has iniciado sesión como administrador
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -105,7 +105,7 @@ class controladorGeneral extends Controller {
                     return view('admin.bienvenidaAd');
                 }
             } else {
-                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al introducir los datos vuelve a intentarlo.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -114,7 +114,7 @@ class controladorGeneral extends Controller {
                 return view('inicioSesion');
             }
         } else {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Algún campo está vacío.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -163,7 +163,7 @@ class controladorGeneral extends Controller {
 
                 return view('inicioSesion');
             } else {
-                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error el usuario no existe o es incorrecto.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -173,7 +173,7 @@ class controladorGeneral extends Controller {
                 return view('olvidarPwd');
             }
         } else {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Introduce el correo, por favor.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -193,7 +193,7 @@ class controladorGeneral extends Controller {
     public function cambiarRol(Request $req) {
         if (isset($_REQUEST['tutor'])) {
             session()->put('rol1', 2);
-            echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como tutor
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -203,7 +203,7 @@ class controladorGeneral extends Controller {
         }
         if (isset($_REQUEST['administrador'])) {
             session()->put('rol1', 1);
-            echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-primary alert-dismissible fade show" role="alert">
                     Has inicado sesion como administrador
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -282,7 +282,7 @@ class controladorGeneral extends Controller {
             $usu = Conexion::existeUsuario($email, $pass);
             session()->put('usu', $usu);
         } else {
-            echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-primary alert-dismissible fade show" role="alert">
                     Sube una foto por favor.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>

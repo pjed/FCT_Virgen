@@ -130,14 +130,14 @@ class Conexion {
         try {
             $p->save();
             $c->save();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al insertar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -172,14 +172,14 @@ class Conexion {
                 'activo' => $activo,
                 'updated_at' => $updated_at]);
 
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Modificado usuario con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar usuario.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -218,14 +218,14 @@ class Conexion {
             $p = usuario::where('dni', $dni)
                     ->update(['pass' => $pass]);
             if ($sitio == 0) {
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Modificado contraseña con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
             } else {
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Contraseña restablecida correctamente y enviada al correo.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -234,14 +234,14 @@ class Conexion {
             }
         } catch (\Exception $e) {
             if ($sitio == 0) {
-                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar contraseña.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
             } else {
-                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al restablecer la contraseña.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -259,14 +259,14 @@ class Conexion {
         try {
             usuarios_rol::where('usuario_dni', $dni)->delete();
             usuario::where('dni', $dni)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -289,14 +289,14 @@ class Conexion {
         try {
 
             tutor::where('usuarios_dni', $dni)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -312,14 +312,14 @@ class Conexion {
     static function borrarAlumno($dni) {
         try {
             matricula::where('usuarios_dni', $dni)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -335,14 +335,14 @@ class Conexion {
     static function borrarAlumnoTablaPracticas($dni) {
         try {
             practica::where('usuarios_dni', $dni)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -358,14 +358,14 @@ class Conexion {
     static function borrarAlumnoTablaGastos($dni) {
         try {
             gasto::where('usuarios_dni', $dni)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -377,9 +377,7 @@ class Conexion {
     static function obtenerIdsComidaAlumno($dni) {
         $v = \DB::table('gastos')
                 ->where('usuarios_dni', $dni)
-                ->select(
-                        'comidas_id'
-                )
+                ->select('comidas_id')
                 ->get();
         return $v;
     }
@@ -387,9 +385,7 @@ class Conexion {
     static function obtenerIdsTransporteAlumno($dni) {
         $v = \DB::table('gastos')
                 ->where('usuarios_dni', $dni)
-                ->select(
-                        'transportes_id'
-                )
+                ->select('transportes_id')
                 ->get();
         return $v;
     }
@@ -401,14 +397,14 @@ class Conexion {
     static function borrarGastoComidaAlumno($comidas_id) {
         try {
             gasto::where('comidas_id', $comidas_id)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -424,14 +420,14 @@ class Conexion {
     static function borrarGastoTransporteAlumno($transportes_id) {
         try {
             gasto::where('$transportes_id', $transportes_id)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -553,7 +549,7 @@ class Conexion {
                         'updated_at' => $updated_at
             ]);
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al actualizar matricula.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -579,14 +575,14 @@ class Conexion {
                         'updated_at' => $updated_at
             ]);
 
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Actualizada foto de perfil correctamente.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al actualizar foto de perfil.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -608,7 +604,7 @@ class Conexion {
                     ->update(['cursos_id_curso' => $ciclo,
                         'updated_at' => $updated_at]);
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al actualizar tutoría.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -780,14 +776,14 @@ class Conexion {
 
         try {
             $p->save(); //aqui se hace la insercion   
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Clave duplicada.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -803,14 +799,14 @@ class Conexion {
     static function borrarPractica($id) {
         try {
             practica::where('id', $id)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -834,7 +830,7 @@ class Conexion {
                 'updated_at' => $updated_at
             ]);
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar el gasto total.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -858,7 +854,7 @@ class Conexion {
                 'updated_at' => $updated_at
             ]);
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -876,7 +872,7 @@ class Conexion {
         try {
             $p = responsable::where('empresa_id', $id)->delete();
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -900,7 +896,7 @@ class Conexion {
                 'updated_at' => $updated_at
             ]);
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -937,14 +933,14 @@ class Conexion {
                         'responsables_id' => $dniResponsable,
                         'updated_at' => $updated_at]);
 
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1048,14 +1044,14 @@ class Conexion {
             $p->created_at = $updated_at;
             $p->updated_at = $updated_at;
             $p->save(); //aqui se hace la insercion   
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Clave duplicada.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1089,14 +1085,14 @@ class Conexion {
                 'updated_at' => $updated_at
             ]);
 
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1112,14 +1108,14 @@ class Conexion {
     static function borrarResponsable($id) {
         try {
             responsable::where('id', $id)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1187,14 +1183,14 @@ class Conexion {
         $p->updated_at = $updated_at;
         try {
             $p->save(); //aqui se hace la insercion   
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Clave duplicada.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1232,14 +1228,14 @@ class Conexion {
                 'updated_at' => $updated_at
             ]);
 
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1255,14 +1251,14 @@ class Conexion {
     static function borrarEmpresa($id) {
         try {
             empresa::where('id', $id)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1452,14 +1448,14 @@ class Conexion {
             $c->updated_at = $fechaHoy;
 
             $c->save(); //aqui se hace la insercion   
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Clave duplicada.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1487,14 +1483,14 @@ class Conexion {
             $g->created_at = $updated_at;
             $g->updated_at = $updated_at;
             $g->save(); //aqui se hace la insercion   
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Gasto insertado en la tabla con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al insertar el gasto en la tabla.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1595,14 +1591,14 @@ class Conexion {
                 'updated_at' => $updated_at
             ]);
 
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1621,14 +1617,14 @@ class Conexion {
                 'importe' => $importe,
                 'updated_at' => $updated_at
             ]);
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1652,14 +1648,14 @@ class Conexion {
             }
             //eliminar tabla gasto
             gasto::where('usuarios_dni', $dni)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1685,14 +1681,14 @@ class Conexion {
             }
             //eliminar tabla gasto
             gasto::where('usuarios_dni', $dni)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1718,14 +1714,14 @@ class Conexion {
             }
             //eliminar tabla gasto
             gasto::where('usuarios_dni', $dni)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1746,14 +1742,14 @@ class Conexion {
             comida::where('id', $v)->delete();
             //eliminar tabla gasto
             gasto::where('id', $idGasto)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1774,14 +1770,14 @@ class Conexion {
             colectivo::where('transportes_id', $idTransporte)->delete();
             //eliminar tabla transporte
             transporte::where('id', $idTransporte)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1808,14 +1804,14 @@ class Conexion {
                 'updated_at' => $updated_at
             ]);
 
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1834,14 +1830,14 @@ class Conexion {
                 'updated_at' => $updated_at
             ]);
 
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1862,14 +1858,14 @@ class Conexion {
             propio::where('transportes_id', $idTransporte)->delete();
             //eliminar tabla transporte
             transporte::where('id', $idTransporte)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -1896,14 +1892,14 @@ class Conexion {
                 'updated_at' => $updated_at
             ]);
 
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -2059,7 +2055,7 @@ class Conexion {
         if ($existeHistorico != null) {
             $v = \DB::table('historico.historico')->get();
         } else {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     No hay datos de histórico.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -2083,14 +2079,14 @@ class Conexion {
             $p->created_at = $updated_at;
             $p->updated_at = $updated_at;
             $p->save(); //aqui se hace la insercion   
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Clave duplicada.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -2112,14 +2108,14 @@ class Conexion {
                 'updated_at' => $updated_at
             ]);
 
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Modificado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al modificar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -2141,14 +2137,14 @@ class Conexion {
             matricula::where('cursos_id_curso', $id)->delete();
             //borrar curso
             curso::where('id_curso', $id)->delete();
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al borrar.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -2185,14 +2181,14 @@ class Conexion {
             $c->created_at = $updated_at;
             $c->updated_at = $updated_at;
             $c->save(); //aqui se hace la insercion   
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Transporte colectivo insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al guardar el transporte colectivo.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -2229,14 +2225,14 @@ class Conexion {
             $c->created_at = $updated_at;
             $c->updated_at = $updated_at;
             $c->save(); //aqui se hace la insercion   
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Clave duplicada.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -2288,9 +2284,7 @@ class Conexion {
                 ->where('usuarios.dni', $dni)
                 ->join('cursos', 'matriculados.cursos_id_curso', '=', 'cursos.id_curso')
                 ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
-                ->select(
-                        'usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.domicilio AS domicilio', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban', 'matriculados.cursos_id_curso AS curso', 'cursos.descripcion AS descripcion', 'cursos.descripcion AS descripcion', 'cursos.familia AS familia', 'cursos.horas AS horas'
-                )
+                ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.domicilio AS domicilio', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.iban AS iban', 'matriculados.cursos_id_curso AS curso', 'cursos.descripcion AS descripcion', 'cursos.descripcion AS descripcion', 'cursos.familia AS familia', 'cursos.horas AS horas')
                 ->get();
         return $v;
     }
@@ -2299,9 +2293,7 @@ class Conexion {
         $v = \DB::table('practicas')
                 ->where('practicas.usuarios_dni', $dni)
                 ->join('empresas', 'practicas.empresas_id', '=', 'empresas.id')
-                ->select(
-                        'empresas.nombre_empresa AS nombre', 'empresas.localidad AS localidad', 'empresas.direccion AS direccion'
-                )
+                ->select('empresas.nombre_empresa AS nombre', 'empresas.localidad AS localidad', 'empresas.direccion AS direccion')
                 ->get();
         return $v;
     }
@@ -2309,18 +2301,14 @@ class Conexion {
     static function listarGastosAlumno($dni) {
         $v = \DB::table('practicas')
                 ->where('practicas.usuarios_dni', $dni)
-                ->select(
-                        'practicas.gastos AS total_gasto_alumno'
-                )
+                ->select('practicas.gastos AS total_gasto_alumno')
                 ->get();
         return $v;
     }
 
     static function listarCentro() {
         $v = \DB::table('centros')
-                ->select(
-                        'centros.cod AS cod', 'centros.nombre AS nombre', 'centros.localidad AS localidad'
-                )
+                ->select('centros.cod AS cod', 'centros.nombre AS nombre', 'centros.localidad AS localidad')
                 ->get();
         return $v;
     }
@@ -2328,9 +2316,7 @@ class Conexion {
     static function obtenerAlumnosTutor($curso) {
         $v = \DB::table('matriculados')
                 ->where('matriculados.cursos_id_curso', $curso)
-                ->select(
-                        'matriculados.usuarios_dni AS dni'
-                )
+                ->select('matriculados.usuarios_dni AS dni')
                 ->get();
         return $v;
     }
@@ -2381,14 +2367,14 @@ class Conexion {
         try {
             \DB::insert('insert into matriculados (usuarios_dni, cursos_id_curso) values (?,?)', [$dni, $ciclo]);
 //            $p->save(); //aqui se hace la insercion   
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Error al inertar usuario.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -2407,14 +2393,14 @@ class Conexion {
             $t->created_at = $updated_at;
             $t->updated_at = $updated_at;
             $t->save(); //aqui se hace la insercion   
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Insertado con exito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     Clave duplicada.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
@@ -2476,14 +2462,14 @@ class Conexion {
             \DB::connection()->getPdo()->exec($sqlDB);
 
             if (count($v) == 0) {
-                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
                     No existen gastos en el año academico seleccionado.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
             } else {
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Se han encontrado registros ...
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>

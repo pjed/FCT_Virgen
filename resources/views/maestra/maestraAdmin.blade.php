@@ -27,7 +27,7 @@ $rol1 = session()->get('rol');
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
         <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
 
-        
+
         <!-- Font Awesome JS -->
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
@@ -89,41 +89,39 @@ $rol1 = session()->get('rol');
                     @endif
                 </ul>
             </nav>
-            <div  id="content">
+            <div id="content">
                 <!-- Page Content Holder --> 
                 <header>
                     <nav class="navbar navbar-default">
-                        <div class="container-fluid">
-                            <div class="navbar-header">
-                                <button class="btn btn-dark" type="button" id="sidebarCollapse" class="btn btn-info">
-                                    <i class="fas fa-align-justify"></i>
-                                </button>
-                            </div>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <form name="perfil" action="perfilAd1"  method="post">
-                                        {{ csrf_field() }}  
-                                        <?php
-                                        $usuario = session()->get('usu');
-
-                                        foreach ($usuario as $value) {
-                                            $foto = $value['foto'];
-                                        }
-                                        ?>
-
-                                        <button type="submit" class="perfil" name="perfil">
-                                            <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
-                                        </button>
-                                    </form>
-                                </li>
-                                <li>  
-                                    <form name="cerrarSesion" action="cerrarSesion"  method="post">
-                                        {{ csrf_field() }}  
-                                        <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
-                                    </form>
-                                </li>
-                            </ul>
+                        <div class="navbar-header">
+                            <button class="btn btn-dark" type="button" id="sidebarCollapse" class="btn btn-info">
+                                <i class="fas fa-align-justify"></i>
+                            </button>
                         </div>
+                        <ul class="navbar-nav navbar-right">
+                            <li>
+                                <form name="perfil" action="perfilAd1"  method="post">
+                                    {{ csrf_field() }}  
+                                    <?php
+                                    $usuario = session()->get('usu');
+
+                                    foreach ($usuario as $value) {
+                                        $foto = $value['foto'];
+                                    }
+                                    ?>
+
+                                    <button type="submit" class="perfil" name="perfil">
+                                        <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
+                                    </button>
+                                </form>
+                            </li>
+                            <li>  
+                                <form name="cerrarSesion" action="cerrarSesion"  method="post">
+                                    {{ csrf_field() }}  
+                                    <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
+                                </form>
+                            </li>
+                        </ul>
                     </nav>
                 </header>
                 <main>
@@ -195,10 +193,6 @@ $rol1 = session()->get('rol');
                 </footer>
             </div>
         </div>
-        <!-- jQuery CDN -->
-  <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>-->
-        <!-- Bootstrap Js CDN -->
-        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
         <script type="text/javascript">
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
