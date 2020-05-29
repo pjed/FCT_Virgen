@@ -119,67 +119,69 @@ $rol1 = session()->get('rol');
                 <main>
                     @yield('contenido')
                 </main>
-                <footer class="bg-dark container-fluid">  
-                    <div class="col-1 container">
-                        <div class="row h-100 justify-content-center align-items-center">
-                            <a class="col nav-link" href="https://europa.eu/european-union/index_es">
-                                <img class="borde_logo" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
-                            </a>
+                <footer class="bg-dark container-fluid">                     
+                    <nav class="nav">
+                        <div class="col-1 container">
+                            <div class="row h-100 justify-content-center align-items-center">
+                                <a class="col nav-link" href="https://europa.eu/european-union/index_es">
+                                    <img class="borde_logo" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-1 container">
-                        <div class="row h-100 justify-content-center align-items-center">
-                            <a class="col nav-link" href="http://http://www.educa.jccm.es/es/fpclm/fp-dual">
-                                <img class="borde_logo" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
-                            </a>
+                        <div class="col-1 container">
+                            <div class="row h-100 justify-content-center align-items-center">
+                                <a class="col nav-link" href="http://http://www.educa.jccm.es/es/fpclm/fp-dual">
+                                    <img class="borde_logo" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-1 container">
-                        <div class="row h-100 justify-content-center align-items-center">
-                            <a class="col nav-link" href="http://www.cifpvirgendegracia.com/">
-                                <img class="borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
-                            </a>
+                        <div class="col-1 container">
+                            <div class="row h-100 justify-content-center align-items-center">
+                                <a class="col nav-link" href="http://www.cifpvirgendegracia.com/">
+                                    <img class="borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="row h-100 justify-content-center align-items-center">
-                            <p class="text-center footer">
-                                Marina Estefanía Flores Fernández
-                                <br>Pedro Javier Espinosa Duque<br>
-                                Manuel Ruiz González
-                            </p>
+                        <div class="col-5">
+                            <div class="row h-100 justify-content-center align-items-center">
+                                <p class="text-center footer">
+                                    Marina Estefanía Flores Fernández
+                                    <br>Pedro Javier Espinosa Duque<br>
+                                    Manuel Ruiz González
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-1 container">
-                        <div class="row h-100 justify-content-center align-items-center">
-                            <p class="text-center footer">2 - DAW <br>2019 - 2020</p>
+                        <div class="col-1 container">
+                            <div class="row h-100 justify-content-center align-items-center">
+                                <p class="text-center footer">2 - DAW <br>2019 - 2020</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-1">
-                        <div class="row h-100 justify-content-center align-items-center">
-                            <button type="button" class="btn" id="info"  data-toggle="modal" data-target="#exampleModal">
-                            </button>
-                        </div>
-                        <!-- Modal -->
-                        <div class="modal  fade" id="exampleModal" tabindex="-1" role="dialog"  aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <h2 class="text-center">Derechos de los iconos</h2>
-                                        <h3 class="text-center">Añadir:</h3><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                        <h3 class="text-center">User:</h3><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                        <h3 class="text-center">Delete: </h3><a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                        <h3 class="text-center">Confirm:</h3><a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                        <h3 class="text-center">Search:</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                        <h3 class="text-center">Edit:</h3><a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                        <h3 class="text-center">Logout: </h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-                                        <h3 class="text-center">Ticket:</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                        <h3 class="text-center">Informacion</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                        <div class="col-1">
+                            <div class="row h-100 justify-content-center align-items-center">
+                                <button type="button" class="btn" id="info"  data-toggle="modal" data-target="#exampleModal">
+                                </button>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal  fade" id="exampleModal" tabindex="-1" role="dialog"  aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <h2 class="text-center">Derechos de los iconos</h2>
+                                            <h3 class="text-center">Añadir:</h3><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3 class="text-center">User:</h3><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3 class="text-center">Delete: </h3><a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3 class="text-center">Confirm:</h3><a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3 class="text-center">Search:</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3 class="text-center">Edit:</h3><a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3 class="text-center">Logout: </h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                                            <h3 class="text-center">Ticket:</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                            <h3 class="text-center">Informacion</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>  
-                    </div>
+                            </div>  
+                        </div>                        
+                    </nav>
                 </footer>
             </div>
         </div>
