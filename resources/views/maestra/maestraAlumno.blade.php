@@ -18,7 +18,12 @@ $rol1 = session()->get('rol');
         <link rel="stylesheet" type="text/css" href="{{asset ('css/css_general.css')}}" media="screen" />        
         <link rel="stylesheet" type="text/css" href="{{asset ('css/bootstrap.min.css')}}" media="screen" />         
         <link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{asset ('css/css_menuVertical.css')}}" media="screen" />
         @yield('css')
+
+        <!-- Font Awesome JS -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
@@ -30,198 +35,138 @@ $rol1 = session()->get('rol');
         <script src="{{asset ('js/popper.min.js')}}"></script>
         <script src="{{asset ('js/bootstrap.min.js')}}"></script>
         <script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>
+        <script src="{{asset ('js/js_menuVertical.js')}}"></script>
         @yield('javascript')
     </head>
     <body>
-        <header>  
-            <div class="hide-mobile">
-                <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                    <div class="text-center col-2">
-                        <a class="navbar-nav" href="#">
-                            <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+        <div class="wrapper">
+            <nav id="sidebar" class="bg-dark">
+                <ul class="list-unstyled components">
+                    <li>
+                        <a href="bienvenidaAl">
+                            <img id="logotipo" class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                         </a>
-                    </div>
+                    </li>
+                    <li>
+                        <a  href="bienvenidaAl">Home</a>
+                    </li>
+                    <li>
+                        <a href="#CrearGastos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Crear Gastos</a>
+                        <ul class="collapse list-unstyled" id="CrearGastos">
+                            <li><a href="crearGastoComida">Comida</a></li>
+                            <li><a href="crearGastoTransporte">Transporte</a></li>    
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#GestionarGastos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gestionar Gastos</a>
+                        <ul class="collapse list-unstyled" id="GestionarGastos">
+                            <li><a href="gestionarGastosComida">Comida</a></li>
+                            <li><a href="gestionarGastosTransporte">Transporte</a></li>    
+                        </ul>
+                    </li> 
+                </ul>
+            </nav>
+            <div id="content">
+                <!-- Page Content Holder --> 
+                <header>
+                    <nav class="navbar navbar-default">
+                        <div class="navbar-header">
+                            <button class="btn btn-dark" type="button" id="sidebarCollapse" class="btn btn-info">
+                                <i class="fas fa-align-justify"></i>
+                            </button>
+                        </div>
+                        <ul class="navbar-nav navbar-right">
+                            <li>
+                                <form name="perfil" action="perfilAd1"  method="post">
+                                    {{ csrf_field() }}  
+                                    <?php
+                                    $usuario = session()->get('usu');
 
-                    <div class="col-8">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="menu">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="bienvenidaAl">Home</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Crear Gasto</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="crearGastoComida">Comida</a>
-                                        <a class="dropdown-item" href="crearGastoTransporte">Transporte</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar Gastos</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="gestionarGastosComida">Comida</a>
-                                        <a class="dropdown-item" href="gestionarGastosTransporte">Transporte</a>
-                                    </div>
-                                </li>
-                            </ul>
+                                    foreach ($usuario as $value) {
+                                        $foto = $value['foto'];
+                                    }
+                                    ?>
+
+                                    <button type="submit" class="perfil" name="perfil">
+                                        <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
+                                    </button>
+                                </form>
+                            </li>
+                            <li>  
+                                <form name="cerrarSesion" action="cerrarSesion"  method="post">
+                                    {{ csrf_field() }}  
+                                    <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
+                                </form>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
+                <main>
+                    @yield('contenido')
+                </main>
+                <footer class="bg-dark container-fluid">         
+                    <div class="col-1 container">
+                        <div class="row h-100 justify-content-center align-items-center">
+                            <a class="col nav-link" href="https://europa.eu/european-union/index_es">
+                                <img class="borde_logo" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
+                            </a>
                         </div>
                     </div>
-
-                    <div class="col-1 text-center">
-                        <form name="perfil" action="perfilAl1"  method="post">
-                            {{ csrf_field() }}  
-                            <?php
-                            $usuario = session()->get('usu');
-
-                            foreach ($usuario as $value) {
-                                $foto = $value['foto'];
-                            }
-                            ?>
-
-                            <button type="submit" class="perfil" name="perfil">
-                                <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
-                            </button>
-                        </form>
+                    <div class="col-1 container">
+                        <div class="row h-100 justify-content-center align-items-center">
+                            <a class="col nav-link" href="http://http://www.educa.jccm.es/es/fpclm/fp-dual">
+                                <img class="borde_logo" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
+                            </a>
+                        </div>
                     </div>
-
-                    <div class="col-1 text-center">
-                        <form name="cerrarSesion" action="cerrarSesion"  method="post">
-                            {{ csrf_field() }}  
-                            <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
-                        </form>
+                    <div class="col-1 container">
+                        <div class="row h-100 justify-content-center align-items-center">
+                            <a class="col nav-link" href="http://www.cifpvirgendegracia.com/">
+                                <img class="borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
+                            </a>
+                        </div>
                     </div>
-                </nav>
-            </div>
-            <div class="hide-desktop  hide-mobile-landscape">
-                <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                    <div class="col-5">
+                        <div class="row h-100 justify-content-center align-items-center">
+                            <p class="text-center footer">
+                                Marina Estefanía Flores Fernández
+                                <br>Pedro Javier Espinosa Duque<br>
+                                Manuel Ruiz González
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-1 container">
+                        <div class="row h-100 justify-content-center align-items-center">
+                            <p class="text-center footer">2 - DAW <br>2019 - 2020</p>
+                        </div>
+                    </div>
                     <div class="col-1">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu2">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="menu2">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="bienvenidaAl">Home</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Crear Gasto</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="crearGastoComida">Comida</a>
-                                        <a class="dropdown-item" href="crearGastoTransporte">Transporte</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar Gastos</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="gestionarGastosComida">Comida</a>
-                                        <a class="dropdown-item" href="gestionarGastosTransporte">Transporte</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-8 text-center">
-                        <a class="navbar-nav" href="#">
-                            <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
-                        </a>
-                    </div>
-
-
-                    <div class="col-1 text-center">
-                        <form name="perfil" action="perfilAl1"  method="post">
-                            {{ csrf_field() }}  
-                            <?php
-                            $usuario = session()->get('usu');
-
-                            foreach ($usuario as $value) {
-                                $foto = $value['foto'];
-                            }
-                            ?>
-
-                            <button type="submit" class="perfil" name="perfil">
-                                <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
+                        <div class="row h-100 justify-content-center align-items-center">
+                            <button type="button" class="btn" id="info"  data-toggle="modal" data-target="#exampleModal">
                             </button>
-                        </form>
-                    </div>
-
-                    <div class="col-1 text-center">
-                        <form name="cerrarSesion" action="cerrarSesion"  method="post">
-                            {{ csrf_field() }}  
-                            <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
-                        </form>
-                    </div>
-                </nav>
-            </div>
-        </header>
-        <main>
-            @yield('contenido')
-        </main>
-        <footer class="footer bg-dark container-fluid">  
-            <nav class="nav">
-                <div class="col-1 container">
-                    <div class="row h-100 justify-content-center align-items-center">
-                        <a class="col nav-link" href="https://europa.eu/european-union/index_es">
-                            <img class="borde_logo" src="{{asset ('images/union_europea_logo.png')}}" alt="logotipo union europea">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-1 container">
-                    <div class="row h-100 justify-content-center align-items-center">
-                        <a class="col nav-link" href="http://http://www.educa.jccm.es/es/fpclm/fp-dual">
-                            <img class="borde_logo" src="{{asset ('images/fpdual.png')}}" alt="logotipo fp dual">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-1 container">
-                    <div class="row h-100 justify-content-center align-items-center">
-                        <a class="col nav-link" href="http://www.cifpvirgendegracia.com/">
-                            <img class="borde_logo" src="{{asset ('images/logoInstituto.png')}}" alt="logotipo instituto">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-5">
-                    <div class="row h-100 justify-content-center align-items-center">
-                        <p class="text-center">
-                            Marina Estefanía Flores Fernández
-                            <br>Pedro Javier Espinosa Duque<br>
-                            Manuel Ruiz González
-                        </p>
-                    </div>
-                </div>
-                <div class="col-1 container">
-                    <div class="row h-100 justify-content-center align-items-center">
-                        <p class="text-center">2 - DAW <br>2019 - 2020</p>
-                    </div>
-                </div>
-                <div class="col-1">
-                    <div class="row h-100 justify-content-center align-items-center">
-                        <button type="button" class="btn" id="info"  data-toggle="modal" data-target="#exampleModal">
-                        </button>
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <h2 class="text-center">Derechos de los iconos</h2>
-                                    <h3 class="text-center">Añadir:</h3><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                    <h3 class="text-center">User:</h3><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                    <h3 class="text-center">Delete: </h3><a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                    <h3 class="text-center">Confirm:</h3><a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                    <h3 class="text-center">Search:</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                    <h3 class="text-center">Edit:</h3><a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                    <h3 class="text-center">Logout: </h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-                                    <h3 class="text-center">Ticket:</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                                    <h3 class="text-center">Informacion</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal  fade" id="exampleModal" tabindex="-1" role="dialog"  aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <h2 class="text-center">Derechos de los iconos</h2>
+                                        <h3 class="text-center">Añadir:</h3><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                        <h3 class="text-center">User:</h3><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                        <h3 class="text-center">Delete: </h3><a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                        <h3 class="text-center">Confirm:</h3><a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                        <h3 class="text-center">Search:</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                        <h3 class="text-center">Edit:</h3><a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                        <h3 class="text-center">Logout: </h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                                        <h3 class="text-center">Ticket:</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                                        <h3 class="text-center">Informacion</h3><a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>  
-                </div>
-            </nav>
-        </footer>
+                        </div>  
+                    </div>
+                </footer>
+            </div>
+        </div>
     </body>
 </html>

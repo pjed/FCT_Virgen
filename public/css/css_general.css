@@ -11,14 +11,15 @@ body{
     background-color: transparent;
     border: none;
 }
+
 #info{
     background-image :url('../images/information.png');
     background-repeat: no-repeat;
     background-color: transparent;
     border: none;
-    background-size: 25px;
-    width: 25px;
-    height: 25px;
+    background-size: 20px;
+    width: 20px;
+    height: 20px;
 }
 /*foto del ticket al crear gasto*/
 .fotoTicket{
@@ -82,10 +83,12 @@ body{
 }
 /*logotipo de la pagina*/
 .logotipo{
-    border: black 2px solid; 
+    border: black 1px solid; 
     background-color: white;
     align-self: center;
     justify-content: center;
+    width: 150px;
+    height: 64px;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -106,10 +109,11 @@ input[type=number] {
         color: white; font-size: 14pt
     }
 
-    footer,.footer{
+    p.footer{
         align-self: center;
         font-size: 8px; 
     }
+
     h1{
         font-size: 25px;
     }
@@ -126,22 +130,16 @@ input[type=number] {
         width: 34px;
         height: 34px;
     }
-    /*logotipo de la pagina*/
-/*    .logotipo{
-        width: 64px;
-        height: 44px;  
-    }*/
 }
 /*Tablet Apps */
 @media only screen and (min-width:481px) and (max-width:1024px){
-
-    /*logotipo de la pagina*/
-    .logotipo{
-        width: 64px;
-        height: 44px;
-    }
     main{
         min-height: 80vh;
+    }
+
+    p.footer{
+        align-self: center;
+        font-size: 8px; 
     }
 
     /*imagenes del footer*/
@@ -158,12 +156,6 @@ input[type=number] {
 }
 /*Pantalla de escritorio WebSite */
 @media only screen and (min-width:1025px){
-
-    /*logotipo de la pagina*/
-    .logotipo{
-        width: 150px;
-        height: 64px;
-    }
     /*imagenes del footer*/
     .borde_logo{
         width: 80px;
@@ -187,16 +179,4 @@ input[type=number] {
         width: 34px;
         height: 34px;
     } 
-}
-
-@media only screen and (min-width: 767px){
-    .hide-desktop{
-        display: none !important;
-    }
-}
-
-@media only screen and (max-width: 767px){
-    .hide-mobile{
-        display: none !important;
-    }
 }

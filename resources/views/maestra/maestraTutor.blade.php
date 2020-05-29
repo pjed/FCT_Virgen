@@ -17,8 +17,8 @@ $rol1 = session()->get('rol');
 
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="{{asset ('css/css_general.css')}}" media="screen" />        
-        <link rel="stylesheet" type="text/css" href="{{asset ('css/bootstrap.min.css')}}" media="screen" />       
-        <link rel="stylesheet" type="text/css" href="{{asset ('css/css_gestionar.css')}}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{asset ('css/bootstrap.min.css')}}" media="screen" /> 
+        <link rel="stylesheet" type="text/css" href="{{asset ('css/css_menuVertical.css')}}" media="screen" />
         @yield('css')
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -26,166 +26,90 @@ $rol1 = session()->get('rol');
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
         <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
 
+        <!-- Font Awesome JS -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
         <!-- Javascript -->
         <script src="{{asset ('js/jquery-3.2.1.slim.min.js')}}"></script>
         <script src="{{asset ('js/popper.min.js')}}"></script>
         <script src="{{asset ('js/bootstrap.min.js')}}"></script>
         <script src="{{asset ('js/jquery-3.3.1.min.js')}}"></script>
+        <script src="{{asset ('js/js_menuVertical.js')}}"></script>
         @yield('javascript')
     </head>
-    <body>
-        <header>  
-            <div class="hide-mobile">
-                <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                    <div class="text-center col-2">
-                        <a class="navbar-nav" href="#">
-                            <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
-                        </a>
-                    </div>
-
-                    <div class="col-8">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
-                            <span class="navbar-toggler-icon"></span>
+    <div class="wrapper">
+        <nav id="sidebar" class="bg-dark">
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="bienvenidaT">
+                        <img id="logotipo" class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                    </a>
+                </li>
+                <li><a  href="bienvenidaT">Home</a></li>
+                <li><a href="ExtraerDocT">Generar Documentos</a> </li>
+                <li><a href="consultarGastosAlumno">Consultar Gastos Alumno</a></li>
+                <li>
+                    <a href="#Gestionar" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gestionar</a>
+                    <ul class="collapse list-unstyled" id="Gestionar">
+                        <li><a href="gestionarEmpresa">Empresa</a></li>
+                        <li><a href="gestionarResponsable">Responsable</a></li>
+                        <li><a href="gestionarPracticas">Practicas</a></li>
+                    </ul>
+                </li> 
+                @if ($rol1==4)
+                <li>
+                    <a href="#CambiarRol" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cambiar de rol</a>
+                    <form name="cambiarRol" action="cambiarRol" method="POST">
+                        {{ csrf_field() }}
+                        <ul class="collapse list-unstyled" id="CambiarRol">
+                            <li><input type="submit" name="tutor" value="Tutor"></li>
+                            <li><input type="submit" name="administrador" value="Administrador"></li>
+                        </ul>
+                    </form>
+                </li>
+                @endif
+            </ul>
+        </nav>
+        <div id="content">
+            <!-- Page Content Holder --> 
+            <header>
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header">
+                        <button class="btn btn-dark" type="button" id="sidebarCollapse" class="btn btn-info">
+                            <i class="fas fa-align-justify"></i>
                         </button>
-                        <div class="collapse navbar-collapse" id="menu">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="bienvenidaT">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="ExtraerDocT">Generar documentos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link"  href="consultarGastosAlumno">Consultar Gastos Alumno</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="gestionarEmpresa">Empresa</a>
-                                        <a class="dropdown-item" href="gestionarResponsable">Responsable</a>
-                                        <a class="dropdown-item" href="gestionarPracticas">Practicas</a>
-                                    </div>
-                                </li>
-                                @if ($rol1==4)
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Cambiar de rol</a>
-                                    <div class="dropdown-menu">
-                                        <form name="cambiarRol" action="cambiarRol" method="POST">
-                                            {{ csrf_field() }}
-                                            <input type="submit" class="btn" name="tutor" value="Tutor">
-                                            <input type="submit" class="btn" name="administrador" value="Administrador">
-                                        </form>
-                                    </div>
-                                </li>
-                                @endif
-                            </ul>
-                        </div>
                     </div>
+                    <ul class="navbar-nav navbar-right">
+                        <li>
+                            <form name="perfil" action="perfilAd1"  method="post">
+                                {{ csrf_field() }}  
+                                <?php
+                                $usuario = session()->get('usu');
 
-                    <div class="col-1 text-center">
-                        <form name="perfil" action="perfilT1"  method="post">
-                            {{ csrf_field() }}  
-                            <?php
-                            $usuario = session()->get('usu');
+                                foreach ($usuario as $value) {
+                                    $foto = $value['foto'];
+                                }
+                                ?>
 
-                            foreach ($usuario as $value) {
-                                $foto = $value['foto'];
-                            }
-                            ?>
-
-                            <button type="submit" class="perfil" name="perfil">
-                                <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
-                            </button>
-                        </form>
-                    </div>
-
-                    <div class="col-1 text-center">
-                        <form name="cerrarSesion" action="cerrarSesion"  method="post">
-                            {{ csrf_field() }}  
-                            <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
-                        </form>
-                    </div>
+                                <button type="submit" class="perfil" name="perfil">
+                                    <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
+                                </button>
+                            </form>
+                        </li>
+                        <li>  
+                            <form name="cerrarSesion" action="cerrarSesion"  method="post">
+                                {{ csrf_field() }}  
+                                <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
+                            </form>
+                        </li>
+                    </ul>
                 </nav>
-            </div>
-            <div class="hide-desktop  hide-mobile-landscape">
-                <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                    <div class="col-1">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu2">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="menu2">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="bienvenidaT">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="ExtraerDocT">Generar documentos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link"  href="consultarGastosAlumno">Consultar Gastos Alumno</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Gestionar</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="gestionarEmpresa">Empresa</a>
-                                        <a class="dropdown-item" href="gestionarResponsable">Responsable</a>
-                                        <a class="dropdown-item" href="gestionarPracticas">Practicas</a>
-                                    </div>
-                                </li>
-                                @if ($rol1==4)
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Cambiar de rol</a>
-                                    <div class="dropdown-menu">
-                                        <form name="cambiarRol" action="cambiarRol" method="POST">
-                                            {{ csrf_field() }}
-                                            <input type="submit" class="btn" name="tutor" value="Tutor">
-                                            <input type="submit" class="btn" name="administrador" value="Administrador">
-                                        </form>
-                                    </div>
-                                </li>
-                                @endif
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-8 text-center">
-                        <a class="navbar-nav" href="#">
-                            <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
-                        </a>
-                    </div>
-
-
-                    <div class="col-1 text-center">
-                        <form name="perfil" action="perfilT1"  method="post">
-                            {{ csrf_field() }}  
-                            <?php
-                            $usuario = session()->get('usu');
-
-                            foreach ($usuario as $value) {
-                                $foto = $value['foto'];
-                            }
-                            ?>
-
-                            <button type="submit" class="perfil" name="perfil">
-                                <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
-                            </button>
-                        </form>
-                    </div>
-
-                    <div class="col-1 text-center">
-                        <form name="cerrarSesion" action="cerrarSesion"  method="post">
-                            {{ csrf_field() }}  
-                            <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
-                        </form>
-                    </div>
-                </nav>
-            </div>
-        </header>
-        <main>            
-            @yield('contenido')
-        </main>
-        <footer class="footer bg-dark container-fluid">  
-            <nav class="nav">
+            </header>
+            <main>            
+                @yield('contenido')
+            </main>
+            <footer class="bg-dark container-fluid">  
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
                         <a class="col nav-link" href="https://europa.eu/european-union/index_es">
@@ -209,17 +133,16 @@ $rol1 = session()->get('rol');
                 </div>
                 <div class="col-5">
                     <div class="row h-100 justify-content-center align-items-center">
-                        <p class="text-center">
+                        <p class="text-center footer">
                             Marina Estefanía Flores Fernández
                             <br>Pedro Javier Espinosa Duque<br>
                             Manuel Ruiz González
                         </p>
                     </div>
                 </div>
-
                 <div class="col-1 container">
                     <div class="row h-100 justify-content-center align-items-center">
-                        <p class="text-center">2 - DAW <br>2019 - 2020</p>
+                        <p class="text-center footer">2 - DAW <br>2019 - 2020</p>
                     </div>
                 </div>
                 <div class="col-1">
@@ -228,7 +151,7 @@ $rol1 = session()->get('rol');
                         </button>
                     </div>
                     <!-- Modal -->
-                    <div class="modal  fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"  aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-body">
@@ -247,7 +170,8 @@ $rol1 = session()->get('rol');
                         </div>
                     </div>  
                 </div>
-            </nav>
-        </footer>
-    </body>
+            </footer>
+        </div>
+    </div>
+</body>
 </html>

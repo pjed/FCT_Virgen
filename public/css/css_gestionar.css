@@ -2,21 +2,11 @@
     Created on : 23-ene-2020, 10:58:07
     Author     : daw209
 */
-#cerrarSesion{
-    background-image :url('../images/logout.png');
-    background-repeat: no-repeat;
-    background-color: transparent;
-    border: none;
-}
+
 .modal{
     color:black;
 }
-#perfil{
-/*    background-image: url('../images/user.png');*/
-    background-repeat: no-repeat;
-    background-color: transparent;
-    border: none;
-}
+
 #aniadir{
     background-image :url('../images/add.png');
     background-repeat: no-repeat;
@@ -57,9 +47,6 @@
 }
 /*Movil site vertical*/
 @media only screen and (max-width:480px){
-    main{
-         min-height: 15rem;     
-    }
     /*iconos*/
     #confirmar,.buscar,.editar,.eliminar,#aniadir, #perfil,  #cerrarSesion{    
         width: 24px;
@@ -69,9 +56,6 @@
 }
 /*Tablet Apps */
 @media only screen and (min-width:481px) and (max-width:1024px){
-    main{
-         min-height: 15rem;   
-    }
     /*iconos*/
     #confirmar,.buscar,.editar,.eliminar,#aniadir, #perfil,#cerrarSesion{    
         width: 24px;
@@ -81,9 +65,6 @@
 }
 /*Pantalla de escritorio WebSite */
 @media only screen and (min-width:1025px){
-    main{
-         min-height: 35rem;
-    }
     /*iconos*/
     #confirmar,.buscar,.editar,.eliminar, #perfil,#aniadir, #cerrarSesion{    
         width: 34px;
