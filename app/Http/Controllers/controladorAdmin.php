@@ -42,14 +42,19 @@ class controladorAdmin extends Controller {
             return $pdf->download('Gastos_' . $anio_seleccionado . '.pdf');
         }
 
+        $datos_seleccionados = [
+            'anio' => $anio_seleccionado,
+            'familia' => $familias,
+            'empresa' => $empresas
+        ];
 
         $datos = [
             'lista_cursos' => $lista_cursos,
             'tabla_gastos' => $tabla_gastos,
             'lista_familias' => $lista_familias,
-            'lista_empresas' => $lista_empresas
+            'lista_empresas' => $lista_empresas,
+            'datos_seleccionados' => $datos_seleccionados
         ];
-
         return view('admin/consultarGastosAnteriores', $datos);
     }
 

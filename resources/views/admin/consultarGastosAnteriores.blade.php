@@ -30,122 +30,188 @@ Consultar gastos anteriores
         <h3>Consultar Gastos Años Anteriores</h3>
         <form name="formCursos" action="consultarGastosAnteriores"  method="post">
             {{ csrf_field() }}
-            Curso: 
-            <select name="curso">
-                <?php
-                if (isset($lista_cursos)) {
-                    $contador = 0;
-                    foreach ($lista_cursos as $curso) {
-                        if ($contador == 0) {
-                            ?>
-                            <option selected value="<?php echo $curso->cod; ?>"><?php echo $curso->descripcion; ?></option>
-                            <?php
-                        } else {
-                            ?>
-                            <option value="<?php echo $curso->cod; ?>"><?php echo $curso->descripcion; ?></option>
-                            <?php
-                        }
-                        $contador++;
-                    }
-                }
-                ?>
-            </select><br><br>
-            Ciclo Formativo: 
-            <select name="familias">
-                <?php
-                if (isset($lista_familias)) {
-                    $contador = 0;
-                    foreach ($lista_familias as $familia) {
-                        if ($contador == 0) {
-                            ?>
-                            <option selected value="<?php echo $familia->id_curso; ?>"><?php echo $familia->id_curso; ?> -> <?php echo $familia->familia; ?></option>
-                            <?php
-                        } else {
-                            ?>
-                            <option value="<?php echo $familia->id_curso; ?>"><?php echo $familia->id_curso; ?> -> <?php echo $familia->familia; ?></option>
-                            <?php
-                        }
-                        $contador++;
-                    }
-                }
-                ?>
-            </select><br><br>
-            Empresas: 
-            <select name="empresas">
-                <?php
-                if (isset($lista_empresas)) {
-                    $contador = 0;
-                    foreach ($lista_empresas as $empresas) {
-                        if ($contador == 0) {
-                            ?>
-                            <option selected value="<?php echo $empresas->cif; ?>"><?php echo $empresas->nombre_empresa; ?></option>
-                            <?php
-                        } else {
-                            ?>
-                            <option value="<?php echo $empresas->cif; ?>"><?php echo $empresas->nombre_empresa; ?></option>
-                            <?php
-                        }
-                        $contador++;
-                    }
-                }
-                ?>
-            </select><br><br>
-            <input type="submit" id="verTabla" class="btn btn-primary" name="verTabla" value="Ver Gastos"/>
-            <br><br>
-
             <?php
-            if (isset($tabla_gastos)) {
-                if (count($tabla_gastos) > 0) {
+            if (isset($_POST['verTabla'])) {
+                $submitbutton = $_POST['verTabla'];
+                if ($submitbutton) {
+                    if (isset($datos_seleccionados)) {
+                        $ano = $datos_seleccionados['anio'];
+                        $familia = $datos_seleccionados['familia'];
+                        $empresa = $datos_seleccionados['empresa'];
+                    }
                     ?>
-                    <input type="submit" id="exportarPDF" class="btn btn-primary" name="exportarPDF" value="Exportar PDF"/>     
-                    <div class="row">
-                        <div class="col-sm col-md">
-                            <div class="table-responsive ">
-                                <table class="table table-striped  table-hover table-bordered" style="text-align: center;" id="tabla">
-                                    <thead class="thead-dark">
-                                    <th>Ciclo</th>
-                                    <th>DNI</th>
-                                    <th>Nombre</th>
-                                    <th>Apellidos</th>
-                                    <th>Gastos</th>
-                                    <th>CIF</th>
-                                    <th>Empresa</th>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $total_alumnos = 0;
-                                        $total_gastos = 0;
-                                        foreach ($tabla_gastos as $gastos) {
+                    Curso: 
+                    <select name="curso">
+                        <?php
+                        if (isset($lista_cursos)) {
+                            foreach ($lista_cursos as $curso) {
+                                if ($curso->cod == $ano) {
+                                    ?>
+                                    <option selected value="<?php echo $curso->cod; ?>"><?php echo $curso->descripcion; ?></option>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <option value="<?php echo $curso->cod; ?>"><?php echo $curso->descripcion; ?></option>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
+                    </select><br><br>
+                    Ciclo Formativo: 
+                    <select name="familias">
+                        <?php
+                        if (isset($lista_familias)) {
+                            foreach ($lista_familias as $familia) {
+                                if ($familia->id_curso == $familia) {
+                                    ?>
+                                    <option selected value="<?php echo $familia->id_curso; ?>"><?php echo $familia->id_curso; ?> -> <?php echo $familia->familia; ?></option>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <option value="<?php echo $familia->id_curso; ?>"><?php echo $familia->id_curso; ?> -> <?php echo $familia->familia; ?></option>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
+                    </select><br><br>
+                    Empresas: 
+                    <select name="empresas">
+                        <?php
+                        if (isset($lista_empresas)) {
+                            foreach ($lista_empresas as $empresas) {
+                                if ($empresas->cif == $empresa) {
+                                    ?>
+                                    <option selected value="<?php echo $empresas->cif; ?>"><?php echo $empresas->nombre_empresa; ?></option>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <option value="<?php echo $empresas->cif; ?>"><?php echo $empresas->nombre_empresa; ?></option>
+                                    <?php
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    ?>
+                    Curso: 
+                    <select name="curso">
+                        <?php
+                        if (isset($lista_cursos)) {
+                            $contador = 0;
+                            foreach ($lista_cursos as $curso) {
+                                if ($contador == 0) {
+                                    ?>
+                                    <option selected value="<?php echo $curso->cod; ?>"><?php echo $curso->descripcion; ?></option>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <option value="<?php echo $curso->cod; ?>"><?php echo $curso->descripcion; ?></option>
+                                    <?php
+                                }
+                                $contador++;
+                            }
+                        }
+                        ?>
+                    </select><br><br>
+                    Ciclo Formativo: 
+                    <select name="familias">
+                        <?php
+                        if (isset($lista_familias)) {
+                            $contador = 0;
+                            foreach ($lista_familias as $familia) {
+                                if ($contador == 0) {
+                                    ?>
+                                    <option selected value="<?php echo $familia->id_curso; ?>"><?php echo $familia->id_curso; ?> -> <?php echo $familia->familia; ?></option>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <option value="<?php echo $familia->id_curso; ?>"><?php echo $familia->id_curso; ?> -> <?php echo $familia->familia; ?></option>
+                                    <?php
+                                }
+                                $contador++;
+                            }
+                        }
+                        ?>
+                    </select><br><br>
+                    Empresas: 
+                    <select name="empresas">
+                        <?php
+                        if (isset($lista_empresas)) {
+                            $contador = 0;
+                            foreach ($lista_empresas as $empresas) {
+                                if ($contador == 0) {
+                                    ?>
+                                    <option selected value="<?php echo $empresas->cif; ?>"><?php echo $empresas->nombre_empresa; ?></option>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <option value="<?php echo $empresas->cif; ?>"><?php echo $empresas->nombre_empresa; ?></option>
+                                    <?php
+                                }
+                                $contador++;
+                            }
+                        }
+                    }
+                    ?>
+                </select><br><br>
+                <input type="submit" id="verTabla" class="btn btn-primary" name="verTabla" value="Ver Gastos"/>
+                <br><br>
+
+                <?php
+                if (isset($tabla_gastos)) {
+                    if (count($tabla_gastos) > 0) {
+                        ?>
+                        <input type="submit" id="exportarPDF" class="btn btn-primary" name="exportarPDF" value="Exportar PDF"/>     
+                        <div class="row">
+                            <div class="col-sm col-md">
+                                <div class="table-responsive ">
+                                    <table class="table table-striped  table-hover table-bordered" style="text-align: center;" id="tabla">
+                                        <thead class="thead-dark">
+                                        <th>Ciclo</th>
+                                        <th>DNI</th>
+                                        <th>Nombre</th>
+                                        <th>Apellidos</th>
+                                        <th>Gastos</th>
+                                        <th>CIF</th>
+                                        <th>Empresa</th>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $total_alumnos = 0;
+                                            $total_gastos = 0;
+                                            foreach ($tabla_gastos as $gastos) {
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $gastos->cursos_id_curso; ?></td>
+                                                    <td><?php echo $gastos->dni; ?></td>
+                                                    <td><?php echo $gastos->nombre; ?></td>
+                                                    <td><?php echo $gastos->apellidos; ?></td>
+                                                    <td><?php echo $gastos->gastos; ?> €</td>
+                                                    <td><?php echo $gastos->cif; ?></td>
+                                                    <td><?php echo $gastos->nombre_empresa; ?></td>
+                                                </tr>
+                                                <?php
+                                                $total_alumnos++;
+                                                $total_gastos += $gastos->gastos;
+                                            }
                                             ?>
                                             <tr>
-                                                <td><?php echo $gastos->cursos_id_curso; ?></td>
-                                                <td><?php echo $gastos->dni; ?></td>
-                                                <td><?php echo $gastos->nombre; ?></td>
-                                                <td><?php echo $gastos->apellidos; ?></td>
-                                                <td><?php echo $gastos->gastos; ?> €</td>
-                                                <td><?php echo $gastos->cif; ?></td>
-                                                <td><?php echo $gastos->nombre_empresa; ?></td>
+                                                <td><b>TOTAL ALUMNOS</b></td>
+                                                <td colspan="2"><?php echo $total_alumnos; ?></td>
+                                                <td><b>TOTAL GASTOS</b></td>
+                                                <td colspan="3"><?php echo $total_gastos; ?> €</td>
                                             </tr>
-                                            <?php
-                                            $total_alumnos++;
-                                            $total_gastos += $gastos->gastos;
-                                        }
-                                        ?>
-                                        <tr>
-                                            <td><b>TOTAL ALUMNOS</b></td>
-                                            <td colspan="2"><?php echo $total_alumnos; ?></td>
-                                            <td><b>TOTAL GASTOS</b></td>
-                                            <td colspan="3"><?php echo $total_gastos; ?> €</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <?php
+                        <?php
+                    }
                 }
-            }
-            ?>
+                ?>
         </form>
     </div>
     @endsection

@@ -2453,7 +2453,7 @@ class Conexion {
                     ->join('matriculados', $cursoAnteriorSeleccionado . '.matriculados.usuarios_dni', '=', $cursoAnteriorSeleccionado . '.usuarios.dni')
                     ->join('empresas', $cursoAnteriorSeleccionado . '.empresas.id', '=', $cursoAnteriorSeleccionado . '.practicas.empresas_id')
                     ->where($cursoAnteriorSeleccionado . '.matriculados.cursos_id_curso', $familias)
-                    ->orWhere($cursoAnteriorSeleccionado . '.empresas.cif', $empresas)
+                    ->Where($cursoAnteriorSeleccionado . '.empresas.cif', $empresas)
                     ->select($cursoAnteriorSeleccionado . '.matriculados.cursos_id_curso', $cursoAnteriorSeleccionado . '.usuarios.dni', $cursoAnteriorSeleccionado . '.usuarios.nombre', $cursoAnteriorSeleccionado . '.usuarios.apellidos', $cursoAnteriorSeleccionado . '.practicas.gastos', $cursoAnteriorSeleccionado . '.empresas.cif', $cursoAnteriorSeleccionado . '.empresas.nombre_empresa')
                     ->groupBy($cursoAnteriorSeleccionado . '.matriculados.cursos_id_curso', $cursoAnteriorSeleccionado . '.usuarios.dni', $cursoAnteriorSeleccionado . '.usuarios.nombre', $cursoAnteriorSeleccionado . '.usuarios.apellidos', $cursoAnteriorSeleccionado . '.practicas.gastos', $cursoAnteriorSeleccionado . '.empresas.cif', $cursoAnteriorSeleccionado . '.empresas.nombre_empresa')
                     ->get();
