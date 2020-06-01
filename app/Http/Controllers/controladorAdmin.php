@@ -44,7 +44,7 @@ class controladorAdmin extends Controller {
 
         $datos_seleccionados = [
             'anio' => $anio_seleccionado,
-            'familia' => $familias,
+            'ciclo' => $familias,
             'empresa' => $empresas
         ];
 

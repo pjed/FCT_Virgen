@@ -36,7 +36,7 @@ Consultar gastos anteriores
                 if ($submitbutton) {
                     if (isset($datos_seleccionados)) {
                         $ano = $datos_seleccionados['anio'];
-                        $familia = $datos_seleccionados['familia'];
+                        $ciclo = $datos_seleccionados['ciclo'];
                         $empresa = $datos_seleccionados['empresa'];
                     }
                     ?>
@@ -63,7 +63,7 @@ Consultar gastos anteriores
                         <?php
                         if (isset($lista_familias)) {
                             foreach ($lista_familias as $familia) {
-                                if ($familia->id_curso == $familia) {
+                                if ($familia->id_curso == $ciclo) {
                                     ?>
                                     <option selected value="<?php echo $familia->id_curso; ?>"><?php echo $familia->id_curso; ?> -> <?php echo $familia->familia; ?></option>
                                     <?php
