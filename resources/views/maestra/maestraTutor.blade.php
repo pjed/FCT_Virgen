@@ -41,11 +41,6 @@ $rol1 = session()->get('rol');
     <div class="wrapper">
         <nav id="sidebar" class="bg-dark">
             <ul class="list-unstyled components">
-                <li>
-                    <a href="bienvenidaT">
-                        <img id="logotipo" class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
-                    </a>
-                </li>
                 <li><a  href="bienvenidaT">Home</a></li>
                 <li><a href="ExtraerDocT">Generar Documentos</a> </li>
                 <li><a href="consultarGastosAlumno">Consultar Gastos Alumno</a></li>
@@ -88,7 +83,7 @@ $rol1 = session()->get('rol');
                     <div class="col-6 container">
                         <div class="row h-100 justify-content-center align-items-center">
                             <a class="col-1 align-items-center" href="bienvenidaT">
-                                <img id="logotipo" class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                                <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                             </a>
                         </div>
                     </div>

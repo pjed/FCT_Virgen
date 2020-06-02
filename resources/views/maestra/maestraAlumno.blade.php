@@ -43,11 +43,6 @@ $rol1 = session()->get('rol');
             <nav id="sidebar" class="bg-dark">
                 <ul class="list-unstyled components">
                     <li>
-                        <a href="bienvenidaAl">
-                            <img id="logotipo" class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
-                        </a>
-                    </li>
-                    <li>
                         <a  href="bienvenidaAl">Home</a>
                     </li>
                     <li>
@@ -83,7 +78,7 @@ $rol1 = session()->get('rol');
                         <div class="col-6 container">
                             <div class="row h-100 justify-content-center align-items-center">
                                 <a class="col-1 align-items-center" href="bienvenidaAl">
-                                    <img id="logotipo" class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                                    <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                                 </a>
                             </div>
                         </div>

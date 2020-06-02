@@ -43,11 +43,6 @@ $rol1 = session()->get('rol');
         <div class="wrapper">
             <nav id="sidebar" class="bg-dark">
                 <ul class="list-unstyled components">
-                    <li>
-                        <a href="bienvenidaAd">
-                            <img id="logotipo" class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
-                        </a>
-                    </li>
                     <li><a  href="bienvenidaAd">Home</a></li>
                     <li>
                         <a href="#GestionarBBDD" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gestionar BBDD</a>
@@ -98,7 +93,7 @@ $rol1 = session()->get('rol');
                         <div class="col-6 container">
                             <div class="row h-100 justify-content-center align-items-center">
                                 <a class="col-1 align-items-center" href="bienvenidaAd">
-                                    <img id="logotipo" class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                                    <img class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
                                 </a>
                             </div>
                         </div>
