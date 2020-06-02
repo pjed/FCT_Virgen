@@ -70,14 +70,26 @@ $rol1 = session()->get('rol');
                 <!-- Page Content Holder --> 
                 <header>
                     <nav class="navbar navbar-default">
-                        <div class="navbar-header">
-                            <button class="btn btn-dark" type="button" id="sidebarCollapse" class="btn btn-info">
-                                <i class="fas fa-align-justify"></i>
-                            </button>
+                        <div class="col-1 container">
+                            <div class="row h-100 justify-content-center align-items-center">
+                                <div class="navbar-header col">
+                                    <button class="btn btn-dark" type="button" id="sidebarCollapse" class="btn btn-info">
+                                        <i class="fas fa-align-justify"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <ul class="navbar-nav navbar-right">
-                            <li>
-                                <form name="perfil" action="perfilAd1"  method="post">
+                        <div class="col-2 container"></div>
+                        <div class="col-6 container">
+                            <div class="row h-100 justify-content-center align-items-center">
+                                <a class="col-1 align-items-center" href="bienvenidaAl">
+                                    <img id="logotipo" class="logotipo" src="{{asset ('images/logo.svg')}}" alt="logotipo">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-1 container">
+                            <div class="row h-100 justify-content-center align-items-center">
+                                <form class="col" name="perfil" action="perfilAl1"  method="post">
                                     {{ csrf_field() }}  
                                     <?php
                                     $usuario = session()->get('usu');
@@ -91,14 +103,16 @@ $rol1 = session()->get('rol');
                                         <img alt="perfil" class="miniatura_perfil" src="<?php echo $foto ?>"/>
                                     </button>
                                 </form>
-                            </li>
-                            <li>  
-                                <form name="cerrarSesion" action="cerrarSesion"  method="post">
+                            </div>
+                        </div>
+                        <div class="col-1 container">
+                            <div class="row h-100 justify-content-center align-items-center">
+                                <form class="col" name="cerrarSesion" action="cerrarSesion"  method="post">
                                     {{ csrf_field() }}  
                                     <button type="submit" class="cerrarSesion" name="cerrarSesion" value=""></button>
                                 </form>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
                     </nav>
                 </header>
                 <main>
