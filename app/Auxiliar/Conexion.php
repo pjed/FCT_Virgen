@@ -1280,6 +1280,15 @@ class Conexion {
                 ->orWhere('familia', 'like', '%' . $keywords . '%')
                 ->select('id_curso AS id', 'descripcion', 'ano_academico AS anioAcademico', 'familia', 'horas')
                 ->paginate(8);
+        if ($v[0] == []) {
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
+                    No se ha encontrado nada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                </div>';
+            $v = null;
+        }
         return $v;
     }
 
@@ -1290,7 +1299,6 @@ class Conexion {
      * @return type
      */
     static function buscarPracticas($keywords) {
-        $v = [];
         $tutor = session()->get('usu');
         foreach ($tutor as $t) {
             $dni = $t['dni'];
@@ -1307,6 +1315,15 @@ class Conexion {
                 ->orWhere('empresas.cif', 'like', '%' . $keywords . '%')
                 ->select('practicas.id AS idPractica', 'practicas.empresas_id AS idEmpresa', 'practicas.usuarios_dni AS dniAlumno', 'practicas.cod_proyecto AS codProyecto', 'practicas.responsables_id AS idResponsable', 'practicas.gastos AS gasto', 'practicas.fecha_inicio AS fechaInicio', 'practicas.fecha_fin AS fechaFin', 'practicas.apto AS apto')
                 ->paginate(8);
+        if ($v[0] == []) {
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
+                    No se ha encontrado nada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                </div>';
+            $v = null;
+        }
         return $v;
     }
 
@@ -1317,12 +1334,20 @@ class Conexion {
      * @return type
      */
     static function buscarResponsables($keywords) {
-        $v = [];
         $v = responsable::where('empresa_id', 'like', '%' . $keywords . '%')
                 ->orWhere('nombre', 'like', '%' . $keywords . '%')
                 ->orWhere('apellidos', 'like', '%' . $keywords . '%')
                 ->orWhere('email', 'like', '%' . $keywords . '%')
                 ->paginate(8);
+        if ($v[0] == []) {
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
+                    No se ha encontrado nada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                </div>';
+            $v = null;
+        }
         return $v;
     }
 
@@ -1334,7 +1359,6 @@ class Conexion {
      * @return type
      */
     static function buscarGastoAlumnoComida($keywords, $dniAlumno) {
-        $v = [];
         $v = \DB::table('usuarios')
                 ->where('usuarios.dni', $dniAlumno)
                 ->where('gastos.tipo', 0)
@@ -1343,6 +1367,15 @@ class Conexion {
                 ->join('comidas', 'comidas.id', '=', 'gastos.comidas_id')
                 ->select('gastos.id AS idGasto', 'comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto')
                 ->paginate(8);
+        if ($v[0] == []) {
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
+                    No se ha encontrado nada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                </div>';
+            $v = null;
+        }
         return $v;
     }
 
@@ -1354,7 +1387,6 @@ class Conexion {
      * @return type
      */
     static function buscarGastoAdminComida($keywords, $dniAlumno) {
-        $v = [];
         $v = \DB::table('usuarios')
                 ->where('usuarios.dni', $dniAlumno)
                 ->where('gastos.tipo', 0)
@@ -1363,6 +1395,15 @@ class Conexion {
                 ->join('comidas', 'comidas.id', '=', 'gastos.comidas_id')
                 ->select('gastos.id AS idGasto', 'comidas.id AS id', 'comidas.importe AS importe', 'comidas.fecha AS fecha', 'comidas.foto AS foto')
                 ->paginate(8);
+        if ($v[0] == []) {
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
+                    No se ha encontrado nada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                </div>';
+            $v = null;
+        }
         return $v;
     }
 
@@ -1373,11 +1414,19 @@ class Conexion {
      * @return type
      */
     static function buscarEmpresas($keywords) {
-        $v = [];
         $v = empresa::where('cif', 'like', '%' . $keywords . '%')
                 ->orWhere('nombre_empresa', 'like', '%' . $keywords . '%')
                 ->orWhere('localidad', 'like', '%' . $keywords . '%')
                 ->paginate(8);
+        if ($v[0] == []) {
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
+                    No se ha encontrado nada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                </div>';
+            $v = null;
+        }
         return $v;
     }
 
@@ -1388,7 +1437,6 @@ class Conexion {
      * @return type
      */
     static function buscarUsuarios($keywords) {
-        $v = [];
         $v = \DB::table('usuarios')
                 ->join('usuarios_roles', 'usuarios.dni', '=', 'usuarios_roles.usuario_dni')
                 ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
@@ -1396,6 +1444,15 @@ class Conexion {
                 ->orWhere('usuarios.email', 'like', '%' . $keywords . '%')
                 ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios_roles.rol_id AS rol_id', 'usuarios.foto AS foto', 'usuarios.activo AS activo')
                 ->paginate(8);
+        if ($v[0] == []) {
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
+                    No se ha encontrado nada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                </div>';
+            $v = null;
+        }
         return $v;
     }
 
@@ -1406,7 +1463,6 @@ class Conexion {
      * @return type
      */
     static function buscarAlumnos($keywords) {
-        $v = [];
         $v = \DB::table('matriculados')
                 ->join('usuarios', 'usuarios.dni', '=', 'matriculados.usuarios_dni')
                 ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
@@ -1414,6 +1470,15 @@ class Conexion {
                 ->orWhere('usuarios.email', 'like', '%' . $keywords . '%')
                 ->select('usuarios.dni AS dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.iban AS iban', 'usuarios.foto AS foto', 'matriculados.cursos_id_curso as curso', 'usuarios.activo AS activo')
                 ->paginate(8);
+        if ($v[0] == []) {
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
+                    No se ha encontrado nada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                </div>';
+            $v = null;
+        }
         return $v;
     }
 
@@ -1424,7 +1489,6 @@ class Conexion {
      * @return type
      */
     static function buscarTutores($keywords) {
-        $v = [];
         $v = \DB::table('tutores')
                 ->join('usuarios', 'usuarios.dni', '=', 'tutores.usuarios_dni')
                 ->where('usuarios.nombre', 'like', '%' . $keywords . '%')
@@ -1432,6 +1496,15 @@ class Conexion {
                 ->orWhere('usuarios.email', 'like', '%' . $keywords . '%')
                 ->select('tutores.idtutores AS idtutores', 'tutores.cursos_id_curso AS cursos_id_curso', 'tutores.usuarios_dni AS usuarios_dni', 'usuarios.nombre AS nombre', 'usuarios.apellidos AS apellidos', 'usuarios.email AS email', 'usuarios.telefono AS telefono', 'usuarios.movil AS movil', 'usuarios.domicilio AS domicilio', 'usuarios.foto AS foto', 'usuarios.activo AS activo')
                 ->paginate(8);
+        if ($v[0] == []) {
+            echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
+                    No se ha encontrado nada.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                </div>';
+            $v = null;
+        }
         return $v;
     }
 

@@ -20,7 +20,13 @@ class controladorAlumno extends Controller {
             $dniAlumno = $u['dni'];
         }
         $l = Conexion::buscarGastoAlumnoComida($keywords, $dniAlumno);
-        $datos = ['buscarGAC' => $l];
+        if ($l == null) {
+            $gastosAlumno = Conexion::listarGastosComidasPagination($dniAlumno);
+            $datos = ['buscarGAC' => null,
+                'gastosAlumno' => $gastosAlumno];
+        } else {
+            $datos = ['buscarGAC' => $l];
+        }
         return view('alumno/gestionarGastosComida', $datos);
     }
 
@@ -67,14 +73,14 @@ class controladorAlumno extends Controller {
 
             Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $usuarios_dni, $comidas_id, $transporte_id);
         }
-        
+
         $usuario = session()->get('usu');
         foreach ($usuario as $u) {
             $usuarios_dni = $u['dni'];
         }
         $gastoTotal = Conexion::obtenerTotalGastosAlumnoParticular($usuarios_dni);
         Conexion::ModificarPracticaGastoTotal($usuarios_dni, $gastoTotal);
-        
+
         return view('alumno/crearGastoComida');
     }
 
@@ -141,14 +147,14 @@ class controladorAlumno extends Controller {
 
             Conexion::ingresarGastoTablaGastos($desplazamiento, $tipo, $usuarios_dni, $comidas_id, $transporte_id);
         }
-        
+
         $usuario = session()->get('usu');
         foreach ($usuario as $u) {
             $usuarios_dni = $u['dni'];
         }
         $gastoTotal = Conexion::obtenerTotalGastosAlumnoParticular($usuarios_dni);
         Conexion::ModificarPracticaGastoTotal($usuarios_dni, $gastoTotal);
-        
+
         return view('alumno/crearGastoTransporte');
     }
 

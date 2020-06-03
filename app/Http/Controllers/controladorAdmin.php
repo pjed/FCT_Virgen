@@ -19,7 +19,7 @@ class controladorAdmin extends Controller {
         $empresas = $req->get('empresas');
         $tabla_gastos = array();
         $lista_cursos = Conexion::listarCursosAnteriores();
-        
+
         if ($anio_seleccionado != "0") {
             $lista_empresas = Conexion::listarEmpresasAnteriores($anio_seleccionado);
             $lista_familias = Conexion::listarFamiliasAnteriores($anio_seleccionado);
@@ -91,14 +91,26 @@ class controladorAdmin extends Controller {
         if ($propio == 0) {
             $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
         }
-        $datos = [
-            'l1' => $l1,
-            'l2' => $l2,
-            'buscarGAdC' => $l,
-            'gc' => null,
-            'gtp' => $gtp,
-            'gtc' => $gtc,
-        ];
+        if ($l == null) {
+            $gc = Conexion::listarGastosComidasPagination($dniAlumno);
+            $datos = [
+                'l1' => $l1,
+                'l2' => $l2,
+                'buscarGAdC' => null,
+                'gc' => $gc,
+                'gtp' => $gtp,
+                'gtc' => $gtc,
+            ];
+        } else {
+            $datos = [
+                'l1' => $l1,
+                'l2' => $l2,
+                'buscarGAdC' => $l,
+                'gc' => null,
+                'gtp' => $gtp,
+                'gtc' => $gtc,
+            ];
+        }
         return view('admin/consultarGastos', $datos);
     }
 

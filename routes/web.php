@@ -214,11 +214,21 @@ Route::group(['middleware' => ['admin']], function() {
         $l = Conexion::buscarTutores($keywords);
         $listaCiclos = Conexion::listaCursos();
         $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
-        $datos = [
-            'buscarT' => $l,
-            'listaCiclos' => $listaCiclos,
-            'listaCiclosSinTutor' => $listaCiclosSinTutor
-        ];
+        if ($l == null) {
+            $listaTutores = Conexion::listarTutores();
+            $datos = [
+                'buscarT' => null,
+                'listaTutores' => $listaTutores,
+                'listaCiclos' => $listaCiclos,
+                'listaCiclosSinTutor' => $listaCiclosSinTutor
+            ];
+        } else {
+            $datos = [
+                'buscarT' => $l,
+                'listaCiclos' => $listaCiclos,
+                'listaCiclosSinTutor' => $listaCiclosSinTutor
+            ];
+        }
         return view('admin/gestionarTutores', $datos);
     })->name('buscargestionarTutores');
     Route::get('buscargestionarUsuarios', function () {
@@ -226,27 +236,55 @@ Route::group(['middleware' => ['admin']], function() {
         $l = Conexion::buscarUsuarios($keywords);
         $listaCiclos = Conexion::listaCursos();
         $listaCiclosSinTutor = Conexion::listarCiclosSinTutor();
-        $datos = [
-            'buscarU' => $l,
-            'listaCiclos' => $listaCiclos,
-            'listaCiclosSinTutor' => $listaCiclosSinTutor
-        ];
+        if ($l == null) {
+            $listaUsuarios = Conexion::listarUsuarios();
+            $datos = [
+                'buscarU' => null,
+                'listaUsuarios' => $listaUsuarios,
+                'listaCiclos' => $listaCiclos,
+                'listaCiclosSinTutor' => $listaCiclosSinTutor
+            ];
+        } else {
+            $datos = [
+                'buscarU' => $l,
+                'listaCiclos' => $listaCiclos,
+                'listaCiclosSinTutor' => $listaCiclosSinTutor
+            ];
+        }
         return view('admin/gestionarUsuarios', $datos);
     })->name('buscargestionarUsuarios');
     Route::get('buscargestionarAlumnos', function () {
         $keywords = session()->get('keywords');
         $l = Conexion::buscarAlumnos($keywords);
         $listaCiclos = Conexion::listaCursos();
-        $datos = [
-            'buscarA' => $l,
-            'listaCiclos' => $listaCiclos
-        ];
+        if ($l == null) {
+            $listaAlumnos = Conexion::listarAlumnos();
+            $datos = [
+                'buscarA' => null,
+                'listaAlumnos' => $listaAlumnos,
+                'listaCiclos' => $listaCiclos
+            ];
+        } else {
+            $datos = [
+                'buscarA' => $l,
+                'listaCiclos' => $listaCiclos
+            ];
+        }
         return view('admin/gestionarAlumnos', $datos);
     })->name('buscargestionarAlumnos');
     Route::get('buscargestionarCursos', function () {
         $keywords = session()->get('keywords');
         $l = Conexion::buscarCursos($keywords);
-        return view('admin/gestionarCursos', ['buscarC' => $l]);
+        if ($l == null) {
+            $listaCursos = Conexion::listaCursosPagination();
+            $datos = [
+                'buscarC' => null,
+                'l1' => $listaCursos
+            ];
+        } else {
+            $datos = ['buscarC' => $l];
+        }
+        return view('admin/gestionarCursos', $datos);
     })->name('buscargestionarCursos');
     Route::get('perfilAd', function () {
         return view('admin/perfilAdmin');

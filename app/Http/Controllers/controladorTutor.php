@@ -39,13 +39,24 @@ class controladorTutor extends Controller {
             $gtp = Conexion::listarGastosTransportesPropiosPagination($dniAlumno);
         }
         $l = Conexion::buscarGastoAlumnoComida($keywords, $dniAlumno);
-        $datos = [
-            'l2' => $l2,
-            'buscarGTC' => $l,
-            'gc' => null,
-            'gtp' => $gtp,
-            'gtc' => $gtc
-        ];
+        if ($l == null) {
+            $gc = Conexion::listarGastosComidasPagination($dniAlumno);
+            $datos = [
+                'l2' => $l2,
+                'buscarGTC' => null,
+                'gc' => $gc,
+                'gtp' => $gtp,
+                'gtc' => $gtc,
+            ];
+        } else {
+            $datos = [
+                'l2' => $l2,
+                'buscarGTC' => $l,
+                'gc' => null,
+                'gtp' => $gtp,
+                'gtc' => $gtc
+            ];
+        }
         return view('tutor/consultarGastosAlumno', $datos);
     }
 
@@ -58,9 +69,16 @@ class controladorTutor extends Controller {
     public function buscarResponsables(Request $req) {
         $keywords = $req->get('keywords');
         $l = Conexion::buscarResponsables($keywords);
-        $l1 = Conexion::listarEmpresas();
-        $datos = ['buscarR' => $l,
-            'l1' => $l1];
+        $listarEmpresas = Conexion::listarEmpresas();
+        if ($l == null) {
+            $listarResponsables = Conexion::listarResponsablesPagination();
+            $datos = ['buscarR' => null,
+                'lu' => $listarResponsables,
+                'l1' => $listarEmpresas];
+        } else {
+            $datos = ['buscarR' => $l,
+                'l1' => $listarEmpresas];
+        }
         return view('tutor/gestionarResponsable', $datos);
     }
 
@@ -73,18 +91,29 @@ class controladorTutor extends Controller {
     public function buscarPracticas(Request $req) {
         $keywords = $req->get('keywords');
         $l = Conexion::buscarPracticas($keywords);
-        $l1 = Conexion::listarEmpresas();
-        $l2 = Conexion::listarAlumnoPorTutor();
-        $l3 = Conexion::listarResponsables();
-        $l4 = Conexion::listarAlumnoPorTutorSinPracticas();
-
-        $datos = [
-            'buscarP' => $l,
-            'l1' => $l1,
-            'l2' => $l2,
-            'l3' => $l3,
-            'l4' => $l4
-        ];
+        $listarEmpresas = Conexion::listarEmpresas();
+        $listarAlumnoPorTutor = Conexion::listarAlumnoPorTutor();
+        $listarResponsables = Conexion::listarResponsables();
+        $listarAlumnoPorTutorSinPracticas = Conexion::listarAlumnoPorTutorSinPracticas();
+        if ($l == null) {
+            $listarPracticas = Conexion::listarPracticasPagination();
+            $datos = [
+                'buscarP' => null,
+                'lu' => $listarPracticas,
+                'l1' => $listarEmpresas,
+                'l2' => $listarAlumnoPorTutor,
+                'l3' => $listarResponsables,
+                'l4' => $listarAlumnoPorTutorSinPracticas
+            ];
+        } else {
+            $datos = [
+                'buscarP' => $l,
+                'l1' => $listarEmpresas,
+                'l2' => $listarAlumnoPorTutor,
+                'l3' => $listarResponsables,
+                'l4' => $listarAlumnoPorTutorSinPracticas
+            ];
+        }
         return view('tutor/gestionarPracticas', $datos);
     }
 
@@ -97,7 +126,14 @@ class controladorTutor extends Controller {
     public function buscarEmpresas(Request $req) {
         $keywords = $req->get('keywords');
         $l = Conexion::buscarEmpresas($keywords);
-        return view('tutor/gestionarEmpresa', ['buscarE' => $l]);
+        if ($l == null) {
+            $listarEmpresas = Conexion::listarEmpresasPagination();
+            $datos = ['buscarE' => null,
+                'lu' => $listarEmpresas];
+        } else {
+            $datos = ['buscarE' => $l];
+        }
+        return view('tutor/gestionarEmpresa', $datos);
     }
 
     /**
@@ -261,11 +297,11 @@ class controladorTutor extends Controller {
             }
             Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
         }
-        
+
         $dniAlumno = session()->get('dniAlumno');
         $gastoTotal = Conexion::obtenerTotalGastosAlumnoParticular($dniAlumno);
         Conexion::ModificarPracticaGastoTotal($dniAlumno, $gastoTotal);
-        
+
         $datos = controladorTutor::enviarConsultarGastoAlumno();
         return view('tutor/consultarGastosAlumno', $datos);
     }
