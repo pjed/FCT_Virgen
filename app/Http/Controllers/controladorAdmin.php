@@ -212,7 +212,7 @@ class controladorAdmin extends Controller {
 
         switch ($filename):
             case "datAlumnos.csv":
-                $sql = "CREATE TABLE IF NOT EXISTS `gestionfct`.datAlumnos (
+                $sql = "CREATE TABLE IF NOT EXISTS `gestionfct`.datalumnos (
                         `ALUMNO` INT(11) NULL DEFAULT NULL,
                         `APELLIDOS` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
                         `NOMBRE` VARCHAR(21) CHARACTER SET 'utf8' NULL DEFAULT NULL,
@@ -511,19 +511,19 @@ class controladorAdmin extends Controller {
 
         $sql = "/* Sentencia para insertar los alumnos matriculados que tienen matricula diferente de anulada y diferente de vacia*/
                 insert into usuarios(dni, nombre, apellidos, domicilio, email, telefono, movil, iban, created_at, updated_at)
-                select  datAlumnos.DNI, 
-                                datAlumnos.NOMBRE, 
-                        datAlumnos.APELLIDOS, 
-                        datAlumnos.DOMICILIO, 
-                        datAlumnos.EMAIL_ALUMNO, 
-                        datAlumnos.TELEFONO, 
-                        datAlumnos.MOVIL, 
+                select  datalumnos.DNI, 
+                                datalumnos.NOMBRE, 
+                        datalumnos.APELLIDOS, 
+                        datalumnos.DOMICILIO, 
+                        datalumnos.EMAIL_ALUMNO, 
+                        datalumnos.TELEFONO, 
+                        datalumnos.MOVIL, 
                         null as iban,  
                         CURRENT_TIMESTAMP, 
                         CURRENT_TIMESTAMP
-                from datmatriculas, datAlumnos
-                where datmatriculas.ALUMNO = datAlumnos.ALUMNO
-                and datAlumnos.ALUMNO = datmatriculas.ALUMNO 
+                from datmatriculas, datalumnos
+                where datmatriculas.ALUMNO = datalumnos.ALUMNO
+                and datalumnos.ALUMNO = datmatriculas.ALUMNO 
                 and datmatriculas.ESTADOMATRICULA <> 'Anulada'
                 and datmatriculas.ESTADOMATRICULA <> '';";
         try {
@@ -602,10 +602,10 @@ class controladorAdmin extends Controller {
 
         $sql = "/* Sentencia para insertar los roles de los alumnos*/
                 insert into usuarios_roles(id, rol_id, usuario_dni, created_at, updated_at)
-                select null, 3 as rol_id, datAlumnos.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
-                from datmatriculas, datAlumnos
-                where datmatriculas.ALUMNO = datAlumnos.ALUMNO
-                and datAlumnos.ALUMNO = datmatriculas.ALUMNO and datmatriculas.ESTADOMATRICULA <> 'Anulada'
+                select null, 3 as rol_id, datalumnos.DNI, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+                from datmatriculas, datalumnos
+                where datmatriculas.ALUMNO = datalumnos.ALUMNO
+                and datalumnos.ALUMNO = datmatriculas.ALUMNO and datmatriculas.ESTADOMATRICULA <> 'Anulada'
                 and datmatriculas.ESTADOMATRICULA <> '';";
         try {
             \DB::connection()->getPdo()->exec($sql);
@@ -648,9 +648,9 @@ class controladorAdmin extends Controller {
 
         $sql = "/* Sentencia para dar de alta los alumnos en los cursos que estan matriculados */
                 insert into matriculados(idmatriculados, usuarios_dni, cursos_id_curso, created_at, updated_at)
-                select null, datAlumnos.DNI, datmatriculas.GRUPO, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
-                from datAlumnos, datmatriculas
-                where datAlumnos.ALUMNO = datmatriculas.ALUMNO
+                select null, datalumnos.DNI, datmatriculas.GRUPO, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+                from datalumnos, datmatriculas
+                where datalumnos.ALUMNO = datmatriculas.ALUMNO
                 and datmatriculas.ESTADOMATRICULA <> 'Anulada'
                 and datmatriculas.ESTADOMATRICULA <> '';";
         try {
