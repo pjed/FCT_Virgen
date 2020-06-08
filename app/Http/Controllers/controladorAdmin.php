@@ -816,6 +816,9 @@ class controladorAdmin extends Controller {
 
             //Método que añade las FKS a la BBDD gestionfct
             $this->AddFKStoBBDD($req);
+            
+            //Eliminar archivos CSV despues de la importacion
+            $this->BorrarArchivosCSV($req);
 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Archivos CSV importados correctamente.
