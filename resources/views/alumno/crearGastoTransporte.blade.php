@@ -1,4 +1,5 @@
 <?php
+use App\Auxiliar\Conexion;
 $usu = session()->get('usu');
 foreach ($usu as $value) {
     $dniAlumno = $value['dni'];
@@ -45,7 +46,7 @@ Crear gasto transporte
                     <input type="radio" name="tipoT" id="colectivo" value="Colectivo" onclick="handleClick(this);">
                     <label for="colectivo">Colectivo</label>
                 </div>
-                @if($gtp = 0)
+                @if($gtp[0] == [])
                 <div>
                     <input type="radio" name="tipoT" id="propio" value="Propio" onclick="handleClick(this);">
                     <label for="propio">Propio</label>
