@@ -1023,7 +1023,7 @@ class controladorAdmin extends Controller {
                       `descripcion` varchar(191) NOT NULL,
                       `ano_academico` varchar(9) NOT NULL,
                       `familia` varchar(100) NOT NULL,
-                      `horas` int(11) DEFAULT '400',
+                      `horas` int(11) NOT NULL DEFAULT 400,
                       `centros_cod` varchar(10) DEFAULT NULL,
                       `created_at` timestamp NULL DEFAULT NULL,
                       `updated_at` timestamp NULL DEFAULT NULL,
