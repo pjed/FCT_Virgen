@@ -267,10 +267,6 @@ class controladorTutor extends Controller {
         if (isset($_REQUEST['eliminarP'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
-            $importe = $req->get('precio');
-            if (file_exists($file) && $file != 'images/ticket.png') {
-                unlink($file);
-            }
             Conexion::borrarGastoTransportePropio($id, $idTransporte);
         }
 //            editar y borrar transporte colectivo
@@ -291,7 +287,6 @@ class controladorTutor extends Controller {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
             $file = $req->get('fotoUrl');
-            $importe = $req->get('precio');
             if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
