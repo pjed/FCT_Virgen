@@ -1123,6 +1123,7 @@ class controladorAdmin extends Controller {
                       `id` int(11) NOT NULL AUTO_INCREMENT,
                       `kms` int(11) NOT NULL,
                       `precio` double(8,2) NOT NULL,
+                      `n_dias` int(11) DEFAULT 0,
                       `created_at` timestamp NULL DEFAULT NULL,
                       `updated_at` timestamp NULL DEFAULT NULL,
                       `transportes_id` int(11) NOT NULL,
