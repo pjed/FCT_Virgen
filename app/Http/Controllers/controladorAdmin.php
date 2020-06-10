@@ -2244,7 +2244,7 @@ class controladorAdmin extends Controller {
             } else {
                 $alumnos_gastos = null;
             }
-
+            
             if ($alumnos_gastos != null) {
                 Documentos::GenerarGastosAlumnos($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
             } else {
