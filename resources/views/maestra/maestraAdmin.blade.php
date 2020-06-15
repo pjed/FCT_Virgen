@@ -89,7 +89,7 @@ $rol1 = session()->get('rol');
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2 container"></div>
+                        <div class="col-1 container"></div>
                         <div class="col-6 container">
                             <div class="row h-100 justify-content-center align-items-center">
                                 <a class="col-1 align-items-center" href="bienvenidaAd">
@@ -115,6 +115,7 @@ $rol1 = session()->get('rol');
                                 </form>
                             </div>
                         </div>
+                        <div class="col-1 container"></div>
                         <div class="col-1 container">
                             <div class="row h-100 justify-content-center align-items-center">
                                 <form class="col" name="cerrarSesion" action="cerrarSesion"  method="post">
