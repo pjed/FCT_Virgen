@@ -425,7 +425,7 @@ class controladorAdmin extends Controller {
                                 datunidades.CURSO as descripcion, 
                                 datunidades.ANNO as ano_academico,
                         datunidades.ESTUDIO as familia,  
-                        null as horas, 
+                        400 as horas, 
                                 13002691 as centro_cod, 
                         CURRENT_TIMESTAMP as created_at, 
                         CURRENT_TIMESTAMP as updated_at 
