@@ -2010,10 +2010,10 @@ class controladorAdmin extends Controller {
             $iban = $req->get("iban");
             $ciclo = $req->get("selectCiclo");
             $rol = 3;
-
-            if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+            if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null) {
                 $val = Conexion::existeUsuario_Dni($dni);
                 if ($val) {
+
                     Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
                     Conexion::insertarAlumnoTablaMatriculados($dni, $ciclo);
                 } else {
@@ -2086,7 +2086,7 @@ class controladorAdmin extends Controller {
             $ciclo = $req->get("selectCiclo");
             $rol = 2;
 
-            if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+            if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null) {
                 $val = Conexion::existeUsuario_Dni($dni);
                 if ($val) {
                     Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
