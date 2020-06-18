@@ -254,7 +254,7 @@ class controladorTutor extends Controller {
             if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoComida($id);
+            Conexion::borrarGastoComida($idGasto);
         }
 //            editar y borrar transporte propio
         if (isset($_REQUEST['editarP'])) {
@@ -267,7 +267,7 @@ class controladorTutor extends Controller {
         if (isset($_REQUEST['eliminarP'])) {
             $id = $req->get('ID');
             $idTransporte = $req->get('idTransporte');
-            Conexion::borrarGastoTransportePropio($id, $idTransporte);
+            Conexion::borrarGastoTransportePropio($idTransporte);
         }
 //            editar y borrar transporte colectivo
         if (isset($_REQUEST['editarC'])) {
@@ -290,7 +290,7 @@ class controladorTutor extends Controller {
             if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
+            Conexion::borrarGastoTransporteColectivo($idTransporte);
         }
 
         $dniAlumno = session()->get('dniAlumno');

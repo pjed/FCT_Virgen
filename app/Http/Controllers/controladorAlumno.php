@@ -188,7 +188,7 @@ class controladorAlumno extends Controller {
             if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoComida($id);
+            Conexion::borrarGastoComida($idGasto);
         }
 
         $gastoTotal = Conexion::obtenerTotalGastosAlumnoParticular($dniAlumno);
@@ -223,7 +223,7 @@ class controladorAlumno extends Controller {
         }
 
         if (isset($_REQUEST['eliminarP'])) {
-            Conexion::borrarGastoTransportePropio($id, $idTransporte);
+            Conexion::borrarGastoTransportePropio($idTransporte);
         }
 
         if (isset($_REQUEST['editarC'])) {
@@ -244,7 +244,7 @@ class controladorAlumno extends Controller {
             if (file_exists($file) && $file != 'images/ticket.png') {
                 unlink($file);
             }
-            Conexion::borrarGastoTransporteColectivo($id, $idTransporte);
+            Conexion::borrarGastoTransporteColectivo($idTransporte);
         }
         $gt = Conexion::listarGastosTransportes($dniAlumno);
         $colectivo = null;
