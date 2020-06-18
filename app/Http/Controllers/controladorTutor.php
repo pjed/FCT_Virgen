@@ -507,7 +507,7 @@ class controladorTutor extends Controller {
             }
         }
         $lu = Conexion::listarEmpresasPagination();
-        $datos = ['buscarP' => null,
+        $datos = ['buscarE' => null,
             'lu' => $lu];
         return view('tutor/gestionarEmpresa', $datos);
     }

@@ -195,7 +195,11 @@ class controladorAlumno extends Controller {
         Conexion::ModificarPracticaGastoTotal($dniAlumno, $gastoTotal);
 
         $gastosAlumno = Conexion::listarGastosComidasPagination($dniAlumno);
-        return view('alumno/gestionarGastosComida', ['gastosAlumno' => $gastosAlumno]);
+        $datos = [
+            'buscarGAC' => null,
+            'gastosAlumno' => $gastosAlumno
+        ];
+        return view('alumno/gestionarGastosComida', $datos);
     }
 
     /**
