@@ -72,23 +72,23 @@ Gestionar Empresa
                                                 {{ csrf_field() }}
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        CIF de la empresa:
+                                                        CIF de la empresa*:
                                                         <input type="text" class="form-control form-control-sm CIF" name="CIF" pattern="{9}" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Nombre de la empresa:
+                                                        Nombre de la empresa*:
                                                         <input type="text" class="form-control form-control-sm nombreEmpresa" name="nombreEmpresa" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
-                                                        Dirección de la empresa:
+                                                        Dirección de la empresa*:
                                                         <input type="text" class="form-control form-control-sm direccion" name="direccion" required/>
                                                     </label>                
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Localidad:
+                                                        Localidad de la empresa*:
                                                         <input type="text" class="form-control form-control-sm localidad" name="localidad" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
