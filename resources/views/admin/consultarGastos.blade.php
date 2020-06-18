@@ -205,7 +205,7 @@ Consultar Gastos Alumnos
                                     <input type="text" class="form-control form-control-sm form-control-md" name="donde" value="<?php echo $key->donde; ?>" readonly/>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="ID" value="<?php echo $key->idColectivos; ?>" />
                                 </td>
-                                <td><input type="number" step="0.01" min="0" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>"/></td>
+                                <td><input type="number" step="0.01" min="0" class="form-control form-control-sm" name="precio" value="<?php echo $key->precio; ?>" readonly/></td>
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $key->foto; ?>" />
                                     <a  href="<?php echo $key->foto; ?>" target="_blank"> <?php echo '<img alt="ticketGasto" class="foto_small" src="' . $key->foto . '"/>'; ?></a>
