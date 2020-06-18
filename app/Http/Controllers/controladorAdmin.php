@@ -1338,7 +1338,10 @@ class controladorAdmin extends Controller {
             Conexion::borrarCurso($id);
         }
         $l = Conexion::listaCursosPagination();
-        return view('admin/gestionarCursos', ['l1' => $l]);
+        $datos = [
+            'buscarC' => null,
+            'l1' => $l];
+        return view('admin/gestionarCursos', $datos);
     }
 
     /**
