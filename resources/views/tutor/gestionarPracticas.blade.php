@@ -49,10 +49,10 @@ Gestionar  Practicas
             <table class="table  table-sm  table-striped  table-hover table-bordered">
                 <thead class="thead-dark">
                     <tr>       
-                        <th>Nombre_Empresa</th>                      
-                        <th>Nombre_Alumno</th>
-                        <th>Cod_proyecto</th>                    
-                        <th>Nombre_Responsable</th>
+                        <th>Nombre Empresa</th>                      
+                        <th>Nombre Alumno</th>
+                        <th>Código proyecto</th>                    
+                        <th>Nombre Responsable</th>
                         <th>Gasto</th>
                         <th>Apto</th> 
                         <th>Fecha inicio</th>
@@ -107,7 +107,7 @@ Gestionar  Practicas
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Cod proyecto*:
+                                                        Código proyecto*:
                                                         <input type="text" id="codProyectoA" class="form-control form-control-sm" name="codProyecto" pattern="[0-9]{6}" required/>
                                                     </label>
                                                 </div>
@@ -197,7 +197,7 @@ Gestionar  Practicas
                             <td><input type="date" class="form-control form-control-sm form-control-md" name="fechaFin" value="<?php echo $key->fechaFin; ?>" readonly/></td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-primary" id="addPeriodo"  data-toggle="modal" data-target="#exampleModal2">
-                                    FTC
+                                    FCT
                                 </button>
                                 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
