@@ -816,7 +816,7 @@ class controladorAdmin extends Controller {
 
             //Método que añade las FKS a la BBDD gestionfct
             $this->AddFKStoBBDD($req);
-            
+
             //Eliminar archivos CSV despues de la importacion
             $this->BorrarArchivosCSV($req);
 
@@ -1733,12 +1733,18 @@ class controladorAdmin extends Controller {
             $movil = $req->get("movil");
 
             if ($tipoUsuario == "Administrador") {
-                $iban = "";
+                $iban = null;
                 $rol = 1;
-                if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+                if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null) {
                     $val = Conexion::existeUsuario_Dni($dni);
                     if ($val) {
                         Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Añadido con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
                     } else {
                         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Ya existe.
@@ -1758,15 +1764,21 @@ class controladorAdmin extends Controller {
             }
 
             if ($tipoUsuario == "Tutor") {
-                $iban = "";
+                $iban = null;
                 $ciclo = $req->get("selectCiclo");
                 $rol = 2;
 
-                if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+                if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null) {
                     $val = Conexion::existeUsuario_Dni($dni);
                     if ($val) {
                         Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
                         Conexion::insertarTutor($ciclo, $dni);
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Añadido con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
                     } else {
                         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Ya existe.
@@ -1790,11 +1802,17 @@ class controladorAdmin extends Controller {
                 $ciclo = $req->get("selectCiclo");
                 $rol = 3;
 
-                if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+                if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null) {
                     $val = Conexion::existeUsuario_Dni($dni);
                     if ($val) {
                         Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
                         Conexion::insertarAlumnoTablaMatriculados($dni, $ciclo);
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Añadido con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
                     } else {
                         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Ya existe.
@@ -1814,15 +1832,21 @@ class controladorAdmin extends Controller {
             }
 
             if ($tipoUsuario == "TutorAdministrador") {
-                $iban = "";
+                $iban = null;
                 $ciclo = $req->get("selectCiclo");
                 $rol = 4;
 
-                if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null && $movil != null) {
+                if ($dni != null && $nombre != null && $apellidos != null && $domicilio != null && $email != null) {
                     $val = Conexion::existeUsuario_Dni($dni);
                     if ($val) {
                         Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
                         Conexion::insertarTutor($ciclo, $dni);
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Añadido con exito.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                  </div>';
                     } else {
                         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Ya existe.
@@ -2247,7 +2271,7 @@ class controladorAdmin extends Controller {
             } else {
                 $alumnos_gastos = null;
             }
-            
+
             if ($alumnos_gastos != null) {
                 Documentos::GenerarGastosAlumnos($alumnos_gastos, $curso, $fecha_actual, $datos_centro, $datos_ciclo, $datos_tutor, $datos_director);
             } else {
