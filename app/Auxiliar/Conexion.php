@@ -138,7 +138,7 @@ class Conexion {
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al insertar.
+                    Error al insertar Usuario.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -2450,14 +2450,14 @@ class Conexion {
             \DB::insert('insert into matriculados (usuarios_dni, cursos_id_curso) values (?,?)', [$dni, $ciclo]);
 //            $p->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con éxito.
+                    Matriculado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al insertar usuario.
+                    Error al matricular.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -2476,7 +2476,7 @@ class Conexion {
             $t->updated_at = $updated_at;
             $t->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con éxito.
+                    Insertado tutor con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
