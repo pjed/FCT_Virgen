@@ -1052,7 +1052,7 @@ class Conexion {
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
-                    Clave duplicada.
+                    Error al insertar responsable.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1198,7 +1198,7 @@ class Conexion {
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
-                    Clave duplicada.
+                    Error al insertar la empresa.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
