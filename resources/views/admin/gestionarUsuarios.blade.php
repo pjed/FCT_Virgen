@@ -349,14 +349,14 @@ Gestionar usuarios
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $value->foto; ?>"/>
                                     <input type="text" class="form-control form-control-sm form-control-md " name="dni" value="<?php echo $value->dni; ?>" readonly/>
                                 </td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
-                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" maxlength=9 title="Introduzca un teléfono válido"/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" maxlength=9  title="Introduzca un teléfono válido"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" maxlength=9 title="Introduzca un teléfono válido" <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" maxlength=9  title="Introduzca un teléfono válido" <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
                                 <td>
-                                    <select class="sel" name="selectRol">
+                                    <select class="sel" name="selectRol" <?php if ($value->activo == 0) { ?> readonly <?php } ?>>
                                         <option value="1" <?php if ($value->rol_id == 1) { ?>selected<?php } ?>>Administrador</option>
                                         <option value="2" <?php if ($value->rol_id == 2) { ?>selected<?php } ?>>Tutor</option>
                                         <option value="3" <?php if ($value->rol_id == 3) { ?>selected<?php } ?>>Alumno</option>
@@ -393,16 +393,15 @@ Gestionar usuarios
                                 <td>
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $value->foto; ?>"/>
                                     <input type="text" class="form-control form-control-sm form-control-md " name="dni" value="<?php echo $value->dni; ?>" readonly/>
-                                    <input type="hidden" class="form-control form-control-sm form-control-md" name="iban" value="<?php echo $value->iban; ?>"/>
                                 </td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
-                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" maxlength=9 title="Introduzca un teléfono válido"/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" maxlength=9  title="Introduzca un teléfono válido"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" maxlength=9 title="Introduzca un teléfono válido" <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" maxlength=9  title="Introduzca un teléfono válido" <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
                                 <td>
-                                    <select class="sel" name="selectRol">
+                                    <select class="sel" name="selectRol" <?php if ($value->activo == 0) { ?> readonly <?php } ?>>
                                         <option value="1" <?php if ($value->rol_id == 1) { ?>selected<?php } ?>>Administrador</option>
                                         <option value="2" <?php if ($value->rol_id == 2) { ?>selected<?php } ?>>Tutor</option>
                                         <option value="3" <?php if ($value->rol_id == 3) { ?>selected<?php } ?>>Alumno</option>

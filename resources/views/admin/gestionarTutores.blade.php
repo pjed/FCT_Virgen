@@ -154,14 +154,14 @@ Gestionar tutores
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $value->foto; ?>"/>
                                     <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $value->usuarios_dni; ?>" readonly/>
                                 </td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
-                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" maxlength=9 title="Introduzca un teléfono válido"/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" maxlength=9  title="Introduzca un teléfono válido"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" maxlength=9 title="Introduzca un teléfono válido" <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" maxlength=9  title="Introduzca un teléfono válido" <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
                                 <td>
-                                    <select name="selectCiclo">
+                                    <select name="selectCiclo" <?php if ($value->activo == 0) { ?> readonly <?php } ?>>
                                         <option value="<?php echo $value->cursos_id_curso ?>" selected><?php echo $value->cursos_id_curso ?></option>
 
                                         <?php foreach ($listaCiclosSinTutor as $value1) { ?>
@@ -200,14 +200,14 @@ Gestionar tutores
                                     <input type="hidden" class="form-control form-control-sm form-control-md" name="fotoUrl" value="<?php echo $value->foto; ?>"/>
                                     <input type="text" class="form-control form-control-sm form-control-md" name="dni" value="<?php echo $value->usuarios_dni; ?>" readonly/>
                                 </td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required/></td>
-                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>"/></td>
-                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" maxlength=9  title="Introduzca un teléfono válido"/></td>
-                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" maxlength=9  title="Introduzca un teléfono válido"/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="nombre" value="<?php echo $value->nombre; ?>" required <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="apellidos" value="<?php echo $value->apellidos; ?>" required <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="email" class="form-control form-control-sm form-control-md" name="email" value="<?php echo $value->email; ?>" <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="text" class="form-control form-control-sm form-control-md" name="domicilio" value="<?php echo $value->domicilio; ?>" required <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="telefono" value="<?php echo $value->telefono; ?>" maxlength=9 title="Introduzca un teléfono válido" <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
+                                <td><input type="tel" class="form-control form-control-sm form-control-md" name="movil" value="<?php echo $value->movil; ?>" maxlength=9  title="Introduzca un teléfono válido" <?php if ($value->activo == 0) { ?> readonly <?php } ?>/></td>
                                 <td>
-                                    <select name="selectCiclo">
+                                    <select name="selectCiclo" <?php if ($value->activo == 0) { ?> readonly <?php } ?>>
                                         <option value="<?php echo $value->cursos_id_curso ?>" selected><?php echo $value->cursos_id_curso ?></option>
 
                                         <?php foreach ($listaCiclosSinTutor as $value1) { ?>
