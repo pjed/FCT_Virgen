@@ -1109,9 +1109,9 @@ class Conexion {
          $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
-            $p = responsable::where('empresa_id', $id)
+            $p = responsable::where('id', $id)
                     ->update([
-                'responsables_id' => null,
+                'empresa_id' => null,
                 'updated_at' => $updated_at
             ]);
             responsable::where('id', $id)->delete();
