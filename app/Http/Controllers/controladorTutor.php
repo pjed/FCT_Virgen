@@ -485,7 +485,7 @@ class controladorTutor extends Controller {
         }
         if (isset($_REQUEST['aniadir'])) {
             $nueva = 1;
-            if ($CIF != null && $nombreEmpresa != null && $dniRepresentante != null && $nombreRepresentante != null && $direccion != null && $localidad != null && $horario != null) {
+            if ($CIF != null && $nombreEmpresa != null && $direccion != null && $localidad != null) {
                 $val = Conexion::existeEmpresa($CIF);
                 if ($val) {
                     Conexion::insertarEmpresa($CIF, $nombreEmpresa, $dniRepresentante, $nombreRepresentante, $direccion, $localidad, $horario);
@@ -499,7 +499,7 @@ class controladorTutor extends Controller {
                 }
             } else {
                 echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Algún campo está vacio.
+                    Debes rellenar los campos obligatorios como mínimo (*).
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -553,7 +553,7 @@ class controladorTutor extends Controller {
                 }
             } else {
                 echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Algún campo está vacio.
+                     Debes rellenar los campos obligatorios como mínimo (*).
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -621,7 +621,7 @@ class controladorTutor extends Controller {
             } else {
                 $fechaFin = null;
             }
-            if ($CIF != null && $dniAlumno != null && $codProyecto != null && $dniResponsable != null) {
+            if ($CIF != null && $dniAlumno != null && $codProyecto != null && $dniResponsable != null && $fechaInicio != null) {
                 $val = Conexion::existePractica($dniAlumno);
                 if ($val) {
                     $gasto = Conexion::obtenerTotalGastosAlumnoParticular($dniAlumno);
@@ -636,7 +636,7 @@ class controladorTutor extends Controller {
                 }
             } else {
                 echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Algún campo está vacio.
+                     Debes rellenar los campos obligatorios como mínimo (*).
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
