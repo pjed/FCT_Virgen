@@ -70,31 +70,31 @@ Gestionar Responsable
                                                 {{ csrf_field() }}
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Dni:
+                                                        DNI*:
                                                         <input type="text" class="form-control form-control-sm dni"  name="dni" pattern="[0-9]{8}[A-Za-z]{1}" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Nombre:
+                                                        Nombre*:
                                                         <input type="text" class="form-control form-control-sm nombre" name="nombre" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
-                                                        Apellido:
+                                                        Apellidos*:
                                                         <input type="text" class="form-control form-control-sm apellido" name="apellido" required/>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Email:
+                                                        Email*:
                                                         <input type="email" class="form-control form-control-sm email" name="email" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
-                                                        Móvil:
+                                                        Móvil*:
                                                         <input type="tel" class="form-control form-control-sm tel" name="tel"  pattern="[6-7]{1}[0-9]{8}" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
-                                                        Empresa:
+                                                        Empresa*:
                                                         <select id="idEmpresa" name="idEmpresa" required>
                                                             <?php
                                                             foreach ($l1 as $k1) {
