@@ -147,7 +147,7 @@ Gestionar  Practicas
                             <td>  
                                 <input type="hidden" name="idPractica" value="<?php echo $key->idPractica; ?>"/>                              
                                 <input type="hidden" name="idEmpresa" value="<?php echo $key->idEmpresa; ?>"/>
-                                <?php if ($key->idEmpresa == 0) { ?>
+                                <?php if ($key->idEmpresa == null) { ?>
                                     <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="Ninguno" readonly/>
                                     <?php
                                 }
@@ -175,7 +175,7 @@ Gestionar  Practicas
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="codProyecto" value="<?php echo $key->codProyecto; ?>" readonly/></td>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="idResponsable" value="<?php echo $key->idResponsable; ?>"/>
-                                <?php if ($key->idResponsable == 0) { ?>
+                                <?php if ($key->idResponsable == null) { ?>
                                     <input type="text" class="form-control form-control-sm form-control-md" name="nombreResponsable" value="Ninguno" readonly/>
                                     <?php
                                 }
@@ -281,7 +281,7 @@ Gestionar  Practicas
                             <td>  
                                 <input type="hidden" name="idPractica" value="<?php echo $key->idPractica; ?>"/>                              
                                 <input type="hidden" name="idEmpresa" value="<?php echo $key->idEmpresa; ?>"/>
-                                <?php if ($key->idEmpresa == 0) { ?>
+                                <?php if ($key->idEmpresa == null) { ?>
                                     <input type="text" class="form-control form-control-sm form-control-md" name="nombreEmpresa" value="Ninguno" readonly/>
                                     <?php
                                 }
@@ -309,7 +309,7 @@ Gestionar  Practicas
                             <td><input type="text" class="form-control form-control-sm form-control-md" name="codProyecto" value="<?php echo $key->codProyecto; ?>" readonly/></td>
                             <td>
                                 <input type="hidden" class="form-control form-control-sm form-control-md" name="idResponsable" value="<?php echo $key->idResponsable; ?>"/>
-                                <?php if ($key->idResponsable == 0) { ?>
+                                <?php if ($key->idResponsable == null) { ?>
                                     <input type="text" class="form-control form-control-sm form-control-md" name="nombreResponsable" value="Ninguno" readonly/>
                                     <?php
                                 }

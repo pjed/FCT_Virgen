@@ -1144,7 +1144,7 @@ class controladorAdmin extends Controller {
                         `apellidos` varchar(100) NOT NULL,
                         `email` varchar(100) DEFAULT NULL,
                         `telefono` varchar(9) DEFAULT NULL,
-                        `empresa_id` int(11) NOT NULL,
+                        `empresa_id` int(11) NULL,
                         `created_at` timestamp NULL DEFAULT NULL,
                         `updated_at` timestamp NULL DEFAULT NULL,
                     PRIMARY KEY (`id`)

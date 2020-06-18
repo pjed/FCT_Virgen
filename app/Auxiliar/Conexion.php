@@ -890,14 +890,14 @@ class Conexion {
         $now = new \DateTime();
         $updated_at = $now->format('Y-m-d H:i:s');
         try {
-            $p = practica::where('empresas_id', $id)
+            $p = practica::where('responsables_id', $id)
                     ->update([
-                'responsables_id' => 0,
+                'responsables_id' => null,
                 'updated_at' => $updated_at
             ]);
         } catch (\Exception $e) {
             echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
-                    Error.
+                    Error al modicar el responsable en las practicas.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1106,7 +1106,14 @@ class Conexion {
      * @param type $id
      */
     static function borrarResponsable($id) {
+         $now = new \DateTime();
+        $updated_at = $now->format('Y-m-d H:i:s');
         try {
+            $p = responsable::where('empresa_id', $id)
+                    ->update([
+                'responsables_id' => null,
+                'updated_at' => $updated_at
+            ]);
             responsable::where('id', $id)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
                     Borrado con exito.
@@ -1116,7 +1123,7 @@ class Conexion {
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al borrar.
+                    Error al borrar al responsable.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>

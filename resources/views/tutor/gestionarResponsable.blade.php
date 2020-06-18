@@ -134,7 +134,7 @@ Gestionar Responsable
                             <td>
                                 <select class="sel" name="idEmpresa" required>
                                     <?php
-                                    if ($key->empresa_id == 0) {
+                                    if ($key->empresa_id == null) {
                                         ?>
                                         <option value="0" selected >Ninguno</option>
                                         <?php
@@ -170,7 +170,7 @@ Gestionar Responsable
                             <td>
                                 <select class="sel" name="idEmpresa" required>
                                     <?php
-                                    if ($key->empresa_id == 0) {
+                                    if ($key->empresa_id == null) {
                                         ?>
                                         <option value="0" selected >Ninguno</option>
                                         <?php
