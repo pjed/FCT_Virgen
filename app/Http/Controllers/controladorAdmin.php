@@ -1739,12 +1739,6 @@ class controladorAdmin extends Controller {
                     $val = Conexion::existeUsuario_Dni($dni);
                     if ($val) {
                         Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
-                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Añadido con exito.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
                     } else {
                         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Ya existe.
@@ -1773,12 +1767,6 @@ class controladorAdmin extends Controller {
                     if ($val) {
                         Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
                         Conexion::insertarTutor($ciclo, $dni);
-                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Añadido con exito.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
                     } else {
                         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Ya existe.
@@ -1807,12 +1795,6 @@ class controladorAdmin extends Controller {
                     if ($val) {
                         Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
                         Conexion::insertarAlumnoTablaMatriculados($dni, $ciclo);
-                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Añadido con exito.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
                     } else {
                         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Ya existe.
@@ -1841,12 +1823,6 @@ class controladorAdmin extends Controller {
                     if ($val) {
                         Conexion::insertarUsuarios($dni, $nombre, $apellidos, $domicilio, $email, $telefono, $iban, $movil, $rol);
                         Conexion::insertarTutor($ciclo, $dni);
-                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Añadido con exito.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">X</span>
-                    </button>
-                  </div>';
                     } else {
                         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Ya existe.
