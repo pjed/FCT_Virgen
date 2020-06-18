@@ -13,6 +13,7 @@ foreach ($usu as $value) {
     $movil = $value['movil'];
     $iban = $value['iban'];
     $foto = $value['foto'];
+    $email = $value['email'];
 }
 ?>
 <h1 class="text-center">Perfil Usuario</h1>
@@ -33,6 +34,10 @@ foreach ($usu as $value) {
                     <form name="perfil" action="perfilAd" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
+                             <label for="domicilio">
+                                Correo
+                                <input type="text" id="correo" disabled name="correo" value="<?php echo $email ?>"><br>
+                            </label>
                             <label for="domicilio">
                                 Domicilio
                                 <input type="text" id="domicilio" name="domicilio" value="<?php echo $domicilio ?>" placeholder="Domicilio" required><br>
