@@ -72,7 +72,7 @@ Gestionar  Practicas
                                                 {{ csrf_field() }}
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Empresa:
+                                                        Empresa*:
                                                         <select id="idEmpresaA" name="idEmpresa" required>
                                                             <?php
                                                             foreach ($l1 as $k1) {
@@ -86,7 +86,7 @@ Gestionar  Practicas
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Alumno:
+                                                        Alumno*:
                                                         <select id="dniAlumnoA" name="dniAlumno" required>                                    
                                                             <?php
                                                             foreach ($l4 as $k4) {
@@ -100,14 +100,14 @@ Gestionar  Practicas
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Responsable: 
+                                                        Responsable*: 
                                                         <select id="idResponsableA" name="idResponsable" required>
                                                         </select>
                                                     </label>
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Cod proyecto:
+                                                        Cod proyecto*:
                                                         <input type="text" id="codProyectoA" class="form-control form-control-sm" name="codProyecto" pattern="[0-9]{6}" required/>
                                                     </label>
                                                 </div>
@@ -119,7 +119,7 @@ Gestionar  Practicas
                                                 </div>
                                                 <div class="row justify-content-center form-group">
                                                     <label class="col-sm text-center">
-                                                        Fecha inicio:
+                                                        Fecha inicio*:
                                                         <input type="date" id="fechaInicioA" class="form-control form-control-sm" name="fechaInicio" required/>
                                                     </label>
                                                     <label class="col-sm text-center">
