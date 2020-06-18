@@ -131,7 +131,7 @@ class Conexion {
             $p->save();
             $c->save();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con exito.
+                    Insertado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -173,7 +173,7 @@ class Conexion {
                 'updated_at' => $updated_at]);
 
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado usuario con exito.
+                    Modificado usuario con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -219,7 +219,7 @@ class Conexion {
                     ->update(['pass' => $pass]);
             if ($sitio == 0) {
                 echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado contraseña con exito.
+                    Modificado contraseña con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -260,7 +260,7 @@ class Conexion {
             usuarios_rol::where('usuario_dni', $dni)->delete();
             usuario::where('dni', $dni)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -290,7 +290,7 @@ class Conexion {
 
             tutor::where('usuarios_dni', $dni)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -313,7 +313,7 @@ class Conexion {
         try {
             matricula::where('usuarios_dni', $dni)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -336,7 +336,7 @@ class Conexion {
         try {
             practica::where('usuarios_dni', $dni)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -359,7 +359,7 @@ class Conexion {
         try {
             gasto::where('usuarios_dni', $dni)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -398,7 +398,7 @@ class Conexion {
         try {
             gasto::where('comidas_id', $comidas_id)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -421,7 +421,7 @@ class Conexion {
         try {
             gasto::where('$transportes_id', $transportes_id)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -777,7 +777,7 @@ class Conexion {
         try {
             $p->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con exito.
+                    Insertado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -800,7 +800,7 @@ class Conexion {
         try {
             practica::where('id', $id)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -934,7 +934,7 @@ class Conexion {
                         'updated_at' => $updated_at]);
 
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito.
+                    Modificado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1045,7 +1045,7 @@ class Conexion {
             $p->updated_at = $updated_at;
             $p->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con exito.
+                    Insertado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1086,7 +1086,7 @@ class Conexion {
             ]);
 
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito.
+                    Modificado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1116,7 +1116,7 @@ class Conexion {
             ]);
             responsable::where('id', $id)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1191,7 +1191,7 @@ class Conexion {
         try {
             $p->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con exito.
+                    Insertado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1236,7 +1236,7 @@ class Conexion {
             ]);
 
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito.
+                    Modificado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1259,7 +1259,7 @@ class Conexion {
         try {
             empresa::where('id', $id)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1529,7 +1529,7 @@ class Conexion {
 
             $c->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con exito.
+                    Insertado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1564,7 +1564,7 @@ class Conexion {
             $g->updated_at = $updated_at;
             $g->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Gasto insertado en la tabla con exito.
+                    Gasto insertado en la tabla con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1672,7 +1672,7 @@ class Conexion {
             ]);
 
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito.
+                    Modificado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1698,7 +1698,7 @@ class Conexion {
                 'updated_at' => $updated_at
             ]);
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito.
+                    Modificado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1729,7 +1729,7 @@ class Conexion {
             //eliminar tabla gasto
             gasto::where('usuarios_dni', $dni)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1762,7 +1762,7 @@ class Conexion {
             //eliminar tabla gasto
             gasto::where('usuarios_dni', $dni)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1795,7 +1795,7 @@ class Conexion {
             //eliminar tabla gasto
             gasto::where('usuarios_dni', $dni)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1823,7 +1823,7 @@ class Conexion {
             //eliminar tabla gasto
             gasto::where('id', $idGasto)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1851,7 +1851,7 @@ class Conexion {
             //eliminar tabla transporte
             transporte::where('id', $idTransporte)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1885,7 +1885,7 @@ class Conexion {
             ]);
 
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito.
+                    Modificado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1911,7 +1911,7 @@ class Conexion {
             ]);
 
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito.
+                    Modificado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1939,7 +1939,7 @@ class Conexion {
             //eliminar tabla transporte
             transporte::where('id', $idTransporte)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -1973,7 +1973,7 @@ class Conexion {
             ]);
 
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito.
+                    Modificado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -2162,7 +2162,7 @@ class Conexion {
             $p->updated_at = $updated_at;
             $p->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con exito.
+                    Insertado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -2191,7 +2191,7 @@ class Conexion {
             ]);
 
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Modificado con exito.
+                    Modificado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -2220,7 +2220,7 @@ class Conexion {
             //borrar curso
             curso::where('id_curso', $id)->delete();
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Borrado con exito.
+                    Borrado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -2264,7 +2264,7 @@ class Conexion {
             $c->updated_at = $updated_at;
             $c->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Transporte colectivo insertado con exito.
+                    Transporte colectivo insertado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -2308,7 +2308,7 @@ class Conexion {
             $c->updated_at = $updated_at;
             $c->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con exito.
+                    Insertado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -2450,14 +2450,14 @@ class Conexion {
             \DB::insert('insert into matriculados (usuarios_dni, cursos_id_curso) values (?,?)', [$dni, $ciclo]);
 //            $p->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con exito.
+                    Insertado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al inertar usuario.
+                    Error al insertar usuario.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -2476,14 +2476,14 @@ class Conexion {
             $t->updated_at = $updated_at;
             $t->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con exito.
+                    Insertado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
-                    Clave duplicada.
+                    Error al insertar tutor.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
