@@ -70,27 +70,27 @@ Gestionar Cursos
                                                     {{ csrf_field() }}
                                                     <div class="row justify-content-center form-group">
                                                         <label class="col-sm text-center">
-                                                            Grupo:
+                                                            Grupo*:
                                                             <input type="text" class="form-control form-control-sm form-control-md id" name="id" required/>
                                                         </label>
                                                     </div>
                                                     <div class="row justify-content-center form-group">
                                                         <label class="col-sm text-center">
-                                                            Descripción:
+                                                            Descripción*:
                                                             <input type="text" class="form-control form-control-sm form-control-md descripcion" name="descripcion" required/>
                                                         </label>           
                                                         <label class="col-sm text-center" >
-                                                            Año Académico:
+                                                            Año Académico*:
                                                             <input type="text" class="form-control form-control-sm form-control-md anioAcademico"  name="anioAcademico" placeholder="2019/2020" required/>
                                                         </label>
                                                     </div>
                                                     <div class="row justify-content-center form-group">
                                                         <label class="col-sm text-center">
-                                                            Familia:
+                                                            Familia*:
                                                             <input type="text" class="form-control form-control-sm form-control-md familia"  name="familia" required/>
                                                         </label>
                                                         <label class="col-sm text-center" >
-                                                            Total de horas:
+                                                            Total de horas*:
                                                             <input type="number" class="form-control form-control-sm form-control-md horas"  name="horas"  required/>
                                                         </label>
                                                     </div>
