@@ -1536,7 +1536,7 @@ class Conexion {
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
-                    Clave duplicada.
+                    Error al insertar gasto de comida.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -2169,7 +2169,7 @@ class Conexion {
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
-                    Clave duplicada.
+                    Error al insertar curso.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
@@ -2308,14 +2308,14 @@ class Conexion {
             $c->updated_at = $updated_at;
             $c->save(); //aqui se hace la insercion   
             echo '<div class="m-0 alert alert-success alert-dismissible fade show" role="alert">
-                    Insertado con éxito.
+                   Transporte propio insertado con éxito.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
                   </div>';
         } catch (\Exception $e) {
             echo '<div class="m-0 alert alert-danger alert-dismissible fade show" role="alert">
-                    Clave duplicada.
+                    Error al guardar el transporte propio.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">X</span>
                     </button>
